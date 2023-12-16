@@ -1,9 +1,29 @@
+import { Translate } from "@mui/icons-material";
 import "./photoMenu.css";
+import { useState, useContext, useEffect, useRef } from "react";
+import { animated, useSpring } from "react-spring";
+import { rotation } from "exifr";
+import zIndex from "@mui/material/styles/zIndex";
 
 const handleDragStart = (e) => e.preventDefault();
 
 const PhotoMenuListItem = (props) => {
   const { id, setAnimalVal, animalVal, name, photoURL } = props;
+
+  // const wrapperRef = useRef(null);
+  const tileRef = useRef(null);
+  // const leftButtonRef = useRef(null);
+  // const rightButtonRef = useRef(null);
+  const [clicked, setClicked] = useState(false);
+  const [yCoord, setYCoord] = useState(0);
+  const [scale, setScale] = useState(1);
+  const [zdex, setZdex] = useState(0);
+
+  // const [tileStyle, setTileStyle] = useSpring(() => ({
+  //   scale: 1,
+  //   zIndex: 0,
+  //   y: 0,
+  // }));
 
   const handleSelect = (name) => {
     if (animalVal.includes(name)) {
@@ -13,11 +33,47 @@ const PhotoMenuListItem = (props) => {
     }
   };
 
+  const onDoubleClick = (e, id) => {
+    console.log("EEEEEE", e.nativeEvent.y);
+    console.log("ID", id);
+    if (e.nativeEvent.y < 300) {
+      setYCoord(100);
+      setScale(3);
+      setZdex(99);
+      setClicked(true);
+    } else {
+      setYCoord(0);
+      setScale(1);
+      setZdex(0);
+      setClicked(true);
+    }
+  };
+
+  useEffect(() => {
+    if (!clicked) return;
+
+    return () => {
+      setClicked(false);
+    };
+  }, [yCoord]);
+
+  const move = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: {
+      scale: `${scale}`,
+      transform: `translate3d(0,${yCoord}px,0)`,
+    },
+  });
+
   return (
-    <div key={id} className="pictureBoxA">
-      <div
-        className={animalVal.includes(name) ? "microsSelected" : "micros"}
-      >
+    <animated.div
+      key={id}
+      className="pictureBoxA"
+      ref={tileRef}
+      style={({ zIndex: zdex }, move)}
+      onDoubleClick={(e) => onDoubleClick(e, id)}
+    >
+      <div className={animalVal.includes(name) ? "microsSelected" : "micros"}>
         <h4
           className={
             animalVal.includes(name)
@@ -40,11 +96,10 @@ const PhotoMenuListItem = (props) => {
           borderBottom: "1px grey solid",
           borderLeft: "1px grey solid",
           borderRight: "1px grey solid",
-          objectFit: "cover"
-
+          objectFit: "cover",
         }}
       />
-    </div>
+    </animated.div>
   );
 };
 

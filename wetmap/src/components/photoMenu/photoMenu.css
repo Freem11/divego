@@ -29,7 +29,6 @@
 .pictureBoxA {
   width: 193px;
   margin-top: -20px;
-  z-index: 0;
 }
 
 .alice-carousel__dots {
@@ -93,8 +92,9 @@
   align-items: center;
   height: 160px;
   /* background-color: pink; */
-  overflow: hidden;
-}
+  z-index: 0;
+  /* overflow: hidden; */
+} 
 
 .masterDivX:hover .backTog{
   opacity: 1;
@@ -106,7 +106,7 @@
 }
 
 .picScollX {
-  position: relative;
+  /* position: relative; */
   display: flex;
   align-items: center;
   justify-items: center;
@@ -124,9 +124,9 @@
   align-items: center;
   justify-items: center;
   flex-direction: row;
-  height: 160px;
-  overflow: hidden;
+  height:160px;
+  overflow-x: clip;
   /* background-color: purple; */
   opacity: 1;
-  z-index: 2;
+  z-index: 50;
 }
