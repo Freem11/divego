@@ -109,11 +109,12 @@ useEffect(() => {
       </div>
       <img
         src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoURL}`}
-        width="192px"
+        width="191px"
         height="108px"
         onDragStart={handleDragStart}
         onClick={() => handleSelect(name)}
         style={{
+          marginLeft: "-1px",
           borderBottomLeftRadius: "10px",
           borderBottomRightRadius: "10px",
           borderBottom: "1px grey solid",
