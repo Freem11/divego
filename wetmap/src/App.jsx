@@ -229,16 +229,16 @@ function App() {
                                                         <Routes>
                                                           <Route
                                                             path="/"
-                                                            // element={
-                                                            //   activeSession ? (
-                                                            //     <MapPage />
-                                                            //   ) : (
-                                                            //     <AuthenticationPage />
-                                                            //   )
-                                                            // }
                                                             element={
-                                                              <MapPage />
+                                                              activeSession ? (
+                                                                <MapPage />
+                                                              ) : (
+                                                                <AuthenticationPage />
+                                                              )
                                                             }
+                                                            // element={
+                                                            //   <MapPage />
+                                                            // }
                                                           />
                                                           <Route
                                                             path="/admin"

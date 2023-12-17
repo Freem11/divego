@@ -8,8 +8,8 @@ export default defineConfig({
       "/api": "http://localhost:5000/",
     },
     https: {
-      key: process.env.VITE_SSL_KEY_FILE,
-      cert: process.env.VITE_SSL_CRT_FILE,
+      key: "/Users/matthewfreeman/key.pem",
+      cert: "/Users/matthewfreeman/cert.pem",
     },
   },
   build: {

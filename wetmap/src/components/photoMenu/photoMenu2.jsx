@@ -21,6 +21,8 @@ const PhotoMenu = () => {
   const { setHeatPts } = useContext(HeatPointsContext);
   const [areaPics, setAreaPics] = useState([]);
 
+  const [selectedID, setSelectedID] = useState(null);
+
   const filterPhotosForMapArea = async () => {
     if (boundaries) {
       if (boundaries[0] > boundaries[2]) {
@@ -218,6 +220,8 @@ const PhotoMenu = () => {
                   photoURL={pic.photoFile}
                   setAnimalVal={setAnimalVal}
                   animalVal={animalVal}
+                  setSelectedID={setSelectedID}
+                  selectedID={selectedID}
                 />
               );
             })}

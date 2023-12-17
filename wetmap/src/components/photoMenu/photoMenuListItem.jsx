@@ -8,22 +8,15 @@ import zIndex from "@mui/material/styles/zIndex";
 const handleDragStart = (e) => e.preventDefault();
 
 const PhotoMenuListItem = (props) => {
-  const { id, setAnimalVal, animalVal, name, photoURL } = props;
+  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID } = props;
 
-  // const wrapperRef = useRef(null);
   const tileRef = useRef(null);
-  // const leftButtonRef = useRef(null);
-  // const rightButtonRef = useRef(null);
   const [clicked, setClicked] = useState(false);
   const [yCoord, setYCoord] = useState(0);
   const [scale, setScale] = useState(1);
   const [zdex, setZdex] = useState(0);
-
-  // const [tileStyle, setTileStyle] = useSpring(() => ({
-  //   scale: 1,
-  //   zIndex: 0,
-  //   y: 0,
-  // }));
+  const [xCoord, setXCoord] = useState(0);
+ 
 
   const handleSelect = (name) => {
     if (animalVal.includes(name)) {
@@ -33,21 +26,51 @@ const PhotoMenuListItem = (props) => {
     }
   };
 
+  let screenInital = window.innerWidth;
+
+  const [windowWidth, setWindowWidth] = useState(screenInital);
+ 
+  window.addEventListener("resize", trackWidth);
+
+  function trackWidth() {
+    setWindowWidth(window.innerWidth);
+  }
+
   const onDoubleClick = (e, id) => {
-    console.log("EEEEEE", e.nativeEvent.y);
-    console.log("ID", id);
+
+    setSelectedID(id)
+
+    let mover = (windowWidth/2 - e.nativeEvent.x)/3
+
     if (e.nativeEvent.y < 300) {
       setYCoord(100);
+      setXCoord(mover)
       setScale(3);
       setZdex(99);
       setClicked(true);
     } else {
       setYCoord(0);
+      setXCoord(0)
       setScale(1);
       setZdex(0);
       setClicked(true);
     }
   };
+
+  const pressReleaseAnimations = () => {
+      setYCoord(0);
+      setXCoord(0)
+      setScale(1);
+      setZdex(0);
+};
+
+useEffect(() => {
+  if(selectedID !== id){
+    pressReleaseAnimations()
+  }
+}, [selectedID]);
+
+
 
   useEffect(() => {
     if (!clicked) return;
@@ -61,7 +84,7 @@ const PhotoMenuListItem = (props) => {
     from: { transform: `translate3d(0,0,0)` },
     to: {
       scale: `${scale}`,
-      transform: `translate3d(0,${yCoord}px,0)`,
+      transform: `translate3d(${xCoord}px,${yCoord}px,0)`,
     },
   });
 
