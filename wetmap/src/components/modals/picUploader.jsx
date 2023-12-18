@@ -322,15 +322,15 @@ const PicUploader = React.memo((props) => {
                     fontSize: 16,
                     textOverflow: "ellipsis",
                     backgroundColor: "transparent",
-                    height: "27px",
-                    width: "160px",
+                    height: "35px",
+                    width: "232px",
                     color: "#F0EEEB",
-                    marginLeft: "3px",
+                    marginLeft: "-30px",
                     borderBottom: "none",
                     borderColor: "transparent",
                     alignItems: "center",
-                    paddingRight: "8px",
-                    borderRadius: "10px",
+                    paddingRight: "20px",
+                    borderRadius: "20px",
                     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
                   },
                 }}
@@ -376,13 +376,14 @@ const PicUploader = React.memo((props) => {
                         color: "white",
                         textOverflow: "ellipsis",
                         backgroundColor: "transparent",
-                        height: "25px",
+                        height: "35px",
                         color: "#F0EEEB",
-                        width: "168px",
+                        width: "250px",
                         borderBottom: "none",
                         borderColor: "transparent",
-                        borderRadius: "10px",
+                        borderRadius: "20px",
                         boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                        marginLeft: "-52px"
                       },
                     }}
                   />
@@ -411,20 +412,21 @@ const PicUploader = React.memo((props) => {
                         color: "white",
                         textOverflow: "ellipsis",
                         backgroundColor: "transparent",
-                        height: "25px",
-                        width: "168px",
+                        height: "35px",
+                        width: "250px",
                         color: "#F0EEEB",
                         borderBottom: "none",
                         borderColor: "transparent",
-                        borderRadius: "10px",
+                        borderRadius: "20px",
                         boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                        marginLeft: "-52px"
                       },
                     }}
                   />
                 </FormGroup>
               </div>
             </div>
-            <div className="Gbox">
+            <div className="Gbox" style={{marginTop: 40}}>
               <FormGroup>
                 <Button
                   variant="text"

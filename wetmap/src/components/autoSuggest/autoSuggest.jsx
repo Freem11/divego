@@ -40,13 +40,13 @@ export default function AnimalAutoSuggest(props) {
             fontSize: 16,
             textOverflow: "ellipsis",
             backgroundColor: "transparent",
-            height: "10px",
+            height: "20px",
             color: "#F0EEEB",
-            width: "130px",
-            marginLeft: "0px",
+            width: "260px",
+            marginLeft: "10px",
             // paddingRight: "10px",
-            paddingLeft: "10px",
-            paddingTop: "7px",
+            paddingLeft: "0px",
+            marginTop: "10px",
           },
         }}
       ></InputBase>
@@ -69,8 +69,8 @@ export default function AnimalAutoSuggest(props) {
           height: "auto",
           zIndex: "100",
           position: "absolute",
-          marginTop: "5px",
-          marginLeft: "-10px",
+          marginTop: "30px",
+          marginLeft: "50px",
         }}
       >
         {list.length > 0 &&
