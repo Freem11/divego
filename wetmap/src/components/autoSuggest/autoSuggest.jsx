@@ -36,15 +36,16 @@ export default function AnimalAutoSuggest(props) {
         inputProps={{
           style: {
             textAlign: "center",
-            fontFamily: "Indie Flower",
+            fontFamily: "Itim",
+            fontSize: 16,
             textOverflow: "ellipsis",
             backgroundColor: "transparent",
             height: "10px",
             color: "#F0EEEB",
             width: "130px",
             marginLeft: "0px",
-            paddingRight: "10px",
-            paddingLeft: "0px",
+            // paddingRight: "10px",
+            paddingLeft: "10px",
             paddingTop: "7px",
           },
         }}

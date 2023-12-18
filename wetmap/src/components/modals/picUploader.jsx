@@ -13,6 +13,7 @@ import { SessionContext } from "../contexts/sessionContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhotoIcon from "@mui/icons-material/Photo";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
 import { getToday } from "../../helpers/picUploaderHelpers.js";
@@ -47,7 +48,7 @@ const noGPSZone = (
 );
 
 const PicUploader = React.memo((props) => {
-  const { closeup } = props;
+  const { animatePicModal } = props;
   let navigate = useNavigate();
   const { setMasterSwitch } = useContext(MasterContext);
   const { pin, setPin } = useContext(PinContext);
@@ -72,10 +73,10 @@ const PicUploader = React.memo((props) => {
         PicDate: rightNow,
       });
     }
-
   }, []);
 
   const handleChange = async (e) => {
+
     if (e.target.name === "PicFile") {
       if (photoFile !== null) {
         removePhoto({ filePath: filePath1, fileName: photoFile });
@@ -95,7 +96,7 @@ const PicUploader = React.memo((props) => {
 
       const newFilePath = await uploadphoto(fileName, fileName.name);
       //needs to be "animalphotos/public/file.jpg"
-      console.log("nfp", newFilePath);
+
       setPhotoFile("animalphotos/" + newFilePath);
 
       // fetch("http://localhost:5000/api/upload", {
@@ -139,7 +140,13 @@ const PicUploader = React.memo((props) => {
     }
   };
 
-  const handleNoGPSClose = () => {
+  const handleNoGPSClose = (e) => {
+    setShowNoGPS(false);
+    handleChange(e)
+    return;
+  };
+
+  const handleSelect = (e) => {
     setShowNoGPS(false);
     return;
   };
@@ -147,7 +154,7 @@ const PicUploader = React.memo((props) => {
   const handleNoGPSCloseOnMapChange = () => {
     setShowNoGPS(false);
     setMasterSwitch(false);
-    closeup();
+    animatePicModal();
     return;
   };
 
@@ -171,7 +178,7 @@ const PicUploader = React.memo((props) => {
 
       let rightNow = getToday(Rnow);
 
-      insertPhotoWaits({ ...pin, PicFile: photoFile });
+      // insertPhotoWaits({ ...pin, PicFile: photoFile });
 
       setPin({
         ...pin,
@@ -182,7 +189,7 @@ const PicUploader = React.memo((props) => {
         Longitude: "",
       });
       setPhotoFile("");
-      closeup();
+      animatePicModal();
       return;
     }
   };
@@ -190,6 +197,20 @@ const PicUploader = React.memo((props) => {
   const clearAnimal = () => {
     setPin({ ...pin, Animal: "" });
     setList([]);
+  };
+
+  const handleModalClose = () => {
+    setPin({
+      ...pin,
+      PicFile: "",
+      PicDate: "",
+      Animal: "",
+      Latitude: "",
+      Longitude: "",
+    });
+    setShowNoGPS(false);
+    setPhotoFile(null);
+    animatePicModal();
   };
 
   function handleClick() {
@@ -200,32 +221,48 @@ const PicUploader = React.memo((props) => {
     <Container fluid>
       <Form onSubmit={handleSubmit}>
         <div className="modalTitle2">
-          <Label>
+          <Label style={{ marginTop: 3, marginRight: 125, width: "200%" }}>
             <strong>Submit Your Picture</strong>
           </Label>
+          <FormGroup>
+            <Button
+              variant="text"
+              id="closeButton"
+              onClick={() => handleModalClose()}
+              style={{ display: "flex", flexDirection: "column", marginRight: 10, marginTop: 2}}
+            >
+              <CloseIcon
+                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+              ></CloseIcon>
+            </Button>
+          </FormGroup>
         </div>
 
-        {photoFile && (
+        {photoFile !== null && (
           <div className="pickie">
             {/* <div>{photoFile}</div> */}
             <img
               src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoFile}`}
-              height="100px"
+              height="200px"
               className="picHolder"
             ></img>
           </div>
         )}
 
+        {photoFile === null && (
+            <div className="blankPic"></div>
+        )}
+
         <div className="uploadbox2">
           <div onClick={handleClick} className="picSelectDiv">
-            <div style={{ marginRight: 5, marginTop: -2 }}>
+            <div style={{ marginRight: 5, marginTop: 3 }}>
               <PhotoIcon
                 sx={{
                   color: "gold",
                   height: "28px",
                   width: "28px",
                   cursor: "pointer",
-                  marginLeft: "2px",
+                  marginLeft: "4px",
                   marginTop: "2.5px",
                 }}
               ></PhotoIcon>
@@ -233,11 +270,14 @@ const PicUploader = React.memo((props) => {
 
             <Label
               style={{
-                fontFamily: "Permanent Marker",
+                fontfamily: 'Patrick Hand',
+                fontSize: 18,
+                // fontWeight: "bold",
+                textTransform: "none",
                 color: "gold",
                 cursor: "pointer",
-                marginLeft: "-6px",
-                marginTop: "3px",
+                marginLeft: "-7px",
+                marginTop: "9px",
               }}
             >
               Choose an Image
@@ -249,7 +289,7 @@ const PicUploader = React.memo((props) => {
               className="modalInputs2"
               style={{
                 textAlign: "center",
-                fontFamily: "Indie Flower",
+                // fontFamily: "Itim, cursive",
                 display: "none",
               }}
               id="file"
@@ -257,150 +297,146 @@ const PicUploader = React.memo((props) => {
               name="PicFile"
               bsSize="lg"
               onChange={handleChange}
-              onClick={handleNoGPSClose}
+              onClick={(e) => handleNoGPSClose(e)}
             ></Input>
           </FormGroup>
         </div>
 
-        <div className="inputboxType1">
-          <FormGroup>
-            <InputBase
-              id="standard-basic"
-              // label="Date Taken"
-              placeholder="Date Taken"
-              variant="standard"
-              type="date"
-              name="PicDate"
-              value={pin.PicDate}
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-              inputProps={{
-                style: {
-                  textAlign: "center",
-                  fontFamily: "Indie Flower",
-                  textOverflow: "ellipsis",
-                  backgroundColor: "#538bdb",
-                  height: "27px",
-                  width: "160px",
-                  color: "#F0EEEB",
-                  marginLeft: "3px",
-                  borderBottom: "none",
-                  borderColor: "transparent",
-                  alignItems: "center",
-                  paddingRight: "8px",
-                  borderRadius: "10px",
-                  boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                },
-              }}
-            />
-          </FormGroup>
-        </div>
-
-        <div className="autosuggestbox" onClick={handleNoGPSClose}>
-          <AnimalAutoSuggest
-            setPin={setPin}
-            pin={pin}
-            setList={setList}
-            list={list}
-            onClick={handleNoGPSClose}
-            clearAnimal={clearAnimal}
-          />
-        </div>
-
-        <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
-          {noGPSZone}
-        </Collapse>
-
-        <div className="Tbox">
-          <div>
-            <div className="inputboxType2">
-              <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  // label="Latitude"
-                  placeholder="Latitude"
-                  variant="standard"
-                  type="decimal"
-                  name="Latitude"
-                  value={pin.Latitude}
-                  onChange={handleChange}
-                  onClick={handleNoGPSClose}
-                  inputProps={{
-                    readOnly: true,
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Indie Flower",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "#538bdb",
-                      height: "25px",
-                      color: "#F0EEEB",
-                      width: "168px",
-                      borderBottom: "none",
-                      borderColor: "transparent",
-                      borderRadius: "10px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
-                />
-              </FormGroup>
-            </div>
-
-            <div className="inputboxType2">
-              <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  // label="Longitude"
-                  placeholder="Longitude"
-                  variant="standard"
-                  type="decimal"
-                  name="Longitude"
-                  contentEditable={false}
-                  value={pin.Longitude}
-                  onChange={handleChange}
-                  onClick={handleNoGPSClose}
-                  inputProps={{
-                    readOnly: true,
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Indie Flower",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "#538bdb",
-                      height: "25px",
-                      width: "168px",
-                      color: "#F0EEEB",
-                      borderBottom: "none",
-                      borderColor: "transparent",
-                      borderRadius: "10px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
-                />
-              </FormGroup>
-            </div>
-          </div>
-          <div className="Gbox">
+        <div className="lowerBox">
+          <div className="inputboxType1">
             <FormGroup>
-              <Button
-                variant="text"
-                id="jumpButton"
-                onClick={handleNoGPSCloseOnMapChange}
-                style={{ display: "flex", flexDirection: "column" }}
-              >
-                <PlaceIcon
-                  sx={{ color: "gold", height: "30px", width: "30px" }}
-                ></PlaceIcon>
-                <p
-                  style={{
-                    fontFamily: "Shadows Into Light",
-                    color: "gold",
-                    fontSize: 10,
-                    marginTop: -1,
-                  }}
-                >
-                  Drop Pin
-                </p>
-              </Button>
+              <InputBase
+                id="standard-basic"
+                // label="Date Taken"
+                placeholder="Date Taken"
+                variant="standard"
+                type="date"
+                name="PicDate"
+                value={pin.PicDate}
+                onChange={handleChange}
+                onClick={handleNoGPSClose}
+                inputProps={{
+                  style: {
+                    textAlign: "center",
+                    fontFamily: "Itim",
+                    fontSize: 16,
+                    textOverflow: "ellipsis",
+                    backgroundColor: "transparent",
+                    height: "27px",
+                    width: "160px",
+                    color: "#F0EEEB",
+                    marginLeft: "3px",
+                    borderBottom: "none",
+                    borderColor: "transparent",
+                    alignItems: "center",
+                    paddingRight: "8px",
+                    borderRadius: "10px",
+                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                  },
+                }}
+              />
             </FormGroup>
+          </div>
+
+          <div className="autosuggestbox" onClick={handleSelect}>
+            <AnimalAutoSuggest
+              setPin={setPin}
+              pin={pin}
+              setList={setList}
+              list={list}
+              onClick={handleSelect}
+              clearAnimal={clearAnimal}
+            />
+          </div>
+
+          <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
+            {noGPSZone}
+          </Collapse>
+
+          <div className="Tbox">
+            <div className="coordDiv">
+              <div className="inputboxType2">
+                <FormGroup>
+                  <InputBase
+                    id="standard-basic"
+                    // label="Latitude"
+                    placeholder="Latitude"
+                    variant="standard"
+                    type="decimal"
+                    name="Latitude"
+                    value={pin.Latitude}
+                    onChange={handleChange}
+                    onClick={handleNoGPSClose}
+                    inputProps={{
+                      readOnly: true,
+                      style: {
+                        textAlign: "center",
+                        fontFamily: "Itim",
+                        fontSize: 16,
+                        color: "white",
+                        textOverflow: "ellipsis",
+                        backgroundColor: "transparent",
+                        height: "25px",
+                        color: "#F0EEEB",
+                        width: "168px",
+                        borderBottom: "none",
+                        borderColor: "transparent",
+                        borderRadius: "10px",
+                        boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                      },
+                    }}
+                  />
+                </FormGroup>
+              </div>
+
+              <div className="inputboxType2">
+                <FormGroup>
+                  <InputBase
+                    id="standard-basic"
+                    // label="Longitude"
+                    placeholder="Longitude"
+                    variant="standard"
+                    type="decimal"
+                    name="Longitude"
+                    contentEditable={false}
+                    value={pin.Longitude}
+                    onChange={handleChange}
+                    onClick={handleNoGPSClose}
+                    inputProps={{
+                      readOnly: true,
+                      style: {
+                        textAlign: "center",
+                        fontFamily: "Itim",
+                        fontSize: 16,
+                        color: "white",
+                        textOverflow: "ellipsis",
+                        backgroundColor: "transparent",
+                        height: "25px",
+                        width: "168px",
+                        color: "#F0EEEB",
+                        borderBottom: "none",
+                        borderColor: "transparent",
+                        borderRadius: "10px",
+                        boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                      },
+                    }}
+                  />
+                </FormGroup>
+              </div>
+            </div>
+            <div className="Gbox">
+              <FormGroup>
+                <Button
+                  variant="text"
+                  id="jumpButton"
+                  onClick={handleNoGPSCloseOnMapChange}
+                >
+                  <PlaceIcon
+                    sx={{ color: "gold", height: "30px", width: "30px" }}
+                  ></PlaceIcon>
+                </Button>
+              </FormGroup>
+            </div>
           </div>
         </div>
 

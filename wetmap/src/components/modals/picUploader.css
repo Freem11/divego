@@ -5,15 +5,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Overlock:wght@700&family=Spinnaker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
 
 .inputboxType1{
-    display: flex;
-    flex-direction: column;;
-    align-items: center;
-    justify-content: center;
-    margin-left: -89px;
+    /* display: flex; */
+    /* flex-direction: column;; */
+    /* align-items: center;
+    justify-content: center; */
+    /* margin-left: -89px; */
     margin-top: 30px;
-    font-family: 'Indie Flower';
+    font-family: 'Itim', cursive;
     border: none;
     border-bottom: none;
     border-color: transparent;
@@ -27,7 +29,7 @@
     margin-left: 0px;
     margin-top: 15px;
     width: 100%; 
-    font-family: 'Indie Flower';
+    font-family: 'Itim', cursive;
     border: none;
     border-bottom: none;
     border-color: transparent;
@@ -117,6 +119,7 @@
     border-color: transparent;
     border: none;
     border-bottom: none;
+    font-family: 'Itim', cursive;
 }
 
 .selectbox{
@@ -134,32 +137,44 @@
     border-color: transparent;
     border: none;
     border-bottom: none;
+    font-family: 'Itim', cursive;
 } 
 
 #modalButton {
     width: 100%;
-    margin-top: 40px;
-    font-family: 'Permanent Marker', cursive;
+    margin-top: 50px;
+    padding-top: 4px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 26px;
+    font-weight: bolder;
     color: gold;
     border-radius: 0;
     border-top: 1px solid #F0EEEB;
+    text-transform: none;
 }
 
 #modalButton:hover {
     background-color: #3e7dd7;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 #modalButton:active {
     background-color: #538dbd;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .modalTitle2{
+    display: flex;
+    flex-direction: row;
     position: absolute;
     top: 49px;
-    width: 400px;
-    margin-left: 15px;
+    /* background-color: green; */
+    width: 95%;
+    margin-left: 25px;
     margin-top: -35px;
-    font-family: 'Permanent Marker', cursive;
-    font-size: 22px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 34px;
     color: #F0EEEB;
 }
 .form-label{
@@ -167,9 +182,12 @@
 }
 
 .uploadbox2{
-    margin-left: 80px;
-    margin-top: 55px;
-    width: 100%;
+    display: flex;
+    justify-content: center;
+    /* margin-left: 80px; */
+    margin-top: 5%;
+    /* width: 100%; */
+    /* background-color: purple; */
 }
 
 #projname {
@@ -181,24 +199,38 @@
     margin-left: 20%;
 }
 
+.lowerBox {
+    display: flex;
+    flex-direction: column;
+    /* background-color: powderblue; */
+    margin-left: 20%;
+    margin-bottom: -10px;
+    width: 42%;
+}
+
 .Tbox {
+    width: 90%;
     display: flex;
     flex-direction: row;
     margin-left: 23px;
+    /* background-color: pink; */
+}
+
+.coordDiv {
+    margin-right: 30px;
+    /* background-color: purple; */
 }
 
 .Gbox {
-    position: absolute;
-    left: 230px;
-    bottom: 107px;
+    margin-left: 50px;
     display: flex;
-    width: 50px;
-    height: 50px;
+    width: 43px;
+    height: 43px;
     align-items: center;
     justify-content: center;
     background-color: #538bdb;
     text-align: center;
-    border-radius: 5px;
+    border-radius: 10px;
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
@@ -214,24 +246,43 @@
 }
 
 #jumpButton {
-     margin-top: 10px;
-     margin-left: 3.5px;
+     /* margin-top: 10px;
+     margin-left: 3.5px; */
+}
+
+.blankPic {
+    display: flex;
+    width: 80%;
+    height: 220px;
+    align-items: center;
+    align-self: center;
+    justify-content: center;
+    justify-self: center;
+    margin-top: 80px;
+    margin-left: 10%;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    border: lightblue 1px solid;
+
 }
 
 .pickie {
     display: flex;
-    width: 100%;
+    width: 80%;
+    height: 220px;
     align-items: center;
     justify-content: center;
-    margin-top: 60px;
-    margin-bottom: -30px;
+    margin-top: 80px;
+    margin-left: 10%;
+    margin-bottom: 30px;
     border-radius: 15px;
+    border: lightblue 1px solid;
 }
 
 .picHolder {
     align-items: center;
-    width: 80%;
-    height: 130px;
+    width: 100%;
+    height: 220px;
     border-radius: 15px;
     object-fit: cover;
 }
@@ -241,13 +292,13 @@
     flex-direction: row;
     cursor: pointer;
     background-color: #538bdb;
-    width: 175px;
-    height: 30px;
+    width: 185px;
+    height: 40px;
     text-align: center;
     border-radius: 5px;
     box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
     margin-left: -15px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .picSelectDiv:hover {
