@@ -272,7 +272,7 @@ const SiteSubmitter = (props) => {
                 height: "28px",
                 width: "28px",
                 cursor: "pointer",
-                marginTop: "4px",
+                marginTop: "2px",
               }}
             ></PlaceIcon>
           </div>
