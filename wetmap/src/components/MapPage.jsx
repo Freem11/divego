@@ -41,6 +41,8 @@ import { UserProfileContext } from "./contexts/userProfileContext";
 import { SessionContext } from "./contexts/sessionContext";
 import { PinContext } from "./contexts/staticPinContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
+import { ModalSelectContext } from "./contexts/modalSelectContext";
+
 
 import Lightbox from "react-image-lightbox";
 import "./mapPage.css";
@@ -82,6 +84,7 @@ const MapPage = React.memo(() => {
   const { selectedPic } = useContext(SelectedPicContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
   const { picModal, setPicModal } = useContext(PicModalContext);
+  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
 
   const togglePicModal = () => {
     setPicModal(!picModal);
@@ -106,8 +109,18 @@ const MapPage = React.memo(() => {
   };
 
   const returnToPicModal = () => {
-    animatePicModal();
-    setMasterSwitch(true);
+
+    if (chosenModal === "DiveSite"){
+      animateSiteModal();
+      setMasterSwitch(true);
+      setChosenModal(null);
+    } else if (chosenModal === "Photos") {
+      animatePicModal();
+      setMasterSwitch(true);
+      setChosenModal(null);
+    }
+
+    
   };
 
   useEffect(() => {

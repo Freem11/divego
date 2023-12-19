@@ -229,7 +229,7 @@ const PhotoMenu = () => {
       </div>
       {areaPics.length === 0 && (
             <div className="emptyPhotos">
-              No Sea Creatures have been added for this area yet.
+              No Sea Creatures have been added for this area yet
             </div>
           )}
       <ToggleButton

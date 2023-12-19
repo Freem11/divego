@@ -135,23 +135,48 @@
     background-color: #538dbd;
 }
 
+.buttonBox {
+ display: flex;
+}
+
 .GPSbutton{
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-    background-color: #538bdb;
-    width: 195px;
-    height: 40px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);
-    margin-left: 230px;
+    margin-left: 240px;
     margin-top: 80px;
+    display: flex;
+    width: 43px;
+    height: 43px;
+    align-items: center;
+    justify-content: center;
+    background-color: #538bdb;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
 .GPSbutton:hover {
     background-color: #3e7dd7;
 }
 .GPSbutton:active {
+    background-color: #538dbd;
+}
+
+.pinButton{
+    margin-left: 50px;
+    margin-top: 80px;
+    display: flex;
+    width: 43px;
+    height: 43px;
+    align-items: center;
+    justify-content: center;
+    background-color: #538bdb;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+}
+
+.pinButton:hover {
+    background-color: #3e7dd7;
+}
+.pinButton:active {
     background-color: #538dbd;
 }

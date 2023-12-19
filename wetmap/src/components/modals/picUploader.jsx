@@ -11,6 +11,7 @@ import { PinContext } from "../contexts/staticPinContext";
 import { PictureContext } from "../contexts/pictureContext";
 import { SessionContext } from "../contexts/sessionContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
+import { ModalSelectContext } from "../contexts/modalSelectContext";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhotoIcon from "@mui/icons-material/Photo";
 import CloseIcon from "@mui/icons-material/Close";
@@ -57,6 +58,7 @@ const PicUploader = React.memo((props) => {
   const { photoFile, setPhotoFile } = useContext(PictureContext);
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
+  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -152,6 +154,7 @@ const PicUploader = React.memo((props) => {
   };
 
   const handleNoGPSCloseOnMapChange = () => {
+    setChosenModal("Photos");
     setShowNoGPS(false);
     setMasterSwitch(false);
     animatePicModal();

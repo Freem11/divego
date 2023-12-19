@@ -29,6 +29,7 @@ import { SessionContext } from "./components/contexts/sessionContext";
 import { MapBoundsContext } from "./components/contexts/mapBoundariesContext";
 import { HeatPointsContext } from "./components/contexts/heatPointsContext";
 import { UserProfileContext } from "./components/contexts/userProfileContext";
+import { ModalSelectContext } from "./components/contexts/modalSelectContext";
 
 import {
   sessionCheck,
@@ -45,7 +46,7 @@ function App() {
   const [adminStat, setAdminStat] = useState(false);
   const [activeSession, setActiveSession] = useState(null);
   const [profile, setProfile] = useState([]);
-
+  const [chosenModal, setChosenModal] = useState(null);
   const d = new Date();
   const [sliderVal, setSliderVal] = useState(d.getMonth() + 1);
   const [animalVal, setAnimalVal] = useState("");
@@ -152,6 +153,7 @@ function App() {
   return (
     <div className="App" onLoad={onLayoutRootView}>
       <GoogleOAuthProvider clientId="803518830612-ullrhq9lgcfe9ornlc5tffhtch7o5t07.apps.googleusercontent.com">
+      <ModalSelectContext.Provider value={{ chosenModal, setChosenModal }}>
         <UserProfileContext.Provider value={{ profile, setProfile }}>
           <HeatPointsContext.Provider value={{ heatpts, setHeatPts }}>
             <AnimalMultiSelectContext.Provider
@@ -271,6 +273,7 @@ function App() {
             </AnimalMultiSelectContext.Provider>
           </HeatPointsContext.Provider>
         </UserProfileContext.Provider>
+        </ModalSelectContext.Provider>
       </GoogleOAuthProvider>
       ;
     </div>

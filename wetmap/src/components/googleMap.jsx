@@ -37,6 +37,8 @@ import { LightBoxContext } from "./contexts/lightBoxContext";
 import { SelectedPicContext } from "./contexts/selectPicContext";
 import { HeatPointsContext } from "./contexts/heatPointsContext";
 import { MapBoundsContext } from "./contexts/mapBoundariesContext";
+import { ModalSelectContext } from "./contexts/modalSelectContext";
+import { DiveSpotContext } from "./contexts/diveSpotContext";
 import FormAnchorModal from "./modals/formAnchorModal";
 import AnchorPics from "./modals/anchorPics";
 import { newGPSBoundaries } from "../helpers/mapHelpers";
@@ -45,7 +47,11 @@ import { setupClusters } from "../helpers/clusterHelpers";
 // import { diveSites } from "../axiosCalls/diveSiteAxiosCalls";
 import { diveSites } from "../supabaseCalls/diveSiteSupabaseCalls";
 // import { heatPoints } from "../axiosCalls/heatPointAxiosCalls";
-import { heatPoints, multiHeatPoints, picClickheatPoints } from "../supabaseCalls/heatPointSupabaseCalls";
+import {
+  heatPoints,
+  multiHeatPoints,
+  picClickheatPoints,
+} from "../supabaseCalls/heatPointSupabaseCalls";
 import Lightbox from "react-image-lightbox";
 import zIndex from "@mui/material/styles/zIndex";
 
@@ -64,6 +70,7 @@ export default function Home() {
 function Map() {
   const { masterSwitch } = useContext(MasterContext);
   const { pin, setPin } = useContext(PinContext);
+  const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const [pinRef, setPinRef] = useState(null);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
@@ -83,7 +90,7 @@ function Map() {
   const { selectedPic } = useContext(SelectedPicContext);
 
   const [newSites, setnewSites] = useState([]);
-  // const [heatpts, setHeatPts] = useState(formatHeatVals([]));
+  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
   const [mapRef, setMapRef] = useState(null);
 
   const [selected, setSelected] = useState(null);
@@ -118,7 +125,6 @@ function Map() {
   }));
 
   const handleMapUpdates = async () => {
-
     let GPSBubble = newGPSBoundaries(mapZoom, mapCoords[0], mapCoords[1]);
 
     let filteredDiveSites = await diveSites(GPSBubble);
@@ -230,12 +236,20 @@ function Map() {
   };
 
   const handleDragEnd = () => {
-    if (pinRef) {
-      setPin({
-        ...pin,
+    if (chosenModal === "DiveSite") {
+      setAddSiteVals({
+        ...addSiteVals,
         Latitude: pinRef.getPosition().lat(),
         Longitude: pinRef.getPosition().lng(),
       });
+    } else if (chosenModal === "Photos") {
+      if (pinRef) {
+        setPin({
+          ...pin,
+          Latitude: pinRef.getPosition().lat(),
+          Longitude: pinRef.getPosition().lng(),
+        });
+      }
     }
   };
 
@@ -260,26 +274,25 @@ function Map() {
       onBoundsChanged={handleBoundsChange}
       disableDefaultUI={true}
     >
-      {masterSwitch && (<div className="aligner">
-        <Collapse
-          in={showGeoCoder}
-          orientation="horizontal"
-          collapsedSize="0px"
-        >
-          <div className="places-container">
-            <PlacesAutoComplete setSelected={setSelected} />
-          </div>
-        </Collapse>
+      {masterSwitch && (
+        <div className="aligner">
+          <Collapse
+            in={showGeoCoder}
+            orientation="horizontal"
+            collapsedSize="0px"
+          >
+            <div className="places-container">
+              <PlacesAutoComplete setSelected={setSelected} />
+            </div>
+          </Collapse>
         </div>
       )}
 
       {clusters &&
         clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates;
-          const {
-            cluster: isCluster,
-            point_count: pointCount,
-          } = cluster.properties;
+          const { cluster: isCluster, point_count: pointCount } =
+            cluster.properties;
 
           if (isCluster) {
             return (
