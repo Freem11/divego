@@ -16,7 +16,7 @@
   /* background-color: green; */
   width: 95%;
   margin-left: 5px;
-  margin-top: -35px;
+  margin-top: -30px;
   font-family: 'Patrick Hand', cursive;
   font-size: 34px;
   color: #F0EEEB;
@@ -24,9 +24,10 @@
 
 .mainBlurbDiv{
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 20%;
+  margin-top: 10%;
   margin-left: 10%;
   font-family: 'Indie Flower';
   color: #F0EEEB;
@@ -35,127 +36,65 @@
   /* background-color: mediumaquamarine; */
 }
 
-
-.exploreDiv{
+.introGuideLaunch {
   display: flex;
-  flex-direction: row;
-  width: 90%;
-  margin-left: 10px;
-  font-family: 'Indie Flower';
+  font-family: 'Itim', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #538bdb;
+  width: 160px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+  margin-top: 5%;
 }
 
-.leftE{
-  min-height: inherit;
-  width: 5%;
-  margin: auto;
-  color: gold;
+.introGuideLaunch:hover {
+  background-color: #3e7dd7;
+}
+.introGuideLaunch:active {
+  background-color: #538dbd;
 }
 
-.rightE{
-  min-height: 30px;
-  width: 75%;
-  margin: auto;
-  color: #F0EEEB;
-}
-
-
-.animalDiv{
+.diveSiteGuideLaunch {
   display: flex;
-  flex-direction: row;
-  width: 90%;
-  margin-left: 10px;
-  font-family: 'Indie Flower';
+  font-family: 'Itim', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #538bdb;
+  width: 160px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+  margin-top: 10%;
 }
 
-.leftA{
-  min-height: inherit;
-  width: 5%;
-  margin: auto;
-  color: gold;
+.diveSiteGuideLaunch:hover {
+  background-color: #3e7dd7;
+}
+.diveSiteGuideLaunch:active {
+  background-color: #538dbd;
 }
 
-.rightA{
-  min-height: 30px;
-  width: 75%;
-  margin: auto;
-  color: #F0EEEB;
-}
-
-
-.diveSiteDiv{
+.photoGuideLaunch {
   display: flex;
-  flex-direction: row;
-  width: 90%;
-  margin-left: 10px;
-  font-family: 'Indie Flower';
+  font-family: 'Itim', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #538bdb;
+  width: 160px;
+  height: 30px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+  margin-top: 10%;
 }
 
-.leftD{
-  min-height: inherit;
-  width: 5%;
-  margin: auto;
-  color: gold;
+.photoGuideLaunch:hover {
+  background-color: #3e7dd7;
 }
-
-.rightD{
-  min-height: 30px;
-  width: 75%;
-  margin: auto;
-  color: #F0EEEB;
+.photoGuideLaunch:active {
+  background-color: #538dbd;
 }
-
-
-.photoDiv{
-  display: flex;
-  flex-direction: row;
-  width: 90%;
-  margin-left: 10px;
-  font-family: 'Indie Flower';
-}
-
-.leftP{
-  min-height: inherit;
-  width: 5%;
-  margin: auto;
-  color: gold;
-}
-
-.rightP{
-  min-height: 30px;
-  width: 75%;
-  margin: auto;
-  color: #F0EEEB;
-}
-
-
-.addSiteDiv{
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 40px;
-  width: 90%;
-  margin-left: 10px;
-  font-family: 'Indie Flower';
-}
-
-.leftDS{
-  height: inherit;
-  width: 5%;
-  margin: auto;
-  color: gold;
-}
-
-.rightDS{
-  min-height: 30px;
-  width: 75%;
-  margin: auto;
-  color: #F0EEEB;
-}
-
-.titleDiv{
-  font-family: 'Permanent Marker', cursive;
-  font-size: 20px;
-  margin-left: 30px;
-  margin-top: -33px;
-  color: #F0EEEB;
-}
-
