@@ -185,8 +185,10 @@ const MapPage = React.memo(() => {
 
   const picModalRef = useRef(null);
   const siteModalRef = useRef(null);
+  const settingsModalRef = useRef(null);
   const [picModalYCoord, setPicModalYCoord] = useState(0);
   const [siteModalYCoord, setSiteModalYCoord] = useState(0);
+  const [settingsModalYCoord, setSettingsModalYCoord] = useState(0);
 
   const movePicModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -198,11 +200,17 @@ const MapPage = React.memo(() => {
     to: { transform: `translate3d(0,${siteModalYCoord}px,0)` },
   });
 
+  const moveSettingsModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${settingsModalYCoord}px,0)` },
+  });
+
   const animatePicModal = () => {
 
     if (picModalYCoord === 0){
       setPicModalYCoord(-950);
       setSiteModalYCoord(0)
+      setSettingsModalYCoord(0)
     } else {
       setPicModalYCoord(0)
     }
@@ -227,6 +235,7 @@ const MapPage = React.memo(() => {
     if (siteModalYCoord === 0){
       setSiteModalYCoord(-950);
       setPicModalYCoord(0)
+      setSettingsModalYCoord(0)
     } else {
       setSiteModalYCoord(0)
     }
@@ -240,7 +249,17 @@ const MapPage = React.memo(() => {
       Latitude: "",
       Longitude: "",
     })
-  
+  };
+
+  const animateSettingsModal = () => {
+
+    if (settingsModalYCoord === 0){
+      setSettingsModalYCoord(-950);
+      setPicModalYCoord(0)
+      setSiteModalYCoord(0)
+    } else {
+      setSettingsModalYCoord(0)
+    }
   };
 
 
@@ -259,9 +278,7 @@ const MapPage = React.memo(() => {
               sx={toggleButtonStyle}
               value="check"
               selected={gearModal}
-              onChange={() => {
-                setGearModal(toggleGearModal);
-              }}
+              onChange={() => {animateSettingsModal()}}
             >
               <SettingsIcon sx={{ height: "39px", width: "39px" }} />
             </ToggleButton>
@@ -505,9 +522,18 @@ const MapPage = React.memo(() => {
         <HowToGuide closeup={toggleGuideModal} />
       </FormGuideModal>
 
-      <FormModal openup={gearModal} closeup={toggleGearModal}>
+  
+      <animated.div
+        className="picModalDiv"
+        style={moveSettingsModal}
+        ref={settingsModalRef}
+      >
+        <Settings animateSettingsModal={animateSettingsModal} />
+      </animated.div>
+
+      {/* <FormModal openup={gearModal} closeup={toggleGearModal}>
         <Settings closeup={toggleGearModal} />
-      </FormModal>
+      </FormModal> */}
 
       {lightbox && (
         <Lightbox

@@ -1,4 +1,4 @@
-import { Container, Form, Label } from "reactstrap";
+import { Container, Form, FormGroup, Label, Button } from "reactstrap";
 import { useContext, useState } from "react";
 import Collapse from "@mui/material/Collapse";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
@@ -6,8 +6,10 @@ import { signOut } from "../../supabaseCalls/authenticateSupabaseCalls";
 import { SessionContext } from "../contexts/sessionContext";
 import "./settings.css";
 import ActDelDialog from "./dialog";
+import CloseIcon from "@mui/icons-material/Close";
 
 const Settings = (props) => {
+  const { animateSettingsModal } = props;
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const [showDangerZone, setShowDangerZone] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
@@ -24,7 +26,7 @@ const Settings = (props) => {
       <div onClick={() => setOpenDialog(true)} className="AccountDeleteButton">
         <Label
           style={{
-            fontFamily: "Caveat",
+            fontFamily: "Itim",
             color: "maroon",
             cursor: "pointer",
             marginTop: "5px",
@@ -45,16 +47,30 @@ const Settings = (props) => {
   return (
     <Container fluid>
       <Form>
-        <div className="titleDiv2">
-          <Label>
+        <div className="titleDiv2" >
+          <Label style={{ marginTop: 3, marginRight: 225, width: "200%" }}> 
             <strong>Settings</strong>
           </Label>
+          <FormGroup>
+            <Button
+              variant="text"
+              id="closeButton2"
+              onClick={() => animateSettingsModal()}
+              style={{ display: "flex", flexDirection: "column", marginRight: 10, marginTop: 10, backgroundColor: "transparent", border: "none"}}
+            >
+              <CloseIcon
+                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+              ></CloseIcon>
+            </Button>
+          </FormGroup>
         </div>
 
+        <div className="lowerBoxSettings">
         <div onClick={handleLogout} className="Logoutbutton">
           <Label
             style={{
-              fontFamily: "Caveat",
+              fontFamily: "Itim",
+              fontWeight: "bold",
               color: "gold",
               cursor: "pointer",
               marginTop: "5px",
@@ -87,9 +103,10 @@ const Settings = (props) => {
           ></ErrorOutlineIcon>
         </div>
 
-        <Collapse in={showDangerZone} orientation="vertical" collapsedSize="0px">
+        <Collapse in={showDangerZone} orientation="vertical" collapsedSize="0px" className="dngZn">
           {dangerZone}
         </Collapse>
+        </div>
       </Form>
 
       <ActDelDialog
