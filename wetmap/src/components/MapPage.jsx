@@ -171,17 +171,25 @@ const MapPage = React.memo(() => {
   }
 
   const picModalRef = useRef(null);
+  const siteModalRef = useRef(null);
   const [picModalYCoord, setPicModalYCoord] = useState(0);
+  const [siteModalYCoord, setSiteModalYCoord] = useState(0);
 
   const movePicModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${picModalYCoord}px,0)` },
   });
 
+  const moveSiteModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${siteModalYCoord}px,0)` },
+  });
+
   const animatePicModal = () => {
 
     if (picModalYCoord === 0){
       setPicModalYCoord(-950);
+      setSiteModalYCoord(0)
     } else {
       setPicModalYCoord(0)
     }
@@ -198,6 +206,27 @@ const MapPage = React.memo(() => {
       Longitude: "",
     });
     setPhotoFile(null);
+  
+  };
+
+  const animateSiteModal = () => {
+
+    if (siteModalYCoord === 0){
+      setSiteModalYCoord(-950);
+      setPicModalYCoord(0)
+    } else {
+      setSiteModalYCoord(0)
+    }
+  };
+
+  const clearSiteModal = () => {
+    animateSiteModal()
+    setAddSiteVals({
+      ...addSiteVals,
+      Site: "",
+      Latitude: "",
+      Longitude: "",
+    })
   
   };
 
@@ -310,9 +339,7 @@ const MapPage = React.memo(() => {
               sx={toggleButtonStyle}
               value="check"
               selected={diveSiteModal}
-              onChange={() => {
-                setDiveSiteModal(toggleDiveSiteModal);
-              }}
+              onChange={() => {clearSiteModal()}}
             >
               <AddLocationAltIcon sx={{ height: "38px", width: "38px" }} />
             </ToggleButton>
@@ -451,14 +478,15 @@ const MapPage = React.memo(() => {
       >
         <PicUploader animatePicModal={animatePicModal} />
       </animated.div>
-{/* 
-      <FormModal openup={picModal} closeup={togglePicModal}>
-        <PicUploader closeup={togglePicModal} />
-      </FormModal> */}
 
-      <FormModal openup={diveSiteModal} closeup={toggleDiveSiteModal}>
-        <SiteSubmitter closeup={toggleDiveSiteModal} />
-      </FormModal>
+      <animated.div
+        className="picModalDiv"
+        style={moveSiteModal}
+        ref={siteModalRef}
+      >
+        <SiteSubmitter animateSiteModal={animateSiteModal} />
+      </animated.div>
+
 
       <FormGuideModal openup={guideModal} closeup={toggleGuideModal}>
         <HowToGuide closeup={toggleGuideModal} />

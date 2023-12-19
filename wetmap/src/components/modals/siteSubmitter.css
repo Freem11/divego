@@ -1,14 +1,27 @@
 @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Permanent+Marker&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
 
+.lowerBoxSite {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40%;
+    margin-left: 28%;
+    margin-bottom: -26px;
+    width: 42%;
+}
+
 .inputbox{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    margin-left: 0px;
     margin-top: 15px;
+    width: 100%; 
+    font-family: 'Itim', cursive;
     border: none;
-    margin-left: -5%;
+    border-bottom: none;
+    border-color: transparent;
 }
 
 .modalInputs{
@@ -35,28 +48,42 @@
 } 
 
 #modalButton2 {
-   width: 100%;
-   margin-top: 50px;
-   font-family: 'Permanent Marker', cursive;
-   color: gold;
-   border-radius: 0;
-   border-top: 1px solid #F0EEEB;
+    width: 100%;
+    margin-top: 173px;
+    padding-top: 4px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 26px;
+    font-weight: bolder;
+    color: gold;
+    border-radius: 0;
+    border-top: 1px solid #F0EEEB;
+    text-transform: none;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 #modalButton2:hover {
     background-color: #3e7dd7;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 #modalButton2:active {
     background-color: #538dbd;
+    border-bottom-left-radius: 25px;
+    border-bottom-right-radius: 25px;
 }
 
 .modalTitle3{
+    display: flex;
+    flex-direction: row;
     position: absolute;
     top: 49px;
-    font-family: 'Permanent Marker', cursive;
-    font-size: 20px;
-    margin-left: 13px;
-    margin-top: -33px;
+    /* background-color: green; */
+    width: 95%;
+    margin-left: 25px;
+    margin-top: -35px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 34px;
     color: #F0EEEB;
 }
 
@@ -110,17 +137,16 @@
 
 .GPSbutton{
     display: flex;
-    font-family: 'Bubblegum Sans', cursive;
-    font-size: 16px;
+    flex-direction: row;
     cursor: pointer;
     background-color: #538bdb;
-    width: 160px;
-    height: 30px;
+    width: 195px;
+    height: 40px;
     text-align: center;
     border-radius: 5px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
-    margin-left: 40%;
-    margin-top: 25px;
+    box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);
+    margin-left: 230px;
+    margin-top: 80px;
 }
 
 .GPSbutton:hover {

@@ -302,7 +302,7 @@ const PicUploader = React.memo((props) => {
           </FormGroup>
         </div>
 
-        <div className="lowerBox">
+        <div className="lowerBoxPhoto">
           <div className="inputboxType1">
             <FormGroup>
               <InputBase

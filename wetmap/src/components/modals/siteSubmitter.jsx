@@ -5,6 +5,7 @@ import exifr from "exifr";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import PhotoIcon from "@mui/icons-material/Photo";
+import CloseIcon from "@mui/icons-material/Close";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
 import Collapse from "@mui/material/Collapse";
@@ -30,7 +31,7 @@ const noGPSZone = (
 );
 
 const SiteSubmitter = (props) => {
-  const { closeup } = props;
+  const { animateSiteModal } = props;
   const [showNoGPS, setShowNoGPS] = useState(false);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
 
@@ -112,7 +113,7 @@ const SiteSubmitter = (props) => {
         Latitude: "",
         Longitude: "",
       })
-      closeup();
+      animateSiteModal();
       return;
     }
   };
@@ -121,62 +122,38 @@ const SiteSubmitter = (props) => {
     document.getElementById("file").click();
   }
 
+  const handleModalClose = () => {
+    setAddSiteVals({...addSiteVals,
+      Site: "",
+      Latitude: "",
+      Longitude: "",
+    })
+    animateSiteModal();
+  };
+
   return (
     <Container fluid>
       <Form onSubmit={handleSubmit}>
         <div className="modalTitle3">
-          <Label>
+          <Label style={{ marginTop: 3, marginRight: 125, width: "200%" }}>
             <strong>Submit Your Dive Site</strong>
           </Label>
-        </div>
-
-        <div className="uploadbox">
-          <div onClick={handleClick} className="fileSelectDiv">
-            <div style={{ marginRight: 5, marginTop: -2 }}>
-              <PhotoIcon
-                sx={{
-                  color: "gold",
-                  height: "28px",
-                  width: "28px",
-                  cursor: "pointer",
-                  marginTop: "5px",
-                  marginLeft: "10px",
-                }}
-              ></PhotoIcon>
-            </div>
-
-            <Label
-              style={{
-                fontFamily: "Bubblegum Sans, cursive",
-                color: "gold",
-                cursor: "pointer",
-                marginTop: "7px",
-                marginLeft:  "-5px",
-                fontSize: "18px"
-              }}
-            >
-              Choose a File
-            </Label>
-          </div>
           <FormGroup>
-            <Input
-              placeholder="Upload"
-              className="modalInputs2"
-              style={{
-                textAlign: "center",
-                fontFamily: "Indie Flower",
-                display: "none",
-              }}
-              id="file"
-              type="file"
-              name="PicFile"
-              bsSize="lg"
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-            ></Input>
+            <Button
+              variant="text"
+              id="closeButton"
+              onClick={() => handleModalClose()}
+              style={{ display: "flex", flexDirection: "column", marginRight: 10, marginTop: 2}}
+            >
+              <CloseIcon
+                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+              ></CloseIcon>
+            </Button>
           </FormGroup>
         </div>
 
+
+        <div className="lowerBoxSite">
         <div className="inputbox">
           <FormGroup>
             <InputBase
@@ -189,23 +166,20 @@ const SiteSubmitter = (props) => {
               inputProps={{
                 style: {
                   textAlign: "center",
-                  fontFamily: "Indie Flower",
+                  fontFamily: "Itim",
+                  fontSize: 18,
                   textOverflow: "ellipsis",
                   backgroundColor: "#538bdb",
-                  height: "25px",
+                  height: "35px",
+                  width: "232px",
                   color: "#F0EEEB",
-                  width: "170px",
-                  borderRadius: "10px",
+                  borderRadius: "20px",
                   boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)"
                 },
               }}
             />
           </FormGroup>
         </div>
-
-        <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
-          {noGPSZone}
-        </Collapse>
 
         <div className="inputbox" >
           <FormGroup>
@@ -220,13 +194,14 @@ const SiteSubmitter = (props) => {
               inputProps={{
                 style: {
                   textAlign: "center",
-                  fontFamily: "Indie Flower",
+                  fontFamily: "Itim",
+                  fontSize: 18,
                   textOverflow: "ellipsis",
                   backgroundColor: "#538BDB",
-                  height: "25px",
+                  height: "35px",
+                  width: "232px",
                   color: "#F0EEEB",
-                  width: "170px",
-                  borderRadius: "10px",
+                  borderRadius: "20px",
                   boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)"
                 }
               }}
@@ -247,18 +222,20 @@ const SiteSubmitter = (props) => {
               inputProps={{
                 style: {
                   textAlign: "center",
-                  fontFamily: "Indie Flower",
+                  fontFamily: "Itim",
+                  fontSize: 18,
                   textOverflow: "ellipsis",
                   backgroundColor: "#538bdb",
-                  height: "25px",
+                  height: "35px",
+                  width: "232px",
                   color: "#F0EEEB",
-                  width: "170px",
-                  borderRadius: "10px",
+                  borderRadius: "120px",
                   boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)"
                 },
               }}
             />
           </FormGroup>
+        </div>
         </div>
 
         <FormGroup>
@@ -270,7 +247,7 @@ const SiteSubmitter = (props) => {
                   height: "28px",
                   width: "28px",
                   cursor: "pointer",
-                  marginTop: "2.5px",
+                  marginTop: "8px",
                   marginLeft: "5px",
                 }}
               ></MapOutlinedIcon>
@@ -278,11 +255,12 @@ const SiteSubmitter = (props) => {
 
             <Label
               style={{
-                fontFamily: "Bubblegum Sans, cursive",
+                fontfamily: 'Patrick Hand',
+                fontWeight: "bold",
                 color: "gold",
                 cursor: "pointer",
-                marginTop: "7px",
-                marginRight: "5px",
+                marginTop: "11px",
+                paddingRight: "5px",
                 fontSize: "15px"
               }}
             >
