@@ -185,9 +185,11 @@ const MapPage = React.memo(() => {
 
   const picModalRef = useRef(null);
   const siteModalRef = useRef(null);
+  const launchModalRef = useRef(null);
   const settingsModalRef = useRef(null);
   const [picModalYCoord, setPicModalYCoord] = useState(0);
   const [siteModalYCoord, setSiteModalYCoord] = useState(0);
+  const [launchModalYCoord, setLaunchModalYCoord] = useState(0);
   const [settingsModalYCoord, setSettingsModalYCoord] = useState(0);
 
   const movePicModal = useSpring({
@@ -198,6 +200,11 @@ const MapPage = React.memo(() => {
   const moveSiteModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${siteModalYCoord}px,0)` },
+  });
+
+  const moveLaunchModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${launchModalYCoord}px,0)` },
   });
 
   const moveSettingsModal = useSpring({
@@ -211,6 +218,7 @@ const MapPage = React.memo(() => {
       setPicModalYCoord(-950);
       setSiteModalYCoord(0)
       setSettingsModalYCoord(0)
+      setLaunchModalYCoord(0)
     } else {
       setPicModalYCoord(0)
     }
@@ -236,6 +244,7 @@ const MapPage = React.memo(() => {
       setSiteModalYCoord(-950);
       setPicModalYCoord(0)
       setSettingsModalYCoord(0)
+      setLaunchModalYCoord(0)
     } else {
       setSiteModalYCoord(0)
     }
@@ -251,12 +260,25 @@ const MapPage = React.memo(() => {
     })
   };
 
+  const animateLaunchModal = () => {
+
+    if (launchModalYCoord === 0){
+      setLaunchModalYCoord(-950);
+      setPicModalYCoord(0)
+      setSiteModalYCoord(0)
+      setSettingsModalYCoord(0)
+    } else {
+      setLaunchModalYCoord(0)
+    }
+  };
+
   const animateSettingsModal = () => {
 
     if (settingsModalYCoord === 0){
       setSettingsModalYCoord(-950);
       setPicModalYCoord(0)
       setSiteModalYCoord(0)
+      setLaunchModalYCoord(0)
     } else {
       setSettingsModalYCoord(0)
     }
@@ -291,9 +313,7 @@ const MapPage = React.memo(() => {
               sx={toggleButtonStyle}
               value="check"
               selected={guideModal}
-              onChange={() => {
-                setGuideModal(toggleGuideModal);
-              }}
+              onChange={() => {animateLaunchModal()}}
             >
               <QuestionMarkIcon sx={{ height: "40px", width: "40px" }} />
             </ToggleButton>
@@ -518,11 +538,18 @@ const MapPage = React.memo(() => {
       </animated.div>
 
 
-      <FormGuideModal openup={guideModal} closeup={toggleGuideModal}>
+      {/* <FormGuideModal openup={guideModal} closeup={toggleGuideModal}>
         <HowToGuide closeup={toggleGuideModal} />
-      </FormGuideModal>
+      </FormGuideModal> */}
 
-  
+      <animated.div
+        className="picModalDiv"
+        style={moveLaunchModal}
+        ref={launchModalRef}
+      >
+        <HowToGuide animateLaunchModal={animateLaunchModal} />
+      </animated.div>
+
       <animated.div
         className="picModalDiv"
         style={moveSettingsModal}
@@ -530,10 +557,6 @@ const MapPage = React.memo(() => {
       >
         <Settings animateSettingsModal={animateSettingsModal} />
       </animated.div>
-
-      {/* <FormModal openup={gearModal} closeup={toggleGearModal}>
-        <Settings closeup={toggleGearModal} />
-      </FormModal> */}
 
       {lightbox && (
         <Lightbox

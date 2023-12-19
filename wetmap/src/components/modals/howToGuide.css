@@ -9,17 +9,30 @@
 }
 
 .titleDiv{
-  margin-top: -50px;
-  margin-left: 10px;
-  font-family: 'Permanent Marker', cursive;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  top: 49px;
+  /* background-color: green; */
+  width: 95%;
+  margin-left: 5px;
+  margin-top: -35px;
+  font-family: 'Patrick Hand', cursive;
+  font-size: 34px;
   color: #F0EEEB;
 }
 
 .mainBlurbDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20%;
   margin-left: 10%;
   font-family: 'Indie Flower';
   color: #F0EEEB;
+  height: 65vh;
   width: 80%;
+  /* background-color: mediumaquamarine; */
 }
 
 
