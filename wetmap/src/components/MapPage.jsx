@@ -355,6 +355,7 @@ const MapPage = React.memo((props) => {
     }    
   }, [siteModal]);
 
+
   return (
     <div className="mappagemaster">
       {masterSwitch && (
@@ -630,7 +631,7 @@ const MapPage = React.memo((props) => {
         className="guideModalDiv"
         style={(moveIntroGuidModal)}
         ref={introGuideModalRef}
-        onClick={() => setItterator(itterator + 1)}
+        // onClick={() => setItterator(itterator + 1)}
       >
         <IntroTutorial animateIntroGuideModal={animateIntroGuideModal} />
       </animated.div>

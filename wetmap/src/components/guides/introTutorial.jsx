@@ -1,3 +1,5 @@
+import { Container, Form, FormGroup, Label, Button } from "reactstrap";
+import CloseIcon from "@mui/icons-material/Close";
 import React, { useState, useContext, useEffect } from "react";
 import { animated, useSpring } from "react-spring";
 import "./introTutorial.css";
@@ -31,7 +33,8 @@ import arrowIOS from "../../images/arrow.png";
 let screenWidthInital = window.innerWidth;
 let screenHeitghInital = window.innerHeight;
 
-export default function IntroTutorial() {
+export default function IntroTutorial(props) {
+  const { animateIntroGuideModal } = props
   window.addEventListener("resize", trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
@@ -183,6 +186,8 @@ export default function IntroTutorial() {
   };
 
   const resetTutorial = async () => {
+    console.log("fire")
+    setItterator(null)
     setCharacterX(0); //1000
     setTextBoxY(0); //1000
     setPicX(0); //-300
@@ -195,6 +200,8 @@ export default function IntroTutorial() {
     setUserBoxX(0); //-300
     setNextTutX(0); //-300
     clearUp();
+    animateIntroGuideModal()
+    console.log("yo", itterator)
   };
 
   const handleSecondTutorialStartup = () => {
@@ -318,11 +325,12 @@ export default function IntroTutorial() {
       return;
     } else {
       if (pushVal === 1 && itterator < feederArray.length - 1) {
+        console.log("printing?", textPrinting)
         if (textPrinting) {
-          setTextPrinting(false);
           textArray = "";
           setTextRead("");
           setTextRead(feederArray[itterator]);
+          setTextPrinting(false);
         } else {
           setItterator((prev) => prev + pushVal);
           setTextPrinting(true);
@@ -388,17 +396,11 @@ export default function IntroTutorial() {
     if (itterator === 0) {
       setTimeout(() => {
         setCharacterX(-windowWidth * 0.35);
-        // characterX.value = withTiming(
-        //   Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        // );
-        // startCharacterAnimation();
-      }, 800);
+      }, 600);
 
       setTimeout(() => {
         setTextBoxY(windowHeigth * 0.6);
-        // textBoxY.value = withTiming(windowHeight * 0.8);
-        // startTextBoxAnimation();
-        setupText(0);
+        // setupText(1);
       }, 1000);
     }
 
@@ -409,12 +411,14 @@ export default function IntroTutorial() {
         setItterator((prev) => prev + 1);
         return;
       }
+      // setupText(1);
       // userBoxX.value = withSpring(windowWidth * 0.2);
       // startUserBoxAnimation();
     }
 
     if (itterator === 2) {
       getProfile();
+      // setupText(1);
       // if (userBoxX.value !== (-300)) {
       // userBoxX.value = withTiming(-300);
   
@@ -424,21 +428,26 @@ export default function IntroTutorial() {
     }
 
     if (itterator === 3) {
+      // setupText(1);
       // blinker = setInterval(guideBut, 1500);
       // guideButtonY.value = withTiming(windowHeight * 0.4);
     }
 
     if (itterator === 4) {
+      // setupText(1);
       // guideButtonY.value = withTiming(-1000);
       // clearUp();
     }
 
     if (itterator === 5) {
+      // setupText(1);
       // questionButtonY.value = withTiming(windowHeight * 0.4);
     }
 
     console.log("i am", itterator);
     if (itterator === 6) {
+      animateIntroGuideModal()
+      setItterator(null)
       // questionButtonY.value = withTiming(-1000);
       // picX.value = withSpring(0);
     }
@@ -650,7 +659,7 @@ export default function IntroTutorial() {
   };
 
   useEffect(() => {
-    if (tutorialRunning) {
+    if (tutorialRunning && guideModal) {
       if (itterator === null) {
         setItterator(0);
       }
@@ -712,7 +721,19 @@ export default function IntroTutorial() {
   }
 
   return (
-    <div className="wrapper" onPress={() => setupText(1)}>
+    <div className="wrapper" onClick={() => setupText(1)}>
+        <FormGroup>
+            <Button
+              variant="text"
+              id="closeButton2"
+              onClick={() => null}
+              style={{ position: "absolute", right: 20, top: 50, backgroundColor: "green", border: "none", zIndex :300}}
+            >
+              <CloseIcon
+                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+              ></CloseIcon>
+            </Button>
+          </FormGroup>
       <div className="container3">
         {pics &&
           pics.map((pic) => {

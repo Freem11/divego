@@ -2,6 +2,7 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { Container, Form, FormGroup, Label, Button } from "reactstrap";
 import "./siteSubmitter.css";
 import { TutorialContext } from "../contexts/tutorialContext";
+import { IterratorContext } from "../contexts/iterratorContext";
 import { TutorialModelContext } from "../contexts/tutorialModalContext";
 import { SecondTutorialModalContext } from "../contexts/secondTutorialModalContext";
 import { ThirdTutorialModalContext } from "../contexts/thirdTutorialModalContext";
@@ -16,7 +17,7 @@ import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import "./howToGuide.css";
 
 const HowToGuide = (props) => {
-
+  const { itterator, setItterator } = useContext(IterratorContext);
   const { animateLaunchModal, animateIntroGuideModal } = props;
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { guideModal, setGuideModal } = useContext(TutorialModelContext);
@@ -28,6 +29,7 @@ const HowToGuide = (props) => {
   );
 
   const handleTutorialStartup = () => {
+    setItterator(0)
     setTutorialRunning(true);
     animateIntroGuideModal()
     animateLaunchModal()
