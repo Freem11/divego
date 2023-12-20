@@ -200,8 +200,6 @@ export default function IntroTutorial(props) {
     setUserBoxX(0); //-300
     setNextTutX(0); //-300
     clearUp();
-    animateIntroGuideModal()
-    console.log("yo", itterator)
   };
 
   const handleSecondTutorialStartup = () => {
@@ -400,7 +398,6 @@ export default function IntroTutorial(props) {
 
       setTimeout(() => {
         setTextBoxY(windowHeigth * 0.6);
-        // setupText(1);
       }, 1000);
     }
 
@@ -411,14 +408,13 @@ export default function IntroTutorial(props) {
         setItterator((prev) => prev + 1);
         return;
       }
-      // setupText(1);
+
       // userBoxX.value = withSpring(windowWidth * 0.2);
       // startUserBoxAnimation();
     }
 
     if (itterator === 2) {
       getProfile();
-      // setupText(1);
       // if (userBoxX.value !== (-300)) {
       // userBoxX.value = withTiming(-300);
   
@@ -428,19 +424,16 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 3) {
-      // setupText(1);
       // blinker = setInterval(guideBut, 1500);
       // guideButtonY.value = withTiming(windowHeight * 0.4);
     }
 
     if (itterator === 4) {
-      // setupText(1);
       // guideButtonY.value = withTiming(-1000);
       // clearUp();
     }
 
     if (itterator === 5) {
-      // setupText(1);
       // questionButtonY.value = withTiming(windowHeight * 0.4);
     }
 
@@ -448,6 +441,7 @@ export default function IntroTutorial(props) {
     if (itterator === 6) {
       animateIntroGuideModal()
       setItterator(null)
+      resetTutorial()
       // questionButtonY.value = withTiming(-1000);
       // picX.value = withSpring(0);
     }
