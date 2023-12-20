@@ -1,0 +1,274 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    /* background: pink */
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    opacity: rgb(0,0,0,0.9);
+  }
+
+  .character {
+    position: absolute;
+    top: 30vh; 
+    left: 100vw; 
+    height: 40vw;
+    width: 80vh;
+    opacity: rgb(0,0,0,1);
+    /* background-color: green */
+  };
+
+  .textboxes {
+    position: absolute;
+    top: 110vh;
+    left: 70wv;
+    width: 40vw;
+    background-color: white;
+    border-radius: 15;
+    align-self: center;
+    opacity: 1;
+  };
+
+  .textcontain {
+    padding: 10;
+    font-family: "Itim";
+    font-size: 24px;
+
+  };
+
+  .container3 {
+    /* flex: 1; */
+    position: absolute;
+    top: 12%;
+    background-color: transparent;
+    align-items: center;
+    /* margin-top: -3%; */
+    height: 90%;
+    margin-right: (10);
+    margin-left: (10);
+    border-radius: 15;
+    /* background-color: green */
+  };
+
+  .picContainer3 {
+    width:  (200);
+    height: (100);
+    margin-bottom: (5);
+    /* background-color: 538bdb; */
+    margin-top: -0%;
+    border-radius: 15;
+    z-index: 10;
+  };
+  .userContainer {
+    position: absolute;
+    top: 20%;
+    background-color: transparent;
+    align-items: center;
+    /* margin-top: -3%; */
+    height: 90%;
+    margin-right: (10);
+    margin-left: (10);
+    border-radius: 15;
+    /* background-color: green */
+  };
+  .nextTutButton {
+    position: absolute;
+    flex-direction: row;
+    top: 25%;
+    background-color: #538bdb;
+    align-items: center;
+    padding-right: 10;
+    padding-left: 2;
+    height: 5%;
+    margin-right: (10);
+    margin-left: (10);
+    border-radius: 15;
+    border-color: lightgrey;
+    border-width: 2;
+  };
+  .nextTutText {
+    color: white;
+    font-family: Itim_400Regular;
+    font-family: (12);
+    height: (15);
+    margin: 10;
+  };
+ 
+  .micro {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: black;
+    opacity: 0.6;
+    width: 96%;
+    border-radius: 5;
+    z-index: 2;
+    left: 5%;
+    top: 13%;
+  };
+  .titleText {
+    text-align: center;
+    font-family: Itim_400Regular;
+    color: #F0EEEB;
+    font-family: 13;
+    margin-left: 10;
+  };
+  .buttonwrapper {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    left: 20%;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    background-color: black;
+  };
+  .anchorClusterWrapper {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    left: 20%;
+    height: 50;
+    width: 50;
+    opacity: 1;
+  };
+  .anchorclust {
+    position: absolute;
+    left: 0.025;
+  };
+  .anchor1 {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    left:  0.13;
+    top: -40;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    margin-bottom: 15;
+  };
+  .anchor2 {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    left:  -0.09;
+    top: -40;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    margin-bottom: 15;
+  };
+  .anchor3 {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    left: -0.09;
+    top: 60;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    margin-bottom: 15;
+  };
+  .anchor4 {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    left:  0.13;
+    top: 60;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    margin-bottom: 15;
+  }
+
+  .anchorSpec {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    top: -10;
+    height: 25;
+    width: 25;
+    opacity: 1;
+    margin-top: -25;
+  };
+  .heatPointWrapper {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    left: 50%;
+    height: 50;
+    width: 50;
+    opacity: 1;
+  };
+  .arrowWrapper {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    left:  2%;
+    height: (110);
+    width: (160);
+    opacity: 1;
+  };
+  .honkCon {
+    height: 25;
+    width: 25;
+    border-radius: 10;
+     /* background-color: blue; */
+    margin-right: -10;
+    margin-bottom: -2;
+  };
+  .guideButton {
+    position: absolute;
+    left: (50);
+    height: (35);
+    width: (90);
+    align-items: center;
+    justify-content: center;
+    background-color: maroon;
+    border-radius: (15);
+    padding-right: 5;
+    padding-left: 5;
+  };
+  .guideButtonAlt {
+    position: absolute;
+    left: (50);
+    height: (30);
+    width: (80);
+    align-items: center;
+    justify-content: center;
+    background-color: #C49102;
+    border-radius: (15);
+    padding-right: 5;
+    padding-left: 5;
+  };
+  .guideText {
+    color: darkgrey;
+    font-family: PatrickHand_400Regular;
+    font-size: (15);
+  };
+  .guideTextAlt {
+    color: black;
+    font-family: PatrickHand_400Regular;
+    font-size: (15);
+  };
+

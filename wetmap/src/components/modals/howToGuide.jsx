@@ -1,5 +1,10 @@
+import { useState, useContext, useEffect, useRef } from "react";
 import { Container, Form, FormGroup, Label, Button } from "reactstrap";
 import "./siteSubmitter.css";
+import { TutorialContext } from "../contexts/tutorialContext";
+import { TutorialModelContext } from "../contexts/tutorialModalContext";
+import { SecondTutorialModalContext } from "../contexts/secondTutorialModalContext";
+import { ThirdTutorialModalContext } from "../contexts/thirdTutorialModalContext";
 import CloseIcon from "@mui/icons-material/Close";
 import ExploreIcon from "@mui/icons-material/Explore";
 import SearchIcon from "@mui/icons-material/Search";
@@ -12,7 +17,34 @@ import "./howToGuide.css";
 
 const HowToGuide = (props) => {
 
-  const { animateLaunchModal } = props;
+  const { animateLaunchModal, animateIntroGuideModal } = props;
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { guideModal, setGuideModal } = useContext(TutorialModelContext);
+  const { secondGuideModal, setSecondGuideModal } = useContext(
+    SecondTutorialModalContext
+  );
+  const { thirdGuideModal, setThirdGuideModal } = useContext(
+    ThirdTutorialModalContext
+  );
+
+  const handleTutorialStartup = () => {
+    setTutorialRunning(true);
+    animateIntroGuideModal()
+    animateLaunchModal()
+    setGuideModal(!guideModal);
+  };
+
+  const handleSecondTutorialStartup = () => {
+    setTutorialRunning(true);
+    animateLaunchModal()
+    setSecondGuideModal(!secondGuideModal);
+  };
+
+  const handleThirdTutorialStartup = () => {
+    setTutorialRunning(true);
+    animateLaunchModal()
+    setThirdGuideModal(!thirdGuideModal);
+  };
 
   return (
     <div className="masterDiv">
@@ -35,7 +67,7 @@ const HowToGuide = (props) => {
 
         <div className="mainBlurbDiv">
      
-        <div onClick={null} className="introGuideLaunch">
+        <div onClick={handleTutorialStartup} className="introGuideLaunch">
           <Label
             style={{
               fontFamily: "Itim",

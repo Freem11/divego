@@ -20,6 +20,7 @@ import {
   useEffect,
   useLayoutEffect,
 } from "react";
+import { animated, useSpring } from "react-spring";
 import PlacesAutoComplete from "./locationSearch/placesAutocomplete";
 import { CoordsContext } from "./contexts/mapCoordsContext";
 import { ZoomContext } from "./contexts/mapZoomContext";
@@ -39,8 +40,8 @@ import { HeatPointsContext } from "./contexts/heatPointsContext";
 import { MapBoundsContext } from "./contexts/mapBoundariesContext";
 import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
+import { AnchorModalContext } from "./contexts/anchorModalContext";
 import FormAnchorModal from "./modals/formAnchorModal";
-import AnchorPics from "./modals/anchorPics";
 import { newGPSBoundaries } from "../helpers/mapHelpers";
 import { formatHeatVals } from "../helpers/heatPointHelpers";
 import { setupClusters } from "../helpers/clusterHelpers";
@@ -86,6 +87,7 @@ function Map() {
   );
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
 
@@ -96,8 +98,6 @@ function Map() {
   const [selected, setSelected] = useState(null);
   const { dragPin, setDragPin } = useContext(PinSpotContext);
   const [tempMarker, setTempMarker] = useState(false);
-
-  const [siteModal, setSiteModal] = useState(false);
 
   const toggleSiteModal = () => {
     setSiteModal(!siteModal);
@@ -259,7 +259,8 @@ function Map() {
       Latitude: lat,
       Longitude: lng,
     });
-    setSiteModal(!siteModal);
+    setSiteModal(true);
+    console.log("hey!", siteModal)
   };
 
   return (
@@ -361,9 +362,7 @@ function Map() {
         ></Marker>
       )}
 
-      <FormAnchorModal openup={siteModal} closeup={toggleSiteModal}>
-        <AnchorPics closeup={toggleSiteModal} />
-      </FormAnchorModal>
+    
       {/* 
       {lightbox && (
         <div className="boxLight">

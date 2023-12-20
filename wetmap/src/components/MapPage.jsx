@@ -8,6 +8,7 @@ import AdminPortal from "./adminPortal";
 import PicUploader from "./modals/picUploader";
 import SiteSubmitter from "./modals/siteSubmitter";
 import HowToGuide from "./modals/howToGuide";
+import AnchorPics from "./modals/anchorPics";
 import Settings from "./modals/setting";
 import DiveSiteAutoComplete from "./diveSiteSearch/diveSiteSearch";
 import PlacesAutoComplete from "./locationSearch/placesAutocomplete";
@@ -42,8 +43,11 @@ import { SessionContext } from "./contexts/sessionContext";
 import { PinContext } from "./contexts/staticPinContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
 import { ModalSelectContext } from "./contexts/modalSelectContext";
-
-
+import { AnchorModalContext } from "./contexts/anchorModalContext";
+import { IterratorContext } from "./contexts/iterratorContext";
+import IntroTutorial from "./guides/introTutorial";
+// import SecondTutorial from "./tutorial/secondTutorial";
+// import ThirdTutorial from "./tutorial/thirdTutorial";
 import Lightbox from "react-image-lightbox";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
@@ -67,7 +71,8 @@ const adminPortalZone = (
   </div>
 );
 
-const MapPage = React.memo(() => {
+const MapPage = React.memo((props) => {
+  const { screenHeigthInital} = props
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
@@ -80,11 +85,14 @@ const MapPage = React.memo(() => {
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { photoFile, setPhotoFile } = useContext(PictureContext);
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
   const { picModal, setPicModal } = useContext(PicModalContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+
+  const { itterator, setItterator } = useContext(IterratorContext);
 
   const togglePicModal = () => {
     setPicModal(!picModal);
@@ -171,7 +179,6 @@ const MapPage = React.memo(() => {
   };
 
   let screenWidthInital = window.innerWidth;
-  let screenHeigthInital = window.innerHeight;
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
  const [windowHeight, setWindowHeight] = useState(screenHeigthInital);
@@ -187,10 +194,18 @@ const MapPage = React.memo(() => {
   const siteModalRef = useRef(null);
   const launchModalRef = useRef(null);
   const settingsModalRef = useRef(null);
+  const introGuideModalRef = useRef(null);
+  const secondGuideModalRef = useRef(null);
+  const thirdGuideModalRef = useRef(null);
+  const anchorModalRef = useRef(null);
   const [picModalYCoord, setPicModalYCoord] = useState(0);
   const [siteModalYCoord, setSiteModalYCoord] = useState(0);
   const [launchModalYCoord, setLaunchModalYCoord] = useState(0);
   const [settingsModalYCoord, setSettingsModalYCoord] = useState(0);
+  const [introGuideModalYCoord, setIntroGuideModalYCoord] = useState(0);
+  const [secondGuideModalYCoord, setSecondGuideModalYCoord] = useState(0);
+  const [thirdGuideModalYCoord, setThirdGuideModalYCoord] = useState(0);
+  const [anchorModalYCoord, setAnchorModalYCoord] = useState(0);
 
   const movePicModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -212,6 +227,26 @@ const MapPage = React.memo(() => {
     to: { transform: `translate3d(0,${settingsModalYCoord}px,0)` },
   });
 
+  const moveIntroGuidModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${introGuideModalYCoord}px,0)` },
+  });
+
+  const moveSecondGuideModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${secondGuideModalYCoord}px,0)` },
+  });
+
+  const moveThirdGuideModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${thirdGuideModalYCoord}px,0)` },
+  });
+
+  const moveAnchorModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${anchorModalYCoord}px,0)` },
+  });
+
   const animatePicModal = () => {
 
     if (picModalYCoord === 0){
@@ -219,6 +254,8 @@ const MapPage = React.memo(() => {
       setSiteModalYCoord(0)
       setSettingsModalYCoord(0)
       setLaunchModalYCoord(0)
+      setAnchorModalYCoord(0)
+      setSiteModal(false)
     } else {
       setPicModalYCoord(0)
     }
@@ -235,7 +272,6 @@ const MapPage = React.memo(() => {
       Longitude: "",
     });
     setPhotoFile(null);
-  
   };
 
   const animateSiteModal = () => {
@@ -245,6 +281,8 @@ const MapPage = React.memo(() => {
       setPicModalYCoord(0)
       setSettingsModalYCoord(0)
       setLaunchModalYCoord(0)
+      setAnchorModalYCoord(0)
+      setSiteModal(false)
     } else {
       setSiteModalYCoord(0)
     }
@@ -267,6 +305,8 @@ const MapPage = React.memo(() => {
       setPicModalYCoord(0)
       setSiteModalYCoord(0)
       setSettingsModalYCoord(0)
+      setAnchorModalYCoord(0)
+      setSiteModal(false)
     } else {
       setLaunchModalYCoord(0)
     }
@@ -279,11 +319,41 @@ const MapPage = React.memo(() => {
       setPicModalYCoord(0)
       setSiteModalYCoord(0)
       setLaunchModalYCoord(0)
+      setAnchorModalYCoord(0)
+      setSiteModal(false)
     } else {
       setSettingsModalYCoord(0)
     }
   };
 
+  const animateIntroGuideModal = () => {
+
+    if (introGuideModalYCoord === 0){
+      setIntroGuideModalYCoord(-windowHeight);
+    } else {
+      setIntroGuideModalYCoord(0)
+    }
+  };
+
+  const animateAnchorModal = () => {
+
+    if (anchorModalYCoord === 0){
+      setAnchorModalYCoord(-950);
+      setPicModalYCoord(0)
+      setSiteModalYCoord(0)
+      setSettingsModalYCoord(0)
+      setLaunchModalYCoord(0)
+    } else {
+      setAnchorModalYCoord(0)
+      setSiteModal(false)
+    }
+  };
+
+  useEffect(() => {
+    if(siteModal){
+      animateAnchorModal()
+    }    
+  }, [siteModal]);
 
   return (
     <div className="mappagemaster">
@@ -537,17 +607,15 @@ const MapPage = React.memo(() => {
         <SiteSubmitter animateSiteModal={animateSiteModal} />
       </animated.div>
 
-
-      {/* <FormGuideModal openup={guideModal} closeup={toggleGuideModal}>
-        <HowToGuide closeup={toggleGuideModal} />
-      </FormGuideModal> */}
-
       <animated.div
         className="picModalDiv"
         style={moveLaunchModal}
         ref={launchModalRef}
       >
-        <HowToGuide animateLaunchModal={animateLaunchModal} />
+        <HowToGuide 
+        animateLaunchModal={animateLaunchModal}
+        animateIntroGuideModal={animateIntroGuideModal} 
+        />
       </animated.div>
 
       <animated.div
@@ -556,6 +624,23 @@ const MapPage = React.memo(() => {
         ref={settingsModalRef}
       >
         <Settings animateSettingsModal={animateSettingsModal} />
+      </animated.div>
+
+      <animated.div
+        className="guideModalDiv"
+        style={(moveIntroGuidModal)}
+        ref={introGuideModalRef}
+        onClick={() => setItterator(itterator + 1)}
+      >
+        <IntroTutorial animateIntroGuideModal={animateIntroGuideModal} />
+      </animated.div>
+
+      <animated.div
+        className="anchorModalDiv"
+        style={(moveAnchorModal)}
+        ref={moveAnchorModal}
+      >
+        <AnchorPics animateAnchorModal={animateAnchorModal} />
       </animated.div>
 
       {lightbox && (
