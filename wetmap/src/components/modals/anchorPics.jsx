@@ -120,7 +120,7 @@ const AnchorPics = (props) => {
               variant="text"
               id="closeButton2"
               onClick={() => handleClose()}
-              style={{ position: "absolute", right: 20, top: 2, backgroundColor: "transparent", border: "none"}}
+              style={{ position: "absolute", right: 5, top: 0, backgroundColor: "transparent", border: "none"}}
             >
               <CloseIcon
                 sx={{ color: "lightgrey", height: "36px", width: "36px" }}
