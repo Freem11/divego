@@ -45,11 +45,18 @@
   .questionbuttonwrapper {
     position: absolute;
     top: -110vh;
-    left: 20%;
+    left: 30%;
     background-color: black;
     border-radius: 50px;
   }
 
+  .explorebuttonwrapper {
+    position: absolute;
+    top: -110vh;
+    left: 30%;
+    background-color: black;
+    border-radius: 50px;
+  }
 
   .container3 {
     /* flex: 1; */
@@ -135,21 +142,22 @@
 
   
 
-  .anchorClusterWrapper {
+  .anchorclusterwrapper {
     flex: 1;
     align-items: center;
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    left: 20%;
-    height: 50;
-    width: 50;
+    top: -160vh;
+    left: 10%;
+    height: 500px;
+    width: 500px;
     opacity: 1;
+    /* background-color: khaki; */
   }
 
   .anchorclust {
-    position: absolute;
-    left: 0.025;
+    margin-top: 40%;
   }
 
   .anchor1 {
@@ -158,8 +166,8 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    left:  0.13;
-    top: -40;
+    top: 0px;
+    left: 350px;
     height: 45;
     width: 45;
     opacity: 1;
@@ -172,8 +180,8 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    left:  -0.09;
-    top: -40;
+    top: 0px;
+    left: 50px;
     height: 45;
     width: 45;
     opacity: 1;
@@ -186,8 +194,8 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    left: -0.09;
-    top: 60;
+    top: 400px;
+    left: 50px;
     height: 45;
     width: 45;
     opacity: 1;
@@ -200,8 +208,8 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    left:  0.13;
-    top: 60;
+    top: 400px;
+    left: 350px;
     height: 45;
     width: 45;
     opacity: 1;
@@ -221,16 +229,14 @@
     margin-top: -25;
   }
 
-  .heatPointWrapper {
+  .heatpointwrapper {
     flex: 1;
     align-items: center;
     justify-content: center;
-    border-radius: 50;
+    border-radius: 50px;
     position: absolute;
+    top: -130vh;
     left: 50%;
-    height: 50;
-    width: 50;
-    opacity: 1;
   }
 
   .arrowWrapper {
@@ -239,9 +245,10 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    left:  2%;
-    height: (110);
-    width: (160);
+    top: -170vh;
+    left:  5%;
+    height: 20vh;
+    width: 20vh;
     opacity: 1;
   }
 

@@ -28,6 +28,8 @@ import anchorIconIOS from "../../images/SiteAnchor20.png";
 import heatIconIOS from "../../images/heatpoint.png";
 import arrowIOS from "../../images/arrow.png";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
+import ExploreIcon from "@mui/icons-material/Explore";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import UserNamer from "./usernamer";
 // import ImageCasher from "../helpers/imageCashing";
 
@@ -214,6 +216,14 @@ export default function IntroTutorial(props) {
   const characterRef = useRef(null);
   const textBoxRef = useRef(null);
   const questionRef = useRef(null);
+  const exploreRef = useRef(null);
+  const clusterAnchorRef = useRef(null);
+  const heatPotintRef = useRef(null);
+  const guideButtonRef = useRef(null);
+  const arrowRef = useRef(null);
+  const userBoxRef = useRef(null);
+  const nextTutRef = useRef(null);
+  const picRef = useRef(null);
 
   const [characterX, setCharacterX] = useState(0); //1000
   const [textBoxY, setTextBoxY] = useState(0); //1000
@@ -257,9 +267,9 @@ export default function IntroTutorial(props) {
     "Now try closing the dive site and choose a creature or two from the pictures along the top, then we will come back to the dive site and see what's changed!";
   const text15 = "";
   const text16 =
-    "Select one or more sea creatures using the menu at the top, a tap will highlight the selected sea creature yellow to indicate that it is selected but...";
+    "Select one or more sea creatures using the menu at the top, a click will highlight the selected sea creature yellow to indicate that it is selected but...";
   const text17 =
-    "If you LONG press on one, you will see that it pops out for a better look! You can long press on another to swap them or long press on the popped out one to put it back, and yes you can still tap to select while its popped out!";
+    "If you DOUBLE click on one, you will see that it pops out for a better look! You can double click on another to swap them or double click on the popped out one to put it back, and yes you can still click to select while its popped out!";
   const text18 = "";
   const text19 =
     "Uh-oh! This isn't the dive site we were looking at before! Try to find the one we were looking at so we can see how it has changed.";
@@ -308,21 +318,21 @@ export default function IntroTutorial(props) {
   ];
 
   const setupText = (pushVal) => {
-    if (itterator === 12 && !textPrinting) {
-      setItterator(11);
-      setGuideModal(false);
-      return;
-    } else if (itterator === 19 && !textPrinting) {
-      setItterator(18);
-      setGuideModal(false);
-      return;
-    }
+    // if (itterator === 12 && !textPrinting) {
+    //   setItterator(11);
+    //   setGuideModal(false);
+    //   return;
+    // } else if (itterator === 19 && !textPrinting) {
+    //   setItterator(18);
+    //   setGuideModal(false);
+    //   return;
+    // }
     if (
       itterator === 1 ||
       // itterator === 6 ||
-      itterator === 11 ||
-      itterator === 15 ||
-      itterator === 18 ||
+      // itterator === 11 ||
+      // itterator === 15 ||
+      // itterator === 18 ||
       itterator >= 24
     ) {
       return;
@@ -441,53 +451,45 @@ export default function IntroTutorial(props) {
 
     if (itterator === 5) {
       setQuestionButtonY(windowHeigth * 1.5);
-      // questionButtonY.value = withTiming(windowHeight * 0.4);
     }
 
     // console.log("i am", itterator);
 
     if (itterator === 6) {
       setQuestionButtonY(0);
-      // questionButtonY.value = withTiming(-1000);
       // picX.value = withSpring(0);
     }
 
     if (itterator === 8) {
-      animateIntroGuideModal();
-      setItterator(null);
-      resetTutorial();
-      // exploreButtonY.value = withTiming(windowHeight * 0.4);
-      // startExploreButtonAnimation();
+      setExploreButtonY(windowHeigth * 1.5);
     }
 
     if (itterator === 9) {
-      // exploreButtonY.value = withTiming(-1000);
-      // clusterAnchorY.value = withTiming(windowHeight * 0.4);
-      // startClusterAnchorAnimation();
+      setExploreButtonY(0);
+      setClusterAnchorY(windowHeigth * 1.85);
     }
 
     if (itterator === 10) {
-      // heatPotintY.value = withTiming(windowHeight * 0.25);
-      // startHeatPointAnimation();
+      setHeatPotintY(windowHeigth * 1.6);
     }
 
     if (itterator === 11) {
+        setHeatPotintY(0);
+        setClusterAnchorY(0);
       if (movingBack) {
         setMovingBack(false);
         setGuideModal(false);
         return;
       } else {
-        setGuideModal(false);
-        heatPotintY.value = withTiming(-1200);
-        // startHeatPointAnimation();
-        clusterAnchorY.value = withTiming(-1200);
-        // startClusterAnchorAnimation();
+        // setGuideModal(false);
+        setHeatPotintY(0);
+        setClusterAnchorY(0);
       }
     }
 
     if (itterator === 12) {
       setTextPrinting(true);
-      setMovingBack(true);
+      // setMovingBack(true);
       setGuideModal(true);
     }
 
@@ -505,9 +507,8 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 16) {
-      setGuideModal(true);
-      arrowY.value = withTiming(windowWidth > 600 ? -10 : 65);
-      // startArrowAnimation();
+      // setGuideModal(true);
+      setArrowY(windowHeigth * 1.4);
     }
 
     if (itterator === 18) {
@@ -517,16 +518,14 @@ export default function IntroTutorial(props) {
         setBackHappened(false);
         return;
       } else {
-        setGuideModal(false);
-        arrowY.value = withTiming(-1200);
-        // startArrowAnimation();
+        // setGuideModal(false);
+        setArrowY(0);
       }
     }
 
     if (itterator === 19) {
       if (backCount === 0) {
-        arrowY.value = withTiming(-1200);
-        // startArrowAnimation();
+        setArrowY(0);
         setBackCount((prev) => prev + 1);
       }
       if (backHappened) {
@@ -543,35 +542,39 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 20) {
-      arrowY.value = withTiming(-1200);
-      setGuideModal(true);
+      setArrowY(0);
+      // setGuideModal(true);
     }
 
     if (itterator === 23) {
-      nextTutX.value = withSpring(windowWidth * 0.3);
+      // nextTutX.value = withSpring(windowWidth * 0.3);
       // startNextTutAnimation();
     }
 
     if (itterator === 24) {
-      setSiteModal(false);
-      nextTutX.value = withTiming(-300);
+      // setSiteModal(false);
+      // nextTutX.value = withTiming(-300);
       // startNextTutAnimation();
     }
 
     if (itterator === feederArray.length - 1) {
+      animateIntroGuideModal();
       setItterator(null);
-      setTutorialRunning(false);
-      setGuideModal(false);
+      resetTutorial();
+
+      // setItterator(null);
+      // setTutorialRunning(false);
+      // setGuideModal(false);
       // characterX.value = withTiming(
       //   Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
       // );
       // startCharacterAnimation();
-      textBoxY.value = withTiming(1000);
+      // textBoxY.value = withTiming(1000);
       // startTextBoxAnimation();
-      setChapter(null);
-      setBackHappened(false);
-      setMovingBack(false);
-      setBackCount(0);
+      // setChapter(null);
+      // setBackHappened(false);
+      // setMovingBack(false);
+      // setBackCount(0);
     }
   }, [itterator]);
 
@@ -600,7 +603,7 @@ export default function IntroTutorial(props) {
     to: { transform: `translate3d(${picX}px,0,0)` },
   });
 
-  const exporeButtonSlide = useSpring({
+  const exploreButtonSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${exploreButtonY}px,0)` },
   });
@@ -797,7 +800,7 @@ export default function IntroTutorial(props) {
         style={textBoxSlide}
         pointerEvents={"box-none"}
       >
-        <div classname="textcontain">
+        <div className="textcontain">
           {textRead}
           <div
             style={{
@@ -807,14 +810,25 @@ export default function IntroTutorial(props) {
               backgroundColor: "green",
             }}
           >
-            {/* <img src={heatIconIOS} classname="honkCon" /> */}
+            <img src={heatIconIOS} className="honkCon" />
           </div>
           {textRead2}
         </div>
       </animated.div>
 
-      <animated.div classname="buttonwrapper" style={exporeButtonSlide}>
-        {/* <MaterialIcons name="explore" color="aquamarine" size={(42)} /> */}
+      <animated.div
+        className="explorebuttonwrapper"
+        ref={exploreRef}
+        style={exploreButtonSlide}
+        pointerEvents={"box-none"}
+      >
+        <ExploreIcon
+          sx={{
+            height: "10vh",
+            width: "10vh",
+            color: "aquamarine",
+          }}
+        />
       </animated.div>
 
       <animated.div
@@ -832,26 +846,22 @@ export default function IntroTutorial(props) {
         />
       </animated.div>
 
-      <animated.div classname="buttonwrapper" style={userBoxSlide}>
+      <animated.div className="buttonwrapper" style={userBoxSlide}>
         {/* <UserNamer></UserNamer> */}
       </animated.div>
 
-      <animated.div classname="anchorClusterWrapper" style={clusterAnchorSlide}>
-        <img
-          src={anchorClustIOS}
-          className="anchorclust"
-          style={{
-            height: 31,
-            width: 31,
-          }}
-        />
-
+      <animated.div
+        className="anchorclusterwrapper"
+        ref={clusterAnchorRef}
+        style={clusterAnchorSlide}
+        pointerEvents={"box-none"}
+      >
         <img
           src={anchorIconIOS}
           className="anchor1"
           style={{
-            height: 28,
-            width: 28,
+            height: "10vh",
+            width: "10vh",
           }}
         />
 
@@ -859,8 +869,17 @@ export default function IntroTutorial(props) {
           src={anchorIconIOS}
           className="anchor2"
           style={{
-            height: 28,
-            width: 28,
+            height: "10vh",
+            width: "10vh",
+          }}
+        />
+
+        <img
+          src={anchorClustIOS}
+          className="anchorclust"
+          style={{
+            height: "12vh",
+            width: "12vh",
           }}
         />
 
@@ -868,8 +887,8 @@ export default function IntroTutorial(props) {
           src={anchorIconIOS}
           className="anchor3"
           style={{
-            height: 28,
-            width: 28,
+            height: "10vh",
+            width: "10vh",
           }}
         />
 
@@ -877,48 +896,61 @@ export default function IntroTutorial(props) {
           src={anchorIconIOS}
           className="anchor4"
           style={{
-            height: 28,
-            width: 28,
+            height: "10vh",
+            width: "10vh",
           }}
         />
       </animated.div>
 
-      <animated.div className="heatPointWrapper" style={heatPointSlide}>
+      <animated.div
+        className="heatpointwrapper"
+        ref={heatPotintRef}
+        style={heatPointSlide}
+        pointerEvents={"box-none"}
+      >
         <img
           src={heatIconIOS}
-          className="anchor4"
+          className="anchorclust"
           style={{
-            height: 50,
-            width: 50,
+            height: "20vh",
+            width: "20vh",
           }}
         />
       </animated.div>
 
-      <animated.div className="arrowWrapper" style={arrowSlide}>
+      <animated.div
+        className="arrowWrapper"
+        ref={arrowRef}
+        style={arrowSlide}
+        pointerEvents={"box-none"}
+      >
         <img
           src={arrowIOS}
           className="anchor4"
           style={{
-            height: 90,
-            width: 200,
+            height: "30vh",
+            width: "70vh",
           }}
         />
       </animated.div>
 
       <animated.div
         className="nextTutButton"
+        ref={nextTutRef}
         style={nextTutSlide}
         onPress={handleSecondTutorialStartup}
       >
         <p onPress={handleSecondTutorialStartup} className="nextTutText">
           Fun With Dive Sites
         </p>
-        {/* <FontAwesome
-            name="arrow-right"
-            size={24}
-            color="white"
-            onPress={handleSecondTutorialStartup}
-          /> */}
+        <KeyboardArrowRightIcon
+          sx={{
+            height: "10vh",
+            width: "10vh",
+            color: "white",
+          }}
+          onClick={handleSecondTutorialStartup}
+        />
       </animated.div>
 
       {/* <animated.div
