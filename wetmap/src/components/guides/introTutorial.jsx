@@ -30,7 +30,7 @@ import arrowIOS from "../../images/arrow.png";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ExploreIcon from "@mui/icons-material/Explore";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-// import UserNamer from "./usernamer";
+import UserNamer from "./usernamer";
 // import ImageCasher from "../helpers/imageCashing";
 
 let screenWidthInital = window.innerWidth;
@@ -72,8 +72,7 @@ export default function IntroTutorial(props) {
   const [pics, setPics] = useState([]);
 
   const [guideState, setGuideState] = useState(false);
-  let counter = 0;
-  let blinker;
+
 
   useEffect(() => {
     getProfile();
@@ -328,7 +327,7 @@ export default function IntroTutorial(props) {
     //   return;
     // }
     if (
-      itterator === 1 ||
+      // itterator === 1 ||
       // itterator === 6 ||
       // itterator === 11 ||
       // itterator === 15 ||
@@ -425,31 +424,21 @@ export default function IntroTutorial(props) {
         return;
       }
 
-      // userBoxX.value = withSpring(windowWidth * 0.2);
-      // startUserBoxAnimation();
+      setUserBoxX(windowWidth * 0.64)
     }
 
     if (itterator === 2) {
       getProfile();
-      // if (userBoxX.value !== (-300)) {
-      // userBoxX.value = withTiming(-300);
-
-      // startUserBoxAnimation();
-      // }
-      // startPicAnimation();
+      setUserBoxX(0)
     }
 
     if (itterator === 3) {
-      // blinker = setInterval(guideBut, 1500);
-      // guideButtonY.value = withTiming(windowHeight * 0.4);
+      setGuideButtonY(windowHeigth * 1.75)
     }
 
-    if (itterator === 4) {
-      // guideButtonY.value = withTiming(-1000);
-      // clearUp();
-    }
 
     if (itterator === 5) {
+      setGuideButtonY(0)
       setQuestionButtonY(windowHeigth * 1.5);
     }
 
@@ -457,7 +446,11 @@ export default function IntroTutorial(props) {
 
     if (itterator === 6) {
       setQuestionButtonY(0);
-      // picX.value = withSpring(0);
+      setPicX(windowWidth * 0.3)
+    }
+
+    if (itterator === 7) {
+      setPicX(0)
     }
 
     if (itterator === 8) {
@@ -673,6 +666,7 @@ export default function IntroTutorial(props) {
 
     let today = new Date();
     let formattedDate = getToday(today);
+    let dateFormat = new Date(formattedDate)
     getPhotos(formattedDate);
   }, [guideModal]);
 
@@ -693,38 +687,6 @@ export default function IntroTutorial(props) {
   const nudgeMap = (values) => {
     setMapCenter({ lat: values.lat, lng: values.lng });
   };
-
-  // const progress = useDerivedValue(() => {
-  //   return withTiming(guideState === true ? 1 : 0);
-  // });
-
-  // const guideButtonPulse = useAnimatedStyle(() => {
-  //   const backgroundColor = interpolateColor(
-  //     progress.value,
-  //     [0, 1],
-  //     [
-  //       styles.guideButton.backgroundColor,
-  //       styles.guideButtonAlt.backgroundColor,
-  //     ]
-  //   );
-  //   return {
-  //     backgroundColor,
-  //   };
-  // });
-
-  function guideBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setGuideState(false);
-    } else {
-      setGuideState(true);
-    }
-  }
-
-  function clearUp() {
-    clearInterval(blinker);
-    setGuideState(false);
-  }
 
   return (
     <div className="wrapper" onClick={() => setupText(1)}>
@@ -747,37 +709,42 @@ export default function IntroTutorial(props) {
           ></CloseIcon>
         </Button>
       </FormGroup>
-      <div className="container3">
+
+      <animated.div 
+        className="container3"
+        ref={picRef}
+        style={picSlide}
+        >
         {pics &&
           pics.map((pic) => {
             return (
-              <animated.div
+              <div
                 key={pic.id}
                 className="picContainer3"
-                style={picSlide}
                 onClick={() =>
                   moveMap({ lat: pic.latitude, lng: pic.longitude })
                 }
               >
-                <div classname="micro">
-                  <p classname="titleText">{pic.label}</p>
+                <div className="micro">
+                  <p className="titleTextX">{pic.label}</p>
                 </div>
-                <div classname="shadowbox">
+                <div className="shadowbox">
                   <img
-                    photoFile={pic.photoFile}
+                    src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photoFile}`}
                     id={pic.id}
                     style={{
                       height: "100%",
                       width: "100%",
                       borderRadius: 15,
                       borderColor: "grey",
+                      objectFit: 'cover'
                     }}
                   />
                 </div>
-              </animated.div>
+              </div>
             );
           })}
-      </div>
+      </animated.div>
 
       <animated.div
         ref={characterRef}
@@ -802,17 +769,9 @@ export default function IntroTutorial(props) {
       >
         <div className="textcontain">
           {textRead}
-          <div
-            style={{
-              opacity: textRead2.length > 2 ? 1 : 0,
-              marginRight: -10,
-              marginBottom: -15,
-              backgroundColor: "green",
-            }}
-          >
-            <img src={heatIconIOS} className="honkCon" />
-          </div>
+         {(textRead2.length > 0) && <img src={heatIconIOS} className="tinyHeat" />}
           {textRead2}
+  
         </div>
       </animated.div>
 
@@ -846,8 +805,12 @@ export default function IntroTutorial(props) {
         />
       </animated.div>
 
-      <animated.div className="buttonwrapper" style={userBoxSlide}>
-        {/* <UserNamer></UserNamer> */}
+      <animated.div 
+      className="usernamerwrapper" 
+      ref={userBoxRef}
+      style={userBoxSlide}
+      >
+        <UserNamer></UserNamer>
       </animated.div>
 
       <animated.div
@@ -934,7 +897,7 @@ export default function IntroTutorial(props) {
         />
       </animated.div>
 
-      <animated.div
+      {/* <animated.div
         className="nextTutButton"
         ref={nextTutRef}
         style={nextTutSlide}
@@ -951,16 +914,17 @@ export default function IntroTutorial(props) {
           }}
           onClick={handleSecondTutorialStartup}
         />
-      </animated.div>
+      </animated.div> */}
 
-      {/* <animated.div
-      className="guideButton"
-        style={[guideButtonSlide]}
+      <animated.div
+        className="guidebutton"
+        ref={guideButtonRef}
+        style={guideButtonSlide}
       >
-        <p style={guideState ? styles.guideTextAlt : styles.guideText}>
+        <p className="guidetext">
           Guide Active
         </p>
-      </animated.div> */}
+      </animated.div>
     </div>
   );
 }

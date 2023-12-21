@@ -126,7 +126,7 @@ if (data) {
     .from("photos")
     .select()
     .filter('label', 'in', '(' + creatureListFinal + ')')
-    .eq("month", value.sliderVal)
+    // .eq("month", value.sliderVal)
     .gte("latitude", value.minLat)
     .gte("longitude", value.minLng)
     .lte("latitude", value.maxLat)

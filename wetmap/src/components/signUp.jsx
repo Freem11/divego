@@ -218,7 +218,7 @@ export default function SignUpRoute() {
           {regFail && <Label className="erroMsg">{regFail}</Label>}
         </div>
       </Form>
-      <div className="wrapper">
+      <div className="authwrapper">
         <div className="signButton" onClick={handleSignUpSubmit}>
           Sign Up
         </div>

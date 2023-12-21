@@ -42,6 +42,10 @@
     /* background-color: khaki; */
   }
 
+  .tx2 {
+    margin-top: 15px;
+  }
+
   .questionbuttonwrapper {
     position: absolute;
     top: -110vh;
@@ -61,25 +65,46 @@
   .container3 {
     /* flex: 1; */
     position: absolute;
-    top: 12%;
+    top: 8%;
+    left: -25vw;
+    z-index: 10;
     background-color: transparent;
     align-items: center;
     /* margin-top: -3%; */
-    height: 90%;
-    margin-right: (10);
-    margin-left: (10);
+    height: min-content;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-bottom: 15px;
     border-radius: 15;
     /* background-color: green */
   }
 
   .picContainer3 {
-    width:  (200);
-    height: (100);
-    margin-bottom: (5);
-    /* background-color: 538bdb; */
-    margin-top: -0%;
+    width:  20vw;
+    height: 12vw;
+    margin-bottom: 5;
+    /* background-color: #538bdb; */
+    margin-top: 0%;
     border-radius: 15;
     z-index: 10;
+  }
+
+  .usernamerwrapper{
+    position: absolute;
+    top: 15%;
+    left: -35vw;
+    width:  20vw;
+    height: 12vw;
+    margin-bottom: 5;
+    /* background-color: #538bdb; */
+    margin-top: 0%;
+    border-radius: 15px;
+    z-index: 10;
+  }
+
+  .shadowbox{
+    width:  20vw;
+    height: 12vw;
   }
 
   .userContainer {
@@ -129,15 +154,16 @@
     border-radius: 5;
     z-index: 2;
     left: 5%;
-    top: 13%;
+    top: -3%;
   }
 
-  .titleText {
-    text-align: center;
-    font-family: Itim_400Regular;
+  .titleTextX {
+    margin-top: 8px;
+    margin-left: 10px;
+    font-family: 'Itim';
     color: #F0EEEB;
-    font-family: 13;
-    margin-left: 10;
+    font-size: 18px;
+    /* margin-left: 2%; */
   }
 
   
@@ -259,45 +285,62 @@
     height: 25;
     width: 25;
     border-radius: 10;
-    background-color: blue;
+    /* background-color: blue; */
   }
 
-  .guideButton {
+  .tinyHeat{
+    /* position: absolute;
+    top: 38%;
+    left: 85%; */
+    height: 25px;
+    width: 25px;
+    border-radius: 10;
+    /* background-color: blue; */
+  }
+
+  .tinyHeat2{
     position: absolute;
-    left: (50);
-    height: (35);
-    width: (90);
-    align-items: center;
-    justify-content: center;
-    background-color: maroon;
-    border-radius: (15);
-    padding-right: 5;
-    padding-left: 5;
+    top: 38%;
+    left: 77%;
+    height: 25px;
+    width: 25px;
+    border-radius: 10;
+    margin-bottom: 5px;
+    /* background-color: blue; */
   }
 
-  .guideButtonAlt {
+  .guidebutton {
     position: absolute;
-    left: (50);
-    height: (30);
-    width: (80);
-    align-items: center;
-    justify-content: center;
-    background-color: #C49102;
-    border-radius: (15);
-    padding-right: 5;
-    padding-left: 5;
+    top: -130vh;
+    left: 30%;
+    height: 6vh;
+    width: 14vh;
+    border-radius: 20px;
+    animation: changeBg 4s linear infinite;
+    border-radius: 15;
+   
   }
 
-  .guideText {
-    color: darkgrey;
-    font-family: PatrickHand_400Regular;
-    font-size: (15);
+  @keyframes changeBg {
+    0% {
+      background-color: maroon;
+    }
+    50% {
+      background-color: #C49102;
+    }
+    100% {
+      background-color: maroon;
+    }
   }
 
-  .guideTextAlt {
+  .guidetext {
     color: black;
-    font-family: PatrickHand_400Regular;
-    font-size: (15);
+    font-family: 'Patrick Hand', cursive;
+    font-size: 20px;
+    margin-top: 12px;
+    padding-right: 10px;
+    padding-left: 10px;
   }
+
 
 

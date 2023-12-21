@@ -1,0 +1,121 @@
+
+  .container {
+    /* position: "absolute", */
+    background-color: #538bdb;
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+     /* height: scale(53); */
+    border-radius: 15px;
+    width: 50vh;
+    height: 37vh;
+    padding-bottom: 30px;
+    padding-top: 1px;
+    font-size: 2rem;
+    margin-top: 10px;
+  }
+
+  .titleText {
+    text-align: center;
+    font-family: 'Patrick Hand', cursive;
+    color: #F0EEEB;
+    font-size: 36px;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+  
+  .input {
+    font-family: 'Itim';
+    background-color: #538dbd;
+    border-radius: 10;
+    width: 200px;
+    height: 40;
+    align-self: center;
+    margin-bottom: 20px;
+    text-align: center;
+    align-content: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .inputRed {
+    font-family: Itim;
+    background-color: pink;
+    border-radius: 10;
+    width: 200px;
+    height: 40;
+    align-self: center;
+    margin-bottom: 20px;
+    text-align: center;
+    overflow: hidden;
+  
+  }
+  
+  .erroMsg {
+    position: absolute;
+    left: 4vh;
+    margin: 5;
+    padding: 7;
+    color: pink;
+    font-family: Itim;
+    font-size: 24px;
+    width: 40vh;
+    border-style: dashed;
+    border-radius: 10;
+    border-color: darkblue;
+    border-width: 1;
+  }
+
+  .OKbutton {
+    position: absolute;
+    background-color: #538bdb;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10;
+    height: 35;
+    width: 150;
+     /* marginLeft: 30%; */
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .OKbuttonPressed {
+    background-color: #538dbd;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10;
+    height: 35px;
+    width: 150px;
+     /* marginLeft: "30%"; */
+    margin-top: 10px;
+    margin-bottom: 15px;
+  }
+
+  .buttontext {
+    color: gold;
+    font-size: 27px;
+    margin-top: 10;
+    font-family: 'Patrick Hand', cursive;
+    width: 100%;
+    align-self: center;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+  }
+
+  .pinButton{
+    position: absolute;
+    top: 23vh;
+    left: 14vh;
+    display: flex;
+    width: 10vh;
+    height: 43px;
+    align-items: center;
+    justify-content: center;
+    background-color: #538bdb;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+}

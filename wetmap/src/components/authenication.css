@@ -33,7 +33,7 @@
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-.wrapper{
+.authwrapper{
   display: flex;
   align-items: center;
   width: inherit;
