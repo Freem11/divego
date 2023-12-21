@@ -1,6 +1,6 @@
 import { Container, Form, FormGroup, Label, Button } from "reactstrap";
 import CloseIcon from "@mui/icons-material/Close";
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { animated, useSpring } from "react-spring";
 import "./introTutorial.css";
 import mantaIOS from "../../images/Manta32.png";
@@ -27,6 +27,7 @@ import anchorClustIOS from "../../images/ClusterAnchor24.png";
 import anchorIconIOS from "../../images/SiteAnchor20.png";
 import heatIconIOS from "../../images/heatpoint.png";
 import arrowIOS from "../../images/arrow.png";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 // import UserNamer from "./usernamer";
 // import ImageCasher from "../helpers/imageCashing";
 
@@ -34,7 +35,7 @@ let screenWidthInital = window.innerWidth;
 let screenHeitghInital = window.innerHeight;
 
 export default function IntroTutorial(props) {
-  const { animateIntroGuideModal } = props
+  const { animateIntroGuideModal } = props;
   window.addEventListener("resize", trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
@@ -186,8 +187,8 @@ export default function IntroTutorial(props) {
   };
 
   const resetTutorial = async () => {
-    console.log("fire")
-    setItterator(null)
+    console.log("fire");
+    setItterator(null);
     setCharacterX(0); //1000
     setTextBoxY(0); //1000
     setPicX(0); //-300
@@ -209,6 +210,10 @@ export default function IntroTutorial(props) {
     setGuideModal(false);
     setSecondGuideModal(true);
   };
+
+  const characterRef = useRef(null);
+  const textBoxRef = useRef(null);
+  const questionRef = useRef(null);
 
   const [characterX, setCharacterX] = useState(0); //1000
   const [textBoxY, setTextBoxY] = useState(0); //1000
@@ -314,7 +319,7 @@ export default function IntroTutorial(props) {
     }
     if (
       itterator === 1 ||
-      itterator === 6 ||
+      // itterator === 6 ||
       itterator === 11 ||
       itterator === 15 ||
       itterator === 18 ||
@@ -323,7 +328,7 @@ export default function IntroTutorial(props) {
       return;
     } else {
       if (pushVal === 1 && itterator < feederArray.length - 1) {
-        console.log("printing?", textPrinting)
+        console.log("printing?", textPrinting);
         if (textPrinting) {
           textArray = "";
           setTextRead("");
@@ -397,7 +402,8 @@ export default function IntroTutorial(props) {
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(windowHeigth * 0.6);
+        console.log("yo", windowHeigth);
+        setTextBoxY(-windowHeigth * 0.3);
       }, 1000);
     }
 
@@ -417,7 +423,7 @@ export default function IntroTutorial(props) {
       getProfile();
       // if (userBoxX.value !== (-300)) {
       // userBoxX.value = withTiming(-300);
-  
+
       // startUserBoxAnimation();
       // }
       // startPicAnimation();
@@ -434,19 +440,22 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 5) {
+      setQuestionButtonY(windowHeigth * 1.5);
       // questionButtonY.value = withTiming(windowHeight * 0.4);
     }
 
-    console.log("i am", itterator);
+    // console.log("i am", itterator);
+
     if (itterator === 6) {
-      animateIntroGuideModal()
-      setItterator(null)
-      resetTutorial()
+      setQuestionButtonY(0);
       // questionButtonY.value = withTiming(-1000);
       // picX.value = withSpring(0);
     }
 
     if (itterator === 8) {
+      animateIntroGuideModal();
+      setItterator(null);
+      resetTutorial();
       // exploreButtonY.value = withTiming(windowHeight * 0.4);
       // startExploreButtonAnimation();
     }
@@ -716,18 +725,25 @@ export default function IntroTutorial(props) {
 
   return (
     <div className="wrapper" onClick={() => setupText(1)}>
-        <FormGroup>
-            <Button
-              variant="text"
-              id="closeButton2"
-              onClick={() => null}
-              style={{ position: "absolute", right: 20, top: 50, backgroundColor: "green", border: "none", zIndex :300}}
-            >
-              <CloseIcon
-                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
-              ></CloseIcon>
-            </Button>
-          </FormGroup>
+      <FormGroup>
+        <Button
+          variant="text"
+          id="closeButton2"
+          onClick={() => null}
+          style={{
+            position: "absolute",
+            right: 20,
+            top: 50,
+            backgroundColor: "green",
+            border: "none",
+            zIndex: 300,
+          }}
+        >
+          <CloseIcon
+            sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+          ></CloseIcon>
+        </Button>
+      </FormGroup>
       <div className="container3">
         {pics &&
           pics.map((pic) => {
@@ -761,6 +777,7 @@ export default function IntroTutorial(props) {
       </div>
 
       <animated.div
+        ref={characterRef}
         className="character"
         style={characterSlide}
         pointerEvents={"box-none"}
@@ -775,32 +792,22 @@ export default function IntroTutorial(props) {
       </animated.div>
 
       <animated.div
-        // className="textboxes"
-        style={
-          (textBoxSlide,
-          {
-            fontFamily: "Itim",
-            fontSize: 24,
-            backgroundColor: "white",
-            height: 50,
-            width: "50vw",
-            top: "110vh",
-            left: "50vw",
-            borderRadius: 15,
-          })
-        }
+        className="talkbox"
+        ref={textBoxRef}
+        style={textBoxSlide}
+        pointerEvents={"box-none"}
       >
-        <div style={{ padding: 10 }} classname="textcontain">
+        <div classname="textcontain">
           {textRead}
           <div
             style={{
               opacity: textRead2.length > 2 ? 1 : 0,
               marginRight: -10,
               marginBottom: -15,
-              // backgroundColor: "green",
+              backgroundColor: "green",
             }}
           >
-            <img src={heatIconIOS} classname="honkCon" />
+            {/* <img src={heatIconIOS} classname="honkCon" /> */}
           </div>
           {textRead2}
         </div>
@@ -810,8 +817,19 @@ export default function IntroTutorial(props) {
         {/* <MaterialIcons name="explore" color="aquamarine" size={(42)} /> */}
       </animated.div>
 
-      <animated.div classname="buttonwrapper" style={questionButtonSlide}>
-        {/* <FontAwesome5 name="question" color="aquamarine" size={(31)} /> */}
+      <animated.div
+        className="questionbuttonwrapper"
+        ref={questionRef}
+        style={questionButtonSlide}
+        pointerEvents={"box-none"}
+      >
+        <QuestionMarkIcon
+          sx={{
+            height: "10vh",
+            width: "10vh",
+            color: "aquamarine",
+          }}
+        />
       </animated.div>
 
       <animated.div classname="buttonwrapper" style={userBoxSlide}>
