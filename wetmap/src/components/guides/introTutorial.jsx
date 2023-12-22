@@ -175,7 +175,7 @@ export default function IntroTutorial(props) {
   };
 
   const getProfile = async () => {
-    console.log(activeSession)
+    // console.log(activeSession)
     let sessionUserId = activeSession.user.id;
     // let sessionUserId = 'acdc4fb2-17e4-4b0b-b4a3-2a60fdfd97dd'
     try {
@@ -212,7 +212,6 @@ export default function IntroTutorial(props) {
     setArrowY(0); //-1200
     setUserBoxY(0); //-300
     setNextTutY(0); //-300
-    clearUp();
   };
 
   const handleSecondTutorialStartup = () => {
@@ -522,7 +521,6 @@ export default function IntroTutorial(props) {
         animateIntroGuideModal()
     }
 
-    console.log(itterator)
     if (itterator === 21) {
       setSiteModal(true)
       animateIntroGuideModal()
@@ -545,19 +543,6 @@ export default function IntroTutorial(props) {
       setMapZoom(10)
       resetTutorial();
 
-      // setItterator(null);
-      // setTutorialRunning(false);
-      // setGuideModal(false);
-      // characterX.value = withTiming(
-      //   Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-      // );
-      // startCharacterAnimation();
-      // textBoxY.value = withTiming(1000);
-      // startTextBoxAnimation();
-      // setChapter(null);
-      // setBackHappened(false);
-      // setMovingBack(false);
-      // setBackCount(0);
     }
   }, [itterator]);
 
