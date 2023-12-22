@@ -325,7 +325,13 @@
     0% {
       background-color: maroon;
     }
+    40% {
+      background-color: maroon;
+    }
     50% {
+      background-color: #C49102;
+    }
+    90% {
       background-color: #C49102;
     }
     100% {

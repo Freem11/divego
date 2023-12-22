@@ -92,7 +92,7 @@ export default function UserNamer() {
         value={formVal.userName}
         name="userName"
         placeholder="User Name"
-        placeholderTextColor="darkgrey"
+        placeholdertextcolor="darkgrey"
         color="#F0EEEB"
         on={() => setUserFail(null)}
         onChange={(e) => handleChange(e)}

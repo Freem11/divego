@@ -53,7 +53,6 @@ export default function AuthenticationPage() {
         <Tabs
           value={value}
           onChange={handleChange}
-          textColor="gray"
           TabIndicatorProps={{sx:{backgroundColor: 'lightgray', height: 2}}}
           sx={{
             "& button.Mui-selected": { color: "lightgray", width: "50%"},

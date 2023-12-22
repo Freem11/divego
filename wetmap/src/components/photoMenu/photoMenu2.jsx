@@ -221,10 +221,11 @@ const PhotoMenu = () => {
         sx={toggleButtonStyle}
         ref={leftButtonRef}
         onClick={() => onClicko("shiftLeft")}
+        value="web"
       >
         <ArrowBackIosIcon />
       </ToggleButton>
-      <div className="picScollY" style={{ width: caddyWidth }} ref={wrapperRef}>
+      <div className="picScollY" style={{ width: caddyWidth }} ref={wrapperRef} value="web">
         <animated.div
           className="picScollX"
           style={({ width: caddyWidth }, move)}
@@ -256,6 +257,7 @@ const PhotoMenu = () => {
         className="backTog"
         sx={toggleButtonStyle}
         ref={rightButtonRef}
+        value="web"
         onClick={() => onClicko("shiftRight")}
       >
         <ArrowForwardIosIcon />

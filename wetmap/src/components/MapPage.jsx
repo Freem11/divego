@@ -44,6 +44,7 @@ import { PinContext } from "./contexts/staticPinContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
 import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
+import { TutorialContext } from "./contexts/tutorialContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import IntroTutorial from "./guides/introTutorial";
 // import SecondTutorial from "./tutorial/secondTutorial";
@@ -52,6 +53,7 @@ import Lightbox from "react-image-lightbox";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
 import Histogram from "./histogram/histogramBody";
+import TutorialBar from "./guideBar/tutorialBarContainer";
 
 const diveSiteSearchZone = (
   <div style={{ marginLeft: "-300px", marginTop: "7px" }}>
@@ -92,6 +94,7 @@ const MapPage = React.memo((props) => {
   const { picModal, setPicModal } = useContext(PicModalContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
 
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { itterator, setItterator } = useContext(IterratorContext);
 
   const togglePicModal = () => {
@@ -358,6 +361,15 @@ const MapPage = React.memo((props) => {
 
   return (
     <div className="mappagemaster">
+
+      <div className="tutbarContainer" pointerEvents={"box-none"}>
+            {tutorialRunning && (
+              <div className="tutorialBar" pointerEvents={"box-none"}>
+                <TutorialBar style={{ zIndex: 255 }} />
+              </div>
+            )}
+      </div>
+
       {masterSwitch && (
         <div className="col2rowT">
           <AnimalTopAutoSuggest />
@@ -633,7 +645,7 @@ const MapPage = React.memo((props) => {
         ref={introGuideModalRef}
         // onClick={() => setItterator(itterator + 1)}
       >
-        <IntroTutorial animateIntroGuideModal={animateIntroGuideModal} />
+        <IntroTutorial animateIntroGuideModal={animateIntroGuideModal} setIntroGuideModalYCoord={setIntroGuideModalYCoord}/>
       </animated.div>
 
       <animated.div

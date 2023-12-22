@@ -44,7 +44,7 @@ let screenWidthInital = window.innerWidth;
 let screenHeitghInital = window.innerHeight;
 
 export default function IntroTutorial(props) {
-  const { animateIntroGuideModal } = props;
+  const { animateIntroGuideModal, setIntroGuideModalYCoord } = props;
   window.addEventListener("resize", trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
@@ -110,11 +110,13 @@ export default function IntroTutorial(props) {
         setSiteModal(false);
         setItterator(6);
         setGuideModal(true);
-        // characterX.value = withTiming(
-        //   Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        // );
-        textBoxY.value = withTiming(windowHeight * 0.8);
-        picY.value = withSpring(0);
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeigth * 0.35);
+        }, 300);
+        // setPixY(windowHeigth * 1.9)
         break;
 
       case "Dive sites":
@@ -122,25 +124,30 @@ export default function IntroTutorial(props) {
         setSiteModal(false);
         setItterator(9);
         setGuideModal(true);
-        // characterX.value = withTiming(
-        //   Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        // );
-        textBoxY.value = withTiming(windowHeight * 0.8);
-        clusterAnchorY.value = withTiming(windowHeight * 0.4);
-        heatPotintY.value = withTiming(windowHeight * 0.25);
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeigth * 0.35);
+        }, 300);
+        // setClusterAnchorY(windowHeigth * 1.85);
+        // setHeatPotintY(windowHeigth * 1.6);
         nudgeMap({ lat: 49.3134161482923, lng: -124.242440499365 });
         break;
 
       case "Changed dive site":
         resetTutorial();
         setSiteModal(false);
-        setItterator(16);
+        setItterator(17);
         setGuideModal(true);
-        // characterX.value = withTiming(
-        //   Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        // );
-        textBoxY.value = withTiming(windowHeight * 0.8);
-        arrowY.value = withTiming(65);
+        setIntroGuideModalYCoord(-windowHeigth)
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeigth * 0.35);
+        }, 300);
+        setArrowY(windowHeigth * 1.4);
         if (selectedDiveSite.SiteName === "") {
           setSelectedDiveSite({
             SiteName: "Madrona Point",
@@ -152,7 +159,10 @@ export default function IntroTutorial(props) {
         break;
 
       case "Exit Guide":
+        setIntroGuideModalYCoord(0)
         handleClearTutorial();
+        setTutorialRunning(false)
+        
         break;
     }
   }, [chapter]);
@@ -512,7 +522,7 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 17) {
-      animateIntroGuideModal()
+      setIntroGuideModalYCoord(-windowHeigth)
       setArrowY(windowHeigth * 1.4);
     }
 
@@ -642,7 +652,7 @@ export default function IntroTutorial(props) {
     if (tutorialRunning && guideModal) {
       if (itterator === null) {
         setItterator(0);
-      } else if (itterator == 12 || itterator == 13){
+      } else if (itterator == 12 || itterator == 13 || itterator == 17){
         animateIntroGuideModal()
       }
     }
