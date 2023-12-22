@@ -5,7 +5,6 @@ import "./picture.css";
 function Picture(props) {
   const { pic } = props
 
-  console.log(pic)
   return (
     <div key={pic.id} className="pictureBox">
     <div className="micro">

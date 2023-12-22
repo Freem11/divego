@@ -6,6 +6,7 @@ import "./introTutorial.css";
 import mantaIOS from "../../images/Manta32.png";
 import seaLionGuy from "../../images/EmilioNeutral.png";
 import { TutorialModelContext } from "../contexts/tutorialModalContext";
+import { CoordsContext } from "../contexts/mapCoordsContext";
 import { SecondTutorialModalContext } from "../contexts/secondTutorialModalContext";
 import { getRecentPhotos } from "../../supabaseCalls/photoSupabaseCalls";
 import { SessionContext } from "../contexts/sessionContext";
@@ -31,6 +32,11 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ExploreIcon from "@mui/icons-material/Explore";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import UserNamer from "./usernamer";
+import { JumpContext } from "../contexts/jumpContext";
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 // import ImageCasher from "../helpers/imageCashing";
 
 let screenWidthInital = window.innerWidth;
@@ -53,6 +59,8 @@ export default function IntroTutorial(props) {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext
   );
+  const { mapCoords, setMapCoords } = useContext(CoordsContext);
+  const { jump, setJump } = useContext(JumpContext);
   const { animalMultiSelection } = useContext(AnimalMultiSelectContext);
 
   // const { siteModal, setSiteModal } = useContext(AnchorModalContext);
@@ -260,27 +268,28 @@ export default function IntroTutorial(props) {
   const text11 = "";
   const text12 =
     "Oops! Looks like you have chosen a dive site that doesn't have any sightings yet! Remember you want a dive site with a heat point       nearby. Close the form and try to find one with heat points.";
-  const text13 =
-    "Wow, cool! look at all the neat sea creatures divers have already seen at this site!";
+  const text13 = ""
   const text14 =
+    "Wow, cool! look at all the neat sea creatures divers have already seen at this site!";
+  const text15 =
     "Now try closing the dive site and choose a creature or two from the pictures along the top, then we will come back to the dive site and see what's changed!";
-  const text15 = "";
-  const text16 =
-    "Select one or more sea creatures using the menu at the top, a click will highlight the selected sea creature yellow to indicate that it is selected but...";
+  const text16 = "";
   const text17 =
+    "Select one or more sea creatures using the menu at the top, a click will highlight the selected sea creature yellow to indicate that it is selected but...";
+  const text18 =
     "If you DOUBLE click on one, you will see that it pops out for a better look! You can double click on another to swap them or double click on the popped out one to put it back, and yes you can still click to select while its popped out!";
-  const text18 = "";
-  const text19 =
-    "Uh-oh! This isn't the dive site we were looking at before! Try to find the one we were looking at so we can see how it has changed.";
+  const text19 = "";
   const text20 =
-    "As you can see, the photos have filtered to show only those creatures you have selected";
+    "Uh-oh! This isn't the dive site we were looking at before! Try to find the one we were looking at so we can see how it has changed.";
   const text21 =
-    "Ok well that's all for this guide, I hope I have helped to give you a feel for how to get around the Scuba SEAsons map.";
+    "As you can see, the photos have filtered to show only those creatures you have selected";
   const text22 =
-    "In the next one I'll show you how to check if a dive site is in the app and if not, enable you to add it yourself!";
+    "Ok well that's all for this guide, I hope I have helped to give you a feel for how to get around the Scuba SEAsons map.";
   const text23 =
+    "In the next one I'll show you how to check if a dive site is in the app and if not, enable you to add it yourself!";
+  const text24 =
     "If you want to continue to the next guide please tap this button, if not tap anywhere else to exit, and thank you for joining Scuba SEAsons!";
-  const text24 = "";
+  const text25 = "";
 
   const [textRead, setTextRead] = useState("");
   const [textRead2, setTextRead2] = useState("  ");
@@ -314,6 +323,7 @@ export default function IntroTutorial(props) {
     text22,
     text23,
     text24,
+    text25,
   ];
 
   const setupText = (pushVal) => {
@@ -327,17 +337,16 @@ export default function IntroTutorial(props) {
     //   return;
     // }
     if (
-      // itterator === 1 ||
-      // itterator === 6 ||
-      // itterator === 11 ||
-      // itterator === 15 ||
-      // itterator === 18 ||
-      itterator >= 24
+      itterator === 1 ||
+      itterator === 6 ||
+      itterator === 11 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator >= 25
     ) {
       return;
     } else {
       if (pushVal === 1 && itterator < feederArray.length - 1) {
-        console.log("printing?", textPrinting);
         if (textPrinting) {
           textArray = "";
           setTextRead("");
@@ -411,8 +420,7 @@ export default function IntroTutorial(props) {
       }, 600);
 
       setTimeout(() => {
-        console.log("yo", windowHeigth);
-        setTextBoxY(-windowHeigth * 0.3);
+        setTextBoxY(-windowHeigth * 0.35);
       }, 1000);
     }
 
@@ -467,76 +475,52 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 11) {
-        setHeatPotintY(0);
-        setClusterAnchorY(0);
-      if (movingBack) {
-        setMovingBack(false);
-        setGuideModal(false);
-        return;
-      } else {
-        // setGuideModal(false);
+
+      if(!movingBack){
+        animateIntroGuideModal()
         setHeatPotintY(0);
         setClusterAnchorY(0);
       }
+     
     }
 
+    console.log(itterator)
     if (itterator === 12) {
+      animateIntroGuideModal()
       setTextPrinting(true);
-      // setMovingBack(true);
-      setGuideModal(true);
+      setMovingBack(true);
+      // setGuideModal(true);
     }
 
     if (itterator === 13) {
-      setTextRead("");
-      setTextPrinting(true);
+      animateIntroGuideModal()
+      setItterator(11)
     }
 
     if (itterator === 14) {
+      animateIntroGuideModal()
+      setMovingBack(false)
       setChapter(null);
     }
 
-    if (itterator === 15) {
-      setGuideModal(false);
+   
+    if (itterator === 16) {
+      animateIntroGuideModal()
+      
     }
 
-    if (itterator === 16) {
-      // setGuideModal(true);
+    if (itterator === 17) {
+      animateIntroGuideModal()
       setArrowY(windowHeigth * 1.4);
     }
 
-    if (itterator === 18) {
-      if (movingBack) {
-        setMovingBack(false);
-        setGuideModal(false);
-        setBackHappened(false);
-        return;
-      } else {
-        // setGuideModal(false);
-        setArrowY(0);
-      }
-    }
-
     if (itterator === 19) {
-      if (backCount === 0) {
         setArrowY(0);
-        setBackCount((prev) => prev + 1);
-      }
-      if (backHappened) {
-        setTextPrinting(true);
-        setMovingBack(true);
-        // -------------------------
-        setGuideModal(true);
-      } else {
-        setTextPrinting(true);
-        setMovingBack(true);
-        setGuideModal(true);
-        setBackHappened(true);
-      }
+        animateIntroGuideModal()
     }
 
-    if (itterator === 20) {
-      setArrowY(0);
-      // setGuideModal(true);
+    if (itterator === 21) {
+      animateIntroGuideModal()
     }
 
     if (itterator === 23) {
@@ -661,6 +645,8 @@ export default function IntroTutorial(props) {
     if (tutorialRunning && guideModal) {
       if (itterator === null) {
         setItterator(0);
+      } else if (itterator == 12 || itterator == 13){
+        animateIntroGuideModal()
       }
     }
 
@@ -670,22 +656,18 @@ export default function IntroTutorial(props) {
     getPhotos(formattedDate);
   }, [guideModal]);
 
-  const moveMap = (values) => {
-    setMapCenter({ lat: values.lat, lng: values.lng });
+  const moveMap = async (values) => {
+    setMapCoords([values.lat, values.lng]);
+    setJump(!jump)
 
-    let hopper = 0;
-    if (itterator === 2) {
-      hopper = 2;
-    } else {
-      hopper = 1;
-    }
-    setItterator((prev) => prev + hopper);
-    picY.value = withTiming(-300);
-    // startPicAnimation();
+    setItterator((prev) => prev + 1);
+
   };
 
-  const nudgeMap = (values) => {
-    setMapCenter({ lat: values.lat, lng: values.lng });
+  const nudgeMap = async (values) => {
+    setMapCoords([values.lat, values.lng]);
+    setJump(!jump)
+
   };
 
   return (

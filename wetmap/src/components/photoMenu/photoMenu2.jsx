@@ -4,6 +4,9 @@ import { multiHeatPoints } from "../../supabaseCalls/heatPointSupabaseCalls";
 import { getPhotosforMapArea } from "../../supabaseCalls/photoSupabaseCalls";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { HeatPointsContext } from "../contexts/heatPointsContext";
+import { IterratorContext } from "../contexts/iterratorContext";
+import { TutorialContext } from "../contexts/tutorialContext";
+import { AnchorModalContext } from "../contexts/anchorModalContext";
 import "photoswipe/dist/photoswipe.css";
 import { formatHeatVals } from "../../helpers/heatPointHelpers";
 import "./photoMenu.css";
@@ -15,6 +18,8 @@ import { animated, useSpring } from "react-spring";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
+let waiter2;
+
 const PhotoMenu = () => {
   const { animalVal, setAnimalVal } = useContext(AnimalContext);
   const { boundaries } = useContext(MapBoundsContext);
@@ -22,6 +27,10 @@ const PhotoMenu = () => {
   const [areaPics, setAreaPics] = useState([]);
 
   const [selectedID, setSelectedID] = useState(null);
+
+  const { itterator, setItterator } = useContext(IterratorContext);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
 
   const filterPhotosForMapArea = async () => {
     if (boundaries) {
@@ -104,6 +113,17 @@ const PhotoMenu = () => {
   }, []);
 
   useEffect(() => {
+      clearTimeout(waiter2);
+  
+      if (tutorialRunning) {
+        if (itterator === 19) {
+          waiter2 = setTimeout(() => {
+            setItterator(itterator + 2);
+            setSiteModal(true)
+          }, 2000);
+        }
+      }
+  
     filterHeatPointsForMapArea();
   }, [animalVal]);
 

@@ -4,15 +4,18 @@ import { SliderContext } from "../contexts/sliderContext";
 import { AnimalContext } from "../contexts/animalContext";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
+import { IterratorContext } from "../contexts/iterratorContext";
+import { TutorialContext } from "../contexts/tutorialContext";
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
-import { getPhotosforAnchor } from "../../supabaseCalls/photoSupabaseCalls";
+import { getPhotosforAnchor, getPhotosforAnchorMulti } from "../../supabaseCalls/photoSupabaseCalls";
 import "photoswipe/dist/photoswipe.css";
 import Picture from "./picture";
 import FlagIcon from "@mui/icons-material/Flag";
 import CloseIcon from "@mui/icons-material/Close";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "./anchorPics.css";
+import { animated } from "react-spring";
 
 const AnchorPics = (props) => {
   const { animateAnchorModal } = props;
@@ -24,12 +27,19 @@ const AnchorPics = (props) => {
   const [monthVal, setMonthVal] = useState("");
   const [anchorPics, setAnchorPics] = useState([]);
 
+  const { itterator, setItterator } = useContext(IterratorContext);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+
   const filterAnchorPhotos = async () => {
     
+
+    console.log("divesite", selectedDiveSite)
       let { minLat, maxLat, minLng, maxLng } = siteGPSBoundaries(
         selectedDiveSite.Latitude,
         selectedDiveSite.Longitude
       );
+
+      console.log("divesite", minLat, maxLat, minLng, maxLng, animalVal)
 
     try {
       const photos = await getPhotosforAnchor({
@@ -92,11 +102,32 @@ const AnchorPics = (props) => {
     filterAnchorPhotos();
   }, []);
 
+
+  useEffect(() => {
+    filterAnchorPhotos();
+  }, [siteModal]);
+
+
   useEffect(() => {
     filterAnchorPhotos();
   }, [selectedDiveSite]);
 
+  useEffect(() => {
+    if (tutorialRunning && itterator === 11){
+      if (anchorPics.length === 0){
+        setItterator(itterator + 1)
+      } else {
+        setItterator(itterator + 3)
+      }
+    } 
+  }, [anchorPics]);
+
+
   const handleClose = async () => {
+
+    if (tutorialRunning && itterator === 16){
+      setItterator(itterator + 1)
+    }
    setSiteModal(false)
    animateAnchorModal()
 };

@@ -260,7 +260,6 @@ function Map() {
       Longitude: lng,
     });
     setSiteModal(true);
-    console.log("hey!", siteModal)
   };
 
   return (

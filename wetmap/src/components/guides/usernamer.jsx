@@ -5,7 +5,7 @@ import { SessionContext } from "../contexts/sessionContext";
 import { PinContext } from "../contexts/staticPinContext";
 import { DiveSpotContext } from "../contexts/diveSpotContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
-import { updateProfile } from "../../supabaseCalls/accountSupabaseCalls";
+import { updateProfile, grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
 import InputBase from "@mui/material/InputBase";
 import "./usernamer.css";
 
@@ -46,15 +46,17 @@ export default function UserNamer() {
       setUserFail("Your Username cannot be blank!");
     } else {
       let sessionUserId = activeSession.user.id;
-      // let sessionUserId = 'a93f6831-15b3-4005-b5d2-0e5aefcbda13';
-      console.log(sessionUserId, formVal.userName);
+      // let sessionUserId = 'acdc4fb2-17e4-4b0b-b4a3-2a60fdfd97dd';
+      // console.log(sessionUserId, formVal.userName);
       try {
-        const success = await updateProfile({
+        await updateProfile({
           id: sessionUserId,
           username: formVal.userName,
         });
+        let success = await grabProfileById(sessionUserId)
+
         if (success.length > 0) {
-          // setItterator(itterator + 1);
+          setItterator(itterator + 1);
           setFormVal({ userName: "" });
           setProfile([{ ...profile, UserName: formVal.userName }]);
           setPinValues({
@@ -78,20 +80,22 @@ export default function UserNamer() {
   };
 
   const handleChange = (e) => {
-    setFormVals({ ...formVals, [e.target.name]: e.target.value });
-    setLoginFail(null);
+    console.log(e.target.name)
+    setFormVal({ ...formVal, [e.target.name]: e.target.value });
+    setUserFail(null);
   };
 
   return (
     <div className="container">
       <p className="titleText">What is your diver name?</p>
       <InputBase
-        // value={formVal.userName}
+        value={formVal.userName}
+        name="userName"
         placeholder="User Name"
         placeholderTextColor="darkgrey"
         color="#F0EEEB"
         on={() => setUserFail(null)}
-        onChange={handleChange}
+        onChange={(e) => handleChange(e)}
         inputProps={{
           style: {
             textAlign: "center",
