@@ -5,7 +5,8 @@ import { AnimalContext } from "../contexts/animalContext";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { IterratorContext } from "../contexts/iterratorContext";
-import { TutorialContext } from "../contexts/tutorialContext";
+import { TutorialContext } from "../contexts/tutorialContext"
+import { ReverseContext } from "../contexts/reverseContext";;
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
 import { getPhotosforAnchor, getPhotosforAnchorMulti } from "../../supabaseCalls/photoSupabaseCalls";
@@ -29,17 +30,14 @@ const AnchorPics = (props) => {
 
   const { itterator, setItterator } = useContext(IterratorContext);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { movingBack, setMovingBack } = useContext(ReverseContext);
 
   const filterAnchorPhotos = async () => {
     
-
-    console.log("divesite", selectedDiveSite)
       let { minLat, maxLat, minLng, maxLng } = siteGPSBoundaries(
         selectedDiveSite.Latitude,
         selectedDiveSite.Longitude
       );
-
-      console.log("divesite", minLat, maxLat, minLng, maxLng, animalVal)
 
     try {
       const photos = await getPhotosforAnchor({
@@ -51,6 +49,15 @@ const AnchorPics = (props) => {
       });
       if (photos) {
         setAnchorPics(photos);
+
+        if (tutorialRunning && itterator === 11 && siteModal){
+          if (photos.length === 0){
+            setItterator(itterator + 1)
+          } else {
+            setItterator(itterator + 3)
+          }
+        } 
+
       }
     } catch (e) {
       console.log({ title: "Error", message: e.message });
@@ -110,17 +117,8 @@ const AnchorPics = (props) => {
 
   useEffect(() => {
     filterAnchorPhotos();
-  }, [selectedDiveSite]);
 
-  useEffect(() => {
-    if (tutorialRunning && itterator === 11){
-      if (anchorPics.length === 0){
-        setItterator(itterator + 1)
-      } else {
-        setItterator(itterator + 3)
-      }
-    } 
-  }, [anchorPics]);
+  }, [selectedDiveSite]);
 
 
   const handleClose = async () => {

@@ -53,6 +53,7 @@ export const getAnimalNamesThatFit = async (value) => {
 };
 
 export const getPhotosforAnchor = async (value) => {
+  console.log("sup", value)
   const { data, error } = await supabase
     .from("photos")
     .select()
@@ -94,7 +95,7 @@ export const getPhotosforAnchorMulti = async (value) => {
   let creatureList;
   let creatureListFinal;
 
-  console.log(value.animalVal)
+  console.log("yoohoo", value.animalVal)
 
   if (value.animalVal.length === 0) {
     creatureListFinal = "";

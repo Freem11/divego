@@ -41,7 +41,8 @@ import { MapBoundsContext } from "./contexts/mapBoundariesContext";
 import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
-import FormAnchorModal from "./modals/formAnchorModal";
+import { IterratorContext } from "./contexts/iterratorContext";
+import { TutorialContext } from "./contexts/tutorialContext";
 import { newGPSBoundaries } from "../helpers/mapHelpers";
 import { formatHeatVals } from "../helpers/heatPointHelpers";
 import { setupClusters } from "../helpers/clusterHelpers";
@@ -86,6 +87,9 @@ function Map() {
     SelectedDiveSiteContext
   );
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
+
+  const { itterator, setItterator } = useContext(IterratorContext);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { lightbox, setLightbox } = useContext(LightBoxContext);
@@ -219,6 +223,9 @@ function Map() {
   }, [selectedDiveSite]);
 
   useEffect(async () => {
+    if (tutorialRunning && itterator === 7){
+      setMapZoom(8)
+    }
     handleMapUpdates();
   }, [mapCoords, divesTog, sliderVal, animalVal]);
 
@@ -259,7 +266,7 @@ function Map() {
       Latitude: lat,
       Longitude: lng,
     });
-    setSiteModal(true);
+    setSiteModal(!siteModal);
   };
 
   return (

@@ -12,15 +12,16 @@ import { getRecentPhotos } from "../../supabaseCalls/photoSupabaseCalls";
 import { SessionContext } from "../contexts/sessionContext";
 import { grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
 import { newGPSBoundaries } from "../../helpers/mapHelpers";
-import { getPhotosforAnchorMulti } from "../../supabaseCalls/photoSupabaseCalls";
+import { getPhotosforAnchorMulti, getPhotosforAnchor} from "../../supabaseCalls/photoSupabaseCalls";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { getToday } from "../../helpers/picUploaderHelpers.js";
-// import { MapCenterContext } from "../contexts/mapCenterContext";
+import { ZoomContext } from "../contexts/mapZoomContext";
 import { IterratorContext } from "../contexts/iterratorContext";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { TutorialResetContext } from "../contexts/tutorialResetContext";
-// import { AnchorModalContext } from "../contexts/anchorModalContext";
+import { AnchorModalContext } from "../contexts/anchorModalContext";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
+import { AnimalContext } from "../contexts/animalContext";
 import { AnimalMultiSelectContext } from "../contexts/animalMultiSelectContext";
 import { ReverseContext } from "../contexts/reverseContext";
 import { ChapterContext } from "../contexts/chapterContext";
@@ -61,9 +62,11 @@ export default function IntroTutorial(props) {
   );
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { jump, setJump } = useContext(JumpContext);
+  const { mapZoom, setMapZoom } = useContext(ZoomContext);
+  const { animalVal } = useContext(AnimalContext);
   const { animalMultiSelection } = useContext(AnimalMultiSelectContext);
 
-  // const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { guideModal, setGuideModal } = useContext(TutorialModelContext);
   const { secondGuideModal, setSecondGuideModal } = useContext(
     SecondTutorialModalContext
@@ -196,7 +199,6 @@ export default function IntroTutorial(props) {
   };
 
   const resetTutorial = async () => {
-    console.log("fire");
     setItterator(null);
     setCharacterX(0); //1000
     setTextBoxY(0); //1000
@@ -480,16 +482,17 @@ export default function IntroTutorial(props) {
         animateIntroGuideModal()
         setHeatPotintY(0);
         setClusterAnchorY(0);
+      } else {
+        setMovingBack(false)
       }
      
     }
 
-    console.log(itterator)
     if (itterator === 12) {
       animateIntroGuideModal()
       setTextPrinting(true);
       setMovingBack(true);
-      // setGuideModal(true);
+      setMapZoom(10)
     }
 
     if (itterator === 13) {
@@ -499,7 +502,6 @@ export default function IntroTutorial(props) {
 
     if (itterator === 14) {
       animateIntroGuideModal()
-      setMovingBack(false)
       setChapter(null);
     }
 
@@ -537,6 +539,7 @@ export default function IntroTutorial(props) {
     if (itterator === feederArray.length - 1) {
       animateIntroGuideModal();
       setItterator(null);
+      setMapZoom(10)
       resetTutorial();
 
       // setItterator(null);
@@ -612,7 +615,7 @@ export default function IntroTutorial(props) {
 
   useEffect(() => {
     filterAnchorPhotos();
-  }, [selectedDiveSite]);
+  }, [selectedDiveSite, itterator]);
 
   const filterAnchorPhotos = async () => {
     let { minLat, maxLat, minLng, maxLng } = newGPSBoundaries(
@@ -620,9 +623,10 @@ export default function IntroTutorial(props) {
       selectedDiveSite.Longitude
     );
 
+    let animalVal = animalMultiSelection
     try {
-      const photos = await getPhotosforAnchorMulti({
-        animalMultiSelection,
+      const photos = await getPhotosforAnchor({
+        animalVal,
         // sliderVal,
         minLat,
         maxLat,
