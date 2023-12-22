@@ -175,6 +175,7 @@ export default function IntroTutorial(props) {
   };
 
   const getProfile = async () => {
+    console.log(activeSession)
     let sessionUserId = activeSession.user.id;
     // let sessionUserId = 'acdc4fb2-17e4-4b0b-b4a3-2a60fdfd97dd'
     try {
@@ -521,7 +522,9 @@ export default function IntroTutorial(props) {
         animateIntroGuideModal()
     }
 
+    console.log(itterator)
     if (itterator === 21) {
+      setSiteModal(true)
       animateIntroGuideModal()
     }
 
@@ -614,18 +617,23 @@ export default function IntroTutorial(props) {
   });
 
   useEffect(() => {
-    filterAnchorPhotos();
+    filterAnchorPhotos()
+  if (itterator === 21){
+    setSiteModal(true)
+  }
+    
   }, [selectedDiveSite, itterator]);
 
   const filterAnchorPhotos = async () => {
+
     let { minLat, maxLat, minLng, maxLng } = newGPSBoundaries(
+      mapZoom,
       selectedDiveSite.Latitude,
       selectedDiveSite.Longitude
     );
 
-    let animalVal = animalMultiSelection
     try {
-      const photos = await getPhotosforAnchor({
+      const photos = await getPhotosforAnchorMulti({
         animalVal,
         // sliderVal,
         minLat,

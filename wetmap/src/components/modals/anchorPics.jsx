@@ -21,7 +21,7 @@ import { animated } from "react-spring";
 const AnchorPics = (props) => {
   const { animateAnchorModal } = props;
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
+  const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { sliderVal } = useContext(SliderContext);
   const { animalVal } = useContext(AnimalContext);
   const { boundaries } = useContext(MapBoundsContext);
@@ -33,14 +33,14 @@ const AnchorPics = (props) => {
   const { movingBack, setMovingBack } = useContext(ReverseContext);
 
   const filterAnchorPhotos = async () => {
-    
+
       let { minLat, maxLat, minLng, maxLng } = siteGPSBoundaries(
         selectedDiveSite.Latitude,
         selectedDiveSite.Longitude
       );
 
     try {
-      const photos = await getPhotosforAnchor({
+      const photos = await getPhotosforAnchorMulti({
         animalVal,
         minLat: minLat,
         maxLat: maxLat,
@@ -106,18 +106,23 @@ const AnchorPics = (props) => {
   }, [sliderVal]);
 
   useEffect(() => {
-    filterAnchorPhotos();
+    if(selectedDiveSite.SiteName !== ""){
+      filterAnchorPhotos();
+    }   
   }, []);
 
 
   useEffect(() => {
-    filterAnchorPhotos();
+    if(selectedDiveSite.SiteName !== ""){
+      filterAnchorPhotos();
+    }
   }, [siteModal]);
 
 
   useEffect(() => {
-    filterAnchorPhotos();
-
+    if(selectedDiveSite.SiteName !== ""){
+      filterAnchorPhotos();
+    }
   }, [selectedDiveSite]);
 
 
@@ -127,6 +132,11 @@ const AnchorPics = (props) => {
       setItterator(itterator + 1)
     }
    setSiteModal(false)
+  //  setSelectedDiveSite({
+  //   SiteName: "",
+  //   Latitude: "",
+  //   Longitude: "",
+  // })
    animateAnchorModal()
 };
   

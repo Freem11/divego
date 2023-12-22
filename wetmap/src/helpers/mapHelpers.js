@@ -168,7 +168,6 @@ function siteGPSBoundaries(Lat, Lng) {
   let minLng = Lng - 0.005;
   let maxLng = Lng + 0.005;
 
-
 return { minLat, maxLat, minLng, maxLng };
 }
 

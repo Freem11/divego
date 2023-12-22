@@ -204,11 +204,13 @@ function Map() {
 
   useEffect(() => {
     if (mapRef) {
+      if (selectedDiveSite.SiteName !== "") {
       mapRef.panTo({
         lat: selectedDiveSite.Latitude,
         lng: selectedDiveSite.Longitude,
       });
       setMapZoom(16);
+    }
     }
     if (selectedDiveSite.Latitude !== "") {
       setTempMarker({
