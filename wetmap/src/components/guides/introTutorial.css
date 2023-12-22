@@ -14,8 +14,8 @@
     position: absolute;
     top: 30vh; 
     left: 100vw; 
-    height: 40vw;
-    width: 80vh;
+    height: 700px;
+    width: 700px;
     opacity: rgb(0,0,0,1);
     /* background-color: green */
   }
@@ -65,8 +65,8 @@
   .container3 {
     /* flex: 1; */
     position: absolute;
-    top: 8%;
-    left: -25vw;
+    top: -180vh;
+    left: 6vw;
     z-index: 10;
     background-color: transparent;
     align-items: center;
@@ -80,8 +80,8 @@
   }
 
   .picContainer3 {
-    width:  20vw;
-    height: 12vw;
+    width:  346px;
+    height: 200px;
     margin-bottom: 5;
     /* background-color: #538bdb; */
     margin-top: 0%;
@@ -91,10 +91,10 @@
 
   .usernamerwrapper{
     position: absolute;
-    top: 15%;
-    left: -35vw;
-    width:  20vw;
-    height: 12vw;
+    top: 100vh;
+    left: 39%;
+    width:  350px;
+    height: 200px;
     margin-bottom: 5;
     /* background-color: #538bdb; */
     margin-top: 0%;
@@ -103,8 +103,8 @@
   }
 
   .shadowbox{
-    width:  20vw;
-    height: 12vw;
+    width:  350px;
+    height: 200px;
   }
 
   .userContainer {

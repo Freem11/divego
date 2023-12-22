@@ -103,7 +103,7 @@ export default function IntroTutorial(props) {
         //   Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
         // );
         textBoxY.value = withTiming(windowHeight * 0.8);
-        picX.value = withSpring(0);
+        picY.value = withSpring(0);
         break;
 
       case "Dive sites":
@@ -192,15 +192,15 @@ export default function IntroTutorial(props) {
     setItterator(null);
     setCharacterX(0); //1000
     setTextBoxY(0); //1000
-    setPicX(0); //-300
+    setPixY(0); //-300
     setExploreButtonY(0); //-1000
     setQuestionButtonY(0); //-1000
     setClusterAnchorY(0); //-1200
     setHeatPotintY(0); //-1200
     setGuideButtonY(0); //-1200
     setArrowY(0); //-1200
-    setUserBoxX(0); //-300
-    setNextTutX(0); //-300
+    setUserBoxY(0); //-300
+    setNextTutY(0); //-300
     clearUp();
   };
 
@@ -226,15 +226,15 @@ export default function IntroTutorial(props) {
 
   const [characterX, setCharacterX] = useState(0); //1000
   const [textBoxY, setTextBoxY] = useState(0); //1000
-  const [picX, setPicX] = useState(0); //-300
+  const [picY, setPixY] = useState(0); //-300
   const [exploreButtonY, setExploreButtonY] = useState(0); //-1000
   const [questionButtonY, setQuestionButtonY] = useState(0); //-1000
   const [clusterAnchorY, setClusterAnchorY] = useState(0); //-1200
   const [heatPotintY, setHeatPotintY] = useState(0); //-1200
   const [guideButtonY, setGuideButtonY] = useState(0); //-1200
   const [arrowY, setArrowY] = useState(0); //-1200
-  const [userBoxX, setUserBoxX] = useState(0); //-300
-  const [nextTutX, setNextTutX] = useState(0); //-300
+  const [userBoxY, setUserBoxY] = useState(0); //-300
+  const [nextTutY, setNextTutY] = useState(0); //-300
 
   const text0 =
     "Hi, welcome to Scuba SEAsons, I'm Emilio, I'm here to show you around.";
@@ -424,12 +424,12 @@ export default function IntroTutorial(props) {
         return;
       }
 
-      setUserBoxX(windowWidth * 0.64)
+      setUserBoxY(-windowHeigth * 0.8)
     }
 
     if (itterator === 2) {
       getProfile();
-      setUserBoxX(0)
+      setUserBoxY(0)
     }
 
     if (itterator === 3) {
@@ -446,11 +446,11 @@ export default function IntroTutorial(props) {
 
     if (itterator === 6) {
       setQuestionButtonY(0);
-      setPicX(windowWidth * 0.3)
+      setPixY(windowHeigth * 1.9)
     }
 
     if (itterator === 7) {
-      setPicX(0)
+      setPixY(0)
     }
 
     if (itterator === 8) {
@@ -540,13 +540,13 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 23) {
-      // nextTutX.value = withSpring(windowWidth * 0.3);
+      // nextTutY.value = withSpring(windowWidth * 0.3);
       // startNextTutAnimation();
     }
 
     if (itterator === 24) {
       // setSiteModal(false);
-      // nextTutX.value = withTiming(-300);
+      // nextTutY.value = withTiming(-300);
       // startNextTutAnimation();
     }
 
@@ -593,7 +593,7 @@ export default function IntroTutorial(props) {
 
   const picSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(${picX}px,0,0)` },
+    to: { transform: `translate3d(0,${picY}px,0)` },
   });
 
   const exploreButtonSlide = useSpring({
@@ -618,12 +618,12 @@ export default function IntroTutorial(props) {
 
   const userBoxSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(${userBoxX}px,0,0)` },
+    to: { transform: `translate3d(0,${userBoxY}px,0)` },
   });
 
   const nextTutSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(${nextTutX}px,0,0)` },
+    to: { transform: `translate3d(${nextTutY}px,0,0)` },
   });
 
   useEffect(() => {
@@ -680,7 +680,7 @@ export default function IntroTutorial(props) {
       hopper = 1;
     }
     setItterator((prev) => prev + hopper);
-    picX.value = withTiming(-300);
+    picY.value = withTiming(-300);
     // startPicAnimation();
   };
 
@@ -690,26 +690,6 @@ export default function IntroTutorial(props) {
 
   return (
     <div className="wrapper" onClick={() => setupText(1)}>
-      <FormGroup>
-        <Button
-          variant="text"
-          id="closeButton2"
-          onClick={() => null}
-          style={{
-            position: "absolute",
-            right: 20,
-            top: 50,
-            backgroundColor: "green",
-            border: "none",
-            zIndex: 300,
-          }}
-        >
-          <CloseIcon
-            sx={{ color: "lightgrey", height: "36px", width: "36px" }}
-          ></CloseIcon>
-        </Button>
-      </FormGroup>
-
       <animated.div 
         className="container3"
         ref={picRef}
