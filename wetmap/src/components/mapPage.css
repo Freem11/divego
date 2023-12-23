@@ -43,6 +43,15 @@
     background: linear-gradient(transparent,rgb(83, 139, 219, 0.9));
 }
 
+.guideModalDiv3 {
+    z-index: 210;
+    position: absolute;
+    top: 100vh;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(transparent,rgb(83, 139, 219, 0.9));
+}
+
 .anchorModalDiv{
     z-index: 200;
     position: absolute;

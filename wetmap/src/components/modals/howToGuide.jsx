@@ -4,6 +4,7 @@ import "./siteSubmitter.css";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { IterratorContext } from "../contexts/iterratorContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
+import { Iterrator3Context } from "../contexts/iterrator3Context";
 import { TutorialModelContext } from "../contexts/tutorialModalContext";
 import { SecondTutorialModalContext } from "../contexts/secondTutorialModalContext";
 import { ThirdTutorialModalContext } from "../contexts/thirdTutorialModalContext";
@@ -20,7 +21,8 @@ import "./howToGuide.css";
 const HowToGuide = (props) => {
   const { itterator, setItterator } = useContext(IterratorContext);
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
-  const { animateLaunchModal, animateIntroGuideModal, animateSecondGuideModal } = props;
+  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
+  const { animateLaunchModal, animateIntroGuideModal, animateSecondGuideModal, animateThirdGuideModal } = props;
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { guideModal, setGuideModal } = useContext(TutorialModelContext);
   const { secondGuideModal, setSecondGuideModal } = useContext(
@@ -47,7 +49,9 @@ const HowToGuide = (props) => {
   };
 
   const handleThirdTutorialStartup = () => {
+    setItterator2(0)
     setTutorialRunning(true);
+    animateThirdGuideModal()
     animateLaunchModal()
     setThirdGuideModal(!thirdGuideModal);
   };
@@ -101,7 +105,7 @@ const HowToGuide = (props) => {
           </Label>
         </div>
 
-        <div onClick={null} className="photoGuideLaunch">
+        <div onClick={handleThirdTutorialStartup} className="photoGuideLaunch">
           <Label
             style={{
               fontFamily: "Itim",

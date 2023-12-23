@@ -534,7 +534,6 @@ export default function SecondTutorial(props) {
     setJump(!jump);
   };
 
-  console.log("yoyoyo", itterator2);
   return (
     <div className="wrapper2" onClick={() => setupText(1)}>
       <animated.div
@@ -553,9 +552,7 @@ export default function SecondTutorial(props) {
       </animated.div>
 
       <animated.div ref={textBoxRef} className="talkbox2" style={textBoxSlide}>
-        {/* <div className="textContain"> */}
         {textRead}
-        {/* </div> */}
       </animated.div>
 
       <animated.div

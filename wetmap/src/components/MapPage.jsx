@@ -49,7 +49,7 @@ import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
 import IntroTutorial from "./guides/introTutorial";
 import SecondTutorial from "./guides/secondTutorial";
-// import ThirdTutorial from "./guides/thirdTutorial";
+import ThirdTutorial from "./guides/thirdTutorial";
 import Lightbox from "react-image-lightbox";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
@@ -428,6 +428,14 @@ const MapPage = React.memo((props) => {
     }
   };
 
+  const animateThirdGuideModal = () => {
+    if (thirdGuideModalYCoord === 0) {
+      setThirdGuideModalYCoord(-windowHeight);
+    } else {
+      setThirdGuideModalYCoord(0);
+    }
+  };
+
   const animateAnchorModal = () => {
     if (anchorModalYCoord === 0) {
       setAnchorModalYCoord(-950);
@@ -720,6 +728,7 @@ const MapPage = React.memo((props) => {
           animateLaunchModal={animateLaunchModal}
           animateIntroGuideModal={animateIntroGuideModal}
           animateSecondGuideModal={animateSecondGuideModal}
+          animateThirdGuideModal={animateThirdGuideModal}
         />
       </animated.div>
 
@@ -752,6 +761,18 @@ const MapPage = React.memo((props) => {
         <SecondTutorial
           animateSecondGuideModal={animateSecondGuideModal}
           setSecondGuideModalYCoord={setSecondGuideModalYCoord}
+        />
+      </animated.div>
+
+      <animated.div
+        className="guideModalDiv3"
+        style={moveThirdGuideModal}
+        ref={thirdGuideModalRef}
+        // onClick={() => setItterator(itterator + 1)}
+      >
+        <ThirdTutorial
+          animateThirdGuideModal={animateThirdGuideModal}
+          setThirdGuideModalYCoord={setThirdGuideModalYCoord}
         />
       </animated.div>
 
