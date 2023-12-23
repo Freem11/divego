@@ -230,7 +230,7 @@ function Map() {
     if (tutorialRunning && itterator === 7){
       setMapZoom(8)
     }
-    if (tutorialRunning && itterator2 === 2){
+    if (tutorialRunning && (itterator2 === 2 || itterator2 === 16)){
       setMapZoom(8)
     }
     handleMapUpdates();

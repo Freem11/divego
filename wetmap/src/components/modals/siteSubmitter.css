@@ -24,6 +24,21 @@
     border-color: transparent;
 }
 
+.inputboxAlt{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0px;
+    margin-top: 15px;
+    width: 100%; 
+    font-family: 'Itim', cursive;
+    border: none;
+    border-bottom: none;
+    border-color: transparent;
+    background-color: pink;
+}
+
 .modalInputs{
     margin-top: 10px;
     border-radius: 10px;
@@ -47,7 +62,7 @@
     border: none;
 } 
 
-#modalButton2 {
+#modalButtonDiv {
     width: 100%;
     margin-top: 173px;
     padding-top: 4px;
@@ -62,12 +77,12 @@
     border-bottom-right-radius: 25px;
 }
 
-#modalButton2:hover {
+#modalButtonDiv:hover {
     background-color: #3e7dd7;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
 }
-#modalButton2:active {
+#modalButtonDiv:active {
     background-color: #538dbd;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;

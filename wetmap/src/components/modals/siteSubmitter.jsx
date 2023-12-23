@@ -93,11 +93,10 @@ const SiteSubmitter = (props) => {
       );
       if (tutorialRunning) {
         if (itterator2 === 13) {
-          setItterator2(itterator2 + 1)
+          setItterator2(itterator2 + 1);
           setLocButState(false);
-        } 
+        }
       }
-
     } else {
       console.log("unsupported");
     }
@@ -113,15 +112,24 @@ const SiteSubmitter = (props) => {
     setShowNoGPS(false);
     setMasterSwitch(false);
     animateSiteModal();
-    return;
+
+    if (tutorialRunning) {
+      if (itterator2 === 16) {
+        setItterator2(itterator2 + 1);
+        setPinButState(false);
+      }
+    }
   };
 
   let counter1 = 0;
   let counter2 = 0;
   let blinker1;
+  let blinker2;
+  let timer2;
 
   const [locButState, setLocButState] = useState(false);
   const [pinButState, setPinButState] = useState(false);
+  const [siteNameState, setSiteNameState] = useState(false);
   const [subButState, setSubButState] = useState(false);
 
   function locationBut() {
@@ -142,20 +150,14 @@ const SiteSubmitter = (props) => {
     }
   }
 
-  // function siteField() {
-  //   counter1++;
-  //   if (counter1 % 2 == 0) {
-  //     SetFormValidation({
-  //       ...formValidation,
-  //       SiteNameVal: false,
-  //     });
-  //   } else {
-  //     SetFormValidation({
-  //       ...formValidation,
-  //       SiteNameVal: true,
-  //     });
-  //   }
-  // }
+  function siteField() {
+    counter1++;
+    if (counter1 % 2 == 0) {
+      setSiteNameState(false);
+    } else {
+      setSiteNameState(true);
+    }
+  }
 
   function subButTimeout() {
     blinker2 = setInterval(subBut, 1000);
@@ -172,10 +174,7 @@ const SiteSubmitter = (props) => {
 
   function cleanUp() {
     clearInterval(blinker1);
-    // SetFormValidation({
-    //   ...formValidation,
-    //   SiteNameVal: false,
-    // });
+    clearInterval(blinker2);
     setLocButState(false);
     setPinButState(false);
     setSubButState(false);
@@ -188,8 +187,16 @@ const SiteSubmitter = (props) => {
       } else if (itterator2 === 13) {
         blinker1 = setInterval(locationBut, 1000);
       } else if (itterator2 === 23) {
-        // blinker1 = setInterval(siteField, 1000);
+        blinker1 = setInterval(siteField, 1000);
         timer2 = setTimeout(subButTimeout, 300);
+      } else if (itterator2 === 26) {
+        setAddSiteVals({
+          ...addSiteVals,
+          Site: "",
+          Latitude: "",
+          Longitude: "",
+        });
+        animateSiteModal()
       }
     }
     return () => cleanUp();
@@ -211,10 +218,6 @@ const SiteSubmitter = (props) => {
     marginTop: "4px",
   };
 
-
-
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -222,7 +225,12 @@ const SiteSubmitter = (props) => {
     let LatV = parseFloat(addSiteVals.Latitude);
     let LngV = parseFloat(addSiteVals.Longitude);
 
-    if (
+
+    if (tutorialRunning) {
+      if (itterator2 ===23)  {
+        setItterator2(itterator2 + 1);
+      }
+    } else if (
       SiteV &&
       typeof SiteV === "string" &&
       LatV &&
@@ -244,6 +252,32 @@ const SiteSubmitter = (props) => {
   const handleModalClose = () => {
     setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
     animateSiteModal();
+  };
+
+  const inputStyle = {
+    textAlign: "center",
+    fontFamily: "Itim",
+    fontSize: 18,
+    textOverflow: "ellipsis",
+    backgroundColor: "#538bdb",
+    height: "35px",
+    width: "232px",
+    color: "#F0EEEB",
+    borderRadius: "20px",
+    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+  };
+
+  const inputStyleAlt = {
+    textAlign: "center",
+    fontFamily: "Itim",
+    fontSize: 18,
+    textOverflow: "ellipsis",
+    backgroundColor: "pink",
+    height: "35px",
+    width: "232px",
+    color: "black",
+    borderRadius: "20px",
+    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
   };
 
   return (
@@ -280,21 +314,11 @@ const SiteSubmitter = (props) => {
                 placeholder="Site Name"
                 type="text"
                 name="Site"
+                value={addSiteVals.Site}
                 onChange={handleChange}
                 onClick={handleNoGPSClose}
                 inputProps={{
-                  style: {
-                    textAlign: "center",
-                    fontFamily: "Itim",
-                    fontSize: 18,
-                    textOverflow: "ellipsis",
-                    backgroundColor: "#538bdb",
-                    height: "35px",
-                    width: "232px",
-                    color: "#F0EEEB",
-                    borderRadius: "20px",
-                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                  },
+                  style: siteNameState ? inputStyleAlt : inputStyle,
                 }}
               />
             </FormGroup>
@@ -359,7 +383,10 @@ const SiteSubmitter = (props) => {
 
         <div className="buttonBox">
           <FormGroup>
-            <div onClick={handleDiveSiteGPS} className={locButState ? "GPSbuttonAlt" : "GPSbutton"}>
+            <div
+              onClick={handleDiveSiteGPS}
+              className={locButState ? "GPSbuttonAlt" : "GPSbutton"}
+            >
               <div>
                 <MyLocationIcon
                   sx={locButState ? buttonColorAlt : buttonColor}
@@ -369,16 +396,24 @@ const SiteSubmitter = (props) => {
           </FormGroup>
 
           <FormGroup>
-            <div onClick={handleNoGPSCloseOnMapChange} className="pinButtonD">
+            <div
+              onClick={handleNoGPSCloseOnMapChange}
+              className={pinButState ? "pinButtonDalt" : "pinButtonD"}
+            >
               <PlaceIcon
-                 sx={pinButState ? buttonColorAlt : buttonColor}
+                sx={pinButState ? buttonColorAlt : buttonColor}
               ></PlaceIcon>
             </div>
           </FormGroup>
         </div>
 
         <FormGroup>
-          <Button variant="text" id="modalButton2" onClick={handleSubmit}>
+          <Button
+            variant="text"
+            id="modalButtonDiv"
+            style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
+            onClick={handleSubmit}
+          >
             Submit Dive Site
           </Button>
         </FormGroup>

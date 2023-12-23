@@ -18,6 +18,7 @@ import { DiveSpotContext } from "../contexts/diveSpotContext";
 import { ChapterContext } from "../contexts/chapterContext";
 import { JumpContext } from "../contexts/jumpContext";
 import { CoordsContext } from "../contexts/mapCoordsContext";
+import { ZoomContext } from "../contexts/mapZoomContext";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
@@ -30,6 +31,7 @@ export default function SecondTutorial(props) {
   const { activeSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
 
+  const { mapZoom, setMapZoom } = useContext(ZoomContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { jump, setJump } = useContext(JumpContext);
 
@@ -435,6 +437,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 16) {
+      moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
       setLocationY(0)
       animateSecondGuideModal()
     }
@@ -452,19 +455,19 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 20) {
-      setSecondGuideModal(true);
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 23) {
-      setSecondGuideModal(false);
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 24) {
-      setSecondGuideModal(true);
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 25) {
-      nextTutX.value = withSpring(windowWidth * 0.3);
+      // nextTutX.value = withSpring(windowWidth * 0.3);
       // startNextTutAnimation();
     }
 
@@ -475,19 +478,17 @@ export default function SecondTutorial(props) {
         Latitude: "",
         Longitude: "",
       });
-      nextTutX.value = withTiming(-300);
+      // nextTutX.value = withTiming(-300);
       // startNextTutAnimation();
       // setDiveSiteAdderModal(false);
       setTutorialRunning(false);
     }
 
     if (itterator2 === feederArray.length - 1) {
-      setTutorialRunning(false);
+      animateSecondGuideModal()
       setItterator2(null);
-      setSecondGuideModal(false);
-      startCharacterAnimation();
-      startTextBoxAnimation();
-      setChapter(null);
+      setMapZoom(10)
+      resetTutorial();
     }
   }, [itterator2]);
 
@@ -589,9 +590,10 @@ export default function SecondTutorial(props) {
       >
         <AddLocationAltIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "8.5vh",
+            width: "8.5vh",
             color: "aquamarine",
+            marginTop: "1vh"
           }}
         />
       </animated.div>

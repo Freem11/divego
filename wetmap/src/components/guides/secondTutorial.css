@@ -54,6 +54,8 @@
     position: absolute;
     top: -110vh;
     left: 30%;
+    width: 10vh;
+    height: 10vh;
     background-color: black;
     border-radius: 50px;
   }

@@ -170,6 +170,13 @@ const MapPage = React.memo((props) => {
       animateSiteModal();
       setMasterSwitch(true);
       setChosenModal(null);
+      if (tutorialRunning) {
+        if (itterator2 === 19) {
+          setItterator2(itterator2 + 1)
+        }
+      }
+
+
     } else if (chosenModal === "Photos") {
       animatePicModal();
       setMasterSwitch(true);
