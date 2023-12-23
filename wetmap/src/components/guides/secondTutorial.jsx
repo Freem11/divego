@@ -355,6 +355,7 @@ export default function SecondTutorial(props) {
 
     if (itterator2 === 2) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
+      setJump(!jump)
       setTimeout(() => {
         setDsSearchY(windowHeight * 1.55);
       }, 1000);
@@ -366,55 +367,58 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 4) {
-      // setSecondGuideModal(true);
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 5) {
-      setChapter(null);
-      setTimeout(() => {
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-      }, 400);
+      animateSecondGuideModal()
+      // setChapter(null);
+      // setTimeout(() => {
+      //   characterX.value = withTiming(
+      //     Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
+      //   );
+      // }, 400);
 
-      setTimeout(() => {
-        textBoxY.value = withTiming(windowHeight * 0.8);
-        setupText(0);
-      }, 600);
-      setSecondGuideModal(false);
+      // setTimeout(() => {
+      //   textBoxY.value = withTiming(windowHeight * 0.8);
+      //   setupText(0);
+      // }, 600);
+      // setSecondGuideModal(false);
     }
 
     if (itterator2 === 6) {
-      setSecondGuideModal(true);
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 8) {
-      diveSiteY.value = withTiming(windowHeight * 0.4);
+      setDiveSiteY(windowHeight * 1.55);
       // startDiveSiteAnimation();
     }
 
     if (itterator2 === 9) {
-      setChapter(null);
-      setTimeout(() => {
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-      }, 400);
+      // setChapter(null);
+      // setTimeout(() => {
+      //   characterX.value = withTiming(
+      //     Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
+      //   );
+      // }, 400);
 
-      setTimeout(() => {
-        textBoxY.value = withTiming(windowHeight * 0.8);
-        setupText(0);
-      }, 600);
-      diveSiteY.value = withTiming(scale(-1000));
-      // startDiveSiteAnimation();
+      // setTimeout(() => {
+      //   textBoxY.value = withTiming(windowHeight * 0.8);
+      //   setupText(0);
+      // }, 600);
+      setDiveSiteY(0);
+      animateSecondGuideModal()
       setSecondGuideModal(false);
     }
 
     if (itterator2 === 10) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 12) {
+      //here!!!
       locationY.value = withTiming(windowHeight * 0.4);
     }
 

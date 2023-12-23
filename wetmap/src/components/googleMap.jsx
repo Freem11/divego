@@ -42,6 +42,7 @@ import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { IterratorContext } from "./contexts/iterratorContext";
+import { Iterrator2Context } from "./contexts/iterrator2Context";
 import { TutorialContext } from "./contexts/tutorialContext";
 import { newGPSBoundaries } from "../helpers/mapHelpers";
 import { formatHeatVals } from "../helpers/heatPointHelpers";
@@ -89,6 +90,7 @@ function Map() {
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
   const { itterator, setItterator } = useContext(IterratorContext);
+  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
@@ -226,6 +228,9 @@ function Map() {
 
   useEffect(async () => {
     if (tutorialRunning && itterator === 7){
+      setMapZoom(8)
+    }
+    if (tutorialRunning && itterator2 === 2){
       setMapZoom(8)
     }
     handleMapUpdates();

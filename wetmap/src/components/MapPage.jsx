@@ -75,7 +75,7 @@ const adminPortalZone = (
 );
 
 const MapPage = React.memo((props) => {
-  const { screenHeigthInital } = props
+  const { screenHeigthInital } = props;
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
@@ -153,9 +153,9 @@ const MapPage = React.memo((props) => {
   useEffect(() => {
     if (tutorialRunning) {
       if (itterator2 === 3) {
-        blinker = setInterval(diveSiteSearch, 1000);
+        blinker = setInterval(diveSiteSearch, 1500);
       } else if (itterator2 === 9) {
-        blinker = setInterval(diveSiteAdd, 1000);
+        blinker = setInterval(diveSiteAdd, 1500);
       }
     }
     return () => cleanUp();
@@ -166,8 +166,7 @@ const MapPage = React.memo((props) => {
   };
 
   const returnToPicModal = () => {
-
-    if (chosenModal === "DiveSite"){
+    if (chosenModal === "DiveSite") {
       animateSiteModal();
       setMasterSwitch(true);
       setChosenModal(null);
@@ -176,8 +175,6 @@ const MapPage = React.memo((props) => {
       setMasterSwitch(true);
       setChosenModal(null);
     }
-
-    
   };
 
   useEffect(() => {
@@ -244,11 +241,31 @@ const MapPage = React.memo((props) => {
     borderRadius: "100%",
   };
 
+  const handleDiveSiteSearch = () => {
+    setShowAnimalSearch(!showAnimalSearch);
+
+    if (tutorialRunning) {
+      if (itterator2 === 3) {
+        setItterator2(itterator2 + 1);
+      }
+    }
+  };
+
+  const handleDiveSiteModal = () => {
+    clearSiteModal();
+
+    if (tutorialRunning) {
+      if (itterator2 === 9) {
+        setItterator2(itterator2 + 1);
+      }
+    }
+  };
+
   let screenWidthInital = window.innerWidth;
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
- const [windowHeight, setWindowHeight] = useState(screenHeigthInital);
- 
+  const [windowHeight, setWindowHeight] = useState(screenHeigthInital);
+
   window.addEventListener("resize", trackScreen);
 
   function trackScreen() {
@@ -314,21 +331,20 @@ const MapPage = React.memo((props) => {
   });
 
   const animatePicModal = () => {
-
-    if (picModalYCoord === 0){
+    if (picModalYCoord === 0) {
       setPicModalYCoord(-950);
-      setSiteModalYCoord(0)
-      setSettingsModalYCoord(0)
-      setLaunchModalYCoord(0)
-      setAnchorModalYCoord(0)
-      setSiteModal(false)
+      setSiteModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setLaunchModalYCoord(0);
+      setAnchorModalYCoord(0);
+      setSiteModal(false);
     } else {
-      setPicModalYCoord(0)
+      setPicModalYCoord(0);
     }
   };
 
   const clearPicModal = () => {
-    animatePicModal()
+    animatePicModal();
     setPin({
       ...pin,
       PicFile: "",
@@ -341,106 +357,97 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSiteModal = () => {
-
-    if (siteModalYCoord === 0){
+    if (siteModalYCoord === 0) {
       setSiteModalYCoord(-950);
-      setPicModalYCoord(0)
-      setSettingsModalYCoord(0)
-      setLaunchModalYCoord(0)
-      setAnchorModalYCoord(0)
-      setSiteModal(false)
+      setPicModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setLaunchModalYCoord(0);
+      setAnchorModalYCoord(0);
+      setSiteModal(false);
     } else {
-      setSiteModalYCoord(0)
+      setSiteModalYCoord(0);
     }
   };
 
   const clearSiteModal = () => {
-    animateSiteModal()
+    animateSiteModal();
     setAddSiteVals({
       ...addSiteVals,
       Site: "",
       Latitude: "",
       Longitude: "",
-    })
+    });
   };
 
   const animateLaunchModal = () => {
-
-    if (launchModalYCoord === 0){
+    if (launchModalYCoord === 0) {
       setLaunchModalYCoord(-950);
-      setPicModalYCoord(0)
-      setSiteModalYCoord(0)
-      setSettingsModalYCoord(0)
-      setAnchorModalYCoord(0)
-      setSiteModal(false)
+      setPicModalYCoord(0);
+      setSiteModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setAnchorModalYCoord(0);
+      setSiteModal(false);
     } else {
-      setLaunchModalYCoord(0)
+      setLaunchModalYCoord(0);
     }
   };
 
   const animateSettingsModal = () => {
-
-    if (settingsModalYCoord === 0){
+    if (settingsModalYCoord === 0) {
       setSettingsModalYCoord(-950);
-      setPicModalYCoord(0)
-      setSiteModalYCoord(0)
-      setLaunchModalYCoord(0)
-      setAnchorModalYCoord(0)
-      setSiteModal(false)
+      setPicModalYCoord(0);
+      setSiteModalYCoord(0);
+      setLaunchModalYCoord(0);
+      setAnchorModalYCoord(0);
+      setSiteModal(false);
     } else {
-      setSettingsModalYCoord(0)
+      setSettingsModalYCoord(0);
     }
   };
 
   const animateIntroGuideModal = () => {
-
-    if (introGuideModalYCoord === 0){
+    if (introGuideModalYCoord === 0) {
       setIntroGuideModalYCoord(-windowHeight);
     } else {
-      setIntroGuideModalYCoord(0)
+      setIntroGuideModalYCoord(0);
     }
   };
 
   const animateSecondGuideModal = () => {
-
-    if (secondGuideModalYCoord === 0){
+    if (secondGuideModalYCoord === 0) {
       setSecondGuideModalYCoord(-windowHeight);
     } else {
-      setSecondGuideModalYCoord(0)
+      setSecondGuideModalYCoord(0);
     }
   };
 
-
   const animateAnchorModal = () => {
-
-    if (anchorModalYCoord === 0){
+    if (anchorModalYCoord === 0) {
       setAnchorModalYCoord(-950);
-      setPicModalYCoord(0)
-      setSiteModalYCoord(0)
-      setSettingsModalYCoord(0)
-      setLaunchModalYCoord(0)
+      setPicModalYCoord(0);
+      setSiteModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setLaunchModalYCoord(0);
     } else {
-      setAnchorModalYCoord(0)
-      setSiteModal(false)
+      setAnchorModalYCoord(0);
+      setSiteModal(false);
     }
   };
 
   useEffect(() => {
-    if(siteModal){
-      animateAnchorModal()
-    }    
+    if (siteModal) {
+      animateAnchorModal();
+    }
   }, [siteModal]);
-
 
   return (
     <div className="mappagemaster">
-
       <div className="tutbarContainer" pointerEvents={"box-none"}>
-            {tutorialRunning && (
-              <div className="tutorialBar" pointerEvents={"box-none"}>
-                <TutorialBar style={{ zIndex: 255 }} />
-              </div>
-            )}
+        {tutorialRunning && (
+          <div className="tutorialBar" pointerEvents={"box-none"}>
+            <TutorialBar style={{ zIndex: 255 }} />
+          </div>
+        )}
       </div>
 
       {masterSwitch && (
@@ -456,7 +463,9 @@ const MapPage = React.memo((props) => {
               sx={toggleButtonStyle}
               value="check"
               selected={gearModal}
-              onChange={() => {animateSettingsModal()}}
+              onChange={() => {
+                animateSettingsModal();
+              }}
             >
               <SettingsIcon sx={{ height: "39px", width: "39px" }} />
             </ToggleButton>
@@ -469,7 +478,9 @@ const MapPage = React.memo((props) => {
               sx={toggleButtonStyle}
               value="check"
               selected={guideModal}
-              onChange={() => {animateLaunchModal()}}
+              onChange={() => {
+                animateLaunchModal();
+              }}
             >
               <QuestionMarkIcon sx={{ height: "40px", width: "40px" }} />
             </ToggleButton>
@@ -511,7 +522,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={showAnimalSearch}
               onChange={() => {
-                setShowAnimalSearch(!showAnimalSearch);
+                handleDiveSiteSearch();
               }}
             >
               <TravelExploreIcon sx={{ height: "36px", width: "36px" }} />
@@ -532,7 +543,9 @@ const MapPage = React.memo((props) => {
               sx={toggleButtonStyle}
               value="check"
               selected={picModal}
-              onChange={() => {clearPicModal()}}
+              onChange={() => {
+                clearPicModal();
+              }}
             >
               <PhotoCameraIcon sx={{ height: "36px", width: "36px" }} />
             </ToggleButton>
@@ -542,10 +555,10 @@ const MapPage = React.memo((props) => {
         {masterSwitch && (
           <div className="diveAddBox">
             <ToggleButton
-              sx={toggleButtonStyle}
+              sx={siteButState ? toggleButtonStyleAlt : toggleButtonStyle}
               value="check"
               selected={diveSiteModal}
-              onChange={() => {clearSiteModal()}}
+              onChange={() => {handleDiveSiteModal()}}
             >
               <AddLocationAltIcon sx={{ height: "38px", width: "38px" }} />
             </ToggleButton>
@@ -559,9 +572,7 @@ const MapPage = React.memo((props) => {
               sx={toggleButtonStyle}
               value="check"
               selected={divesTog}
-              onChange={() => {
-                setDivesTog(!divesTog);
-              }}
+              onChange={() => {setDivesTog(!divesTog);}}
             >
               <AnchorIcon sx={{ height: "37px", width: "37px" }} />
             </ToggleButton>
@@ -698,10 +709,10 @@ const MapPage = React.memo((props) => {
         style={moveLaunchModal}
         ref={launchModalRef}
       >
-        <HowToGuide 
-        animateLaunchModal={animateLaunchModal}
-        animateIntroGuideModal={animateIntroGuideModal} 
-        animateSecondGuideModal={animateSecondGuideModal}
+        <HowToGuide
+          animateLaunchModal={animateLaunchModal}
+          animateIntroGuideModal={animateIntroGuideModal}
+          animateSecondGuideModal={animateSecondGuideModal}
         />
       </animated.div>
 
@@ -715,26 +726,31 @@ const MapPage = React.memo((props) => {
 
       <animated.div
         className="guideModalDiv"
-        style={(moveIntroGuidModal)}
+        style={moveIntroGuidModal}
         ref={introGuideModalRef}
         // onClick={() => setItterator(itterator + 1)}
       >
-        <IntroTutorial animateIntroGuideModal={animateIntroGuideModal} setIntroGuideModalYCoord={setIntroGuideModalYCoord}/>
+        <IntroTutorial
+          animateIntroGuideModal={animateIntroGuideModal}
+          setIntroGuideModalYCoord={setIntroGuideModalYCoord}
+        />
       </animated.div>
 
       <animated.div
         className="guideModalDiv2"
-        style={(moveSecondGuideModal)}
+        style={moveSecondGuideModal}
         ref={secondGuideModalRef}
         // onClick={() => setItterator(itterator + 1)}
       >
-        <SecondTutorial animateSecondGuideModal={animateSecondGuideModal} setSecondGuideModalYCoord={setSecondGuideModalYCoord}/>
+        <SecondTutorial
+          animateSecondGuideModal={animateSecondGuideModal}
+          setSecondGuideModalYCoord={setSecondGuideModalYCoord}
+        />
       </animated.div>
-      
 
       <animated.div
         className="anchorModalDiv"
-        style={(moveAnchorModal)}
+        style={moveAnchorModal}
         ref={moveAnchorModal}
       >
         <AnchorPics animateAnchorModal={animateAnchorModal} />

@@ -265,7 +265,7 @@ const SiteSubmitter = (props) => {
         </FormGroup>
 
         <FormGroup>
-          <div onClick={handleNoGPSCloseOnMapChange} className="pinButton">
+          <div onClick={handleNoGPSCloseOnMapChange} className="pinButtonD">
             <PlaceIcon
               sx={{
                 color: "gold",
