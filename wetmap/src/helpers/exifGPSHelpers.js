@@ -1,5 +1,6 @@
 
 function exifGPSHelper(lat, lng, latRef, lngRef) {
+
   let lats = "";
   let lngs = "";
 

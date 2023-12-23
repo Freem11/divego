@@ -12,10 +12,11 @@ import { PictureContext } from "../contexts/pictureContext";
 import { SessionContext } from "../contexts/sessionContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { ModalSelectContext } from "../contexts/modalSelectContext";
+import { Iterrator3Context } from "../contexts/iterrator3Context";
+import { TutorialContext } from "../contexts/tutorialContext";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhotoIcon from "@mui/icons-material/Photo";
 import CloseIcon from "@mui/icons-material/Close";
-
 import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
 import { getToday } from "../../helpers/picUploaderHelpers.js";
 import Collapse from "@mui/material/Collapse";
@@ -59,6 +60,8 @@ const PicUploader = React.memo((props) => {
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -77,8 +80,15 @@ const PicUploader = React.memo((props) => {
     }
   }, []);
 
-  const handleChange = async (e) => {
+  useEffect(() => {
+    if (tutorialRunning) {
+      if (itterator3 === 11) {
+        setItterator3(itterator3 + 1);
+      }
+    }
+  }, [pin.PicDate]);
 
+  const handleChange = async (e) => {
     if (e.target.name === "PicFile") {
       if (photoFile !== null) {
         removePhoto({ filePath: filePath1, fileName: photoFile });
@@ -110,7 +120,7 @@ const PicUploader = React.memo((props) => {
       //     setPhotoFile(data.fileName);
       //   });
 
-      exifr.parse(e.target.files[0]).then((output) => {
+      exifr.parse(e.target.files[0], true).then((output) => {
         let EXIFData = exifGPSHelper(
           output.GPSLatitude,
           output.GPSLongitude,
@@ -137,6 +147,12 @@ const PicUploader = React.memo((props) => {
           setShowNoGPS(true);
         }
       });
+
+      if (tutorialRunning) {
+        if (itterator3 === 8) {
+          setItterator3(itterator3 + 1);
+        }
+      }
     } else {
       setPin({ ...pin, [e.target.name]: e.target.value });
     }
@@ -144,7 +160,7 @@ const PicUploader = React.memo((props) => {
 
   const handleNoGPSClose = (e) => {
     setShowNoGPS(false);
-    handleChange(e)
+    handleChange(e);
     return;
   };
 
@@ -158,12 +174,97 @@ const PicUploader = React.memo((props) => {
     setShowNoGPS(false);
     setMasterSwitch(false);
     animatePicModal();
+    if (tutorialRunning) {
+      if (itterator3 === 16) {
+        setItterator3(itterator3 + 1);
+      }
+    }
     return;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  let counter = 0;
+  let blinker;
 
+  const [imgButState, setImgButState] = useState(false);
+  const [datButState, setDatButState] = useState(false);
+  const [autoButState, setAutoButState] = useState(false);
+  const [pinButState, setPinButState] = useState(false);
+  const [subButState, setSubButState] = useState(false);
+
+  function imageBut() {
+    counter++;
+    if (counter % 2 == 0) {
+      setImgButState(false);
+    } else {
+      setImgButState(true);
+    }
+  }
+
+  function calendarBut() {
+    counter++;
+    if (counter % 2 == 0) {
+      setDatButState(false);
+    } else {
+      setDatButState(true);
+    }
+  }
+
+  function animalField() {
+    counter++;
+    if (counter % 2 == 0) {
+      setAutoButState(false);
+    } else {
+      setAutoButState(true);
+    }
+  }
+
+  function pinBut() {
+    counter++;
+    if (counter % 2 == 0) {
+      setPinButState(false);
+    } else {
+      setPinButState(true);
+    }
+  }
+
+  function subBut() {
+    counter++;
+    if (counter % 2 == 0) {
+      setSubButState(false);
+    } else {
+      setSubButState(true);
+    }
+  }
+
+  function cleanUp() {
+    clearInterval(blinker);
+    setImgButState(false);
+    setDatButState(false);
+    setAutoButState(false)
+    setPinButState(false);
+    setSubButState(false);
+  }
+
+  useEffect(() => {
+    if (tutorialRunning) {
+      if (itterator3 === 8) {
+        blinker = setInterval(imageBut, 1000);
+      } else if (itterator3 === 11) {
+        blinker = setInterval(calendarBut, 1000);
+      } else if (itterator3 === 14) {
+        blinker = setInterval(animalField, 1000);
+      } else if (itterator3 === 16) {
+        blinker = setInterval(pinBut, 1000);
+      } else if (itterator3 === 22) {
+        blinker = setInterval(subBut, 1000);
+      }
+    }
+    return () => cleanUp();
+  }, [itterator3]);
+
+  const handleSubmit = (e) => {
+
+    e.preventDefault();
     let AnimalV = pin.Animal.toString();
     let LatV = parseFloat(pin.Latitude);
     let LngV = parseFloat(pin.Longitude);
@@ -177,11 +278,19 @@ const PicUploader = React.memo((props) => {
       LngV &&
       typeof LngV == "number"
     ) {
+
       let Rnow = new Date();
 
       let rightNow = getToday(Rnow);
 
-      // insertPhotoWaits({ ...pin, PicFile: photoFile });
+     
+      if (tutorialRunning) {
+        if (itterator3 === 22) {
+          setItterator3(itterator3 + 1);
+        } else {
+          insertPhotoWaits({ ...pin, PicFile: photoFile });
+        }
+      }
 
       setPin({
         ...pin,
@@ -220,6 +329,92 @@ const PicUploader = React.memo((props) => {
     document.getElementById("file").click();
   }
 
+  const labelStyle = {
+    fontfamily: "Patrick Hand",
+    fontSize: 18,
+    textTransform: "none",
+    color: "gold",
+    cursor: "pointer",
+    marginLeft: "-7px",
+    marginTop: "9px",
+  };
+
+  const labelStyleAlt = {
+    fontfamily: "Patrick Hand",
+    fontSize: 18,
+    textTransform: "none",
+    color: "#538dbd",
+    cursor: "pointer",
+    marginLeft: "-7px",
+    marginTop: "9px",
+  };
+
+  const iconStyle = {
+    color: "gold",
+    height: "28px",
+    width: "28px",
+    cursor: "pointer",
+    marginLeft: "4px",
+    marginTop: "2.5px",
+  };
+
+  const iconStyleAlt = {
+    color: "#538dbd",
+    height: "28px",
+    width: "28px",
+    cursor: "pointer",
+    marginLeft: "4px",
+    marginTop: "2.5px",
+  };
+
+  const inputStyle = {
+    textAlign: "center",
+    fontFamily: "Itim",
+    fontSize: 16,
+    textOverflow: "ellipsis",
+    backgroundColor: "transparent",
+    height: "35px",
+    width: "232px",
+    color: "#F0EEEB",
+    marginLeft: "-30px",
+    borderBottom: "none",
+    borderColor: "transparent",
+    alignItems: "center",
+    paddingRight: "20px",
+    borderRadius: "20px",
+    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+  };
+
+  const inputStyleAlt = {
+    textAlign: "center",
+    fontFamily: "Itim",
+    fontSize: 16,
+    textOverflow: "ellipsis",
+    backgroundColor: "pink",
+    height: "35px",
+    width: "232px",
+    color: "#F0EEEB",
+    marginLeft: "-30px",
+    borderBottom: "none",
+    borderColor: "transparent",
+    alignItems: "center",
+    paddingRight: "20px",
+    borderRadius: "20px",
+    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+  };
+
+  const buttonStyle = {
+    color: "gold",
+    height: "30px",
+    width: "30px",
+  };
+
+  const buttonStyleAlt = {
+    color: "#538dbd",
+    height: "30px",
+    width: "30px",
+  };
+
   return (
     <Container fluid>
       <Form onSubmit={handleSubmit}>
@@ -232,7 +427,12 @@ const PicUploader = React.memo((props) => {
               variant="text"
               id="closeButton"
               onClick={() => handleModalClose()}
-              style={{ display: "flex", flexDirection: "column", marginRight: 10, marginTop: 2}}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginRight: 10,
+                marginTop: 2,
+              }}
             >
               <CloseIcon
                 sx={{ color: "lightgrey", height: "36px", width: "36px" }}
@@ -252,37 +452,20 @@ const PicUploader = React.memo((props) => {
           </div>
         )}
 
-        {photoFile === null && (
-            <div className="blankPic"></div>
-        )}
+        {photoFile === null && <div className="blankPic"></div>}
 
         <div className="uploadbox2">
-          <div onClick={handleClick} className="picSelectDiv">
+          <div
+            onClick={handleClick}
+            className={imgButState ? "picSelectDivAlt" : "picSelectDiv"}
+          >
             <div style={{ marginRight: 5, marginTop: 3 }}>
               <PhotoIcon
-                sx={{
-                  color: "gold",
-                  height: "28px",
-                  width: "28px",
-                  cursor: "pointer",
-                  marginLeft: "4px",
-                  marginTop: "2.5px",
-                }}
+                sx={imgButState ? iconStyleAlt : iconStyle}
               ></PhotoIcon>
             </div>
 
-            <Label
-              style={{
-                fontfamily: 'Patrick Hand',
-                fontSize: 18,
-                // fontWeight: "bold",
-                textTransform: "none",
-                color: "gold",
-                cursor: "pointer",
-                marginLeft: "-7px",
-                marginTop: "9px",
-              }}
-            >
+            <Label style={imgButState ? labelStyleAlt : labelStyle}>
               Choose an Image
             </Label>
           </div>
@@ -318,30 +501,15 @@ const PicUploader = React.memo((props) => {
                 value={pin.PicDate}
                 onChange={handleChange}
                 onClick={handleNoGPSClose}
-                inputProps={{
-                  style: {
-                    textAlign: "center",
-                    fontFamily: "Itim",
-                    fontSize: 16,
-                    textOverflow: "ellipsis",
-                    backgroundColor: "transparent",
-                    height: "35px",
-                    width: "232px",
-                    color: "#F0EEEB",
-                    marginLeft: "-30px",
-                    borderBottom: "none",
-                    borderColor: "transparent",
-                    alignItems: "center",
-                    paddingRight: "20px",
-                    borderRadius: "20px",
-                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                  },
-                }}
+                inputProps={{ style: datButState ? inputStyleAlt : inputStyle }}
               />
             </FormGroup>
           </div>
 
-          <div className="autosuggestbox" onClick={handleSelect}>
+          <div
+            className={autoButState ? "autosuggestboxAlt" : "autosuggestbox"}
+            onClick={handleSelect}
+          >
             <AnimalAutoSuggest
               setPin={setPin}
               pin={pin}
@@ -385,7 +553,7 @@ const PicUploader = React.memo((props) => {
                         borderColor: "transparent",
                         borderRadius: "20px",
                         boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                        marginLeft: "-52px"
+                        marginLeft: "-52px",
                       },
                     }}
                   />
@@ -420,14 +588,17 @@ const PicUploader = React.memo((props) => {
                         borderColor: "transparent",
                         borderRadius: "20px",
                         boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                        marginLeft: "-52px"
+                        marginLeft: "-52px",
                       },
                     }}
                   />
                 </FormGroup>
               </div>
             </div>
-            <div className="Gbox" style={{marginTop: 40}}>
+            <div
+              className={pinButState ? "GboxAlt" : "Gbox"}
+              style={{ marginTop: "40px" }}
+            >
               <FormGroup>
                 <Button
                   variant="text"
@@ -435,7 +606,7 @@ const PicUploader = React.memo((props) => {
                   onClick={handleNoGPSCloseOnMapChange}
                 >
                   <PlaceIcon
-                    sx={{ color: "gold", height: "30px", width: "30px" }}
+                    sx={pinButState ? buttonStyleAlt : buttonStyle}
                   ></PlaceIcon>
                 </Button>
               </FormGroup>
@@ -444,7 +615,12 @@ const PicUploader = React.memo((props) => {
         </div>
 
         <FormGroup>
-          <Button variant="text" id="modalButton" onClick={handleSubmit}>
+          <Button
+            variant="text"
+            id="modalButton"
+            style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
+            onClick={handleSubmit}
+          >
             Submit Photo
           </Button>
         </FormGroup>

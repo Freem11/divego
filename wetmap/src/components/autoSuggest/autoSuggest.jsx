@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { getAnimalNamesThatFit } from "../../supabaseCalls/photoSupabaseCalls";
 import InputBase from "@mui/material/InputBase";
 import AutoSuggestListItem from "./animalSuggestListItem";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "./autoSuggest.css";
+import { Iterrator3Context } from "../contexts/iterrator3Context";
+import { TutorialContext } from "../contexts/tutorialContext";
+
+let waiter;
 
 export default function AnimalAutoSuggest(props) {
   const { setPin, pin, setList, list, clearAnimal } = props;
+  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  
+  useEffect(() => {
+    clearTimeout(waiter);
+
+    if (tutorialRunning) {
+      if (itterator3 === 14) {
+        waiter = setTimeout(() => {
+          setItterator3(itterator3 + 1);
+        }, 2000);
+      }
+    }
+  }, [pin.Animal]);
 
   const handleChange = async (e) => {
     setPin({ ...pin, Animal: e.target.value });

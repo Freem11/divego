@@ -5,7 +5,7 @@ import mantaIOS from "../../images/Manta32.png";
 import seaLionGuy from "../../images/EmilioNeutral.png";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PhotoIcon from "@mui/icons-material/Photo";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { ThirdTutorialModalContext } from "../contexts/thirdTutorialModalContext";
 import { SessionContext } from "../contexts/sessionContext";
 import { grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
@@ -27,7 +27,9 @@ import { MasterContext } from "../contexts/masterContext";
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
-export default function ThirdTutorial() {
+export default function ThirdTutorial(props) {
+  const { animateThirdGuideModal, setThirdGuideModalYCoord } = props;
+
   window.addEventListener("resize", trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
@@ -340,7 +342,7 @@ export default function ThirdTutorial() {
     if (textVal) {
       textArray = textVal.split("");
       if (textPrinting) {
-        textPrinter = setInterval(printOutText, 40);
+        textPrinter = setInterval(printOutText, 80);
       } else {
         setTextRead(textVal);
       }
@@ -362,146 +364,100 @@ export default function ThirdTutorial() {
     }
 
     if (itterator3 === 3) {
-      photoY.value = withTiming(windowHeight * 0.4);
-      // startPhotoButtonAnimation();
+      setCameraY(windowHeight * 1.55);
     }
 
     if (itterator3 === 5) {
-      setChapter(null);
-      setTimeout(() => {
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-      }, 400);
+      setCameraY(0);
+      animateThirdGuideModal()
+    }
 
-      setTimeout(() => {
-        textBoxY.value = withTiming(windowHeight * 0.77);
-        setupText(0);
-      }, 600);
-      photoY.value = withTiming(scale(-1000));
-      // startPhotoButtonAnimation();
-      setThirdGuideModal(false);
+    if (itterator3 === 6) {
+      animateThirdGuideModal()
     }
 
     if (itterator3 === 7) {
-      imageY.value = withTiming(windowHeight * 0.4);
-      // startImageButtonAnimation();
+      setPhotoY(windowHeight * 1.55);
     }
 
     if (itterator3 === 8) {
-      imageY.value = withTiming(scale(-1000));
-      // startImageButtonAnimation();
-      setThirdGuideModal(false);
+      setPhotoY(0);
+      animateThirdGuideModal()
     }
 
-    if (itterator3 === 10) {
-      calendarY.value = withTiming(windowHeight * 0.4);
-      //  startCalendarAnimation();
+    if (itterator3 === 9) {
+      animateThirdGuideModal()
     }
 
     if (itterator3 === 11) {
-      calendarY.value = withTiming(scale(-1000));
-      // startCalendarAnimation();
-      setThirdGuideModal(false);
+      animateThirdGuideModal()
     }
 
     if (itterator3 === 12) {
-      setThirdGuideModal(true);
+      animateThirdGuideModal()
     }
-    if (itterator3 === 13) {
-      setChapter(null);
-      setTimeout(() => {
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-      }, 400);
-
-      setTimeout(() => {
-        textBoxY.value = withTiming(windowHeight * 0.77);
-        setupText(0);
-      }, 600);
-    }
-
+  
     if (itterator3 === 14) {
-      setThirdGuideModal(false);
+      animateThirdGuideModal()
     }
 
     if (itterator3 === 15) {
-      moveMap({ lat: mapCenter.lat, lng: mapCenter.lng });
-      setThirdGuideModal(true);
+      moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
+      animateThirdGuideModal()
       setTimeout(() => {
-        pinY.value = withTiming(windowHeight * 0.4);
-        // startPinAnimation();
+        setPinY(windowHeight * 1.55);
       }, 1000);
     }
 
     if (itterator3 === 16) {
-      setChapter(null);
-      setTimeout(() => {
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-      }, 400);
-
-      setTimeout(() => {
-        textBoxY.value = withTiming(windowHeight * 0.77);
-        setupText(0);
-      }, 600);
-      setThirdGuideModal(false);
-      pinY.value = withTiming(scale(-1000));
-      // startPinAnimation();
+      animateThirdGuideModal()
+      setPinY(0);
     }
 
-    if (itterator3 === 17) {
-      setPicAdderModal(false);
-      setThirdGuideModal(true);
+    if (itterator3 === 17) {;
+      animateThirdGuideModal()
       setTimeout(() => {
-        mantaY.value = withTiming(windowHeight * 0.4);
-        // startMantaAnimation();
+        setMantaY(windowHeight * 1.55);
       }, 1000);
     }
 
     if (itterator3 === 19) {
-      setThirdGuideModal(false);
-      mantaY.value = withTiming(scale(-1200));
-      // startMantaAnimation();
+      animateThirdGuideModal()
+      setMantaY(0);
     }
 
     if (itterator3 === 20) {
-      setThirdGuideModal(true);
+      animateThirdGuideModal()
     }
 
     if (itterator3 === 22) {
-      setThirdGuideModal(false);
+      animateThirdGuideModal()
     }
 
     if (itterator3 === 23) {
-      setThirdGuideModal(true);
+      animateThirdGuideModal()
     }
 
     console.log("threethrrethree", itterator3); 
     if (itterator3 === 26) {
-      setPinValues({
-        ...pinValues,
-        PicFile: null,
-        Animal: "",
-        PicDate: "",
-        Latitude: "",
-        Longitude: "",
-        DDVal: "0",
-      });
-      setUploadedFile(null);
-      setPicAdderModal(false);
+      // setPinValues({
+      //   ...pinValues,
+      //   PicFile: null,
+      //   Animal: "",
+      //   PicDate: "",
+      //   Latitude: "",
+      //   Longitude: "",
+      //   DDVal: "0",
+      // });
+      // setUploadedFile(null);
       setTutorialRunning(false);
     }
 
     if (itterator3 === feederArray.length - 1) {
-      setTutorialRunning(false);
       setItterator3(null);
-      setThirdGuideModal(false);
-      startCharacterAnimation();
-      startTextBoxAnimation();
-      setChapter(null);
+      animateThirdGuideModal()
+      setMapZoom(10)
+      resetTutorial()
     }
   }, [itterator3]);
 
@@ -552,6 +508,7 @@ export default function ThirdTutorial() {
 
   };
 
+  
   return (
     <div className="wrapper3" onClick={() => setupText(1)}>
       <animated.div
@@ -578,9 +535,10 @@ export default function ThirdTutorial() {
       >
         <PhotoCameraIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "9vh",
+            width: "9vh",
             color: "aquamarine",
+            marginTop: "0.5vh"
           }}
         />
       </animated.div>
@@ -591,27 +549,20 @@ export default function ThirdTutorial() {
       >
         <PhotoIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "9vh",
+            width: "9vh",
             color: "aquamarine",
+            marginTop: "0.5vh"
           }}
         />
       </animated.div>
-      {/* <Animated.View style={[styles.buttonwrapper, calendarSlide]}>
-          <FontAwesome
-            name="calendar"
-            color="gold"
-            size={scale(34)}
-            style={{ marginBottom: 2.5 }}
-          />
-        </Animated.View> */}
- 
+  
       <animated.div
         ref={pinRef}
         className="pinbuttonwrapper"
         style={pinButtonSlide}
       >
-        <MyLocationIcon
+        <LocationOnIcon
           sx={{
             height: "10vh",
             width: "10vh",
