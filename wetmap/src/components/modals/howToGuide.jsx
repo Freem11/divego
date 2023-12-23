@@ -3,6 +3,7 @@ import { Container, Form, FormGroup, Label, Button } from "reactstrap";
 import "./siteSubmitter.css";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { IterratorContext } from "../contexts/iterratorContext";
+import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { TutorialModelContext } from "../contexts/tutorialModalContext";
 import { SecondTutorialModalContext } from "../contexts/secondTutorialModalContext";
 import { ThirdTutorialModalContext } from "../contexts/thirdTutorialModalContext";
@@ -18,7 +19,8 @@ import "./howToGuide.css";
 
 const HowToGuide = (props) => {
   const { itterator, setItterator } = useContext(IterratorContext);
-  const { animateLaunchModal, animateIntroGuideModal } = props;
+  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
+  const { animateLaunchModal, animateIntroGuideModal, animateSecondGuideModal } = props;
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { guideModal, setGuideModal } = useContext(TutorialModelContext);
   const { secondGuideModal, setSecondGuideModal } = useContext(
@@ -37,7 +39,9 @@ const HowToGuide = (props) => {
   };
 
   const handleSecondTutorialStartup = () => {
+    setItterator2(0)
     setTutorialRunning(true);
+    animateSecondGuideModal()
     animateLaunchModal()
     setSecondGuideModal(!secondGuideModal);
   };
@@ -83,7 +87,7 @@ const HowToGuide = (props) => {
           </Label>
         </div>
 
-        <div onClick={null} className="diveSiteGuideLaunch">
+        <div onClick={handleSecondTutorialStartup} className="diveSiteGuideLaunch">
           <Label
             style={{
               fontFamily: "Itim",

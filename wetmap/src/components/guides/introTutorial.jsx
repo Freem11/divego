@@ -25,6 +25,7 @@ import { AnimalContext } from "../contexts/animalContext";
 import { AnimalMultiSelectContext } from "../contexts/animalMultiSelectContext";
 import { ReverseContext } from "../contexts/reverseContext";
 import { ChapterContext } from "../contexts/chapterContext";
+import { JumpContext } from "../contexts/jumpContext";
 import anchorClustIOS from "../../images/ClusterAnchor24.png";
 import anchorIconIOS from "../../images/SiteAnchor20.png";
 import heatIconIOS from "../../images/heatpoint.png";
@@ -33,7 +34,7 @@ import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import ExploreIcon from "@mui/icons-material/Explore";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import UserNamer from "./usernamer";
-import { JumpContext } from "../contexts/jumpContext";
+
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,

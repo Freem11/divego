@@ -47,8 +47,8 @@ import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { TutorialContext } from "./contexts/tutorialContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import IntroTutorial from "./guides/introTutorial";
-// import SecondTutorial from "./tutorial/secondTutorial";
-// import ThirdTutorial from "./tutorial/thirdTutorial";
+import SecondTutorial from "./guides/secondTutorial";
+// import ThirdTutorial from "./guides/thirdTutorial";
 import Lightbox from "react-image-lightbox";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
@@ -74,7 +74,7 @@ const adminPortalZone = (
 );
 
 const MapPage = React.memo((props) => {
-  const { screenHeigthInital} = props
+  const { screenHeigthInital } = props
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
@@ -337,6 +337,16 @@ const MapPage = React.memo((props) => {
       setIntroGuideModalYCoord(0)
     }
   };
+
+  const animateSecondGuideModal = () => {
+
+    if (secondGuideModalYCoord === 0){
+      setSecondGuideModalYCoord(-windowHeight);
+    } else {
+      setSecondGuideModalYCoord(0)
+    }
+  };
+
 
   const animateAnchorModal = () => {
 
@@ -628,6 +638,7 @@ const MapPage = React.memo((props) => {
         <HowToGuide 
         animateLaunchModal={animateLaunchModal}
         animateIntroGuideModal={animateIntroGuideModal} 
+        animateSecondGuideModal={animateSecondGuideModal}
         />
       </animated.div>
 
@@ -647,6 +658,16 @@ const MapPage = React.memo((props) => {
       >
         <IntroTutorial animateIntroGuideModal={animateIntroGuideModal} setIntroGuideModalYCoord={setIntroGuideModalYCoord}/>
       </animated.div>
+
+      <animated.div
+        className="guideModalDiv2"
+        style={(moveSecondGuideModal)}
+        ref={secondGuideModalRef}
+        // onClick={() => setItterator(itterator + 1)}
+      >
+        <SecondTutorial animateSecondGuideModal={animateSecondGuideModal} setSecondGuideModalYCoord={setSecondGuideModalYCoord}/>
+      </animated.div>
+      
 
       <animated.div
         className="anchorModalDiv"
