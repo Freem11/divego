@@ -708,7 +708,7 @@ const MapPage = React.memo((props) => {
         style={moveSiteModal}
         ref={siteModalRef}
       >
-        <SiteSubmitter animateSiteModal={animateSiteModal} />
+        <SiteSubmitter animateSiteModal={animateSiteModal} setSiteModalYCoord={setSiteModalYCoord}/>
       </animated.div>
 
       <animated.div

@@ -36,7 +36,7 @@ const noGPSZone = (
 );
 
 const SiteSubmitter = (props) => {
-  const { animateSiteModal } = props;
+  const { animateSiteModal, setSiteModalYCoord } = props;
   const [showNoGPS, setShowNoGPS] = useState(false);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { setMasterSwitch } = useContext(MasterContext);
@@ -186,7 +186,11 @@ const SiteSubmitter = (props) => {
         blinker1 = setInterval(pinBut, 600);
       } else if (itterator2 === 13) {
         blinker1 = setInterval(locationBut, 1000);
-      } else if (itterator2 === 23) {
+      } else if(itterator2 === 15 || itterator2 == 10) {
+        setSiteModalYCoord(-950)
+      } else if (itterator2 ===8 || itterator2 === 1) {
+        setSiteModalYCoord(0)
+      } else if (itterator2 === 23) { 
         blinker1 = setInterval(siteField, 1000);
         timer2 = setTimeout(subButTimeout, 300);
       } else if (itterator2 === 26) {

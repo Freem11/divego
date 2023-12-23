@@ -23,11 +23,22 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
-const windowWidth = window.innerWidth;
-const windowHeight = window.innerHeight;
+const screenWidthInital = window.innerWidth;
+const screenHeitghInital = window.innerHeight;
 
 export default function SecondTutorial(props) {
   const { animateSecondGuideModal, setSecondGuideModalYCoord } = props;
+
+  window.addEventListener("resize", trackDimensions);
+
+  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
+  const [windowHeigth, setWindowHeigth] = useState(screenHeitghInital);
+
+  function trackDimensions() {
+    setWindowWidth(window.innerWidth);
+    setWindowHeigth(window.innerHeight);
+  }
+
   const { activeSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
 
@@ -77,41 +88,47 @@ export default function SecondTutorial(props) {
     switch (chapter) {
       case "Checking for a dive site":
         setItterator2(1);
+        setSecondGuideModalYCoord(-windowHeigth)
         setSecondGuideModal(true);
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-        textBoxY.value = withTiming(windowHeight * 0.8);
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeigth * 0.35);
+        }, 300);
         break;
 
       case "Adding your dive sites":
         setItterator2(8);
-        setSecondGuideModal(true);
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-        textBoxY.value = withTiming(windowHeight * 0.8);
+        setSecondGuideModalYCoord(-windowHeigth)
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeigth * 0.35);
+        }, 300);
         break;
 
       case "DS Help":
         setItterator2(10);
-        setSecondGuideModal(true);
-        // setDiveSiteAdderModal(true);
-        setTutorialRunning(true);
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-        textBoxY.value = withTiming(windowHeight * 0.8);
+        setSecondGuideModalYCoord(-windowHeigth)
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeigth * 0.35);
+        }, 300);
         break;
 
       case "Placing the pin":
         setItterator2(15);
-        setSecondGuideModal(true);
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-        textBoxY.value = withTiming(windowHeight * 0.77);
-        // setDiveSiteAdderModal(true);
+        setSecondGuideModalYCoord(-windowHeigth)
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeigth * 0.35);
+        }, 300);
         break;
 
       case "Exit Guide":
@@ -236,12 +253,9 @@ export default function SecondTutorial(props) {
     "Now that you have your GPS fields filled out add the site name in the top field and then tap the 'Submit Dive Site' button at the bottom and your site will be submitted for review";
   const text22 =
     "Please note your new site won't automatically be added to the map, the Scuba SEAsons team will verify your submission before committing to the map, but after that your site will go in and be credited to you with your diver name that we setup earlier!";
-
   const text23 = "";
-
   const text24 =
     "Nice Job, That's how you add a new dive site to Scuba SEAsons! In this case, since this is a guide, the entry was not submitted, but you can add from now on, in the same way";
-
   const text25 =
     "That's it for adding dive sites to the app! In the next guide we will look at adding sea creature sighting photos! Tap on this button to go to that guide next, otherwise tap anywhere else to close, and thanks for joining me again!";
 
@@ -351,7 +365,7 @@ export default function SecondTutorial(props) {
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeight * 0.35);
+        setTextBoxY(-windowHeigth * 0.35);
       }, 1000);
     }
 
@@ -359,7 +373,7 @@ export default function SecondTutorial(props) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
       setJump(!jump)
       setTimeout(() => {
-        setDsSearchY(windowHeight * 1.55);
+        setDsSearchY(windowHeigth * 1.55);
       }, 1000);
     }
 
@@ -374,18 +388,6 @@ export default function SecondTutorial(props) {
 
     if (itterator2 === 5) {
       animateSecondGuideModal()
-      // setChapter(null);
-      // setTimeout(() => {
-      //   characterX.value = withTiming(
-      //     Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-      //   );
-      // }, 400);
-
-      // setTimeout(() => {
-      //   textBoxY.value = withTiming(windowHeight * 0.8);
-      //   setupText(0);
-      // }, 600);
-      // setSecondGuideModal(false);
     }
 
     if (itterator2 === 6) {
@@ -393,22 +395,10 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 8) {
-      setDiveSiteY(windowHeight * 1.55);
-      // startDiveSiteAnimation();
+      setDiveSiteY(windowHeigth * 1.55);
     }
 
     if (itterator2 === 9) {
-      // setChapter(null);
-      // setTimeout(() => {
-      //   characterX.value = withTiming(
-      //     Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-      //   );
-      // }, 400);
-
-      // setTimeout(() => {
-      //   textBoxY.value = withTiming(windowHeight * 0.8);
-      //   setupText(0);
-      // }, 600);
       setDiveSiteY(0);
       animateSecondGuideModal()
       setSecondGuideModal(false);
@@ -420,7 +410,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 12) {
-      setPinY(windowHeight * 1.55)
+      setPinY(windowHeigth * 1.55)
     }
 
     if (itterator2 === 13) {
@@ -433,7 +423,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 15) {
-      setLocationY(windowHeight * 1.55)
+      setLocationY(windowHeigth * 1.55)
     }
 
     if (itterator2 === 16) {
@@ -445,7 +435,7 @@ export default function SecondTutorial(props) {
     if (itterator2 === 17) {
       animateSecondGuideModal()
       setTimeout(() => {
-        setMantaY(windowHeight * 1.55)
+        setMantaY(windowHeigth * 1.55)
       }, 1000);
     }
 
@@ -480,7 +470,6 @@ export default function SecondTutorial(props) {
       });
       // nextTutX.value = withTiming(-300);
       // startNextTutAnimation();
-      // setDiveSiteAdderModal(false);
       setTutorialRunning(false);
     }
 
