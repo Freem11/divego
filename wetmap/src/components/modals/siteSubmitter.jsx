@@ -15,6 +15,8 @@ import { userCheck } from "../../supabaseCalls/authenticateSupabaseCalls";
 import { DiveSpotContext } from "../contexts/diveSpotContext";
 import { MasterContext } from "../contexts/masterContext";
 import { ModalSelectContext } from "../contexts/modalSelectContext";
+import { Iterrator2Context } from "../contexts/iterrator2Context";
+import { TutorialContext } from "../contexts/tutorialContext";
 
 const noGPSZone = (
   <div
@@ -39,6 +41,8 @@ const SiteSubmitter = (props) => {
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { setMasterSwitch } = useContext(MasterContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -87,6 +91,13 @@ const SiteSubmitter = (props) => {
         },
         { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
       );
+      if (tutorialRunning) {
+        if (itterator2 === 13) {
+          setItterator2(itterator2 + 1)
+          setLocButState(false);
+        } 
+      }
+
     } else {
       console.log("unsupported");
     }
@@ -104,6 +115,105 @@ const SiteSubmitter = (props) => {
     animateSiteModal();
     return;
   };
+
+  let counter1 = 0;
+  let counter2 = 0;
+  let blinker1;
+
+  const [locButState, setLocButState] = useState(false);
+  const [pinButState, setPinButState] = useState(false);
+  const [subButState, setSubButState] = useState(false);
+
+  function locationBut() {
+    counter1++;
+    if (counter1 % 2 == 0) {
+      setLocButState(false);
+    } else {
+      setLocButState(true);
+    }
+  }
+
+  function pinBut() {
+    counter1++;
+    if (counter1 % 2 == 0) {
+      setPinButState(false);
+    } else {
+      setPinButState(true);
+    }
+  }
+
+  // function siteField() {
+  //   counter1++;
+  //   if (counter1 % 2 == 0) {
+  //     SetFormValidation({
+  //       ...formValidation,
+  //       SiteNameVal: false,
+  //     });
+  //   } else {
+  //     SetFormValidation({
+  //       ...formValidation,
+  //       SiteNameVal: true,
+  //     });
+  //   }
+  // }
+
+  function subButTimeout() {
+    blinker2 = setInterval(subBut, 1000);
+  }
+
+  function subBut() {
+    counter2++;
+    if (counter2 % 2 == 0) {
+      setSubButState(false);
+    } else {
+      setSubButState(true);
+    }
+  }
+
+  function cleanUp() {
+    clearInterval(blinker1);
+    // SetFormValidation({
+    //   ...formValidation,
+    //   SiteNameVal: false,
+    // });
+    setLocButState(false);
+    setPinButState(false);
+    setSubButState(false);
+  }
+
+  useEffect(() => {
+    if (tutorialRunning) {
+      if (itterator2 === 16) {
+        blinker1 = setInterval(pinBut, 600);
+      } else if (itterator2 === 13) {
+        blinker1 = setInterval(locationBut, 1000);
+      } else if (itterator2 === 23) {
+        // blinker1 = setInterval(siteField, 1000);
+        timer2 = setTimeout(subButTimeout, 300);
+      }
+    }
+    return () => cleanUp();
+  }, [itterator2]);
+
+  const buttonColor = {
+    color: "gold",
+    height: "28px",
+    width: "28px",
+    cursor: "pointer",
+    marginTop: "4px",
+  };
+
+  const buttonColorAlt = {
+    color: "#538bdb",
+    height: "28px",
+    width: "28px",
+    cursor: "pointer",
+    marginTop: "4px",
+  };
+
+
+
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -248,35 +358,23 @@ const SiteSubmitter = (props) => {
         </div>
 
         <div className="buttonBox">
-        <FormGroup>
-          <div onClick={handleDiveSiteGPS} className="GPSbutton">
-            <div>
-              <MyLocationIcon
-                sx={{
-                  color: "gold",
-                  height: "28px",
-                  width: "28px",
-                  cursor: "pointer",
-                  marginTop: "4px",
-                }}
-              ></MyLocationIcon>
+          <FormGroup>
+            <div onClick={handleDiveSiteGPS} className={locButState ? "GPSbuttonAlt" : "GPSbutton"}>
+              <div>
+                <MyLocationIcon
+                  sx={locButState ? buttonColorAlt : buttonColor}
+                ></MyLocationIcon>
+              </div>
             </div>
-          </div>
-        </FormGroup>
+          </FormGroup>
 
-        <FormGroup>
-          <div onClick={handleNoGPSCloseOnMapChange} className="pinButtonD">
-            <PlaceIcon
-              sx={{
-                color: "gold",
-                height: "28px",
-                width: "28px",
-                cursor: "pointer",
-                marginTop: "2px",
-              }}
-            ></PlaceIcon>
-          </div>
-        </FormGroup>
+          <FormGroup>
+            <div onClick={handleNoGPSCloseOnMapChange} className="pinButtonD">
+              <PlaceIcon
+                 sx={pinButState ? buttonColorAlt : buttonColor}
+              ></PlaceIcon>
+            </div>
+          </FormGroup>
         </div>
 
         <FormGroup>

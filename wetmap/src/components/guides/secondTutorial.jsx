@@ -418,39 +418,37 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 12) {
-      //here!!!
-      locationY.value = withTiming(windowHeight * 0.4);
+      setPinY(windowHeight * 1.55)
     }
 
     if (itterator2 === 13) {
-      locationY.value = withTiming(scale(-1000));
-      setSecondGuideModal(false);
+      setPinY(0)
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 14) {
-      setSecondGuideModal(true);
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 15) {
-      pinY.value = withTiming(windowHeight * 0.4);
+      setLocationY(windowHeight * 1.55)
     }
 
     if (itterator2 === 16) {
-      pinY.value = withTiming(scale(-1000));
-      setSecondGuideModal(false);
+      setLocationY(0)
+      animateSecondGuideModal()
     }
 
     if (itterator2 === 17) {
-      setSecondGuideModal(true);
+      animateSecondGuideModal()
       setTimeout(() => {
-        mantaY.value = withTiming(windowHeight * 0.4);
-        // startMantaAnimation();
+        setMantaY(windowHeight * 1.55)
       }, 1000);
     }
 
     if (itterator2 === 19) {
-      setSecondGuideModal(false);
-      mantaY.value = withTiming(scale(-1200));
+      animateSecondGuideModal()
+      setMantaY(0)
     }
 
     if (itterator2 === 20) {
