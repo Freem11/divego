@@ -212,17 +212,17 @@ export default function IntroTutorial(props) {
 
   const resetTutorial = async () => {
     setItterator(null);
-    setCharacterX(0); //1000
-    setTextBoxY(0); //1000
-    setPixY(0); //-300
-    setExploreButtonY(0); //-1000
-    setQuestionButtonY(0); //-1000
-    setClusterAnchorY(0); //-1200
-    setHeatPotintY(0); //-1200
-    setGuideButtonY(0); //-1200
-    setArrowY(0); //-1200
-    setUserBoxY(0); //-300
-    setNextTutY(0); //-300
+    setCharacterX(0);
+    setTextBoxY(0);
+    setPixY(0);
+    setExploreButtonY(0);
+    setQuestionButtonY(0);
+    setClusterAnchorY(0);
+    setHeatPotintY(0);
+    setGuideButtonY(0);
+    setArrowY(0);
+    setUserBoxY(0);
+    setNextTutY(0);
   };
 
   const handleSecondTutorialStartup = () => {

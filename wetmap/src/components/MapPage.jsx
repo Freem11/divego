@@ -46,6 +46,7 @@ import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { TutorialContext } from "./contexts/tutorialContext";
 import { IterratorContext } from "./contexts/iterratorContext";
+import { Iterrator2Context } from "./contexts/iterrator2Context";
 import IntroTutorial from "./guides/introTutorial";
 import SecondTutorial from "./guides/secondTutorial";
 // import ThirdTutorial from "./guides/thirdTutorial";
@@ -96,6 +97,7 @@ const MapPage = React.memo((props) => {
 
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { itterator, setItterator } = useContext(IterratorContext);
+  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
 
   const togglePicModal = () => {
     setPicModal(!picModal);
@@ -114,6 +116,50 @@ const MapPage = React.memo((props) => {
   };
 
   const [gearModal, setGearModal] = useState(false);
+
+  const [searButState, setSearButState] = useState(false);
+  const [siteButState, setSiteButState] = useState(false);
+  const [photButState, setPhotButState] = useState(false);
+
+  let blinker;
+  let counter = 0;
+  let counter1 = 0;
+
+  function diveSiteSearch() {
+    counter++;
+    if (counter % 2 == 0) {
+      setSearButState(false);
+    } else {
+      setSearButState(true);
+    }
+  }
+
+  function diveSiteAdd() {
+    counter1++;
+    if (counter1 % 2 == 0) {
+      setSiteButState(false);
+    } else {
+      setSiteButState(true);
+    }
+  }
+
+  function cleanUp() {
+    clearInterval(blinker);
+    setSearButState(false);
+    setSiteButState(false);
+    setPhotButState(false);
+  }
+
+  useEffect(() => {
+    if (tutorialRunning) {
+      if (itterator2 === 3) {
+        blinker = setInterval(diveSiteSearch, 1000);
+      } else if (itterator2 === 9) {
+        blinker = setInterval(diveSiteAdd, 1000);
+      }
+    }
+    return () => cleanUp();
+  }, [itterator2]);
 
   const toggleGearModal = () => {
     setGearModal(!gearModal);
@@ -177,6 +223,23 @@ const MapPage = React.memo((props) => {
     border: "1px solid black",
     marginTop: "5px",
     color: "aquamarine",
+    boxShadow: "-2px 4px 4px #00000064",
+    borderRadius: "100%",
+  };
+
+  const toggleButtonStyleAlt = {
+    "&.Mui-selected": { backgroundColor: "aquamarine" },
+    "&.Mui-selected:hover": { backgroundColor: "gold", color: "black" },
+    "&:hover": {
+      color: "black",
+      backgroundColor: "gold",
+    },
+    backgroundColor: "aquamarine",
+    height: "48px",
+    width: "48px",
+    border: "1px solid black",
+    marginTop: "5px",
+    color: "black",
     boxShadow: "-2px 4px 4px #00000064",
     borderRadius: "100%",
   };
@@ -444,7 +507,7 @@ const MapPage = React.memo((props) => {
             style={{ display: "flex", flexDirection: "row" }}
           >
             <ToggleButton
-              sx={toggleButtonStyle}
+              sx={searButState ? toggleButtonStyleAlt : toggleButtonStyle}
               value="check"
               selected={showAnimalSearch}
               onChange={() => {
