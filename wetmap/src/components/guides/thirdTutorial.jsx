@@ -28,7 +28,7 @@ const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 export default function ThirdTutorial(props) {
-  const { animateThirdGuideModal, setThirdGuideModalYCoord } = props;
+  const { animateThirdGuideModal, setThirdGuideModalYCoord, setPicAddermodal } = props;
 
   window.addEventListener("resize", trackDimensions);
 
@@ -93,16 +93,7 @@ export default function ThirdTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeight * 0.35);
         }, 300);
-        // setUploadedFile(null);
-        // setPinValues({
-        //   ...pinValues,
-        //   PicFile: null,
-        //   Animal: "",
-        //   PicDate: "",
-        //   Latitude: "",
-        //   Longitude: "",
-        //   DDVal: "0",
-        // });
+        setPicAddermodal(false)
         break;
 
       case "Adding your photo":
@@ -116,7 +107,7 @@ export default function ThirdTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeight * 0.35);
         }, 300);
-        // setPicAdderModal(true);
+        setPicAddermodal(true)
         break;
 
       case "Name that sea creature!":
@@ -129,7 +120,7 @@ export default function ThirdTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeight * 0.35);
         }, 300);
-        // setPicAdderModal(true);
+        setPicAddermodal(true)
         break;
 
       case "Dropping the pin":
@@ -142,14 +133,14 @@ export default function ThirdTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeight * 0.35);
         }, 300);
-        // setPicAdderModal(true);
+        setPicAddermodal(true)
         break;
 
       case "Exit Guide":
         setThirdGuideModalYCoord(0);
         handleClearTutorial();
         setTutorialRunning(false);
-        // setDsAddermodal(false)
+        setPicAddermodal(false)
         break;
     }
     setChapter(null)

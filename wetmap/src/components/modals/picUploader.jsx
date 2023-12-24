@@ -50,7 +50,7 @@ const noGPSZone = (
 );
 
 const PicUploader = React.memo((props) => {
-  const { animatePicModal } = props;
+  const { animatePicModal, setPicModalYCoord } = props;
   let navigate = useNavigate();
   const { setMasterSwitch } = useContext(MasterContext);
   const { pin, setPin } = useContext(PinContext);
@@ -251,8 +251,12 @@ const PicUploader = React.memo((props) => {
         blinker = setInterval(imageBut, 1000);
       } else if (itterator3 === 11) {
         blinker = setInterval(calendarBut, 1000);
-      } else if (itterator3 === 14) {
-        blinker = setInterval(animalField, 1000);
+      } else if (itterator3 === 3) {
+        setPicModalYCoord(0)
+      } else if (itterator3 === 3) {
+        setPicModalYCoord(0)
+      } else if (itterator3 === 6 || itterator3 === 12 || itterator3 === 15) {
+        setPicModalYCoord(-950)
       } else if (itterator3 === 16) {
         blinker = setInterval(pinBut, 1000);
       } else if (itterator3 === 22) {

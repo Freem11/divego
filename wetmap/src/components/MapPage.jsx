@@ -90,7 +90,8 @@ const MapPage = React.memo((props) => {
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { photoFile, setPhotoFile } = useContext(PictureContext);
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const [ dsAdderModal, setDsAddermodal ] = useState(false)
+  const [dsAdderModal, setDsAddermodal] = useState(false);
+  const [picAdderModal, setPicAddermodal] = useState(false);
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
@@ -485,29 +486,34 @@ const MapPage = React.memo((props) => {
   };
 
   useEffect(() => {
-    console.log("trigger");
     if (siteModal) {
       setAnchorModalYCoord(-950);
     }
 
     if (!siteModal) {
-      console.log("should");
       setAnchorModalYCoord(0);
     }
   }, [siteModal]);
 
   useEffect(() => {
-    console.log("trigger");
     if (dsAdderModal) {
       setSiteModalYCoord(-950);
     }
 
     if (!dsAdderModal) {
-      console.log("should");
       setSiteModalYCoord(0);
     }
   }, [dsAdderModal]);
 
+  useEffect(() => {
+    if (picAdderModal) {
+      setPicModalYCoord(-950);
+    }
+
+    if (!picAdderModal) {
+      setPicModalYCoord(0);
+    }
+  }, [dsAdderModal]);
 
   return (
     <div className="mappagemaster">
@@ -766,7 +772,10 @@ const MapPage = React.memo((props) => {
         style={movePicModal}
         ref={picModalRef}
       >
-        <PicUploader animatePicModal={animatePicModal} />
+        <PicUploader
+          animatePicModal={animatePicModal}
+          setPicModalYCoord={setPicModalYCoord}
+        />
       </animated.div>
 
       <animated.div
@@ -839,6 +848,7 @@ const MapPage = React.memo((props) => {
         <ThirdTutorial
           animateThirdGuideModal={animateThirdGuideModal}
           setThirdGuideModalYCoord={setThirdGuideModalYCoord}
+          setPicAddermodal={setPicAddermodal}
         />
       </animated.div>
 
