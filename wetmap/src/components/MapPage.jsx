@@ -90,6 +90,7 @@ const MapPage = React.memo((props) => {
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { photoFile, setPhotoFile } = useContext(PictureContext);
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  const [ dsAdderModal, setDsAddermodal ] = useState(false)
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
@@ -193,18 +194,16 @@ const MapPage = React.memo((props) => {
       setChosenModal(null);
       if (tutorialRunning) {
         if (itterator2 === 19) {
-          setItterator2(itterator2 + 1)
+          setItterator2(itterator2 + 1);
         }
       }
-
-
     } else if (chosenModal === "Photos") {
       animatePicModal();
       setMasterSwitch(true);
       setChosenModal(null);
       if (tutorialRunning) {
         if (itterator3 === 19) {
-          setItterator3(itterator3 + 1)
+          setItterator3(itterator3 + 1);
         }
       }
     }
@@ -486,10 +485,29 @@ const MapPage = React.memo((props) => {
   };
 
   useEffect(() => {
+    console.log("trigger");
     if (siteModal) {
-      animateAnchorModal();
+      setAnchorModalYCoord(-950);
+    }
+
+    if (!siteModal) {
+      console.log("should");
+      setAnchorModalYCoord(0);
     }
   }, [siteModal]);
+
+  useEffect(() => {
+    console.log("trigger");
+    if (dsAdderModal) {
+      setSiteModalYCoord(-950);
+    }
+
+    if (!dsAdderModal) {
+      console.log("should");
+      setSiteModalYCoord(0);
+    }
+  }, [dsAdderModal]);
+
 
   return (
     <div className="mappagemaster">
@@ -594,7 +612,9 @@ const MapPage = React.memo((props) => {
               sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
               value="check"
               selected={picModal}
-              onChange={() => {handlePhotoModal()}}
+              onChange={() => {
+                handlePhotoModal();
+              }}
             >
               <PhotoCameraIcon sx={{ height: "36px", width: "36px" }} />
             </ToggleButton>
@@ -607,7 +627,9 @@ const MapPage = React.memo((props) => {
               sx={siteButState ? toggleButtonStyleAlt : toggleButtonStyle}
               value="check"
               selected={diveSiteModal}
-              onChange={() => {handleDiveSiteModal()}}
+              onChange={() => {
+                handleDiveSiteModal();
+              }}
             >
               <AddLocationAltIcon sx={{ height: "38px", width: "38px" }} />
             </ToggleButton>
@@ -621,7 +643,9 @@ const MapPage = React.memo((props) => {
               sx={toggleButtonStyle}
               value="check"
               selected={divesTog}
-              onChange={() => {setDivesTog(!divesTog);}}
+              onChange={() => {
+                setDivesTog(!divesTog);
+              }}
             >
               <AnchorIcon sx={{ height: "37px", width: "37px" }} />
             </ToggleButton>
@@ -750,7 +774,10 @@ const MapPage = React.memo((props) => {
         style={moveSiteModal}
         ref={siteModalRef}
       >
-        <SiteSubmitter animateSiteModal={animateSiteModal} setSiteModalYCoord={setSiteModalYCoord}/>
+        <SiteSubmitter
+          animateSiteModal={animateSiteModal}
+          setSiteModalYCoord={setSiteModalYCoord}
+        />
       </animated.div>
 
       <animated.div
@@ -795,6 +822,7 @@ const MapPage = React.memo((props) => {
         <SecondTutorial
           animateSecondGuideModal={animateSecondGuideModal}
           setSecondGuideModalYCoord={setSecondGuideModalYCoord}
+          setDsAddermodal={setDsAddermodal}
         />
       </animated.div>
 

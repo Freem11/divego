@@ -27,7 +27,7 @@ const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 export default function SecondTutorial(props) {
-  const { animateSecondGuideModal, setSecondGuideModalYCoord } = props;
+  const { animateSecondGuideModal, setSecondGuideModalYCoord, setDsAddermodal } = props;
 
   window.addEventListener("resize", trackDimensions);
 
@@ -135,6 +135,7 @@ export default function SecondTutorial(props) {
         setSecondGuideModalYCoord(0);
         handleClearTutorial();
         setTutorialRunning(false);
+        setDsAddermodal(false)
         break;
     }
   }, [chapter]);
