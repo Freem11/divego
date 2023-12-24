@@ -1,12 +1,30 @@
-import React from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { getAnimalNamesThatFit } from "../../supabaseCalls/photoSupabaseCalls";
 import InputBase from "@mui/material/InputBase";
 import AutoSuggestListItem from "./animalSuggestListItem";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "./autoSuggest.css";
+import { Iterrator3Context } from "../contexts/iterrator3Context";
+import { TutorialContext } from "../contexts/tutorialContext";
+
+let waiter;
 
 export default function AnimalAutoSuggest(props) {
   const { setPin, pin, setList, list, clearAnimal } = props;
+  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  
+  useEffect(() => {
+    clearTimeout(waiter);
+
+    if (tutorialRunning) {
+      if (itterator3 === 14) {
+        waiter = setTimeout(() => {
+          setItterator3(itterator3 + 1);
+        }, 2000);
+      }
+    }
+  }, [pin.Animal]);
 
   const handleChange = async (e) => {
     setPin({ ...pin, Animal: e.target.value });
@@ -36,16 +54,17 @@ export default function AnimalAutoSuggest(props) {
         inputProps={{
           style: {
             textAlign: "center",
-            fontFamily: "Indie Flower",
+            fontFamily: "Itim",
+            fontSize: 16,
             textOverflow: "ellipsis",
             backgroundColor: "transparent",
-            height: "10px",
+            height: "20px",
             color: "#F0EEEB",
-            width: "130px",
-            marginLeft: "0px",
-            paddingRight: "10px",
+            width: "260px",
+            marginLeft: "10px",
+            // paddingRight: "10px",
             paddingLeft: "0px",
-            paddingTop: "7px",
+            marginTop: "10px",
           },
         }}
       ></InputBase>
@@ -68,8 +87,8 @@ export default function AnimalAutoSuggest(props) {
           height: "auto",
           zIndex: "100",
           position: "absolute",
-          marginTop: "5px",
-          marginLeft: "-10px",
+          marginTop: "30px",
+          marginLeft: "50px",
         }}
       >
         {list.length > 0 &&

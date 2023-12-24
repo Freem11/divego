@@ -20,6 +20,7 @@ import {
   useEffect,
   useLayoutEffect,
 } from "react";
+import { animated, useSpring } from "react-spring";
 import PlacesAutoComplete from "./locationSearch/placesAutocomplete";
 import { CoordsContext } from "./contexts/mapCoordsContext";
 import { ZoomContext } from "./contexts/mapZoomContext";
@@ -37,15 +38,23 @@ import { LightBoxContext } from "./contexts/lightBoxContext";
 import { SelectedPicContext } from "./contexts/selectPicContext";
 import { HeatPointsContext } from "./contexts/heatPointsContext";
 import { MapBoundsContext } from "./contexts/mapBoundariesContext";
-import FormAnchorModal from "./modals/formAnchorModal";
-import AnchorPics from "./modals/anchorPics";
+import { ModalSelectContext } from "./contexts/modalSelectContext";
+import { DiveSpotContext } from "./contexts/diveSpotContext";
+import { AnchorModalContext } from "./contexts/anchorModalContext";
+import { IterratorContext } from "./contexts/iterratorContext";
+import { Iterrator2Context } from "./contexts/iterrator2Context";
+import { TutorialContext } from "./contexts/tutorialContext";
 import { newGPSBoundaries } from "../helpers/mapHelpers";
 import { formatHeatVals } from "../helpers/heatPointHelpers";
 import { setupClusters } from "../helpers/clusterHelpers";
 // import { diveSites } from "../axiosCalls/diveSiteAxiosCalls";
 import { diveSites } from "../supabaseCalls/diveSiteSupabaseCalls";
 // import { heatPoints } from "../axiosCalls/heatPointAxiosCalls";
-import { heatPoints, multiHeatPoints, picClickheatPoints } from "../supabaseCalls/heatPointSupabaseCalls";
+import {
+  heatPoints,
+  multiHeatPoints,
+  picClickheatPoints,
+} from "../supabaseCalls/heatPointSupabaseCalls";
 import Lightbox from "react-image-lightbox";
 import zIndex from "@mui/material/styles/zIndex";
 
@@ -64,6 +73,7 @@ export default function Home() {
 function Map() {
   const { masterSwitch } = useContext(MasterContext);
   const { pin, setPin } = useContext(PinContext);
+  const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const [pinRef, setPinRef] = useState(null);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
@@ -79,18 +89,21 @@ function Map() {
   );
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
+  const { itterator, setItterator } = useContext(IterratorContext);
+  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
 
   const [newSites, setnewSites] = useState([]);
-  // const [heatpts, setHeatPts] = useState(formatHeatVals([]));
+  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
   const [mapRef, setMapRef] = useState(null);
 
   const [selected, setSelected] = useState(null);
   const { dragPin, setDragPin } = useContext(PinSpotContext);
   const [tempMarker, setTempMarker] = useState(false);
-
-  const [siteModal, setSiteModal] = useState(false);
 
   const toggleSiteModal = () => {
     setSiteModal(!siteModal);
@@ -118,7 +131,6 @@ function Map() {
   }));
 
   const handleMapUpdates = async () => {
-
     let GPSBubble = newGPSBoundaries(mapZoom, mapCoords[0], mapCoords[1]);
 
     let filteredDiveSites = await diveSites(GPSBubble);
@@ -194,11 +206,13 @@ function Map() {
 
   useEffect(() => {
     if (mapRef) {
+      if (selectedDiveSite.SiteName !== "") {
       mapRef.panTo({
         lat: selectedDiveSite.Latitude,
         lng: selectedDiveSite.Longitude,
       });
       setMapZoom(16);
+    }
     }
     if (selectedDiveSite.Latitude !== "") {
       setTempMarker({
@@ -213,6 +227,12 @@ function Map() {
   }, [selectedDiveSite]);
 
   useEffect(async () => {
+    if (tutorialRunning && itterator === 7){
+      setMapZoom(8)
+    }
+    if (tutorialRunning && (itterator2 === 2 || itterator2 === 16)){
+      setMapZoom(8)
+    }
     handleMapUpdates();
   }, [mapCoords, divesTog, sliderVal, animalVal]);
 
@@ -230,12 +250,20 @@ function Map() {
   };
 
   const handleDragEnd = () => {
-    if (pinRef) {
-      setPin({
-        ...pin,
+    if (chosenModal === "DiveSite") {
+      setAddSiteVals({
+        ...addSiteVals,
         Latitude: pinRef.getPosition().lat(),
         Longitude: pinRef.getPosition().lng(),
       });
+    } else if (chosenModal === "Photos") {
+      if (pinRef) {
+        setPin({
+          ...pin,
+          Latitude: pinRef.getPosition().lat(),
+          Longitude: pinRef.getPosition().lng(),
+        });
+      }
     }
   };
 
@@ -260,26 +288,25 @@ function Map() {
       onBoundsChanged={handleBoundsChange}
       disableDefaultUI={true}
     >
-      {masterSwitch && (<div className="aligner">
-        <Collapse
-          in={showGeoCoder}
-          orientation="horizontal"
-          collapsedSize="0px"
-        >
-          <div className="places-container">
-            <PlacesAutoComplete setSelected={setSelected} />
-          </div>
-        </Collapse>
+      {masterSwitch && (
+        <div className="aligner">
+          <Collapse
+            in={showGeoCoder}
+            orientation="horizontal"
+            collapsedSize="0px"
+          >
+            <div className="places-container">
+              <PlacesAutoComplete setSelected={setSelected} />
+            </div>
+          </Collapse>
         </div>
       )}
 
       {clusters &&
         clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates;
-          const {
-            cluster: isCluster,
-            point_count: pointCount,
-          } = cluster.properties;
+          const { cluster: isCluster, point_count: pointCount } =
+            cluster.properties;
 
           if (isCluster) {
             return (
@@ -348,9 +375,7 @@ function Map() {
         ></Marker>
       )}
 
-      <FormAnchorModal openup={siteModal} closeup={toggleSiteModal}>
-        <AnchorPics closeup={toggleSiteModal} />
-      </FormAnchorModal>
+    
       {/* 
       {lightbox && (
         <div className="boxLight">

@@ -52,6 +52,8 @@ export const updateProfile = async (values) => {
     .update({ UserName: values.username })
     .eq("UserID", values.id);
 
+    console.log("supa sends",data, error)
+
   if (error) {
     console.log("couldn't do it,", error);
     return [];

@@ -10,6 +10,8 @@ import { diveSites } from "../../supabaseCalls/diveSiteSupabaseCalls";
 import { AnimalRevealContext } from "../contexts/animalRevealContext";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
+import { Iterrator2Context } from "../contexts/iterrator2Context";
+import { TutorialContext } from "../contexts/tutorialContext";
 
 export default function DiveSiteAutoComplete() {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
@@ -20,6 +22,9 @@ export default function DiveSiteAutoComplete() {
   const { setAnimalVal } = useContext(AnimalContext);
   const [list, setList] = useState([]);
 
+  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  
   let diveSiteNames;
 
   const handleDiveSiteList = async () => {
@@ -86,6 +91,11 @@ export default function DiveSiteAutoComplete() {
                     Latitude: site.lat,
                     Longitude: site.lng,
                   });
+                  if (tutorialRunning) {
+                    if (itterator2 === 5) {
+                      setItterator2(itterator2 + 1);
+                    }
+                  }
                   setShowAnimalSearch(!setShowAnimalSearch)
                 }
               });

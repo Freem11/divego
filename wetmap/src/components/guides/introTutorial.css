@@ -1,0 +1,359 @@
+.wrapper {
+    width: 100%;
+    height: 100%;
+    /* background: pink */
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    /* opacity: rgb(0,0,0,0.9); */
+  }
+
+  .character {
+    position: absolute;
+    top: 30vh; 
+    left: 100vw; 
+    height: 700px;
+    width: 700px;
+    opacity: rgb(0,0,0,1);
+    /* background-color: green */
+  }
+
+  .talkbox {
+    position: absolute;
+    top: 110vh;
+    left: 35%;
+    width: 60vh;
+    height: min-content;
+    font-family: Itim;
+    font-size: 24px;
+    background-color: white;
+    border-radius: 15px;
+    align-self: center;
+    padding:5px;
+    padding-bottom: 25px;
+  }
+
+  .textcontain {
+    font-family: Itim;
+    font-size: 24px;
+    height: min-content;
+    /* background-color: khaki; */
+  }
+
+  .tx2 {
+    margin-top: 15px;
+  }
+
+  .questionbuttonwrapper {
+    position: absolute;
+    top: -110vh;
+    left: 30%;
+    background-color: black;
+    border-radius: 50px;
+  }
+
+  .explorebuttonwrapper {
+    position: absolute;
+    top: -110vh;
+    left: 30%;
+    background-color: black;
+    border-radius: 50px;
+  }
+
+  .container3 {
+    /* flex: 1; */
+    position: absolute;
+    top: -180vh;
+    left: 6vw;
+    z-index: 10;
+    background-color: transparent;
+    align-items: center;
+    /* margin-top: -3%; */
+    height: min-content;
+    margin-right: 10px;
+    margin-left: 10px;
+    padding-bottom: 15px;
+    border-radius: 15;
+    /* background-color: green */
+  }
+
+  .picContainer3 {
+    width:  346px;
+    height: 200px;
+    margin-bottom: 5;
+    /* background-color: #538bdb; */
+    margin-top: 0%;
+    border-radius: 15;
+    z-index: 10;
+  }
+
+  .usernamerwrapper{
+    position: absolute;
+    top: 100vh;
+    left: 39%;
+    width:  350px;
+    height: 300px;
+    margin-bottom: 5px;
+    /* background-color: #538bdb; */
+    margin-top: 0%;
+    border-radius: 15px;
+    z-index: 10;
+  }
+
+  .shadowbox{
+    width:  350px;
+    height: 200px;
+  }
+
+  .userContainer {
+    position: absolute;
+    top: 20%;
+    background-color: transparent;
+    align-items: center;
+    /* margin-top: -3%; */
+    height: 90%;
+    margin-right: (10);
+    margin-left: (10);
+    border-radius: 15;
+    /* background-color: green */
+  }
+
+  .nextTutButton {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: -110vh;
+    left: 15%;
+    width: 270px;
+    height: 30px;
+    background-color: #538bdb;
+    align-items: center;
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 20px;
+    border-color: lightgrey;
+    border-width: 2px;
+    cursor: pointer;
+  }
+
+  .nextTutText {
+    color: white;
+    font-family: Itim;
+    font-size: 24px;
+    height: 30px;
+    margin: 10px;
+    cursor: pointer;
+  }
+ 
+  .micro {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    background-color: black;
+    opacity: 0.6;
+    width: 96%;
+    border-radius: 5;
+    z-index: 2;
+    left: 5%;
+    top: -3%;
+  }
+
+  .titleTextX {
+    margin-top: 8px;
+    margin-left: 10px;
+    font-family: 'Itim';
+    color: #F0EEEB;
+    font-size: 18px;
+    /* margin-left: 2%; */
+  }
+
+  
+
+  .anchorclusterwrapper {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    top: -160vh;
+    left: 10%;
+    height: 500px;
+    width: 500px;
+    opacity: 1;
+    /* background-color: khaki; */
+  }
+
+  .anchorclust {
+    margin-top: 40%;
+  }
+
+  .anchor1 {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    top: 0px;
+    left: 350px;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    margin-bottom: 15;
+  }
+
+  .anchor2 {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    top: 0px;
+    left: 50px;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    margin-bottom: 15;
+  }
+
+  .anchor3 {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    top: 400px;
+    left: 50px;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    margin-bottom: 15;
+  }
+
+  .anchor4 {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    top: 400px;
+    left: 350px;
+    height: 45;
+    width: 45;
+    opacity: 1;
+    margin-bottom: 15;
+  }
+
+  .anchorSpec {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    top: -10;
+    height: 25;
+    width: 25;
+    opacity: 1;
+    margin-top: -25;
+  }
+
+  .heatpointwrapper {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+    position: absolute;
+    top: -130vh;
+    left: 50%;
+  }
+
+  .arrowWrapper {
+    flex: 1;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50;
+    position: absolute;
+    top: -170vh;
+    left:  5%;
+    height: 20vh;
+    width: 20vh;
+    opacity: 1;
+  }
+
+  .honkCon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25;
+    width: 25;
+    border-radius: 10;
+    /* background-color: blue; */
+  }
+
+  .tinyHeat{
+    /* position: absolute;
+    top: 38%;
+    left: 85%; */
+    height: 25px;
+    width: 25px;
+    border-radius: 10;
+    /* background-color: blue; */
+  }
+
+  .tinyHeat2{
+    position: absolute;
+    top: 38%;
+    left: 77%;
+    height: 25px;
+    width: 25px;
+    border-radius: 10;
+    margin-bottom: 5px;
+    /* background-color: blue; */
+  }
+
+  .guidebutton {
+    position: absolute;
+    top: -130vh;
+    left: 30%;
+    height: 6vh;
+    width: 14vh;
+    border-radius: 20px;
+    animation: changeBg 4s linear infinite;
+    border-radius: 15;
+   
+  }
+
+  @keyframes changeBg {
+    0% {
+      background-color: maroon;
+    }
+    40% {
+      background-color: maroon;
+    }
+    50% {
+      background-color: #C49102;
+    }
+    90% {
+      background-color: #C49102;
+    }
+    100% {
+      background-color: maroon;
+    }
+  }
+
+  .guidetext {
+    color: black;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 20px;
+    margin-top: 12px;
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+
+

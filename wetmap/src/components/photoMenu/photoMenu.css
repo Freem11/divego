@@ -29,7 +29,6 @@
 .pictureBoxA {
   width: 193px;
   margin-top: -20px;
-  z-index: 0;
 }
 
 .alice-carousel__dots {
@@ -57,10 +56,12 @@
 
 .animalLabelArea {
   padding-top: 5px;
+  padding-bottom: 5px;
   border: grey 1px solid;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  font-family: "Indie Flower";
+  font-family: "Itim";
+  font-size: 15px;
 }
 
 .animalLabelAreaSelected {
@@ -80,7 +81,7 @@
   justify-items: center;
   align-items: center;
   color: white;
-  font-family: "Indie Flower";
+  font-family: "Patrick Hand";
   font-size: calc(10px + 1vw);
   margin-top: -50px;
 
@@ -93,8 +94,9 @@
   align-items: center;
   height: 160px;
   /* background-color: pink; */
-  overflow: hidden;
-}
+  z-index: 0;
+  /* overflow: hidden; */
+} 
 
 .masterDivX:hover .backTog{
   opacity: 1;
@@ -106,7 +108,7 @@
 }
 
 .picScollX {
-  position: relative;
+  /* position: relative; */
   display: flex;
   align-items: center;
   justify-items: center;
@@ -124,9 +126,9 @@
   align-items: center;
   justify-items: center;
   flex-direction: row;
-  height: 160px;
-  overflow: hidden;
+  height:160px;
+  overflow-x: clip;
   /* background-color: purple; */
   opacity: 1;
-  z-index: 2;
+  z-index: 50;
 }

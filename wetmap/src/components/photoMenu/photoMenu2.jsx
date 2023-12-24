@@ -4,6 +4,9 @@ import { multiHeatPoints } from "../../supabaseCalls/heatPointSupabaseCalls";
 import { getPhotosforMapArea } from "../../supabaseCalls/photoSupabaseCalls";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { HeatPointsContext } from "../contexts/heatPointsContext";
+import { IterratorContext } from "../contexts/iterratorContext";
+import { TutorialContext } from "../contexts/tutorialContext";
+import { AnchorModalContext } from "../contexts/anchorModalContext";
 import "photoswipe/dist/photoswipe.css";
 import { formatHeatVals } from "../../helpers/heatPointHelpers";
 import "./photoMenu.css";
@@ -15,11 +18,19 @@ import { animated, useSpring } from "react-spring";
 import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
+let waiter2;
+
 const PhotoMenu = () => {
   const { animalVal, setAnimalVal } = useContext(AnimalContext);
   const { boundaries } = useContext(MapBoundsContext);
   const { setHeatPts } = useContext(HeatPointsContext);
   const [areaPics, setAreaPics] = useState([]);
+
+  const [selectedID, setSelectedID] = useState(null);
+
+  const { itterator, setItterator } = useContext(IterratorContext);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
 
   const filterPhotosForMapArea = async () => {
     if (boundaries) {
@@ -102,6 +113,17 @@ const PhotoMenu = () => {
   }, []);
 
   useEffect(() => {
+      clearTimeout(waiter2);
+  
+      if (tutorialRunning) {
+        if (itterator === 19) {
+          waiter2 = setTimeout(() => {
+            setItterator(itterator + 2);
+            setSiteModal(true)
+          }, 2000);
+        }
+      }
+  
     filterHeatPointsForMapArea();
   }, [animalVal]);
 
@@ -199,10 +221,11 @@ const PhotoMenu = () => {
         sx={toggleButtonStyle}
         ref={leftButtonRef}
         onClick={() => onClicko("shiftLeft")}
+        value="web"
       >
         <ArrowBackIosIcon />
       </ToggleButton>
-      <div className="picScollY" style={{ width: caddyWidth }} ref={wrapperRef}>
+      <div className="picScollY" style={{ width: caddyWidth }} ref={wrapperRef} value="web">
         <animated.div
           className="picScollX"
           style={({ width: caddyWidth }, move)}
@@ -218,6 +241,8 @@ const PhotoMenu = () => {
                   photoURL={pic.photoFile}
                   setAnimalVal={setAnimalVal}
                   animalVal={animalVal}
+                  setSelectedID={setSelectedID}
+                  selectedID={selectedID}
                 />
               );
             })}
@@ -225,13 +250,14 @@ const PhotoMenu = () => {
       </div>
       {areaPics.length === 0 && (
             <div className="emptyPhotos">
-              No Sea Creatures have been added for this area yet.
+              No Sea Creatures have been added for this area yet
             </div>
           )}
       <ToggleButton
         className="backTog"
         sx={toggleButtonStyle}
         ref={rightButtonRef}
+        value="web"
         onClick={() => onClicko("shiftRight")}
       >
         <ArrowForwardIosIcon />

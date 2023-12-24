@@ -14,6 +14,56 @@
     background-color: lightpink;
 }
 
+.picModalDiv{
+    z-index: 200;
+    position: absolute;
+    top: 120vh;
+    left: 35%;
+    width: 500px;
+    height: 700px;
+    background-color: #538bdb;
+    border-radius: 25px;
+}
+
+.guideModalDiv {
+    z-index: 210;
+    position: absolute;
+    top: 100vh;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(transparent,rgb(83, 139, 219, 0.9));
+}
+
+.guideModalDiv2 {
+    z-index: 210;
+    position: absolute;
+    top: 100vh;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(transparent,rgb(83, 139, 219, 0.9));
+}
+
+.guideModalDiv3 {
+    z-index: 210;
+    position: absolute;
+    top: 100vh;
+    width: 100vw;
+    height: 100%;
+    background: linear-gradient(transparent,rgb(83, 139, 219, 0.9));
+}
+
+.anchorModalDiv{
+    z-index: 200;
+    position: absolute;
+    top: 120vh;
+    left: 35%;
+    min-width: 500px;
+    width: 33vw;
+    height: 700px;
+    background-color: #538bdb;
+    border-radius: 25px;
+}
+
 .col2rowT {
 	display: flex;
 	flex-direction: column;
@@ -177,6 +227,23 @@
 	/* width: 55vw; */
 }
 
+.tutbarContainer {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    pointer-events: none;
+    /* background-color: maroon; */
+    height: 100px;
+    width: 300px;
+    z-index: 300;
+}
+
+.tutorialBar {
+    width: 100%;
+    height: 100%;
+    /* background-color: pink; */
+  }
+
 
 @media only screen and (max-width: 500px) {
 
@@ -207,4 +274,5 @@
         margin-left: clamp(10px, 22vw, 2000px);
         width: 75vw;
     }
+
 }

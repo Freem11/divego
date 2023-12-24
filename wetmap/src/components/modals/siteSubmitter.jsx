@@ -4,13 +4,19 @@ import "./siteSubmitter.css";
 import exifr from "exifr";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
-import PhotoIcon from "@mui/icons-material/Photo";
+import MyLocationIcon from "@mui/icons-material/MyLocation";
+import PlaceIcon from "@mui/icons-material/Place";
+import CloseIcon from "@mui/icons-material/Close";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
 import Collapse from "@mui/material/Collapse";
 import { insertDiveSiteWaits } from "../../supabaseCalls/diveSiteWaitSupabaseCalls";
 import { userCheck } from "../../supabaseCalls/authenticateSupabaseCalls";
 import { DiveSpotContext } from "../contexts/diveSpotContext";
+import { MasterContext } from "../contexts/masterContext";
+import { ModalSelectContext } from "../contexts/modalSelectContext";
+import { Iterrator2Context } from "../contexts/iterrator2Context";
+import { TutorialContext } from "../contexts/tutorialContext";
 
 const noGPSZone = (
   <div
@@ -30,9 +36,13 @@ const noGPSZone = (
 );
 
 const SiteSubmitter = (props) => {
-  const { closeup } = props;
+  const { animateSiteModal, setSiteModalYCoord } = props;
   const [showNoGPS, setShowNoGPS] = useState(false);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
+  const { setMasterSwitch } = useContext(MasterContext);
+  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -81,6 +91,12 @@ const SiteSubmitter = (props) => {
         },
         { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
       );
+      if (tutorialRunning) {
+        if (itterator2 === 13) {
+          setItterator2(itterator2 + 1);
+          setLocButState(false);
+        }
+      }
     } else {
       console.log("unsupported");
     }
@@ -91,6 +107,122 @@ const SiteSubmitter = (props) => {
     return;
   };
 
+  const handleNoGPSCloseOnMapChange = () => {
+    setChosenModal("DiveSite");
+    setShowNoGPS(false);
+    setMasterSwitch(false);
+    animateSiteModal();
+
+    if (tutorialRunning) {
+      if (itterator2 === 16) {
+        setItterator2(itterator2 + 1);
+        setPinButState(false);
+      }
+    }
+  };
+
+  let counter1 = 0;
+  let counter2 = 0;
+  let blinker1;
+  let blinker2;
+  let timer2;
+
+  const [locButState, setLocButState] = useState(false);
+  const [pinButState, setPinButState] = useState(false);
+  const [siteNameState, setSiteNameState] = useState(false);
+  const [subButState, setSubButState] = useState(false);
+
+  function locationBut() {
+    counter1++;
+    if (counter1 % 2 == 0) {
+      setLocButState(false);
+    } else {
+      setLocButState(true);
+    }
+  }
+
+  function pinBut() {
+    counter1++;
+    if (counter1 % 2 == 0) {
+      setPinButState(false);
+    } else {
+      setPinButState(true);
+    }
+  }
+
+  function siteField() {
+    counter1++;
+    if (counter1 % 2 == 0) {
+      setSiteNameState(false);
+    } else {
+      setSiteNameState(true);
+    }
+  }
+
+  function subButTimeout() {
+    blinker2 = setInterval(subBut, 1000);
+  }
+
+  function subBut() {
+    counter2++;
+    if (counter2 % 2 == 0) {
+      setSubButState(false);
+    } else {
+      setSubButState(true);
+    }
+  }
+
+  function cleanUp() {
+    clearInterval(blinker1);
+    clearInterval(blinker2);
+    setLocButState(false);
+    setPinButState(false);
+    setSiteNameState(false)
+    setSubButState(false);
+  }
+
+  useEffect(() => {
+    if (tutorialRunning) {
+      if (itterator2 === 16) {
+        blinker1 = setInterval(pinBut, 600);
+      } else if (itterator2 === 13) {
+        blinker1 = setInterval(locationBut, 1000);
+      } else if(itterator2 === 15 || itterator2 == 10) {
+        setSiteModalYCoord(-950)
+      } else if (itterator2 ===8 || itterator2 === 1) {
+        setSiteModalYCoord(0)
+      } else if (itterator2 === 23) { 
+        blinker1 = setInterval(siteField, 1000);
+        timer2 = setTimeout(subButTimeout, 300);
+      } else if (itterator2 === 26) {
+        setAddSiteVals({
+          ...addSiteVals,
+          Site: "",
+          Latitude: "",
+          Longitude: "",
+        });
+        animateSiteModal()
+      }
+    }
+    return () => cleanUp();
+  }, [itterator2]);
+
+  const buttonColor = {
+    color: "gold",
+    height: "28px",
+    width: "28px",
+    cursor: "pointer",
+    marginTop: "4px",
+  };
+
+  const buttonColorAlt = {
+    color: "#538bdb",
+    height: "28px",
+    width: "28px",
+    cursor: "pointer",
+    marginTop: "4px",
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -98,7 +230,12 @@ const SiteSubmitter = (props) => {
     let LatV = parseFloat(addSiteVals.Latitude);
     let LngV = parseFloat(addSiteVals.Longitude);
 
-    if (
+
+    if (tutorialRunning) {
+      if (itterator2 ===23)  {
+        setItterator2(itterator2 + 1);
+      }
+    } else if (
       SiteV &&
       typeof SiteV === "string" &&
       LatV &&
@@ -107,12 +244,8 @@ const SiteSubmitter = (props) => {
       typeof LngV === "number"
     ) {
       insertDiveSiteWaits(addSiteVals);
-      setAddSiteVals({...addSiteVals,
-        Site: "",
-        Latitude: "",
-        Longitude: "",
-      })
-      closeup();
+      setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
+      animateSiteModal();
       return;
     }
   };
@@ -121,178 +254,172 @@ const SiteSubmitter = (props) => {
     document.getElementById("file").click();
   }
 
+  const handleModalClose = () => {
+    setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
+    animateSiteModal();
+  };
+
+  const inputStyle = {
+    textAlign: "center",
+    fontFamily: "Itim",
+    fontSize: 18,
+    textOverflow: "ellipsis",
+    backgroundColor: "#538bdb",
+    height: "35px",
+    width: "232px",
+    color: "#F0EEEB",
+    borderRadius: "20px",
+    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+  };
+
+  const inputStyleAlt = {
+    textAlign: "center",
+    fontFamily: "Itim",
+    fontSize: 18,
+    textOverflow: "ellipsis",
+    backgroundColor: "pink",
+    height: "35px",
+    width: "232px",
+    color: "black",
+    borderRadius: "20px",
+    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+  };
+
+
   return (
     <Container fluid>
       <Form onSubmit={handleSubmit}>
         <div className="modalTitle3">
-          <Label>
+          <Label style={{ marginTop: 3, marginRight: 125, width: "200%" }}>
             <strong>Submit Your Dive Site</strong>
           </Label>
-        </div>
-
-        <div className="uploadbox">
-          <div onClick={handleClick} className="fileSelectDiv">
-            <div style={{ marginRight: 5, marginTop: -2 }}>
-              <PhotoIcon
-                sx={{
-                  color: "gold",
-                  height: "28px",
-                  width: "28px",
-                  cursor: "pointer",
-                  marginTop: "5px",
-                  marginLeft: "10px",
-                }}
-              ></PhotoIcon>
-            </div>
-
-            <Label
+          <FormGroup>
+            <Button
+              variant="text"
+              id="closeButton"
+              onClick={() => handleModalClose()}
               style={{
-                fontFamily: "Bubblegum Sans, cursive",
-                color: "gold",
-                cursor: "pointer",
-                marginTop: "7px",
-                marginLeft:  "-5px",
-                fontSize: "18px"
+                display: "flex",
+                flexDirection: "column",
+                marginRight: 10,
+                marginTop: 2,
               }}
             >
-              Choose a File
-            </Label>
+              <CloseIcon
+                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+              ></CloseIcon>
+            </Button>
+          </FormGroup>
+        </div>
+
+        <div className="lowerBoxSite">
+          <div className="inputbox">
+            <FormGroup>
+              <InputBase
+                id="standard-basic"
+                placeholder="Site Name"
+                type="text"
+                name="Site"
+                value={addSiteVals.Site}
+                onChange={handleChange}
+                onClick={handleNoGPSClose}
+                inputProps={{
+                  style: siteNameState ? inputStyleAlt : inputStyle,
+                }}
+              />
+            </FormGroup>
           </div>
-          <FormGroup>
-            <Input
-              placeholder="Upload"
-              className="modalInputs2"
-              style={{
-                textAlign: "center",
-                fontFamily: "Indie Flower",
-                display: "none",
-              }}
-              id="file"
-              type="file"
-              name="PicFile"
-              bsSize="lg"
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-            ></Input>
-          </FormGroup>
+
+          <div className="inputbox">
+            <FormGroup>
+              <InputBase
+                id="standard-basic"
+                placeholder="Latitude"
+                type="decimal"
+                name="Latitude"
+                value={addSiteVals.Latitude}
+                onChange={handleChange}
+                onClick={handleNoGPSClose}
+                inputProps={{
+                  style: {
+                    textAlign: "center",
+                    fontFamily: "Itim",
+                    fontSize: 18,
+                    textOverflow: "ellipsis",
+                    backgroundColor: "#538BDB",
+                    height: "35px",
+                    width: "232px",
+                    color: "#F0EEEB",
+                    borderRadius: "20px",
+                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                  },
+                }}
+              />
+            </FormGroup>
+          </div>
+
+          <div className="inputbox">
+            <FormGroup>
+              <InputBase
+                id="standard-basic"
+                placeholder="Longitude"
+                type="decimal"
+                name="Longitude"
+                value={addSiteVals.Longitude}
+                onChange={handleChange}
+                onClick={handleNoGPSClose}
+                inputProps={{
+                  style: {
+                    textAlign: "center",
+                    fontFamily: "Itim",
+                    fontSize: 18,
+                    textOverflow: "ellipsis",
+                    backgroundColor: "#538bdb",
+                    height: "35px",
+                    width: "232px",
+                    color: "#F0EEEB",
+                    borderRadius: "120px",
+                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                  },
+                }}
+              />
+            </FormGroup>
+          </div>
         </div>
 
-        <div className="inputbox">
+        <div className="buttonBox">
           <FormGroup>
-            <InputBase
-              id="standard-basic"
-              placeholder="Site Name"
-              type="text"
-              name="Site"
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-              inputProps={{
-                style: {
-                  textAlign: "center",
-                  fontFamily: "Indie Flower",
-                  textOverflow: "ellipsis",
-                  backgroundColor: "#538bdb",
-                  height: "25px",
-                  color: "#F0EEEB",
-                  width: "170px",
-                  borderRadius: "10px",
-                  boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)"
-                },
-              }}
-            />
+            <div
+              onClick={handleDiveSiteGPS}
+              className={locButState ? "GPSbuttonAlt" : "GPSbutton"}
+            >
+              <div>
+                <MyLocationIcon
+                  sx={locButState ? buttonColorAlt : buttonColor}
+                ></MyLocationIcon>
+              </div>
+            </div>
           </FormGroup>
-        </div>
 
-        <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
-          {noGPSZone}
-        </Collapse>
-
-        <div className="inputbox" >
           <FormGroup>
-            <InputBase
-              id="standard-basic"
-              placeholder="Latitude"
-              type="decimal"
-              name="Latitude"
-              value={addSiteVals.Latitude}
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-              inputProps={{
-                style: {
-                  textAlign: "center",
-                  fontFamily: "Indie Flower",
-                  textOverflow: "ellipsis",
-                  backgroundColor: "#538BDB",
-                  height: "25px",
-                  color: "#F0EEEB",
-                  width: "170px",
-                  borderRadius: "10px",
-                  boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)"
-                }
-              }}
-            />
-          </FormGroup>
-        </div>
-
-        <div className="inputbox">
-          <FormGroup>
-            <InputBase
-              id="standard-basic"
-              placeholder="Longitude"
-              type="decimal"
-              name="Longitude"
-              value={addSiteVals.Longitude}
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-              inputProps={{
-                style: {
-                  textAlign: "center",
-                  fontFamily: "Indie Flower",
-                  textOverflow: "ellipsis",
-                  backgroundColor: "#538bdb",
-                  height: "25px",
-                  color: "#F0EEEB",
-                  width: "170px",
-                  borderRadius: "10px",
-                  boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)"
-                },
-              }}
-            />
+            <div
+              onClick={handleNoGPSCloseOnMapChange}
+              className={pinButState ? "pinButtonDalt" : "pinButtonD"}
+            >
+              <PlaceIcon
+                sx={pinButState ? buttonColorAlt : buttonColor}
+              ></PlaceIcon>
+            </div>
           </FormGroup>
         </div>
 
         <FormGroup>
-          <div onClick={handleDiveSiteGPS} className="GPSbutton">
-            <div style={{ marginLeft: 3, marginRight: 2, marginTop: -2 }}>
-              <MapOutlinedIcon
-                sx={{
-                  color: "gold",
-                  height: "28px",
-                  width: "28px",
-                  cursor: "pointer",
-                  marginTop: "2.5px",
-                  marginLeft: "5px",
-                }}
-              ></MapOutlinedIcon>
-            </div>
-
-            <Label
-              style={{
-                fontFamily: "Bubblegum Sans, cursive",
-                color: "gold",
-                cursor: "pointer",
-                marginTop: "7px",
-                marginRight: "5px",
-                fontSize: "15px"
-              }}
-            >
-              I'm At The Dive Site
-            </Label>
-          </div>
-        </FormGroup>
-
-        <FormGroup>
-          <Button variant="text" id="modalButton2" onClick={handleSubmit}>
+          <Button
+            variant="text"
+            id="modalButtonDiv"
+            style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
+            onClick={handleSubmit}
+          >
             Submit Dive Site
           </Button>
         </FormGroup>

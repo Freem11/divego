@@ -1,32 +1,46 @@
+import { Container, Form, FormGroup, Label, Button } from "reactstrap";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { SliderContext } from "../contexts/sliderContext";
 import { AnimalContext } from "../contexts/animalContext";
+import { AnchorModalContext } from "../contexts/anchorModalContext";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
+import { IterratorContext } from "../contexts/iterratorContext";
+import { TutorialContext } from "../contexts/tutorialContext"
+import { ReverseContext } from "../contexts/reverseContext";;
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
-import { getPhotosforAnchor } from "../../supabaseCalls/photoSupabaseCalls";
+import { getPhotosforAnchor, getPhotosforAnchorMulti } from "../../supabaseCalls/photoSupabaseCalls";
 import "photoswipe/dist/photoswipe.css";
+import Picture from "./picture";
 import FlagIcon from "@mui/icons-material/Flag";
+import CloseIcon from "@mui/icons-material/Close";
 import { Gallery, Item } from "react-photoswipe-gallery";
 import "./anchorPics.css";
+import { animated } from "react-spring";
 
-const AnchorPics = () => {
-  const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
+const AnchorPics = (props) => {
+  const { animateAnchorModal, setAnchorModalYCoord } = props;
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { sliderVal } = useContext(SliderContext);
   const { animalVal } = useContext(AnimalContext);
   const { boundaries } = useContext(MapBoundsContext);
   const [monthVal, setMonthVal] = useState("");
   const [anchorPics, setAnchorPics] = useState([]);
 
+  const { itterator, setItterator } = useContext(IterratorContext);
+  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { movingBack, setMovingBack } = useContext(ReverseContext);
+
   const filterAnchorPhotos = async () => {
-    
+
       let { minLat, maxLat, minLng, maxLng } = siteGPSBoundaries(
         selectedDiveSite.Latitude,
         selectedDiveSite.Longitude
       );
 
     try {
-      const photos = await getPhotosforAnchor({
+      const photos = await getPhotosforAnchorMulti({
         animalVal,
         minLat: minLat,
         maxLat: maxLat,
@@ -35,6 +49,15 @@ const AnchorPics = () => {
       });
       if (photos) {
         setAnchorPics(photos);
+
+        if (tutorialRunning && itterator === 11 && siteModal){
+          if (photos.length === 0){
+            setItterator(itterator + 1)
+          } else {
+            setItterator(itterator + 3)
+          }
+        } 
+
       }
     } catch (e) {
       console.log({ title: "Error", message: e.message });
@@ -83,68 +106,80 @@ const AnchorPics = () => {
   }, [sliderVal]);
 
   useEffect(() => {
-    filterAnchorPhotos();
+    if(selectedDiveSite.SiteName !== ""){
+      filterAnchorPhotos();
+    }   
   }, []);
 
+
   useEffect(() => {
-    filterAnchorPhotos();
+    if(selectedDiveSite.SiteName !== ""){
+      filterAnchorPhotos();
+    }
+  }, [siteModal]);
+
+
+  useEffect(() => {
+    if(selectedDiveSite.SiteName !== ""){
+      filterAnchorPhotos();
+    }
   }, [selectedDiveSite]);
 
+  useEffect(() => {
+    if(itterator === 25){
+      animateAnchorModal()
+    }
+  }, [itterator]);
+
+  const handleClose = async () => {
+
+    if (tutorialRunning && itterator === 16){
+      setItterator(itterator + 1)
+    }
+   setSiteModal(false)
+  //  setSelectedDiveSite({
+  //   SiteName: "",
+  //   Latitude: "",
+  //   Longitude: "",
+  // })
+   animateAnchorModal()
+};
   
   return (
     <div className="masterDivA">
+      <div className="fixerDiv">
+      <div className="fixDiv">
       <div className="topDiv">
-      <h3 className="DiveSiteLabel">{selectedDiveSite.SiteName}</h3>
       <div className="flagContainer">
       <a
         className="atagDS"
         href={`mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20Dive%20Site:%20"${selectedDiveSite.SiteName}"%20at%20Latitude:%20${selectedDiveSite.Latitude}%20Longitude:%20${selectedDiveSite.Longitude}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Dive%20site%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20dive%20site%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Dive%20site%20GPS%20coordinates%20are%20not%20correct%0D%0A%0D%0A(Please%20provide%20a%20correct%20latitude%20and%20longitude%20and%20we%20will%20update%20the%20record)`}
       >
-        <FlagIcon sx={{ color: "red" }} />
+        <FlagIcon sx={{ color: "red", height: 35, width: 35, marginTop: 0.4 }} />
       </a>
+      </div>
+      <h3 className="DiveSiteLabel">{selectedDiveSite.SiteName}</h3>
+      <FormGroup>
+            <Button
+              variant="text"
+              id="closeButton2"
+              onClick={() => handleClose()}
+              style={{ position: "absolute", right: 5, top: 0, backgroundColor: "transparent", border: "none"}}
+            >
+              <CloseIcon
+                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+              ></CloseIcon>
+            </Button>
+          </FormGroup>
+      </div>
       </div>
       </div>
       <div className="picScollA">
         {anchorPics &&
           anchorPics.map((pic) => {
             return (
-              <div key={pic.id} className="pictureBox">
-                <div className="micro">
-                  <a
-                    className="atag"
-                    href={`mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20picture:%20"${pic.label}"%20${pic.photoFile}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Animal%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20animal%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Copy%20write%20image%20claim%0D%0A%0D%0A(Please%20provide%20proof%20that%20you%20own%20the%20submitted%20photo%20and%20we%20will%20remove%20it%20as%20you%20have%20requested)`}
-                  >
-                    <FlagIcon sx={{ color: "red", marginBottom: "-28px" }} />
-                  </a>
-                  <h4 className="animalLabel">{pic.label}</h4>
-                </div>
-                <Gallery>
-                  {/* <div> */}
-                    <Item
-                      original={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photoFile}`}
-                      thumbnail={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photoFile}`}
-                      width= "700"
-                      height= "550"
-                      style={{ borderRadius: 10}}
-                    >
-                      {({ ref, open }) => (
-                        <img
-                          style={{
-                            width: "384px",
-                            height: "216px",
-                            margin: "3px",
-                            borderRadius: "10px",
-                            objectFit: "cover"
-                          }}
-                          ref={ref}
-                          onClick={open}
-                          src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photoFile}`}
-                        />
-                      )}
-                    </Item>
-                  {/* </div> */}
-                </Gallery>
-              </div>
+              <Picture key={pic.id} pic={pic}></Picture>
+              
             );
           })}
         {anchorPics.length === 0 && (
@@ -153,6 +188,7 @@ const AnchorPics = () => {
           </div>
         )}
       </div>
+      
     </div>
   );
 };

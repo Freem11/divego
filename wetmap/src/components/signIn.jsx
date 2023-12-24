@@ -311,7 +311,7 @@ export default function SignInRoute() {
 
         {loginFail && <Label className="erroMsg">{loginFail}</Label>}
       </Form>
-      <div className="wrapper">
+      <div className="authwrapper">
         <div className="signButton" onClick={handleSignInSubmit}>
           Sign In
         </div>

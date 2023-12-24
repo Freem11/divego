@@ -1,0 +1,114 @@
+
+  .wrapper2 {
+    width: 100%;
+    height: 100%;
+    /* background: pink */
+  }
+
+  .container {
+    width: 100%;
+    height: 100%;
+    /* opacity: rgb(0,0,0,0.9; */
+  }
+
+  .character2 {
+    position: absolute;
+    top: 30vh; 
+    left: 100vw; 
+    height: 700px;
+    width: 700px;
+    opacity: rgb(0,0,0,1);
+    /* background-color: green */
+  }
+
+  .talkbox2 {
+    position: absolute;
+    top: 110vh;
+    left: 35%;
+    width: 60vh;
+    height: min-content;
+    font-family: Itim;
+    font-size: 24px;
+    background-color: white;
+    border-radius: 15px;
+    align-self: center;
+    padding:5px;
+    padding-bottom: 25px;
+  }
+
+  .textContain {
+    padding: 10;
+    font-family: Itim;
+    font-size: 14px;
+  }
+
+  .dsSearchbuttonwrapper {
+    position: absolute;
+    top: -110vh;
+    left: 30%;
+    background-color: black;
+    border-radius: 50px;
+  }
+
+  .dsAddbuttonwrapper {
+    position: absolute;
+    top: -110vh;
+    left: 30%;
+    width: 10vh;
+    height: 10vh;
+    background-color: black;
+    border-radius: 50px;
+  }
+
+  .myLocationbuttonwrapper {
+    position: absolute;
+    top: -110vh;
+    left: 30%;
+    background-color: black;
+    border-radius: 50px;
+  }
+
+  .pinbuttonwrapper {
+    position: absolute;
+    top: -110vh;
+    left: 30%;
+    background-color: black;
+    border-radius: 50px;
+  }
+
+  .mantaWrapper {
+    position: absolute;
+    top: -110vh;
+    left: 30%;
+  }
+
+  .nextTutButton2 {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    top: -110vh;
+    left: 15%;
+    width: 210px;
+    height: 30px;
+    background-color: #538bdb;
+    align-items: center;
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 20px;
+    border-color: lightgrey;
+    border-width: 2px;
+    cursor: pointer;
+  }
+
+  .nextTutText2 {
+    color: white;
+    font-family: Itim;
+    font-size: 24px;
+    height: 30px;
+    margin: 10px;
+    cursor: pointer;
+  }
