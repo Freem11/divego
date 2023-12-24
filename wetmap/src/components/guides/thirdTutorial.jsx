@@ -70,20 +70,9 @@ export default function ThirdTutorial(props) {
   useEffect(() => {
     if (tutorialReset) {
       setItterator3(null);
-      // setPicAdderModal(false);
       setTutorialRunning(false);
       setThirdGuideModal(false);
-      setMasterSwitch(true);
-      // setUploadedFile(null);
-      // setPinValues({
-      //   ...pinValues,
-      //   PicFile: null,
-      //   Animal: "",
-      //   PicDate: "",
-      //   Latitude: "",
-      //   Longitude: "",
-      //   DDVal: "0",
-      // });
+      setTutorialReset(false);
       resetTutorial();
       setChapter(null);
     }
@@ -96,59 +85,74 @@ export default function ThirdTutorial(props) {
     switch (chapter) {
       case "Contributing photos overview":
         setItterator3(3);
-        setPicAdderModal(false);
+        setThirdGuideModalYCoord(-windowHeight)
         setThirdGuideModal(true);
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-        textBoxY.value = withTiming(windowHeight * 0.77);
-        setUploadedFile(null);
-        setPinValues({
-          ...pinValues,
-          PicFile: null,
-          Animal: "",
-          PicDate: "",
-          Latitude: "",
-          Longitude: "",
-          DDVal: "0",
-        });
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeight * 0.35);
+        }, 300);
+        // setUploadedFile(null);
+        // setPinValues({
+        //   ...pinValues,
+        //   PicFile: null,
+        //   Animal: "",
+        //   PicDate: "",
+        //   Latitude: "",
+        //   Longitude: "",
+        //   DDVal: "0",
+        // });
         break;
 
       case "Adding your photo":
         setItterator3(6);
+        setThirdGuideModalYCoord(-windowHeight)
         setThirdGuideModal(true);
         setTutorialRunning(true);
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-        textBoxY.value = withTiming(windowHeight * 0.77);
-        setPicAdderModal(true);
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeight * 0.35);
+        }, 300);
+        // setPicAdderModal(true);
         break;
 
       case "Name that sea creature!":
         setItterator3(12);
+        setThirdGuideModalYCoord(-windowHeight)
         setThirdGuideModal(true);
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-        textBoxY.value = withTiming(windowHeight * 0.77);
-        setPicAdderModal(true);
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeight * 0.35);
+        }, 300);
+        // setPicAdderModal(true);
         break;
 
       case "Dropping the pin":
         setItterator3(15);
+        setThirdGuideModalYCoord(-windowHeight)
         setThirdGuideModal(true);
-        characterX.value = withTiming(
-          Platform.OS === "ios" ? windowWidth * 0.2 : windowWidth * 0.26
-        );
-        textBoxY.value = withTiming(windowHeight * 0.77);
-        setPicAdderModal(true);
+        setTimeout(() => {
+          setCharacterX(-windowWidth * 0.35);
+        }, 100);
+        setTimeout(() => {
+          setTextBoxY(-windowHeight * 0.35);
+        }, 300);
+        // setPicAdderModal(true);
         break;
 
       case "Exit Guide":
+        setThirdGuideModalYCoord(0);
         handleClearTutorial();
+        setTutorialRunning(false);
+        // setDsAddermodal(false)
         break;
     }
+    setChapter(null)
   }, [chapter]);
 
   const handleClearTutorial = async () => {
@@ -438,7 +442,6 @@ export default function ThirdTutorial(props) {
       animateThirdGuideModal()
     }
 
-    console.log("threethrrethree", itterator3); 
     if (itterator3 === 26) {
       // setPinValues({
       //   ...pinValues,

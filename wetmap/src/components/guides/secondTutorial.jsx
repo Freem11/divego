@@ -142,6 +142,7 @@ export default function SecondTutorial(props) {
         setDsAddermodal(false)
         break;
     }
+    setChapter(null)
   }, [chapter]);
 
   const handleClearTutorial = async () => {
@@ -162,7 +163,6 @@ export default function SecondTutorial(props) {
   };
 
   const resetTutorial = async () => {
-    setItterator2(null);
     setCharacterX(0);
     setTextBoxY(0);
     setDsSearchY(0);

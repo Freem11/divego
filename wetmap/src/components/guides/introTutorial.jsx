@@ -106,10 +106,10 @@ export default function IntroTutorial(props) {
 
   useEffect(() => {
     setMovingBack(false);
+    resetTutorial()
 
     switch (chapter) {
       case "Getting around the map":
-        resetTutorial();
         setSiteModal(false);
         setItterator(6);
         setGuideModal(true);
@@ -123,7 +123,6 @@ export default function IntroTutorial(props) {
         break;
 
       case "Dive sites":
-        resetTutorial();
         setSiteModal(false);
         setItterator(9);
         setGuideModal(true);
@@ -139,7 +138,6 @@ export default function IntroTutorial(props) {
         break;
 
       case "Changed dive site":
-        resetTutorial();
         setSiteModal(false);
         setItterator(17);
         setGuideModal(true);
@@ -168,6 +166,7 @@ export default function IntroTutorial(props) {
         
         break;
     }
+    setChapter(null)
   }, [chapter]);
 
   const handleClearTutorial = async () => {
@@ -213,7 +212,6 @@ export default function IntroTutorial(props) {
   };
 
   const resetTutorial = async () => {
-    setItterator(null);
     setCharacterX(0);
     setTextBoxY(0);
     setPixY(0);
@@ -466,7 +464,7 @@ export default function IntroTutorial(props) {
       setQuestionButtonY(windowHeigth * 1.5);
     }
 
-    // console.log("i am", itterator);
+    console.log("i am", itterator);
 
     if (itterator === 6) {
       setQuestionButtonY(0);
@@ -516,7 +514,6 @@ export default function IntroTutorial(props) {
 
     if (itterator === 14) {
       animateIntroGuideModal()
-      setChapter(null);
     }
 
    
@@ -528,6 +525,7 @@ export default function IntroTutorial(props) {
     if (itterator === 17) {
       setIntroGuideModalYCoord(-windowHeigth)
       setArrowY(windowHeigth * 1.4);
+      setChapter(null);
     }
 
     if (itterator === 19) {
