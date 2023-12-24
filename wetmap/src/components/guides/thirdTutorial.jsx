@@ -434,16 +434,6 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 26) {
-      // setPinValues({
-      //   ...pinValues,
-      //   PicFile: null,
-      //   Animal: "",
-      //   PicDate: "",
-      //   Latitude: "",
-      //   Longitude: "",
-      //   DDVal: "0",
-      // });
-      // setUploadedFile(null);
       setTutorialRunning(false);
     }
 

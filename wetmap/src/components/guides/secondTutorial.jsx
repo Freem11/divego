@@ -636,6 +636,7 @@ export default function SecondTutorial(props) {
             height: "50px",
             width: "50px",
             color: "white",
+            cursor: "pointer"
           }}
           onClick={handleThirdTutorialStartup}
         />

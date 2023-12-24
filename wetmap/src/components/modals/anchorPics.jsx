@@ -19,7 +19,7 @@ import "./anchorPics.css";
 import { animated } from "react-spring";
 
 const AnchorPics = (props) => {
-  const { animateAnchorModal } = props;
+  const { animateAnchorModal, setAnchorModalYCoord } = props;
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { sliderVal } = useContext(SliderContext);
@@ -125,6 +125,11 @@ const AnchorPics = (props) => {
     }
   }, [selectedDiveSite]);
 
+  useEffect(() => {
+    if(itterator === 25){
+      animateAnchorModal()
+    }
+  }, [itterator]);
 
   const handleClose = async () => {
 

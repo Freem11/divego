@@ -101,6 +101,7 @@
     border-radius: 20px;
     border-color: lightgrey;
     border-width: 2px;
+    cursor: pointer;
   }
 
   .nextTutText2 {
@@ -109,4 +110,5 @@
     font-size: 24px;
     height: 30px;
     margin: 10px;
+    cursor: pointer;
   }

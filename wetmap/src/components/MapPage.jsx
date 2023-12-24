@@ -857,7 +857,10 @@ const MapPage = React.memo((props) => {
         style={moveAnchorModal}
         ref={moveAnchorModal}
       >
-        <AnchorPics animateAnchorModal={animateAnchorModal} />
+        <AnchorPics
+          animateAnchorModal={animateAnchorModal}
+          setAnchorModalYCoord={setAnchorModalYCoord}
+        />
       </animated.div>
 
       {lightbox && (

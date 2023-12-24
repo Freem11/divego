@@ -538,12 +538,13 @@ export default function IntroTutorial(props) {
       animateIntroGuideModal()
     }
 
-    if (itterator === 23) {
+    if (itterator === 24) {
       setNextTutY(windowHeigth * 1.4);
     }
 
-    if (itterator === 24) {
+    if (itterator === 25) {
       setNextTutY(0);
+      setTutorialRunning(false);
     }
 
     if (itterator === feederArray.length - 1) {
@@ -879,6 +880,7 @@ export default function IntroTutorial(props) {
             height: "50px",
             width: "50px",
             color: "white",
+            cursor: "pointer"
           }}
           onClick={handleSecondTutorialStartup}
         />
