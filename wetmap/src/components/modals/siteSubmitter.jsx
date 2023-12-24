@@ -177,6 +177,7 @@ const SiteSubmitter = (props) => {
     clearInterval(blinker2);
     setLocButState(false);
     setPinButState(false);
+    setSiteNameState(false)
     setSubButState(false);
   }
 

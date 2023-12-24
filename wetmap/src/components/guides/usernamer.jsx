@@ -108,12 +108,12 @@ export default function UserNamer() {
             width: "220px",
             borderRadius: "20px",
             boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-            marginBottom: "-15px"
+            marginBottom: "15px"
           }
         }}
       ></InputBase>
 
-      {userFail && <p className="erroMsg">{userFail}</p>}
+      {userFail && <p className="erroMsgU">{userFail}</p>}
 
       <FormGroup>
           <div onClick={handleSubmit} className="pinButton">

@@ -191,6 +191,7 @@ const MapPage = React.memo((props) => {
   const returnToPicModal = () => {
     if (chosenModal === "DiveSite") {
       animateSiteModal();
+      animateSecondGuideModal()
       setMasterSwitch(true);
       setChosenModal(null);
       if (tutorialRunning) {
@@ -200,6 +201,7 @@ const MapPage = React.memo((props) => {
       }
     } else if (chosenModal === "Photos") {
       animatePicModal();
+      animateThirdGuideModal()
       setMasterSwitch(true);
       setChosenModal(null);
       if (tutorialRunning) {
@@ -216,7 +218,12 @@ const MapPage = React.memo((props) => {
       try {
         const success = await grabProfileById(sessionUserId);
         if (success) {
-          // let bully = success[0].UserName;
+          let bully = success[0].UserName;
+          if (bully == null || bully === "") {
+            setIntroGuideModalYCoord(-windowHeight);
+            setTutorialRunning(true);
+            setItterator(0);
+          } else {
           setProfile(success);
           setPin({
             ...pin,
@@ -228,9 +235,7 @@ const MapPage = React.memo((props) => {
             UserID: success[0].UserID,
             UserName: success[0].UserName,
           });
-          // if (bully == null) {
-          //   setGuideModal(!guideModal);
-          // }
+          }
         }
       } catch (e) {
         console.log({ title: "Error", message: e.message });
@@ -513,7 +518,7 @@ const MapPage = React.memo((props) => {
     if (!picAdderModal) {
       setPicModalYCoord(0);
     }
-  }, [dsAdderModal]);
+  }, [picAdderModal]);
 
   return (
     <div className="mappagemaster">

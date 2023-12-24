@@ -1,6 +1,7 @@
 
   .container {
-    /* position: "absolute", */
+    display: flex;
+    flex-direction: column;
     background-color: #538bdb;
     opacity: 1;
     align-items: center;
@@ -51,32 +52,30 @@
   
   }
   
-  .erroMsg {
-    position: absolute;
-    left: 4vh;
-    margin: 5;
-    padding: 7;
+  .erroMsgU {
+    margin: 5px;
+    padding: 7px;
+    margin-top: 5px;
     color: pink;
     font-family: Itim;
     font-size: 24px;
-    width: 40vh;
+    width: 80%;
     border-style: dashed;
-    border-radius: 10;
+    border-radius: 15px;
     border-color: darkblue;
-    border-width: 1;
+    border-width: 1px;
   }
 
   .OKbutton {
-    position: absolute;
     background-color: #538bdb;
     flex-direction: row;
     align-items: center;
     justify-content: center;
     border-radius: 10;
-    height: 35;
-    width: 150;
+    height: 35px;
+    width: 150px;
      /* marginLeft: 30%; */
-    margin-top: 10px;
+    margin-top: 60px;
     margin-bottom: 15px;
   }
 
@@ -86,17 +85,17 @@
     align-items: center;
     justify-content: center;
     border-radius: 10;
-    height: 35px;
+    height: 25px;
     width: 150px;
      /* marginLeft: "30%"; */
-    margin-top: 10px;
+    margin-top: 60px;
     margin-bottom: 15px;
   }
 
   .buttontext {
     color: gold;
     font-size: 27px;
-    margin-top: 10;
+    margin-top: 25px;
     font-family: 'Patrick Hand', cursive;
     width: 100%;
     align-self: center;
@@ -106,12 +105,11 @@
   }
 
   .pinButton{
-    position: absolute;
-    top: 23vh;
-    left: 14vh;
     display: flex;
-    width: 10vh;
+    width: 400%;
     height: 43px;
+    margin-top: 10px;
+    margin-left: -150%;
     align-items: center;
     justify-content: center;
     background-color: #538bdb;

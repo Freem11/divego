@@ -115,6 +115,7 @@ export default function SecondTutorial(props) {
 
       case "DS Help":
         setItterator2(10);
+        setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
           setCharacterX(-windowWidth * 0.35);
@@ -126,6 +127,7 @@ export default function SecondTutorial(props) {
 
       case "Placing the pin":
         setItterator2(15);
+        setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
           setCharacterX(-windowWidth * 0.35);
@@ -136,10 +138,11 @@ export default function SecondTutorial(props) {
         break;
 
       case "Exit Guide":
+        setDsAddermodal(false)
         setSecondGuideModalYCoord(0);
         handleClearTutorial();
         setTutorialRunning(false);
-        setDsAddermodal(false)
+        
         break;
     }
     setChapter(null)
@@ -385,19 +388,24 @@ export default function SecondTutorial(props) {
 
     if (itterator2 === 3) {
       setDsSearchY(0);
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(0)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 4) {
-      animateSecondGuideModal()
+      setDsSearchY(0);
+      setSecondGuideModalYCoord(-windowHeigth)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 5) {
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(0)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 6) {
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(-windowHeigth)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 8) {
@@ -406,13 +414,15 @@ export default function SecondTutorial(props) {
 
     if (itterator2 === 9) {
       setDiveSiteY(0);
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(0)
+      // animateSecondGuideModal()
       setSecondGuideModal(false);
     }
 
     if (itterator2 === 10) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(-windowHeigth)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 12) {
@@ -421,11 +431,13 @@ export default function SecondTutorial(props) {
 
     if (itterator2 === 13) {
       setPinY(0)
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(0)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 14) {
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(-windowHeigth)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 15) {
@@ -435,31 +447,38 @@ export default function SecondTutorial(props) {
     if (itterator2 === 16) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
       setLocationY(0)
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(0)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 17) {
-      animateSecondGuideModal()
+      setLocationY(0)
+      setSecondGuideModalYCoord(-windowHeigth)
+      // animateSecondGuideModal()
       setTimeout(() => {
         setMantaY(windowHeigth * 1.55)
       }, 1000);
     }
 
     if (itterator2 === 19) {
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(0)
+      // animateSecondGuideModal()
       setMantaY(0)
     }
 
     if (itterator2 === 20) {
-      animateSecondGuideModal()
+      setLocationY(windowHeigth * 1.55)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 23) {
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(0)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 24) {
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(-windowHeigth)
+      // animateSecondGuideModal()
     }
 
     if (itterator2 === 25) {
@@ -478,7 +497,8 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === feederArray.length - 1) {
-      animateSecondGuideModal()
+      setSecondGuideModalYCoord(0)
+      // animateSecondGuideModal()
       setItterator2(null);
       setMapZoom(10)
       resetTutorial();

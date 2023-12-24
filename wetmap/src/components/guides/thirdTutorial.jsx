@@ -364,11 +364,13 @@ export default function ThirdTutorial(props) {
 
     if (itterator3 === 5) {
       setCameraY(0);
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(0)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 6) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(-windowHeight)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 7) {
@@ -377,60 +379,72 @@ export default function ThirdTutorial(props) {
 
     if (itterator3 === 8) {
       setPhotoY(0);
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(0)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 9) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(-windowHeight)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 11) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(0)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 12) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(-windowHeight)
+      // animateThirdGuideModal()
     }
   
     if (itterator3 === 14) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(0)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 15) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(-windowHeight)
+      // animateThirdGuideModal()
       setTimeout(() => {
         setPinY(windowHeight * 1.55);
       }, 1000);
     }
 
     if (itterator3 === 16) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(0)
+      // animateThirdGuideModal()
       setPinY(0);
     }
 
     if (itterator3 === 17) {;
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(-windowHeight)
+      // animateThirdGuideModal()
       setTimeout(() => {
         setMantaY(windowHeight * 1.55);
       }, 1000);
     }
 
     if (itterator3 === 19) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(0)
+      // animateThirdGuideModal()
       setMantaY(0);
     }
 
     if (itterator3 === 20) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(-windowHeight)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 22) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(0)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 23) {
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(-windowHeight)
+      // animateThirdGuideModal()
     }
 
     if (itterator3 === 26) {
@@ -439,7 +453,8 @@ export default function ThirdTutorial(props) {
 
     if (itterator3 === feederArray.length - 1) {
       setItterator3(null);
-      animateThirdGuideModal()
+      setThirdGuideModalYCoord(0)
+      // animateThirdGuideModal()
       setMapZoom(10)
       resetTutorial()
     }

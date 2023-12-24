@@ -144,7 +144,7 @@ const PicUploader = React.memo((props) => {
             Latitude: pin.Latitude,
             Longitude: pin.Longitude,
           });
-          setShowNoGPS(true);
+          // setShowNoGPS(true);
         }
       });
 
@@ -251,6 +251,8 @@ const PicUploader = React.memo((props) => {
         blinker = setInterval(imageBut, 1000);
       } else if (itterator3 === 11) {
         blinker = setInterval(calendarBut, 1000);
+      } else if (itterator3 === 14) {
+        blinker = setInterval(animalField, 1000);
       } else if (itterator3 === 3) {
         setPicModalYCoord(0)
       } else if (itterator3 === 3) {

@@ -464,7 +464,6 @@ export default function IntroTutorial(props) {
       setQuestionButtonY(windowHeigth * 1.5);
     }
 
-    console.log("i am", itterator);
 
     if (itterator === 6) {
       setQuestionButtonY(0);
@@ -501,24 +500,26 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 12) {
-      animateIntroGuideModal()
+      setIntroGuideModalYCoord(-windowHeigth)
+      // animateIntroGuideModal()
       setTextPrinting(true);
       setMovingBack(true);
       setMapZoom(10)
     }
 
     if (itterator === 13) {
-      animateIntroGuideModal()
+      setIntroGuideModalYCoord(0)
+      // animateIntroGuideModal()
       setItterator(11)
     }
 
     if (itterator === 14) {
-      animateIntroGuideModal()
+      setIntroGuideModalYCoord(-windowHeigth)
     }
 
    
     if (itterator === 16) {
-      animateIntroGuideModal()
+      setIntroGuideModalYCoord(0)
       
     }
 
@@ -530,12 +531,12 @@ export default function IntroTutorial(props) {
 
     if (itterator === 19) {
         setArrowY(0);
-        animateIntroGuideModal()
+        setIntroGuideModalYCoord(0)
     }
 
     if (itterator === 21) {
       setSiteModal(true)
-      animateIntroGuideModal()
+      setIntroGuideModalYCoord(-windowHeigth)
     }
 
     if (itterator === 24) {
@@ -548,7 +549,7 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === feederArray.length - 1) {
-      animateIntroGuideModal();
+      setIntroGuideModalYCoord(0)
       setItterator(null);
       setMapZoom(10)
       resetTutorial();
