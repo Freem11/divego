@@ -82,26 +82,31 @@
     left: 30%;
   }
 
-  .nextTutButton {
+  .nextTutButton2 {
     position: absolute;
+    display: flex;
     flex-direction: row;
-    top: 25%;
+    top: -110vh;
+    left: 15%;
+    width: 210px;
+    height: 30px;
     background-color: #538bdb;
     align-items: center;
-    padding-right: 10;
-    padding-left: 2;
-    height: 5%;
-    margin-right: 10;
-    margin-left: 10;
-    border-radius: 15;
+    padding-right: 5px;
+    padding-left: 10px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    border-radius: 20px;
     border-color: lightgrey;
-    border-width: 2;
+    border-width: 2px;
   }
 
-  .nextTutText {
+  .nextTutText2 {
     color: white;
     font-family: Itim;
-    font-size: 12;
-    height: 15;
-    margin: 10;
+    font-size: 24px;
+    height: 30px;
+    margin: 10px;
   }

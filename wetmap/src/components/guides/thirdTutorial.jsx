@@ -70,20 +70,20 @@ export default function ThirdTutorial(props) {
   useEffect(() => {
     if (tutorialReset) {
       setItterator3(null);
-      setPicAdderModal(false);
+      // setPicAdderModal(false);
       setTutorialRunning(false);
       setThirdGuideModal(false);
       setMasterSwitch(true);
-      setUploadedFile(null);
-      setPinValues({
-        ...pinValues,
-        PicFile: null,
-        Animal: "",
-        PicDate: "",
-        Latitude: "",
-        Longitude: "",
-        DDVal: "0",
-      });
+      // setUploadedFile(null);
+      // setPinValues({
+      //   ...pinValues,
+      //   PicFile: null,
+      //   Animal: "",
+      //   PicDate: "",
+      //   Latitude: "",
+      //   Longitude: "",
+      //   DDVal: "0",
+      // });
       resetTutorial();
       setChapter(null);
     }
@@ -169,12 +169,12 @@ export default function ThirdTutorial(props) {
   };
 
   const resetTutorial = async () => {
-    characterX.value = 1000;
-    textBoxY.value = 1000;
-    photoY.value = scale(-1000);
-    imageY.value = scale(-1000);
-    pinY.value = scale(-1000);
-    mantaY.value = scale(-1200);
+    setCharacterX(0)
+    setTextBoxY(0)
+    setCameraY(0)
+    setPhotoY(0)
+    setPinY(0)
+    setMantaY(0)
     setTutorialReset(false);
   };
 

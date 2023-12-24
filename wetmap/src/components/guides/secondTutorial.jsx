@@ -11,6 +11,7 @@ import { UserProfileContext } from "../contexts/userProfileContext";
 // import { MapRegionContext } from "../contexts/mapRegionContext";
 // import { MapCenterContext } from "../contexts/mapCenterContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
+import { Iterrator3Context } from "../contexts/iterrator3Context";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { TutorialResetContext } from "../contexts/tutorialResetContext";
 // import { DSAdderContext } from "../contexts/DSModalContext";
@@ -23,11 +24,13 @@ import LocationOnIcon from "@mui/icons-material/LocationOn";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 export default function SecondTutorial(props) {
-  const { animateSecondGuideModal, setSecondGuideModalYCoord, setDsAddermodal } = props;
+  const { animateSecondGuideModal, setSecondGuideModalYCoord, setDsAddermodal, animateThirdGuideModal, setThirdGuideModalYCoord } = props;
 
   window.addEventListener("resize", trackDimensions);
 
@@ -55,6 +58,7 @@ export default function SecondTutorial(props) {
     ThirdTutorialModalContext
   );
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
+  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { chapter, setChapter } = useContext(ChapterContext);
   const { tutorialReset, setTutorialReset } = useContext(TutorialResetContext);
@@ -190,10 +194,11 @@ export default function SecondTutorial(props) {
 
   const handleThirdTutorialStartup = () => {
     setItterator2(null);
-    setDiveSiteAdderModal(false);
+    setItterator3(0)
+    setDsAddermodal(false)
     setTutorialRunning(true);
-    setSecondGuideModal(false);
-    setThirdGuideModal(true);
+    animateSecondGuideModal()
+    animateThirdGuideModal()
   };
 
   const characterRef = useRef(null);
@@ -458,8 +463,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 25) {
-      // nextTutX.value = withSpring(windowWidth * 0.3);
-      // startNextTutAnimation();
+      setNextTutY(windowHeigth * 1.4);
     }
 
     if (itterator2 === 26) {
@@ -469,8 +473,7 @@ export default function SecondTutorial(props) {
         Latitude: "",
         Longitude: "",
       });
-      // nextTutX.value = withTiming(-300);
-      // startNextTutAnimation();
+      setNextTutY(0);
       setTutorialRunning(false);
     }
 
@@ -519,7 +522,7 @@ export default function SecondTutorial(props) {
 
   const nextTutSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(${nextTutY}px,0,0)` },
+    to: { transform: `translate3d(0,${nextTutY}px,0)` },
   });
 
   useEffect(() => {
@@ -619,20 +622,25 @@ export default function SecondTutorial(props) {
         />
       </animated.div>
 
-      {/* <animated.View
-          style={[styles.nextTutButton, nextTutSlide]}
-          onPress={handleThirdTutorialStartup}
-        >
-          <Text onPress={handleThirdTutorialStartup} style={styles.nextTutText}>
+      <animated.div
+        className="nextTutButton2"
+        ref={nextTutRef}
+        style={nextTutSlide}
+        onPress={handleThirdTutorialStartup}
+      >
+        <p onPress={handleThirdTutorialStartup} className="nextTutText2">
             Photogenics
-          </Text>
-          <FontAwesome
-            name="arrow-right"
-            size={24}
-            color="white"
-            onPress={handleThirdTutorialStartup}
-          />
-        </animated.View> */}
+        </p>
+        <KeyboardArrowRightIcon
+          sx={{
+            height: "50px",
+            width: "50px",
+            color: "white",
+          }}
+          onClick={handleThirdTutorialStartup}
+        />
+      </animated.div>
+
     </div>
   );
 }

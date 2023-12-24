@@ -810,6 +810,8 @@ const MapPage = React.memo((props) => {
         <IntroTutorial
           animateIntroGuideModal={animateIntroGuideModal}
           setIntroGuideModalYCoord={setIntroGuideModalYCoord}
+          animateSecondGuideModal={animateSecondGuideModal}
+          setSecondGuideModalYCoord={setSecondGuideModalYCoord}
         />
       </animated.div>
 
@@ -823,6 +825,8 @@ const MapPage = React.memo((props) => {
           animateSecondGuideModal={animateSecondGuideModal}
           setSecondGuideModalYCoord={setSecondGuideModalYCoord}
           setDsAddermodal={setDsAddermodal}
+          animateThirdGuideModal={animateThirdGuideModal}
+          setThirdGuideModalYCoord={setThirdGuideModalYCoord}
         />
       </animated.div>
 

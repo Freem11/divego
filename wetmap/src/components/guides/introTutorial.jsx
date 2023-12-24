@@ -17,6 +17,7 @@ import { UserProfileContext } from "../contexts/userProfileContext";
 import { getToday } from "../../helpers/picUploaderHelpers.js";
 import { ZoomContext } from "../contexts/mapZoomContext";
 import { IterratorContext } from "../contexts/iterratorContext";
+import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { TutorialResetContext } from "../contexts/tutorialResetContext";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
@@ -45,7 +46,7 @@ let screenWidthInital = window.innerWidth;
 let screenHeitghInital = window.innerHeight;
 
 export default function IntroTutorial(props) {
-  const { animateIntroGuideModal, setIntroGuideModalYCoord } = props;
+  const { animateIntroGuideModal, setIntroGuideModalYCoord, animateSecondGuideModal, setSecondGuideModalYCoord } = props;
   window.addEventListener("resize", trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
@@ -73,6 +74,7 @@ export default function IntroTutorial(props) {
     SecondTutorialModalContext
   );
   const { itterator, setItterator } = useContext(IterratorContext);
+  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { chapter, setChapter } = useContext(ChapterContext);
   const { tutorialReset, setTutorialReset } = useContext(TutorialResetContext);
@@ -227,10 +229,11 @@ export default function IntroTutorial(props) {
 
   const handleSecondTutorialStartup = () => {
     setItterator(null);
+    setItterator2(0)
     setSiteModal(false);
     setTutorialRunning(true);
-    setGuideModal(false);
-    setSecondGuideModal(true);
+    animateIntroGuideModal()
+    animateSecondGuideModal()
   };
 
   const characterRef = useRef(null);
@@ -538,14 +541,11 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 23) {
-      // nextTutY.value = withSpring(windowWidth * 0.3);
-      // startNextTutAnimation();
+      setNextTutY(windowHeigth * 1.4);
     }
 
     if (itterator === 24) {
-      // setSiteModal(false);
-      // nextTutY.value = withTiming(-300);
-      // startNextTutAnimation();
+      setNextTutY(0);
     }
 
     if (itterator === feederArray.length - 1) {
@@ -609,7 +609,7 @@ export default function IntroTutorial(props) {
 
   const nextTutSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(${nextTutY}px,0,0)` },
+    to: { transform: `translate3d(0,${nextTutY}px,0)` },
   });
 
   useEffect(() => {
@@ -867,7 +867,7 @@ export default function IntroTutorial(props) {
         />
       </animated.div>
 
-      {/* <animated.div
+      <animated.div
         className="nextTutButton"
         ref={nextTutRef}
         style={nextTutSlide}
@@ -878,13 +878,13 @@ export default function IntroTutorial(props) {
         </p>
         <KeyboardArrowRightIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "50px",
+            width: "50px",
             color: "white",
           }}
           onClick={handleSecondTutorialStartup}
         />
-      </animated.div> */}
+      </animated.div>
 
       <animated.div
         className="guidebutton"
