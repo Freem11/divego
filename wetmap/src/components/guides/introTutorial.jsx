@@ -457,7 +457,7 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 3) {
-      setGuideButtonY(windowHeigth * 1.7)
+      setGuideButtonY((2*windowHeigth)-(windowHeigth-100)/2)
     }
 
 
