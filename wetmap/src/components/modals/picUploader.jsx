@@ -258,6 +258,8 @@ const PicUploader = React.memo((props) => {
     setSubButState(false);
   }
 
+  let modalHeigth = 700;
+
   useEffect(() => {
     if (tutorialRunning) {
       if (itterator3 === 8) {
@@ -271,7 +273,7 @@ const PicUploader = React.memo((props) => {
       } else if (itterator3 === 3) {
         setPicModalYCoord(0)
       } else if (itterator3 === 6 || itterator3 === 12 || itterator3 === 15) {
-        setPicModalYCoord(-windowHeight)
+        setPicModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2)
       } else if (itterator3 === 16) {
         blinker = setInterval(pinBut, 1000);
       } else if (itterator3 === 22) {

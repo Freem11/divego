@@ -85,6 +85,8 @@ export default function SecondTutorial(props) {
     }
   }, [tutorialReset]);
 
+  let modalHeigth = 700;
+  
   useEffect(() => {
     // setDiveSiteAdderModal(false);
     resetTutorial();
@@ -221,6 +223,7 @@ export default function SecondTutorial(props) {
   const [pinY, setPinY] = useState(0);
   const [mantaY, setMantaY] = useState(0);
   const [nextTutY, setNextTutY] = useState(0);
+
 
   const text0 =
     "Hey welcome back! Now that you have a Diver Name, I can show you how you can contribute to Scuba SEAsons!";

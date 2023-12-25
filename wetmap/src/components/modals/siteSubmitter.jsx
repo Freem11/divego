@@ -194,6 +194,8 @@ const SiteSubmitter = (props) => {
     setSubButState(false);
   }
 
+  let modalHeigth = 700;
+
   useEffect(() => {
     if (tutorialRunning) {
       if (itterator2 === 16) {
@@ -201,7 +203,7 @@ const SiteSubmitter = (props) => {
       } else if (itterator2 === 13) {
         blinker1 = setInterval(locationBut, 1000);
       } else if(itterator2 === 15 || itterator2 == 10) {
-        setSiteModalYCoord(-windowHeight)
+        setSiteModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2)
       } else if (itterator2 ===8 || itterator2 === 1) {
         setSiteModalYCoord(0)
       } else if (itterator2 === 23) { 

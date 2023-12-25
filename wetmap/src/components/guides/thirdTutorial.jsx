@@ -78,6 +78,8 @@ export default function ThirdTutorial(props) {
     }
   }, [tutorialReset]);
 
+  let modalHeigth = 700;
+  
   useEffect(() => {
     setMasterSwitch(true);
     resetTutorial();
