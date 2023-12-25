@@ -104,6 +104,8 @@ export default function IntroTutorial(props) {
     }
   }, [tutorialReset]);
 
+  let modalHeigth = 700;
+  
   useEffect(() => {
     setMovingBack(false);
     resetTutorial()
