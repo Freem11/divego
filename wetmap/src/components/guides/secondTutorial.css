@@ -13,8 +13,8 @@
 
   .character2 {
     position: absolute;
-    bottom: -5%; 
-    right: -30%; 
+    bottom: -10vh; 
+    left: 100vw; 
     height: 700px;
     width: 700px;
     opacity: rgb(0,0,0,1);
@@ -44,7 +44,7 @@
 
   .dsSearchbuttonwrapper {
     position: absolute;
-    top: -110vh;
+    top: -120vh;
     left: 30%;
     width: 100px;
     height: 100px;
@@ -54,7 +54,7 @@
 
   .dsAddbuttonwrapper {
     position: absolute;
-    top: -110vh;
+    top: -120vh;
     left: 30%;
     width: 100px;
     height: 100px;
@@ -64,7 +64,7 @@
 
   .myLocationbuttonwrapper {
     position: absolute;
-    top: -110vh;
+    top: -120vh;
     left: 30%;
     width: 100px;
     height: 100px;
@@ -74,7 +74,7 @@
 
   .pinbuttonwrapper {
     position: absolute;
-    top: -110vh;
+    top: -120vh;
     left: 30%;
     width: 100px;
     height: 100px;

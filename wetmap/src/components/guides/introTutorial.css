@@ -12,8 +12,8 @@
 
   .character {
     position: absolute;
-    bottom: -5%; 
-    right: -30%; 
+    bottom: -10vh; 
+    left: 100vw; 
     height: 700px;
     width: 700px;
     opacity: rgb(0,0,0,1);
@@ -48,7 +48,7 @@
 
   .questionbuttonwrapper {
     position: absolute;
-    top: -110vh;
+    top: -120vh;
     left: 30%;
     width: 100px;
     height: 100px;
@@ -58,7 +58,7 @@
 
   .explorebuttonwrapper {
     position: absolute;
-    top: -110vh;
+    top: -120vh;
     left: 30%;
     width: 100px;
     height: 100px;
@@ -69,7 +69,7 @@
   .container3 {
     /* flex: 1; */
     position: absolute;
-    top: -180vh;
+    top: -200vh;
     left: 6vw;
     z-index: 10;
     background-color: transparent;
@@ -185,7 +185,7 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    top: -160vh;
+    top: -180vh;
     left: 10%;
     height: 500px;
     width: 500px;
@@ -282,7 +282,7 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    top: -170vh;
+    top: -190vh;
     left:  5%;
     height: 20vh;
     width: 20vh;
@@ -324,8 +324,8 @@
     position: absolute;
     top: -130vh;
     left: 30%;
-    height: 5%;
-    width: 6.5%;
+    height: 8%;
+    width: 12%;
     border-radius: 20px;
     animation: changeBg 4s linear infinite;
     border-radius: 15;

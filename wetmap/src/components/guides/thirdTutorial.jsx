@@ -33,7 +33,7 @@ export default function ThirdTutorial(props) {
   window.addEventListener("resize", trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
-  const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
+  const [windowHeigth, setWindowHeigth] = useState(screenHeitghInital);
 
   function trackDimensions() {
     setWindowWidth(window.innerWidth);
@@ -85,53 +85,53 @@ export default function ThirdTutorial(props) {
     switch (chapter) {
       case "Contributing photos overview":
         setItterator3(3);
-        setThirdGuideModalYCoord(-windowHeight)
+        setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeight * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         setPicAddermodal(false)
         break;
 
       case "Adding your photo":
         setItterator3(6);
-        setThirdGuideModalYCoord(-windowHeight)
+        setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
         setTutorialRunning(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeight * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         setPicAddermodal(true)
         break;
 
       case "Name that sea creature!":
         setItterator3(12);
-        setThirdGuideModalYCoord(-windowHeight)
+        setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeight * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         setPicAddermodal(true)
         break;
 
       case "Dropping the pin":
         setItterator3(15);
-        setThirdGuideModalYCoord(-windowHeight)
+        setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeight * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         setPicAddermodal(true)
         break;
@@ -350,16 +350,16 @@ export default function ThirdTutorial(props) {
 
     if (itterator3 === 0) {
       setTimeout(() => {
-        setCharacterX(-windowWidth * 0.35);
+        setCharacterX((-600));
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeight * 0.35);
+        setTextBoxY(-windowHeigth+(windowHeigth-400));
       }, 1000);
     }
 
     if (itterator3 === 3) {
-      setCameraY(windowHeight * 1.55);
+      setCameraY(windowHeigth * 1.7);
     }
 
     if (itterator3 === 5) {
@@ -369,12 +369,12 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 6) {
-      setThirdGuideModalYCoord(-windowHeight)
+      setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 7) {
-      setPhotoY(windowHeight * 1.55);
+      setPhotoY(windowHeigth * 1.7);
     }
 
     if (itterator3 === 8) {
@@ -384,7 +384,7 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 9) {
-      setThirdGuideModalYCoord(-windowHeight)
+      setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
     }
 
@@ -394,7 +394,7 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 12) {
-      setThirdGuideModalYCoord(-windowHeight)
+      setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
     }
   
@@ -405,10 +405,10 @@ export default function ThirdTutorial(props) {
 
     if (itterator3 === 15) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
-      setThirdGuideModalYCoord(-windowHeight)
+      setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
       setTimeout(() => {
-        setPinY(windowHeight * 1.55);
+        setPinY(windowHeigth * 1.7);
       }, 1000);
     }
 
@@ -419,10 +419,10 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 17) {;
-      setThirdGuideModalYCoord(-windowHeight)
+      setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
       setTimeout(() => {
-        setMantaY(windowHeight * 1.55);
+        setMantaY(windowHeigth * 1.55);
       }, 1000);
     }
 
@@ -433,7 +433,7 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 20) {
-      setThirdGuideModalYCoord(-windowHeight)
+      setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
     }
 
@@ -443,7 +443,7 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 23) {
-      setThirdGuideModalYCoord(-windowHeight)
+      setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
     }
 

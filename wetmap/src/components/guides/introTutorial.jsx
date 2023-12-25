@@ -114,10 +114,10 @@ export default function IntroTutorial(props) {
         setItterator(6);
         setGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         // setPixY(windowHeigth * 1.9)
         break;
@@ -127,10 +127,10 @@ export default function IntroTutorial(props) {
         setItterator(9);
         setGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         // setClusterAnchorY(windowHeigth * 1.85);
         // setHeatPotintY(windowHeigth * 1.6);
@@ -143,12 +143,12 @@ export default function IntroTutorial(props) {
         setGuideModal(true);
         setIntroGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
-        setArrowY(windowHeigth * 1.4);
+        setArrowY(windowHeigth * 1.6);
         if (selectedDiveSite.SiteName === "") {
           setSelectedDiveSite({
             SiteName: "Madrona Point",
@@ -430,11 +430,11 @@ export default function IntroTutorial(props) {
   useEffect(() => {
     if (itterator === 0) {
       setTimeout(() => {
-        setCharacterX(-windowWidth * 0.35);
+        setCharacterX((-600));
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeigth * 0.35);
+        setTextBoxY(-windowHeigth+(windowHeigth-400));
       }, 1000);
     }
 
@@ -455,19 +455,19 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 3) {
-      setGuideButtonY(windowHeigth * 1.75)
+      setGuideButtonY(windowHeigth * 1.7)
     }
 
 
     if (itterator === 5) {
       setGuideButtonY(0)
-      setQuestionButtonY(windowHeigth * 1.5);
+      setQuestionButtonY(windowHeigth * 1.7);
     }
 
 
     if (itterator === 6) {
       setQuestionButtonY(0);
-      setPixY(windowHeigth * 1.9)
+      setPixY(windowHeigth * 2.1)
     }
 
     if (itterator === 7) {
@@ -480,7 +480,7 @@ export default function IntroTutorial(props) {
 
     if (itterator === 9) {
       setExploreButtonY(0);
-      setClusterAnchorY(windowHeigth * 1.85);
+      setClusterAnchorY(windowHeigth * 2);
     }
 
     if (itterator === 10) {
@@ -525,7 +525,7 @@ export default function IntroTutorial(props) {
 
     if (itterator === 17) {
       setIntroGuideModalYCoord(-windowHeigth)
-      setArrowY(windowHeigth * 1.4);
+      setArrowY(windowHeigth * 1.6);
       setChapter(null);
     }
 
