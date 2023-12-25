@@ -23,8 +23,8 @@
   .talkbox {
     position: absolute;
     top: 120%;
-    left: 35%;
-    width: 60vh;
+    left: 33%;
+    width: 600px;
     height: min-content;
     font-family: Itim;
     font-size: 24px;
@@ -48,7 +48,7 @@
 
   .questionbuttonwrapper {
     position: absolute;
-    top: -120vh;
+    top: -200vh;
     left: 30%;
     width: 100px;
     height: 100px;
@@ -58,7 +58,7 @@
 
   .explorebuttonwrapper {
     position: absolute;
-    top: -120vh;
+    top: -200vh;
     left: 30%;
     width: 100px;
     height: 100px;
@@ -95,7 +95,7 @@
 
   .usernamerwrapper{
     position: absolute;
-    top: 100vh;
+    top: -200vh;
     left: 39%;
     width:  350px;
     height: 300px;
@@ -128,7 +128,7 @@
     position: absolute;
     display: flex;
     flex-direction: row;
-    top: -110vh;
+    top: -200vh;
     left: 15%;
     width: 270px;
     height: 30px;
@@ -185,7 +185,7 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    top: -160vh;
+    top: -200vh;
     left: 10%;
     height: 500px;
     width: 500px;
@@ -272,7 +272,7 @@
     justify-content: center;
     border-radius: 50px;
     position: absolute;
-    top: -130vh;
+    top: -200vh;
     left: 50%;
   }
 
@@ -282,11 +282,12 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    top: -190vh;
-    left:  5%;
-    height: 20vh;
-    width: 20vh;
+    top: -200vh;
+    left:  25%;
+    height: 250px;
+    width: 600px;
     opacity: 1;
+    /* background-color: plum; */
   }
 
   .honkCon {
@@ -322,7 +323,7 @@
 
   .guidebutton {
     position: absolute;
-    top: -120vh;
+    top: -200vh;
     left: 30%;
     height: 55px;
     width: 180px;
