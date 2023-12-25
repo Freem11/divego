@@ -378,9 +378,12 @@ const MapPage = React.memo((props) => {
     to: { transform: `translate3d(0,${anchorModalYCoord}px,0)` },
   });
 
+
+  let modalHeigth = 700;
+
   const animatePicModal = () => {
     if (picModalYCoord === 0) {
-      setPicModalYCoord(-windowHeight+(windowHeight-700)/2);
+      setPicModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -406,7 +409,7 @@ const MapPage = React.memo((props) => {
 
   const animateSiteModal = () => {
     if (siteModalYCoord === 0) {
-      setSiteModalYCoord(-windowHeight);
+      setSiteModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
       setPicModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -429,7 +432,7 @@ const MapPage = React.memo((props) => {
 
   const animateLaunchModal = () => {
     if (launchModalYCoord === 0) {
-      setLaunchModalYCoord(-windowHeight);
+      setLaunchModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
@@ -442,7 +445,7 @@ const MapPage = React.memo((props) => {
 
   const animateSettingsModal = () => {
     if (settingsModalYCoord === 0) {
-      setSettingsModalYCoord(-windowHeight);
+      setSettingsModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -479,7 +482,7 @@ const MapPage = React.memo((props) => {
 
   const animateAnchorModal = () => {
     if (anchorModalYCoord === 0) {
-      setAnchorModalYCoord(-windowHeight);
+      setAnchorModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
@@ -492,7 +495,7 @@ const MapPage = React.memo((props) => {
 
   useEffect(() => {
       if (siteModal) {
-        setAnchorModalYCoord(-windowHeight);
+        setAnchorModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
         setPicModalYCoord(0);
         setSiteModalYCoord(0);
         setSettingsModalYCoord(0);
@@ -507,7 +510,7 @@ const MapPage = React.memo((props) => {
 
   useEffect(() => {
     if (dsAdderModal) {
-      setSiteModalYCoord(-windowHeight);
+      setSiteModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
     }
 
     if (!dsAdderModal) {
@@ -517,7 +520,7 @@ const MapPage = React.memo((props) => {
 
   useEffect(() => {
     if (picAdderModal) {
-      setPicModalYCoord(-windowHeight);
+      setPicModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
     }
 
     if (!picAdderModal) {

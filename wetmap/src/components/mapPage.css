@@ -55,7 +55,7 @@
 .anchorModalDiv{
     z-index: 200;
     position: absolute;
-    top: 120vh;
+    top: 100vh;
     left: 35%;
     min-width: 500px;
     width: 33vw;
