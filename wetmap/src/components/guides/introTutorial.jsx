@@ -451,7 +451,7 @@ export default function IntroTutorial(props) {
         return;
       }
 
-      setUserBoxY(-windowHeigth * 0.8)
+      setUserBoxY((2*windowHeigth)+(windowHeigth-userBoxHeigth)/3)
     }
 
     if (itterator === 2) {
@@ -693,6 +693,15 @@ export default function IntroTutorial(props) {
     
   }
 
+  let userBoxHeigth = 0
+  const elem2 = document.querySelector("#userBox");
+  if(elem2) {
+    userBoxHeigth = elem2.getBoundingClientRect().height;
+    
+  }
+
+console.log("im this tall", userBoxHeigth)
+  
   return (
     <div className="wrapper" onClick={() => setupText(1)}>
       <animated.div 
@@ -792,6 +801,7 @@ export default function IntroTutorial(props) {
       </animated.div>
 
       <animated.div 
+      id="userBox"
       className="usernamerwrapper" 
       ref={userBoxRef}
       style={userBoxSlide}
