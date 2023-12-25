@@ -82,10 +82,10 @@ export default function ThirdTutorial(props) {
   
   useEffect(() => {
     setMasterSwitch(true);
-    resetTutorial();
 
     switch (chapter) {
       case "Contributing photos overview":
+        resetTutorial();
         setItterator3(3);
         setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
@@ -96,9 +96,11 @@ export default function ThirdTutorial(props) {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         setPicAddermodal(false)
+        setCameraY((2*windowHeigth)+(windowHeigth-100)/3);
         break;
 
       case "Adding your photo":
+        resetTutorial();
         setItterator3(6);
         setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
@@ -113,6 +115,7 @@ export default function ThirdTutorial(props) {
         break;
 
       case "Name that sea creature!":
+        resetTutorial();
         setItterator3(12);
         setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
@@ -126,6 +129,7 @@ export default function ThirdTutorial(props) {
         break;
 
       case "Dropping the pin":
+        resetTutorial();
         setItterator3(15);
         setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
@@ -136,6 +140,7 @@ export default function ThirdTutorial(props) {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         setPicAddermodal(true)
+        setPinY((2*windowHeigth)+(windowHeigth-100)/3);
         break;
 
       case "Exit Guide":
@@ -222,10 +227,10 @@ export default function ThirdTutorial(props) {
   const text9 =
     "As you can see, the photo you chose is now in the big empty field and, depending on the photo you may have seen, that the date, lat. and lng. fields are populated. Scuba SEAsons will pull that data off your photo if it carries that info. If not, don't worry we can add them manually.";
   const text10 =
-    "In any case, let's assume you need to add in that info. First let's take care of the date, you'll see a calendar icon just to the right of the date field (looks like this) tap in and set the date the photo was taken for us";
+    "In any case, let's assume you need to add in that info. First let's take care of the date, it's the next field down, click on it and set the date the photo was taken for us";
   const text11 = "";
   const text12 =
-    "Great! Now that we have the correct date in place, let's move down to the next 'animal' field. For this one, you can tap right on it and a dropdown will pop up.";
+    "Great! Now that we have the correct date in place, let's move down to the next 'animal' field. As we did with the date field click on it and this time a dropdown will pop up.";
   const text13 =
     "Start entering the name of the sea creature in your picture, if it already exists in Scuba SEAsons it will show up as a selectable option to help speed things along, but if it's completely new you will need to type it out.";
   const text14 = "";
@@ -361,7 +366,7 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 3) {
-      setCameraY(windowHeigth * 1.7);
+      setCameraY((2*windowHeigth)+(windowHeigth-100)/3);
     }
 
     if (itterator3 === 5) {
@@ -376,7 +381,7 @@ export default function ThirdTutorial(props) {
     }
 
     if (itterator3 === 7) {
-      setPhotoY(windowHeigth * 1.7);
+      setPhotoY((2*windowHeigth)+(windowHeigth-100)/3);
     }
 
     if (itterator3 === 8) {
@@ -410,7 +415,7 @@ export default function ThirdTutorial(props) {
       setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
       setTimeout(() => {
-        setPinY(windowHeigth * 1.7);
+        setPinY((2*windowHeigth)+(windowHeigth-100)/3);
       }, 1000);
     }
 
@@ -424,7 +429,7 @@ export default function ThirdTutorial(props) {
       setThirdGuideModalYCoord(-windowHeigth)
       // animateThirdGuideModal()
       setTimeout(() => {
-        setMantaY(windowHeigth * 1.55);
+        setMantaY((2*windowHeigth)+(windowHeigth-120)/3);
       }, 1000);
     }
 
