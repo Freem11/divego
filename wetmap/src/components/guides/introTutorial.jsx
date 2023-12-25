@@ -699,8 +699,6 @@ export default function IntroTutorial(props) {
     userBoxHeigth = elem2.getBoundingClientRect().height;
     
   }
-
-console.log("im this tall", userBoxHeigth)
   
   return (
     <div className="wrapper" onClick={() => setupText(1)}>

@@ -435,7 +435,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 12) {
-      setPinY((windowHeigth)+(windowHeigth-100)/2)
+      setPinY((2*windowHeigth)+(windowHeigth-100)/3)
     }
 
     if (itterator2 === 13) {
@@ -465,7 +465,7 @@ export default function SecondTutorial(props) {
       setSecondGuideModalYCoord(-windowHeigth)
       // animateSecondGuideModal()
       setTimeout(() => {
-        setMantaY((windowHeigth)+(windowHeigth-120)/2)
+        setMantaY((2*windowHeigth)+(windowHeigth-120)/3)
       }, 1000);
     }
 
