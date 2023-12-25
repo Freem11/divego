@@ -17,7 +17,7 @@
 .picModalDiv{
     z-index: 200;
     position: absolute;
-    top: 125vh;
+    top: 100vh;
     left: 35%;
     width: 500px;
     height: 700px;

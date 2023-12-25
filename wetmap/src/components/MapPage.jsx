@@ -380,7 +380,7 @@ const MapPage = React.memo((props) => {
 
   const animatePicModal = () => {
     if (picModalYCoord === 0) {
-      setPicModalYCoord(-windowHeight);
+      setPicModalYCoord(-windowHeight+(windowHeight-700)/2);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
