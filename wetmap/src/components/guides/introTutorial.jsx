@@ -463,13 +463,14 @@ export default function IntroTutorial(props) {
 
     if (itterator === 5) {
       setGuideButtonY(0)
-      setQuestionButtonY(windowHeigth * 1.7);
+      setQuestionButtonY((2*windowHeigth)-(windowHeigth-100)/2);
     }
 
 
     if (itterator === 6) {
       setQuestionButtonY(0);
-      setPixY(windowHeigth * 2.1)
+      setPixY((2*windowHeigth)+(windowHeigth-picBoxHeigth)/2)
+
     }
 
     if (itterator === 7) {
@@ -477,12 +478,12 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 8) {
-      setExploreButtonY(windowHeigth * 1.5);
+      setExploreButtonY((2*windowHeigth)-(windowHeigth-100)/2);
     }
 
     if (itterator === 9) {
       setExploreButtonY(0);
-      setClusterAnchorY(windowHeigth * 2);
+      setClusterAnchorY((2*windowHeigth)-(windowHeigth-500)/2);
     }
 
     if (itterator === 10) {
@@ -680,9 +681,17 @@ export default function IntroTutorial(props) {
 
   };
 
+  let picBoxHeigth = 0
+  const elem = document.querySelector("#picBox");
+  if(elem) {
+    picBoxHeigth = elem.getBoundingClientRect().height;
+    
+  }
+
   return (
     <div className="wrapper" onClick={() => setupText(1)}>
       <animated.div 
+        id="picBox"
         className="container3"
         ref={picRef}
         style={picSlide}
