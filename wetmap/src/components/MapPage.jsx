@@ -491,13 +491,18 @@ const MapPage = React.memo((props) => {
   };
 
   useEffect(() => {
-    if (siteModal) {
-      setAnchorModalYCoord(-windowHeight);
-    }
-
-    if (!siteModal) {
-      setAnchorModalYCoord(0);
-    }
+      if (siteModal) {
+        setAnchorModalYCoord(-windowHeight);
+        setPicModalYCoord(0);
+        setSiteModalYCoord(0);
+        setSettingsModalYCoord(0);
+        setLaunchModalYCoord(0);
+      }
+  
+      if (!siteModal) {
+        setAnchorModalYCoord(0);
+      }
+    
   }, [siteModal]);
 
   useEffect(() => {

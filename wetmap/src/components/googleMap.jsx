@@ -273,7 +273,7 @@ function Map() {
       Latitude: lat,
       Longitude: lng,
     });
-    setSiteModal(!siteModal);
+    setSiteModal(true);
   };
 
   return (
