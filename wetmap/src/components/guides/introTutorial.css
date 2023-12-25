@@ -1,6 +1,6 @@
 .wrapper {
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     /* background: pink */
   }
 
@@ -12,8 +12,8 @@
 
   .character {
     position: absolute;
-    top: 30vh; 
-    left: 100vw; 
+    bottom: -5%; 
+    right: -30%; 
     height: 700px;
     width: 700px;
     opacity: rgb(0,0,0,1);
@@ -22,7 +22,7 @@
 
   .talkbox {
     position: absolute;
-    top: 110vh;
+    top: 120%;
     left: 35%;
     width: 60vh;
     height: min-content;
@@ -50,6 +50,8 @@
     position: absolute;
     top: -110vh;
     left: 30%;
+    width: 100px;
+    height: 100px;
     background-color: black;
     border-radius: 50px;
   }
@@ -58,6 +60,8 @@
     position: absolute;
     top: -110vh;
     left: 30%;
+    width: 100px;
+    height: 100px;
     background-color: black;
     border-radius: 50px;
   }
@@ -320,8 +324,8 @@
     position: absolute;
     top: -130vh;
     left: 30%;
-    height: 6vh;
-    width: 14vh;
+    height: 5%;
+    width: 6.5%;
     border-radius: 20px;
     animation: changeBg 4s linear infinite;
     border-radius: 15;

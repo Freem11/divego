@@ -6,7 +6,7 @@ function Picture(props) {
   const { pic } = props
 
   return (
-    <div key={pic.id} className="pictureBox">
+    <div key={pic.id} className="pictureBoxQ">
     <div className="micro">
     <h4 className="animalLabel">{pic.label}</h4>
       <a

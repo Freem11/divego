@@ -534,8 +534,8 @@ export default function ThirdTutorial(props) {
       >
         <PhotoCameraIcon
           sx={{
-            height: "9vh",
-            width: "9vh",
+            height: "90%",
+            width: "90%",
             color: "aquamarine",
             marginTop: "0.5vh"
           }}
@@ -548,8 +548,8 @@ export default function ThirdTutorial(props) {
       >
         <PhotoIcon
           sx={{
-            height: "9vh",
-            width: "9vh",
+            height: "90%",
+            width: "90%",
             color: "aquamarine",
             marginTop: "0.5vh"
           }}
@@ -563,8 +563,8 @@ export default function ThirdTutorial(props) {
       >
         <LocationOnIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "100%",
+            width: "100%",
             color: "aquamarine",
           }}
         />
@@ -574,8 +574,8 @@ export default function ThirdTutorial(props) {
         <img
           src={mantaIOS}
           style={{
-            height: 60,
-            width: 50,
+            height: "100%",
+            width: "80%",
           }}
         />
       </animated.div>

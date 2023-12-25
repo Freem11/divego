@@ -62,7 +62,7 @@
     border: none;
 } 
 
-#modalButtonDiv {
+#modalButtonDivD {
     width: 100%;
     margin-top: 173px;
     padding-top: 4px;
@@ -77,12 +77,12 @@
     border-bottom-right-radius: 25px;
 }
 
-#modalButtonDiv:hover {
+#modalButtonDivD:hover {
     background-color: #3e7dd7;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
 }
-#modalButtonDiv:active {
+#modalButtonDivD:active {
     background-color: #538dbd;
     border-bottom-left-radius: 25px;
     border-bottom-right-radius: 25px;
@@ -154,7 +154,7 @@
  display: flex;
 }
 
-.GPSbutton{
+.GPSbutton {
     margin-left: 240px;
     margin-top: 80px;
     display: flex;
@@ -203,10 +203,10 @@
     box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
-.pinButton:hover {
+.pinButtonD:hover {
     background-color: #3e7dd7;
 }
-.pinButton:active {
+.pinButtonD:active {
     background-color: #538dbd;
 }
 

@@ -35,8 +35,8 @@
     pointer-events: all;
   }
   .guidebuttonBar {
-    height: 6vh;
-    width: 14vh;
+    height: 52%;
+    width: 50%;
     border-radius: 20px;
     animation: changeBg 4s linear infinite;
     border-radius: 15px;

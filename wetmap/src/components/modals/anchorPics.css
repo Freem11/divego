@@ -1,7 +1,8 @@
 .masterDivA{
     overflow-y: hidden;
     overflow-x:hidden;
-    max-height: 80vh;
+    max-height: 98%;
+    width: 100%;
     /* margin-top: 45px; */
   }
   
@@ -41,17 +42,21 @@
 }
 
 .picScollA{
-    margin-top: 45px;
+    margin-top: 10%;
+    margin-left: 0.3%;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
     overflow: hidden;
+    /* background-color: khaki; */
+    height: 0%;
     width: 100%;
-    margin: 0px;
+    /* margin: 0px; */
 }
 
 .fixerDiv {
-    margin-bottom: 50px;
+    margin-bottom: 8%;
+    /* background-color: lawngreen; */
 }
 
 .fixDiv {
@@ -70,8 +75,6 @@
 .topDiv{
     display: flex;
     flex-direction: row;
-    top: 5%;
-    /* position: absolute; */
     width: 90%;
     margin-left: 3%;
     margin-top: -18px;

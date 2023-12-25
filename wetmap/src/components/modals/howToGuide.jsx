@@ -22,7 +22,12 @@ const HowToGuide = (props) => {
   const { itterator, setItterator } = useContext(IterratorContext);
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { itterator3, setItterator3 } = useContext(Iterrator3Context);
-  const { animateLaunchModal, animateIntroGuideModal, animateSecondGuideModal, animateThirdGuideModal } = props;
+  const {
+    animateLaunchModal,
+    animateIntroGuideModal,
+    animateSecondGuideModal,
+    animateThirdGuideModal,
+  } = props;
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { guideModal, setGuideModal } = useContext(TutorialModelContext);
   const { secondGuideModal, setSecondGuideModal } = useContext(
@@ -33,50 +38,67 @@ const HowToGuide = (props) => {
   );
 
   const handleTutorialStartup = () => {
-    setItterator(0)
+    setItterator(0);
     setTutorialRunning(true);
-    animateIntroGuideModal()
-    animateLaunchModal()
+    animateIntroGuideModal();
+    animateLaunchModal();
     setGuideModal(!guideModal);
   };
 
   const handleSecondTutorialStartup = () => {
-    setItterator2(0)
+    setItterator2(0);
     setTutorialRunning(true);
-    animateSecondGuideModal()
-    animateLaunchModal()
+    animateSecondGuideModal();
+    animateLaunchModal();
     setSecondGuideModal(!secondGuideModal);
   };
 
   const handleThirdTutorialStartup = () => {
-    setItterator2(0)
+    setItterator2(0);
     setTutorialRunning(true);
-    animateThirdGuideModal()
-    animateLaunchModal()
+    animateThirdGuideModal();
+    animateLaunchModal();
     setThirdGuideModal(!thirdGuideModal);
   };
 
   return (
     <div className="masterDiv">
-      <div className="topRead">
-        <div className="titleDiv">
-          <h3 style={{ marginTop: 3, marginRight: 45, width: "200%", fontFamily: "Patrick Hand", fontSize: 32}}>How to use Scuba SEAsons</h3>
-          <FormGroup>
-            <Button
-              variant="text"
-              id="closeButton2"
-              onClick={() => animateLaunchModal()}
-              style={{ display: "flex", flexDirection: "column", marginRight: 20, marginTop: 10, backgroundColor: "transparent", border: "none"}}
-            >
-              <CloseIcon
-                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
-              ></CloseIcon>
-            </Button>
-          </FormGroup>
-        </div>
+      {/* <div className="topRead"> */}
+      <div className="titleDiv">
+        <h3
+          style={{
+            marginTop: 3,
+            marginRight: 45,
+            width: "200%",
+            fontFamily: "Patrick Hand",
+            fontSize: 32,
+          }}
+        >
+          How to use Scuba SEAsons
+        </h3>
+        <FormGroup>
+          <Button
+            variant="text"
+            id="closeButton"
+            onClick={() => animateLaunchModal()}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              marginRight: 20,
+              marginTop: 10,
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer"
+            }}
+          >
+            <CloseIcon
+              sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+            ></CloseIcon>
+          </Button>
+        </FormGroup>
+      </div>
 
-        <div className="mainBlurbDiv">
-     
+      <div className="mainBlurbDiv">
         <div onClick={handleTutorialStartup} className="introGuideLaunch">
           <Label
             style={{
@@ -91,7 +113,10 @@ const HowToGuide = (props) => {
           </Label>
         </div>
 
-        <div onClick={handleSecondTutorialStartup} className="diveSiteGuideLaunch">
+        <div
+          onClick={handleSecondTutorialStartup}
+          className="diveSiteGuideLaunch"
+        >
           <Label
             style={{
               fontFamily: "Itim",
@@ -118,10 +143,8 @@ const HowToGuide = (props) => {
             Photogenics
           </Label>
         </div>
-
-        </div>
       </div>
-
+      {/* </div> */}
     </div>
   );
 };

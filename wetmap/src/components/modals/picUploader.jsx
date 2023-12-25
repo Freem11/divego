@@ -32,6 +32,9 @@ let filePath1 = "./wetmap/src/components/uploads/";
 let filePath = "/src/components/uploads/";
 let UserId = "";
 
+const screenWidthInital = window.innerWidth;
+const screenHeitghInital = window.innerHeight;
+
 const noGPSZone = (
   <div
     style={{
@@ -67,6 +70,16 @@ const PicUploader = React.memo((props) => {
     selectedFile: null,
   });
 
+  window.addEventListener("resize", trackDimensions);
+
+  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
+  const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
+
+  function trackDimensions() {
+    setWindowWidth(window.innerWidth);
+    setWindowHeigth(window.innerHeight);
+  }
+  
   useEffect(() => {
     if (pin.PicDate === "") {
       let Rnow = new Date();
@@ -258,7 +271,7 @@ const PicUploader = React.memo((props) => {
       } else if (itterator3 === 3) {
         setPicModalYCoord(0)
       } else if (itterator3 === 6 || itterator3 === 12 || itterator3 === 15) {
-        setPicModalYCoord(-950)
+        setPicModalYCoord(-windowHeight)
       } else if (itterator3 === 16) {
         blinker = setInterval(pinBut, 1000);
       } else if (itterator3 === 22) {

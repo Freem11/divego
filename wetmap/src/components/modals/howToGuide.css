@@ -1,7 +1,8 @@
 .masterDiv{
   overflow-y: hidden;
   overflow-x:hidden;
-  max-height: 80vh;
+  /* background-color: khaki; */
+  height: 97%;
 }
 
 .masterDiv:hover{
@@ -27,13 +28,13 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin-top: 10%;
-  margin-left: 10%;
+  /* margin-top: 20%; */
+  margin-left: 14%;
   font-family: 'Indie Flower';
   color: #F0EEEB;
-  height: 65vh;
-  width: 80%;
-  /* background-color: mediumaquamarine; */
+  height: 100%;
+  width: 70%;
+  /* background-color: aquamarine; */
 }
 
 .introGuideLaunch {

@@ -18,6 +18,9 @@ import { ModalSelectContext } from "../contexts/modalSelectContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { TutorialContext } from "../contexts/tutorialContext";
 
+const screenWidthInital = window.innerWidth;
+const screenHeitghInital = window.innerHeight;
+
 const noGPSZone = (
   <div
     style={{
@@ -47,6 +50,16 @@ const SiteSubmitter = (props) => {
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
   });
+
+  window.addEventListener("resize", trackDimensions);
+
+  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
+  const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
+
+  function trackDimensions() {
+    setWindowWidth(window.innerWidth);
+    setWindowHeigth(window.innerHeight);
+  }
 
   const handleChange = (e) => {
     setAddSiteVals({ ...addSiteVals, [e.target.name]: e.target.value });
@@ -188,7 +201,7 @@ const SiteSubmitter = (props) => {
       } else if (itterator2 === 13) {
         blinker1 = setInterval(locationBut, 1000);
       } else if(itterator2 === 15 || itterator2 == 10) {
-        setSiteModalYCoord(-950)
+        setSiteModalYCoord(-windowHeight)
       } else if (itterator2 ===8 || itterator2 === 1) {
         setSiteModalYCoord(0)
       } else if (itterator2 === 23) { 
@@ -416,7 +429,7 @@ const SiteSubmitter = (props) => {
         <FormGroup>
           <Button
             variant="text"
-            id="modalButtonDiv"
+            id="modalButtonDivD"
             style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
             onClick={handleSubmit}
           >

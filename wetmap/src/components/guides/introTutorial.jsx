@@ -753,8 +753,8 @@ export default function IntroTutorial(props) {
       >
         <ExploreIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "100%",
+            width: "100%",
             color: "aquamarine",
           }}
         />
@@ -768,8 +768,8 @@ export default function IntroTutorial(props) {
       >
         <QuestionMarkIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "100%",
+            width: "100%",
             color: "aquamarine",
           }}
         />

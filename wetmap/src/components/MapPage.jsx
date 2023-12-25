@@ -191,22 +191,22 @@ const MapPage = React.memo((props) => {
   const returnToPicModal = () => {
     if (chosenModal === "DiveSite") {
       animateSiteModal();
-      animateSecondGuideModal()
       setMasterSwitch(true);
       setChosenModal(null);
       if (tutorialRunning) {
         if (itterator2 === 19) {
           setItterator2(itterator2 + 1);
+          animateSecondGuideModal()
         }
       }
     } else if (chosenModal === "Photos") {
       animatePicModal();
-      animateThirdGuideModal()
       setMasterSwitch(true);
       setChosenModal(null);
       if (tutorialRunning) {
         if (itterator3 === 19) {
           setItterator3(itterator3 + 1);
+          animateThirdGuideModal()
         }
       }
     }
@@ -380,7 +380,7 @@ const MapPage = React.memo((props) => {
 
   const animatePicModal = () => {
     if (picModalYCoord === 0) {
-      setPicModalYCoord(-950);
+      setPicModalYCoord(-windowHeight);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -406,7 +406,7 @@ const MapPage = React.memo((props) => {
 
   const animateSiteModal = () => {
     if (siteModalYCoord === 0) {
-      setSiteModalYCoord(-950);
+      setSiteModalYCoord(-windowHeight);
       setPicModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -429,7 +429,7 @@ const MapPage = React.memo((props) => {
 
   const animateLaunchModal = () => {
     if (launchModalYCoord === 0) {
-      setLaunchModalYCoord(-950);
+      setLaunchModalYCoord(-windowHeight);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
@@ -442,7 +442,7 @@ const MapPage = React.memo((props) => {
 
   const animateSettingsModal = () => {
     if (settingsModalYCoord === 0) {
-      setSettingsModalYCoord(-950);
+      setSettingsModalYCoord(-windowHeight);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -479,7 +479,7 @@ const MapPage = React.memo((props) => {
 
   const animateAnchorModal = () => {
     if (anchorModalYCoord === 0) {
-      setAnchorModalYCoord(-950);
+      setAnchorModalYCoord(-windowHeight);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
@@ -492,7 +492,7 @@ const MapPage = React.memo((props) => {
 
   useEffect(() => {
     if (siteModal) {
-      setAnchorModalYCoord(-950);
+      setAnchorModalYCoord(-windowHeight);
     }
 
     if (!siteModal) {
@@ -502,7 +502,7 @@ const MapPage = React.memo((props) => {
 
   useEffect(() => {
     if (dsAdderModal) {
-      setSiteModalYCoord(-950);
+      setSiteModalYCoord(-windowHeight);
     }
 
     if (!dsAdderModal) {
@@ -512,7 +512,7 @@ const MapPage = React.memo((props) => {
 
   useEffect(() => {
     if (picAdderModal) {
-      setPicModalYCoord(-950);
+      setPicModalYCoord(-windowHeight);
     }
 
     if (!picAdderModal) {
@@ -748,6 +748,7 @@ const MapPage = React.memo((props) => {
               width: "90%",
               position: "relative",
               zIndex: "2",
+              // backgroundColor: "green"
             }}
           >
             <Button
@@ -764,6 +765,7 @@ const MapPage = React.memo((props) => {
                 marginTop: "15px",
                 borderRadius: "10px",
                 boxShadow: " 5px 5px 5px 5px rgba(0,0,0, 0.7)",
+                zIndex: 3
               }}
             >
               Set Pin

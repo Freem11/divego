@@ -1,8 +1,8 @@
-.pictureBox{
+.pictureBoxQ{
   display: flex;
   flex-direction: column;
   width: 99%;
-  margin-bottom: -15px;
+  margin-bottom: -1%;
   overflow: hidden;
 }
 

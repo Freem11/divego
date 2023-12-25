@@ -586,8 +586,8 @@ export default function SecondTutorial(props) {
       >
         <TravelExploreIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "100%",
+            width: "100%",
             color: "aquamarine",
           }}
         />
@@ -600,10 +600,10 @@ export default function SecondTutorial(props) {
       >
         <AddLocationAltIcon
           sx={{
-            height: "8.5vh",
-            width: "8.5vh",
+            height: "90%",
+            width: "90%",
             color: "aquamarine",
-            marginTop: "1vh"
+            marginTop: "10%"
           }}
         />
       </animated.div>
@@ -615,8 +615,8 @@ export default function SecondTutorial(props) {
       >
         <LocationOnIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "100%",
+            width: "100%",
             color: "aquamarine",
           }}
         />
@@ -625,8 +625,8 @@ export default function SecondTutorial(props) {
       <animated.div ref={pinRef} className="pinbuttonwrapper" style={pinSlide}>
         <MyLocationIcon
           sx={{
-            height: "10vh",
-            width: "10vh",
+            height: "100%",
+            width: "100%",
             color: "aquamarine",
           }}
         />
@@ -636,8 +636,8 @@ export default function SecondTutorial(props) {
         <img
           src={mantaIOS}
           style={{
-            height: 60,
-            width: 50,
+            height: "100%",
+            width: "80%",
           }}
         />
       </animated.div>
