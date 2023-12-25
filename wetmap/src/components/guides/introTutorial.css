@@ -322,10 +322,10 @@
 
   .guidebutton {
     position: absolute;
-    top: -130vh;
+    top: -120vh;
     left: 30%;
-    height: 8%;
-    width: 12%;
+    height: 55px;
+    width: 180px;
     border-radius: 20px;
     animation: changeBg 4s linear infinite;
     border-radius: 15;
