@@ -236,7 +236,7 @@ export default function SecondTutorial(props) {
   const text1 =
     "First, let's look at working with Dive sites, let's move to a spot with known dive sites";
   const text2 =
-    "Now that the map is positioned, let's check for a dive site by tapping on the dive site search tool option, it looks like this";
+    "Now that the map is positioned, let's check for a dive site by clicking on the dive site search tool option, it looks like this";
   const text3 = "";
   const text4 =
     "Now that the options are open, it will show you a list of dive sites in the area, try searching for 'Copper Cliffs' and select it, once you have found it";
@@ -253,29 +253,29 @@ export default function SecondTutorial(props) {
   const text11 =
     "Next are the GPS lat and lng fields, there are 3 ways you can add them. The first is manually if you have the decimal format GPS coordinates simply add them to the fields and your good to go!";
   const text12 =
-    "The second way is using the location button, it’s this one. Tapping it will take your device’s current location and use that to create GPS coordinates for the dive site. Try it out now!";
+    "The second way is using the location button, it’s this one. Clicking it will take your device’s current location and use that to create GPS coordinates for the dive site. Try it out now!";
   const text13 = "";
   const text14 =
-    "Nice! As you can see tapping the location button has produced GPS coordinates for your current location!";
+    "Nice! As you can see clicking the location button has produced GPS coordinates for your current location!";
   const text15 =
     "Next, assuming neither of these options will fit your situation there is one more, using this Pin Dropper button to open up the map so we can drop a pin, let’s try it";
   const text16 = "";
   const text17 =
     "As you can see we are now back on the map and there is a new icon that looks like a manta ray, this is our draggable pin";
   const text18 =
-    "Simply press on and drag the manta pin to to place it where you dive site is meant to be and then tap the 'set pin' button at the bottom";
+    "Simply press on and drag the manta pin to to place it where you dive site is meant to be and then click the 'set pin' button at the top of the page";
   const text19 = "";
   const text20 =
     "As you can see Scuba SEAsons has taken the location of the pin you set and has given us its GPS coordinates!";
   const text21 =
-    "Now that you have your GPS fields filled out add the site name in the top field and then tap the 'Submit Dive Site' button at the bottom and your site will be submitted for review";
+    "Now that you have your GPS fields filled out add the site name in the top field and then click the 'Submit Dive Site' button at the bottom and your site will be submitted for review";
   const text22 =
     "Please note your new site won't automatically be added to the map, the Scuba SEAsons team will verify your submission before committing to the map, but after that your site will go in and be credited to you with your diver name that we setup earlier!";
   const text23 = "";
   const text24 =
     "Nice Job, That's how you add a new dive site to Scuba SEAsons! In this case, since this is a guide, the entry was not submitted, but you can add from now on, in the same way";
   const text25 =
-    "That's it for adding dive sites to the app! In the next guide we will look at adding sea creature sighting photos! Tap on this button to go to that guide next, otherwise tap anywhere else to close, and thanks for joining me again!";
+    "That's it for adding dive sites to the app! In the next guide we will look at adding sea creature sighting photos! Click on this button to go to that guide next, otherwise click anywhere else to close, and thanks for joining me again!";
 
   const text26 = "";
 
