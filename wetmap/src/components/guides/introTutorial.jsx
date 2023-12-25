@@ -108,10 +108,11 @@ export default function IntroTutorial(props) {
   
   useEffect(() => {
     setMovingBack(false);
-    resetTutorial()
+    
 
     switch (chapter) {
       case "Getting around the map":
+        resetTutorial()
         setSiteModal(false);
         setItterator(6);
         setGuideModal(true);
@@ -121,10 +122,11 @@ export default function IntroTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
-        // setPixY(windowHeigth * 1.9)
+        setPixY((2*windowHeigth)+(windowHeigth-picBoxHeigth)/2)
         break;
 
       case "Dive sites":
+        resetTutorial()
         setSiteModal(false);
         setItterator(9);
         setGuideModal(true);
@@ -134,12 +136,13 @@ export default function IntroTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
-        // setClusterAnchorY(windowHeigth * 1.85);
-        // setHeatPotintY(windowHeigth * 1.6);
+        setClusterAnchorY((2*windowHeigth)+(windowHeigth-500)/2);
+        setHeatPotintY((2*windowHeigth)+(windowHeigth-200)/3);
         nudgeMap({ lat: 49.3134161482923, lng: -124.242440499365 });
         break;
 
       case "Changed dive site":
+        resetTutorial()
         setSiteModal(false);
         setItterator(17);
         setGuideModal(true);
@@ -150,7 +153,7 @@ export default function IntroTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
-        setArrowY(windowHeigth * 1.6);
+        setArrowY((2*windowHeigth)+(windowHeigth-250)/6);
         if (selectedDiveSite.SiteName === "") {
           setSelectedDiveSite({
             SiteName: "Madrona Point",
@@ -457,13 +460,13 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 3) {
-      setGuideButtonY((2*windowHeigth)-(windowHeigth-100)/2)
+      setGuideButtonY((2*windowHeigth)+(windowHeigth-55)/3)
     }
 
 
     if (itterator === 5) {
       setGuideButtonY(0)
-      setQuestionButtonY((2*windowHeigth)-(windowHeigth-100)/2);
+      setQuestionButtonY((2*windowHeigth)+(windowHeigth-100)/3);
     }
 
 
@@ -478,16 +481,16 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 8) {
-      setExploreButtonY((2*windowHeigth)-(windowHeigth-100)/2);
+      setExploreButtonY((2*windowHeigth)+(windowHeigth-100)/3);
     }
 
     if (itterator === 9) {
       setExploreButtonY(0);
-      setClusterAnchorY((2*windowHeigth)-(windowHeigth-500)/2);
+      setClusterAnchorY((2*windowHeigth)+(windowHeigth-500)/2);
     }
 
     if (itterator === 10) {
-      setHeatPotintY(windowHeigth * 1.6);
+      setHeatPotintY((2*windowHeigth)+(windowHeigth-200)/3);
     }
 
     if (itterator === 11) {
@@ -528,9 +531,9 @@ export default function IntroTutorial(props) {
 
     if (itterator === 17) {
       setIntroGuideModalYCoord(-windowHeigth)
-      setArrowY(windowHeigth * 1.6);
-      setChapter(null);
+      setArrowY((2*windowHeigth)+(windowHeigth-250)/6);
     }
+   
 
     if (itterator === 19) {
         setArrowY(0);
@@ -543,7 +546,7 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 24) {
-      setNextTutY(windowHeigth * 1.4);
+      setNextTutY((2*windowHeigth)+(windowHeigth-250)/2);
     }
 
     if (itterator === 25) {
@@ -559,6 +562,8 @@ export default function IntroTutorial(props) {
 
     }
   }, [itterator]);
+
+  console.log("arrof?",  arrowY, textBoxY, characterX)
 
   const characterSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -870,10 +875,9 @@ export default function IntroTutorial(props) {
       >
         <img
           src={arrowIOS}
-          className="anchor4"
           style={{
-            height: "30vh",
-            width: "70vh",
+            height: "100%",
+            width: "100%",
           }}
         />
       </animated.div>
