@@ -89,10 +89,10 @@ export default function SecondTutorial(props) {
   
   useEffect(() => {
     // setDiveSiteAdderModal(false);
-    resetTutorial();
 
     switch (chapter) {
       case "Checking for a dive site":
+        resetTutorial();
         setItterator2(1);
         setSecondGuideModalYCoord(-windowHeigth)
         setSecondGuideModal(true);
@@ -102,9 +102,11 @@ export default function SecondTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
+        setDsSearchY((2*windowHeigth)+(windowHeigth-100)/3);
         break;
 
       case "Adding your dive sites":
+        resetTutorial();
         setItterator2(8);
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
@@ -113,9 +115,11 @@ export default function SecondTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
+        setDiveSiteY((2*windowHeigth)+(windowHeigth-100)/3);
         break;
 
       case "DS Help":
+        resetTutorial();
         setItterator2(10);
         setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
@@ -128,6 +132,7 @@ export default function SecondTutorial(props) {
         break;
 
       case "Placing the pin":
+        resetTutorial();
         setItterator2(15);
         setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
@@ -137,6 +142,7 @@ export default function SecondTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
+        setLocationY((2*windowHeigth)+(windowHeigth-100)/3)
         break;
 
       case "Exit Guide":
@@ -385,7 +391,7 @@ export default function SecondTutorial(props) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
       setJump(!jump)
       setTimeout(() => {
-        setDsSearchY(windowHeigth * 1.7);
+        setDsSearchY((2*windowHeigth)+(windowHeigth-100)/3);
       }, 1000);
     }
 
@@ -412,7 +418,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 8) {
-      setDiveSiteY(windowHeigth * 1.7);
+      setDiveSiteY((2*windowHeigth)+(windowHeigth-100)/3);
     }
 
     if (itterator2 === 9) {
@@ -429,7 +435,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 12) {
-      setPinY(windowHeigth * 1.7)
+      setPinY((windowHeigth)+(windowHeigth-100)/2)
     }
 
     if (itterator2 === 13) {
@@ -444,7 +450,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 15) {
-      setLocationY(windowHeigth * 1.7)
+      setLocationY((2*windowHeigth)+(windowHeigth-100)/3)
     }
 
     if (itterator2 === 16) {
@@ -459,7 +465,7 @@ export default function SecondTutorial(props) {
       setSecondGuideModalYCoord(-windowHeigth)
       // animateSecondGuideModal()
       setTimeout(() => {
-        setMantaY(windowHeigth * 1.7)
+        setMantaY((windowHeigth)+(windowHeigth-120)/2)
       }, 1000);
     }
 
@@ -470,7 +476,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 20) {
-      setLocationY(windowHeigth * 1.7)
+      // setLocationY((2*windowHeigth)+(windowHeigth-100)/3)
       // animateSecondGuideModal()
     }
 
@@ -485,7 +491,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 25) {
-      setNextTutY(windowHeigth * 1.4);
+      setNextTutY((2*windowHeigth)+(windowHeigth-250)/2);
     }
 
     if (itterator2 === 26) {
