@@ -97,10 +97,10 @@ export default function SecondTutorial(props) {
         setSecondGuideModalYCoord(-windowHeigth)
         setSecondGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         break;
 
@@ -108,10 +108,10 @@ export default function SecondTutorial(props) {
         setItterator2(8);
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         break;
 
@@ -120,10 +120,10 @@ export default function SecondTutorial(props) {
         setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         break;
 
@@ -132,10 +132,10 @@ export default function SecondTutorial(props) {
         setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
-          setCharacterX(-windowWidth * 0.35);
+          setCharacterX((-600));
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth * 0.35);
+          setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
         break;
 
@@ -373,11 +373,11 @@ export default function SecondTutorial(props) {
   useEffect(() => {
     if (itterator2 === 0) {
       setTimeout(() => {
-        setCharacterX(-windowWidth * 0.35);
+        setCharacterX((-600));
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeigth * 0.35);
+        setTextBoxY(-windowHeigth+(windowHeigth-400));
       }, 1000);
     }
 
@@ -385,7 +385,7 @@ export default function SecondTutorial(props) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
       setJump(!jump)
       setTimeout(() => {
-        setDsSearchY(windowHeigth * 1.55);
+        setDsSearchY(windowHeigth * 1.7);
       }, 1000);
     }
 
@@ -412,7 +412,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 8) {
-      setDiveSiteY(windowHeigth * 1.55);
+      setDiveSiteY(windowHeigth * 1.7);
     }
 
     if (itterator2 === 9) {
@@ -429,7 +429,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 12) {
-      setPinY(windowHeigth * 1.55)
+      setPinY(windowHeigth * 1.7)
     }
 
     if (itterator2 === 13) {
@@ -444,7 +444,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 15) {
-      setLocationY(windowHeigth * 1.55)
+      setLocationY(windowHeigth * 1.7)
     }
 
     if (itterator2 === 16) {
@@ -459,7 +459,7 @@ export default function SecondTutorial(props) {
       setSecondGuideModalYCoord(-windowHeigth)
       // animateSecondGuideModal()
       setTimeout(() => {
-        setMantaY(windowHeigth * 1.55)
+        setMantaY(windowHeigth * 1.7)
       }, 1000);
     }
 
@@ -470,7 +470,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 20) {
-      setLocationY(windowHeigth * 1.55)
+      setLocationY(windowHeigth * 1.7)
       // animateSecondGuideModal()
     }
 
