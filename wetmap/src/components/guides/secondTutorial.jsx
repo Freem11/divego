@@ -276,7 +276,6 @@ export default function SecondTutorial(props) {
     "Nice Job, That's how you add a new dive site to Scuba SEAsons! In this case, since this is a guide, the entry was not submitted, but you can add from now on, in the same way";
   const text25 =
     "That's it for adding dive sites to the app! In the next guide we will look at adding sea creature sighting photos! Click on this button to go to that guide next, otherwise click anywhere else to close, and thanks for joining me again!";
-
   const text26 = "";
 
   const [textRead, setTextRead] = useState("");

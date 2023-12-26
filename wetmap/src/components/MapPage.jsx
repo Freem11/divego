@@ -196,7 +196,7 @@ const MapPage = React.memo((props) => {
       if (tutorialRunning) {
         if (itterator2 === 19) {
           setItterator2(itterator2 + 1);
-          animateSecondGuideModal()
+          animateSecondGuideModal();
         }
       }
     } else if (chosenModal === "Photos") {
@@ -206,7 +206,7 @@ const MapPage = React.memo((props) => {
       if (tutorialRunning) {
         if (itterator3 === 19) {
           setItterator3(itterator3 + 1);
-          animateThirdGuideModal()
+          animateThirdGuideModal();
         }
       }
     }
@@ -224,17 +224,17 @@ const MapPage = React.memo((props) => {
             setTutorialRunning(true);
             setItterator(0);
           } else {
-          setProfile(success);
-          setPin({
-            ...pin,
-            UserID: success[0].UserID,
-            UserName: success[0].UserName,
-          });
-          setAddSiteVals({
-            ...addSiteVals,
-            UserID: success[0].UserID,
-            UserName: success[0].UserName,
-          });
+            setProfile(success);
+            setPin({
+              ...pin,
+              UserID: success[0].UserID,
+              UserName: success[0].UserName,
+            });
+            setAddSiteVals({
+              ...addSiteVals,
+              UserID: success[0].UserID,
+              UserName: success[0].UserName,
+            });
           }
         }
       } catch (e) {
@@ -279,7 +279,136 @@ const MapPage = React.memo((props) => {
     borderRadius: "100%",
   };
 
-  const handleDiveSiteSearch = () => {
+  //Gaps
+  //guide 1
+  // 11, 13, 16 ,19, 25 - lock all
+  //guide 2
+  // 3 - keep dive site search accessible
+  // 9 - keep dive site modal accessible
+  // 5, 13, 16, 19, 23, 26 - lock all
+  //guide 3
+  // 5 - keep photo modal accessible
+  // 8, 11, 14, 16, 19, 22, 26 - lock all
+
+  const handleSettingsButton = () => {
+    if (
+      itterator === 11 ||
+      itterator === 13 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator === 25 ||
+      itterator2 === 3 ||
+      itterator2 === 5 ||
+      itterator2 === 9 ||
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23 ||
+      itterator2 === 26 ||
+      itterator3 === 5 ||
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 19 ||
+      itterator3 === 22 ||
+      itterator3 === 26
+    ) {
+      return;
+    }
+
+    animateSettingsModal();
+
+  };
+  
+  const handleTutorialButton = () => {
+    if (
+      itterator === 11 ||
+      itterator === 13 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator === 25 ||
+      itterator2 === 3 ||
+      itterator2 === 5 ||
+      itterator2 === 9 ||
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23 ||
+      itterator2 === 26 ||
+      itterator3 === 5 ||
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 19 ||
+      itterator3 === 22 ||
+      itterator3 === 26
+    ) {
+      return;
+    }
+
+    animateLaunchModal();
+
+  };
+
+  const handleGeocodingSearchButton = () => {
+    if (
+      itterator === 11 ||
+      itterator === 13 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator === 25 ||
+      itterator2 === 3 ||
+      itterator2 === 5 ||
+      itterator2 === 9 ||
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23 ||
+      itterator2 === 26 ||
+      itterator3 === 5 ||
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 19 ||
+      itterator3 === 22 ||
+      itterator3 === 26
+    ) {
+      return;
+    }
+
+    setShowGeoCoder(!showGeoCoder);
+
+  };
+
+  const handleDiveSiteSearchButton = () => {
+    if (
+      itterator === 11 ||
+      itterator === 13 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator === 25 ||
+      itterator2 === 5 ||
+      itterator2 === 9 ||
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23 ||
+      itterator2 === 26 ||
+      itterator3 === 5 ||
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 19 ||
+      itterator3 === 22 ||
+      itterator3 === 26
+    ) {
+      return;
+    }
+
     setShowAnimalSearch(!showAnimalSearch);
 
     if (tutorialRunning) {
@@ -289,17 +418,31 @@ const MapPage = React.memo((props) => {
     }
   };
 
-  const handleDiveSiteModal = () => {
-    clearSiteModal();
-
-    if (tutorialRunning) {
-      if (itterator2 === 9) {
-        setItterator2(itterator2 + 1);
-      }
+  const handlePhotoModalButton = () => {
+    if (
+      itterator === 11 ||
+      itterator === 13 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator === 25 ||
+      itterator2 === 3 ||
+      itterator2 === 5 ||
+      itterator2 === 9 ||
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23 ||
+      itterator2 === 26 ||
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 19 ||
+      itterator3 === 22 ||
+      itterator3 === 26
+    ) {
+      return;
     }
-  };
-
-  const handlePhotoModal = () => {
     clearPicModal();
 
     if (tutorialRunning) {
@@ -309,6 +452,72 @@ const MapPage = React.memo((props) => {
     }
   };
 
+
+  const handleDiveSiteModalButton = () => {
+    if (
+      itterator === 11 ||
+      itterator === 13 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator === 25 ||
+      itterator2 === 3 ||
+      itterator2 === 5 ||
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23 ||
+      itterator2 === 26 ||
+      itterator3 === 5 ||
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 19 ||
+      itterator3 === 22 ||
+      itterator3 === 26
+    ) {
+      return;
+    }
+
+    clearSiteModal();
+
+    if (tutorialRunning) {
+      if (itterator2 === 9) {
+        setItterator2(itterator2 + 1);
+      }
+    }
+  };
+
+  const handleAnchorButton = () => {
+    if (
+      itterator === 11 ||
+      itterator === 13 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator === 25 ||
+      itterator2 === 3 ||
+      itterator2 === 5 ||
+      itterator2 === 9 ||
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23 ||
+      itterator2 === 26 ||
+      itterator3 === 5 ||
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 19 ||
+      itterator3 === 22 ||
+      itterator3 === 26
+    ) {
+      return;
+    }
+
+    setDivesTog(!divesTog);
+
+  };
   let screenWidthInital = window.innerWidth;
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
@@ -378,12 +587,11 @@ const MapPage = React.memo((props) => {
     to: { transform: `translate3d(0,${anchorModalYCoord}px,0)` },
   });
 
-
   let modalHeigth = 700;
 
   const animatePicModal = () => {
     if (picModalYCoord === 0) {
-      setPicModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
+      setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -409,7 +617,7 @@ const MapPage = React.memo((props) => {
 
   const animateSiteModal = () => {
     if (siteModalYCoord === 0) {
-      setSiteModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
+      setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -432,7 +640,7 @@ const MapPage = React.memo((props) => {
 
   const animateLaunchModal = () => {
     if (launchModalYCoord === 0) {
-      setLaunchModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
+      setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
@@ -445,7 +653,7 @@ const MapPage = React.memo((props) => {
 
   const animateSettingsModal = () => {
     if (settingsModalYCoord === 0) {
-      setSettingsModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
+      setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setLaunchModalYCoord(0);
@@ -482,7 +690,7 @@ const MapPage = React.memo((props) => {
 
   const animateAnchorModal = () => {
     if (anchorModalYCoord === 0) {
-      setAnchorModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
+      setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
@@ -494,23 +702,22 @@ const MapPage = React.memo((props) => {
   };
 
   useEffect(() => {
-      if (siteModal) {
-        setAnchorModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
-        setPicModalYCoord(0);
-        setSiteModalYCoord(0);
-        setSettingsModalYCoord(0);
-        setLaunchModalYCoord(0);
-      }
-  
-      if (!siteModal) {
-        setAnchorModalYCoord(0);
-      }
-    
+    if (siteModal) {
+      setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setPicModalYCoord(0);
+      setSiteModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setLaunchModalYCoord(0);
+    }
+
+    if (!siteModal) {
+      setAnchorModalYCoord(0);
+    }
   }, [siteModal]);
 
   useEffect(() => {
     if (dsAdderModal) {
-      setSiteModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
+      setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
     }
 
     if (!dsAdderModal) {
@@ -520,7 +727,7 @@ const MapPage = React.memo((props) => {
 
   useEffect(() => {
     if (picAdderModal) {
-      setPicModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2);
+      setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
     }
 
     if (!picAdderModal) {
@@ -552,7 +759,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={gearModal}
               onChange={() => {
-                animateSettingsModal();
+                handleSettingsButton()
               }}
             >
               <SettingsIcon sx={{ height: "39px", width: "39px" }} />
@@ -567,7 +774,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={guideModal}
               onChange={() => {
-                animateLaunchModal();
+                handleTutorialButton()
               }}
             >
               <QuestionMarkIcon sx={{ height: "40px", width: "40px" }} />
@@ -585,7 +792,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={showGeoCoder}
               onChange={() => {
-                setShowGeoCoder(!showGeoCoder);
+                handleGeocodingSearchButton();
               }}
             >
               <ExploreIcon sx={{ height: "37px", width: "37px" }} />
@@ -610,7 +817,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={showAnimalSearch}
               onChange={() => {
-                handleDiveSiteSearch();
+                handleDiveSiteSearchButton();
               }}
             >
               <TravelExploreIcon sx={{ height: "36px", width: "36px" }} />
@@ -632,7 +839,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={picModal}
               onChange={() => {
-                handlePhotoModal();
+                handlePhotoModalButton();
               }}
             >
               <PhotoCameraIcon sx={{ height: "36px", width: "36px" }} />
@@ -647,7 +854,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={diveSiteModal}
               onChange={() => {
-                handleDiveSiteModal();
+                handleDiveSiteModalButton();
               }}
             >
               <AddLocationAltIcon sx={{ height: "38px", width: "38px" }} />
@@ -663,7 +870,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={divesTog}
               onChange={() => {
-                setDivesTog(!divesTog);
+                handleAnchorButton()
               }}
             >
               <AnchorIcon sx={{ height: "37px", width: "37px" }} />
@@ -773,7 +980,7 @@ const MapPage = React.memo((props) => {
                 marginTop: "15px",
                 borderRadius: "10px",
                 boxShadow: " 5px 5px 5px 5px rgba(0,0,0, 0.7)",
-                zIndex: 3
+                zIndex: 3,
               }}
             >
               Set Pin
