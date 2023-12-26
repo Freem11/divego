@@ -121,6 +121,10 @@ const SiteSubmitter = (props) => {
   };
 
   const handleNoGPSCloseOnMapChange = () => {
+    if (itterator2 === 13 || itterator2 === 23) {
+      return;
+    }
+
     setChosenModal("DiveSite");
     setShowNoGPS(false);
     setMasterSwitch(false);
@@ -190,7 +194,7 @@ const SiteSubmitter = (props) => {
     clearInterval(blinker2);
     setLocButState(false);
     setPinButState(false);
-    setSiteNameState(false)
+    setSiteNameState(false);
     setSubButState(false);
   }
 
@@ -202,11 +206,11 @@ const SiteSubmitter = (props) => {
         blinker1 = setInterval(pinBut, 600);
       } else if (itterator2 === 13) {
         blinker1 = setInterval(locationBut, 1000);
-      } else if(itterator2 === 15 || itterator2 == 10) {
-        setSiteModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2)
-      } else if (itterator2 ===8 || itterator2 === 1) {
-        setSiteModalYCoord(0)
-      } else if (itterator2 === 23) { 
+      } else if (itterator2 === 15 || itterator2 == 10) {
+        setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      } else if (itterator2 === 8 || itterator2 === 1) {
+        setSiteModalYCoord(0);
+      } else if (itterator2 === 23) {
         blinker1 = setInterval(siteField, 1000);
         timer2 = setTimeout(subButTimeout, 300);
       } else if (itterator2 === 26) {
@@ -216,7 +220,7 @@ const SiteSubmitter = (props) => {
           Latitude: "",
           Longitude: "",
         });
-        animateSiteModal()
+        animateSiteModal();
       }
     }
     return () => cleanUp();
@@ -245,9 +249,8 @@ const SiteSubmitter = (props) => {
     let LatV = parseFloat(addSiteVals.Latitude);
     let LngV = parseFloat(addSiteVals.Longitude);
 
-
     if (tutorialRunning) {
-      if (itterator2 ===23)  {
+      if (itterator2 === 23) {
         setItterator2(itterator2 + 1);
       }
     } else if (
@@ -270,6 +273,9 @@ const SiteSubmitter = (props) => {
   }
 
   const handleModalClose = () => {
+    if (itterator2 === 13 || itterator2 === 16 || itterator2 === 19 || itterator2 === 23) {
+      return;
+    }
     setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
     animateSiteModal();
   };
@@ -299,7 +305,6 @@ const SiteSubmitter = (props) => {
     borderRadius: "20px",
     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
   };
-
 
   return (
     <Container fluid>

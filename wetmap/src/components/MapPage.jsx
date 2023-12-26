@@ -279,17 +279,6 @@ const MapPage = React.memo((props) => {
     borderRadius: "100%",
   };
 
-  //Gaps
-  //guide 1
-  // 11, 13, 16 ,19, 25 - lock all
-  //guide 2
-  // 3 - keep dive site search accessible
-  // 9 - keep dive site modal accessible
-  // 5, 13, 16, 19, 23, 26 - lock all
-  //guide 3
-  // 5 - keep photo modal accessible
-  // 8, 11, 14, 16, 19, 22, 26 - lock all
-
   const handleSettingsButton = () => {
     if (
       itterator === 11 ||
