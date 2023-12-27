@@ -58,36 +58,51 @@ export default function SignInRoute() {
     getUserData();
   }, []);
 
-  const handleAppleUserData = async (userData) => {
+  function parseJwt(token) {
+    var base64Url = token.split(".")[1];
+    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var jsonPayload = decodeURIComponent(
+      window
+        .atob(base64)
+        .split("")
+        .map(function (c) {
+          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+        })
+        .join("")
+    );
 
-    if (
-      (creds.email !== null) &
-      (creds.fullName.familyName !== null) &
-      (creds.fullName.givenName !== null)
-    ) {
-    let appleObject = {
-      name: `${userData.fullName.givenName} ${userData.fullName.familyName}`,
-      email: userData.email,
-      id: userData.user,
-    };
-    let appleObjectX = {
-      name: `${userData.name.firstName} ${userData.name.lastName}`,
-      email: userData.email,
-      id: userData.user,
-    };
-    await localStorage.setItem("appletoken", JSON.stringify(appleObject));
-    await localStorage.setItem("appletokenX", JSON.stringify(appleObjectX));
-    handleOAuthSubmit(appleObject || appleObjectX); 
-  } else {
-    let reUsedApple = JSON.parse(await AsyncStorage.getItem("appletoken"));
-    if (reUsedApple && reUsedApple.id === userData.user) {
-      handleOAuthSubmit(reUsedApple);
-      setIsSignedIn(false);
-    } else {
-      setIsSignedIn(false);
-      setLoginFail("Invalid Credentials (email and name required for sign in)");
-    }
+    return JSON.parse(jsonPayload);
   }
+
+  const handleAppleUserData = async (userData) => {
+    const decoded = parseJwt(userData.authorization.id_token);
+    console.log("appletoken", decoded.email);
+
+    // let tempObject = {
+    //   name: `Matthew Freeman`,
+    //   email: "freem1985@gmail.com",
+    //   id: "freem1985@gmail.com",
+    // };
+    // await localStorage.setItem("appletoken", JSON.stringify(tempObject));
+
+    if (userData.user) {
+      let appleObject = {
+        name: `${userData.user.name.firstName} ${userData.user.name.lastName}`,
+        email: userData.user.email,
+        id: userData.user,
+      };
+      await localStorage.setItem("appletoken", JSON.stringify(appleObject));
+      handleOAuthSubmit(appleObject);
+    } else {
+      let reUsedApple = JSON.parse(await localStorage.getItem("appletoken"));
+      if (reUsedApple && reUsedApple.email === decoded.email) {
+        handleOAuthSubmit(reUsedApple);
+      } else {
+        setLoginFail(
+          "Invalid Credentials (email and name required for sign in)"
+        );
+      }
+    }
   };
 
   async function getGoogleUserData(token) {
@@ -260,26 +275,24 @@ export default function SignInRoute() {
           />
         </div>
 
-   
         <div className="Oaths">
-        <div className="OAuthButton">
-          <LoginSocialApple
-             client_id={appleAppId || ''}
-             scope={'name email'}
-             redirect_uri={REDIRECT_URI}
-             onResolve={({ provider, data }) => {
-              handleAppleUserData(data);
-              alert("apple", data)
-              console.log("apple", data);
-             }}
-             onReject={err => {
-               console.log(err);
-             }}
-           >
-            <AppleLoginButton style={{ width: "245px", height: "40px" }} />
-          </LoginSocialApple>
-        </div>
-        
+          <div className="OAuthButton">
+            <LoginSocialApple
+              client_id={appleAppId || ""}
+              scope={"name email"}
+              redirect_uri={REDIRECT_URI}
+              onResolve={({ provider, data }) => {
+                handleAppleUserData(data);
+                console.log("apple", data);
+              }}
+              onReject={(err) => {
+                console.log(err);
+              }}
+            >
+              <AppleLoginButton style={{ width: "245px", height: "40px" }} />
+            </LoginSocialApple>
+          </div>
+
           <div className="OAuthButton">
             <LoginSocialGoogle
               isOnlyGetToken
