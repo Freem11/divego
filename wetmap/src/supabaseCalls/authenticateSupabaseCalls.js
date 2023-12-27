@@ -59,7 +59,7 @@ export const signInStandard = async (loginDetails) => {
   }
 
   if (data) {
-    return { data };
+    return { data, error };
   }
 };
 

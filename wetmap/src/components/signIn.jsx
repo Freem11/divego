@@ -62,13 +62,9 @@ export default function SignInRoute() {
     var base64Url = token.split(".")[1];
     var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
     var jsonPayload = decodeURIComponent(
-      window
-        .atob(base64)
-        .split("")
-        .map(function (c) {
+      window.atob(base64).split("").map(function (c) {
           return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join("")
+        }).join("")
     );
 
     return JSON.parse(jsonPayload);
@@ -76,24 +72,29 @@ export default function SignInRoute() {
 
   const handleAppleUserData = async (userData) => {
     const decoded = parseJwt(userData.authorization.id_token);
-
+    
     if (userData.user) {
       let appleObject = {
         name: `${userData.user.name.firstName} ${userData.user.name.lastName}`,
         email: userData.user.email,
         id: decoded.sub,
       };
-      await localStorage.setItem("appletoken", JSON.stringify(appleObject));
+      // await localStorage.setItem("appletoken", JSON.stringify(appleObject));
       handleOAuthSubmit(appleObject);
     } else {
-      let reUsedApple = JSON.parse(await localStorage.getItem("appletoken"));
-      if (reUsedApple && reUsedApple.email === decoded.email) {
-        handleOAuthSubmit(reUsedApple);
-      } else {
-        setLoginFail(
-          "Invalid Credentials (email and name required for sign in)"
-        );
-      }
+      let reUsedApple = {
+        email: decoded.email,
+        id: decoded.sub,
+      };
+      handleOAuthSubmit(reUsedApple);
+      // let reUsedApple = JSON.parse(await localStorage.getItem("appletoken"));
+      // if (reUsedApple && reUsedApple.email === decoded.email) {
+      //   handleOAuthSubmit(reUsedApple);
+      // } else {
+      //   setLoginFail(
+      //     "Invalid Credentials (email and name required for sign in)"
+      //   );
+      // }
     }
   };
 
@@ -130,6 +131,8 @@ export default function SignInRoute() {
   const handleOAuthSubmit = async (user) => {
     let Fname;
     let LName;
+    let Pword = user.id;
+    let MailE = user.email;
 
     if (user.given_name) {
       if (user.family_name) {
@@ -139,13 +142,10 @@ export default function SignInRoute() {
         Fname = user.given_name.split(" ").slice(0, -1).join(" ");
         LName = user.given_name.split(" ").slice(-1)[0];
       }
-    } else {
+    } else if (user.name) {
       Fname = user.name.split(" ").slice(0, 1);
       LName = user.name.split(" ").slice(-1);
     }
-
-    let Pword = user.id;
-    let MailE = user.email;
 
     let accessToken = await OAuthSignIn({
       password: Pword,
@@ -166,12 +166,13 @@ export default function SignInRoute() {
       return;
     } else {
       let registrationToken = await register(formVals);
-      //test me
-      await createProfile({
-        id: registrationToken.data.session.user.id,
-        email: formVals.email,
-      });
-      ////
+      if (formVals.firstName){
+        await createProfile({
+          id: registrationToken.data.session.user.id,
+          email: formVals.email,
+        });
+      }
+     
       if (registrationToken.data.session !== null) {
         await localStorage.setItem(
           "token",
@@ -269,23 +270,6 @@ export default function SignInRoute() {
 
         <div className="Oaths">
           <div className="OAuthButton">
-            <LoginSocialApple
-              client_id={appleAppId || ""}
-              scope={"name email"}
-              redirect_uri={REDIRECT_URI}
-              onResolve={({ provider, data }) => {
-                handleAppleUserData(data);
-                console.log("apple", data);
-              }}
-              onReject={(err) => {
-                console.log(err);
-              }}
-            >
-              <AppleLoginButton style={{ width: "245px", height: "40px" }} />
-            </LoginSocialApple>
-          </div>
-
-          <div className="OAuthButton">
             <LoginSocialGoogle
               isOnlyGetToken
               client_id={googleClientId || ""}
@@ -318,6 +302,23 @@ export default function SignInRoute() {
             >
               <FacebookLoginButton style={{ width: "245px", height: "40px" }} />
             </LoginSocialFacebook>
+          </div>
+
+          <div className="OAuthButton">
+            <LoginSocialApple
+              client_id={appleAppId || ""}
+              scope={"name email"}
+              redirect_uri={REDIRECT_URI}
+              onResolve={({ provider, data }) => {
+                handleAppleUserData(data);
+                console.log("apple", data);
+              }}
+              onReject={(err) => {
+                console.log(err);
+              }}
+            >
+              <AppleLoginButton style={{ width: "245px", height: "40px" }} />
+            </LoginSocialApple>
           </div>
         </div>
 
