@@ -76,20 +76,12 @@ export default function SignInRoute() {
 
   const handleAppleUserData = async (userData) => {
     const decoded = parseJwt(userData.authorization.id_token);
-    console.log("appletoken", decoded.email);
-
-    // let tempObject = {
-    //   name: `Matthew Freeman`,
-    //   email: "freem1985@gmail.com",
-    //   id: "freem1985@gmail.com",
-    // };
-    // await localStorage.setItem("appletoken", JSON.stringify(tempObject));
 
     if (userData.user) {
       let appleObject = {
         name: `${userData.user.name.firstName} ${userData.user.name.lastName}`,
         email: userData.user.email,
-        id: userData.user,
+        id: decoded.sub,
       };
       await localStorage.setItem("appletoken", JSON.stringify(appleObject));
       handleOAuthSubmit(appleObject);
