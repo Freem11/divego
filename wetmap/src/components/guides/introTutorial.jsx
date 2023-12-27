@@ -270,7 +270,7 @@ export default function IntroTutorial(props) {
   const text2 =
     "Nice to meet you! Now that we are buddied up, let me first explain how my guide system works";
   const text3 =
-    "In the top left you may have noticed this 'Guide Active' button, as long as you are in a guide it will be on screen if you tap on it a menu will open giving you the option to chapter skip to different parts of the guide you are currently in";
+    "In the top left you may have noticed this 'Guide Active' button, as long as you are in a guide it will be on screen if you click on it a menu will open giving you the option to chapter skip to different parts of the guide you are currently in";
   const text4 =
     "The last option in the list on any of the guides is the 'Exit Guide' option which will let you jump out and explore on your own at any time";
   const text5 =
@@ -282,8 +282,8 @@ export default function IntroTutorial(props) {
   const text8 =
     "Normally to move the map, you can use the location search under this icon. Enter in the name of the location you want to hop over to and it will take you there";
   const text9 =
-    "Looking at the map you can now see a few things, namely these grey and blue anchors, the grey anchors are a cluster of dive sites, tapping on one will zoom the map into it until the single dive sites split out from it";
-  const text10 = `The blue anchors are dive sites, try tapping on one and let's take a closer look! But make sure it has a heat point nearby, they look like this,      that means sea creatures have been spotted on that dive site.`;
+    "Looking at the map you can now see a few things, namely these grey and blue anchors, the grey anchors are a cluster of dive sites, clicking on one will zoom the map into it until the single dive sites split out from it";
+  const text10 = `The blue anchors are dive sites, try clicking on one and let's take a closer look! But make sure it has a heat point nearby, they look like this,      that means sea creatures have been spotted on that dive site.`;
   const text11 = "";
   const text12 =
     "Oops! Looks like you have chosen a dive site that doesn't have any sightings yet! Remember you want a dive site with a heat point       nearby. Close the form and try to find one with heat points.";
@@ -307,7 +307,7 @@ export default function IntroTutorial(props) {
   const text23 =
     "In the next one I'll show you how to check if a dive site is in the app and if not, enable you to add it yourself!";
   const text24 =
-    "If you want to continue to the next guide please tap this button, if not tap anywhere else to exit, and thank you for joining Scuba SEAsons!";
+    "If you want to continue to the next guide please click this button, if not click anywhere else to exit, and thank you for joining Scuba SEAsons!";
   const text25 = "";
 
   const [textRead, setTextRead] = useState("");

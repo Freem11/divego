@@ -222,7 +222,7 @@ export default function ThirdTutorial(props) {
   const text6 =
     "This is the photo adding form, as you can see there's a lot here, so let's start from the top and work our way down.";
   const text7 =
-    "At the top you can see this big empty field and just below is the 'Choose an image' button, tap it to go into your device's photos and select one (preferably a sea creature of course!)";
+    "At the top you can see this big empty field and just below is the 'Choose an image' button, click it to go into your computer's file browser and select one (preferably a sea creature of course!)";
   const text8 = "";
   const text9 =
     "As you can see, the photo you chose is now in the big empty field and, depending on the photo you may have seen, that the date, lat. and lng. fields are populated. Scuba SEAsons will pull that data off your photo if it carries that info. If not, don't worry we can add them manually.";
@@ -245,14 +245,14 @@ export default function ThirdTutorial(props) {
   const text20 =
     "As you can see Scuba SEAsons has taken the location of the pin you set and has given us its GPS coordinates!";
   const text21 =
-    "Your sighting is now ready! All you need to do now is tap the 'submit photo' button at the bottom to finish up!";
+    "Your sighting is now ready! All you need to do now is click the 'submit photo' button at the top of the page to finish up!";
   const text22 = "";
   const text23 =
     "Bam! That's how you add a new sea creature sighting to Scuba SEAsons! As we did with the dive site guide, this entry was not submitted since it's a dry run, but you can from now on in the same way.";
   const text24 =
     "Just like with the Dive site submissions your sea creature sighting won't automatically be added to the map, the Scuba SEAsons team will verify your submission before committing to the map, but after that your photo will go in and be credited to you with your diver name that we setup back in the intro guide!";
   const text25 =
-    "That's it for adding sea creature sightings to the app! This is currently the last guide so tap anywhere else to close, and thanks for being a member of Scuba SEAsons, I look forward to seeing what amazing sea creatures you encounter on your dives!";
+    "That's it for adding sea creature sightings to the app! This is currently the last guide so click anywhere else to close, and thanks for being a member of Scuba SEAsons, I look forward to seeing what amazing sea creatures you encounter on your dives!";
   const text26 = "";
 
   const [textRead, setTextRead] = useState("");

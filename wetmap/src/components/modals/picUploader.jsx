@@ -79,7 +79,7 @@ const PicUploader = React.memo((props) => {
     setWindowWidth(window.innerWidth);
     setWindowHeigth(window.innerHeight);
   }
-  
+
   useEffect(() => {
     if (pin.PicDate === "") {
       let Rnow = new Date();
@@ -183,6 +183,11 @@ const PicUploader = React.memo((props) => {
   };
 
   const handleNoGPSCloseOnMapChange = () => {
+
+    if (itterator3 === 8 || itterator3 === 11 || itterator3 === 14 || itterator3 === 22) {
+      return
+    }
+    
     setChosenModal("Photos");
     setShowNoGPS(false);
     setMasterSwitch(false);
@@ -253,7 +258,7 @@ const PicUploader = React.memo((props) => {
     clearInterval(blinker);
     setImgButState(false);
     setDatButState(false);
-    setAutoButState(false)
+    setAutoButState(false);
     setPinButState(false);
     setSubButState(false);
   }
@@ -269,11 +274,11 @@ const PicUploader = React.memo((props) => {
       } else if (itterator3 === 14) {
         blinker = setInterval(animalField, 1000);
       } else if (itterator3 === 3) {
-        setPicModalYCoord(0)
+        setPicModalYCoord(0);
       } else if (itterator3 === 3) {
-        setPicModalYCoord(0)
+        setPicModalYCoord(0);
       } else if (itterator3 === 6 || itterator3 === 12 || itterator3 === 15) {
-        setPicModalYCoord(-windowHeight+(windowHeight-modalHeigth)/2)
+        setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       } else if (itterator3 === 16) {
         blinker = setInterval(pinBut, 1000);
       } else if (itterator3 === 22) {
@@ -284,7 +289,6 @@ const PicUploader = React.memo((props) => {
   }, [itterator3]);
 
   const handleSubmit = (e) => {
-
     e.preventDefault();
     let AnimalV = pin.Animal.toString();
     let LatV = parseFloat(pin.Latitude);
@@ -299,12 +303,10 @@ const PicUploader = React.memo((props) => {
       LngV &&
       typeof LngV == "number"
     ) {
-
       let Rnow = new Date();
 
       let rightNow = getToday(Rnow);
 
-     
       if (tutorialRunning) {
         if (itterator3 === 22) {
           setItterator3(itterator3 + 1);
@@ -333,6 +335,16 @@ const PicUploader = React.memo((props) => {
   };
 
   const handleModalClose = () => {
+    if (
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 22
+    ) {
+      return;
+    }
+
     setPin({
       ...pin,
       PicFile: "",

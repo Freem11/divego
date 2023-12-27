@@ -14,10 +14,15 @@ import { Auth } from "@supabase/auth-ui-react";
 import { supabase } from "../supabase";
 import "./authenication.css";
 import InputBase from "@mui/material/InputBase";
-import { LoginSocialGoogle, LoginSocialFacebook } from "reactjs-social-login";
+import {
+  LoginSocialGoogle,
+  LoginSocialFacebook,
+  LoginSocialApple,
+} from "reactjs-social-login";
 import {
   FacebookLoginButton,
   GoogleLoginButton,
+  AppleLoginButton,
 } from "react-social-login-buttons";
 import headliner from "../images/Headliner.png";
 
@@ -25,6 +30,8 @@ let emailVar = false;
 let passwordVar = false;
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID;
+const appleAppId = import.meta.env.VITE_APPLE_APP_ID;
+const REDIRECT_URI = window.location.href;
 
 export default function SignInRoute() {
   const { activeSession, setActiveSession } = useContext(SessionContext);
@@ -50,6 +57,38 @@ export default function SignInRoute() {
     }
     getUserData();
   }, []);
+
+  const handleAppleUserData = async (userData) => {
+
+    if (
+      (creds.email !== null) &
+      (creds.fullName.familyName !== null) &
+      (creds.fullName.givenName !== null)
+    ) {
+    let appleObject = {
+      name: `${userData.fullName.givenName} ${userData.fullName.familyName}`,
+      email: userData.email,
+      id: userData.user,
+    };
+    let appleObjectX = {
+      name: `${userData.name.firstName} ${userData.name.lastName}`,
+      email: userData.email,
+      id: userData.user,
+    };
+    await localStorage.setItem("appletoken", JSON.stringify(appleObject));
+    await localStorage.setItem("appletokenX", JSON.stringify(appleObjectX));
+    handleOAuthSubmit(appleObject || appleObjectX); 
+  } else {
+    let reUsedApple = JSON.parse(await AsyncStorage.getItem("appletoken"));
+    if (reUsedApple && reUsedApple.id === userData.user) {
+      handleOAuthSubmit(reUsedApple);
+      setIsSignedIn(false);
+    } else {
+      setIsSignedIn(false);
+      setLoginFail("Invalid Credentials (email and name required for sign in)");
+    }
+  }
+  };
 
   async function getGoogleUserData(token) {
     if (!token) return;
@@ -121,7 +160,10 @@ export default function SignInRoute() {
     } else {
       let registrationToken = await register(formVals);
       //test me
-      await createProfile({id: registrationToken.data.session.user.id , email: formVals.email})
+      await createProfile({
+        id: registrationToken.data.session.user.id,
+        email: formVals.email,
+      });
       ////
       if (registrationToken.data.session !== null) {
         await localStorage.setItem(
@@ -218,7 +260,26 @@ export default function SignInRoute() {
           />
         </div>
 
+   
         <div className="Oaths">
+        <div className="OAuthButton">
+          <LoginSocialApple
+             client_id={appleAppId || ''}
+             scope={'name email'}
+             redirect_uri={REDIRECT_URI}
+             onResolve={({ provider, data }) => {
+              handleAppleUserData(data);
+              alert("apple", data)
+              console.log("apple", data);
+             }}
+             onReject={err => {
+               console.log(err);
+             }}
+           >
+            <AppleLoginButton style={{ width: "245px", height: "40px" }} />
+          </LoginSocialApple>
+        </div>
+        
           <div className="OAuthButton">
             <LoginSocialGoogle
               isOnlyGetToken
