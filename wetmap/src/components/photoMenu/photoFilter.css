@@ -1,0 +1,31 @@
+
+  .containerF {
+    display: flex;
+    flex-direction: row;
+    /* background-color: green; */
+    opacity: 1;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    z-index: 1;
+    border-radius: 10px;
+    margin-left: -5px;
+    padding-right: 5px;
+    padding-left: 15px;
+    font-size: 2rem;
+  }
+
+  .inputboxF {
+    background-color: white;
+    /* margin-bottom: 15px; */
+    margin-left: -5px;
+  }
+
+  .suggestInput {
+    font-size:  12px;
+    width: 100%;
+  }
+
+  .xButton {
+    z-index: 10;
+  }

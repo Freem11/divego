@@ -244,6 +244,48 @@
     /* background-color: pink; */
   }
 
+  .filterer {
+    display: flex;
+    align-self: center;
+    justify-content: center;
+    flex-direction: column;
+    position: absolute;
+    left: 38vw;
+    margin-top: -3px;
+    width: 20%;
+    z-index: 3;
+    /* background-color: green; */
+  }
+
+  .emptyBox {
+    display: flex;
+    align-self: center;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    margin-top: -9px;
+    width: 100%;
+    z-index: 3;
+    /* background-color: grey */
+  }
+
+  .closer {
+      margin-top: 9px;
+    z-index: 5;
+  }
+
+  .pullTab {
+    display: flex;
+    height:  20px;
+    width:  100px;
+    background-color: gold;
+    border-bottom-right-radius: 7px;
+    border-bottom-left-radius: 7px;
+    z-index: 10;
+    align-self: center;
+    justify-self: center;
+  }
 
 @media only screen and (max-width: 500px) {
 

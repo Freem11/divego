@@ -7,6 +7,8 @@ import { HeatPointsContext } from "../contexts/heatPointsContext";
 import { IterratorContext } from "../contexts/iterratorContext";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
+import { AreaPicsContext } from "../contexts/areaPicsContext";
+import { SearchTextContext } from "../contexts/searchTextContext";
 import "photoswipe/dist/photoswipe.css";
 import { formatHeatVals } from "../../helpers/heatPointHelpers";
 import "./photoMenu.css";
@@ -24,7 +26,8 @@ const PhotoMenu = () => {
   const { animalVal, setAnimalVal } = useContext(AnimalContext);
   const { boundaries } = useContext(MapBoundsContext);
   const { setHeatPts } = useContext(HeatPointsContext);
-  const [areaPics, setAreaPics] = useState([]);
+  const { areaPics, setAreaPics } = useContext(AreaPicsContext);
+  const { textvalue, setTextValue } = useContext(SearchTextContext);
 
   const [selectedID, setSelectedID] = useState(null);
 
@@ -37,12 +40,14 @@ const PhotoMenu = () => {
       if (boundaries[0] > boundaries[2]) {
         try {
           const AmericanPhotos = await getPhotosforMapArea({
+            animal: textvalue,
             minLat: boundaries[1],
             maxLat: boundaries[3],
             minLng: -180,
             maxLng: boundaries[2],
           });
           const AsianPhotos = await getPhotosforMapArea({
+            animal: textvalue,
             minLat: boundaries[1],
             maxLat: boundaries[3],
             minLng: boundaries[0],
@@ -66,6 +71,7 @@ const PhotoMenu = () => {
       } else {
         try {
           const photos = await getPhotosforMapArea({
+            animal: textvalue,
             minLat: boundaries[1],
             maxLat: boundaries[3],
             minLng: boundaries[0],
@@ -129,7 +135,7 @@ const PhotoMenu = () => {
 
   useEffect(() => {
     filterPhotosForMapArea();
-  }, [boundaries]);
+  }, [boundaries, textvalue]);
 
   let screenInital = window.innerWidth;
 
