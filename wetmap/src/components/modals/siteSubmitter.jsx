@@ -8,6 +8,7 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PlaceIcon from "@mui/icons-material/Place";
 import CloseIcon from "@mui/icons-material/Close";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
 import Collapse from "@mui/material/Collapse";
 import { insertDiveSiteWaits } from "../../supabaseCalls/diveSiteWaitSupabaseCalls";
@@ -17,6 +18,7 @@ import { MasterContext } from "../contexts/masterContext";
 import { ModalSelectContext } from "../contexts/modalSelectContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { TutorialContext } from "../contexts/tutorialContext";
+import { ChapterContext } from "../contexts/chapterContext";
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -46,6 +48,7 @@ const SiteSubmitter = (props) => {
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { chapter, setChapter } = useContext(ChapterContext);
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -280,6 +283,13 @@ const SiteSubmitter = (props) => {
     animateSiteModal();
   };
 
+  const activateGuide = () => {
+    if (tutorialRunning) {
+    } else {
+      setChapter("DS Help");
+    }
+  };
+
   const inputStyle = {
     textAlign: "center",
     fontFamily: "Itim",
@@ -310,9 +320,32 @@ const SiteSubmitter = (props) => {
     <Container fluid>
       <Form onSubmit={handleSubmit}>
         <div className="modalTitle3">
-          <Label style={{ marginTop: 3, marginRight: 125, width: "200%" }}>
+          <Label style={{ marginTop: 3, marginRight: 55, width: "200%" }}>
             <strong>Submit Your Dive Site</strong>
           </Label>
+          <FormGroup>
+            <Button
+              variant="text"
+              id="questionButton"
+              onClick={() => activateGuide()}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginRight: -10,
+                marginTop: 2,
+              }}
+            >
+              <QuestionMarkIcon
+                sx={{
+                  color: "lightgrey",
+                  height: "30px",
+                  width: "34px",
+                  marginTop: "2px",
+                }}
+              ></QuestionMarkIcon>
+            </Button>
+          </FormGroup>
+
           <FormGroup>
             <Button
               variant="text"
@@ -326,7 +359,11 @@ const SiteSubmitter = (props) => {
               }}
             >
               <CloseIcon
-                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+                sx={{
+                  color: "lightgrey",
+                  height: "36px",
+                  width: "36px",
+                }}
               ></CloseIcon>
             </Button>
           </FormGroup>
