@@ -13,6 +13,7 @@ import Settings from "./modals/setting";
 import DiveSiteAutoComplete from "./diveSiteSearch/diveSiteSearch";
 import PlacesAutoComplete from "./locationSearch/placesAutocomplete";
 import PhotoMenu from "./photoMenu/photoMenu2";
+import PhotoFilterer from "./photoMenu/photoFilter";
 import { useState, useContext, useEffect, useRef } from "react";
 import { grabProfileById } from "./../supabaseCalls/accountSupabaseCalls";
 import Button from "@mui/material/Button";
@@ -48,6 +49,7 @@ import { TutorialContext } from "./contexts/tutorialContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
 import { Iterrator3Context } from "./contexts/iterrator3Context";
+import { AreaPicsContext } from "./contexts/areaPicsContext";
 import IntroTutorial from "./guides/introTutorial";
 import SecondTutorial from "./guides/secondTutorial";
 import ThirdTutorial from "./guides/thirdTutorial";
@@ -56,6 +58,7 @@ import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
 import Histogram from "./histogram/histogramBody";
 import TutorialBar from "./guideBar/tutorialBarContainer";
+import { getTablePaginationUtilityClass } from "@mui/material";
 
 const diveSiteSearchZone = (
   <div style={{ marginLeft: "-300px", marginTop: "7px" }}>
@@ -82,6 +85,7 @@ const MapPage = React.memo((props) => {
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
   const [showAdminPortal, setShowAdminPortal] = useState(false);
+  const [showFilterer, setShowFilterer] = useState(false);
   const { animalVal } = useContext(AnimalContext);
   const { showGeoCoder, setShowGeoCoder } = useContext(GeoCoderContext);
   const { showAnimalSearch, setShowAnimalSearch } =
@@ -102,6 +106,9 @@ const MapPage = React.memo((props) => {
   const { itterator, setItterator } = useContext(IterratorContext);
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { itterator3, setItterator3 } = useContext(Iterrator3Context);
+
+  const { areaPics, setAreaPics } = useContext(AreaPicsContext);
+  const [isOpen, setIsOpen] = useState(false);
 
   const togglePicModal = () => {
     setPicModal(!picModal);
@@ -307,9 +314,8 @@ const MapPage = React.memo((props) => {
     }
 
     animateSettingsModal();
-
   };
-  
+
   const handleTutorialButton = () => {
     if (
       itterator === 11 ||
@@ -338,7 +344,6 @@ const MapPage = React.memo((props) => {
     }
 
     animateLaunchModal();
-
   };
 
   const handleGeocodingSearchButton = () => {
@@ -452,7 +457,6 @@ const MapPage = React.memo((props) => {
     }
   };
 
-
   const handleDiveSiteModalButton = () => {
     if (
       itterator === 11 ||
@@ -516,7 +520,6 @@ const MapPage = React.memo((props) => {
     }
 
     setDivesTog(!divesTog);
-
   };
   let screenWidthInital = window.innerWidth;
 
@@ -711,6 +714,19 @@ const MapPage = React.memo((props) => {
     }
   };
 
+  const animatePulltab = () => {
+    setShowFilterer(!showFilterer)
+
+  };
+
+  useEffect(() => {
+    if (!showFilterer){
+      setIsOpen(false)
+    } else {
+      setIsOpen(true)
+    }
+  }, [showFilterer]);
+
   useEffect(() => {
     if (siteModal) {
       setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -769,7 +785,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={gearModal}
               onChange={() => {
-                handleSettingsButton()
+                handleSettingsButton();
               }}
             >
               <SettingsIcon sx={{ height: "39px", width: "39px" }} />
@@ -784,7 +800,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={guideModal}
               onChange={() => {
-                handleTutorialButton()
+                handleTutorialButton();
               }}
             >
               <QuestionMarkIcon sx={{ height: "40px", width: "40px" }} />
@@ -880,7 +896,7 @@ const MapPage = React.memo((props) => {
               value="check"
               selected={divesTog}
               onChange={() => {
-                handleAnchorButton()
+                handleAnchorButton();
               }}
             >
               <AnchorIcon sx={{ height: "37px", width: "37px" }} />
@@ -891,6 +907,28 @@ const MapPage = React.memo((props) => {
       {masterSwitch && (
         <div className="col1row8">
           <PhotoMenu />
+          <div className="filterer">
+            {((areaPics && areaPics.length > 0) || isOpen) && (
+              <div className="emptyBox" pointerEvents={"box-none"}>
+                <Collapse
+                  in={showFilterer}
+                  orientation="vertical"
+                  collapsedSize="0px"
+                >
+                  <div
+                    className="closer"
+                  >
+                    <PhotoFilterer />
+                  </div>
+                </Collapse>
+
+                <div
+                  className="pullTab"
+                  onClick={() => animatePulltab()}
+                ></div>
+              </div>
+            )}
+          </div>
         </div>
       )}
 
