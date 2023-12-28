@@ -563,8 +563,6 @@ export default function IntroTutorial(props) {
     }
   }, [itterator]);
 
-  console.log("arrof?",  arrowY, textBoxY, characterX)
-
   const characterSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(${characterX}px,0,0)` },
@@ -894,9 +892,9 @@ export default function IntroTutorial(props) {
         className="nextTutButton"
         ref={nextTutRef}
         style={nextTutSlide}
-        onPress={handleSecondTutorialStartup}
+        onClick={handleSecondTutorialStartup}
       >
-        <p onPress={handleSecondTutorialStartup} className="nextTutText">
+        <p onClick={handleSecondTutorialStartup} className="nextTutText">
           Fun With Dive Sites
         </p>
         <KeyboardArrowRightIcon

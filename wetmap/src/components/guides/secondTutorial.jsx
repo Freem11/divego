@@ -121,6 +121,7 @@ export default function SecondTutorial(props) {
       case "DS Help":
         resetTutorial();
         setItterator2(10);
+        setTutorialRunning(true)
         setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
@@ -654,9 +655,9 @@ export default function SecondTutorial(props) {
         className="nextTutButton2"
         ref={nextTutRef}
         style={nextTutSlide}
-        onPress={handleThirdTutorialStartup}
+        onClick={handleThirdTutorialStartup}
       >
-        <p onPress={handleThirdTutorialStartup} className="nextTutText2">
+        <p onClick={handleThirdTutorialStartup} className="nextTutText2">
             Photogenics
         </p>
         <KeyboardArrowRightIcon

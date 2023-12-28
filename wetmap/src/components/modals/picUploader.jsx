@@ -14,9 +14,11 @@ import { UserProfileContext } from "../contexts/userProfileContext";
 import { ModalSelectContext } from "../contexts/modalSelectContext";
 import { Iterrator3Context } from "../contexts/iterrator3Context";
 import { TutorialContext } from "../contexts/tutorialContext";
+import { ChapterContext } from "../contexts/chapterContext";
 import PlaceIcon from "@mui/icons-material/Place";
 import PhotoIcon from "@mui/icons-material/Photo";
 import CloseIcon from "@mui/icons-material/Close";
+import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
 import { getToday } from "../../helpers/picUploaderHelpers.js";
 import Collapse from "@mui/material/Collapse";
@@ -65,6 +67,7 @@ const PicUploader = React.memo((props) => {
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
   const { itterator3, setItterator3 } = useContext(Iterrator3Context);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { chapter, setChapter } = useContext(ChapterContext);
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -183,11 +186,15 @@ const PicUploader = React.memo((props) => {
   };
 
   const handleNoGPSCloseOnMapChange = () => {
-
-    if (itterator3 === 8 || itterator3 === 11 || itterator3 === 14 || itterator3 === 22) {
-      return
+    if (
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 22
+    ) {
+      return;
     }
-    
+
     setChosenModal("Photos");
     setShowNoGPS(false);
     setMasterSwitch(false);
@@ -362,6 +369,10 @@ const PicUploader = React.memo((props) => {
     document.getElementById("file").click();
   }
 
+  const activateGuide = () => {
+    setChapter("Adding your photo")
+};
+
   const labelStyle = {
     fontfamily: "Patrick Hand",
     fontSize: 18,
@@ -452,9 +463,32 @@ const PicUploader = React.memo((props) => {
     <Container fluid>
       <Form onSubmit={handleSubmit}>
         <div className="modalTitle2">
-          <Label style={{ marginTop: 3, marginRight: 125, width: "200%" }}>
+          <Label style={{ marginTop: 3, marginRight: 75, width: "200%" }}>
             <strong>Submit Your Picture</strong>
           </Label>
+          <FormGroup>
+            <Button
+              variant="text"
+              id="questionButton"
+              onClick={() => activateGuide()}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                marginRight: -10,
+                marginTop: 2,
+              }}
+            >
+              <QuestionMarkIcon
+                sx={{
+                  color: "lightgrey",
+                  height: "30px",
+                  width: "34px",
+                  marginTop: "2px",
+                }}
+              ></QuestionMarkIcon>
+            </Button>
+          </FormGroup>
+
           <FormGroup>
             <Button
               variant="text"
@@ -468,7 +502,11 @@ const PicUploader = React.memo((props) => {
               }}
             >
               <CloseIcon
-                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+                sx={{
+                  color: "lightgrey",
+                  height: "36px",
+                  width: "36px",
+                }}
               ></CloseIcon>
             </Button>
           </FormGroup>
