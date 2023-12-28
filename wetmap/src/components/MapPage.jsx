@@ -369,7 +369,12 @@ const MapPage = React.memo((props) => {
     }
 
     setShowGeoCoder(!showGeoCoder);
-
+    setShowAnimalSearch(false);
+    setPicModalYCoord(0);
+    setSiteModalYCoord(0);
+    setSettingsModalYCoord(0);
+    setLaunchModalYCoord(0);
+    setAnchorModalYCoord(0);
   };
 
   const handleDiveSiteSearchButton = () => {
@@ -399,6 +404,12 @@ const MapPage = React.memo((props) => {
     }
 
     setShowAnimalSearch(!showAnimalSearch);
+    setShowGeoCoder(false);
+    setPicModalYCoord(0);
+    setSiteModalYCoord(0);
+    setSettingsModalYCoord(0);
+    setLaunchModalYCoord(0);
+    setAnchorModalYCoord(0);
 
     if (tutorialRunning) {
       if (itterator2 === 3) {
@@ -585,6 +596,8 @@ const MapPage = React.memo((props) => {
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
       setAnchorModalYCoord(0);
+      setShowAnimalSearch(false);
+      setShowGeoCoder(false);
       setSiteModal(false);
     } else {
       setPicModalYCoord(0);
@@ -611,6 +624,8 @@ const MapPage = React.memo((props) => {
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
       setAnchorModalYCoord(0);
+      setShowAnimalSearch(false);
+      setShowGeoCoder(false);
       setSiteModal(false);
     } else {
       setSiteModalYCoord(0);
@@ -634,6 +649,8 @@ const MapPage = React.memo((props) => {
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setAnchorModalYCoord(0);
+      setShowAnimalSearch(false);
+      setShowGeoCoder(false);
       setSiteModal(false);
     } else {
       setLaunchModalYCoord(0);
@@ -647,6 +664,8 @@ const MapPage = React.memo((props) => {
       setSiteModalYCoord(0);
       setLaunchModalYCoord(0);
       setAnchorModalYCoord(0);
+      setShowAnimalSearch(false);
+      setShowGeoCoder(false);
       setSiteModal(false);
     } else {
       setSettingsModalYCoord(0);
@@ -684,6 +703,8 @@ const MapPage = React.memo((props) => {
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
+      setShowAnimalSearch(false);
+      setShowGeoCoder(false);
     } else {
       setAnchorModalYCoord(0);
       setSiteModal(false);
