@@ -41,8 +41,8 @@ const PhotoListItem = (props) => {
       lng: photoById[0].longitude,
       animal: photoById[0].label,
       month: monthID,
-      UserID: photoById.UserID,
-      userName: photoById.userName,
+      UserID: photoById[0].UserID,
+      userName: photoById[0].userName,
     });
 
     // heatPointExists = await getLoneHeatPoint({
