@@ -269,6 +269,7 @@ function Map() {
 
   const setupAnchorModal = (diveSiteName, lat, lng) => {
     setSelectedDiveSite({
+      ...selectedDiveSite,
       SiteName: diveSiteName,
       Latitude: lat,
       Longitude: lng,

@@ -57,3 +57,20 @@ if (data) {
   console.log(data);
 }
 };
+
+export const getDiveSiteByName = async (value) => {
+
+  const { data, error } = await supabase
+  .from("diveSites")
+  .select()
+  .eq("name", value)
+
+if (error) {
+  console.log("couldn't do it 7,", error);
+  return [];
+}
+
+if (data) {
+  return data;
+}
+};

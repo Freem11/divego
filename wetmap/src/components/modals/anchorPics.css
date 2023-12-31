@@ -19,6 +19,13 @@
     color: #F0EEEB;
 }
 
+.DiveSiteCredit{
+    font-family: 'Itim', cursive;
+    font-size: 16px;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
 .monthlyLabel{
     font-family: "Caveat", cursive;
     font-size: larger;
@@ -42,7 +49,7 @@
 }
 
 .picScollA{
-    margin-top: 10%;
+    margin-top: 14%;
     margin-left: 0.3%;
     display: flex;
     flex-direction: column;
@@ -60,9 +67,10 @@
 }
 
 .fixDiv {
- height: 40px;
+ height: 50px;
  margin-top: 20px;
  margin-bottom: 5px;
+ padding-bottom: 5px;
  position: absolute;
  background-color: #538bdb;
  border-radius: 15px;

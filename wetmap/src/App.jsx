@@ -165,6 +165,8 @@ function App() {
     SiteName: "",
     Latitude: "",
     Longitude: "",
+    UserID: "",
+    userName: "",
   });
 
   const [photoFile, setPhotoFile] = useState(null);

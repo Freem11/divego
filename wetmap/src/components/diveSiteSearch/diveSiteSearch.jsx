@@ -87,6 +87,7 @@ export default function DiveSiteAutoComplete() {
               response[0].forEach((site) => {
                 if (site.name === value) {
                   setSelectedDiveSite({
+                    ...selectedDiveSite,
                     SiteName: site.name,
                     Latitude: site.lat,
                     Longitude: site.lng,

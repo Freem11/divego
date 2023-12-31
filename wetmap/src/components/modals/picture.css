@@ -36,19 +36,20 @@
 
 .userLabel {
    height: 25px;
+   align-self: end;
    width: fit-content;
    border-radius: 10px;
    font-family: 'Itim';
    font-size: 18px;
    text-align: left;
    margin-top: -35px;
-   margin-left: 70%;
+   margin-right: 2%;
    padding-bottom: -5px;
    padding-left: 15px;
    padding-right: 15px;
    color: #F0EEEB;
    background-color: black;
-   opacity: 0.7;
+   opacity: 0.6;
    overflow: hidden;
 }
 

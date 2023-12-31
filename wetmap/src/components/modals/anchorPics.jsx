@@ -9,6 +9,7 @@ import { TutorialContext } from "../contexts/tutorialContext"
 import { ReverseContext } from "../contexts/reverseContext";;
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
+import { getDiveSiteByName } from "../../supabaseCalls/diveSiteSupabaseCalls";
 import { getPhotosforAnchor, getPhotosforAnchorMulti } from "../../supabaseCalls/photoSupabaseCalls";
 import "photoswipe/dist/photoswipe.css";
 import Picture from "./picture";
@@ -27,6 +28,7 @@ const AnchorPics = (props) => {
   const { boundaries } = useContext(MapBoundsContext);
   const [monthVal, setMonthVal] = useState("");
   const [anchorPics, setAnchorPics] = useState([]);
+  const [site, setSite] = useState("");
 
   const { itterator, setItterator } = useContext(IterratorContext);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
@@ -122,7 +124,9 @@ const AnchorPics = (props) => {
   useEffect(() => {
     if(selectedDiveSite.SiteName !== ""){
       filterAnchorPhotos();
+      getDiveSite(selectedDiveSite.SiteName);
     }
+    
   }, [selectedDiveSite]);
 
   useEffect(() => {
@@ -130,6 +134,17 @@ const AnchorPics = (props) => {
       animateAnchorModal()
     }
   }, [itterator]);
+
+  const getDiveSite = async (site) => {
+    try {
+      const selectedSite = await getDiveSiteByName(site);
+      if (selectedSite.length > 0) {
+        setSite(selectedSite[0].userName);
+      }
+    } catch (e) {
+      console.log({ title: "Error", message: e.message });
+    }
+  };
 
   const handleClose = async () => {
 
@@ -144,7 +159,7 @@ const AnchorPics = (props) => {
   // })
    animateAnchorModal()
 };
-  
+  console.log("this", selectedDiveSite)
   return (
     <div className="masterDivA">
       <div className="fixerDiv">
@@ -155,16 +170,17 @@ const AnchorPics = (props) => {
         className="atagDS"
         href={`mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20Dive%20Site:%20"${selectedDiveSite.SiteName}"%20at%20Latitude:%20${selectedDiveSite.Latitude}%20Longitude:%20${selectedDiveSite.Longitude}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Dive%20site%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20dive%20site%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Dive%20site%20GPS%20coordinates%20are%20not%20correct%0D%0A%0D%0A(Please%20provide%20a%20correct%20latitude%20and%20longitude%20and%20we%20will%20update%20the%20record)`}
       >
-        <FlagIcon sx={{ color: "red", height: 35, width: 35, marginTop: 0.4 }} />
+        <FlagIcon sx={{ color: "red", height: 35, width: 35, marginTop: 1.3 }} />
       </a>
       </div>
       <h3 className="DiveSiteLabel">{selectedDiveSite.SiteName}</h3>
+      <h3 className="DiveSiteCredit">Added by: {site}</h3>
       <FormGroup>
             <Button
               variant="text"
               id="closeButton2"
               onClick={() => handleClose()}
-              style={{ position: "absolute", right: 5, top: 0, backgroundColor: "transparent", border: "none"}}
+              style={{ position: "absolute", right: 5, top: 8, backgroundColor: "transparent", border: "none"}}
             >
               <CloseIcon
                 sx={{ color: "lightgrey", height: "36px", width: "36px" }}

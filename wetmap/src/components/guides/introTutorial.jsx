@@ -156,6 +156,7 @@ export default function IntroTutorial(props) {
         setArrowY((2*windowHeigth)+(windowHeigth-250)/6);
         if (selectedDiveSite.SiteName === "") {
           setSelectedDiveSite({
+            ...selectedDiveSite,
             SiteName: "Madrona Point",
             Latitude: 49.3134,
             Longitude: -124.2424,

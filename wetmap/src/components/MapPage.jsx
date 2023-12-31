@@ -380,6 +380,7 @@ const MapPage = React.memo((props) => {
     setSettingsModalYCoord(0);
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
+    setSiteModal(false);
   };
 
   const handleDiveSiteSearchButton = () => {
@@ -415,6 +416,7 @@ const MapPage = React.memo((props) => {
     setSettingsModalYCoord(0);
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
+    setSiteModal(false);
 
     if (tutorialRunning) {
       if (itterator2 === 3) {
@@ -734,6 +736,8 @@ const MapPage = React.memo((props) => {
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
+      setShowAnimalSearch(false);
+      setShowGeoCoder(false);
     }
 
     if (!siteModal) {
