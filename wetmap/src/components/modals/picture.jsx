@@ -26,6 +26,7 @@ function Picture(props) {
                 objectFit: "cover"
               }}
               />
+    <h4 className="userLabel">Added by: {pic.userName}</h4>
   </div>
   )
 }
