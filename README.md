@@ -48,6 +48,12 @@ How to Guide, explains most features of the app for new users.
 
 Login/Logout/Register system with persistent login (user stays logged in even after closing browser, unless they deliberately log out) with OAuth integrations for Google and Facebook.
 
+Three Interactive User guides designed to get users acclimated to how to use the app fast:
+Intro Guide - map navigation and how to find active areas, also completes user profile.
+Dive Sites - how to use the search tool to check if a site is in the app and add a new site if not.
+Sighting Submissions - how to add a sea creature sighting, inclduing how to make use of all submission features.
+
+
 Backend integration with Supabase 
 
 # Admin section for:
@@ -56,10 +62,8 @@ User dive site submission and user photo submission validation before committing
 
 # In Progress Features:
 
-Three Interactive User guides designed to get users acclimated to how to use the app fast:
-Intro Guide - map navigation and how to find active areas, also completes user profile.
-Dive Sites - how to use the search tool to check if a site is in the app and add a new site if not.
-Sighting Submissions - how to add a sea creature sighting, inclduing how to make use of all submission features.
+Remaining feature that are present in the mobile verion that have not yet been added to the desktop version
+
 
 # Planned Features:
 
@@ -68,11 +72,11 @@ Automated animal ID from photo machine learning
 
 
 # ScreenShots
-!["Screenshot of Sign In Screen"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/SignIn.png)
-!["Screenshot of Map Screen"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/Overview.png)
-!["Screenshot of Dive Site Gallery"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/DiveSitePhotos.png)
-!["Screenshot of Dive Site Form"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/DiveSiteNew.png)
-!["Screenshot of Photo Upload Form"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/PhotoSubmit.png)
-!["Screenshot of Dive Site Search Tool"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/DiveSiteSearch.png)
-!["Screenshot of Pin Dropper"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/PinDrop.png)
+!["Screenshot of Sign In Screen"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/screenshots/HomeScreen.png)
+!["Screenshot of Map Screen"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/screenshots/MapPage.png)
+!["Screenshot of Dive Site Gallery"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/screenshots/AnchorPhotos.png)
+!["Screenshot of Dive Site Form"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/screenshots/SiteSubmit.png)
+!["Screenshot of Photo Upload Form"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/screenshots/PhotoSubmit.png)
+!["Screenshot of Guide System"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/screenshots/Guide.png)
+
 
