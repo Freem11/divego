@@ -12,7 +12,7 @@ use-supercluster
 exifr
 
 # Live at
-https://divegoweb.netlify.app
+https://scubaseasons.netlify.app/
 
 !["Web Version QR"](https://github.com/Freem11/divego/blob/master/wetmap/src/images/Home.png)
 
