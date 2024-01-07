@@ -16,6 +16,7 @@ import PhotoMenu from "./photoMenu/photoMenu2";
 import PhotoFilterer from "./photoMenu/photoFilter";
 import { useState, useContext, useEffect, useRef } from "react";
 import { grabProfileById } from "./../supabaseCalls/accountSupabaseCalls";
+import { removePhoto } from "./../supabaseCalls/uploadSupabaseCalls";
 import Button from "@mui/material/Button";
 import ToggleButton from "@mui/material/ToggleButton";
 import Collapse from "@mui/material/Collapse";
@@ -381,6 +382,13 @@ const MapPage = React.memo((props) => {
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
+    if (pin.PicFile !== null) {
+      removePhoto({
+        filePath:
+          "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+        fileName: `${pin.PicFile}`,
+      });
+    }
   };
 
   const handleDiveSiteSearchButton = () => {
@@ -417,6 +425,13 @@ const MapPage = React.memo((props) => {
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
+    if (pin.PicFile !== null) {
+      removePhoto({
+        filePath:
+          "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+        fileName: `${pin.PicFile}`,
+      });
+    }
 
     if (tutorialRunning) {
       if (itterator2 === 3) {
@@ -606,6 +621,13 @@ const MapPage = React.memo((props) => {
       setSiteModal(false);
     } else {
       setPicModalYCoord(0);
+      if (pin.PicFile !== null) {
+        removePhoto({
+          filePath:
+            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          fileName: `${pin.PicFile}`,
+        });
+      }
     }
   };
 
@@ -632,6 +654,13 @@ const MapPage = React.memo((props) => {
       setShowAnimalSearch(false);
       setShowGeoCoder(false);
       setSiteModal(false);
+      if (pin.PicFile !== null) {
+        removePhoto({
+          filePath:
+            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          fileName: `${pin.PicFile}`,
+        });
+      }
     } else {
       setSiteModalYCoord(0);
     }
@@ -657,6 +686,13 @@ const MapPage = React.memo((props) => {
       setShowAnimalSearch(false);
       setShowGeoCoder(false);
       setSiteModal(false);
+      if (pin.PicFile !== null) {
+        removePhoto({
+          filePath:
+            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          fileName: `${pin.PicFile}`,
+        });
+      }
     } else {
       setLaunchModalYCoord(0);
     }
@@ -672,6 +708,13 @@ const MapPage = React.memo((props) => {
       setShowAnimalSearch(false);
       setShowGeoCoder(false);
       setSiteModal(false);
+      if (pin.PicFile !== null) {
+        removePhoto({
+          filePath:
+            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          fileName: `${pin.PicFile}`,
+        });
+      }
     } else {
       setSettingsModalYCoord(0);
     }
@@ -710,6 +753,13 @@ const MapPage = React.memo((props) => {
       setLaunchModalYCoord(0);
       setShowAnimalSearch(false);
       setShowGeoCoder(false);
+      if (pin.PicFile !== null) {
+        removePhoto({
+          filePath:
+            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          fileName: `${pin.PicFile}`,
+        });
+      }
     } else {
       setAnchorModalYCoord(0);
       setSiteModal(false);

@@ -5,6 +5,8 @@ import "./picture.css";
 function Picture(props) {
   const { pic } = props
 
+  let photoName =  pic.photoFile.split('/').pop();
+
   return (
     <div key={pic.id} className="pictureBoxQ">
     <div className="micro">
@@ -18,7 +20,9 @@ function Picture(props) {
     </div>
   
             <img
-              src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photoFile}`}
+              src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
+              // src={`https://bca075819c975f1f381667bcdff15b92.r2.cloudflarestorage.com/scubaseasons/${photoName}`}
+              // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photoFile}`}
               style={{
                 width: "100%",
                 margin: "3px",

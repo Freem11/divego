@@ -69,9 +69,9 @@ const PicUploader = React.memo((props) => {
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { chapter, setChapter } = useContext(ChapterContext);
 
-  const [uploadedFile, setUploadedFile] = useState({
-    selectedFile: null,
-  });
+  // const [uploadedFile, setUploadedFile] = useState({
+  //   selectedFile: null,
+  // });
 
   window.addEventListener("resize", trackDimensions);
 
@@ -106,27 +106,60 @@ const PicUploader = React.memo((props) => {
 
   const handleChange = async (e) => {
     if (e.target.name === "PicFile") {
-      if (photoFile !== null) {
-        removePhoto({ filePath: filePath1, fileName: photoFile });
+      if (pin.PicFile !== null) {
+        removePhoto({
+          filePath:
+            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          fileName: `${pin.PicFile}`,
+        });
       }
 
-      let fileName = e.target.files[0];
-      let baseDate = e.target.files[0].lastModified;
+      
+      let image = e.target.files[0];
+      let extension = image.name.split(".").pop();
+      const fileName = Date.now() + "." + extension;
 
-      setUploadedFile({ ...uploadedFile, selectedFile: e.target.files[0] });
-
-      var convDate = new Date(baseDate);
-
-      let moddedDate = getToday(convDate);
-
+      //uploadPhoto
       const data = new FormData();
-      data.append("image", fileName);
-
-      const newFilePath = await uploadphoto(fileName, fileName.name);
-      //needs to be "animalphotos/public/file.jpg"
-
+      data.append("image", image);
+      const newFilePath = await uploadphoto(data, fileName);
       setPhotoFile("animalphotos/" + newFilePath);
 
+
+      //scrape off photo info 
+      let formattedDate = pin.PicDate;
+      let newLatitude = pin.Latitude;
+      let newLongitude = pin.Longitude;
+      let baseDate = image.lastModified;
+      var convDate = new Date(baseDate);
+
+    
+      
+      formattedDate = getToday(convDate);
+
+      exifr.parse(image, true).then((output) => {
+        let EXIFData = exifGPSHelper(
+          output.GPSLatitude,
+          output.GPSLongitude,
+          output.GPSLatitudeRef,
+          output.GPSLongitudeRef
+        );
+
+        if (EXIFData) {
+          newLatitude = EXIFData[0]
+          newLongitude = EXIFData[1]
+        }
+
+      });
+
+      setPin({
+        ...pin,
+        PicFile: `animalphotos/public/${fileName}`,
+        PicDate: formattedDate,
+        Latitude: newLatitude,
+        Longitude: newLongitude,
+      });
+  
       // fetch("http://localhost:5000/api/upload", {
       //   method: "POST",
       //   body: data,
@@ -136,34 +169,7 @@ const PicUploader = React.memo((props) => {
       //     setPhotoFile(data.fileName);
       //   });
 
-      exifr.parse(e.target.files[0], true).then((output) => {
-        let EXIFData = exifGPSHelper(
-          output.GPSLatitude,
-          output.GPSLongitude,
-          output.GPSLatitudeRef,
-          output.GPSLongitudeRef
-        );
-
-        if (EXIFData) {
-          setPin({
-            ...pin,
-            PicFile: newFilePath,
-            PicDate: moddedDate,
-            Latitude: EXIFData[0],
-            Longitude: EXIFData[1],
-          });
-        } else {
-          setPin({
-            ...pin,
-            PicFile: newFilePath,
-            PicDate: moddedDate,
-            Latitude: pin.Latitude,
-            Longitude: pin.Longitude,
-          });
-          // setShowNoGPS(true);
-        }
-      });
-
+      
       if (tutorialRunning) {
         if (itterator3 === 8) {
           setItterator3(itterator3 + 1);
@@ -350,6 +356,14 @@ const PicUploader = React.memo((props) => {
       itterator3 === 22
     ) {
       return;
+    }
+    
+    if (pin.PicFile !== null) {
+      removePhoto({
+        filePath:
+          "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+        fileName: `${pin.PicFile}`,
+      });
     }
 
     setPin({

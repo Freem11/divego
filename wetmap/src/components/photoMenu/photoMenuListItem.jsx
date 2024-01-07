@@ -10,6 +10,9 @@ const handleDragStart = (e) => e.preventDefault();
 const PhotoMenuListItem = (props) => {
   const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID } = props;
 
+  let photoName =  photoURL.split('/').pop();
+
+  console.log("im", photoName)
   const tileRef = useRef(null);
   const [clicked, setClicked] = useState(false);
   const [yCoord, setYCoord] = useState(0);
@@ -108,7 +111,9 @@ useEffect(() => {
         </h4>
       </div>
       <img
-        src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoURL}`}
+        src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
+        // src={`https://bca075819c975f1f381667bcdff15b92.r2.cloudflarestorage.com/scubaseasons/${photoName}`}
+        // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoURL}`}
         width="191px"
         height="108px"
         onDragStart={handleDragStart}

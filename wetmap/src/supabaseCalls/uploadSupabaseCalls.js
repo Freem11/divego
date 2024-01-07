@@ -1,9 +1,10 @@
 import { supabase } from "../supabase";
 
-  export const uploadphoto = async (file, oldFileName) => {
+  export const uploadphoto = async (file, fileName) => {
 
-    let extension =  oldFileName.split('.').pop();
-    const fileName = Date.now() + "." + extension
+    // console.log("supa", file, oldFileName)
+    // let extension =  oldFileName.split('.').pop();
+    // const fileName = Date.now() + "." + extension
 
     const { data, error } = await supabase.storage
     .from("animalphotos")
@@ -14,7 +15,7 @@ import { supabase } from "../supabase";
     }
   
     if (data) {
-      console.log("photos?",data)
+      console.log(`Upload of photo: ${fileName} was sucessful`)
       return data.path
     }
   };
@@ -32,7 +33,8 @@ import { supabase } from "../supabase";
     }
   
     if (data) {
-      console.log(data)
+      console.log(`Deletion of photo: ${shortPath} was sucessful`)
+   
     }
 
     };
