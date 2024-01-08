@@ -16,7 +16,8 @@ import PhotoMenu from "./photoMenu/photoMenu2";
 import PhotoFilterer from "./photoMenu/photoFilter";
 import { useState, useContext, useEffect, useRef } from "react";
 import { grabProfileById } from "./../supabaseCalls/accountSupabaseCalls";
-import { removePhoto } from "./../supabaseCalls/uploadSupabaseCalls";
+// import { removePhoto } from "./../supabaseCalls/uploadSupabaseCalls";
+import { removePhoto } from "./../cloudflareBucketCalls/cloudflareAWSCalls";
 import Button from "@mui/material/Button";
 import ToggleButton from "@mui/material/ToggleButton";
 import Collapse from "@mui/material/Collapse";
@@ -385,7 +386,7 @@ const MapPage = React.memo((props) => {
     if (pin.PicFile !== null) {
       removePhoto({
         filePath:
-          "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
       });
     }
@@ -428,7 +429,7 @@ const MapPage = React.memo((props) => {
     if (pin.PicFile !== null) {
       removePhoto({
         filePath:
-          "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
       });
     }
@@ -624,7 +625,7 @@ const MapPage = React.memo((props) => {
       if (pin.PicFile !== null) {
         removePhoto({
           filePath:
-            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -657,7 +658,7 @@ const MapPage = React.memo((props) => {
       if (pin.PicFile !== null) {
         removePhoto({
           filePath:
-            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -689,7 +690,7 @@ const MapPage = React.memo((props) => {
       if (pin.PicFile !== null) {
         removePhoto({
           filePath:
-            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -711,7 +712,7 @@ const MapPage = React.memo((props) => {
       if (pin.PicFile !== null) {
         removePhoto({
           filePath:
-            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -756,7 +757,7 @@ const MapPage = React.memo((props) => {
       if (pin.PicFile !== null) {
         removePhoto({
           filePath:
-            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }

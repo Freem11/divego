@@ -159,7 +159,7 @@ const AnchorPics = (props) => {
   // })
    animateAnchorModal()
 };
-  console.log("this", selectedDiveSite)
+  // console.log("this", selectedDiveSite)
   return (
     <div className="masterDivA">
       <div className="fixerDiv">

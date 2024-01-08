@@ -7,25 +7,46 @@ import {
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 
-export const addDeletedAccountInfo = async (values) => {
+export const uploadphoto = async (file, fileName) => {
 
-    console.log("passing", values)
-    const { data, error } = await supabase
-    .from("deletedUsers")
-    .insert([
-      {
-        firstName: values.firstName,
-        lastName: values.lastName,
-        email: values.email,
-        uuid: values.UserID
-      },
-    ]);
-  
-    if (error) {
-      console.log("couldn't do it,", error);
+    // console.log("got", file, fileName)
+
+    const input = {
+        "Body": file,
+        "Bucket": "scubaseasons",
+        "Key": fileName,
+        "ContentType": "image/jpeg"
     }
-  
-    if (data) {
-      console.log(data);
+
+    const command = new PutObjectCommand(input)
+    const response = await aws3.send(command)
+   
+    if (response) {
+        // console.log("cloudFlare", response)
+        console.log(`Upload of photo: ${fileName} was sucessful`)
+    //   return data.path
     }
   };
+  
+  export const removePhoto = async (values) => {
+
+    let shortPath = values.fileName.split('/').pop();
+
+    const input = {
+        "Bucket": "scubaseasons",
+        "Key": shortPath
+    }
+
+    const command = new DeleteObjectCommand(input)
+    const response = await aws3.send(command)
+   
+    // if (error) {
+    //   console.log("couldn't upload,", error);
+    // }
+  
+    if (response) {
+        // console.log("cloudFlare", response)
+        console.log(`Deletion of photo: ${shortPath} was sucessful`)
+    }
+
+    };

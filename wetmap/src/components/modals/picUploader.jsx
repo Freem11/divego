@@ -24,8 +24,8 @@ import { getToday } from "../../helpers/picUploaderHelpers.js";
 import Collapse from "@mui/material/Collapse";
 import { insertPhotoWaits } from "../../supabaseCalls/photoWaitSupabaseCalls";
 // import { insertPhotoWaits } from "../../axiosCalls/photoWaitAxiosCalls";
-import { uploadphoto } from "../../supabaseCalls/uploadSupabaseCalls";
-import { removePhoto } from "../../supabaseCalls/uploadSupabaseCalls";
+// import { uploadphoto, removePhoto } from "../../supabaseCalls/uploadSupabaseCalls";
+import { uploadphoto, removePhoto } from "../../cloudflareBucketCalls/cloudflareAWSCalls";
 // import { removePhoto } from "../../axiosCalls/uploadAxiosCalls";
 import { getAnimalNamesThatFit } from "../../axiosCalls/photoAxiosCalls";
 import { userCheck } from "../../supabaseCalls/authenticateSupabaseCalls";
@@ -105,11 +105,12 @@ const PicUploader = React.memo((props) => {
   }, [pin.PicDate]);
 
   const handleChange = async (e) => {
+    setPhotoFile(null);
     if (e.target.name === "PicFile") {
       if (pin.PicFile !== null) {
         removePhoto({
           filePath:
-            "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -121,9 +122,9 @@ const PicUploader = React.memo((props) => {
 
       //uploadPhoto
       const data = new FormData();
-      data.append("image", image);
-      const newFilePath = await uploadphoto(data, fileName);
-      setPhotoFile("animalphotos/" + newFilePath);
+      data.append("image", e.target.files[0]);
+      const newFilePath = await uploadphoto(image, fileName);
+      setPhotoFile(fileName);
 
 
       //scrape off photo info 
@@ -357,11 +358,11 @@ const PicUploader = React.memo((props) => {
     ) {
       return;
     }
-    
+
     if (pin.PicFile !== null) {
       removePhoto({
         filePath:
-          "https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/",
+          `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
       });
     }
@@ -530,7 +531,8 @@ const PicUploader = React.memo((props) => {
           <div className="pickie">
             {/* <div>{photoFile}</div> */}
             <img
-              src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoFile}`}
+              src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoFile}`}
+              // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoFile}`}
               height="200px"
               className="picHolder"
             ></img>
