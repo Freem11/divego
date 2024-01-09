@@ -2,7 +2,8 @@ import { useState, useEffect } from "react";
 import { Form, Input, Label } from "reactstrap";
 import { photoWaits } from "../../supabaseCalls/photoWaitSupabaseCalls";
 import { insertphoto } from "../../supabaseCalls/photoSupabaseCalls";
-import { removePhoto } from "../../supabaseCalls/uploadSupabaseCalls";
+// import { removePhoto } from "../../supabaseCalls/uploadSupabaseCalls";
+import { removePhoto } from "../../cloudflareBucketCalls/cloudflareAWSCalls";
 import {
   grabPhotoWaitById,
   deletePhotoWait,
@@ -25,6 +26,8 @@ const PhotoListItem = (props) => {
 
   let photoById;
   let heatPointExists;
+
+  let photoName =  photoFile.split('/').pop();
 
   const ValidatePhoto = async (id) => {
     photoById = await grabPhotoWaitById(id);
@@ -111,8 +114,8 @@ const PhotoListItem = (props) => {
 
   return (
     <li
-      id={key}
-      key={key}
+      id={id}
+      key={id}
       className="photoLI"
       style={{ listStyleType: "none" }}
     >
@@ -122,8 +125,10 @@ const PhotoListItem = (props) => {
             <Gallery>
               <div>
                 <Item
-                  original={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${formVals.photo}`}
-                  thumbnail={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${formVals.photo}`}
+                  original={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
+                  thumbnail={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
+                  // original={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${formVals.photo}`}
+                  // thumbnail={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${formVals.photo}`}
                   width="992"
                   height="558"
                   style={{ borderRadius: "10px" }}
@@ -139,7 +144,8 @@ const PhotoListItem = (props) => {
                       }}
                       ref={ref}
                       onClick={open}
-                      src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${formVals.photo}`}
+                      src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
+                      // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${formVals.photo}`}
                     />
                   )}
                 </Item>

@@ -115,7 +115,7 @@ const PicUploader = React.memo((props) => {
         });
       }
 
-      
+      if (e.target.files[0]){
       let image = e.target.files[0];
       let extension = image.name.split(".").pop();
       const fileName = Date.now() + "." + extension;
@@ -160,7 +160,8 @@ const PicUploader = React.memo((props) => {
         Latitude: newLatitude,
         Longitude: newLongitude,
       });
-  
+      
+      }
       // fetch("http://localhost:5000/api/upload", {
       //   method: "POST",
       //   body: data,
