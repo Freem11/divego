@@ -43,7 +43,7 @@ import { ChapterContext } from "./components/contexts/chapterContext";
 import { TutorialModelContext } from "./components/contexts/tutorialModalContext";
 import { SecondTutorialModalContext } from "./components/contexts/secondTutorialModalContext";
 import { ThirdTutorialModalContext } from "./components/contexts/thirdTutorialModalContext";
-
+import { getMostRecentPhoto } from "./supabaseCalls/photoSupabaseCalls";
 import {
   sessionCheck,
   userCheck,
@@ -113,22 +113,28 @@ function App() {
         console.log("no dice:", error);
       }
 
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(
-          function (position) {
-            setMapCoords([position.coords.latitude, position.coords.longitude]);
-            setAppIsReady(true);
-          },
-          function (error) {
-            console.log("location permissions denied", error.message);
-            setAppIsReady(true);
-          },
-          { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
-        );
-      } else {
-        console.log("unsupported");
+      const photoLocation = await getMostRecentPhoto();
+      if (photoLocation) {
+        setMapCoords([photoLocation[0].latitude, photoLocation[0].longitude]);
         setAppIsReady(true);
       }
+
+      // if (navigator.geolocation) {
+      //   navigator.geolocation.getCurrentPosition(
+      //     function (position) {
+      //       setMapCoords([position.coords.latitude, position.coords.longitude]);
+      //       setAppIsReady(true);
+      //     },
+      //     function (error) {
+      //       console.log("location permissions denied", error.message);
+      //       setAppIsReady(true);
+      //     },
+      //     { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
+      //   );
+      // } else {
+      //   console.log("unsupported");
+      //   setAppIsReady(true);
+      // }
     };
   }, []);
 

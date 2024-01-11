@@ -56,11 +56,11 @@ export default function PhotoFilterer() {
             onClick={handleClear}
             sx={{
               color: "black",
-              height: "10px",
-              width: "10px",
+              height: "15px",
+              width: "15px",
               position: "absolute",
-              top: "12%",
-              left: "84%",
+              top: "8%",
+              left: "76%",
             }}
           ></HighlightOffIcon>
         </div>

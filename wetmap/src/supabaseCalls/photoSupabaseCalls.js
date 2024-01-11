@@ -120,13 +120,14 @@ export const getPhotosforAnchorMulti = async (value) => {
     const { data, error } = await supabase
     .from("photos")
     .select()
-    .ilike("label", "%" + creatureListFinal + "%")
     // .ilike("userName", "%" + value.myCreatures + "%")
     // .eq("month", value.sliderVal)
+    .ilike("label", "%" + creatureListFinal + "%")
     .gte("latitude", value.minLat)
     .gte("longitude", value.minLng)
     .lte("latitude", value.maxLat)
     .lte("longitude", value.maxLng)
+    .order("id", {ascending: false})
 
   if (error) {
     console.log("couldn't do it 24,", error);
@@ -148,6 +149,7 @@ export const getPhotosforAnchorMulti = async (value) => {
   .gte("longitude", value.minLng)
   .lte("latitude", value.maxLat)
   .lte("longitude", value.maxLng)
+  .order("id", {ascending: false})
 
 if (error) {
   console.log("couldn't do it 25,", error);
@@ -169,7 +171,7 @@ export const getPhotosforMapArea = async (value) => {
     .gte("latitude", value.minLat)
     .gte("longitude", value.minLng)
     .lte("latitude", value.maxLat)
-    .lte("longitude", value.maxLng);
+    .lte("longitude", value.maxLng)
 
   if (error) {
     console.log("couldn't do it,", error);

@@ -1,6 +1,6 @@
 .masterDiv2 {
   width: 100%;
-  background-color: pink;
+  background-color: green;
 }
 
 .picContainer {
@@ -28,7 +28,8 @@
 
 .pictureBoxA {
   width: 193px;
-  margin-top: -20px;
+  /* margin-top: -20px; */
+  /* background-color: pink; */
 }
 
 .alice-carousel__dots {
@@ -36,43 +37,43 @@
 }
 
 .micros {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: darkblue;
   color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border: grey 1px solid;
   height: 30px;
   width: 192px;
   text-align: center;
 }
 
 .microsSelected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: gold;
-  color: white;
+  color: black;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  border: grey 1px solid;
   height: 30px;
   width: 192px;
+  text-align: center;
 }
 
 .animalLabelArea {
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border: grey 1px solid;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";
-  font-size: 15px;
 }
 
 .animalLabelAreaSelected {
-  color: black;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  border: grey 1px solid;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";
-  font-size: 15px;
 }
 
 .emptyPhotos {
@@ -94,8 +95,8 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 160px;
-  /* background-color: pink; */
+  height: 145px;
+  /* background-color: green; */
   z-index: 0;
   /* overflow: hidden; */
 } 
@@ -116,6 +117,7 @@
   justify-items: center;
   flex-direction: row;
   height: 160px;
+  /* margin-left: -1px; */
   /* overflow: hidden; */
   /* background-color: greenyellow; */
   opacity: 1;

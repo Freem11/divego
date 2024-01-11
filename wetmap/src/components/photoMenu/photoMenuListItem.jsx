@@ -29,14 +29,17 @@ const PhotoMenuListItem = (props) => {
     }
   };
 
-  let screenInital = window.innerWidth;
+  let screenWidthInital = window.innerWidth;
+  let screenHeigthInital = window.innerWidth;
 
-  const [windowWidth, setWindowWidth] = useState(screenInital);
- 
-  window.addEventListener("resize", trackWidth);
+  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
+  const [windowHeight, setWindowHeight] = useState(screenHeigthInital);
 
-  function trackWidth() {
+  window.addEventListener("resize", trackDimensions);
+
+  function trackDimensions() {
     setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
   }
 
   const onDoubleClick = (e, id) => {
@@ -44,9 +47,10 @@ const PhotoMenuListItem = (props) => {
     setSelectedID(id)
 
     let mover = (windowWidth/2 - e.nativeEvent.x)/3
+    let moverHeigth = (windowHeight/7)
 
     if (e.nativeEvent.y < 300) {
-      setYCoord(100);
+      setYCoord(moverHeigth);
       setXCoord(mover)
       setScale(3);
       setZdex(99);
@@ -91,6 +95,11 @@ useEffect(() => {
     },
   });
 
+
+  let labelLength = name.length
+  let labelFont = (120)/labelLength + 6
+
+
   return (
     <animated.div
       key={id}
@@ -101,6 +110,7 @@ useEffect(() => {
     >
       <div className={animalVal.includes(name) ? "microsSelected" : "micros"}>
         <h4
+          style={{fontSize: labelFont}}
           className={
             animalVal.includes(name)
               ? "animalLabelAreaSelected"
