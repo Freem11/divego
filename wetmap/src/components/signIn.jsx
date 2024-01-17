@@ -106,8 +106,8 @@ export default function SignInRoute() {
         headers: { Authorization: `Bearer ${token}` },
       });
       const user = await res.json();
-      handleOAuthSubmit(user);
       // console.log("helloG?", user);
+      handleOAuthSubmit(user);
     } catch (err) {
       console.log("error", err);
     }
@@ -129,6 +129,7 @@ export default function SignInRoute() {
   }
 
   const handleOAuthSubmit = async (user) => {
+
     let Fname;
     let LName;
     let Pword = user.id;
@@ -272,6 +273,7 @@ export default function SignInRoute() {
           <div className="OAuthButton">
             <LoginSocialGoogle
               isOnlyGetToken
+              scope="https://www.googleapis.com/auth/userinfo.email"
               client_id={googleClientId || ""}
               onResolve={({ provider, data }) => {
                 setProfile(data);

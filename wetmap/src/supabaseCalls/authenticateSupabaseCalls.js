@@ -49,6 +49,7 @@ export const register = async (registerDetails) => {
 };
 
 export const signInStandard = async (loginDetails) => {
+  // console.log("auth got,", loginDetails);
   const { data, error } = await supabase.auth.signInWithPassword({
     email: loginDetails.email,
     password: loginDetails.password,
