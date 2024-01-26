@@ -45,9 +45,11 @@ const PhotoMenuListItem = (props) => {
   const onDoubleClick = (e, id) => {
 
     setSelectedID(id)
+    console.log(windowHeight, windowHeight / 10)
 
     let mover = (windowWidth/2 - e.nativeEvent.x)/3
-    let moverHeigth = (windowHeight/7)
+    let moverHeigth = (windowHeight/11 + 160/3)
+
 
     if (e.nativeEvent.y < 300) {
       setYCoord(moverHeigth);
