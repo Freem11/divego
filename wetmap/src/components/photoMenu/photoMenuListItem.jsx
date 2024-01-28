@@ -87,7 +87,7 @@ const PhotoMenuListItem = (props) => {
     let moverWidth = ((windowW/2) - centererPressX)/3
     let moverHeigth = ((windowH/2) - centererPressY)/3
 
-    if (e.nativeEvent.y < 300) {
+    if (scale === 1) {
       setYCoord(moverHeigth);
       setXCoord(moverWidth)
       setScale(3);
