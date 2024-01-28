@@ -59,8 +59,8 @@ export default function PhotoFilterer() {
               height: "15px",
               width: "15px",
               position: "absolute",
-              top: "8%",
-              left: "76%",
+              top: "50%",
+              left: "85%",
             }}
           ></HighlightOffIcon>
         </div>

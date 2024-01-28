@@ -89,13 +89,13 @@ const PhotoMenuListItem = (props) => {
     let centererPressX = xClick + distanceToItemMiddleX
     let distanceToItemMiddleY = HeightOfTile/2 - yClickI
     let centererPressY = yClick + distanceToItemMiddleY
-    let moverWidth = ((windowW/2) - centererPressX)/3
+    let moverWidth = ((windowW/2) - centererPressX)/2.5
     let moverHeigth = ((windowH/2) - centererPressY)/3
 
     if (scale === 1) {
       setYCoord(moverHeigth);
       setXCoord(moverWidth)
-      setScale(3);
+      setScale(2.5);
       setZdex(99);
       setClicked(true);
     } else {

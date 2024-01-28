@@ -188,9 +188,7 @@
 .col1row8 {
     width: auto;
     z-index: 2;
-    position: absolute;
-    top: 10px;
-    right: 10px;
+    position: relative;
     /* background-color: pink; */
 }
 
@@ -246,15 +244,15 @@
   }
 
   .filterer {
-    display: flex;
+    /* display: flex; */
     align-self: center;
     justify-content: center;
     flex-direction: column;
     position: absolute;
     left: 38vw;
-    margin-top: 7px;
-    width: 20%;
-    z-index: 3;
+    top: 27vh;
+    height: 4vh;
+    z-index: 301;
     /* background-color: green; */
   }
 
@@ -265,25 +263,33 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    margin-top: -9px;
+    /* height: -2vh; */
+    margin-top: 0vh;
     width: 100%;
     z-index: 3;
     /* background-color: grey */
   }
 
   .closer {
-      margin-top: 9px;
+    /* background-color: pink; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8vh;
+    margin-top: 0vh;
+    margin-bottom: -2vh;
     z-index: 5;
   }
 
   .pullTab {
     display: flex;
-    height:  20px;
+    margin-top: 0vh;
+    height:  3vh;
     width:  100px;
     background-color: gold;
     border-bottom-right-radius: 7px;
     border-bottom-left-radius: 7px;
-    z-index: 10;
+    /* z-index: 310; */
     align-self: center;
     justify-self: center;
   }

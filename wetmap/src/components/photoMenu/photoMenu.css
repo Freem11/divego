@@ -100,8 +100,8 @@
 
 .masterDivX {
   position: absolute;
-  top: 8vh;
-  left: -94vw;
+  top: 10vh;
+  left: 5vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -109,7 +109,7 @@
   width: 90vw;
   height: 10vh;
   /* background-color: green; */
-  z-index: 0;
+  z-index: 301;
   /* overflow: hidden; */
 } 
 
