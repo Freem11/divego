@@ -145,7 +145,7 @@ useEffect(() => {
 
   let picWidth = {
     width: "100%",
-    height: "130vh"
+    height: "200%"
   }
 
   return (
