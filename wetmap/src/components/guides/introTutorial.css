@@ -69,7 +69,7 @@
   .container3 {
     /* flex: 1; */
     position: absolute;
-    top: -200vh;
+    top: -350vh;
     left: 6vw;
     z-index: 10;
     background-color: transparent;
@@ -185,7 +185,7 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    top: -200vh;
+    top: -250vh;
     left: 10%;
     height: 500px;
     width: 500px;

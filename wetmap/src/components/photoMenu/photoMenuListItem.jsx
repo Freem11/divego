@@ -8,7 +8,7 @@ import zIndex from "@mui/material/styles/zIndex";
 const handleDragStart = (e) => e.preventDefault();
 
 const PhotoMenuListItem = (props) => {
-  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID } = props;
+  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID, caddyWidth } = props;
 
   let photoName =  photoURL.split('/').pop();
 
@@ -42,18 +42,54 @@ const PhotoMenuListItem = (props) => {
     setWindowHeight(window.innerHeight);
   }
 
+  // window.addEventListener("resize", trackWidth);
+
+  useEffect(() => {
+    if(selectedID !== id){
+      pressReleaseAnimations()
+    }
+  }, [selectedID]);
+  
+  // function trackWidth() {
+  //   setBoxWidth(window.innerWidth * 0.9);
+  //   setCaddyWidth(window.innerWidth * 0.9);
+  //   // setCaddyWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
+  // }
+
+  let screenInital = window.innerWidth;
+  const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
+  const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
+  const [windowW, setWindowW] = useState(window.innerWidth);
+  const [windowH, setWindowH] = useState(window.innerHeight);
+
+  window.addEventListener("resize", trackWidth);
+
+  function trackWidth() {
+    setWindowW(window.innerWidth)
+    setWindowH(window.innerHeight)
+    setBoxWidth(window.innerWidth * 0.8);
+    setTileWidth(Math.floor((window.innerWidth * 0.8)/4));
+  }
+
   const onDoubleClick = (e, id) => {
 
     setSelectedID(id)
-    console.log(windowHeight, windowHeight / 10)
+ 
+    let yClick = e.nativeEvent.clientY
+    let xClick = e.nativeEvent.clientX
+    let yClickI = e.nativeEvent.layerY
+    let xClickI = e.nativeEvent.layerX
 
-    let mover = (windowWidth/2 - e.nativeEvent.x)/3
-    let moverHeigth = (windowHeight/11 + 160/3)
-
+    let distanceToItemMiddleX = caddyWidth/2 - xClickI
+    let centererPressX = xClick + distanceToItemMiddleX
+    let distanceToItemMiddleY = caddyWidth/2 - yClickI
+    let centererPressY = yClick + distanceToItemMiddleY
+    let moverWidth = ((windowW/2) - centererPressX)/3
+    let moverHeigth = ((windowH/2) - centererPressY)/3
 
     if (e.nativeEvent.y < 300) {
       setYCoord(moverHeigth);
-      setXCoord(mover)
+      setXCoord(moverWidth)
       setScale(3);
       setZdex(99);
       setClicked(true);
@@ -102,6 +138,10 @@ useEffect(() => {
   let labelFont = (120)/labelLength + 6
 
 
+  let picWidth = {
+    width: "100%"
+  }
+
   return (
     <animated.div
       key={id}
@@ -126,8 +166,8 @@ useEffect(() => {
         src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
         // src={`https://bca075819c975f1f381667bcdff15b92.r2.cloudflarestorage.com/scubaseasons/${photoName}`}
         // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoURL}`}
-        width="191px"
-        height="108px"
+        width={picWidth.width}
+        height={"130vh"}
         onDragStart={handleDragStart}
         onClick={() => handleSelect(name)}
         style={{
