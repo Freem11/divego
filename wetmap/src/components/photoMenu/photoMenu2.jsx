@@ -166,7 +166,7 @@ const PhotoMenu = () => {
 
   const onClicko = (direction) => {
  
-    if(numTiles < 4) {
+    if(areaPics.length < 4) {
       setXCoord((4*caddyWidth - (areaPics.length*caddyWidth))/2)
     } else {
       if (direction === "shiftLeft") {
