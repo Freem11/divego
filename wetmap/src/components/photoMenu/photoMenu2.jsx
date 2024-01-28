@@ -171,18 +171,28 @@ const PhotoMenu = () => {
     } else {
       if (direction === "shiftLeft") {
         //left shift aka left BUTTON clicked
-        if (numTiles >= areaPics.length-4) {
-          setXCoord(0)
-          setNumbTiles(areaPics.length-4)
-        } else if (numTiles < areaPics.length){
-          setXCoord(xCoord + numTiles*caddyWidth)
-          setNumbTiles(numTiles + 4)
+        if ((numTiles + 4) <= areaPics.length-4) {
+          setXCoord(xCoord + caddyWidth*4)
+          if(numTiles < 4){
+            setNumbTiles(numTiles + 8)
+          } else {
+            setNumbTiles(numTiles + 4)
+          }
+          
+        } else if ((numTiles + 4) > areaPics.length-4){
+          setXCoord(xCoord + (areaPics.length - numTiles)*caddyWidth)
+          setNumbTiles(areaPics.length)
         } 
         } else {
           //"shiftRight"  aka right BUTTON clicked
             if (numTiles >= 4) {
               setXCoord(xCoord - caddyWidth*4)
-              setNumbTiles(numTiles-4)
+              if(numTiles >= areaPics.length){
+                setNumbTiles(numTiles-8)
+              } else {
+                setNumbTiles(numTiles-4)
+              }
+           
             } else if (numTiles < 4){
               setXCoord(xCoord - numTiles*caddyWidth)
               setNumbTiles(0)
