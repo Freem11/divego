@@ -141,9 +141,9 @@ const PhotoMenu = () => {
   }
 
   const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
-  const [caddyWidth, setCaddyWidth] = useState((screenInital * 0.8)/4);
+  const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
 
-  // const [caddyWidth, setCaddyWidth] = useState(
+  // const [tileWidth, setTileWidth] = useState(
   //   Math.floor(screenInital / 192) * 193 - 192
   // );
 
@@ -151,8 +151,8 @@ const PhotoMenu = () => {
 
   function trackWidth() {
     setBoxWidth(window.innerWidth * 0.8);
-    setCaddyWidth(Math.floor((window.innerWidth * 0.8)/4));
-    // setCaddyWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
+    setTileWidth(Math.floor((window.innerWidth * 0.8)/4));
+    // setTileWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
   }
 
   const wrapperRef = useRef(null);
@@ -162,42 +162,44 @@ const PhotoMenu = () => {
   const [clicked, setClicked] = useState(false);
 
   const [xCoord, setXCoord] = useState(0);
-  const [numTiles, setNumbTiles] = useState(0);
+  let tilesToMove = 4
 
   const onClicko = (direction) => {
+      let maxLength = areaPics.length*tileWidth
+
  
-    if(areaPics.length < 4) {
-      setXCoord((4*caddyWidth - (areaPics.length*caddyWidth))/2)
+    if(areaPics.length < tilesToMove) {
+      setXCoord((tilesToMove*tileWidth - (areaPics.length*tileWidth))/2)
     } else {
       if (direction === "shiftLeft") {
         //left shift aka left BUTTON clicked
-        if ((numTiles + 4) <= areaPics.length-4) {
-          setXCoord(xCoord + caddyWidth*4)
-          if(numTiles < 4){
-            setNumbTiles(numTiles + 8)
+        if (xCoord >= 0) {
+          setXCoord(0)
+        } else if (xCoord >= maxLength) {
+          setXCoord(maxLength)
+        } else {
+          if (xCoord + tilesToMove*tileWidth < 0){
+            setXCoord(xCoord + tilesToMove*tileWidth)
           } else {
-            setNumbTiles(numTiles + 4)
+            setXCoord(0)
           }
-          
-        } else if ((numTiles + 4) > areaPics.length-4){
-          setXCoord(xCoord + (areaPics.length - numTiles)*caddyWidth)
-          setNumbTiles(areaPics.length)
-        } 
+        }
+
         } else {
           //"shiftRight"  aka right BUTTON clicked
-            if (numTiles >= 4) {
-              setXCoord(xCoord - caddyWidth*4)
-              if(numTiles >= areaPics.length){
-                setNumbTiles(numTiles-8)
-              } else {
-                setNumbTiles(numTiles-4)
-              }
-           
-            } else if (numTiles < 4){
-              setXCoord(xCoord - numTiles*caddyWidth)
-              setNumbTiles(0)
-            } 
-      
+
+          if (xCoord > 0) {
+            setXCoord(0)
+          } else if (xCoord > -(maxLength - tilesToMove*tileWidth)) {
+            if (xCoord - tilesToMove*tileWidth < -(maxLength - tilesToMove*tileWidth)){
+                setXCoord(-(maxLength - tilesToMove*tileWidth))
+            } else {
+              setXCoord(xCoord - tilesToMove*tileWidth)
+            }
+          } else {
+            setXCoord(-(maxLength - tilesToMove*tileWidth))
+          }
+    
         setClicked(true);
       };
     }
@@ -220,10 +222,9 @@ const PhotoMenu = () => {
   useEffect(() => {
     setXCoord(0);
     setClicked(false);
-    setNumbTiles(areaPics.length-4)
 
     if(areaPics.length < 4){
-      setXCoord((4*caddyWidth - (areaPics.length*caddyWidth))/2)
+      setXCoord((4*tileWidth - (areaPics.length*tileWidth))/2)
     }
   }, [areaPics.length]);
 
@@ -270,7 +271,7 @@ const PhotoMenu = () => {
                   animalVal={animalVal}
                   setSelectedID={setSelectedID}
                   selectedID={selectedID}
-                  caddyWidth={caddyWidth}
+                  tilwWidth={tileWidth}
                 />
               );
             })}

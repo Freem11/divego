@@ -8,7 +8,7 @@ import zIndex from "@mui/material/styles/zIndex";
 const handleDragStart = (e) => e.preventDefault();
 
 const PhotoMenuListItem = (props) => {
-  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID, caddyWidth } = props;
+  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID, tileWidth } = props;
 
   let photoName =  photoURL.split('/').pop();
 
@@ -52,13 +52,13 @@ const PhotoMenuListItem = (props) => {
   
   // function trackWidth() {
   //   setBoxWidth(window.innerWidth * 0.9);
-  //   setCaddyWidth(window.innerWidth * 0.9);
-  //   // setCaddyWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
+  //   settileWidth(window.innerWidth * 0.9);
+  //   // settileWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
   // }
 
   let screenInital = window.innerWidth;
   const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
-  const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
+  // const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
   const [windowW, setWindowW] = useState(window.innerWidth);
   const [windowH, setWindowH] = useState(window.innerHeight);
 
@@ -74,15 +74,20 @@ const PhotoMenuListItem = (props) => {
   const onDoubleClick = (e, id) => {
 
     setSelectedID(id)
- 
+
+    let WidthofTile = e.target.width
+    let HeightOfTile = e.target.height
+
+    console.log(WidthofTile, HeightOfTile) //130, 201
+
     let yClick = e.nativeEvent.clientY
     let xClick = e.nativeEvent.clientX
     let yClickI = e.nativeEvent.layerY
     let xClickI = e.nativeEvent.layerX
 
-    let distanceToItemMiddleX = caddyWidth/2 - xClickI
+    let distanceToItemMiddleX = WidthofTile/2 - xClickI
     let centererPressX = xClick + distanceToItemMiddleX
-    let distanceToItemMiddleY = caddyWidth/2 - yClickI
+    let distanceToItemMiddleY = HeightOfTile/2 - yClickI
     let centererPressY = yClick + distanceToItemMiddleY
     let moverWidth = ((windowW/2) - centererPressX)/3
     let moverHeigth = ((windowH/2) - centererPressY)/3
@@ -139,7 +144,8 @@ useEffect(() => {
 
 
   let picWidth = {
-    width: "100%"
+    width: "100%",
+    height: "130vh"
   }
 
   return (
@@ -147,8 +153,9 @@ useEffect(() => {
       key={id}
       className="pictureBoxA"
       ref={tileRef}
-      style={({ zIndex: zdex }, move)}
+      style={move}
       onDoubleClick={(e) => onDoubleClick(e, id)}
+      onClick={() => handleSelect(name)}
     >
       <div className={animalVal.includes(name) ? "microsSelected" : "micros"}>
         <h4
@@ -167,9 +174,8 @@ useEffect(() => {
         // src={`https://bca075819c975f1f381667bcdff15b92.r2.cloudflarestorage.com/scubaseasons/${photoName}`}
         // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoURL}`}
         width={picWidth.width}
-        height={"130vh"}
+        height={picWidth.height}
         onDragStart={handleDragStart}
-        onClick={() => handleSelect(name)}
         style={{
           marginLeft: "-1px",
           borderBottomLeftRadius: "10px",

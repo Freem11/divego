@@ -40,6 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
   background-color: darkblue;
   color: white;
   border-top-left-radius: 10px;
@@ -49,6 +50,7 @@
   width: 20vw;
   text-align: center;
   margin-left: -0.5px;
+  pointer-events: all;
 }
 
 .microsSelected {
@@ -64,6 +66,7 @@
   width: 20vw;
   text-align: center;
   margin-left: -0.5px;
+  pointer-events: all
 }
 
 .animalLabelArea {
@@ -71,12 +74,14 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";
+  pointer-events: all;
 }
 
 .animalLabelAreaSelected {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";
+  pointer-events: all;
 }
 
 .emptyPhotos {
