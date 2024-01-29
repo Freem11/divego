@@ -2,33 +2,39 @@
   .containerF {
     display: flex;
     flex-direction: row;
-    /* background-color: green; */
-    opacity: 1;
-    align-items: center;
+    /* background-color: blue; */
+    /* align-items: center; */
     justify-content: center;
     align-self: center;
+    width: 96%;
+    height: 6vh;
     z-index: 1;
-    border-radius: 10px;
-    margin-left: -5px;
-    padding-right: 5px;
-    padding-left: 15px;
+    border-radius: 10%;
+    /* margin-left: -5%; */
+    padding-right: 4%;
+    /* padding-left: 15%; */
     font-size: 2rem;
   }
 
   .inputboxF {
-    background-color: white;
-    /* margin-bottom: 15px; */
-    margin-left: -5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* background-color: blue; */
+    /* margin-top: -2vh; */
+    height: 6vh;
+    /* width: 10vw; */
   }
 
   .suggestInput {
-    font-size:  12px;
+    /* background-color: purple; */
+    /* font-size:  2rem; */
     width: 100%;
   }
 
   .xButton {
     z-index: 10;
-    height: 50px;
-    width: 50px;
-    background-color: pink;
+    height: 5%;
+    width: 5%;
+    /* background-color: pink; */
   }
