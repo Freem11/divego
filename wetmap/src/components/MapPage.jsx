@@ -832,7 +832,7 @@ const MapPage = React.memo((props) => {
         </div>
       )}
 
-      <div className="fabButtons">
+      {/* <div className="fabButtons">
         {masterSwitch && (
           <div className="gearBox">
             <ToggleButton
@@ -885,7 +885,7 @@ const MapPage = React.memo((props) => {
         >
           {locationSearchZone}
         </Collapse> */}
-          </div>
+          {/* </div>
         )}
 
         {masterSwitch && (
@@ -956,9 +956,11 @@ const MapPage = React.memo((props) => {
             >
               <AnchorIcon sx={{ height: "37px", width: "37px" }} />
             </ToggleButton>
-          </div>
-        )}
-      </div>
+          </div> */}
+        {/* )}
+
+      </div> */}
+
       {masterSwitch && (
         <div className="col1row8">
           <PhotoMenu />

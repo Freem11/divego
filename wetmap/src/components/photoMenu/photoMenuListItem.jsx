@@ -8,11 +8,11 @@ import zIndex from "@mui/material/styles/zIndex";
 const handleDragStart = (e) => e.preventDefault();
 
 const PhotoMenuListItem = (props) => {
-  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID, tileWidth, setTileWidth } = props;
+  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID, tileWidth, setTileWidth, boxWidth, setBoxWidth } = props;
 
   let photoName =  photoURL.split('/').pop();
 
-  // console.log("im", photoName)
+  console.log("im", tileWidth, boxWidth)
   const tileRef = useRef(null);
   const [clicked, setClicked] = useState(false);
   const [yCoord, setYCoord] = useState(0);
@@ -57,7 +57,7 @@ const PhotoMenuListItem = (props) => {
   // }
 
   let screenInital = window.innerWidth;
-  const [boxWidth, setBoxWidth] = useState((screenInital * 0.8));
+  // const [boxWidth, setBoxWidth] = useState((screenInital * 0.8));
   // const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/5);
   const [windowW, setWindowW] = useState(window.innerWidth);
   const [windowH, setWindowH] = useState(window.innerHeight);
@@ -67,9 +67,16 @@ const PhotoMenuListItem = (props) => {
   function trackWidth() {
     setWindowW(window.innerWidth)
     setWindowH(window.innerHeight)
-    setBoxWidth((window.innerWidth * 0.8));
-    setTileWidth(((window.innerWidth * 0.8)/5)-1.5);
+    // setBoxWidth((window.innerWidth * 0.8));
+    // setTileWidth( (boxWidth/5));
+    // if(boxWidth < 930){
+    // setTileWidth( (boxWidth/5.4));
+    // } else {
+    //   setTileWidth(((window.innerWidth * 0.8)/5)-1.5);
+    // }
   }
+
+  
 
   const onDoubleClick = (e, id) => {
 
@@ -157,7 +164,7 @@ useEffect(() => {
     >
       <div style={{width: tileWidth}} className={animalVal.includes(name) ? "microsSelected" : "micros"}>
         <h4
-          style={{fontSize: labelFont}}
+          style={{fontSize: "0.1em"}}
           className={
             animalVal.includes(name)
               ? "animalLabelAreaSelected"

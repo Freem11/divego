@@ -141,7 +141,7 @@ const PhotoMenu = () => {
   }
 
   const [boxWidth, setBoxWidth] = useState((screenInital * 0.8));
-  const [tileWidth, setTileWidth] = useState(((screenInital * 0.8)/5)-1.5);
+  const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
 
   // const [tileWidth, setTileWidth] = useState(
   //   Math.floor(screenInital / 192) * 193 - 192
@@ -151,9 +151,22 @@ const PhotoMenu = () => {
 
   function trackWidth() {
     setBoxWidth((window.innerWidth * 0.8));
-    setTileWidth(((window.innerWidth * 0.8)/5)-1.5);
+    // setTileWidth(boxWidth/5);
+    // if(boxWidth < 930){
+    //   setTileWidth(boxWidth/5.40);
+    // } else {
+    //   setTileWidth(((window.innerWidth * 0.8)/5)-1.5);
+    // }
+    
     // setTileWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
   }
+
+  useEffect(() => {
+    setTileWidth(boxWidth/5 -1.5);
+  }, [boxWidth]);
+
+
+  console.log(tileWidth, boxWidth)
 
   const wrapperRef = useRef(null);
   const caddyRef = useRef(null);
@@ -244,9 +257,9 @@ const PhotoMenu = () => {
     "&.Mui-selected": { backgroundColor: "gold" },
     "&.Mui-selected:hover": { backgroundColor: "gold" },
     backgroundColor: "transparent",
-    height: "48px",
-    width: "48px",
-    marginTop: "5px",
+    height: "2vw",
+    width: "2vw",
+    marginTop: "-3vh",
     color: "white",
     borderRadius: "100%",
   };
@@ -285,6 +298,8 @@ const PhotoMenu = () => {
                   selectedID={selectedID}
                   tileWidth={tileWidth}
                   setTileWidth={setTileWidth}
+                  boxWidth={boxWidth}
+                  setBoxWidth={setBoxWidth}
                 />
               );
             })}

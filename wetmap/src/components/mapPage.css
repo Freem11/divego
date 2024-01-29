@@ -118,6 +118,7 @@
 
 .fabButtons {
     z-index: 5;
+    background-color: khaki;
     position:absolute;
 	display: flex;
     flex-direction: column;
