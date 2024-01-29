@@ -1,6 +1,6 @@
 .masterDiv2 {
   width: 100%;
-  background-color: green;
+  /* background-color: green; */
 }
 
 .picContainer {
@@ -27,9 +27,9 @@
 }
 
 .pictureBoxA {
-  width: 193px;
-  /* margin-top: -20px; */
-  /* background-color: pink; */
+  margin-top: -15vh;
+  height: 10vh;
+  width: 20vw;
 }
 
 .alice-carousel__dots {
@@ -40,14 +40,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: transparent;
   background-color: darkblue;
   color: white;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border: grey 1px solid;
-  height: 30px;
-  width: 192px;
+  height: 4vh;
+  width: 20vw;
   text-align: center;
+  margin-left: -0.5px;
+  pointer-events: all;
 }
 
 .microsSelected {
@@ -59,21 +62,26 @@
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   border: grey 1px solid;
-  height: 30px;
-  width: 192px;
+  height: 4vh;
+  width: 20vw;
   text-align: center;
+  margin-left: -0.5px;
+  pointer-events: all
 }
 
 .animalLabelArea {
+  align-items: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";
+  pointer-events: all;
 }
 
 .animalLabelAreaSelected {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";
+  pointer-events: all;
 }
 
 .emptyPhotos {
@@ -91,13 +99,17 @@
 }
 
 .masterDivX {
+  position: absolute;
+  top: 10vh;
+  left: 5vw;
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 145px;
+  width: 90vw;
+  height: 10vh;
   /* background-color: green; */
-  z-index: 0;
+  z-index: 301;
   /* overflow: hidden; */
 } 
 
@@ -108,6 +120,7 @@
 
 .backTog{
   opacity: 0;
+  background-color: pink;
 }
 
 .picScollX {
@@ -116,7 +129,8 @@
   align-items: center;
   justify-items: center;
   flex-direction: row;
-  height: 160px;
+  width: 80vw;
+  height:10vh;
   /* margin-left: -1px; */
   /* overflow: hidden; */
   /* background-color: greenyellow; */
@@ -130,7 +144,10 @@
   align-items: center;
   justify-items: center;
   flex-direction: row;
-  height:160px;
+  width: 80vw;
+  height:10vh;
+  margin-left: 1vw;
+  margin-right: 1vw;
   overflow-x: clip;
   /* background-color: purple; */
   opacity: 1;

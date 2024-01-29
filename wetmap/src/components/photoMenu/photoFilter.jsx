@@ -5,6 +5,7 @@ import InputBase from "@mui/material/InputBase";
 import { SearchTextContext } from "../contexts/searchTextContext";
 import { AreaPicsContext } from "../contexts/areaPicsContext";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import "./photoFilter.css";
 
 export default function PhotoFilterer() {
   const { textvalue, setTextValue } = useContext(SearchTextContext);
@@ -33,14 +34,13 @@ export default function PhotoFilterer() {
             className="suggestInput"
             inputProps={{
               style: {
-                fontSize: "14px",
-                width: "100%",
+                fontSize: "1rem",
+                width: "20vw",
                 textAlign: "center",
-                height: "35px",
+                height: "5vh",
                 backgroundColor: "white",
-                borderRadius: "15px",
+                borderRadius: "1rem",
                 marginBottom: "15px",
-                marginLeft: "-5px"
               },
             }}
           />
@@ -56,11 +56,12 @@ export default function PhotoFilterer() {
             onClick={handleClear}
             sx={{
               color: "black",
-              height: "15px",
-              width: "15px",
+              height: "2vh",
+              width: "2vw",
+              // marginBottom: "500%",
               position: "absolute",
-              top: "8%",
-              left: "76%",
+              top: "3vh",
+              left: "85%",
             }}
           ></HighlightOffIcon>
         </div>

@@ -114,9 +114,7 @@ const PhotoMenu = () => {
     }
   };
 
-  useEffect(() => {
-    filterPhotosForMapArea();
-  }, []);
+ 
 
   useEffect(() => {
       clearTimeout(waiter2);
@@ -138,17 +136,23 @@ const PhotoMenu = () => {
   }, [boundaries, textvalue]);
 
   let screenInital = window.innerWidth;
+  let caddyWidthNew = {
+    width: "90vw"
+  }
 
-  const [boxWidth, setBoxWidth] = useState(screenInital * 0.99);
-  const [caddyWidth, setCaddyWidth] = useState(
-    Math.floor(screenInital / 192) * 193 - 192
-  );
+  const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
+  const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
+
+  // const [tileWidth, setTileWidth] = useState(
+  //   Math.floor(screenInital / 192) * 193 - 192
+  // );
 
   window.addEventListener("resize", trackWidth);
 
   function trackWidth() {
-    setBoxWidth(window.innerWidth * 0.95);
-    setCaddyWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
+    setBoxWidth(window.innerWidth * 0.8);
+    setTileWidth(Math.floor((window.innerWidth * 0.8)/4));
+    // setTileWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
   }
 
   const wrapperRef = useRef(null);
@@ -158,38 +162,49 @@ const PhotoMenu = () => {
   const [clicked, setClicked] = useState(false);
 
   const [xCoord, setXCoord] = useState(0);
+  let tilesToMove = 4
 
   const onClicko = (direction) => {
-    let maxLength = areaPics.length * 193;
+      let maxLength = areaPics.length*tileWidth
 
-    if (direction === "shiftLeft") {
-      if (xCoord >= 0) {
-        setXCoord(0);
-      } else if (xCoord >= maxLength) {
-        setXCoord(maxLength);
-      } else {
-        if (xCoord + caddyWidth < 0) {
-          setXCoord(xCoord + caddyWidth);
-        } else {
-          setXCoord(0)
-        }
-      }
+ 
+    if(areaPics.length < tilesToMove) {
+      setXCoord((tilesToMove*tileWidth - (areaPics.length*tileWidth))/2)
     } else {
-      //"shiftRight"
-      if (xCoord > 0) {
-        setXCoord(0);
-      } else if (xCoord > -(maxLength - caddyWidth)) {
-        if (xCoord - caddyWidth < -(maxLength - caddyWidth)) {
-          setXCoord(-(maxLength - caddyWidth));
+      if (direction === "shiftLeft") {
+        //left shift aka left BUTTON clicked
+        if (xCoord >= 0) {
+          setXCoord(0)
+        } else if (xCoord >= maxLength) {
+          setXCoord(maxLength)
         } else {
-          setXCoord(xCoord - caddyWidth);
+          if (xCoord + tilesToMove*tileWidth < 0){
+            setXCoord(xCoord + tilesToMove*tileWidth)
+          } else {
+            setXCoord(0)
+          }
         }
-      } else {
-        setXCoord(-(maxLength - caddyWidth));
-      }
+
+        } else {
+          //"shiftRight"  aka right BUTTON clicked
+
+          if (xCoord > 0) {
+            setXCoord(0)
+          } else if (xCoord > -(maxLength - tilesToMove*tileWidth)) {
+            if (xCoord - tilesToMove*tileWidth < -(maxLength - tilesToMove*tileWidth)){
+                setXCoord(-(maxLength - tilesToMove*tileWidth))
+            } else {
+              setXCoord(xCoord - tilesToMove*tileWidth)
+            }
+          } else {
+            setXCoord(-(maxLength - tilesToMove*tileWidth))
+          }
+    
+        setClicked(true);
+      };
     }
-    setClicked(true);
-  };
+}
+
 
   const move = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -207,6 +222,10 @@ const PhotoMenu = () => {
   useEffect(() => {
     setXCoord(0);
     setClicked(false);
+
+    if(areaPics.length < 4){
+      setXCoord((4*tileWidth - (areaPics.length*tileWidth))/2)
+    }
   }, [areaPics.length]);
 
   const toggleButtonStyle = {
@@ -221,7 +240,8 @@ const PhotoMenu = () => {
   };
 
   return (
-    <div className="masterDivX" style={{ width: boxWidth }}>
+    // <div className="masterDivX" style={{ width: boxWidth }}>
+    <div className="masterDivX">
       <ToggleButton
         className="backTog"
         sx={toggleButtonStyle}
@@ -231,10 +251,12 @@ const PhotoMenu = () => {
       >
         <ArrowBackIosIcon />
       </ToggleButton>
-      <div className="picScollY" style={{ width: caddyWidth }} ref={wrapperRef} value="web">
+      {/* <div className="picScollY" style={{ width: caddyWidth }} ref={wrapperRef} value="web"> */}
+      <div className="picScollY" ref={wrapperRef} value="web">
         <animated.div
           className="picScollX"
-          style={({ width: caddyWidth }, move)}
+          // style={({ width: caddyWidth }, move)}
+          style={(move)}
           ref={caddyRef}
         >
           {areaPics &&
@@ -249,6 +271,7 @@ const PhotoMenu = () => {
                   animalVal={animalVal}
                   setSelectedID={setSelectedID}
                   selectedID={selectedID}
+                  tilwWidth={tileWidth}
                 />
               );
             })}

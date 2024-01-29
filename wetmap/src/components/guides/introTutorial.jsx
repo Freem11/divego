@@ -473,7 +473,7 @@ export default function IntroTutorial(props) {
 
     if (itterator === 6) {
       setQuestionButtonY(0);
-      setPixY((2*windowHeigth)+(windowHeigth-picBoxHeigth)/2)
+      setPixY((3.5*windowHeigth)+(windowHeigth-picBoxHeigth)/2)
 
     }
 
@@ -487,7 +487,7 @@ export default function IntroTutorial(props) {
 
     if (itterator === 9) {
       setExploreButtonY(0);
-      setClusterAnchorY((2*windowHeigth)+(windowHeigth-500)/2);
+      setClusterAnchorY((2.5*windowHeigth)+(windowHeigth-500)/2);
     }
 
     if (itterator === 10) {
