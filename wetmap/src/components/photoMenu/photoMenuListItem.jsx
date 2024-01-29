@@ -164,7 +164,7 @@ useEffect(() => {
     >
       <div style={{width: tileWidth}} className={animalVal.includes(name) ? "microsSelected" : "micros"}>
         <h4
-          style={{fontSize: "0.1em"}}
+          style={{fontSize: "1vw"}}
           className={
             animalVal.includes(name)
               ? "animalLabelAreaSelected"

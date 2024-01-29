@@ -828,11 +828,11 @@ const MapPage = React.memo((props) => {
 
       {masterSwitch && (
         <div className="col2rowT">
-          <AnimalTopAutoSuggest />
+          {/* <AnimalTopAutoSuggest /> */}
         </div>
       )}
 
-      {/* <div className="fabButtons">
+       <div className="fabButtons">
         {masterSwitch && (
           <div className="gearBox">
             <ToggleButton
@@ -878,14 +878,14 @@ const MapPage = React.memo((props) => {
             >
               <ExploreIcon sx={{ height: "37px", width: "37px" }} />
             </ToggleButton>
-            {/* <Collapse
+           <Collapse
           in={showGeoCoder}
           orientation="horizontal"
           collapsedSize="0px"
         >
           {locationSearchZone}
-        </Collapse> */}
-          {/* </div>
+        </Collapse>
+           </div>
         )}
 
         {masterSwitch && (
@@ -956,17 +956,17 @@ const MapPage = React.memo((props) => {
             >
               <AnchorIcon sx={{ height: "37px", width: "37px" }} />
             </ToggleButton>
-          </div> */}
-        {/* )}
+          </div>
+       )}
 
-      </div> */}
+      </div>
 
       {masterSwitch && (
-        <div className="col1row8">
+        <div className="col1row8" pointerEvents={"box-none"}>
           <PhotoMenu />
           <div className="filterer">
             {((areaPics && areaPics.length > 0) || isOpen) && (
-              <div className="emptyBox" pointerEvents={"box-none"}>
+              <div className="emptyBox">
                 <Collapse
                   in={showFilterer}
                   orientation="vertical"
@@ -974,6 +974,7 @@ const MapPage = React.memo((props) => {
                 >
                   <div
                     className="closer"
+                    pointerEvents={"box-none"}
                   >
                     <PhotoFilterer />
                   </div>
@@ -983,6 +984,7 @@ const MapPage = React.memo((props) => {
                   className="pullTab"
                   onClick={() => animatePulltab()}
                 ></div>
+                <AnimalTopAutoSuggest /> 
               </div>
             )}
           </div>

@@ -118,7 +118,7 @@
 
 .fabButtons {
     z-index: 5;
-    background-color: khaki;
+    /* background-color: khaki; */
     position:absolute;
 	display: flex;
     flex-direction: column;
@@ -252,7 +252,8 @@
     justify-content: center;
     flex-direction: column;
     position: absolute;
-    left: 39.5vw;
+    pointer-events: none;
+    left: 25vw;
     top: 21.8vh;
     /* height: 0vh; */
     /* width: 10vw; */
@@ -268,6 +269,7 @@
     align-content: center;
     align-items: center;
     height: -2vh;
+    pointer-events: none;
     /* width: 20vw; */
     z-index: 3;
     /* background-color: grey */
@@ -280,6 +282,7 @@
     justify-content: center;
     height: 6vh;
     width: 21vw;
+    pointer-events: none;
     /* margin-top: 0vh; */
     /* margin-bottom: -2vh; */
     z-index: 5;
@@ -288,9 +291,11 @@
   .pullTab {
     display: flex;
     margin-top: 0vh;
+    margin-bottom: 2vh;
     min-height: 15px;
     height:  3vh;
-    width:  50%;
+    width:  25%;
+    pointer-events: auto;
     background-color: gold;
     border-bottom-right-radius: 7px;
     border-bottom-left-radius: 7px;

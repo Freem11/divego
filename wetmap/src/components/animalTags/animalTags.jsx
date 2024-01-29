@@ -17,9 +17,9 @@ const AnimalTag = (props) => {
         <p
           style={{
             color: "#355D71",
-            fontFamily: "Permanent Marker",
-            fontSize: 12,
-            marginRight: 10,
+            fontFamily: "Itim",
+            fontSize: "0.8rem",
+            marginRight: "0.5rem",
             marginLeft: 2,
             marginTop: 0,
             marginBottom: 0,
@@ -29,7 +29,7 @@ const AnimalTag = (props) => {
         </p>
         <div className="xButton">
           <HighlightOffIcon
-            sx={{ color: "gray", height: "14px", width: "14px" }}
+            sx={{ color: "gray", width: "1rem" }}
           ></HighlightOffIcon>
         </div>
     </div>
