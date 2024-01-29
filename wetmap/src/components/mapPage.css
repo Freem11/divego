@@ -191,7 +191,7 @@
     position: relative;
     align-items: center;
     justify-content: center;
-    background-color: pink;
+    /* background-color: pink; */
 }
 
 /* .col1row9 {
@@ -252,7 +252,7 @@
     flex-direction: column;
     position: absolute;
     left: 39.5vw;
-    top: 27vh;
+    top: 21.8vh;
     /* height: 0vh; */
     /* width: 10vw; */
     z-index: 301;

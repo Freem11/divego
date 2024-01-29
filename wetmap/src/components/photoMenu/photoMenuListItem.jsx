@@ -8,7 +8,7 @@ import zIndex from "@mui/material/styles/zIndex";
 const handleDragStart = (e) => e.preventDefault();
 
 const PhotoMenuListItem = (props) => {
-  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID, tileWidth } = props;
+  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID, tileWidth, setTileWidth } = props;
 
   let photoName =  photoURL.split('/').pop();
 
@@ -57,8 +57,8 @@ const PhotoMenuListItem = (props) => {
   // }
 
   let screenInital = window.innerWidth;
-  const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
-  // const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
+  const [boxWidth, setBoxWidth] = useState((screenInital * 0.8));
+  // const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/5);
   const [windowW, setWindowW] = useState(window.innerWidth);
   const [windowH, setWindowH] = useState(window.innerHeight);
 
@@ -67,8 +67,8 @@ const PhotoMenuListItem = (props) => {
   function trackWidth() {
     setWindowW(window.innerWidth)
     setWindowH(window.innerHeight)
-    setBoxWidth(window.innerWidth * 0.8);
-    setTileWidth(Math.floor((window.innerWidth * 0.8)/4));
+    setBoxWidth((window.innerWidth * 0.8));
+    setTileWidth(((window.innerWidth * 0.8)/5)-1.5);
   }
 
   const onDoubleClick = (e, id) => {
@@ -77,8 +77,6 @@ const PhotoMenuListItem = (props) => {
 
     let WidthofTile = e.target.width
     let HeightOfTile = e.target.height
-
-    console.log(WidthofTile, HeightOfTile) //130, 201
 
     let yClick = e.nativeEvent.clientY
     let xClick = e.nativeEvent.clientX
@@ -144,8 +142,8 @@ useEffect(() => {
 
 
   let picWidth = {
-    width: "100%",
-    height: "200%"
+    width: tileWidth,
+    height: "150%"
   }
 
   return (
@@ -157,7 +155,7 @@ useEffect(() => {
       onDoubleClick={(e) => onDoubleClick(e, id)}
       onClick={() => handleSelect(name)}
     >
-      <div className={animalVal.includes(name) ? "microsSelected" : "micros"}>
+      <div style={{width: tileWidth}} className={animalVal.includes(name) ? "microsSelected" : "micros"}>
         <h4
           style={{fontSize: labelFont}}
           className={
@@ -173,7 +171,7 @@ useEffect(() => {
         src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
         // src={`https://bca075819c975f1f381667bcdff15b92.r2.cloudflarestorage.com/scubaseasons/${photoName}`}
         // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoURL}`}
-        width={picWidth.width}
+        width={tileWidth}
         height={picWidth.height}
         onDragStart={handleDragStart}
         style={{

@@ -140,8 +140,8 @@ const PhotoMenu = () => {
     width: "90vw"
   }
 
-  const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
-  const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
+  const [boxWidth, setBoxWidth] = useState((screenInital * 0.8));
+  const [tileWidth, setTileWidth] = useState(((screenInital * 0.8)/5)-1.5);
 
   // const [tileWidth, setTileWidth] = useState(
   //   Math.floor(screenInital / 192) * 193 - 192
@@ -150,8 +150,8 @@ const PhotoMenu = () => {
   window.addEventListener("resize", trackWidth);
 
   function trackWidth() {
-    setBoxWidth(window.innerWidth * 0.8);
-    setTileWidth(Math.floor((window.innerWidth * 0.8)/4));
+    setBoxWidth((window.innerWidth * 0.8));
+    setTileWidth(((window.innerWidth * 0.8)/5)-1.5);
     // setTileWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
   }
 
@@ -162,7 +162,8 @@ const PhotoMenu = () => {
   const [clicked, setClicked] = useState(false);
 
   const [xCoord, setXCoord] = useState(0);
-  let tilesToMove = 4
+  let tilesToMove = 5
+  const [tilesRemaining, setTilesRemaining] = useState(areaPics.length - 10);
 
   const onClicko = (direction) => {
       let maxLength = areaPics.length*tileWidth
@@ -177,27 +178,37 @@ const PhotoMenu = () => {
           setXCoord(0)
         } else if (xCoord >= maxLength) {
           setXCoord(maxLength)
+          setTilesRemaining(tilesRemaining + 5)
         } else {
-          if (xCoord + tilesToMove*tileWidth < 0){
-            setXCoord(xCoord + tilesToMove*tileWidth)
+          if (xCoord + tilesToMove*(tileWidth) + (tilesToMove*1.5) < 0){
+            setXCoord(xCoord + tilesToMove*(tileWidth) + tilesToMove*(1.5))
+            setTilesRemaining(tilesRemaining + 5)
           } else {
+            setTilesRemaining(tilesRemaining + 5)
             setXCoord(0)
           }
         }
 
         } else {
           //"shiftRight"  aka right BUTTON clicked
-
           if (xCoord > 0) {
             setXCoord(0)
-          } else if (xCoord > -(maxLength - tilesToMove*tileWidth)) {
-            if (xCoord - tilesToMove*tileWidth < -(maxLength - tilesToMove*tileWidth)){
-                setXCoord(-(maxLength - tilesToMove*tileWidth))
+          } else if (xCoord > -(maxLength)) {
+            if (xCoord - tilesToMove*(tileWidth+1.5) < -(maxLength - tilesToMove*(tileWidth+1.5))){
+
+              if(tilesRemaining < -5 ){
+
+              } else {
+                setXCoord((xCoord - ((tilesRemaining + 5) *tileWidth) - ((tilesRemaining+5)*(1.5))  ))
+                setTilesRemaining(tilesRemaining - 5)
+              }
+                
             } else {
-              setXCoord(xCoord - tilesToMove*tileWidth)
+              setXCoord(xCoord - tilesToMove*(tileWidth)- tilesToMove*(1.5))
+              setTilesRemaining(tilesRemaining - 5)
             }
           } else {
-            setXCoord(-(maxLength - tilesToMove*tileWidth))
+            setXCoord(-(maxLength - tilesToMove*(tileWidth) + tilesToMove*(1.5)))
           }
     
         setClicked(true);
@@ -221,6 +232,7 @@ const PhotoMenu = () => {
 
   useEffect(() => {
     setXCoord(0);
+    setTilesRemaining(areaPics.length-10)
     setClicked(false);
 
     if(areaPics.length < 4){
@@ -252,11 +264,11 @@ const PhotoMenu = () => {
         <ArrowBackIosIcon />
       </ToggleButton>
       {/* <div className="picScollY" style={{ width: caddyWidth }} ref={wrapperRef} value="web"> */}
-      <div className="picScollY" ref={wrapperRef} value="web">
+      <div className="picScollY" style={{width: boxWidth}} ref={wrapperRef} value="web">
         <animated.div
           className="picScollX"
-          // style={({ width: caddyWidth }, move)}
-          style={(move)}
+          style={({ width: boxWidth }, move)}
+          // style={(move)}
           ref={caddyRef}
         >
           {areaPics &&
@@ -271,7 +283,8 @@ const PhotoMenu = () => {
                   animalVal={animalVal}
                   setSelectedID={setSelectedID}
                   selectedID={selectedID}
-                  tilwWidth={tileWidth}
+                  tileWidth={tileWidth}
+                  setTileWidth={setTileWidth}
                 />
               );
             })}

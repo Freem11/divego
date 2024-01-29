@@ -47,7 +47,7 @@
   border-top-right-radius: 10px;
   border: grey 1px solid;
   height: 4vh;
-  width: 20vw;
+  /* width: 18vw; */
   text-align: center;
   margin-left: -0.5px;
   pointer-events: all;
@@ -129,11 +129,11 @@
   align-items: center;
   justify-items: center;
   flex-direction: row;
-  width: 80vw;
+  width: 80%;
   height:10vh;
   /* margin-left: -1px; */
   /* overflow: hidden; */
-  /* background-color: greenyellow; */
+  background-color: greenyellow;
   opacity: 1;
   /* transition: translatex(-193px) 1s ease-out; */
 }
@@ -144,12 +144,12 @@
   align-items: center;
   justify-items: center;
   flex-direction: row;
-  width: 80vw;
+  width: 100%;
   height:10vh;
   margin-left: 1vw;
   margin-right: 1vw;
   overflow-x: clip;
-  /* background-color: purple; */
+  background-color: purple;
   opacity: 1;
   z-index: 50;
 }
