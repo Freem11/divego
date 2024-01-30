@@ -116,6 +116,21 @@
 	color: white; */
 }
 
+.fabContainer {
+    position:absolute;
+    align-items: center;
+    justify-content: center;
+    bottom: -14vh;
+    left: 25vw;
+    height: 15vh;
+    width: 50vw;	
+    display: flex;
+    flex-direction: column;
+    z-index: 5;
+    cursor: pointer;
+    /* background-color: pink; */
+}
+
 .fabButtons {
     z-index: 5;
     background-color: #538dbd;
@@ -125,8 +140,9 @@
     border-radius: 1rem;
     justify-content: space-evenly;
 	gap: 1rem;
-	bottom: 1vh;
-    left: 25vw;
+    bottom: 1vh;
+    min-height: 45px;
+    height: 6vw;
     width: 50vw;
 }
 
@@ -142,13 +158,35 @@
 	right: 30px;
 }
 
+.animateFont {
+    margin-top: -1vh;
+    padding-bottom: -1vh;
+    font-family: Itim;
+    font-size: 1vw;
+    color: white;
+    width: 10vw;
+}
+
 .buttonFont {
-    margin-top: 1vh;
+    margin-top: 0vh;
     padding-bottom: 1vh;
     font-family: Itim;
     font-size: 1vw;
     color: white;
     width: 10vw;
+}
+
+.animateBox {
+    position: absolute;
+    z-index: 5;
+    bottom: 8vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2vh;
+    height: 5vw;
+    width: 4vw;
 }
 
 .gearBox {

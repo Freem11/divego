@@ -165,9 +165,6 @@ const PhotoMenu = () => {
     setTileWidth(boxWidth/5 -1.5);
   }, [boxWidth]);
 
-
-  console.log(tileWidth, boxWidth)
-
   const wrapperRef = useRef(null);
   const caddyRef = useRef(null);
   const leftButtonRef = useRef(null);

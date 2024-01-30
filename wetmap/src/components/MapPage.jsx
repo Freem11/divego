@@ -31,6 +31,8 @@ import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import { DiveSitesContext } from "./contexts/diveSitesContext";
 import { AnimalContext } from "./contexts/animalContext";
 import { PicModalContext } from "./contexts/picModalContext";
@@ -90,8 +92,9 @@ const MapPage = React.memo((props) => {
   const [showFilterer, setShowFilterer] = useState(false);
   const { animalVal } = useContext(AnimalContext);
   const { showGeoCoder, setShowGeoCoder } = useContext(GeoCoderContext);
-  const { showAnimalSearch, setShowAnimalSearch } =
-    useContext(AnimalRevealContext);
+  const { showAnimalSearch, setShowAnimalSearch } = useContext(
+    AnimalRevealContext
+  );
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { photoFile, setPhotoFile } = useContext(PictureContext);
@@ -255,7 +258,10 @@ const MapPage = React.memo((props) => {
   }, []);
 
   const toggleButtonStyle = {
-    "&.Mui-selected": { backgroundColor: "#538bdb", border: "1px solid #538bdb" },
+    "&.Mui-selected": {
+      backgroundColor: "#538bdb",
+      border: "1px solid #538bdb",
+    },
     "&.Mui-selected:hover": { backgroundColor: "lightgrey", color: "white" },
     "&:hover": {
       color: "lightgrey",
@@ -385,8 +391,7 @@ const MapPage = React.memo((props) => {
     setSiteModal(false);
     if (pin.PicFile !== null) {
       removePhoto({
-        filePath:
-          `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+        filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
       });
     }
@@ -428,8 +433,7 @@ const MapPage = React.memo((props) => {
     setSiteModal(false);
     if (pin.PicFile !== null) {
       removePhoto({
-        filePath:
-          `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+        filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
       });
     }
@@ -567,6 +571,13 @@ const MapPage = React.memo((props) => {
   const [secondGuideModalYCoord, setSecondGuideModalYCoord] = useState(0);
   const [thirdGuideModalYCoord, setThirdGuideModalYCoord] = useState(0);
   const [anchorModalYCoord, setAnchorModalYCoord] = useState(0);
+  const [fabsYCoord, setfabsYCoord] = useState(0);
+  const [menuUp, setMenuUp] = useState(false);
+
+  const moveFabModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${fabsYCoord}px,0)` },
+  });
 
   const movePicModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -609,6 +620,22 @@ const MapPage = React.memo((props) => {
   });
 
   let modalHeigth = 700;
+ 
+  const animateFabs = () => {
+
+    let blueSectionHeight = document.getElementsByClassName("fabButtons")[0].clientHeight
+    
+    if (fabsYCoord === 0) {
+      setfabsYCoord(-blueSectionHeight - blueSectionHeight/2);
+    } else {
+      setfabsYCoord(0);
+    }
+  };
+
+  const animateMenu = (e) => {
+    animateFabs();
+    setMenuUp(!menuUp);
+  };
 
   const animatePicModal = () => {
     if (picModalYCoord === 0) {
@@ -624,8 +651,7 @@ const MapPage = React.memo((props) => {
       setPicModalYCoord(0);
       if (pin.PicFile !== null) {
         removePhoto({
-          filePath:
-            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -657,8 +683,7 @@ const MapPage = React.memo((props) => {
       setSiteModal(false);
       if (pin.PicFile !== null) {
         removePhoto({
-          filePath:
-            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -689,8 +714,7 @@ const MapPage = React.memo((props) => {
       setSiteModal(false);
       if (pin.PicFile !== null) {
         removePhoto({
-          filePath:
-            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -711,8 +735,7 @@ const MapPage = React.memo((props) => {
       setSiteModal(false);
       if (pin.PicFile !== null) {
         removePhoto({
-          filePath:
-            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -756,8 +779,7 @@ const MapPage = React.memo((props) => {
       setShowGeoCoder(false);
       if (pin.PicFile !== null) {
         removePhoto({
-          filePath:
-            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -768,15 +790,14 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePulltab = () => {
-    setShowFilterer(!showFilterer)
-
+    setShowFilterer(!showFilterer);
   };
 
   useEffect(() => {
-    if (!showFilterer){
-      setIsOpen(false)
+    if (!showFilterer) {
+      setIsOpen(false);
     } else {
-      setIsOpen(true)
+      setIsOpen(true);
     }
   }, [showFilterer]);
 
@@ -827,146 +848,170 @@ const MapPage = React.memo((props) => {
       </div>
 
       {masterSwitch && (
-        <div className="col2rowT">
-          {/* <AnimalTopAutoSuggest /> */}
-        </div>
+        <div className="col2rowT">{/* <AnimalTopAutoSuggest /> */}</div>
       )}
 
-       <div className="fabButtons">
+      <animated.div className="fabContainer" style={moveFabModal}>
         {masterSwitch && (
-          <div className="gearBox">
-            <ToggleButton
-              sx={toggleButtonStyle}
-              value="check"
-              selected={gearModal}
-              onChange={() => {
-                handleSettingsButton();
-              }}
-            >
-              <SettingsIcon sx={{ height: "3vw" }} />
-            </ToggleButton>
-            <p className="buttonFont">Settings</p>
+          <div className="animateBox" onClick={(e) => animateMenu(e)}>
+            <p className="animateFont">{menuUp ? "Hide Menu" : "Show Menu"}</p>
+            {menuUp ? (
+              <KeyboardArrowDownIcon
+                sx={{
+                  height: "3vh",
+                  color: "white",
+                  marginTop: "-2vh",
+                  marginBottom: "5vh",
+                }}
+              />
+            ) : (
+              <KeyboardArrowUpIcon
+                sx={{
+                  height: "3vh",
+                  color: "white",
+                  marginTop: "-2vh",
+                  marginBottom: "5vh",
+                }}
+              />
+            )}
           </div>
         )}
 
-        {masterSwitch && (
-          <div className="gearBox">
-            <ToggleButton
-              sx={toggleButtonStyle}
-              value="check"
-              selected={guideModal}
-              onChange={() => {
-                handleTutorialButton();
-              }}
-            >
-              <QuestionMarkIcon sx={{ height: "4vw" }} />
-            </ToggleButton>
-            <p className="buttonFont">Guides</p>
-          </div>
-        )}
+        <div className="fabButtons">
+          {masterSwitch && (
+            <div className="gearBox">
+              <ToggleButton
+                sx={toggleButtonStyle}
+                value="check"
+                selected={gearModal}
+                onChange={() => {
+                  handleSettingsButton();
+                }}
+              >
+                <SettingsIcon sx={{ height: "3vw" }} />
+              </ToggleButton>
+              <p className="buttonFont">Settings</p>
+            </div>
+          )}
 
-        {masterSwitch && (
-          <div
-            className="gearBox"
-            // style={{ display: "flex", flexDirection: "row" }}
-          >
-            <ToggleButton
-              sx={toggleButtonStyle}
-              value="check"
-              selected={showGeoCoder}
-              onChange={() => {
-                handleGeocodingSearchButton();
-              }}
+          {masterSwitch && (
+            <div className="gearBox">
+              <ToggleButton
+                sx={toggleButtonStyle}
+                value="check"
+                selected={guideModal}
+                onChange={() => {
+                  handleTutorialButton();
+                }}
+              >
+                <QuestionMarkIcon sx={{ height: "4vw" }} />
+              </ToggleButton>
+              <p className="buttonFont">Guides</p>
+            </div>
+          )}
+
+          {masterSwitch && (
+            <div
+              className="gearBox"
+              // style={{ display: "flex", flexDirection: "row" }}
             >
-              <ExploreIcon sx={{ height: "3vw", width: "37px" }} />
-            </ToggleButton>
-            <p className="buttonFont">Map Search</p>
-           {/* <Collapse
+              <ToggleButton
+                sx={toggleButtonStyle}
+                value="check"
+                selected={showGeoCoder}
+                onChange={() => {
+                  handleGeocodingSearchButton();
+                }}
+              >
+                <ExploreIcon sx={{ height: "3vw", width: "37px" }} />
+              </ToggleButton>
+              <p className="buttonFont">Map Search</p>
+              {/* <Collapse
           in={showGeoCoder}
           orientation="horizontal"
           collapsedSize="0px"
         >
           {locationSearchZone}
         </Collapse> */}
-           </div>
-        )}
+            </div>
+          )}
 
-        {masterSwitch && (
-          <div
-            className="gearBox"
-            // style={{ display: "flex", flexDirection: "row" }}
-          >
-            <ToggleButton
-              sx={searButState ? toggleButtonStyleAlt : toggleButtonStyle}
-              value="check"
-              selected={showAnimalSearch}
-              onChange={() => {
-                handleDiveSiteSearchButton();
-              }}
+          {masterSwitch && (
+            <div
+              className="gearBox"
+              // style={{ display: "flex", flexDirection: "row" }}
             >
-              <TravelExploreIcon sx={{ height: "2.5vw", width: "36px" }} />
-            </ToggleButton>
-            <p className="buttonFont">Site Search</p>
-            {/* <Collapse
+              <ToggleButton
+                sx={searButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                value="check"
+                selected={showAnimalSearch}
+                onChange={() => {
+                  handleDiveSiteSearchButton();
+                }}
+              >
+                <TravelExploreIcon sx={{ height: "2.5vw", width: "36px" }} />
+              </ToggleButton>
+              <p className="buttonFont">Site Search</p>
+              {/* <Collapse
               in={showAnimalSearch}
               orientation="horizontal"
               collapsedSize="0px"
             >
               {diveSiteSearchZone}
             </Collapse> */}
-          </div>
-        )}
+            </div>
+          )}
 
-        {masterSwitch && (
-          <div className="gearBox">
-            <ToggleButton
-              sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
-              value="check"
-              selected={picModal}
-              onChange={() => {
-                handlePhotoModalButton();
-              }}
-            >
-              <PhotoCameraIcon sx={{ height: "2.5vw", width: "36px" }} />
-            </ToggleButton>
-            <p className="buttonFont">Photo Add</p>
-          </div>
-        )}
+          {masterSwitch && (
+            <div className="gearBox">
+              <ToggleButton
+                sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                value="check"
+                selected={picModal}
+                onChange={() => {
+                  handlePhotoModalButton();
+                }}
+              >
+                <PhotoCameraIcon sx={{ height: "2.5vw", width: "36px" }} />
+              </ToggleButton>
+              <p className="buttonFont">Photo Add</p>
+            </div>
+          )}
 
-        {masterSwitch && (
-          <div className="gearBox">
-            <ToggleButton
-              sx={siteButState ? toggleButtonStyleAlt : toggleButtonStyle}
-              value="check"
-              selected={diveSiteModal}
-              onChange={() => {
-                handleDiveSiteModalButton();
-              }}
-            >
-              <AddLocationAltIcon sx={{ height: "3vw", width: "38px" }} />
-            </ToggleButton>
-            <p className="buttonFont">Site Add</p>
-          </div>
-        )}
+          {masterSwitch && (
+            <div className="gearBox">
+              <ToggleButton
+                sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                value="check"
+                selected={diveSiteModal}
+                onChange={() => {
+                  handleDiveSiteModalButton();
+                }}
+              >
+                <AddLocationAltIcon sx={{ height: "3vw", width: "38px" }} />
+              </ToggleButton>
+              <p className="buttonFont">Site Add</p>
+            </div>
+          )}
 
-        {masterSwitch && (
-          <div className="gearBox">
-            {" "}
-            <ToggleButton
-              sx={toggleButtonStyle}
-              value="check"
-              selected={divesTog}
-              onChange={() => {
-                handleAnchorButton();
-              }}
-            >
-              <AnchorIcon sx={{ height: "2.5vw", width: "37px" }} />
-            </ToggleButton>
-            <p className="buttonFont">Show/Hide</p>
-          </div>
-       )}
-
-      </div>
+          {masterSwitch && (
+            <div className="gearBox">
+              {" "}
+              <ToggleButton
+                sx={toggleButtonStyle}
+                value="check"
+                selected={divesTog}
+                onChange={() => {
+                  handleAnchorButton();
+                }}
+              >
+                <AnchorIcon sx={{ height: "2.5vw", width: "37px" }} />
+              </ToggleButton>
+              <p className="buttonFont">Show/Hide</p>
+            </div>
+          )}
+        </div>
+      </animated.div>
 
       {masterSwitch && (
         <div className="col1row8" pointerEvents={"box-none"}>
@@ -979,19 +1024,13 @@ const MapPage = React.memo((props) => {
                   orientation="vertical"
                   collapsedSize="0px"
                 >
-                  <div
-                    className="closer"
-                    pointerEvents={"box-none"}
-                  >
+                  <div className="closer" pointerEvents={"box-none"}>
                     <PhotoFilterer />
                   </div>
                 </Collapse>
 
-                <div
-                  className="pullTab"
-                  onClick={() => animatePulltab()}
-                ></div>
-                <AnimalTopAutoSuggest /> 
+                <div className="pullTab" onClick={() => animatePulltab()}></div>
+                <AnimalTopAutoSuggest />
               </div>
             )}
           </div>

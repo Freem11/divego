@@ -12,7 +12,6 @@ const PhotoMenuListItem = (props) => {
 
   let photoName =  photoURL.split('/').pop();
 
-  console.log("im", tileWidth, boxWidth)
   const tileRef = useRef(null);
   const [clicked, setClicked] = useState(false);
   const [yCoord, setYCoord] = useState(0);
