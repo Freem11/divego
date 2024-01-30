@@ -41,6 +41,7 @@ export default function PhotoFilterer() {
                 backgroundColor: "white",
                 borderRadius: "1rem",
                 marginBottom: "15px",
+                pointerEvents: 'auto'
               },
             }}
           />
@@ -60,8 +61,8 @@ export default function PhotoFilterer() {
               width: "2vw",
               // marginBottom: "500%",
               position: "absolute",
-              top: "3vh",
-              left: "85%",
+              top: "2.5vh",
+              left: "63%",
             }}
           ></HighlightOffIcon>
         </div>

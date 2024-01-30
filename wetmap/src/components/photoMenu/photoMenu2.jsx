@@ -249,7 +249,7 @@ const PhotoMenu = () => {
     setClicked(false);
 
     if(areaPics.length < 4){
-      setXCoord((4*tileWidth - (areaPics.length*tileWidth))/2)
+      setXCoord((5*tileWidth - (areaPics.length*tileWidth))/2)
     }
   }, [areaPics.length]);
 

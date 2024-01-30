@@ -118,74 +118,50 @@
 
 .fabButtons {
     z-index: 5;
-    /* background-color: khaki; */
+    background-color: #538dbd;
     position:absolute;
 	display: flex;
-    flex-direction: column;
-    height: 419px;
-	gap: 0.5rem;
-	bottom: 200px;
-    right: 67px;
-    width: 10px;
+    flex-direction: row;
+    border-radius: 1rem;
+    justify-content: space-evenly;
+	gap: 1rem;
+	bottom: 1vh;
+    left: 25vw;
+    width: 50vw;
 }
 
 .just-testing2 {
     z-index: 2;
     position: absolute;
 	display: flex;
-	flex-direction: column;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 	gap: 0.5rem;
 	bottom: 40px;
 	right: 30px;
 }
 
-/*
-.col1row2 {
-    z-index: 2;
-    position: absolute;
-    top: 80px;
-    left: 10px;
+.buttonFont {
+    margin-top: 1vh;
+    padding-bottom: 1vh;
+    font-family: Itim;
+    font-size: 1vw;
+    color: white;
+    width: 10vw;
 }
 
-.col1row3 {
-    z-index: 2;
-    position: absolute;
-    top: 140px;
-    left: 10px;
+.gearBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2vh;
+    height: 5vw;
+    width: 4vw;
+    /* background-color: green; */
 }
 
-.col1row4 {
-    width: 50px;
-    z-index: 2;
-    position: absolute;
-    top: 203px;
-    left: 10px
-}
-
-.col1row5 {
-    width: 50px;
-    z-index: 2;
-    position: absolute;
-    top: 263px;
-    left: 10px
-}
-
-.col1row6 {
-    width: 50px;
-    z-index: 2;
-    position: absolute;
-    top: 323px;
-    left: 10px;
-}
-
-.col1row7 {
-    width: 50px;
-    z-index: 2;
-    position: absolute;
-    top: 383px;
-    left: 10px;
-}
-*/
 .col1row8 {
     width: 100%;
     z-index: 2;

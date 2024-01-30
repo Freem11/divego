@@ -255,27 +255,27 @@ const MapPage = React.memo((props) => {
   }, []);
 
   const toggleButtonStyle = {
-    "&.Mui-selected": { backgroundColor: "aquamarine" },
-    "&.Mui-selected:hover": { backgroundColor: "gold", color: "black" },
+    "&.Mui-selected": { backgroundColor: "#538bdb", border: "1px solid #538bdb" },
+    "&.Mui-selected:hover": { backgroundColor: "lightgrey", color: "white" },
     "&:hover": {
-      color: "black",
-      backgroundColor: "gold",
+      color: "lightgrey",
+      backgroundColor: "white",
     },
-    backgroundColor: "black",
-    height: "48px",
-    width: "48px",
-    border: "1px solid black",
+    backgroundColor: "white",
+    height: "3vw",
+    width: "3vw",
+    border: "1px solid white",
     marginTop: "5px",
-    color: "aquamarine",
+    color: "#538bdb",
     boxShadow: "-2px 4px 4px #00000064",
     borderRadius: "100%",
   };
 
   const toggleButtonStyleAlt = {
-    "&.Mui-selected": { backgroundColor: "aquamarine" },
-    "&.Mui-selected:hover": { backgroundColor: "gold", color: "black" },
+    "&.Mui-selected": { backgroundColor: "#538bdb" },
+    "&.Mui-selected:hover": { backgroundColor: "#538bdb", color: "white" },
     "&:hover": {
-      color: "black",
+      color: "white",
       backgroundColor: "gold",
     },
     backgroundColor: "aquamarine",
@@ -843,13 +843,14 @@ const MapPage = React.memo((props) => {
                 handleSettingsButton();
               }}
             >
-              <SettingsIcon sx={{ height: "39px", width: "39px" }} />
+              <SettingsIcon sx={{ height: "3vw" }} />
             </ToggleButton>
+            <p className="buttonFont">Settings</p>
           </div>
         )}
 
         {masterSwitch && (
-          <div className="howToBox">
+          <div className="gearBox">
             <ToggleButton
               sx={toggleButtonStyle}
               value="check"
@@ -858,15 +859,16 @@ const MapPage = React.memo((props) => {
                 handleTutorialButton();
               }}
             >
-              <QuestionMarkIcon sx={{ height: "40px", width: "40px" }} />
+              <QuestionMarkIcon sx={{ height: "4vw" }} />
             </ToggleButton>
+            <p className="buttonFont">Guides</p>
           </div>
         )}
 
         {masterSwitch && (
           <div
-            className="NavBox"
-            style={{ display: "flex", flexDirection: "row" }}
+            className="gearBox"
+            // style={{ display: "flex", flexDirection: "row" }}
           >
             <ToggleButton
               sx={toggleButtonStyle}
@@ -876,22 +878,23 @@ const MapPage = React.memo((props) => {
                 handleGeocodingSearchButton();
               }}
             >
-              <ExploreIcon sx={{ height: "37px", width: "37px" }} />
+              <ExploreIcon sx={{ height: "3vw", width: "37px" }} />
             </ToggleButton>
-           <Collapse
+            <p className="buttonFont">Map Search</p>
+           {/* <Collapse
           in={showGeoCoder}
           orientation="horizontal"
           collapsedSize="0px"
         >
           {locationSearchZone}
-        </Collapse>
+        </Collapse> */}
            </div>
         )}
 
         {masterSwitch && (
           <div
-            className="diveSiteBox"
-            style={{ display: "flex", flexDirection: "row" }}
+            className="gearBox"
+            // style={{ display: "flex", flexDirection: "row" }}
           >
             <ToggleButton
               sx={searButState ? toggleButtonStyleAlt : toggleButtonStyle}
@@ -901,20 +904,21 @@ const MapPage = React.memo((props) => {
                 handleDiveSiteSearchButton();
               }}
             >
-              <TravelExploreIcon sx={{ height: "36px", width: "36px" }} />
+              <TravelExploreIcon sx={{ height: "2.5vw", width: "36px" }} />
             </ToggleButton>
-            <Collapse
+            <p className="buttonFont">Site Search</p>
+            {/* <Collapse
               in={showAnimalSearch}
               orientation="horizontal"
               collapsedSize="0px"
             >
               {diveSiteSearchZone}
-            </Collapse>
+            </Collapse> */}
           </div>
         )}
 
         {masterSwitch && (
-          <div className="PhotoBox">
+          <div className="gearBox">
             <ToggleButton
               sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
               value="check"
@@ -923,13 +927,14 @@ const MapPage = React.memo((props) => {
                 handlePhotoModalButton();
               }}
             >
-              <PhotoCameraIcon sx={{ height: "36px", width: "36px" }} />
+              <PhotoCameraIcon sx={{ height: "2.5vw", width: "36px" }} />
             </ToggleButton>
+            <p className="buttonFont">Photo Add</p>
           </div>
         )}
 
         {masterSwitch && (
-          <div className="diveAddBox">
+          <div className="gearBox">
             <ToggleButton
               sx={siteButState ? toggleButtonStyleAlt : toggleButtonStyle}
               value="check"
@@ -938,13 +943,14 @@ const MapPage = React.memo((props) => {
                 handleDiveSiteModalButton();
               }}
             >
-              <AddLocationAltIcon sx={{ height: "38px", width: "38px" }} />
+              <AddLocationAltIcon sx={{ height: "3vw", width: "38px" }} />
             </ToggleButton>
+            <p className="buttonFont">Site Add</p>
           </div>
         )}
 
         {masterSwitch && (
-          <div className="AnchorBox">
+          <div className="gearBox">
             {" "}
             <ToggleButton
               sx={toggleButtonStyle}
@@ -954,8 +960,9 @@ const MapPage = React.memo((props) => {
                 handleAnchorButton();
               }}
             >
-              <AnchorIcon sx={{ height: "37px", width: "37px" }} />
+              <AnchorIcon sx={{ height: "2.5vw", width: "37px" }} />
             </ToggleButton>
+            <p className="buttonFont">Show/Hide</p>
           </div>
        )}
 
@@ -1033,7 +1040,7 @@ const MapPage = React.memo((props) => {
               setMapZoom(mapZoom + 1);
             }}
           >
-            <AddIcon sx={{ height: "40px", width: "40px" }} />
+            <AddIcon sx={{ height: "3vw", width: "40px" }} />
           </ToggleButton>
         </div>
 
@@ -1048,7 +1055,7 @@ const MapPage = React.memo((props) => {
               setMapZoom(mapZoom - 1);
             }}
           >
-            <RemoveIcon sx={{ height: "40px", width: "40px" }} />
+            <RemoveIcon sx={{ height: "3vw", width: "40px" }} />
           </ToggleButton>
         </div>
       </div>
