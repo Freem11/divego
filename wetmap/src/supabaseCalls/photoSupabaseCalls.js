@@ -205,11 +205,13 @@ export const getHistoData = async (values) => {
 };
 
 export const getRecentPhotos = async (today) => {
-  const { data, error } = await supabase
-    .from("photos")
-    .select()
-    .lte("created_at", today)
-    .limit(3);
+  // const { data, error } = await supabase
+  //   .from("photos")
+  //   .select()
+  //   .lte("created_at", today)
+  //   .limit(3);
+  const { data, error } = await supabase.rpc("three_random");
+
 
   if (error) {
     console.log("couldn't do it 28,", error);

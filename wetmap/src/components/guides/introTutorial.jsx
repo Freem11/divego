@@ -122,7 +122,7 @@ export default function IntroTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth+(windowHeigth-400));
         }, 300);
-        setPixY((2*windowHeigth)+(windowHeigth-picBoxHeigth)/2)
+        setPixY((3.5*windowHeigth)+(windowHeigth-picBoxHeigth)/2)
         break;
 
       case "Dive sites":
@@ -698,7 +698,7 @@ export default function IntroTutorial(props) {
     userBoxHeigth = elem2.getBoundingClientRect().height;
     
   }
-  
+
   return (
     <div className="wrapper" onClick={() => setupText(1)}>
       <animated.div 
@@ -722,7 +722,7 @@ export default function IntroTutorial(props) {
                 </div>
                 <div className="shadowbox">
                   <img
-                    src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photoFile}`}
+                    src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photofile}`}
                     id={pic.id}
                     style={{
                       height: "100%",
