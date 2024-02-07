@@ -53,7 +53,6 @@ export const getAnimalNamesThatFit = async (value) => {
 };
 
 export const getPhotosforAnchor = async (value) => {
-
   const { data, error } = await supabase
     .from("photos")
     .select()
@@ -92,76 +91,68 @@ export const getAnimalMultiSelect = async (text) => {
 };
 
 export const getPhotosforAnchorMulti = async (value) => {
-
-  let creatureList
-  value.animalVal.forEach(creature => {
- 
-    if (creatureList === undefined){
-      creatureList =  creature + ","
-    } else{
-      creatureList = creatureList + creature + ","
-
-  }
-    
+  let creatureList;
+  value.animalVal.forEach((creature) => {
+    if (creatureList === undefined) {
+      creatureList = creature + ",";
+    } else {
+      creatureList = creatureList + creature + ",";
+    }
   });
 
-  let creatureListFinal
-  if(creatureList !== undefined){
-    creatureListFinal = creatureList.slice(0,-1)
- 
+  let creatureListFinal;
+  if (creatureList !== undefined) {
+    creatureListFinal = creatureList.slice(0, -1);
   }
 
   if (creatureListFinal === undefined) {
-    creatureListFinal = ""
+    creatureListFinal = "";
   }
 
   if (value.animalVal.length === 0 || value.animalVal === null) {
-
     const { data, error } = await supabase
-    .from("photos")
-    .select()
-    // .ilike("userName", "%" + value.myCreatures + "%")
-    // .eq("month", value.sliderVal)
-    .ilike("label", "%" + creatureListFinal + "%")
-    .gte("latitude", value.minLat)
-    .gte("longitude", value.minLng)
-    .lte("latitude", value.maxLat)
-    .lte("longitude", value.maxLng)
-    .order("id", {ascending: false})
+      .from("photos")
+      .select()
+      // .ilike("userName", "%" + value.myCreatures + "%")
+      // .eq("month", value.sliderVal)
+      .ilike("label", "%" + creatureListFinal + "%")
+      .gte("latitude", value.minLat)
+      .gte("longitude", value.minLng)
+      .lte("latitude", value.maxLat)
+      .lte("longitude", value.maxLng)
+      .order("id", { ascending: false });
 
-  if (error) {
-    console.log("couldn't do it 24,", error);
-    return [];
+    if (error) {
+      console.log("couldn't do it 24,", error);
+      return [];
+    }
+
+    if (data) {
+      return data;
+    }
+  } else {
+    const { data, error } = await supabase
+      .from("photos")
+      .select()
+      .filter("label", "in", "(" + creatureListFinal + ")")
+      // .ilike("userName", "%" + value.myCreatures + "%")
+      // .eq("month", value.sliderVal)
+      .gte("latitude", value.minLat)
+      .gte("longitude", value.minLng)
+      .lte("latitude", value.maxLat)
+      .lte("longitude", value.maxLng)
+      .order("id", { ascending: false });
+
+    if (error) {
+      console.log("couldn't do it 25,", error);
+      return [];
+    }
+
+    if (data) {
+      return data;
+    }
   }
-
-  if (data) {
-    return data;
-  }
-
- } else {
-  const { data, error } = await supabase
-  .from("photos")
-  .select()
-  .filter('label', 'in', '(' + creatureListFinal + ')')
-  // .ilike("userName", "%" + value.myCreatures + "%")
-  // .eq("month", value.sliderVal)
-  .gte("latitude", value.minLat)
-  .gte("longitude", value.minLng)
-  .lte("latitude", value.maxLat)
-  .lte("longitude", value.maxLng)
-  .order("id", {ascending: false})
-
-if (error) {
-  console.log("couldn't do it 25,", error);
-  return [];
-}
-
-if (data) {
-  return data;
-}
- }
-  
-}; 
+};
 
 export const getPhotosforMapArea = async (value) => {
   const { data, error } = await supabase
@@ -171,7 +162,7 @@ export const getPhotosforMapArea = async (value) => {
     .gte("latitude", value.minLat)
     .gte("longitude", value.minLng)
     .lte("latitude", value.maxLat)
-    .lte("longitude", value.maxLng)
+    .lte("longitude", value.maxLng);
 
   if (error) {
     console.log("couldn't do it,", error);
@@ -205,13 +196,7 @@ export const getHistoData = async (values) => {
 };
 
 export const getRecentPhotos = async (today) => {
-  // const { data, error } = await supabase
-  //   .from("photos")
-  //   .select()
-  //   .lte("created_at", today)
-  //   .limit(3);
-  const { data, error } = await supabase.rpc("three_random");
-
+  const { data, error } = await supabase.rpc("three_randomz");
 
   if (error) {
     console.log("couldn't do it 28,", error);
