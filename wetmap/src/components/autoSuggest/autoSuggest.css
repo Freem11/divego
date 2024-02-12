@@ -1,26 +1,24 @@
-
-.suggestInput{
-  width: 230px;
-  height: 28px;
+.suggestInput {
+  height: "5vh";
+  width: "18vw";
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
   border: none;
   text-align: center;
-  font-family: 'Indie Flower', cursive;
-  font-size: small;
   text-overflow: ellipsis;
-  color: #F0EEEB;
+  color: #f0eeeb;
   border-radius: 5px;
-  font-size: large;
-  padding-left: 10px;
 }
 
-.suggestInput:focus{
+.suggestInput:focus {
   user-select: none;
   outline: none;
 }
 
-.suggestItem{
-  width: 180px;
+.suggestItem {
+  width: 12vw;
   height: auto;
   background-color: #538bdb;
   border: transparent;
@@ -28,14 +26,14 @@
   list-style: none;
   transform: translateX(11px);
   box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
-  color: #F0EEEB;
-  margin: 1px;
+  color: #f0eeeb;
+  margin: 0.5%;
 }
 
-#XButton{
-  width: 10px;
+#XButton {
   margin: 0px;
   padding: 0px;
-  margin-top: -14px;
-  margin-left: 212px;
+  margin-top: -10%;
+  margin-left: 15vw;
+  background-color: blueviolet;
 }

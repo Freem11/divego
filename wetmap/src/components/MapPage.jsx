@@ -620,7 +620,7 @@ const MapPage = React.memo((props) => {
     to: { transform: `translate3d(0,${anchorModalYCoord}px,0)` },
   });
 
-  let modalHeigth = 700;
+  // let modalHeigth = 700;
  
   const animateFabs = () => {
 
@@ -640,6 +640,9 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePicModal = () => {
+
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+
     if (picModalYCoord === 0) {
       setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setSiteModalYCoord(0);
@@ -674,6 +677,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSiteModal = () => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+
     if (siteModalYCoord === 0) {
       setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
@@ -705,6 +710,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateLaunchModal = () => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+
     if (launchModalYCoord === 0) {
       setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
@@ -726,6 +733,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSettingsModal = () => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+
     if (settingsModalYCoord === 0) {
       setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
@@ -771,6 +780,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateAnchorModal = () => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+
     if (anchorModalYCoord === 0) {
       setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
@@ -804,6 +815,8 @@ const MapPage = React.memo((props) => {
   }, [showFilterer]);
 
   useEffect(() => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+
     if (siteModal) {
       setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       setPicModalYCoord(0);
@@ -820,6 +833,8 @@ const MapPage = React.memo((props) => {
   }, [siteModal]);
 
   useEffect(() => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+
     if (dsAdderModal) {
       setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
     }
@@ -830,6 +845,8 @@ const MapPage = React.memo((props) => {
   }, [dsAdderModal]);
 
   useEffect(() => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+
     if (picAdderModal) {
       setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
     }

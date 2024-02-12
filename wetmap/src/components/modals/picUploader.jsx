@@ -25,7 +25,10 @@ import Collapse from "@mui/material/Collapse";
 import { insertPhotoWaits } from "../../supabaseCalls/photoWaitSupabaseCalls";
 // import { insertPhotoWaits } from "../../axiosCalls/photoWaitAxiosCalls";
 // import { uploadphoto, removePhoto } from "../../supabaseCalls/uploadSupabaseCalls";
-import { uploadphoto, removePhoto } from "../../cloudflareBucketCalls/cloudflareAWSCalls";
+import {
+  uploadphoto,
+  removePhoto,
+} from "../../cloudflareBucketCalls/cloudflareAWSCalls";
 // import { removePhoto } from "../../axiosCalls/uploadAxiosCalls";
 import { getAnimalNamesThatFit } from "../../axiosCalls/photoAxiosCalls";
 import { userCheck } from "../../supabaseCalls/authenticateSupabaseCalls";
@@ -109,58 +112,52 @@ const PicUploader = React.memo((props) => {
     if (e.target.name === "PicFile") {
       if (pin.PicFile !== null) {
         removePhoto({
-          filePath:
-            `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
         });
       }
 
-      if (e.target.files[0]){
-      let image = e.target.files[0];
-      let extension = image.name.split(".").pop();
-      const fileName = Date.now() + "." + extension;
+      if (e.target.files[0]) {
+        let image = e.target.files[0];
+        let extension = image.name.split(".").pop();
+        const fileName = Date.now() + "." + extension;
 
-      //uploadPhoto
-      const data = new FormData();
-      data.append("image", e.target.files[0]);
-      const newFilePath = await uploadphoto(image, fileName);
-      setPhotoFile(fileName);
+        //uploadPhoto
+        const data = new FormData();
+        data.append("image", e.target.files[0]);
+        const newFilePath = await uploadphoto(image, fileName);
+        setPhotoFile(fileName);
 
+        //scrape off photo info
+        let formattedDate = pin.PicDate;
+        let newLatitude = pin.Latitude;
+        let newLongitude = pin.Longitude;
+        let baseDate = image.lastModified;
+        var convDate = new Date(baseDate);
 
-      //scrape off photo info 
-      let formattedDate = pin.PicDate;
-      let newLatitude = pin.Latitude;
-      let newLongitude = pin.Longitude;
-      let baseDate = image.lastModified;
-      var convDate = new Date(baseDate);
+        formattedDate = getToday(convDate);
 
-    
-      
-      formattedDate = getToday(convDate);
+        exifr.parse(image, true).then((output) => {
+          let EXIFData = exifGPSHelper(
+            output.GPSLatitude,
+            output.GPSLongitude,
+            output.GPSLatitudeRef,
+            output.GPSLongitudeRef
+          );
 
-      exifr.parse(image, true).then((output) => {
-        let EXIFData = exifGPSHelper(
-          output.GPSLatitude,
-          output.GPSLongitude,
-          output.GPSLatitudeRef,
-          output.GPSLongitudeRef
-        );
+          if (EXIFData) {
+            newLatitude = EXIFData[0];
+            newLongitude = EXIFData[1];
+          }
+        });
 
-        if (EXIFData) {
-          newLatitude = EXIFData[0]
-          newLongitude = EXIFData[1]
-        }
-
-      });
-
-      setPin({
-        ...pin,
-        PicFile: `animalphotos/public/${fileName}`,
-        PicDate: formattedDate,
-        Latitude: newLatitude,
-        Longitude: newLongitude,
-      });
-      
+        setPin({
+          ...pin,
+          PicFile: `animalphotos/public/${fileName}`,
+          PicDate: formattedDate,
+          Latitude: newLatitude,
+          Longitude: newLongitude,
+        });
       }
       // fetch("http://localhost:5000/api/upload", {
       //   method: "POST",
@@ -171,7 +168,6 @@ const PicUploader = React.memo((props) => {
       //     setPhotoFile(data.fileName);
       //   });
 
-      
       if (tutorialRunning) {
         if (itterator3 === 8) {
           setItterator3(itterator3 + 1);
@@ -362,8 +358,7 @@ const PicUploader = React.memo((props) => {
 
     if (pin.PicFile !== null) {
       removePhoto({
-        filePath:
-          `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+        filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
       });
     }
@@ -386,61 +381,58 @@ const PicUploader = React.memo((props) => {
   }
 
   const activateGuide = () => {
-    setChapter("Adding your photo")
-};
+    setChapter("Adding your photo");
+  };
 
   const labelStyle = {
+    display: "flex",
     fontfamily: "Patrick Hand",
-    fontSize: 18,
+    fontSize: "1vw",
     textTransform: "none",
     color: "gold",
     cursor: "pointer",
-    marginLeft: "-7px",
-    marginTop: "9px",
+    marginLeft: "-1vw",
+    // marginTop: "9px",
   };
 
   const labelStyleAlt = {
     fontfamily: "Patrick Hand",
-    fontSize: 18,
+    fontSize: "1em",
     textTransform: "none",
     color: "#538dbd",
     cursor: "pointer",
-    marginLeft: "-7px",
-    marginTop: "9px",
+    marginLeft: "-1vw",
+    // marginTop: "9px",
   };
 
   const iconStyle = {
     color: "gold",
-    height: "28px",
-    width: "28px",
+    width: "3.5vw",
+    height: "4vh",
+    marginTop: "0.3vh",
     cursor: "pointer",
-    marginLeft: "4px",
-    marginTop: "2.5px",
   };
 
   const iconStyleAlt = {
     color: "#538dbd",
-    height: "28px",
-    width: "28px",
+    width: "3.5vw",
+    height: "4vh",
+    marginTop: "0.3vh",
     cursor: "pointer",
-    marginLeft: "4px",
-    marginTop: "2.5px",
   };
 
   const inputStyle = {
     textAlign: "center",
     fontFamily: "Itim",
-    fontSize: 16,
+    fontSize: "1.5vw",
     textOverflow: "ellipsis",
     backgroundColor: "transparent",
-    height: "35px",
-    width: "232px",
+    height: "5vh",
+    width: "18vw",
     color: "#F0EEEB",
-    marginLeft: "-30px",
     borderBottom: "none",
     borderColor: "transparent",
     alignItems: "center",
-    paddingRight: "20px",
     borderRadius: "20px",
     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
   };
@@ -448,272 +440,267 @@ const PicUploader = React.memo((props) => {
   const inputStyleAlt = {
     textAlign: "center",
     fontFamily: "Itim",
-    fontSize: 16,
+    fontSize: "1.5vw",
     textOverflow: "ellipsis",
     backgroundColor: "pink",
-    height: "35px",
-    width: "232px",
+    height: "5vh",
+    width: "18vw",
     color: "#F0EEEB",
-    marginLeft: "-30px",
     borderBottom: "none",
     borderColor: "transparent",
     alignItems: "center",
-    paddingRight: "20px",
     borderRadius: "20px",
     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
   };
 
   const buttonStyle = {
     color: "gold",
-    height: "30px",
-    width: "30px",
+    width: "3.5vw",
+    height: "4.5vh"
   };
 
   const buttonStyleAlt = {
     color: "#538dbd",
-    height: "30px",
-    width: "30px",
+    width: "3.5vw",
+    height: "4.5vh"
   };
 
   return (
-    <Container fluid>
-      <Form onSubmit={handleSubmit}>
-        <div className="modalTitle2">
-          <Label style={{ marginTop: 3, marginRight: 75, width: "200%" }}>
-            <strong>Submit Your Picture</strong>
-          </Label>
-          <FormGroup>
-            <Button
-              variant="text"
-              id="questionButton"
-              onClick={() => activateGuide()}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginRight: -10,
-                marginTop: 2,
-              }}
-            >
-              <QuestionMarkIcon
-                sx={{
-                  color: "lightgrey",
-                  height: "30px",
-                  width: "34px",
-                  marginTop: "2px",
-                }}
-              ></QuestionMarkIcon>
-            </Button>
-          </FormGroup>
-
-          <FormGroup>
-            <Button
-              variant="text"
-              id="closeButton"
-              onClick={() => handleModalClose()}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginRight: 10,
-                marginTop: 2,
-              }}
-            >
-              <CloseIcon
-                sx={{
-                  color: "lightgrey",
-                  height: "36px",
-                  width: "36px",
-                }}
-              ></CloseIcon>
-            </Button>
-          </FormGroup>
-        </div>
-
-        {photoFile !== null && (
-          <div className="pickie">
-            {/* <div>{photoFile}</div> */}
-            <img
-              src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoFile}`}
-              // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoFile}`}
-              height="200px"
-              className="picHolder"
-            ></img>
-          </div>
-        )}
-
-        {photoFile === null && <div className="blankPic"></div>}
-
-        <div className="uploadbox2">
-          <div
-            onClick={handleClick}
-            className={imgButState ? "picSelectDivAlt" : "picSelectDiv"}
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        height: "100%",
+        // backgroundColor: "palegoldenrod"
+      }}
+    >
+      <div className="modalTitle2">
+        <Label
+          style={{
+            width: "100vw",
+            marginLeft: "1vw",
+            textAlign: "left",
+            fontFamily: "Patrick Hand",
+            fontSize: "2vw",
+            // backgroundColor: "pink",
+          }}
+        >
+          <strong>Submit Your Picture</strong>
+        </Label>
+        <FormGroup>
+          <Button
+            variant="text"
+            id="questionButton"
+            onClick={() => activateGuide()}
           >
-            <div style={{ marginRight: 5, marginTop: 3 }}>
-              <PhotoIcon
-                sx={imgButState ? iconStyleAlt : iconStyle}
-              ></PhotoIcon>
-            </div>
-
-            <Label style={imgButState ? labelStyleAlt : labelStyle}>
-              Choose an Image
-            </Label>
-          </div>
-          <FormGroup>
-            <Input
-              placeholder="Upload"
-              className="modalInputs2"
-              style={{
-                textAlign: "center",
-                // fontFamily: "Itim, cursive",
-                display: "none",
+            <QuestionMarkIcon
+              sx={{
+                color: "lightgrey",
+                width: "2vw",
+                height: "5vh",
               }}
-              id="file"
-              type="file"
-              name="PicFile"
-              bsSize="lg"
-              onChange={handleChange}
-              onClick={(e) => handleNoGPSClose(e)}
-            ></Input>
-          </FormGroup>
-        </div>
-
-        <div className="lowerBoxPhoto">
-          <div className="inputboxType1">
-            <FormGroup>
-              <InputBase
-                id="standard-basic"
-                // label="Date Taken"
-                placeholder="Date Taken"
-                variant="standard"
-                type="date"
-                name="PicDate"
-                value={pin.PicDate}
-                onChange={handleChange}
-                onClick={handleNoGPSClose}
-                inputProps={{ style: datButState ? inputStyleAlt : inputStyle }}
-              />
-            </FormGroup>
-          </div>
-
-          <div
-            className={autoButState ? "autosuggestboxAlt" : "autosuggestbox"}
-            onClick={handleSelect}
-          >
-            <AnimalAutoSuggest
-              setPin={setPin}
-              pin={pin}
-              setList={setList}
-              list={list}
-              onClick={handleSelect}
-              clearAnimal={clearAnimal}
-            />
-          </div>
-
-          <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
-            {noGPSZone}
-          </Collapse>
-
-          <div className="Tbox">
-            <div className="coordDiv">
-              <div className="inputboxType2">
-                <FormGroup>
-                  <InputBase
-                    id="standard-basic"
-                    // label="Latitude"
-                    placeholder="Latitude"
-                    variant="standard"
-                    type="decimal"
-                    name="Latitude"
-                    value={pin.Latitude}
-                    onChange={handleChange}
-                    onClick={handleNoGPSClose}
-                    inputProps={{
-                      readOnly: true,
-                      style: {
-                        textAlign: "center",
-                        fontFamily: "Itim",
-                        fontSize: 16,
-                        textOverflow: "ellipsis",
-                        backgroundColor: "transparent",
-                        height: "35px",
-                        color: "#F0EEEB",
-                        width: "250px",
-                        borderBottom: "none",
-                        borderColor: "transparent",
-                        borderRadius: "20px",
-                        boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                        marginLeft: "-52px",
-                      },
-                    }}
-                  />
-                </FormGroup>
-              </div>
-
-              <div className="inputboxType2">
-                <FormGroup>
-                  <InputBase
-                    id="standard-basic"
-                    // label="Longitude"
-                    placeholder="Longitude"
-                    variant="standard"
-                    type="decimal"
-                    name="Longitude"
-                    contentEditable={false}
-                    value={pin.Longitude}
-                    onChange={handleChange}
-                    onClick={handleNoGPSClose}
-                    inputProps={{
-                      readOnly: true,
-                      style: {
-                        textAlign: "center",
-                        fontFamily: "Itim",
-                        fontSize: 16,
-                        textOverflow: "ellipsis",
-                        backgroundColor: "transparent",
-                        height: "35px",
-                        width: "250px",
-                        color: "#F0EEEB",
-                        borderBottom: "none",
-                        borderColor: "transparent",
-                        borderRadius: "20px",
-                        boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                        marginLeft: "-52px",
-                      },
-                    }}
-                  />
-                </FormGroup>
-              </div>
-            </div>
-            <div
-              className={pinButState ? "GboxAlt" : "Gbox"}
-              style={{ marginTop: "40px" }}
-            >
-              <FormGroup>
-                <Button
-                  variant="text"
-                  id="jumpButton"
-                  onClick={handleNoGPSCloseOnMapChange}
-                >
-                  <PlaceIcon
-                    sx={pinButState ? buttonStyleAlt : buttonStyle}
-                  ></PlaceIcon>
-                </Button>
-              </FormGroup>
-            </div>
-          </div>
-        </div>
+            ></QuestionMarkIcon>
+          </Button>
+        </FormGroup>
 
         <FormGroup>
           <Button
             variant="text"
-            id="modalButton"
-            style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
-            onClick={handleSubmit}
+            id="closeButton"
+            onClick={() => handleModalClose()}
           >
-            Submit Photo
+            <CloseIcon
+              sx={{
+                color: "lightgrey",
+                width: "2vw",
+                  height: "5vh",
+              }}
+            ></CloseIcon>
           </Button>
         </FormGroup>
-      </Form>
-    </Container>
+      </div>
+
+      {photoFile !== null && (
+        <div className="pickie">
+          {/* <div>{photoFile}</div> */}
+          <img
+            src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoFile}`}
+            // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoFile}`}
+            height="200px"
+            className="picHolder"
+          ></img>
+        </div>
+      )}
+
+      {photoFile === null && <div className="blankPic"></div>}
+
+      <div className="uploadbox2">
+        <div
+          onClick={handleClick}
+          className={imgButState ? "picSelectDivAlt" : "picSelectDiv"}
+        >
+          <div style={{ marginRight: "1vw" }}>
+            <PhotoIcon sx={imgButState ? iconStyleAlt : iconStyle}></PhotoIcon>
+          </div>
+
+          <Label style={imgButState ? labelStyleAlt : labelStyle}>
+            Choose an Image
+          </Label>
+        </div>
+        <FormGroup>
+          <Input
+            placeholder="Upload"
+            className="modalInputs2"
+            style={{
+              textAlign: "center",
+              // fontFamily: "Itim, cursive",
+              display: "none",
+            }}
+            id="file"
+            type="file"
+            name="PicFile"
+            bsSize="lg"
+            onChange={handleChange}
+            onClick={(e) => handleNoGPSClose(e)}
+          ></Input>
+        </FormGroup>
+      </div>
+
+      <div className="lowerBoxPhoto">
+
+        {/* <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
+          {noGPSZone}
+        </Collapse> */}
+
+        <div className="Tbox">
+          <div className="coordDiv">
+          <div className="inputboxType1">
+          <FormGroup>
+            <InputBase
+              id="standard-basic"
+              // label="Date Taken"
+              placeholder="Date Taken"
+              variant="standard"
+              type="date"
+              name="PicDate"
+              value={pin.PicDate}
+              onChange={handleChange}
+              onClick={handleNoGPSClose}
+              inputProps={{ style: datButState ? inputStyleAlt : inputStyle }}
+            />
+          </FormGroup>
+        </div>
+          <div
+          className={autoButState ? "autosuggestboxAlt" : "autosuggestbox"}
+          onClick={handleSelect}
+        >
+          <AnimalAutoSuggest
+            setPin={setPin}
+            pin={pin}
+            setList={setList}
+            list={list}
+            onClick={handleSelect}
+            clearAnimal={clearAnimal}
+          />
+        </div>
+            <div className="inputboxType2">
+              <FormGroup>
+                <InputBase
+                  id="standard-basic"
+                  // label="Latitude"
+                  placeholder="Latitude"
+                  variant="standard"
+                  type="decimal"
+                  name="Latitude"
+                  value={pin.Latitude}
+                  onChange={handleChange}
+                  onClick={handleNoGPSClose}
+                  inputProps={{
+                    readOnly: true,
+                    style: {
+                      textAlign: "center",
+                      fontFamily: "Itim",
+                      fontSize: "1.5vw",
+                      textOverflow: "ellipsis",
+                      backgroundColor: "transparent",
+                      height: "5vh",
+                      width: "18vw",
+                      color: "#F0EEEB",
+                      borderBottom: "none",
+                      borderColor: "transparent",
+                      borderRadius: "20px",
+                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                    },
+                  }}
+                />
+              </FormGroup>
+            </div>
+
+            <div className="inputboxType2">
+              <FormGroup>
+                <InputBase
+                  id="standard-basic"
+                  // label="Longitude"
+                  placeholder="Longitude"
+                  variant="standard"
+                  type="decimal"
+                  name="Longitude"
+                  contentEditable={false}
+                  value={pin.Longitude}
+                  onChange={handleChange}
+                  onClick={handleNoGPSClose}
+                  inputProps={{
+                    readOnly: true,
+                    style: {
+                      textAlign: "center",
+                      fontFamily: "Itim",
+                      fontSize: "1.5vw",
+                      textOverflow: "ellipsis",
+                      backgroundColor: "transparent",
+                      height: "5vh",
+                      width: "18vw",
+                      color: "#F0EEEB",
+                      borderBottom: "none",
+                      borderColor: "transparent",
+                      borderRadius: "20px",
+                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                    },
+                  }}
+                />
+              </FormGroup>
+            </div>
+          </div>
+          <div
+            className={pinButState ? "GboxAlt" : "Gbox"}
+            style={{ marginTop: "23vh" }}
+          >
+            <FormGroup>
+              <Button
+                variant="text"
+                id="jumpButton"
+                onClick={handleNoGPSCloseOnMapChange}
+              >
+                <PlaceIcon
+                  sx={pinButState ? buttonStyleAlt : buttonStyle}
+                ></PlaceIcon>
+              </Button>
+            </FormGroup>
+          </div>
+        </div>
+      </div>
+
+      <FormGroup>
+        <Button
+          variant="text"
+          id="modalButton"
+          style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
+          onClick={handleSubmit}
+        >
+          Submit Photo
+        </Button>
+      </FormGroup>
+    </div>
   );
 });
 

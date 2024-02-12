@@ -1,352 +1,342 @@
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Permanent+Marker&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Permanent+Marker&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Spinnaker&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Overlock:wght@700&family=Spinnaker&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Spinnaker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Overlock:wght@700&family=Spinnaker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap");
 
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Itim&display=swap");
 
-.inputboxType1{
-    margin-top: 30px;
-    font-family: 'Itim', cursive;
-    border: none;
-    border-bottom: none;
-    /* background-color: green; */
+.inputboxType1 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1vh;
+  width: 100%;
+  font-family: "Itim", cursive;
+  border: none;
+  border-bottom: none;
+  /* background-color: green; */
 }
 
-.inputboxType2{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0px;
-    margin-top: 15px;
-    width: 100%; 
-    font-family: 'Itim', cursive;
-    border: none;
-    border-bottom: none;
-    border-color: transparent;
+.inputboxType2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2vh;
+  width: 100%;
+  font-family: "Itim", cursive;
+  border: none;
+  border-bottom: none;
+  border-color: transparent;
+  /* background-color: blueviolet; */
 }
-.autosuggestbox{
-    display: flex;
-    flex-direction: row;;
-    margin-left: -30px;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    border: transparent;
-    width: 252px;
-    background-color: transparent;
-    border-radius: 20px; 
-    height: 35px;
-    padding-bottom: 5px;
-    padding-top: 3px; 
-    box-shadow: inset 0 0 15px rgba(0,0,0, 0.5); 
+.autosuggestbox {
+  margin-top: 2vh;
+  margin-bottom: 4px;
+  border: transparent;
+  height: 5vh;
+  width: 18vw;
+  background-color: transparent;
+  border-radius: 20px;
+  padding-bottom: 5px;
+  padding-top: 3px;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-.autosuggestboxAlt{
-    display: flex;
-    flex-direction: row;;
-    margin-left: -30px;
-    margin-top: 20px;
-    margin-bottom: 4px;
-    border: transparent;
-    width: 252px;
-    background-color: pink;
-    border-radius: 20px; 
-    height: 35px;
-    padding-bottom: 5px;
-    padding-top: 3px; 
-    box-shadow: inset 0 0 15px rgba(0,0,0, 0.5); 
+.autosuggestboxAlt {
+  margin-top: 20px;
+  margin-bottom: 4px;
+  border: transparent;
+  height: 5vh;
+  width: 18vw;
+  background-color: pink;
+  border-radius: 20px;
+  padding-bottom: 5px;
+  padding-top: 3px;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-#XButton{
-    width: 10px;
-    margin: 0px;
-    padding: 0px;
-    margin-top: 15px;
-    margin-left: 10px;
+#XButton {
+  width: 10px;
+  margin: 0px;
+  padding: 0px;
+  margin-top: 15px;
+  margin-left: 10px;
 }
 
 #animal {
-    background-color: transparent;
-    border-top: transparent;
-    border-left: transparent;
-    border-right: transparent;
-    height: 40px;
-    font-size: medium;
-    list-style-type: none;
-    padding-right: -50px;
-    margin-bottom: -15px;
-    text-overflow: ellipsis;
+  background-color: transparent;
+  border-top: transparent;
+  border-left: transparent;
+  border-right: transparent;
+  height: 40px;
+  font-size: medium;
+  list-style-type: none;
+  padding-right: -50px;
+  margin-bottom: -15px;
+  text-overflow: ellipsis;
 }
 
 #react-autowhatever-1 {
-    list-style: none;
-    list-style-type: none;
-    z-index: 10;
+  list-style: none;
+  list-style-type: none;
+  z-index: 10;
 }
 
 #react-autowhatever-1--open {
-    list-style: none;
-    list-style-type: none;
-    z-index: 10;
+  list-style: none;
+  list-style-type: none;
+  z-index: 10;
 }
 
 .react-autosuggest__suggestions-list {
-    list-style: none;
-    list-style-type: none;
-    margin-left: -30px;
-    width: 70%;
-    margin-bottom: -15px;
+  list-style: none;
+  list-style-type: none;
+  margin-left: -30px;
+  width: 70%;
+  margin-bottom: -15px;
 }
 
-.suggestItem{
-    background-color: transparent;
-    list-style: none;
-    padding: 3px;
-    border: 1px lightgray solid;
-    border-bottom: 1px lightgray solid;
-    border-radius: 3px;
-    width: 150%;
-    margin-left: -5px;
-    font: 1em sans-serif;
-    box-shadow: 3px 3px lightgray;
-    z-index: 20;
-    font-family: 'Indie Flower';
+.suggestItem {
+  background-color: transparent;
+  list-style: none;
+  padding: 3px;
+  border: 1px lightgray solid;
+  border-bottom: 1px lightgray solid;
+  border-radius: 3px;
+  width: 150%;
+  margin-left: -5px;
+  font: 1em sans-serif;
+  box-shadow: 3px 3px lightgray;
+  z-index: 20;
+  font-family: "Indie Flower";
 }
 
-.suggestItem:hover{
-    background-color: lightgray;
+.suggestItem:hover {
+  background-color: lightgray;
 }
 
-
-.modalInputs{
-    margin-top: 10px;
-    border-radius: 10px;
-    width: 80%;
-    margin-left: -15%;
-    border-color: transparent;
-    border: none;
-    border-bottom: none;
-    font-family: 'Itim', cursive;
+.modalInputs {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 80%;
+  margin-left: -15%;
+  border-color: transparent;
+  border: none;
+  border-bottom: none;
+  font-family: "Itim", cursive;
 }
 
-.selectbox{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    margin-left: 22%;
+.selectbox {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 22%;
 }
-.modalInputs2{
-    margin-top: 10px;
-    border-radius: 15px;
-    width: 80%;
-    margin-left: -15%;
-    border-color: transparent;
-    border: none;
-    border-bottom: none;
-    font-family: 'Itim', cursive;
-} 
+.modalInputs2 {
+  margin-top: 10px;
+  border-radius: 15px;
+  width: 80%;
+  margin-left: -15%;
+  border-color: transparent;
+  border: none;
+  border-bottom: none;
+  font-family: "Itim", cursive;
+}
 
 #modalButton {
-    width: 100%;
-    margin-top: 45px;
-    padding-top: 4px;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 26px;
-    font-weight: bolder;
-    color: gold;
-    border-radius: 0;
-    border-top: 1px solid #F0EEEB;
-    text-transform: none;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+  width: 30vw;
+  height: 8vh;
+  /* background-color: lightcoral; */
+  margin-top: 5vh;
+  padding-top: 4px;
+  font-family: "Patrick Hand", cursive;
+  font-size: 1em;
+  font-weight: bolder;
+  color: gold;
+  border-radius: 0;
+  border-top: 1px solid #f0eeeb;
+  text-transform: none;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 #modalButton:hover {
-    background-color: #3e7dd7;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+  background-color: #3e7dd7;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 #modalButton:active {
-    background-color: #538dbd;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+  background-color: #538dbd;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
-.modalTitle2{
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 49px;
-    /* background-color: green; */
-    width: 95%;
-    margin-left: 25px;
-    margin-top: -35px;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 34px;
-    color: #F0EEEB;
+.modalTitle2 {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  /* background-color: green; */
+  height: 10vh;
+  width: 95%;
+  margin-left: 3%;
+  margin-top: 0vh;
+  font-family: "Patrick Hand", cursive;
+  color: #f0eeeb;
 }
-.form-label{
-    width: 200px;
+.form-label {
+  width: 200px;
 }
 
-.uploadbox2{
-    display: flex;
-    justify-content: center;
-    /* margin-left: 80px; */
-    margin-top: 0%;
-    /* width: 100%; */
-    /* background-color: purple; */
+.uploadbox2 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 6vh;
+  width: 100%;
+  /* background-color: purple; */
 }
 
 #projname {
-    height: 20px;
-    margin-left: -20px;
+  height: 20px;
+  margin-left: -20px;
 }
 
-#locate{
-    margin-left: 20%;
+#locate {
+  margin-left: 20%;
 }
 
 .lowerBoxPhoto {
-    display: flex;
-    flex-direction: column;
-    margin-top: -15px;
-    margin-left: 23%;
-    margin-bottom: -26px;
-    width: 42%;
+  display: flex;
+  width: 90%;
+  height: 40%;
+  flex-direction: column;
+  /* background-color: lightcoral; */
 }
 
 .Tbox {
-    width: 90%;
-    display: flex;
-    flex-direction: row;
-    margin-left: 23px;
-    /* background-color: pink; */
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  /* margin-left: 23px; */
+  /* background-color: pink; */
 }
 
 .coordDiv {
-    margin-right: 30px;
-    /* background-color: purple; */
+  margin-right: 3vw;
+  /* background-color: purple; */
 }
 
 .Gbox {
-    margin-left: 50px;
-    display: flex;
-    width: 43px;
-    height: 43px;
-    align-items: center;
-    justify-content: center;
-    background-color: #538bdb;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+  display: flex;
+  width: 3vw;
+  height: 5vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #538bdb;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
 .GboxAlt {
-    margin-left: 50px;
-    display: flex;
-    width: 43px;
-    height: 43px;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
-    margin-top: 40px;
-    margin-left: 5px;
+  margin-left: 50px;
+  display: flex;
+  width: 43px;
+  height: 43px;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+  margin-top: 40px;
+  margin-left: 5px;
 }
 
 .Gbox:hover {
-    background-color: #3e7dd7;
+  background-color: #3e7dd7;
 }
 .Gbox:active {
-    background-color: #538dbd;
+  background-color: #538dbd;
 }
 
-.uploadbox5{
-    margin-top: 20px;
+.uploadbox5 {
+  margin-top: 20px;
 }
-
 
 .blankPic {
-    display: flex;
-    width: 80%;
-    height: 220px;
-    align-items: center;
-    align-self: center;
-    justify-content: center;
-    justify-self: center;
-    margin-top: 80px;
-    margin-left: 10%;
-    margin-bottom: 30px;
-    border-radius: 15px;
-    border: lightblue 1px solid;
-
+  display: flex;
+  width: 80%;
+  height: 18vh;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  justify-self: center;
+  margin-bottom: 2vh;
+  border-radius: 15px;
+  border: lightblue 1px solid;
 }
 
 .pickie {
-    display: flex;
-    width: 80%;
-    height: 220px;
-    align-items: center;
-    justify-content: center;
-    margin-top: 80px;
-    margin-left: 10%;
-    margin-bottom: 30px;
-    border-radius: 15px;
-    border: lightblue 1px solid;
+  display: flex;
+  width: 80%;
+  height: 18vh;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2vh;
+  border-radius: 15px;
+  border: lightblue 1px solid;
 }
 
 .picHolder {
-    align-items: center;
-    width: 100%;
-    height: 220px;
-    border-radius: 15px;
-    object-fit: cover;
-} 
+  align-items: center;
+  width: 100%;
+  height: 220px;
+  border-radius: 15px;
+  object-fit: cover;
+}
 
 .picSelectDiv {
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-    background-color: #538bdb;
-    width: 185px;
-    height: 40px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);
-    margin-left: -15px;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #538bdb;
+  width: 12vw;
+  height: 5vh;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);
 }
 
 .picSelectDivAlt {
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-    background-color: white;
-    width: 185px;
-    height: 40px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);
-    margin-left: -15px;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  background-color: white;
+  width: 185px;
+  height: 40px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);
 }
 
 .picSelectDiv:hover {
-    background-color: #3e7dd7;
+  background-color: #3e7dd7;
 }
 .picSelectDiv:active {
-    background-color: #538dbd;
+  background-color: #538dbd;
 }
 
 ::-webkit-calendar-picker-indicator {
-    filter: invert(100%) sepia(300%) saturate(1000%) hue-rotate(1000deg)
-      brightness(180%) contrast(60%);
-  }
+  filter: invert(100%) sepia(300%) saturate(1000%) hue-rotate(1000deg)
+    brightness(180%) contrast(60%);
+}

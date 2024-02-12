@@ -55,16 +55,12 @@ export default function AnimalAutoSuggest(props) {
           style: {
             textAlign: "center",
             fontFamily: "Itim",
-            fontSize: 16,
+            fontSize: "1.5vw",
             textOverflow: "ellipsis",
             backgroundColor: "transparent",
-            height: "20px",
+            height: "5vh",
+            width: "18vw",
             color: "#F0EEEB",
-            width: "260px",
-            marginLeft: "10px",
-            // paddingRight: "10px",
-            paddingLeft: "0px",
-            marginTop: "10px",
           },
         }}
       ></InputBase>
@@ -74,8 +70,8 @@ export default function AnimalAutoSuggest(props) {
           <HighlightOffIcon
             sx={{
               color: "white",
-              height: "10px",
-              width: "10px",
+              height: "2vh",
+              width: "2vw",
               position: "absolute",
             }}
           ></HighlightOffIcon>
@@ -87,8 +83,8 @@ export default function AnimalAutoSuggest(props) {
           height: "auto",
           zIndex: "100",
           position: "absolute",
-          marginTop: "30px",
-          marginLeft: "50px",
+          marginTop: "4vh",
+          marginLeft: "4vw",
         }}
       >
         {list.length > 0 &&

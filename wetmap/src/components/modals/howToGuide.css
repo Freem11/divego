@@ -1,8 +1,13 @@
 .masterDiv{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
   overflow-y: hidden;
   overflow-x:hidden;
+  height: 94%;
   /* background-color: khaki; */
-  height: 97%;
+
 }
 
 .masterDiv:hover{
@@ -11,15 +16,13 @@
 
 .titleDiv{
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: row;
-  position: absolute;
-  top: 49px;
   /* background-color: green; */
-  width: 95%;
-  margin-left: 5px;
-  margin-top: -30px;
+  height: 10vh;
+  width: 90%;
   font-family: 'Patrick Hand', cursive;
-  font-size: 34px;
   color: #F0EEEB;
 }
 
@@ -29,7 +32,7 @@
   align-items: center;
   justify-content: center;
   /* margin-top: 20%; */
-  margin-left: 14%;
+  /* margin-left: 14%; */
   font-family: 'Indie Flower';
   color: #F0EEEB;
   height: 100%;
@@ -39,12 +42,14 @@
 
 .introGuideLaunch {
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Itim', cursive;
-  font-size: 16px;
+  font-size: 1em;
   cursor: pointer;
   background-color: #538bdb;
-  width: 160px;
-  height: 30px;
+  width: 12vw;
+  height: 4vh;
   text-align: center;
   border-radius: 5px;
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
@@ -60,16 +65,18 @@
 
 .diveSiteGuideLaunch {
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Itim', cursive;
-  font-size: 16px;
+  font-size: 1em;
   cursor: pointer;
   background-color: #538bdb;
-  width: 160px;
-  height: 30px;
+  width: 12vw;
+  height: 4vh;
   text-align: center;
   border-radius: 5px;
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  margin-top: 10%;
+  margin-top: 4vh;
 }
 
 .diveSiteGuideLaunch:hover {
@@ -81,16 +88,18 @@
 
 .photoGuideLaunch {
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Itim', cursive;
-  font-size: 16px;
+  font-size: 1em;
   cursor: pointer;
   background-color: #538bdb;
-  width: 160px;
-  height: 30px;
+  width: 12vw;
+  height: 4vh;
   text-align: center;
   border-radius: 5px;
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  margin-top: 10%;
+  margin-top: 4vh;
 }
 
 .photoGuideLaunch:hover {

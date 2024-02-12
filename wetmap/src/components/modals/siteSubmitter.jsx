@@ -231,16 +231,16 @@ const SiteSubmitter = (props) => {
 
   const buttonColor = {
     color: "gold",
-    height: "28px",
-    width: "28px",
+    height: "4vw",
+    width: "4vh",
     cursor: "pointer",
     marginTop: "4px",
   };
 
   const buttonColorAlt = {
     color: "#538bdb",
-    height: "28px",
-    width: "28px",
+    height: "4vw",
+    width: "4vh",
     cursor: "pointer",
     marginTop: "4px",
   };
@@ -276,7 +276,12 @@ const SiteSubmitter = (props) => {
   }
 
   const handleModalClose = () => {
-    if (itterator2 === 13 || itterator2 === 16 || itterator2 === 19 || itterator2 === 23) {
+    if (
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23
+    ) {
       return;
     }
     setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
@@ -293,34 +298,50 @@ const SiteSubmitter = (props) => {
   const inputStyle = {
     textAlign: "center",
     fontFamily: "Itim",
-    fontSize: 18,
+    fontSize: "2vw",
     textOverflow: "ellipsis",
     backgroundColor: "#538bdb",
-    height: "35px",
-    width: "232px",
+    height: "5vh",
+    width: "18vw",
     color: "#F0EEEB",
-    borderRadius: "20px",
+    borderRadius: "120px",
     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
   };
 
   const inputStyleAlt = {
     textAlign: "center",
     fontFamily: "Itim",
-    fontSize: 18,
+    fontSize: "2vw",
     textOverflow: "ellipsis",
     backgroundColor: "pink",
-    height: "35px",
-    width: "232px",
+    height: "5vh",
+    width: "18vw",
     color: "black",
-    borderRadius: "20px",
+    borderRadius: "120px",
     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
   };
 
   return (
-    <Container fluid>
-      <Form onSubmit={handleSubmit}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          height: "100%",
+          // backgroundColor: "palegoldenrod"
+        }}
+      >
         <div className="modalTitle3">
-          <Label style={{ marginTop: 3, marginRight: 55, width: "200%" }}>
+          <Label
+            style={{
+              width: "100vw",
+              marginLeft: "1vw",
+              textAlign: "left",
+              fontFamily: "Patrick Hand",
+              fontSize: "2vw",
+              // backgroundColor: "pink",
+            }}
+          >
             <strong>Submit Your Dive Site</strong>
           </Label>
           <FormGroup>
@@ -328,19 +349,13 @@ const SiteSubmitter = (props) => {
               variant="text"
               id="questionButton"
               onClick={() => activateGuide()}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginRight: -10,
-                marginTop: 2,
-              }}
             >
               <QuestionMarkIcon
                 sx={{
                   color: "lightgrey",
-                  height: "30px",
-                  width: "34px",
-                  marginTop: "2px",
+                  width: "2vw",
+                  height: "5vh",
+                  // backgroundColor: 'gray',
                 }}
               ></QuestionMarkIcon>
             </Button>
@@ -351,18 +366,13 @@ const SiteSubmitter = (props) => {
               variant="text"
               id="closeButton"
               onClick={() => handleModalClose()}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginRight: 10,
-                marginTop: 2,
-              }}
             >
               <CloseIcon
                 sx={{
                   color: "lightgrey",
-                  height: "36px",
-                  width: "36px",
+                  width: "2vw",
+                  height: "5vh",
+                  // backgroundColor: "pink"
                 }}
               ></CloseIcon>
             </Button>
@@ -401,13 +411,13 @@ const SiteSubmitter = (props) => {
                   style: {
                     textAlign: "center",
                     fontFamily: "Itim",
-                    fontSize: 18,
+                    fontSize: '2vw',
                     textOverflow: "ellipsis",
                     backgroundColor: "#538BDB",
-                    height: "35px",
-                    width: "232px",
+                    height: "5vh",
+                    width: "18vw",
                     color: "#F0EEEB",
-                    borderRadius: "20px",
+                    borderRadius: "120px",
                     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
                   },
                 }}
@@ -429,11 +439,11 @@ const SiteSubmitter = (props) => {
                   style: {
                     textAlign: "center",
                     fontFamily: "Itim",
-                    fontSize: 18,
+                    fontSize: "2vw",
                     textOverflow: "ellipsis",
                     backgroundColor: "#538bdb",
-                    height: "35px",
-                    width: "232px",
+                    height: "5vh",
+                    width: "18vw",
                     color: "#F0EEEB",
                     borderRadius: "120px",
                     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
@@ -480,8 +490,7 @@ const SiteSubmitter = (props) => {
             Submit Dive Site
           </Button>
         </FormGroup>
-      </Form>
-    </Container>
+      </div>
   );
 };
 

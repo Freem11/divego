@@ -1,225 +1,232 @@
-@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Permanent+Marker&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap");
 
 .lowerBoxSite {
-    display: flex;
-    flex-direction: column;
-    margin-top: 40%;
-    margin-left: 28%;
-    margin-bottom: -26px;
-    width: 42%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin-top: 0%;
+  height: 40vh;
+  width: 90%;
+  /* background-color: lawngreen; */
 }
 
-.inputbox{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0px;
-    margin-top: 15px;
-    width: 100%; 
-    font-family: 'Itim', cursive;
-    border: none;
-    border-bottom: none;
-    border-color: transparent;
+.inputbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px;
+  margin-top: 15px;
+  width: 100%;
+  font-family: "Itim", cursive;
+  border: none;
+  border-bottom: none;
+  border-color: transparent;
 }
 
-.inputboxAlt{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    margin-left: 0px;
-    margin-top: 15px;
-    width: 100%; 
-    font-family: 'Itim', cursive;
-    border: none;
-    border-bottom: none;
-    border-color: transparent;
-    background-color: pink;
+.inputboxAlt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px;
+  margin-top: 15px;
+  width: 100%;
+  font-family: "Itim", cursive;
+  border: none;
+  border-bottom: none;
+  border-color: transparent;
+  background-color: pink;
 }
 
-.modalInputs{
-    margin-top: 10px;
-    border-radius: 10px;
-    width: 80%;
-    margin-left: -15%;
-    border: none;
-} 
-
-.selectbox{
-    margin-top: 20px;
-    margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    margin-left: 22%;
+.modalInputs {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 80%;
+  margin-left: -15%;
+  border: none;
 }
-.modalInputs2{
-    margin-top: 10px;
-    border-radius: 10px;
-    width: 80%;
-    margin-left: -15%;
-    border: none;
-} 
+
+.selectbox {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-left: 22%;
+}
+.modalInputs2 {
+  margin-top: 10px;
+  border-radius: 10px;
+  width: 80%;
+  margin-left: -15%;
+  border: none;
+}
 
 #modalButtonDivD {
-    width: 100%;
-    margin-top: 173px;
-    padding-top: 4px;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 26px;
-    font-weight: bolder;
-    color: gold;
-    border-radius: 0;
-    border-top: 1px solid #F0EEEB;
-    text-transform: none;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+  width: 30vw;
+  height: 8vh;
+  /* background-color: lightcoral; */
+  margin-top: 5vh;
+  padding-top: 4px;
+  font-family: "Patrick Hand", cursive;
+  font-size: 2vw;
+  font-weight: bolder;
+  color: gold;
+  border-radius: 0;
+  border-top: 1px solid #f0eeeb;
+  text-transform: none;
+  border-bottom-left-radius: 2vw;
+  border-bottom-right-radius: 2vw;
 }
 
 #modalButtonDivD:hover {
-    background-color: #3e7dd7;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+  background-color: #3e7dd7;
+  border-bottom-left-radius: 2vw;
+  border-bottom-right-radius: 2vw;
 }
 #modalButtonDivD:active {
-    background-color: #538dbd;
-    border-bottom-left-radius: 25px;
-    border-bottom-right-radius: 25px;
+  background-color: #538dbd;
+  border-bottom-left-radius: 2vw;
+  border-bottom-right-radius: 2vw;
 }
 
-.modalTitle3{
-    display: flex;
-    flex-direction: row;
-    position: absolute;
-    top: 49px;
-    /* background-color: green; */
-    width: 95%;
-    margin-left: 25px;
-    margin-top: -35px;
-    font-family: 'Patrick Hand', cursive;
-    font-size: 34px;
-    color: #F0EEEB;
+.modalTitle3 {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  /* background-color: green; */
+  height: 10vh;
+  width: 95%;
+  margin-left: 3%;
+  margin-top: 1vh;
+  font-family: "Patrick Hand", cursive;
+  color: #f0eeeb;
 }
 
-.uploadbox{
-    margin-left: 71px;
-    margin-top: 50px;
-    width: 100%;
-    margin-bottom: 30px;
+.uploadbox {
+  margin-left: 71px;
+  margin-top: 50px;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 #projname {
-    height: 20px;
-    margin-left: -20px;
+  height: 20px;
+  margin-left: -20px;
 }
 
-#locate{
-    margin-left: 20%;
+#locate {
+  margin-left: 20%;
 }
 
 .Tbox {
-    display: flex;
-    flex-direction: row;
-    margin-left: 23px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 23px;
 }
 
 .Gbox {
-    margin-top: 28px;
-    margin-left: 5px;
+  margin-top: 28px;
+  margin-left: 5px;
 }
 
-
-.fileSelectDiv{
-    display: flex;
-    flex-direction: row;
-    cursor: pointer;
-    background-color: #538bdb;
-    width: 160px;
-    height: 35px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
-    margin-left: -10px;
+.fileSelectDiv {
+  display: flex;
+  flex-direction: row;
+  cursor: pointer;
+  background-color: #538bdb;
+  width: 160px;
+  height: 35px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 3px 3px 3px 3px rgba(0, 0, 0, 0.3);
+  margin-left: -10px;
 }
 
 .fileSelectDiv:hover {
-    background-color: #3e7dd7;
+  background-color: #3e7dd7;
 }
 .fileSelectDiv:active {
-    background-color: #538dbd;
+  background-color: #538dbd;
 }
 
 .buttonBox {
- display: flex;
+  display: flex;
+  justify-content: center;
+  width: 90%;
+  height: 20%;
+  /* background-color: lemonchiffon; */
 }
 
 .GPSbutton {
-    margin-left: 240px;
-    margin-top: 80px;
-    display: flex;
-    width: 43px;
-    height: 43px;
-    align-items: center;
-    justify-content: center;
-    background-color: #538bdb;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+  margin-left: 5vw;
+  margin-top: 0vh;
+  display: flex;
+  width: 3.5vw;
+  height: 6vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #538bdb;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
 .GPSbutton:hover {
-    background-color: #3e7dd7;
+  background-color: #3e7dd7;
 }
 .GPSbutton:active {
-    background-color: #538dbd;
+  background-color: #538dbd;
 }
 
-.GPSbuttonAlt{
-    margin-left: 240px;
-    margin-top: 80px;
-    display: flex;
-    width: 43px;
-    height: 43px;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+.GPSbuttonAlt {
+  margin-left: 5vw;
+  margin-top: 0vh;
+  display: flex;
+  width: 3.5vw;
+  height: 6vh;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
-.pinButtonD{
-    margin-left: 50px;
-    margin-top: 80px;
-    display: flex;
-    width: 43px;
-    height: 43px;
-    align-items: center;
-    justify-content: center;
-    background-color: #538bdb;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+.pinButtonD {
+  margin-left: 2vw;
+  margin-top: 0vh;
+  display: flex;
+  width: 3.5vw;
+  height: 6vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #538bdb;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
 .pinButtonD:hover {
-    background-color: #3e7dd7;
+  background-color: #3e7dd7;
 }
 .pinButtonD:active {
-    background-color: #538dbd;
+  background-color: #538dbd;
 }
 
-.pinButtonDalt{
-    margin-left: 50px;
-    margin-top: 80px;
-    display: flex;
-    width: 43px;
-    height: 43px;
-    align-items: center;
-    justify-content: center;
-    background-color: white;
-    text-align: center;
-    border-radius: 10px;
-    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+.pinButtonDalt {
+  margin-left: 2vw;
+  margin-top: 0vh;
+  display: flex;
+  width: 3.5vw;
+  height: 6vh;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  text-align: center;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }

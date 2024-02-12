@@ -45,85 +45,92 @@ const Settings = (props) => {
   };
 
   return (
-    <Container fluid>
-      <Form>
-        <div className="titleDiv2">
-          <Label style={{ marginTop: 3, marginRight: 225, width: "200%" }}>
-            <strong>Settings</strong>
+    <div className="masterDivSet">
+      <div className="titleDiv2">
+        <h3
+          style={{
+            width: "100vw",
+            marginLeft: "1vw",
+            textAlign: "left",
+            fontFamily: "Patrick Hand",
+            fontSize: "2em",
+            // backgroundColor: "pink",
+          }}
+        >
+          Settings
+        </h3>
+        <FormGroup>
+          <Button
+            variant="text"
+            id="closeButton"
+            onClick={() => animateSettingsModal()}
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              // marginRight: 20,
+              // marginTop: 10,
+              backgroundColor: "transparent",
+              border: "none",
+              cursor: "pointer",
+            }}
+          >
+            <CloseIcon
+              sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+            ></CloseIcon>
+          </Button>
+        </FormGroup>
+      </div>
+
+      <div className="lowerBoxSettings">
+        <div onClick={handleLogout} className="Logoutbutton">
+          <Label
+            style={{
+              fontFamily: "Itim",
+              fontWeight: "bold",
+              color: "gold",
+              cursor: "pointer",
+              marginTop: "5px",
+            }}
+          >
+            Sign Out
           </Label>
-          <FormGroup>
-            <Button
-              variant="text"
-              id="closeButton"
-              onClick={() => animateSettingsModal()}
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                marginRight: 10,
-                marginTop: 10,
-                backgroundColor: "transparent",
-                border: "none",
-                cursor: "pointer"
-              }}
-            >
-              <CloseIcon
-                sx={{ color: "lightgrey", height: "36px", width: "36px" }}
-              ></CloseIcon>
-            </Button>
-          </FormGroup>
         </div>
 
-        <div className="lowerBoxSettings">
-          <div onClick={handleLogout} className="Logoutbutton">
-            <Label
-              style={{
-                fontFamily: "Itim",
-                fontWeight: "bold",
-                color: "gold",
-                cursor: "pointer",
-                marginTop: "5px",
-              }}
-            >
-              Sign Out
-            </Label>
-          </div>
-
-          <div
-            className="dangerZonebar"
-            onDoubleClick={() => setShowDangerZone(!showDangerZone)}
-          >
-            <ErrorOutlineIcon
-              sx={{
-                color: "maroon",
-                height: "28px",
-                width: "28px",
-                marginRight: "10%",
-              }}
-            ></ErrorOutlineIcon>
-            <strong className="dangerText">Danger Zone</strong>
-            <ErrorOutlineIcon
-              sx={{
-                color: "maroon",
-                height: "28px",
-                width: "28px",
-                marginLeft: "10%",
-              }}
-            ></ErrorOutlineIcon>
-          </div>
-
-          <Collapse
-            in={showDangerZone}
-            orientation="vertical"
-            collapsedSize="0px"
-            className="dngZn"
-          >
-            {dangerZone}
-          </Collapse>
+        <div
+          className="dangerZonebar"
+          onDoubleClick={() => setShowDangerZone(!showDangerZone)}
+        >
+          <ErrorOutlineIcon
+            sx={{
+              color: "maroon",
+              height: "28px",
+              width: "28px",
+              marginRight: "10%",
+            }}
+          ></ErrorOutlineIcon>
+          <strong className="dangerText">Danger Zone</strong>
+          <ErrorOutlineIcon
+            sx={{
+              color: "maroon",
+              height: "28px",
+              width: "28px",
+              marginLeft: "10%",
+            }}
+          ></ErrorOutlineIcon>
         </div>
-      </Form>
+
+        <Collapse
+          in={showDangerZone}
+          orientation="vertical"
+          collapsedSize="0px"
+          className="dngZn"
+        >
+          {dangerZone}
+        </Collapse>
+      </div>
 
       <ActDelDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
-    </Container>
+    </div>
   );
 };
 

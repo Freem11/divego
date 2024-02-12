@@ -1,51 +1,53 @@
-.masterDiv{
-  overflow-y: hidden;
-  overflow-x:hidden;
-  max-height: 80vh;
-  margin: 10px;
+.masterDivSet{
+  display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  overflow-y: hidden;
+  overflow-x:hidden;
+  height: 85%;
+  /* background-color: khaki; */
+
 }
 
 .titleDiv2{
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-direction: row;
-  position: absolute;
-  top: 49px;
   /* background-color: green; */
-  width: 95%;
-  margin-left: 5px;
-  margin-top: -35px;
+  height: 10vh;
+  width: 90%;
   font-family: 'Patrick Hand', cursive;
-  font-size: 34px;
   color: #F0EEEB;
 }
 
 .lowerBoxSettings {
   width: 90%;
-  margin-left: 5%;
-  margin-top: 20%;
+  height: 40vh;
+  margin-top: 10vh;
+  margin-bottom: 10vh;
   display: flex;
   flex-direction: column;
-  align-content: center;
   align-items: center;
-  justify-content: center;
-  justify-items: center;
+  justify-content: space-between;
   /* background-color: green; */
 }
 
 .Logoutbutton{
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Itim', cursive;
-  font-size: 16px;
+  font-size: 1em;
   cursor: pointer;
   background-color: #538bdb;
-  width: 160px;
-  height: 30px;
+  width: 12vw;
+  height: 4vh;
   text-align: center;
   border-radius: 5px;
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  margin-top: 5%;
+  /* margin-top: 1vh; */
 }
 
 .Logoutbutton:hover {
@@ -57,19 +59,18 @@
 
 .AccountDeleteButton{
   display: flex;
+  align-items: center;
+  justify-content: center;
   font-family: 'Permanent Marker', cursive;
-  font-size: 16px;
+  font-size: 1em;
   cursor: pointer;
   color: maroon;
   background-color: pink;
-  width: 160px;
-  height: 30px;
-  text-align: center;
+  margin-top: 4vh;
+  width: 12vw;
+  height: 4vh;
   border-radius: 5px;
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  /* margin-left: 26%; */
-  margin-top: 30px;
-  /* margin-bottom: 20px; */
 }
 
 .AccountDeleteButton:hover {
@@ -81,19 +82,16 @@
 
 .dangerZonebar{
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
   justify-content: center;
-  justify-items: center;
-  text-align: center;
   align-content: center;
-  align-self: center;
   align-items: center;
   width: 80%;
-  height: 25px;
+  height: 3vh;
   background-color: pink;
   opacity: 0.65;
   border-radius: 10px;
-  margin-top: 95%;
+  margin-top: 30vh;
   padding-left: 5px;
   padding-right: 5px;
   cursor: pointer;
@@ -101,9 +99,8 @@
 
 .dangerText{
   color: maroon;
-  height: 25px;
-  width: 150px;
-  margin-top: 3px;
+  height: 2vh;
+  width: 15vw;
 }
 
 
