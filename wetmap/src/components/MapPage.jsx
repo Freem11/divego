@@ -554,6 +554,12 @@ const MapPage = React.memo((props) => {
   function trackScreen() {
     setWindowWidth(window.innerWidth);
     setWindowHeight(window.innerHeight);
+    setfabsYCoord(0);
+    setPicModalYCoord(0);
+    setSiteModalYCoord(0);
+    setSettingsModalYCoord(0);
+    setAnchorModalYCoord(0);
+    setLaunchModalYCoord(0);
   }
 
   const picModalRef = useRef(null);
@@ -621,14 +627,15 @@ const MapPage = React.memo((props) => {
   });
 
   // let modalHeigth = 700;
- 
-  const animateFabs = () => {
 
-    let containerHeight = document.getElementsByClassName("fabContainer")[0].clientHeight
-    let buttonSectionHeight = document.getElementsByClassName("fabButtons")[0].clientHeight
-    
+  const animateFabs = () => {
+    let containerHeight = document.getElementsByClassName("fabContainer")[0]
+      .clientHeight;
+    let buttonSectionHeight = document.getElementsByClassName("fabButtons")[0]
+      .clientHeight;
+
     if (fabsYCoord === 0) {
-      setfabsYCoord(-containerHeight+((containerHeight/100)*12));
+      setfabsYCoord(-containerHeight + (containerHeight / 100) * 12);
     } else {
       setfabsYCoord(0);
     }
@@ -640,8 +647,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePicModal = () => {
-
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (picModalYCoord === 0) {
       setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -677,7 +684,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSiteModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (siteModalYCoord === 0) {
       setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -710,7 +718,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateLaunchModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (launchModalYCoord === 0) {
       setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -733,7 +742,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSettingsModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (settingsModalYCoord === 0) {
       setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -780,7 +790,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateAnchorModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (anchorModalYCoord === 0) {
       setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -815,7 +826,8 @@ const MapPage = React.memo((props) => {
   }, [showFilterer]);
 
   useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (siteModal) {
       setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -833,7 +845,8 @@ const MapPage = React.memo((props) => {
   }, [siteModal]);
 
   useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (dsAdderModal) {
       setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -845,7 +858,8 @@ const MapPage = React.memo((props) => {
   }, [dsAdderModal]);
 
   useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0].clientHeight
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (picAdderModal) {
       setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -870,8 +884,8 @@ const MapPage = React.memo((props) => {
         <div className="col2rowT">{/* <AnimalTopAutoSuggest /> */}</div>
       )}
 
-{masterSwitch && (
-      <animated.div className="fabContainer" style={moveFabModal}>
+      {masterSwitch && (
+        <animated.div className="fabContainer" style={moveFabModal}>
           <div className="animateBox" onClick={(e) => animateMenu(e)}>
             <p className="animateFont">{menuUp ? "Hide Menu" : "Show Menu"}</p>
             {menuUp ? (
@@ -894,143 +908,142 @@ const MapPage = React.memo((props) => {
               />
             )}
           </div>
-        
 
-        <div className="fabButtons">
-          {masterSwitch && (
-            <div className="gearBox">
-              <ToggleButton
-                sx={toggleButtonStyle}
-                value="check"
-                selected={gearModal}
-                onChange={() => {
-                  handleSettingsButton();
-                }}
-              >
-                <SettingsIcon sx={{ width: "2vw" }} />
-              </ToggleButton>
-              <p className="buttonFont">Settings</p>
-            </div>
-          )}
+          <div className="fabButtons">
+            {masterSwitch && (
+              <div className="gearBox">
+                <ToggleButton
+                  sx={toggleButtonStyle}
+                  value="check"
+                  selected={gearModal}
+                  onChange={() => {
+                    handleSettingsButton();
+                  }}
+                >
+                  <SettingsIcon sx={{ width: "2vw" }} />
+                </ToggleButton>
+                <p className="buttonFont">Settings</p>
+              </div>
+            )}
 
-          {masterSwitch && (
-            <div className="gearBox">
-              <ToggleButton
-                sx={toggleButtonStyle}
-                value="check"
-                selected={guideModal}
-                onChange={() => {
-                  handleTutorialButton();
-                }}
-              >
-                <QuestionMarkIcon sx={{ width: "2vw" }} />
-              </ToggleButton>
-              <p className="buttonFont">Guides</p>
-            </div>
-          )}
+            {masterSwitch && (
+              <div className="gearBox">
+                <ToggleButton
+                  sx={toggleButtonStyle}
+                  value="check"
+                  selected={guideModal}
+                  onChange={() => {
+                    handleTutorialButton();
+                  }}
+                >
+                  <QuestionMarkIcon sx={{ width: "2vw" }} />
+                </ToggleButton>
+                <p className="buttonFont">Guides</p>
+              </div>
+            )}
 
-          {masterSwitch && (
-            <div
-              className="gearBox"
-              // style={{ display: "flex", flexDirection: "row" }}
-            >
-              <ToggleButton
-                sx={toggleButtonStyle}
-                value="check"
-                selected={showGeoCoder}
-                onChange={() => {
-                  handleGeocodingSearchButton();
-                }}
+            {masterSwitch && (
+              <div
+                className="gearBox"
+                // style={{ display: "flex", flexDirection: "row" }}
               >
-                <ExploreIcon sx={{ width: "2vw" }} />
-              </ToggleButton>
-              <p className="buttonFont">Map Search</p>
-              {/* <Collapse
+                <ToggleButton
+                  sx={toggleButtonStyle}
+                  value="check"
+                  selected={showGeoCoder}
+                  onChange={() => {
+                    handleGeocodingSearchButton();
+                  }}
+                >
+                  <ExploreIcon sx={{ width: "2vw" }} />
+                </ToggleButton>
+                <p className="buttonFont">Map Search</p>
+                {/* <Collapse
           in={showGeoCoder}
           orientation="horizontal"
           collapsedSize="0px"
         >
           {locationSearchZone}
         </Collapse> */}
-            </div>
-          )}
+              </div>
+            )}
 
-          {masterSwitch && (
-            <div
-              className="gearBox"
-              // style={{ display: "flex", flexDirection: "row" }}
-            >
-              <ToggleButton
-                sx={searButState ? toggleButtonStyleAlt : toggleButtonStyle}
-                value="check"
-                selected={showAnimalSearch}
-                onChange={() => {
-                  handleDiveSiteSearchButton();
-                }}
+            {masterSwitch && (
+              <div
+                className="gearBox"
+                // style={{ display: "flex", flexDirection: "row" }}
               >
-                <TravelExploreIcon sx={{ width: "2vw" }} />
-              </ToggleButton>
-              <p className="buttonFont">Site Search</p>
-              {/* <Collapse
+                <ToggleButton
+                  sx={searButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                  value="check"
+                  selected={showAnimalSearch}
+                  onChange={() => {
+                    handleDiveSiteSearchButton();
+                  }}
+                >
+                  <TravelExploreIcon sx={{ width: "2vw" }} />
+                </ToggleButton>
+                <p className="buttonFont">Site Search</p>
+                {/* <Collapse
               in={showAnimalSearch}
               orientation="horizontal"
               collapsedSize="0px"
             >
               {diveSiteSearchZone}
             </Collapse> */}
-            </div>
-          )}
+              </div>
+            )}
 
-          {masterSwitch && (
-            <div className="gearBox">
-              <ToggleButton
-                sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
-                value="check"
-                selected={picModal}
-                onChange={() => {
-                  handlePhotoModalButton();
-                }}
-              >
-                <PhotoCameraIcon sx={{ width: "2vw" }} />
-              </ToggleButton>
-              <p className="buttonFont">Photo Add</p>
-            </div>
-          )}
+            {masterSwitch && (
+              <div className="gearBox">
+                <ToggleButton
+                  sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                  value="check"
+                  selected={picModal}
+                  onChange={() => {
+                    handlePhotoModalButton();
+                  }}
+                >
+                  <PhotoCameraIcon sx={{ width: "2vw" }} />
+                </ToggleButton>
+                <p className="buttonFont">Photo Add</p>
+              </div>
+            )}
 
-          {masterSwitch && (
-            <div className="gearBox">
-              <ToggleButton
-                sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
-                value="check"
-                selected={diveSiteModal}
-                onChange={() => {
-                  handleDiveSiteModalButton();
-                }}
-              >
-                <AddLocationAltIcon sx={{ width: "2vw" }} />
-              </ToggleButton>
-              <p className="buttonFont">Site Add</p>
-            </div>
-          )}
+            {masterSwitch && (
+              <div className="gearBox">
+                <ToggleButton
+                  sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                  value="check"
+                  selected={diveSiteModal}
+                  onChange={() => {
+                    handleDiveSiteModalButton();
+                  }}
+                >
+                  <AddLocationAltIcon sx={{ width: "2vw" }} />
+                </ToggleButton>
+                <p className="buttonFont">Site Add</p>
+              </div>
+            )}
 
-          {masterSwitch && (
-            <div className="gearBox">
-              {" "}
-              <ToggleButton
-                sx={toggleButtonStyle}
-                value="check"
-                selected={divesTog}
-                onChange={() => {
-                  handleAnchorButton();
-                }}
-              >
-                <AnchorIcon sx={{ width: "2vw"}} />
-              </ToggleButton>
-              <p className="buttonFont">Show/Hide</p>
-            </div>
-          )}
-        </div>
-      </animated.div>
+            {masterSwitch && (
+              <div className="gearBox">
+                {" "}
+                <ToggleButton
+                  sx={toggleButtonStyle}
+                  value="check"
+                  selected={divesTog}
+                  onChange={() => {
+                    handleAnchorButton();
+                  }}
+                >
+                  <AnchorIcon sx={{ width: "2vw" }} />
+                </ToggleButton>
+                <p className="buttonFont">Show/Hide</p>
+              </div>
+            )}
+          </div>
+        </animated.div>
       )}
 
       {masterSwitch && (
@@ -1093,7 +1106,7 @@ const MapPage = React.memo((props) => {
           style={{ display: "flex", flexDirection: "row" }}
         >
           <ToggleButton
-            sx={[toggleButtonStyle, {width: "2vw", height: '4vh'}]}
+            sx={[toggleButtonStyle, { width: "2vw", height: "4vh" }]}
             value="check"
             onClick={() => {
               setMapZoom(mapZoom + 1);
@@ -1108,7 +1121,7 @@ const MapPage = React.memo((props) => {
           style={{ display: "flex", flexDirection: "row" }}
         >
           <ToggleButton
-            sx={[toggleButtonStyle, {width: "2vw", height: '4vh'}]}
+            sx={[toggleButtonStyle, { width: "2vw", height: "4vh" }]}
             value="check"
             onClick={() => {
               setMapZoom(mapZoom - 1);
