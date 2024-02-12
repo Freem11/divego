@@ -117,33 +117,33 @@
 }
 
 .fabContainer {
-    position:absolute;
+    position: absolute;
+    bottom: -12vh;
+    left: 20vw;
+    display: flex;
     align-items: center;
     justify-content: center;
-    bottom: -14vh;
-    left: 25vw;
-    height: 15vh;
-    width: 50vw;	
-    display: flex;
+    height: 20vh;
+    width: 60vw;	
     flex-direction: column;
     z-index: 5;
-    cursor: pointer;
+    pointer-events: none;
     /* background-color: pink; */
 }
 
 .fabButtons {
     z-index: 5;
     background-color: #538dbd;
-    position:absolute;
+    position: relative;
 	display: flex;
     flex-direction: row;
     border-radius: 1rem;
+    align-items: center;
     justify-content: space-evenly;
-	gap: 1rem;
-    bottom: 1vh;
-    min-height: 45px;
-    height: 6vw;
-    width: 50vw;
+    gap: 1rem;
+    height: 60%;
+    width: 100%;
+    pointer-events: all;
 }
 
 .just-testing2 {
@@ -159,34 +159,31 @@
 }
 
 .animateFont {
-    margin-top: -1vh;
-    padding-bottom: -1vh;
     font-family: Itim;
-    font-size: 1vw;
+    font-size: 2vh;
     color: white;
-    width: 10vw;
+    pointer-events: all;
 }
 
 .buttonFont {
-    margin-top: 0vh;
-    padding-bottom: 1vh;
+    margin-top: 10%;
+    margin-bottom: 0;
     font-family: Itim;
     font-size: 1vw;
     color: white;
-    width: 10vw;
+    /* background-color: lawngreen; */
 }
 
 .animateBox {
-    position: absolute;
+    position: relative;
     z-index: 5;
-    bottom: 8vh;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 2vh;
-    height: 5vw;
-    width: 4vw;
+    pointer-events: all;
+    height: 40%;
+    /* background-color: khaki; */
 }
 
 .gearBox {
@@ -194,10 +191,12 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-top: 2vh;
-    height: 5vw;
-    width: 4vw;
-    /* background-color: green; */
+    width: 100%;
+    height: 100%;
+    /* margin-top: 2vh; */
+    padding-bottom: 0vh;
+    pointer-events: all;
+    /* background-color: lavender; */
 }
 
 .col1row8 {

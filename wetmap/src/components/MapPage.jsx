@@ -260,7 +260,9 @@ const MapPage = React.memo((props) => {
   const toggleButtonStyle = {
     "&.Mui-selected": {
       backgroundColor: "#538bdb",
-      border: "1px solid #538bdb",
+      width: "30%",
+      height: "40%",
+      // border: "1px solid #538bdb",
     },
     "&.Mui-selected:hover": { backgroundColor: "lightgrey", color: "white" },
     "&:hover": {
@@ -268,27 +270,27 @@ const MapPage = React.memo((props) => {
       backgroundColor: "white",
     },
     backgroundColor: "white",
-    height: "3vw",
-    width: "3vw",
-    border: "1px solid white",
-    marginTop: "5px",
+    width: "30%",
+    height: "40%",
+    // border: "1px solid white",
+    // marginTop: "5px",
     color: "#538bdb",
     boxShadow: "-2px 4px 4px #00000064",
     borderRadius: "100%",
   };
 
   const toggleButtonStyleAlt = {
-    "&.Mui-selected": { backgroundColor: "#538bdb" },
+    "&.Mui-selected": { backgroundColor: "#538bdb", width: "70%" },
     "&.Mui-selected:hover": { backgroundColor: "#538bdb", color: "white" },
     "&:hover": {
       color: "white",
       backgroundColor: "gold",
     },
     backgroundColor: "aquamarine",
-    height: "48px",
-    width: "48px",
-    border: "1px solid black",
-    marginTop: "5px",
+    // height: "48px",
+    width: "70%",
+    // border: "1px solid black",
+    // marginTop: "5px",
     color: "black",
     boxShadow: "-2px 4px 4px #00000064",
     borderRadius: "100%",
@@ -544,7 +546,6 @@ const MapPage = React.memo((props) => {
     setDivesTog(!divesTog);
   };
   let screenWidthInital = window.innerWidth;
-
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
   const [windowHeight, setWindowHeight] = useState(screenHeigthInital);
 
@@ -623,10 +624,11 @@ const MapPage = React.memo((props) => {
  
   const animateFabs = () => {
 
-    let blueSectionHeight = document.getElementsByClassName("fabButtons")[0].clientHeight
+    let containerHeight = document.getElementsByClassName("fabContainer")[0].clientHeight
+    let buttonSectionHeight = document.getElementsByClassName("fabButtons")[0].clientHeight
     
     if (fabsYCoord === 0) {
-      setfabsYCoord(-blueSectionHeight - blueSectionHeight/2);
+      setfabsYCoord(-containerHeight+((containerHeight/100)*12));
     } else {
       setfabsYCoord(0);
     }
@@ -851,8 +853,8 @@ const MapPage = React.memo((props) => {
         <div className="col2rowT">{/* <AnimalTopAutoSuggest /> */}</div>
       )}
 
+{masterSwitch && (
       <animated.div className="fabContainer" style={moveFabModal}>
-        {masterSwitch && (
           <div className="animateBox" onClick={(e) => animateMenu(e)}>
             <p className="animateFont">{menuUp ? "Hide Menu" : "Show Menu"}</p>
             {menuUp ? (
@@ -861,7 +863,7 @@ const MapPage = React.memo((props) => {
                   height: "3vh",
                   color: "white",
                   marginTop: "-2vh",
-                  marginBottom: "5vh",
+                  marginBottom: "1vh",
                 }}
               />
             ) : (
@@ -870,12 +872,12 @@ const MapPage = React.memo((props) => {
                   height: "3vh",
                   color: "white",
                   marginTop: "-2vh",
-                  marginBottom: "5vh",
+                  marginBottom: "1vh",
                 }}
               />
             )}
           </div>
-        )}
+        
 
         <div className="fabButtons">
           {masterSwitch && (
@@ -888,7 +890,7 @@ const MapPage = React.memo((props) => {
                   handleSettingsButton();
                 }}
               >
-                <SettingsIcon sx={{ height: "3vw", width: "2vw" }} />
+                <SettingsIcon sx={{ width: "2vw" }} />
               </ToggleButton>
               <p className="buttonFont">Settings</p>
             </div>
@@ -904,7 +906,7 @@ const MapPage = React.memo((props) => {
                   handleTutorialButton();
                 }}
               >
-                <QuestionMarkIcon sx={{ height: "4vw", width: "2vw" }} />
+                <QuestionMarkIcon sx={{ width: "2vw" }} />
               </ToggleButton>
               <p className="buttonFont">Guides</p>
             </div>
@@ -923,7 +925,7 @@ const MapPage = React.memo((props) => {
                   handleGeocodingSearchButton();
                 }}
               >
-                <ExploreIcon sx={{ height: "3vw", width: "2vw" }} />
+                <ExploreIcon sx={{ width: "2vw" }} />
               </ToggleButton>
               <p className="buttonFont">Map Search</p>
               {/* <Collapse
@@ -949,7 +951,7 @@ const MapPage = React.memo((props) => {
                   handleDiveSiteSearchButton();
                 }}
               >
-                <TravelExploreIcon sx={{ height: "2.5vw", width: "2vw" }} />
+                <TravelExploreIcon sx={{ width: "2vw" }} />
               </ToggleButton>
               <p className="buttonFont">Site Search</p>
               {/* <Collapse
@@ -972,7 +974,7 @@ const MapPage = React.memo((props) => {
                   handlePhotoModalButton();
                 }}
               >
-                <PhotoCameraIcon sx={{ height: "2.5vw", width: "2vw" }} />
+                <PhotoCameraIcon sx={{ width: "2vw" }} />
               </ToggleButton>
               <p className="buttonFont">Photo Add</p>
             </div>
@@ -988,7 +990,7 @@ const MapPage = React.memo((props) => {
                   handleDiveSiteModalButton();
                 }}
               >
-                <AddLocationAltIcon sx={{ height: "3vw", width: "2vw" }} />
+                <AddLocationAltIcon sx={{ width: "2vw" }} />
               </ToggleButton>
               <p className="buttonFont">Site Add</p>
             </div>
@@ -1005,13 +1007,14 @@ const MapPage = React.memo((props) => {
                   handleAnchorButton();
                 }}
               >
-                <AnchorIcon sx={{ height: "2.5vw", width: "2vw" }} />
+                <AnchorIcon sx={{ width: "2vw"}} />
               </ToggleButton>
               <p className="buttonFont">Show/Hide</p>
             </div>
           )}
         </div>
       </animated.div>
+      )}
 
       {masterSwitch && (
         <div className="col1row8" pointerEvents={"box-none"}>
@@ -1073,13 +1076,13 @@ const MapPage = React.memo((props) => {
           style={{ display: "flex", flexDirection: "row" }}
         >
           <ToggleButton
-            sx={toggleButtonStyle}
+            sx={[toggleButtonStyle, {width: "2vw", height: '4vh'}]}
             value="check"
             onClick={() => {
               setMapZoom(mapZoom + 1);
             }}
           >
-            <AddIcon sx={{ height: "3vw", width: "40px" }} />
+            <AddIcon sx={{ height: "2vw", width: "2vw" }} />
           </ToggleButton>
         </div>
 
@@ -1088,13 +1091,13 @@ const MapPage = React.memo((props) => {
           style={{ display: "flex", flexDirection: "row" }}
         >
           <ToggleButton
-            sx={toggleButtonStyle}
+            sx={[toggleButtonStyle, {width: "2vw", height: '4vh'}]}
             value="check"
             onClick={() => {
               setMapZoom(mapZoom - 1);
             }}
           >
-            <RemoveIcon sx={{ height: "3vw", width: "40px" }} />
+            <RemoveIcon sx={{ height: "2vw", width: "2vw" }} />
           </ToggleButton>
         </div>
       </div>
