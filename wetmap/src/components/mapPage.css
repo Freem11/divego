@@ -56,10 +56,9 @@
     z-index: 200;
     position: absolute;
     top: 100vh;
-    left: 35%;
-    min-width: 500px;
-    width: 33vw;
-    height: 700px;
+    left: 35vw;
+    width: 30vw;
+    height: 80vh;
     background-color: #538bdb;
     border-radius: 25px;
 }

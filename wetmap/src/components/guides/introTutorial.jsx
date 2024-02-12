@@ -12,7 +12,10 @@ import { getRecentPhotos } from "../../supabaseCalls/photoSupabaseCalls";
 import { SessionContext } from "../contexts/sessionContext";
 import { grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
 import { newGPSBoundaries } from "../../helpers/mapHelpers";
-import { getPhotosforAnchorMulti, getPhotosforAnchor} from "../../supabaseCalls/photoSupabaseCalls";
+import {
+  getPhotosforAnchorMulti,
+  getPhotosforAnchor,
+} from "../../supabaseCalls/photoSupabaseCalls";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { getToday } from "../../helpers/picUploaderHelpers.js";
 import { ZoomContext } from "../contexts/mapZoomContext";
@@ -46,7 +49,12 @@ let screenWidthInital = window.innerWidth;
 let screenHeitghInital = window.innerHeight;
 
 export default function IntroTutorial(props) {
-  const { animateIntroGuideModal, setIntroGuideModalYCoord, animateSecondGuideModal, setSecondGuideModalYCoord } = props;
+  const {
+    animateIntroGuideModal,
+    setIntroGuideModalYCoord,
+    animateSecondGuideModal,
+    setSecondGuideModalYCoord,
+  } = props;
   window.addEventListener("resize", trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
@@ -87,7 +95,6 @@ export default function IntroTutorial(props) {
 
   const [guideState, setGuideState] = useState(false);
 
-
   useEffect(() => {
     getProfile();
   }, []);
@@ -105,55 +112,54 @@ export default function IntroTutorial(props) {
   }, [tutorialReset]);
 
   let modalHeigth = 700;
-  
+
   useEffect(() => {
     setMovingBack(false);
-    
 
     switch (chapter) {
       case "Getting around the map":
-        resetTutorial()
+        resetTutorial();
         setSiteModal(false);
         setItterator(6);
         setGuideModal(true);
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-600);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth + (windowHeigth - 400));
         }, 300);
-        setPixY((3.5*windowHeigth)+(windowHeigth-picBoxHeigth)/2)
+        setPixY(3.5 * windowHeigth + (windowHeigth - picBoxHeigth) / 2);
         break;
 
       case "Dive sites":
-        resetTutorial()
+        resetTutorial();
         setSiteModal(false);
         setItterator(9);
         setGuideModal(true);
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-600);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth + (windowHeigth - 400));
         }, 300);
-        setClusterAnchorY((2*windowHeigth)+(windowHeigth-500)/2);
-        setHeatPotintY((2*windowHeigth)+(windowHeigth-200)/3);
+        setClusterAnchorY(2 * windowHeigth + (windowHeigth - 500) / 2);
+        setHeatPotintY(2 * windowHeigth + (windowHeigth - 200) / 3);
         nudgeMap({ lat: 49.3134161482923, lng: -124.242440499365 });
         break;
 
       case "Changed dive site":
-        resetTutorial()
+        resetTutorial();
         setSiteModal(false);
         setItterator(17);
         setGuideModal(true);
-        setIntroGuideModalYCoord(-windowHeigth)
+        setIntroGuideModalYCoord(-windowHeigth);
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-600);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth + (windowHeigth - 400));
         }, 300);
-        setArrowY((2*windowHeigth)+(windowHeigth-250)/6);
+        setArrowY(2 * windowHeigth + (windowHeigth - 250) / 6);
         if (selectedDiveSite.SiteName === "") {
           setSelectedDiveSite({
             ...selectedDiveSite,
@@ -166,13 +172,13 @@ export default function IntroTutorial(props) {
         break;
 
       case "Exit Guide":
-        setIntroGuideModalYCoord(0)
+        setIntroGuideModalYCoord(0);
         handleClearTutorial();
-        setTutorialRunning(false)
-        
+        setTutorialRunning(false);
+
         break;
     }
-    setChapter(null)
+    setChapter(null);
   }, [chapter]);
 
   const handleClearTutorial = async () => {
@@ -233,11 +239,11 @@ export default function IntroTutorial(props) {
 
   const handleSecondTutorialStartup = () => {
     setItterator(null);
-    setItterator2(0)
+    setItterator2(0);
     setSiteModal(false);
     setTutorialRunning(true);
-    animateIntroGuideModal()
-    animateSecondGuideModal()
+    animateIntroGuideModal();
+    animateSecondGuideModal();
   };
 
   const characterRef = useRef(null);
@@ -288,7 +294,7 @@ export default function IntroTutorial(props) {
   const text11 = "";
   const text12 =
     "Oops! Looks like you have chosen a dive site that doesn't have any sightings yet! Remember you want a dive site with a heat point       nearby. Close the form and try to find one with heat points.";
-  const text13 = ""
+  const text13 = "";
   const text14 =
     "Wow, cool! look at all the neat sea creatures divers have already seen at this site!";
   const text15 =
@@ -436,11 +442,11 @@ export default function IntroTutorial(props) {
   useEffect(() => {
     if (itterator === 0) {
       setTimeout(() => {
-        setCharacterX((-600));
+        setCharacterX(-600);
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeigth+(windowHeigth-400));
+        setTextBoxY(-windowHeigth + (windowHeigth - 400));
       }, 1000);
     }
 
@@ -452,102 +458,94 @@ export default function IntroTutorial(props) {
         return;
       }
 
-      setUserBoxY((2*windowHeigth)+(windowHeigth-userBoxHeigth)/3)
+      setUserBoxY(2 * windowHeigth + (windowHeigth - userBoxHeigth) / 3);
     }
 
     if (itterator === 2) {
       getProfile();
-      setUserBoxY(0)
+      setUserBoxY(0);
     }
 
     if (itterator === 3) {
-      setGuideButtonY((2*windowHeigth)+(windowHeigth-55)/3)
+      setGuideButtonY(2 * windowHeigth + (windowHeigth - 55) / 3);
     }
-
 
     if (itterator === 5) {
-      setGuideButtonY(0)
-      setQuestionButtonY((2*windowHeigth)+(windowHeigth-100)/3);
+      setGuideButtonY(0);
+      setQuestionButtonY(2 * windowHeigth + (windowHeigth - 100) / 3);
     }
-
 
     if (itterator === 6) {
       setQuestionButtonY(0);
-      setPixY((3.5*windowHeigth)+(windowHeigth-picBoxHeigth)/2)
-
+      setPixY(3.5 * windowHeigth + (windowHeigth - picBoxHeigth) / 2);
     }
 
     if (itterator === 7) {
-      setPixY(0)
+      setPixY(0);
     }
 
     if (itterator === 8) {
-      setExploreButtonY((2*windowHeigth)+(windowHeigth-100)/3);
+      setExploreButtonY(2 * windowHeigth + (windowHeigth - 100) / 3);
     }
 
     if (itterator === 9) {
       setExploreButtonY(0);
-      setClusterAnchorY((2.5*windowHeigth)+(windowHeigth-500)/2);
+      setClusterAnchorY(2.5 * windowHeigth + (windowHeigth - 500) / 2);
     }
 
     if (itterator === 10) {
-      setHeatPotintY((2*windowHeigth)+(windowHeigth-200)/3);
+      setHeatPotintY(2 * windowHeigth + (windowHeigth - 200) / 3);
     }
 
     if (itterator === 11) {
-
-      if(!movingBack){
-        animateIntroGuideModal()
+      if (!movingBack) {
+        animateIntroGuideModal();
         setHeatPotintY(0);
         setClusterAnchorY(0);
       } else {
-        setMovingBack(false)
+        setMovingBack(false);
       }
-     
     }
 
     if (itterator === 12) {
-      setIntroGuideModalYCoord(-windowHeigth)
+      setIntroGuideModalYCoord(-windowHeigth);
       // animateIntroGuideModal()
       setTextPrinting(true);
       setMovingBack(true);
-      setMapZoom(10)
+      setMapZoom(10);
     }
 
     if (itterator === 13) {
-      setIntroGuideModalYCoord(0)
+      setIntroGuideModalYCoord(0);
       // animateIntroGuideModal()
-      setItterator(11)
+      setItterator(11);
     }
 
     if (itterator === 14) {
-      setIntroGuideModalYCoord(-windowHeigth)
+      setIntroGuideModalYCoord(-windowHeigth);
     }
 
-   
     if (itterator === 16) {
-      setIntroGuideModalYCoord(0)
-      
+      setIntroGuideModalYCoord(0);
     }
 
     if (itterator === 17) {
-      setIntroGuideModalYCoord(-windowHeigth)
-      setArrowY((2*windowHeigth)+(windowHeigth-250)/6);
+      setIntroGuideModalYCoord(-windowHeigth);
+      setArrowY(2 * windowHeigth + (windowHeigth - 250) / 6);
     }
-   
 
     if (itterator === 19) {
-        setArrowY(0);
-        setIntroGuideModalYCoord(0)
+      setArrowY(0);
+      setIntroGuideModalYCoord(0);
     }
 
     if (itterator === 21) {
-      setSiteModal(true)
-      setIntroGuideModalYCoord(-windowHeigth)
+      setSiteModal(true);
+      setIntroGuideModalYCoord(-windowHeigth);
     }
 
     if (itterator === 24) {
-      setNextTutY((2*windowHeigth)+(windowHeigth-250)/2);
+      setNextTutY(2 * windowHeigth + (windowHeigth - 250) / 2);
     }
 
     if (itterator === 25) {
@@ -556,11 +554,10 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === feederArray.length - 1) {
-      setIntroGuideModalYCoord(0)
+      setIntroGuideModalYCoord(0);
       setItterator(null);
-      setMapZoom(10)
+      setMapZoom(10);
       resetTutorial();
-
     }
   }, [itterator]);
 
@@ -620,15 +617,13 @@ export default function IntroTutorial(props) {
   });
 
   useEffect(() => {
-    filterAnchorPhotos()
-  if (itterator === 21){
-    setSiteModal(true)
-  }
-    
+    filterAnchorPhotos();
+    if (itterator === 21) {
+      setSiteModal(true);
+    }
   }, [selectedDiveSite, itterator]);
 
   const filterAnchorPhotos = async () => {
-
     let { minLat, maxLat, minLng, maxLng } = newGPSBoundaries(
       mapZoom,
       selectedDiveSite.Latitude,
@@ -660,53 +655,49 @@ export default function IntroTutorial(props) {
     if (tutorialRunning && guideModal) {
       if (itterator === null) {
         setItterator(0);
-      } else if (itterator == 12 || itterator == 13 || itterator == 17){
-        animateIntroGuideModal()
+      } else if (itterator == 12 || itterator == 13 || itterator == 17) {
+        animateIntroGuideModal();
       }
     }
 
     let today = new Date();
     let formattedDate = getToday(today);
-    let dateFormat = new Date(formattedDate)
+    let dateFormat = new Date(formattedDate);
     getPhotos(formattedDate);
   }, [guideModal]);
 
   const moveMap = async (values) => {
     setMapCoords([values.lat, values.lng]);
-    setJump(!jump)
+    setJump(!jump);
 
     setItterator((prev) => prev + 1);
-
   };
 
   const nudgeMap = async (values) => {
     setMapCoords([values.lat, values.lng]);
-    setJump(!jump)
-
+    setJump(!jump);
   };
 
-  let picBoxHeigth = 0
+  let picBoxHeigth = 0;
   const elem = document.querySelector("#picBox");
-  if(elem) {
+  if (elem) {
     picBoxHeigth = elem.getBoundingClientRect().height;
-    
   }
 
-  let userBoxHeigth = 0
+  let userBoxHeigth = 0;
   const elem2 = document.querySelector("#userBox");
-  if(elem2) {
+  if (elem2) {
     userBoxHeigth = elem2.getBoundingClientRect().height;
-    
   }
 
   return (
     <div className="wrapper" onClick={() => setupText(1)}>
-      <animated.div 
+      <animated.div
         id="picBox"
         className="container3"
         ref={picRef}
         style={picSlide}
-        >
+      >
         {pics &&
           pics.map((pic) => {
             return (
@@ -722,14 +713,15 @@ export default function IntroTutorial(props) {
                 </div>
                 <div className="shadowbox">
                   <img
-                    src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photofile}`}
+                    src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${pic.photofile}`}
+                    // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photofile}`}
                     id={pic.id}
                     style={{
                       height: "100%",
                       width: "100%",
                       borderRadius: 15,
                       borderColor: "grey",
-                      objectFit: 'cover'
+                      objectFit: "cover",
                     }}
                   />
                 </div>
@@ -761,9 +753,10 @@ export default function IntroTutorial(props) {
       >
         <div className="textcontain">
           {textRead}
-         {(textRead2.length > 0) && <img src={heatIconIOS} className="tinyHeat" />}
+          {textRead2.length > 0 && (
+            <img src={heatIconIOS} className="tinyHeat" />
+          )}
           {textRead2}
-  
         </div>
       </animated.div>
 
@@ -797,11 +790,11 @@ export default function IntroTutorial(props) {
         />
       </animated.div>
 
-      <animated.div 
-      id="userBox"
-      className="usernamerwrapper" 
-      ref={userBoxRef}
-      style={userBoxSlide}
+      <animated.div
+        id="userBox"
+        className="usernamerwrapper"
+        ref={userBoxRef}
+        style={userBoxSlide}
       >
         <UserNamer></UserNamer>
       </animated.div>
@@ -903,7 +896,7 @@ export default function IntroTutorial(props) {
             height: "50px",
             width: "50px",
             color: "white",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
           onClick={handleSecondTutorialStartup}
         />
@@ -914,9 +907,7 @@ export default function IntroTutorial(props) {
         ref={guideButtonRef}
         style={guideButtonSlide}
       >
-        <p className="guidetext">
-          Guide Active
-        </p>
+        <p className="guidetext">Guide Active</p>
       </animated.div>
     </div>
   );

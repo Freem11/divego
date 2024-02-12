@@ -2,17 +2,18 @@
   display: flex;
   flex-direction: column;
   width: 99%;
-  margin-bottom: -1%;
+  margin-bottom: -14%;
   overflow: hidden;
 }
 
 .micro{
    display: flex;
+   align-items: center;
    flex-direction: row;
-   height: 35px;
+   height: 5vh;
    width: 100%;
-   margin-top: 20px;
-   margin-bottom: -50px;
+   margin-top: 5vh;
+   margin-bottom: -6vh;
    margin-left: -2.5%;
    margin-right: -30%;
    z-index: 4;
@@ -21,13 +22,13 @@
 }
 
  .animalLabel{
-   height: 30px;
+   height: 4vh;
    width: 100%;
    font-family: 'Itim';
-   font-size: 22px;
+   font-size: 2vw;
    text-align: left;
-   margin-top: 5px;
-   padding-left: 10px;
+   margin-top: 4vh;
+   padding-left: 1vw;
    color: #F0EEEB;
    background-color: black;
    opacity: 0.7;
@@ -35,14 +36,14 @@
 }
 
 .userLabel {
-   height: 25px;
+   height: 4vh;
    align-self: end;
    width: fit-content;
    border-radius: 10px;
    font-family: 'Itim';
-   font-size: 18px;
+   font-size: 1.5vw;
    text-align: left;
-   margin-top: -35px;
+   margin-top: -4.5vh;
    margin-right: 2%;
    padding-bottom: -5px;
    padding-left: 15px;
@@ -54,11 +55,11 @@
 }
 
 .atag{
-   background-color: white;
+   /* background-color: white; */
    margin-left: -9%;
-   margin-right: 10px;
-   margin-top: -15px;
-   height: 0px;
-   width: 30px;
+   margin-right: 1vw;
+   margin-top: -3vh;
+   /* height: 0px; */
+   width: 3vw;
    z-index: 6;
 } 

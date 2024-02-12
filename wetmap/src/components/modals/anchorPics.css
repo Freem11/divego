@@ -1,8 +1,9 @@
 .masterDivA{
     overflow-y: hidden;
-    overflow-x:hidden;
+    overflow-x: hidden;
     max-height: 98%;
     width: 100%;
+    /* background-color: turquoise; */
     /* margin-top: 45px; */
   }
   
@@ -10,20 +11,37 @@
     overflow-y: auto;
   }
 
+  .dsInfo {
+      /* background-color: brown; */
+      margin-left: 2vw;
+      height: 7vh;
+      width: 80%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+  }
+
 .DiveSiteLabel{
     font-family: 'Patrick Hand', cursive;
-    position: absolute;
     /* background-color: khaki; */
-    margin-top: 15px;
-    margin-left: 50px;
+    margin-top: -1vh;
+    height: 3vh;
+    font-size: 1em;
     color: #F0EEEB;
 }
 
 .DiveSiteCredit{
     font-family: 'Itim', cursive;
-    font-size: 16px;
-    margin-top: 50px;
-    margin-left: 50px;
+    margin-top: -2vh;
+    font-size: 0.5em;
+    height: 3vh;
+    /* background-color: blue; */
+
+}
+
+#closeButton2 {
+    background-color: transparent;
+    border: none;
 }
 
 .monthlyLabel{
@@ -34,18 +52,19 @@
 }
 
 .flagContainer{
+    display: flex;
     align-content: center;
     justify-content: center;
-    position: absolute;
-    margin-top: 15px;
+    margin-top: 1vh;
+    height: 7vh;
     /* background-color: mediumblue; */
 }
 
 .atagDS{
+    /* display: flex;
     align-content: center;
-    justify-content: center;
-    padding: 5px;
-    margin-left: -9px;
+    justify-content: center; */
+    /* background-color: burlywood; */
 }
 
 .picScollA{
@@ -67,14 +86,15 @@
 }
 
 .fixDiv {
- height: 50px;
- margin-top: 20px;
- margin-bottom: 5px;
- padding-bottom: 5px;
+ height: 8vh;
+ margin-top: 2vh;
+ margin-bottom: 1vh;
+ padding-bottom: 1vh;
  position: absolute;
- background-color: #538bdb;
+ /* background-color: green; */
+ /* background-color: #538bdb; */
  border-radius: 15px;
- width: 93%;
+ width: 95%;
  margin-left: 2%;
  opacity: 0.8;
  z-index: 12;
@@ -83,22 +103,21 @@
 .topDiv{
     display: flex;
     flex-direction: row;
-    width: 90%;
-    margin-left: 3%;
-    margin-top: -18px;
-    margin-bottom: 40px;
+    width: 100%;
+    height: 7vh;
+    /* background-color: blueviolet; */
     font-family: 'Patrick Hand', cursive;
-    font-size: 26px;
+    font-size: 3vw;
     color: #F0EEEB;
 }
 
-.picHolderX{
+/* .picHolderX{
     width: 110px;
     height: 100px;
     /* margin-left: 17%; */
     border-radius: 10px;
     box-shadow: 3px 6px rgba(0, 0, 0, 0.25)
-}
+} */
 
 .emptySite{
     align-items: center;
