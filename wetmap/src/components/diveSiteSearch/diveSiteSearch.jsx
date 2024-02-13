@@ -113,12 +113,12 @@ export default function DiveSiteAutoComplete(props) {
         "&.Mui-selected:hover": { opacity: "80%" },
         "&:hover": { opacity: "80%" },
         width: "17vw",
-        height: "3.5vh",
+        height: "5vh",
         backgroundColor: "white",
         borderRadius: "10px",
         paddingLeft: "1vw",
         paddingRight: "1vw",
-        paddingTop: "1vh",
+        // paddingTop: "1vh",
         // paddingBottom: "3vh",
         // overflow: "hidden"
       }}
@@ -127,7 +127,6 @@ export default function DiveSiteAutoComplete(props) {
           {...params}
           placeholder="Dive Site"
           variant="standard"
-          sx={{ paddingLeft: "0.25vw" }}
         />
       )}
     ></Autocomplete>

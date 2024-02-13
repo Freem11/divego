@@ -48,7 +48,7 @@ const PlacesAutoComplete = (props) => {
         value={value}
         onChange={(e) => setValue(e.target.value)}
         // disabled={!ready}
-        placeholder="  New Location"
+        placeholder="  Search Places..."
         style={{
           marginTop: "5px",
           marginLeft: "2px",
