@@ -13,7 +13,9 @@ import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { TutorialContext } from "../contexts/tutorialContext";
 
-export default function DiveSiteAutoComplete() {
+export default function DiveSiteAutoComplete(props) {
+  const { setSiteSearchModalYCoord } = props;
+
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext
   );
@@ -24,7 +26,7 @@ export default function DiveSiteAutoComplete() {
 
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-  
+
   let diveSiteNames;
 
   const handleDiveSiteList = async () => {
@@ -97,7 +99,7 @@ export default function DiveSiteAutoComplete() {
                       setItterator2(itterator2 + 1);
                     }
                   }
-                  setShowAnimalSearch(!setShowAnimalSearch)
+                  setSiteSearchModalYCoord(0);
                 }
               });
             })
@@ -110,21 +112,22 @@ export default function DiveSiteAutoComplete() {
         "&.Mui-selected": { opacity: "80%" },
         "&.Mui-selected:hover": { opacity: "80%" },
         "&:hover": { opacity: "80%" },
-        width: 222,
-        height: 40,
+        width: "17vw",
+        height: "3.5vh",
         backgroundColor: "white",
-        opacity: "70%",
         borderRadius: "10px",
-        paddingLeft: "10px",
-        paddingRight: "10px",
-        paddingTop: "5px",
+        paddingLeft: "1vw",
+        paddingRight: "1vw",
+        paddingTop: "1vh",
+        // paddingBottom: "3vh",
+        // overflow: "hidden"
       }}
       renderInput={(params) => (
         <TextField
           {...params}
           placeholder="Dive Site"
           variant="standard"
-          sx={{ paddingLeft: "0px" }}
+          sx={{ paddingLeft: "0.25vw" }}
         />
       )}
     ></Autocomplete>

@@ -24,9 +24,9 @@
 .DiveSiteLabel{
     font-family: 'Patrick Hand', cursive;
     /* background-color: khaki; */
-    margin-top: -1vh;
+    margin-top: 1vh;
     height: 3vh;
-    font-size: 1em;
+    font-size: 0.6em;
     color: #F0EEEB;
 }
 

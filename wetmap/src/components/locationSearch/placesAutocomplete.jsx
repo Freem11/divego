@@ -15,7 +15,8 @@ import { JumpContext } from "../contexts/jumpContext";
 import { GeoCoderContext } from "../contexts/geoCoderContext";
 import { CoordsContext } from "../contexts/mapCoordsContext";
 
-const PlacesAutoComplete = () => {
+const PlacesAutoComplete = (props) => {
+  const { setMapSearchYCoord } = props;
   const { jump, setJump } = useContext(JumpContext);
   const { setShowGeoCoder } = useContext(GeoCoderContext);
   const { setMapCoords } = useContext(CoordsContext);
@@ -38,24 +39,25 @@ const PlacesAutoComplete = () => {
     setMapCoords([lat, lng]);
     setValue("");
     setJump(!jump);
-    setShowGeoCoder(!setShowGeoCoder);
+    setMapSearchYCoord(0);
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
+    <Combobox onSelect={handleSelect} style={{zIndex:210}}>
       <ComboboxInput
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        disabled={!ready}
+        // disabled={!ready}
         placeholder="  New Location"
         style={{
           marginTop: "5px",
           marginLeft: "2px",
-          opacity: 0.7,
-          width: "237px",
-          height: "40px",
+          // opacity: 0.7,
+          width: "18vw",
+          height: "3.5vh",
           borderRadius: "10px",
-          fontSize: "16px",
+          fontSize: "1.5vw",
+          zIndex: 220
         }}
       />
       <ComboboxPopover className="popover">

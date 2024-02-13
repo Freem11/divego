@@ -65,6 +65,18 @@
     border: 1px solid lightgrey;
 }
 
+.searchModalDiv{
+    z-index: 200;
+    position: absolute;
+    top: 100vh;
+    left: 35vw;
+    width: 30vw;
+    height: 20vh;
+    background-color: #538bdb;
+    border-radius: 25px;
+    border: 1px solid lightgrey;
+}
+
 .col2rowT {
 	display: flex;
 	flex-direction: column;
@@ -134,7 +146,7 @@
 
 .fabButtons {
     z-index: 5;
-    background-color: #538dbd;
+    background-color: #538bdb;
     position: relative;
 	display: flex;
     flex-direction: row;

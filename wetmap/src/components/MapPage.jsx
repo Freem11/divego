@@ -10,8 +10,6 @@ import SiteSubmitter from "./modals/siteSubmitter";
 import HowToGuide from "./modals/howToGuide";
 import AnchorPics from "./modals/anchorPics";
 import Settings from "./modals/setting";
-import DiveSiteAutoComplete from "./diveSiteSearch/diveSiteSearch";
-import PlacesAutoComplete from "./locationSearch/placesAutocomplete";
 import PhotoMenu from "./photoMenu/photoMenu2";
 import PhotoFilterer from "./photoMenu/photoFilter";
 import { useState, useContext, useEffect, useRef } from "react";
@@ -57,24 +55,14 @@ import { AreaPicsContext } from "./contexts/areaPicsContext";
 import IntroTutorial from "./guides/introTutorial";
 import SecondTutorial from "./guides/secondTutorial";
 import ThirdTutorial from "./guides/thirdTutorial";
+import SiteSearchModal from "./modals/siteSearchModal";
+import MapSearchModal from "./modals/mapSearchModal";
 import Lightbox from "react-image-lightbox";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
 import Histogram from "./histogram/histogramBody";
 import TutorialBar from "./guideBar/tutorialBarContainer";
 import { getTablePaginationUtilityClass } from "@mui/material";
-
-const diveSiteSearchZone = (
-  <div style={{ marginLeft: "-300px", marginTop: "7px" }}>
-    <DiveSiteAutoComplete></DiveSiteAutoComplete>
-  </div>
-);
-
-const locationSearchZone = (
-  <div style={{ marginLeft: "-305px", marginTop: "0px", width: "220px" }}>
-    <PlacesAutoComplete></PlacesAutoComplete>
-  </div>
-);
 
 const adminPortalZone = (
   <div style={{ marginLeft: "10px", marginBottom: "40px" }}>
@@ -383,8 +371,8 @@ const MapPage = React.memo((props) => {
       return;
     }
 
-    setShowGeoCoder(!showGeoCoder);
-    setShowAnimalSearch(false);
+    animateMapSearchModal();
+    setSiteSearchModalYCoord(0);
     setPicModalYCoord(0);
     setSiteModalYCoord(0);
     setSettingsModalYCoord(0);
@@ -425,8 +413,8 @@ const MapPage = React.memo((props) => {
       return;
     }
 
-    setShowAnimalSearch(!showAnimalSearch);
-    setShowGeoCoder(false);
+    animateSiteSearchModal();
+    setMapSearchYCoord(0);
     setPicModalYCoord(0);
     setSiteModalYCoord(0);
     setSettingsModalYCoord(0);
@@ -554,13 +542,15 @@ const MapPage = React.memo((props) => {
   function trackScreen() {
     setWindowWidth(window.innerWidth);
     setWindowHeight(window.innerHeight);
-    setMenuUp(false)
+    setMenuUp(false);
     setfabsYCoord(0);
     setPicModalYCoord(0);
     setSiteModalYCoord(0);
     setSettingsModalYCoord(0);
     setAnchorModalYCoord(0);
     setLaunchModalYCoord(0);
+    setMapSearchYCoord(0);
+    setSiteSearchModalYCoord(0);
   }
 
   const picModalRef = useRef(null);
@@ -571,6 +561,8 @@ const MapPage = React.memo((props) => {
   const secondGuideModalRef = useRef(null);
   const thirdGuideModalRef = useRef(null);
   const anchorModalRef = useRef(null);
+  const siteSearchModalRef = useRef(null);
+  const mapSearchModalRef = useRef(null);
   const [picModalYCoord, setPicModalYCoord] = useState(0);
   const [siteModalYCoord, setSiteModalYCoord] = useState(0);
   const [launchModalYCoord, setLaunchModalYCoord] = useState(0);
@@ -578,6 +570,8 @@ const MapPage = React.memo((props) => {
   const [introGuideModalYCoord, setIntroGuideModalYCoord] = useState(0);
   const [secondGuideModalYCoord, setSecondGuideModalYCoord] = useState(0);
   const [thirdGuideModalYCoord, setThirdGuideModalYCoord] = useState(0);
+  const [siteSearchModalYCoord, setSiteSearchModalYCoord] = useState(0);
+  const [mapSearchYCoord, setMapSearchYCoord] = useState(0);
   const [anchorModalYCoord, setAnchorModalYCoord] = useState(0);
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
@@ -627,6 +621,16 @@ const MapPage = React.memo((props) => {
     to: { transform: `translate3d(0,${anchorModalYCoord}px,0)` },
   });
 
+  const moveSiteSearchModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${siteSearchModalYCoord}px,0)` },
+  });
+
+  const moveMapSearchModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${mapSearchYCoord}px,0)` },
+  });
+
   // let modalHeigth = 700;
 
   const animateFabs = () => {
@@ -657,8 +661,8 @@ const MapPage = React.memo((props) => {
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
       setAnchorModalYCoord(0);
-      setShowAnimalSearch(false);
-      setShowGeoCoder(false);
+      setSiteSearchModalYCoord(0);
+      setMapSearchYCoord(0);
       setSiteModal(false);
     } else {
       setPicModalYCoord(0);
@@ -694,8 +698,8 @@ const MapPage = React.memo((props) => {
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
       setAnchorModalYCoord(0);
-      setShowAnimalSearch(false);
-      setShowGeoCoder(false);
+      setSiteSearchModalYCoord(0);
+      setMapSearchYCoord(0);
       setSiteModal(false);
       if (pin.PicFile !== null) {
         removePhoto({
@@ -728,8 +732,8 @@ const MapPage = React.memo((props) => {
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setAnchorModalYCoord(0);
-      setShowAnimalSearch(false);
-      setShowGeoCoder(false);
+      setSiteSearchModalYCoord(0);
+      setMapSearchYCoord(0);
       setSiteModal(false);
       if (pin.PicFile !== null) {
         removePhoto({
@@ -752,8 +756,8 @@ const MapPage = React.memo((props) => {
       setSiteModalYCoord(0);
       setLaunchModalYCoord(0);
       setAnchorModalYCoord(0);
-      setShowAnimalSearch(false);
-      setShowGeoCoder(false);
+      setMapSearchYCoord(0);
+      setSiteSearchModalYCoord(0);
       setSiteModal(false);
       if (pin.PicFile !== null) {
         removePhoto({
@@ -800,8 +804,9 @@ const MapPage = React.memo((props) => {
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
-      setShowAnimalSearch(false);
-      setShowGeoCoder(false);
+      setMapSearchYCoord(0);
+      setSiteSearchModalYCoord(0);
+      setSiteModal(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -810,6 +815,46 @@ const MapPage = React.memo((props) => {
       }
     } else {
       setAnchorModalYCoord(0);
+      setSiteModal(false);
+    }
+  };
+
+  const animateSiteSearchModal = () => {
+    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+      .clientHeight;
+
+    if (siteSearchModalYCoord === 0) {
+      setSiteSearchModalYCoord(
+        -windowHeight + (windowHeight - modalHeigth) / 3
+      );
+      setPicModalYCoord(0);
+      setSiteModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setLaunchModalYCoord(0);
+      setAnchorModalYCoord(0);
+      setMapSearchYCoord(0);
+      setSiteModal(false);
+    } else {
+      setSiteSearchModalYCoord(0);
+      setSiteModal(false);
+    }
+  };
+
+  const animateMapSearchModal = () => {
+    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+      .clientHeight;
+
+    if (mapSearchYCoord === 0) {
+      setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 3);
+      setPicModalYCoord(0);
+      setSiteModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setLaunchModalYCoord(0);
+      setAnchorModalYCoord(0);
+      setSiteSearchModalYCoord(0);
+      setSiteModal(false);
+    } else {
+      setMapSearchYCoord(0);
       setSiteModal(false);
     }
   };
@@ -836,8 +881,8 @@ const MapPage = React.memo((props) => {
       setSiteModalYCoord(0);
       setSettingsModalYCoord(0);
       setLaunchModalYCoord(0);
-      setShowAnimalSearch(false);
-      setShowGeoCoder(false);
+      setMapSearchYCoord(0);
+      setSiteSearchModalYCoord(0);
     }
 
     if (!siteModal) {
@@ -1264,11 +1309,33 @@ const MapPage = React.memo((props) => {
       <animated.div
         className="anchorModalDiv"
         style={moveAnchorModal}
-        ref={moveAnchorModal}
+        ref={anchorModalRef}
       >
         <AnchorPics
           animateAnchorModal={animateAnchorModal}
           setAnchorModalYCoord={setAnchorModalYCoord}
+        />
+      </animated.div>
+
+      <animated.div
+        className="searchModalDiv"
+        style={moveMapSearchModal}
+        ref={mapSearchModalRef}
+      >
+        <MapSearchModal
+          animateMapSearchModal={animateMapSearchModal}
+          setMapSearchYCoord={setMapSearchYCoord}
+        />
+      </animated.div>
+
+      <animated.div
+        className="searchModalDiv"
+        style={moveSiteSearchModal}
+        ref={siteSearchModalRef}
+      >
+        <SiteSearchModal
+          animateSiteSearchModal={animateSiteSearchModal}
+          setSiteSearchModalYCoord={setSiteSearchModalYCoord}
         />
       </animated.div>
 
