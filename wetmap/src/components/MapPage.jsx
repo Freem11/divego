@@ -554,6 +554,7 @@ const MapPage = React.memo((props) => {
   function trackScreen() {
     setWindowWidth(window.innerWidth);
     setWindowHeight(window.innerHeight);
+    setMenuUp(false)
     setfabsYCoord(0);
     setPicModalYCoord(0);
     setSiteModalYCoord(0);

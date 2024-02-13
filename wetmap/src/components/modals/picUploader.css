@@ -149,14 +149,14 @@
   font-family: "Itim", cursive;
 }
 
-#modalButton {
+#modalButtonDivP {
   width: 30vw;
   height: 8vh;
   /* background-color: lightcoral; */
   margin-top: 5vh;
   padding-top: 4px;
   font-family: "Patrick Hand", cursive;
-  font-size: 1em;
+  font-size: 2vw;
   font-weight: bolder;
   color: gold;
   border-radius: 0;

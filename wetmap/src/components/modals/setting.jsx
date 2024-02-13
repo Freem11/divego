@@ -53,7 +53,7 @@ const Settings = (props) => {
             marginLeft: "1vw",
             textAlign: "left",
             fontFamily: "Patrick Hand",
-            fontSize: "2em",
+            fontSize: "2vw",
             // backgroundColor: "pink",
           }}
         >

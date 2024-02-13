@@ -386,8 +386,8 @@ const PicUploader = React.memo((props) => {
 
   const labelStyle = {
     display: "flex",
-    fontfamily: "Patrick Hand",
-    fontSize: "1vw",
+    fontFamily: "Patrick Hand",
+    fontSize: "1.3vw",
     textTransform: "none",
     color: "gold",
     cursor: "pointer",
@@ -396,8 +396,8 @@ const PicUploader = React.memo((props) => {
   };
 
   const labelStyleAlt = {
-    fontfamily: "Patrick Hand",
-    fontSize: "1em",
+    fontFamily: "Patrick Hand",
+    fontSize: "1.3vw",
     textTransform: "none",
     color: "#538dbd",
     cursor: "pointer",
@@ -693,7 +693,7 @@ const PicUploader = React.memo((props) => {
       <FormGroup>
         <Button
           variant="text"
-          id="modalButton"
+          id="modalButtonDivP"
           style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
           onClick={handleSubmit}
         >

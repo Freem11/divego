@@ -71,7 +71,7 @@ const HowToGuide = (props) => {
             width: "100vw",
             textAlign: "left",
             fontFamily: "Patrick Hand",
-            fontSize: "2em",
+            fontSize: "2vw",
             // backgroundColor: "pink"
           }}
         >

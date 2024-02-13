@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 99%;
-  margin-bottom: -14%;
+  margin-bottom: -10%;
   overflow: hidden;
 }
 
@@ -22,12 +22,12 @@
 }
 
  .animalLabel{
-   height: 4vh;
+   height: 6vh;
    width: 100%;
    font-family: 'Itim';
    font-size: 2vw;
    text-align: left;
-   margin-top: 4vh;
+   margin-top: 7vh;
    padding-left: 1vw;
    color: #F0EEEB;
    background-color: black;
@@ -43,7 +43,7 @@
    font-family: 'Itim';
    font-size: 1.5vw;
    text-align: left;
-   margin-top: -4.5vh;
+   margin-top: -5vh;
    margin-right: 2%;
    padding-bottom: -5px;
    padding-left: 15px;
