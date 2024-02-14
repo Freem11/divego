@@ -116,7 +116,7 @@ function Map() {
   let mapBoundariesTimoutHandler;
 
   const options = useMemo(() => ({
-    mapTypeId: "satellite",
+    mapTypeId: "hybrid",
     clickableIcons: false,
     maxZoom: 16,
     minZoom: 3,

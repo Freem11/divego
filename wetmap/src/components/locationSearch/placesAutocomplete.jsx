@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
@@ -16,18 +16,25 @@ import { GeoCoderContext } from "../contexts/geoCoderContext";
 import { CoordsContext } from "../contexts/mapCoordsContext";
 
 const PlacesAutoComplete = (props) => {
-  const { setMapSearchYCoord } = props;
+  const { setMapSearchYCoord, mapSearchYCoord } = props;
   const { jump, setJump } = useContext(JumpContext);
   const { setShowGeoCoder } = useContext(GeoCoderContext);
   const { setMapCoords } = useContext(CoordsContext);
 
   const {
     ready,
+    init,
     value,
     setValue,
     suggestions: { status, data },
     clearSuggestions,
-  } = usePlacesAutocomplete();
+  } = usePlacesAutocomplete({inOnMount : false});
+
+  useEffect(() => {
+    if(mapSearchYCoord !== 0){
+      init()
+    }
+  }, [mapSearchYCoord])
 
   const handleSelect = async (address) => {
     setValue(address, false);
