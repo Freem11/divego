@@ -131,19 +131,105 @@ function Map() {
   }));
 
   const handleMapUpdates = async () => {
-    let GPSBubble = newGPSBoundaries(mapZoom, mapCoords[0], mapCoords[1]);
+    let boundaries = mapRef.getBounds();
+    let lats = boundaries[Object.keys(boundaries)[0]];
+    let lngs = boundaries[Object.keys(boundaries)[1]];
 
-    let filteredDiveSites = await diveSites(GPSBubble);
-    !divesTog ? setnewSites([]) : setnewSites(filteredDiveSites);
+    if (boundaries) {
+      if (lngs.lo > lngs.hi) {
+        try {
+          const AmericanDiveSites = await diveSites({
+            minLat: lats.lo,
+            maxLat: lats.hi,
+            minLng: -180,
+            maxLng: lngs.hi,
+          });
+          const AsianDiveSites = await diveSites({
+            minLat: lats.lo,
+            maxLat: lats.hi,
+            minLng: lngs.lo,
+            maxLng: 180,
+          });
 
-    let filteredHeatPoints = await multiHeatPoints(GPSBubble, animalVal);
+          let diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
 
-    // let filteredHeatPoints = await multiHeatPoints(
-    //   GPSBubble,
-    //   sliderVal,
-    //   animalMultiSelection
-    // );
-    setHeatPts(formatHeatVals(filteredHeatPoints));
+          if (diveSiteList) {
+            const diveSitesArray = Array.from(
+              new Set(diveSiteList.map((a) => a.name))
+            ).map((name) => {
+              return diveSiteList.find((a) => a.name === name);
+            });
+
+            !divesTog ? setnewSites([]) : setnewSites(diveSitesArray);
+          }
+        } catch (e) {
+          console.log({ title: "Error", message: e.message });
+        }
+
+        try {
+          const AmericanHeatPoints = await multiHeatPoints(
+            {
+              minLat: lats.lo,
+              maxLat: lats.hi,
+              minLng: -180,
+              maxLng: lngs.hi,
+            },
+            animalVal
+          );
+          const AsianHeatPoints = await multiHeatPoints(
+            {
+              minLat: lats.lo,
+              maxLat: lats.hi,
+              minLng: lngs.lo,
+              maxLng: 180,
+            },
+            animalVal
+          );
+
+          let heatPointList = [...AsianHeatPoints, ...AmericanHeatPoints];
+          setHeatPts(formatHeatVals(heatPointList));
+        } catch (e) {
+          console.log({ title: "Error", message: e.message });
+        }
+      } else {
+        try {
+          const diveSiteList = await diveSites({
+            minLat: lats.lo,
+            maxLat: lats.hi,
+            minLng: lngs.lo,
+            maxLng: lngs.hi,
+          });
+          if (diveSiteList) {
+            const diveSitesArray = Array.from(
+              new Set(diveSiteList.map((a) => a.name))
+            ).map((name) => {
+              return diveSiteList.find((a) => a.name === name);
+            });
+
+            !divesTog ? setnewSites([]) : setnewSites(diveSitesArray);
+          }
+        } catch (e) {
+          console.log({ title: "Error", message: e.message });
+        }
+
+        try {
+          const heatPointList = await multiHeatPoints(
+            {
+              minLat: lats.lo,
+              maxLat: lats.hi,
+              minLng: lngs.lo,
+              maxLng: lngs.hi,
+            },
+            animalVal
+          );
+
+          setHeatPts(formatHeatVals(heatPointList));
+        } catch (e) {
+          console.log({ title: "Error", message: e.message });
+        }
+      }
+    }
+
   };
 
   useLayoutEffect(() => {
@@ -207,12 +293,12 @@ function Map() {
   useEffect(() => {
     if (mapRef) {
       if (selectedDiveSite.SiteName !== "") {
-      mapRef.panTo({
-        lat: selectedDiveSite.Latitude,
-        lng: selectedDiveSite.Longitude,
-      });
-      setMapZoom(16);
-    }
+        mapRef.panTo({
+          lat: selectedDiveSite.Latitude,
+          lng: selectedDiveSite.Longitude,
+        });
+        setMapZoom(16);
+      }
     }
     if (selectedDiveSite.Latitude !== "") {
       setTempMarker({
@@ -227,11 +313,11 @@ function Map() {
   }, [selectedDiveSite]);
 
   useEffect(async () => {
-    if (tutorialRunning && itterator === 7){
-      setMapZoom(8)
+    if (tutorialRunning && itterator === 7) {
+      setMapZoom(8);
     }
-    if (tutorialRunning && (itterator2 === 2 || itterator2 === 16)){
-      setMapZoom(8)
+    if (tutorialRunning && (itterator2 === 2 || itterator2 === 16)) {
+      setMapZoom(8);
     }
     handleMapUpdates();
   }, [mapCoords, divesTog, sliderVal, animalVal]);
@@ -306,8 +392,10 @@ function Map() {
       {clusters &&
         clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates;
-          const { cluster: isCluster, point_count: pointCount } =
-            cluster.properties;
+          const {
+            cluster: isCluster,
+            point_count: pointCount,
+          } = cluster.properties;
 
           if (isCluster) {
             return (
@@ -376,7 +464,6 @@ function Map() {
         ></Marker>
       )}
 
-    
       {/* 
       {lightbox && (
         <div className="boxLight">
