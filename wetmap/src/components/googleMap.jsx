@@ -131,6 +131,7 @@ function Map() {
   }));
 
   const handleMapUpdates = async () => {
+    if(mapRef){
     let boundaries = mapRef.getBounds();
     let lats = boundaries[Object.keys(boundaries)[0]];
     let lngs = boundaries[Object.keys(boundaries)[1]];
@@ -152,16 +153,7 @@ function Map() {
           });
 
           let diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
-
-          if (diveSiteList) {
-            const diveSitesArray = Array.from(
-              new Set(diveSiteList.map((a) => a.name))
-            ).map((name) => {
-              return diveSiteList.find((a) => a.name === name);
-            });
-
-            !divesTog ? setnewSites([]) : setnewSites(diveSitesArray);
-          }
+          !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
         } catch (e) {
           console.log({ title: "Error", message: e.message });
         }
@@ -199,15 +191,8 @@ function Map() {
             minLng: lngs.lo,
             maxLng: lngs.hi,
           });
-          if (diveSiteList) {
-            const diveSitesArray = Array.from(
-              new Set(diveSiteList.map((a) => a.name))
-            ).map((name) => {
-              return diveSiteList.find((a) => a.name === name);
-            });
 
-            !divesTog ? setnewSites([]) : setnewSites(diveSitesArray);
-          }
+          !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
         } catch (e) {
           console.log({ title: "Error", message: e.message });
         }
@@ -229,7 +214,7 @@ function Map() {
         }
       }
     }
-
+  }
   };
 
   useLayoutEffect(() => {

@@ -14,6 +14,7 @@ let emailVar = false;
 let passwordVar = false;
 let firstVar = false;
 let lastVar = false;
+import manta from "../images/Matt_Manta_White.png"
 import headliner from "../images/Headliner.png";
 
 export default function SignUpRoute() {
@@ -102,14 +103,15 @@ export default function SignUpRoute() {
           <img
             style={{
               maxHeight: "35vh",
-              maxWidth: "80%",
+              // maxWidth: "80%",
               // height: "0%",
-              marginTop: "0%",
+              marginTop: "8vh",
               marginBottom: "0%",
               backgroundColor: "#538dbd",
             }}
-            src={headliner}
+            src={manta}
           />
+          <h1 className="logoTag">Scuba SEAsons</h1>
         </div>
         <div className="inptBx">
           <InputBase

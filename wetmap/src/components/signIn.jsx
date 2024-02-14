@@ -24,6 +24,7 @@ import {
   GoogleLoginButton,
   AppleLoginButton,
 } from "react-social-login-buttons";
+import manta from "../images/Matt_Manta_White.png"
 import headliner from "../images/Headliner.png";
 
 let emailVar = false;
@@ -258,15 +259,16 @@ export default function SignInRoute() {
         <div className="headlinerdiv">
           <img
             style={{
-              maxHeight: "35vh",
-              maxWidth: "80%",
+              maxHeight: "25vh",
+              // maxWidth: "80%",
               // height: "0%",
-              marginTop: "0%",
+              marginTop: "10vh",
               marginBottom: "0%",
               backgroundColor: "#538dbd",
             }}
-            src={headliner}
+            src={manta}
           />
+          <h1 className="logoTag">Scuba SEAsons</h1>
         </div>
 
         <div className="Oaths">
