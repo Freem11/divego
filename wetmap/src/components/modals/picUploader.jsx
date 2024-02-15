@@ -4,7 +4,7 @@ import "./picUploader.css";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import exifr from "exifr";
-import AnimalAutoSuggest from "../autoSuggest/autoSuggest";
+import AutoSuggest from "../autoSuggest/autoSuggest";
 import { useNavigate } from "react-router-dom";
 import { MasterContext } from "../contexts/masterContext";
 import { PinContext } from "../contexts/staticPinContext";
@@ -30,7 +30,7 @@ import {
   removePhoto,
 } from "../../cloudflareBucketCalls/cloudflareAWSCalls";
 // import { removePhoto } from "../../axiosCalls/uploadAxiosCalls";
-import { getAnimalNamesThatFit } from "../../axiosCalls/photoAxiosCalls";
+import { getAnimalNamesThatFit } from "../../supabaseCalls/photoSupabaseCalls";
 import { userCheck } from "../../supabaseCalls/authenticateSupabaseCalls";
 
 let filePath1 = "./wetmap/src/components/uploads/";
@@ -465,6 +465,42 @@ const PicUploader = React.memo((props) => {
     height: "4.5vh"
   };
 
+  // AutoSuggest props
+  const handleChangeAutoSuggest = async (e) => {
+    setPin({ ...pin, Animal: e.target.value });
+
+    if (e.target.value.length > 0) {
+      let fitleredListOfAnimals = await getAnimalNamesThatFit(e.target.value);
+      let animalArray = [];
+      fitleredListOfAnimals.forEach((animal) => {
+        if (!animalArray.includes(animal.label)) {
+          animalArray.push(animal.label);
+        }
+      });
+      setList(animalArray);
+    } else {
+      setList([]);
+    }
+  };
+
+  const handleSelectAutoSuggest = (name) => {
+    setPin({ ...pin, Animal: name });
+    setList([]);
+  };
+
+  let waiter;
+  useEffect(() => {
+    clearTimeout(waiter);
+
+    if (tutorialRunning) {
+      if (itterator3 === 14) {
+        waiter = setTimeout(() => {
+          setItterator3(itterator3 + 1);
+        }, 2000);
+      }
+    }
+  }, [pin.Animal]);
+
   return (
     <div
       style={{
@@ -595,13 +631,13 @@ const PicUploader = React.memo((props) => {
           className={autoButState ? "autosuggestboxAlt" : "autosuggestbox"}
           onClick={handleSelect}
         >
-          <AnimalAutoSuggest
-            setPin={setPin}
-            pin={pin}
-            setList={setList}
+          <AutoSuggest
+            placeholder="Animal"
+            value={pin.Animal}
             list={list}
-            onClick={handleSelect}
-            clearAnimal={clearAnimal}
+            clear={clearAnimal}
+            handleChange={handleChangeAutoSuggest}
+            handleSelect={handleSelectAutoSuggest}
           />
         </div>
             <div className="inputboxType2">

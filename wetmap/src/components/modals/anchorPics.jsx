@@ -196,7 +196,7 @@ const AnchorPics = (props) => {
             return <Picture key={pic.id} pic={pic}></Picture>;
           })}
         {anchorPics.length === 0 && (
-          <div className="emptySite">No Sightings At This Site Yet!</div>
+          <div className="emptysite">No Sightings At This Site Yet!</div>
         )}
       </div>
     </div>

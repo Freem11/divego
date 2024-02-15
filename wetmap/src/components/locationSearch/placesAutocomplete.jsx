@@ -50,21 +50,19 @@ const PlacesAutoComplete = (props) => {
   };
 
   return (
-    <Combobox onSelect={handleSelect} style={{zIndex:210}}>
+    <Combobox onSelect={handleSelect}>
       <ComboboxInput
         value={value}
         onChange={(e) => setValue(e.target.value)}
-        // disabled={!ready}
         placeholder="  Search Places..."
         style={{
           marginTop: "5px",
           marginLeft: "2px",
-          // opacity: 0.7,
           width: "18vw",
           height: "3.5vh",
           borderRadius: "10px",
           fontSize: "1.5vw",
-          zIndex: 220
+          zIndex: 209
         }}
       />
       <ComboboxPopover className="popover">

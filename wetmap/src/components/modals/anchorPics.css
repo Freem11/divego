@@ -109,24 +109,24 @@
     color: #F0EEEB;
 }
 
-/* .picHolderX{
-    width: 110px;
-    height: 100px;
-    /* margin-left: 17%; */
-    border-radius: 10px;
-    box-shadow: 3px 6px rgba(0, 0, 0, 0.25)
-} */
-
-.emptySite{
+.emptysite{
     align-items: center;
-    margin-top: 30px;
+    margin-top: 25vh;
     margin-left: 13%;
     text-align: center;
-    font-family: 'Indie Flower';
-    font-size: 30;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 2vw;
     font-weight: bolder;
     height: 40px;
     width: 80%;
     color: #F0EEEB;
 }
 
+
+/* .picHolderX{
+    width: 110px;
+    height: 100px;
+    /* margin-left: 17%; */
+    /* border-radius: 10px;
+    box-shadow: 3px 6px rgba(0, 0, 0, 0.25) */
+/* }  */ 
