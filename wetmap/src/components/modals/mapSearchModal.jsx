@@ -6,7 +6,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import PlacesAutoComplete from "../locationSearch/placesAutocomplete";
 
 const MapSearchModal = (props) => {
-  const { animateMapSearchModal, setMapSearchYCoord } = props;
+  const { animateMapSearchModal, setMapSearchYCoord, mapSearchYCoord} = props;
  
   return (
     <div className="masterDiv">
@@ -46,7 +46,7 @@ const MapSearchModal = (props) => {
       </div>
 
       <div className="mainBlurbDiv">
-        <PlacesAutoComplete setMapSearchYCoord={setMapSearchYCoord}/>
+        <PlacesAutoComplete setMapSearchYCoord={setMapSearchYCoord} mapSearchYCoord={mapSearchYCoord}/>
       </div>
     </div>
   );

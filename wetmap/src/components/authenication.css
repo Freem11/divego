@@ -19,6 +19,13 @@
   margin-top: 2vh;
 }
 
+.logoTag {
+  margin-top: 1vh;
+  font-family: "Caveat", cursive;
+  font-size: 3vw;
+  color: white;
+}
+
 .inpts {
   text-align: center;
   align-self: center;

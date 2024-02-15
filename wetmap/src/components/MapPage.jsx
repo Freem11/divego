@@ -1325,6 +1325,7 @@ const MapPage = React.memo((props) => {
         <MapSearchModal
           animateMapSearchModal={animateMapSearchModal}
           setMapSearchYCoord={setMapSearchYCoord}
+          mapSearchYCoord={mapSearchYCoord}
         />
       </animated.div>
 
