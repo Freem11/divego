@@ -5,7 +5,7 @@ import { photos } from "../data/testdata";
 import Autocomplete from "@mui/material/Autocomplete";
 import AutoSuggest from "../autoSuggest/autoSuggest";
 import TextField from "@mui/material/TextField";
-import { diveSites } from "../../supabaseCalls/diveSiteSupabaseCalls";
+import { diveSites, getSiteNamesThatFit } from "../../supabaseCalls/diveSiteSupabaseCalls";
 // import { getAnimalNames } from "../supabaseCalls/photoSupabaseCalls";
 // import { getAnimalNames } from "../axiosCalls/photoAxiosCalls";
 import { AnimalRevealContext } from "../contexts/animalRevealContext";
@@ -44,7 +44,7 @@ export default function DiveSiteAutoComplete(props) {
       diveSiteNames = null;
       diveSiteArray = [];
 
-      diveSiteNames = await diveSites({ minLat, maxLat, minLng, maxLng });
+      diveSiteNames = await getSiteNamesThatFit({ minLat, maxLat, minLng, maxLng },searchText);
     }
 
     if (diveSiteNames) {
@@ -64,7 +64,7 @@ export default function DiveSiteAutoComplete(props) {
 
   useEffect(async () => {
     handleDiveSiteList();
-  }, [boundaries]);
+  }, [boundaries, searchText]);
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
@@ -79,12 +79,14 @@ export default function DiveSiteAutoComplete(props) {
       let minLng2 = boundaries[0];
       let maxLng2 = boundaries[2];
 
-      let diveSiteSet = diveSites({
+      let diveSiteSet = getSiteNamesThatFit({
         minLat: minLat2,
         maxLat: maxLat2,
         minLng: minLng2,
         maxLng: maxLng2,
-      });
+      },
+      searchText
+      );
 
       Promise.all([diveSiteSet])
         .then((response) => {
@@ -102,6 +104,7 @@ export default function DiveSiteAutoComplete(props) {
                 }
               }
               setSiteSearchModalYCoord(0);
+              setSearchText("")
             }
           });
         })
@@ -114,7 +117,7 @@ export default function DiveSiteAutoComplete(props) {
   return (
     <div className={"autosuggestbox"}>
       <AutoSuggest
-        placeholder={"Dive Site"}
+        placeholder={"Search Dive Sites..."}
         value={searchText}
         list={list}
         clear={() => setSearchText("")}

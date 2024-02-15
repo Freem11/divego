@@ -37,6 +37,11 @@ export const insertphoto = async (values, monthID) => {
 };
 
 export const getAnimalNamesThatFit = async (value) => {
+
+  if(value === "") {
+    return [];
+  }
+
   const { data, error } = await supabase
     .from("photos")
     .select("label")

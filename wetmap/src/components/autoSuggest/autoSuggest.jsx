@@ -47,7 +47,7 @@ export default function AutoSuggest(props) {
           height: "auto",
           zIndex: "100",
           position: "absolute",
-          marginTop: "4vh",
+          marginTop: "0vh",
           marginLeft: "4vw",
         }}
       >
