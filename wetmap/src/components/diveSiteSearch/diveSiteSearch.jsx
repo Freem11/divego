@@ -3,6 +3,7 @@ import { AnimalContext } from "../contexts/animalContext";
 import { useEffect } from "react";
 import { photos } from "../data/testdata";
 import Autocomplete from "@mui/material/Autocomplete";
+import AutoSuggest from "../autoSuggest/autoSuggest";
 import TextField from "@mui/material/TextField";
 import { diveSites } from "../../supabaseCalls/diveSiteSupabaseCalls";
 // import { getAnimalNames } from "../supabaseCalls/photoSupabaseCalls";
@@ -23,6 +24,7 @@ export default function DiveSiteAutoComplete(props) {
   const { setShowAnimalSearch } = useContext(AnimalRevealContext);
   const { setAnimalVal } = useContext(AnimalContext);
   const [list, setList] = useState([]);
+  const [searchText, setSearchText] = useState("");
 
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
@@ -64,71 +66,61 @@ export default function DiveSiteAutoComplete(props) {
     handleDiveSiteList();
   }, [boundaries]);
 
-  return (
-    <Autocomplete
-      disablePortal
-      id="combo-box-demo"
-      options={list}
-      onChange={(event, value) => {
-        if (value !== null) {
-          let minLat2 = boundaries[1];
-          let maxLat2 = boundaries[3];
+  const handleChange = (e) => {
+    setSearchText(e.target.value);
+  }
 
-          let minLng2 = boundaries[0];
-          let maxLng2 = boundaries[2];
+  const handleSelect = (value) => {
+    setSearchText(value);
+    if (value !== null) {
+      let minLat2 = boundaries[1];
+      let maxLat2 = boundaries[3];
 
-          let diveSiteSet = diveSites({
-            minLat: minLat2,
-            maxLat: maxLat2,
-            minLng: minLng2,
-            maxLng: maxLng2,
-          });
+      let minLng2 = boundaries[0];
+      let maxLng2 = boundaries[2];
 
-          Promise.all([diveSiteSet])
-            .then((response) => {
-              response[0].forEach((site) => {
-                if (site.name === value) {
-                  setSelectedDiveSite({
-                    ...selectedDiveSite,
-                    SiteName: site.name,
-                    Latitude: site.lat,
-                    Longitude: site.lng,
-                  });
-                  if (tutorialRunning) {
-                    if (itterator2 === 5) {
-                      setItterator2(itterator2 + 1);
-                    }
-                  }
-                  setSiteSearchModalYCoord(0);
-                }
+      let diveSiteSet = diveSites({
+        minLat: minLat2,
+        maxLat: maxLat2,
+        minLng: minLng2,
+        maxLng: maxLng2,
+      });
+
+      Promise.all([diveSiteSet])
+        .then((response) => {
+          response[0].forEach((site) => {
+            if (site.name === value) {
+              setSelectedDiveSite({
+                ...selectedDiveSite,
+                SiteName: site.name,
+                Latitude: site.lat,
+                Longitude: site.lng,
               });
-            })
-            .catch((error) => {
-              console.log(error);
-            });
-        }
-      }}
-      sx={{
-        "&.Mui-selected": { opacity: "80%" },
-        "&.Mui-selected:hover": { opacity: "80%" },
-        "&:hover": { opacity: "80%" },
-        width: "17vw",
-        height: "5vh",
-        backgroundColor: "white",
-        borderRadius: "10px",
-        paddingLeft: "1vw",
-        paddingRight: "1vw",
-        // paddingTop: "1vh",
-        // paddingBottom: "3vh",
-        // overflow: "hidden"
-      }}
-      renderInput={(params) => (
-        <TextField
-          {...params}
-          placeholder="Dive Site"
-          variant="standard"
-        />
-      )}
-    ></Autocomplete>
+              if (tutorialRunning) {
+                if (itterator2 === 5) {
+                  setItterator2(itterator2 + 1);
+                }
+              }
+              setSiteSearchModalYCoord(0);
+            }
+          });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }
+
+  return (
+    <div className={"autosuggestbox"}>
+      <AutoSuggest
+        placeholder={"Dive Site"}
+        value={searchText}
+        list={list}
+        clear={() => setSearchText("")}
+        handleChange={handleChange}
+        handleSelect={handleSelect}
+      />
+    </div>
   );
 }
