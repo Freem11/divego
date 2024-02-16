@@ -1116,7 +1116,7 @@ const MapPage = React.memo((props) => {
         </div>
       )}
 
-{masterSwitch && (
+      {masterSwitch && (
         <div className="histoBox" style={{ pointerEvents: "none" }}>
           <Histogram pointerEvents={"none"} />
         </div>
@@ -1135,8 +1135,6 @@ const MapPage = React.memo((props) => {
           showAdminPortal={showAdminPortal}
         />
       </div>
-
-      
 
       <div>
         <Home

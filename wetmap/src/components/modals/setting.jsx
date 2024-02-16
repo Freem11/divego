@@ -29,7 +29,7 @@ const Settings = (props) => {
             fontFamily: "Itim",
             color: "maroon",
             cursor: "pointer",
-            marginTop: "5px",
+            fontSize: "1vw",
           }}
         >
           Delete Account
@@ -89,7 +89,7 @@ const Settings = (props) => {
               fontWeight: "bold",
               color: "gold",
               cursor: "pointer",
-              marginTop: "5px",
+              fontSize: "1.5vw"
             }}
           >
             Sign Out
@@ -103,8 +103,7 @@ const Settings = (props) => {
           <ErrorOutlineIcon
             sx={{
               color: "maroon",
-              height: "28px",
-              width: "28px",
+              height: "2vw",
               marginRight: "10%",
             }}
           ></ErrorOutlineIcon>
@@ -112,8 +111,7 @@ const Settings = (props) => {
           <ErrorOutlineIcon
             sx={{
               color: "maroon",
-              height: "28px",
-              width: "28px",
+              height: "2vw",
               marginLeft: "10%",
             }}
           ></ErrorOutlineIcon>

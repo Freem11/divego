@@ -344,30 +344,20 @@ const SiteSubmitter = (props) => {
           >
             <strong>Submit Your Dive Site</strong>
           </Label>
-          <FormGroup>
-            <Button
-              variant="text"
-              id="questionButton"
-              onClick={() => activateGuide()}
-            >
+      
               <QuestionMarkIcon
+
                 sx={{
                   color: "lightgrey",
                   width: "2vw",
-                  height: "5vh",
+                  height: "4vh",
+                  marginRight: "1vw",
                   // backgroundColor: 'gray',
                 }}
               ></QuestionMarkIcon>
-            </Button>
-          </FormGroup>
-
-          <FormGroup>
-            <Button
-              variant="text"
-              id="closeButton"
-              onClick={() => handleModalClose()}
-            >
+      
               <CloseIcon
+              onClick={() => handleModalClose()}
                 sx={{
                   color: "lightgrey",
                   width: "2vw",
@@ -375,8 +365,7 @@ const SiteSubmitter = (props) => {
                   // backgroundColor: "pink"
                 }}
               ></CloseIcon>
-            </Button>
-          </FormGroup>
+       
         </div>
 
         <div className="lowerBoxSite">

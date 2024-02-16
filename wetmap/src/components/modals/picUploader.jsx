@@ -387,30 +387,32 @@ const PicUploader = React.memo((props) => {
   const labelStyle = {
     display: "flex",
     fontFamily: "Patrick Hand",
-    fontSize: "1.3vw",
+    fontSize: "1.2vw",
     textTransform: "none",
     color: "gold",
     cursor: "pointer",
-    marginLeft: "-1vw",
+    // backgroundColor: "pink",
     // marginTop: "9px",
   };
 
   const labelStyleAlt = {
+    display: "flex",
     fontFamily: "Patrick Hand",
-    fontSize: "1.3vw",
+    fontSize: "1.2vw",
     textTransform: "none",
-    color: "#538dbd",
+    color: "gold",
     cursor: "pointer",
-    marginLeft: "-1vw",
+    // backgroundColor: "pink",
     // marginTop: "9px",
   };
 
   const iconStyle = {
     color: "gold",
-    width: "3.5vw",
+    width: "2vw",
     height: "4vh",
     marginTop: "0.3vh",
     cursor: "pointer",
+    // backgroundColor: "green"
   };
 
   const iconStyleAlt = {
@@ -456,13 +458,13 @@ const PicUploader = React.memo((props) => {
   const buttonStyle = {
     color: "gold",
     width: "3.5vw",
-    height: "4.5vh"
+    height: "4.5vh",
   };
 
   const buttonStyleAlt = {
     color: "#538dbd",
     width: "3.5vw",
-    height: "4.5vh"
+    height: "4.5vh",
   };
 
   // AutoSuggest props
@@ -514,7 +516,7 @@ const PicUploader = React.memo((props) => {
       <div className="modalTitle2">
         <Label
           style={{
-            width: "100vw",
+            width: "20vw",
             marginLeft: "1vw",
             textAlign: "left",
             fontFamily: "Patrick Hand",
@@ -524,37 +526,37 @@ const PicUploader = React.memo((props) => {
         >
           <strong>Submit Your Picture</strong>
         </Label>
-        <FormGroup>
-          <Button
-            variant="text"
-            id="questionButton"
-            onClick={() => activateGuide()}
-          >
-            <QuestionMarkIcon
-              sx={{
-                color: "lightgrey",
-                width: "2vw",
-                height: "5vh",
-              }}
-            ></QuestionMarkIcon>
-          </Button>
-        </FormGroup>
 
-        <FormGroup>
-          <Button
-            variant="text"
-            id="closeButton"
-            onClick={() => handleModalClose()}
-          >
-            <CloseIcon
-              sx={{
-                color: "lightgrey",
-                width: "2vw",
-                  height: "5vh",
-              }}
-            ></CloseIcon>
-          </Button>
-        </FormGroup>
+        {/* <Button
+          variant="text"
+          // id="questionButton"
+          
+        > */}
+        <QuestionMarkIcon
+          onClick={() => activateGuide()}
+          sx={{
+            color: "lightgrey",
+            width: "2vw",
+            height: "4vh",
+            marginRight: "1vw",
+          }}
+        ></QuestionMarkIcon>
+        {/* </Button> */}
+
+        {/* <Button
+          variant="text"
+          // id="closeButton"
+          
+        > */}
+        <CloseIcon
+          onClick={() => handleModalClose()}
+          sx={{
+            color: "lightgrey",
+            width: "2vw",
+            height: "5vh",
+          }}
+        ></CloseIcon>
+        {/* </Button> */}
       </div>
 
       {photoFile !== null && (
@@ -576,7 +578,7 @@ const PicUploader = React.memo((props) => {
           onClick={handleClick}
           className={imgButState ? "picSelectDivAlt" : "picSelectDiv"}
         >
-          <div style={{ marginRight: "1vw" }}>
+          <div style={{ marginLeft: "0vw", marginRight: "1vw" }}>
             <PhotoIcon sx={imgButState ? iconStyleAlt : iconStyle}></PhotoIcon>
           </div>
 
@@ -604,75 +606,78 @@ const PicUploader = React.memo((props) => {
       </div>
 
       <div className="lowerBoxPhoto">
-
         {/* <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
           {noGPSZone}
         </Collapse> */}
 
         <div className="Tbox">
           <div className="coordDiv">
-          <div className="inputboxType1">
-          <FormGroup>
-            <InputBase
-              id="standard-basic"
-              // label="Date Taken"
-              placeholder="Date Taken"
-              variant="standard"
-              type="date"
-              name="PicDate"
-              value={pin.PicDate}
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-              inputProps={{ style: datButState ? inputStyleAlt : inputStyle }}
-            />
-          </FormGroup>
-        </div>
-          <div
-          className={autoButState ? "autosuggestboxPhotoAlt" : "autosuggestboxPhoto"}
-          onClick={handleSelect}
-        >
-          <AutoSuggest
-            placeholder="Animal"
-            value={pin.Animal}
-            list={list}
-            clear={clearAnimal}
-            handleChange={handleChangeAutoSuggest}
-            handleSelect={handleSelectAutoSuggest}
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              textAlign: "center",
-              height: "5vh",
-              fontFamily: "itim",
-              color: "white",
-              fontSize: "1.5vw",
-            }}
-            style1={{
-              marginTop: "2vh",
-              marginLeft: "1vw"
-            }}
-            style2={{
-              display: "flex",
-              height: "2.5vh",
-              paddingLeft: "1vw",
-              paddingRight: "1vw",
-              listStyle: "none",
-              backgroundColor: "#538bdb",
-              borderRadius: "5px",
-              alignItems: "center",
-              justifyContent: "center",
-              boxShadow: "3px 3px rgba(0, 0, 0, 0.5)",
-              marginBottom: "0.2vh",
-              marginLeft: "2vw"
-            }}
-            style3={{
-              color: "white",
-              fontFamily: "itim",
-              fontSize: "1vw"
-            }}
-          />
-        </div>
+            <div className="inputboxType1">
+              <FormGroup>
+                <InputBase
+                  id="standard-basic"
+                  // label="Date Taken"
+                  placeholder="Date Taken"
+                  variant="standard"
+                  type="date"
+                  name="PicDate"
+                  value={pin.PicDate}
+                  onChange={handleChange}
+                  onClick={handleNoGPSClose}
+                  inputProps={{
+                    style: datButState ? inputStyleAlt : inputStyle,
+                  }}
+                />
+              </FormGroup>
+            </div>
+            <div
+              className={
+                autoButState ? "autosuggestboxPhotoAlt" : "autosuggestboxPhoto"
+              }
+              onClick={handleSelect}
+            >
+              <AutoSuggest
+                placeholder="Animal"
+                value={pin.Animal}
+                list={list}
+                clear={clearAnimal}
+                handleChange={handleChangeAutoSuggest}
+                handleSelect={handleSelectAutoSuggest}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  textAlign: "center",
+                  height: "5vh",
+                  fontFamily: "itim",
+                  color: "white",
+                  fontSize: "1.5vw",
+                }}
+                style1={{
+                  marginTop: "2vh",
+                  marginLeft: "1vw",
+                }}
+                style2={{
+                  display: "flex",
+                  height: "2.5vh",
+                  paddingLeft: "1vw",
+                  paddingRight: "1vw",
+                  listStyle: "none",
+                  backgroundColor: "#538bdb",
+                  borderRadius: "5px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  boxShadow: "3px 3px rgba(0, 0, 0, 0.5)",
+                  marginBottom: "0.2vh",
+                  marginLeft: "2vw",
+                }}
+                style3={{
+                  color: "white",
+                  fontFamily: "itim",
+                  fontSize: "1vw",
+                }}
+              />
+            </div>
             <div className="inputboxType2">
               <FormGroup>
                 <InputBase
@@ -740,21 +745,18 @@ const PicUploader = React.memo((props) => {
               </FormGroup>
             </div>
           </div>
-          <div
-            className={pinButState ? "GboxAlt" : "Gbox"}
-            style={{ marginTop: "23vh" }}
-          >
-            <FormGroup>
-              <Button
-                variant="text"
-                id="jumpButton"
-                onClick={handleNoGPSCloseOnMapChange}
-              >
-                <PlaceIcon
-                  sx={pinButState ? buttonStyleAlt : buttonStyle}
-                ></PlaceIcon>
-              </Button>
-            </FormGroup>
+        </div>
+        <div className="Tbox2">
+          <div className="smallBox"></div>
+          <div className="smallBox2">
+            <div
+              className={pinButState ? "GboxAlt" : "Gbox"}
+              onClick={handleNoGPSCloseOnMapChange}
+            >
+              <PlaceIcon
+                sx={pinButState ? buttonStyleAlt : buttonStyle}
+              ></PlaceIcon>
+            </div>
           </div>
         </div>
       </div>

@@ -107,6 +107,7 @@ const HowToGuide = (props) => {
               fontWeight: "bold",
               color: "gold",
               cursor: "pointer",
+              fontSize: "1vw"
             }}
           >
             Intro Guide
@@ -123,6 +124,8 @@ const HowToGuide = (props) => {
               fontWeight: "bold",
               color: "gold",
               cursor: "pointer",
+              fontSize: "1vw",
+              width: "10vw"
             }}
           >
             Fun With Dive Sites
@@ -136,6 +139,7 @@ const HowToGuide = (props) => {
               fontWeight: "bold",
               color: "gold",
               cursor: "pointer",
+              fontSize: "1vw"
             }}
           >
             Photogenics
