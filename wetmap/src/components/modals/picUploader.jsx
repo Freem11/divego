@@ -628,7 +628,7 @@ const PicUploader = React.memo((props) => {
           </FormGroup>
         </div>
           <div
-          className={autoButState ? "autosuggestboxAlt" : "autosuggestbox"}
+          className={autoButState ? "autosuggestboxPhotoAlt" : "autosuggestboxPhoto"}
           onClick={handleSelect}
         >
           <AutoSuggest
@@ -638,6 +638,39 @@ const PicUploader = React.memo((props) => {
             clear={clearAnimal}
             handleChange={handleChangeAutoSuggest}
             handleSelect={handleSelectAutoSuggest}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              textAlign: "center",
+              height: "5vh",
+              fontFamily: "itim",
+              color: "white",
+              fontSize: "1.5vw",
+            }}
+            style1={{
+              marginTop: "2vh",
+              marginLeft: "1vw"
+            }}
+            style2={{
+              display: "flex",
+              height: "2.5vh",
+              paddingLeft: "1vw",
+              paddingRight: "1vw",
+              listStyle: "none",
+              backgroundColor: "#538bdb",
+              borderRadius: "5px",
+              alignItems: "center",
+              justifyContent: "center",
+              boxShadow: "3px 3px rgba(0, 0, 0, 0.5)",
+              marginBottom: "0.2vh",
+              marginLeft: "2vw"
+            }}
+            style3={{
+              color: "white",
+              fontFamily: "itim",
+              fontSize: "1vw"
+            }}
           />
         </div>
             <div className="inputboxType2">

@@ -115,7 +115,7 @@ export default function DiveSiteAutoComplete(props) {
   }
 
   return (
-    <div className={"autosuggestbox"}>
+    <div className={"autosuggestboxWhite"}>
       <AutoSuggest
         placeholder={"Search Dive Sites..."}
         value={searchText}
@@ -123,6 +123,32 @@ export default function DiveSiteAutoComplete(props) {
         clear={() => setSearchText("")}
         handleChange={handleChange}
         handleSelect={handleSelect}
+        style={{
+          height: "3vh",
+          marginLeft: "2vw",
+          fontFamily: "itim",
+        }}
+        style1={{
+          marginTop: "0vh",
+          marginLeft: "1vw"
+        }}
+        style2={{
+          display: "flex",
+          height: "2.5vh",
+          width: "15vw",
+          paddingLeft: "1vw",
+          paddingRight: "1vw",
+          listStyle: "none",
+          backgroundColor: "white",
+          marginBottom: "0.1vh",
+          borderRadius: "5px",
+          alignItems: "center",
+          justifyContent: "center"
+        }}
+        style3={{
+          color: "black",
+          fontSize: "1vw"
+        }}
       />
     </div>
   );

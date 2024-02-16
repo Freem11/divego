@@ -34,13 +34,16 @@
   border-color: transparent;
   /* background-color: blueviolet; */
 }
-.autosuggestbox {
+.autosuggestboxPhoto {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 2vh;
   margin-bottom: 4px;
   border: transparent;
   height: 5vh;
-  width: 18vw;
-  background-color: transparent;
+  /* width: 18vw; */
+  /* background-color: green; */
   border-radius: 20px;
   padding-bottom: 5px;
   padding-top: 3px;
@@ -48,16 +51,30 @@
 }
 
 .autosuggestboxAlt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
   margin-bottom: 4px;
   border: transparent;
   height: 5vh;
-  width: 18vw;
+  /* width: 18vw; */
   background-color: pink;
   border-radius: 20px;
   padding-bottom: 5px;
   padding-top: 3px;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
+}
+
+.autosuggestboxWhite {
+  margin-top: 2vh;
+  margin-bottom: 4px;
+  border: transparent;
+  height: 3vh;
+  width: 18vw;
+  background-color: white;
+  border-radius: 20px;
+  padding-bottom: 5px;
 }
 
 #XButton {

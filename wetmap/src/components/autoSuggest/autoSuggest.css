@@ -17,7 +17,9 @@
   user-select: none;
   outline: none;
 }
-
+.itemHover :hover {
+  background-color: lightgrey;
+}
 .suggestItem {
   width: 12vw;
   height: auto;
@@ -35,7 +37,7 @@
   margin: 0px;
   padding: 0px;
   margin-top: -4vh;
-  margin-left: 15vw;
+  margin-left: 14vw;
   margin-bottom: 4vh;
   background-color: blueviolet;
 }

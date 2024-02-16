@@ -5,7 +5,7 @@ import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "./autoSuggest.css";
 
 export default function AutoSuggest(props) {
-  const { placeholder, value, list, clear, handleSelect, handleChange } = props;
+  const { placeholder, value, list, clear, handleSelect, handleChange, style, style1, style2, style3 } = props;
 
   return (
     <div>
@@ -16,15 +16,7 @@ export default function AutoSuggest(props) {
         value={value}
         onChange={handleChange}
         inputProps={{
-          style: {
-            textAlign: "center",
-            fontFamily: "Itim",
-            fontSize: "1.5vw",
-            textOverflow: "ellipsis",
-            backgroundColor: "transparent",
-            height: "5vh",
-            width: "18vw",
-            color: "#F0EEEB",
+          style: { ...style
           },
         }}
       ></InputBase>
@@ -43,12 +35,10 @@ export default function AutoSuggest(props) {
       )}
 
       <div
-        style={{
+        style={{...style1,
           height: "auto",
           zIndex: "100",
           position: "absolute",
-          marginTop: "0vh",
-          marginLeft: "4vw",
         }}
       >
         {list.length > 0 &&
@@ -58,6 +48,8 @@ export default function AutoSuggest(props) {
                 key={element}
                 value={element}
                 handleSelect={handleSelect}
+                style={style2}
+                style3={style3}
               />
             );
           })}
