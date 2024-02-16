@@ -126,7 +126,7 @@ export default function DiveSiteAutoComplete(props) {
         style={{
           height: "3vh",
           marginLeft: "2vw",
-          fontFamily: "itim",
+          fontFamily: "Itim, cursive",
         }}
         style1={{
           marginTop: "0vh",
@@ -147,7 +147,9 @@ export default function DiveSiteAutoComplete(props) {
         }}
         style3={{
           color: "black",
-          fontSize: "1vw"
+          fontSize: "1vw",
+          fontFamily: "Itim, cursive",
+          fontWeight: "normal"
         }}
       />
     </div>
