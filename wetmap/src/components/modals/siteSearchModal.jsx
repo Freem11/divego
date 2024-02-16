@@ -39,14 +39,16 @@ const SiteSearchModal = (props) => {
             }}
           >
             <CloseIcon
-              sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
             ></CloseIcon>
           </Button>
         </FormGroup>
       </div>
 
       <div className="mainBlurbDiv">
-        <DiveSiteAutoComplete setSiteSearchModalYCoord={setSiteSearchModalYCoord}/>
+        <DiveSiteAutoComplete
+          setSiteSearchModalYCoord={setSiteSearchModalYCoord}
+        />
       </div>
     </div>
   );

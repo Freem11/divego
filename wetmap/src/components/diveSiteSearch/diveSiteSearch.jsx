@@ -126,6 +126,8 @@ export default function DiveSiteAutoComplete(props) {
         style={{
           height: "3vh",
           marginLeft: "2vw",
+          marginBottom: "1vw",
+          fontSize: "2vw",
           fontFamily: "Itim, cursive",
         }}
         style1={{

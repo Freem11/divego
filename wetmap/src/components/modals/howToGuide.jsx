@@ -93,7 +93,7 @@ const HowToGuide = (props) => {
             }}
           >
             <CloseIcon
-              sx={{ color: "lightgrey", height: "36px", width: "36px" }}
+              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
             ></CloseIcon>
           </Button>
         </FormGroup>
