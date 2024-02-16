@@ -8,9 +8,21 @@ import zIndex from "@mui/material/styles/zIndex";
 const handleDragStart = (e) => e.preventDefault();
 
 const PhotoMenuListItem = (props) => {
-  const { id, setAnimalVal, animalVal, name, photoURL, selectedID, setSelectedID, tileWidth, setTileWidth, boxWidth, setBoxWidth } = props;
+  const {
+    id,
+    setAnimalVal,
+    animalVal,
+    name,
+    photoURL,
+    selectedID,
+    setSelectedID,
+    tileWidth,
+    setTileWidth,
+    boxWidth,
+    setBoxWidth,
+  } = props;
 
-  let photoName =  photoURL.split('/').pop();
+  let photoName = photoURL.split("/").pop();
 
   const tileRef = useRef(null);
   const [clicked, setClicked] = useState(false);
@@ -18,7 +30,6 @@ const PhotoMenuListItem = (props) => {
   const [scale, setScale] = useState(1);
   const [zdex, setZdex] = useState(0);
   const [xCoord, setXCoord] = useState(0);
- 
 
   const handleSelect = (name) => {
     if (animalVal.includes(name)) {
@@ -44,11 +55,11 @@ const PhotoMenuListItem = (props) => {
   // window.addEventListener("resize", trackWidth);
 
   useEffect(() => {
-    if(selectedID !== id){
-      pressReleaseAnimations()
+    if (selectedID !== id) {
+      pressReleaseAnimations();
     }
   }, [selectedID]);
-  
+
   // function trackWidth() {
   //   setBoxWidth(window.innerWidth * 0.9);
   //   settileWidth(window.innerWidth * 0.9);
@@ -64,47 +75,41 @@ const PhotoMenuListItem = (props) => {
   window.addEventListener("resize", trackWidth);
 
   function trackWidth() {
-    setWindowW(window.innerWidth)
-    setWindowH(window.innerHeight)
-    // setBoxWidth((window.innerWidth * 0.8));
-    // setTileWidth( (boxWidth/5));
-    // if(boxWidth < 930){
-    // setTileWidth( (boxWidth/5.4));
-    // } else {
-    //   setTileWidth(((window.innerWidth * 0.8)/5)-1.5);
-    // }
+    setWindowW(window.innerWidth);
+    setWindowH(window.innerHeight);
+    setYCoord(0);
+    setXCoord(0);
+    setScale(1);
+    setZdex(0);
   }
 
-  
-
   const onDoubleClick = (e, id) => {
+    setSelectedID(id);
 
-    setSelectedID(id)
+    let WidthofTile = e.target.width;
+    let HeightOfTile = e.target.height;
 
-    let WidthofTile = e.target.width
-    let HeightOfTile = e.target.height
+    let yClick = e.nativeEvent.clientY;
+    let xClick = e.nativeEvent.clientX;
+    let yClickI = e.nativeEvent.layerY;
+    let xClickI = e.nativeEvent.layerX;
 
-    let yClick = e.nativeEvent.clientY
-    let xClick = e.nativeEvent.clientX
-    let yClickI = e.nativeEvent.layerY
-    let xClickI = e.nativeEvent.layerX
-
-    let distanceToItemMiddleX = WidthofTile/2 - xClickI
-    let centererPressX = xClick + distanceToItemMiddleX
-    let distanceToItemMiddleY = HeightOfTile/2 - yClickI
-    let centererPressY = yClick + distanceToItemMiddleY
-    let moverWidth = ((windowW/2) - centererPressX)/2.5
-    let moverHeigth = ((windowH/2) - centererPressY)/3
+    let distanceToItemMiddleX = WidthofTile / 2 - xClickI;
+    let centererPressX = xClick + distanceToItemMiddleX;
+    let distanceToItemMiddleY = HeightOfTile / 2 - yClickI;
+    let centererPressY = yClick + distanceToItemMiddleY;
+    let moverWidth = (windowW / 2 - centererPressX) / 2.5;
+    let moverHeigth = (windowH / 2 - centererPressY) / 3;
 
     if (scale === 1) {
       setYCoord(moverHeigth);
-      setXCoord(moverWidth)
+      setXCoord(moverWidth);
       setScale(2.5);
       setZdex(99);
       setClicked(true);
     } else {
       setYCoord(0);
-      setXCoord(0)
+      setXCoord(0);
       setScale(1);
       setZdex(0);
       setClicked(true);
@@ -112,19 +117,17 @@ const PhotoMenuListItem = (props) => {
   };
 
   const pressReleaseAnimations = () => {
-      setYCoord(0);
-      setXCoord(0)
-      setScale(1);
-      setZdex(0);
-};
+    setYCoord(0);
+    setXCoord(0);
+    setScale(1);
+    setZdex(0);
+  };
 
-useEffect(() => {
-  if(selectedID !== id){
-    pressReleaseAnimations()
-  }
-}, [selectedID]);
-
-
+  useEffect(() => {
+    if (selectedID !== id) {
+      pressReleaseAnimations();
+    }
+  }, [selectedID]);
 
   useEffect(() => {
     if (!clicked) return;
@@ -142,15 +145,13 @@ useEffect(() => {
     },
   });
 
-
-  let labelLength = name.length
-  let labelFont = (120)/labelLength + 6
-
+  let labelLength = name.length;
+  let labelFont = 120 / labelLength + 6;
 
   let picWidth = {
     width: tileWidth,
-    height: "150%"
-  }
+    height: "150%",
+  };
 
   return (
     <animated.div
@@ -161,9 +162,12 @@ useEffect(() => {
       onDoubleClick={(e) => onDoubleClick(e, id)}
       onClick={() => handleSelect(name)}
     >
-      <div style={{width: tileWidth}} className={animalVal.includes(name) ? "microsSelected" : "micros"}>
+      <div
+        style={{ width: tileWidth }}
+        className={animalVal.includes(name) ? "microsSelected" : "micros"}
+      >
         <h4
-          style={{fontSize: "1vw"}}
+          style={{ fontSize: "1vw" }}
           className={
             animalVal.includes(name)
               ? "animalLabelAreaSelected"
