@@ -238,21 +238,19 @@
     
 }
 
-.col2rowB{
+.histoBox{
     height: auto;
     z-index: 2;
     position: absolute;
-    bottom: 0px;
-    left: -10%;
+    bottom: 2vh;
+    left: 30vw;
     /* background-color: white; */
     opacity: 100%;
     border-radius: 5px;
     font-family: 'Caveat', cursive;
-    font-size: large;
+    font-size: 1.5vw;
     font-weight: bold;
-    margin-left: clamp(10px, 35vw, 2000px);
-    width: clamp(50px, 50vw, 1000px);
-	/* width: 55vw; */
+    width: 40vw;
 }
 
 .tutbarContainer {

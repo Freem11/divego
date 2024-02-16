@@ -1116,6 +1116,12 @@ const MapPage = React.memo((props) => {
         </div>
       )}
 
+{masterSwitch && (
+        <div className="histoBox" style={{ pointerEvents: "none" }}>
+          <Histogram pointerEvents={"none"} />
+        </div>
+      )}
+
       <div className="col1rowB">
         <Collapse
           in={showAdminPortal}
@@ -1130,11 +1136,7 @@ const MapPage = React.memo((props) => {
         />
       </div>
 
-      {masterSwitch && (
-        <div className="col2rowB" style={{ pointerEvents: "none" }}>
-          <Histogram pointerEvents={"none"} />
-        </div>
-      )}
+      
 
       <div>
         <Home

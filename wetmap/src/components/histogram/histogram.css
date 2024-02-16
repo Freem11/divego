@@ -3,7 +3,7 @@
 .mainContainer {
     background-color: "pink";
     z-index: 2;
-    height: 180px;
+    height: 25vh;
     border-radius: 10px;
     width: 100%;
     pointer-events: none;
@@ -12,7 +12,7 @@
   .barBox {
     display: flex;
     flex-direction: "row";
-    align-content: "flex-end"; 
+    /* align-content: "flex-end";  */
     justify-content: space-evenly;
     vertical-align: "bottom";
     height: 60%;
@@ -39,11 +39,12 @@
 
   .months {
     display: flex;
+    align-items: center;
     justify-content: space-evenly;
     width: 90%;
     flex-direction: "row";
     margin-left: 5%;
-    height: 30px;
+    height: 5vh;
     /* margin-top: 10px; */
     background-color: black;
     opacity: 0.6;
@@ -52,14 +53,11 @@
   }
 
   .letter {
-    margin-left: 1px;
-    margin-right: 1px;
-    width: 50px;
-    height: 40px;
-    margin-top: 5px;
+    width: 2vw;
+    margin-top: 3vh;
     color: white;
     font-weight: "bold";
-    font-family: 'Bubblegum Sans', cursive;
+    font-family: "Itim", cursive;
   }
 
   .barContainer {
@@ -68,7 +66,7 @@
     align-self: end;
     background-color: #e7ecef;
     z-index: 2;
-    border-top-right-radius: 5px;
+    border-top-right-radius: 10px;
     border-top-left-radius: 35px;
     margin-left: 1px;
     margin-right: 1px;

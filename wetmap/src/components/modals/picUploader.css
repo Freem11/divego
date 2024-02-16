@@ -130,7 +130,7 @@
   font: 1em sans-serif;
   box-shadow: 3px 3px lightgray;
   z-index: 20;
-  font-family: "Indie Flower";
+  font-family: "Itim", cursive;
 }
 
 .suggestItem:hover {
