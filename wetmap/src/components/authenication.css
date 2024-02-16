@@ -1,6 +1,8 @@
 .containerDiv {
-  max-height: 50%;
+  height: 50vh;
+  display: flex;
   align-items: center;
+  justify-content: center;
   background-color: #538dbd;
   padding-top: 3%;
 }
@@ -8,8 +10,8 @@
 .formstyle {
   align-items: center;
   background-color: #538dbd;
-  max-height: 10vh;
-  margin-top: -1vh;
+  max-height: 10vw;
+  margin-top: -20vh;
   margin-bottom: 15vh;
 }
 
@@ -32,9 +34,9 @@
   font-family: Indie Flower;
   text-overflow: ellipsis;
   background-color: #538dbd;
-  height: 25px;
+  width: 25vw;
+  height: 4vh;
   color: lightgray;
-  width: 170px;
   border-radius: 10px;
   margin: 10px;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
@@ -54,32 +56,34 @@
   width: 96vw;
   margin-left: 2vw;
   border-top: 1px solid lightgray;
-  padding-top: 5px;
+  padding-top: 1vh;
   cursor: pointer;
-  font-family: Permanent Marker;
+  font-size: 2.5vw;
+  font-family: "Patrick Hand", cursive;
   color: gold;
 }
 
 .erroMsg {
-  margin: 5px;
-  padding: 7px;
+  margin: 1vw;
+  padding: 1vw;
   color: pink;
   font-family: Indie Flower;
+  font-size: 2vw;
   border-radius: 10px;
   border: 1px dashed darkblue;
   /* margin-bottom: 2vh; */
-  margin-top: 40px;
+  margin-top: 2vh;
 }
 
 
 .GoogleLogo {
-  height: 25px;
+  height: 2vw;
 }
 
 .FacebookLogo {
-  height: 35px;
-  margin-top: 3px;
-  margin-left: 3px;
+  height: 2vw;
+  /* margin-top: 3px;
+  margin-left: 3px; */
 }
 
 .FButtton {
@@ -87,7 +91,7 @@
 }
 
 .Oaths {
-  margin-top: 30px;
+  margin-top: 2vh;
   align-self: center;
   justify-content: center;
   align-items: center;
@@ -96,15 +100,15 @@
 .inptBx{
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 1vh;
+  margin-bottom: 2vh;
 }
 
 .OAuthButton {
   display: flex;
-  font-family: "Indie Flower";
+  font-family: "Itim";
   color: white;
-  font-size: 10px;
+  font-size: 2vw;
   cursor: pointer;
   align-self: center;
   justify-content: center;
@@ -116,35 +120,36 @@
   border-radius: 5px;
   /* box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3); */
   /* margin-left: 40%; */
-  margin-top: 10px;
+  margin-top: 1vh
 }
 
 .OAuthButton2 {
   display: flex;
   font-family: "Bubblegum Sans", cursive;
-  font-size: 16px;
+  font-size: 2vw;
   cursor: pointer;
   background-color: #538dbd;
-  width: 200px;
-  height: 40px;
+  /* width: 200px;
+  height: 40px; */
   text-align: center;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
   /* margin-left: 40%; */
-  margin-top: 25px;
+  margin-top: 1vh;
 }
 
 .OAuthButton3 {
   display: flex;
   font-family: "Indie Flower";
-  font-size: 17px;
+  font-size: 2vw;
   cursor: pointer;
   background-color: #538dbd;
   /* width: 200px;
   height: 40px; */
   text-align: center;
   border: none;
-  padding-top: 7px;
+  /* padding-top: 7px; */
+  margin-top: 1vh;
   color: white;
   /* box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3); */
   /* border-radius: 5px;

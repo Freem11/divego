@@ -259,10 +259,10 @@ export default function SignInRoute() {
         <div className="headlinerdiv">
           <img
             style={{
-              maxHeight: "25vh",
+              height: "20vh",
               // maxWidth: "80%",
               // height: "0%",
-              marginTop: "10vh",
+              marginTop: "-2vh",
               marginBottom: "0%",
               backgroundColor: "#538dbd",
             }}
@@ -286,7 +286,7 @@ export default function SignInRoute() {
                 console.log(err);
               }}
             >
-              <GoogleLoginButton style={{ width: "245px", height: "40px" }} />
+              <GoogleLoginButton style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "26vw", height: "5vh", fontSize: "1.7vw" }} />
             </LoginSocialGoogle>
           </div>
 
@@ -304,7 +304,7 @@ export default function SignInRoute() {
                 console.log(err);
               }}
             >
-              <FacebookLoginButton style={{ width: "245px", height: "40px" }} />
+              <FacebookLoginButton style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "26vw", height: "5vh", fontSize: "1.7vw" }} />
             </LoginSocialFacebook>
           </div>
 
@@ -321,7 +321,7 @@ export default function SignInRoute() {
                 console.log(err);
               }}
             >
-              <AppleLoginButton style={{ width: "245px", height: "40px" }} />
+              <AppleLoginButton style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "26vw", height: "5vh", fontSize: "1.7vw" }} />
             </LoginSocialApple>
           </div>
         </div>
@@ -341,12 +341,12 @@ export default function SignInRoute() {
             inputProps={{
               style: {
                 textAlign: "center",
-                fontFamily: "Indie Flower",
+                fontFamily: "Itim",
                 textOverflow: "ellipsis",
                 backgroundColor: "#538dbd",
-                height: "25px",
+                width: "25vw",
+                height: "4vh",
                 color: "#F0EEEB",
-                width: "170px",
                 borderRadius: "10px",
                 boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
               },
@@ -367,12 +367,12 @@ export default function SignInRoute() {
             inputProps={{
               style: {
                 textAlign: "center",
-                fontFamily: "Indie Flower",
+                fontFamily: "Itim",
                 textOverflow: "ellipsis",
                 backgroundColor: "#538dbd",
-                height: "25px",
+                width: "25vw",
+                height: "4vh",
                 color: "#F0EEEB",
-                width: "170px",
                 borderRadius: "10px",
                 boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
               },

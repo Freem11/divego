@@ -57,11 +57,11 @@ export default function AuthenticationPage() {
           sx={{
             "& button.Mui-selected": { color: "lightgray", width: "50%"},
             backgroundColor: "#538dbd",
-            fontFamily: "Permanent Marker",
+            fontFamily: "Patrick Hand",
           }}
         >
-          <Tab label="Sign In" {...a11yProps(0)} sx={{fontFamily: "Permanent Marker", color: "darkgray", width: "50%"}}/>
-          <Tab label="Sign Up" {...a11yProps(1)} sx={{fontFamily: "Permanent Marker", color: "darkgray", width: "50%"}}/>
+          <Tab label="Sign In" {...a11yProps(0)} sx={{fontFamily: "Patrick Hand", color: "darkgray", width: "50%", fontSize: "2.5vw"}}/>
+          <Tab label="Sign Up" {...a11yProps(1)} sx={{fontFamily: "Patrick Hand", color: "darkgray", width: "50%", fontSize: "2.5vw"}}/>
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} style={{backgroundColor: '#538dbd', height: "100%"}}>
