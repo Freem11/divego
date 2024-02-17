@@ -47,30 +47,30 @@
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 5vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .photobuttonwrapper {
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 5vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .pinbuttonwrapper {
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 5vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .mantaWrapper {

@@ -274,12 +274,12 @@ const MapPage = React.memo((props) => {
       color: "white",
       backgroundColor: "gold",
     },
-    backgroundColor: "aquamarine",
-    // height: "48px",
-    width: "70%",
+    backgroundColor: "#538dbd",
+    height: "40%",
+    width: "30%",
     // border: "1px solid black",
     // marginTop: "5px",
-    color: "black",
+    color: "gold",
     boxShadow: "-2px 4px 4px #00000064",
     borderRadius: "100%",
   };
@@ -1059,7 +1059,7 @@ const MapPage = React.memo((props) => {
             {masterSwitch && (
               <div className="gearBox">
                 <ToggleButton
-                  sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                  sx={siteButState ? toggleButtonStyleAlt : toggleButtonStyle}
                   value="check"
                   selected={diveSiteModal}
                   onChange={() => {
@@ -1204,8 +1204,8 @@ const MapPage = React.memo((props) => {
                 "&:hover": { backgroundColor: "lightblue" },
                 color: "gold",
                 fontFamily: "Permanent Marker, cursive",
-                fontSize: "15px",
-                width: "10%",
+                fontSize: "2vw",
+                width: "20vw",
                 height: "80%",
                 textAlign: "center",
                 backgroundColor: "#538bdb",
@@ -1290,6 +1290,7 @@ const MapPage = React.memo((props) => {
           setDsAddermodal={setDsAddermodal}
           animateThirdGuideModal={animateThirdGuideModal}
           setThirdGuideModalYCoord={setThirdGuideModalYCoord}
+          setSiteModalYCoord={setSiteModalYCoord}
         />
       </animated.div>
 

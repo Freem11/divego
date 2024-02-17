@@ -32,8 +32,8 @@
     background-color: white;
     border-radius: 15px;
     align-self: center;
-    padding:5px;
-    padding-bottom: 25px;
+    padding: 0.5vw;
+    padding-bottom: 1vh;
   }
 
   .textContain {
@@ -46,40 +46,40 @@
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 5vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .dsAddbuttonwrapper {
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 5vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .myLocationbuttonwrapper {
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 5vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .pinbuttonwrapper {
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 5vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .mantaWrapper {
@@ -93,19 +93,21 @@
   .nextTutButton2 {
     position: absolute;
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: row;
     top: -200vh;
     left: 15%;
-    width: 210px;
-    height: 30px;
+    width: 20vw;
+    height: 4vh;
     background-color: #538bdb;
     align-items: center;
-    padding-right: 5px;
-    padding-left: 10px;
-    padding-top: 20px;
-    padding-bottom: 20px;
-    margin-right: 10px;
-    margin-left: 10px;
+    padding-right: 1vw;
+    padding-left: 2vw;
+    padding-top: 3vh;
+    padding-bottom: 4vh;
+    margin-right: 1vw;
+    margin-left: 1vw;
     border-radius: 20px;
     border-color: lightgrey;
     border-width: 2px;
@@ -115,8 +117,8 @@
   .nextTutText2 {
     color: white;
     font-family: Itim;
-    font-size: 24px;
-    height: 30px;
-    margin: 10px;
+    font-size: 2vw;
+    height: 3vh;
+    margin: 1vw;
     cursor: pointer;
   }
