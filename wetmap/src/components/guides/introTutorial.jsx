@@ -116,10 +116,17 @@ export default function IntroTutorial(props) {
   useEffect(() => {
     setMovingBack(false);
     let characterWidth = document.getElementsByClassName("character")[0]
-    .clientWidth;
+      .clientWidth;
 
     let textBoxHeight = document.getElementsByClassName("talkbox")[0]
-    .clientHeight;
+      .clientHeight;
+
+    let clusterHeight = document.getElementsByClassName(
+      "anchorclusterwrapper"
+    )[0].clientHeight;
+
+    let arrowHeight = document.getElementsByClassName("arrowWrapper")[0]
+      .clientHeight;
 
     switch (chapter) {
       case "Getting around the map":
@@ -128,10 +135,10 @@ export default function IntroTutorial(props) {
         setItterator(6);
         setGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth+characterWidth*1.2);
+          setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth/4);
+          setTextBoxY(-windowHeigth / 4);
         }, 300);
         setPixY(3.5 * windowHeigth + (windowHeigth - picBoxHeigth) / 2);
         break;
@@ -142,12 +149,14 @@ export default function IntroTutorial(props) {
         setItterator(9);
         setGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth+characterWidth*1.2);
+          setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth/4);
+          setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setClusterAnchorY(2 * windowHeigth + (windowHeigth - 500) / 2);
+        setClusterAnchorY(
+          2 * windowHeigth + (windowHeigth - clusterHeight) / 2
+        );
         setHeatPotintY(2 * windowHeigth + (windowHeigth - 200) / 3);
         nudgeMap({ lat: 49.3134161482923, lng: -124.242440499365 });
         break;
@@ -159,12 +168,12 @@ export default function IntroTutorial(props) {
         setGuideModal(true);
         setIntroGuideModalYCoord(-windowHeigth);
         setTimeout(() => {
-          setCharacterX(-windowWidth+characterWidth*1.2);
+          setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth/4);
+          setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setArrowY(2 * windowHeigth + (windowHeigth - 250) / 6);
+        setArrowY(2 * windowHeigth + (windowHeigth - arrowHeight) / 6);
         if (selectedDiveSite.SiteName === "") {
           setSelectedDiveSite({
             ...selectedDiveSite,
@@ -446,18 +455,18 @@ export default function IntroTutorial(props) {
 
   useEffect(() => {
     let characterWidth = document.getElementsByClassName("character")[0]
-    .clientWidth;
+      .clientWidth;
 
     let textBoxHeight = document.getElementsByClassName("talkbox")[0]
-    .clientHeight;
+      .clientHeight;
 
     if (itterator === 0) {
       setTimeout(() => {
-        setCharacterX(-windowWidth+characterWidth*1.2);
+        setCharacterX(-windowWidth + characterWidth * 1.2);
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeigth/5);
+        setTextBoxY(-windowHeigth / 5);
       }, 1000);
     }
 
@@ -500,8 +509,12 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 9) {
+      let clusterHeight = document.getElementsByClassName(
+        "anchorclusterwrapper"
+      )[0].clientHeight;
+
       setExploreButtonY(0);
-      setClusterAnchorY(2.5 * windowHeigth + (windowHeigth - 500) / 2);
+      setClusterAnchorY(2 * windowHeigth + (windowHeigth - clusterHeight) / 2);
     }
 
     if (itterator === 10) {
@@ -541,8 +554,11 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 17) {
+      let arrowHeight = document.getElementsByClassName("arrowWrapper")[0]
+        .clientHeight;
+
       setIntroGuideModalYCoord(-windowHeigth);
-      setArrowY(2 * windowHeigth + (windowHeigth - 250) / 6);
+      setArrowY(2 * windowHeigth + (windowHeigth - arrowHeight) / 6);
     }
 
     if (itterator === 19) {
@@ -556,7 +572,10 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 24) {
-      setNextTutY(2 * windowHeigth + (windowHeigth - 250) / 2);
+      let nextTutHeight = document.getElementsByClassName("nextTutButton")[0]
+        .clientHeight;
+
+      setNextTutY(2 * windowHeigth + (windowHeigth - nextTutHeight) / 2);
     }
 
     if (itterator === 25) {
@@ -906,10 +925,11 @@ export default function IntroTutorial(props) {
         </p>
         <KeyboardArrowRightIcon
           sx={{
-            height: "50px",
-            width: "50px",
+            height: "6vw",
+            width: "6vw",
             color: "white",
             cursor: "pointer",
+            marginTop: "1vh",
           }}
           onClick={handleSecondTutorialStartup}
         />
