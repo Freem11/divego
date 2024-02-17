@@ -82,6 +82,11 @@ export default function ThirdTutorial(props) {
   
   useEffect(() => {
     setMasterSwitch(true);
+    let characterWidth = document.getElementsByClassName("character3")[0]
+    .clientWidth;
+
+    let textBoxHeight = document.getElementsByClassName("talkbox3")[0]
+    .clientHeight;
 
     switch (chapter) {
       case "Contributing photos overview":
@@ -90,10 +95,10 @@ export default function ThirdTutorial(props) {
         setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setPicAddermodal(false)
         setCameraY((2*windowHeigth)+(windowHeigth-100)/3);
@@ -106,10 +111,10 @@ export default function ThirdTutorial(props) {
         setThirdGuideModal(true);
         setTutorialRunning(true);
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setPicAddermodal(true)
         break;
@@ -120,10 +125,10 @@ export default function ThirdTutorial(props) {
         setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setPicAddermodal(true)
         break;
@@ -134,10 +139,10 @@ export default function ThirdTutorial(props) {
         setThirdGuideModalYCoord(-windowHeigth)
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setPicAddermodal(true)
         setPinY((2*windowHeigth)+(windowHeigth-100)/3);
@@ -354,14 +359,20 @@ export default function ThirdTutorial(props) {
   }, [itterator3, textPrinting]);
 
   useEffect(() => {
+    let characterWidth = document.getElementsByClassName("character3")[0]
+    .clientWidth;
+
+    let textBoxHeight = document.getElementsByClassName("talkbox3")[0]
+    .clientHeight;
+
 
     if (itterator3 === 0) {
       setTimeout(() => {
-        setCharacterX((-600));
+        setCharacterX(-windowWidth+characterWidth*1.2);
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeigth+(windowHeigth-400));
+        setTextBoxY(-windowHeigth/4);
       }, 1000);
     }
 

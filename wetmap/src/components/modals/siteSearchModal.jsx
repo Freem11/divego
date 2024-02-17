@@ -9,7 +9,7 @@ const SiteSearchModal = (props) => {
   const { animateSiteSearchModal, setSiteSearchModalYCoord } = props;
 
   return (
-    <div className="masterDiv">
+    <div className="masterDiv" style={{overflow: "hidden"}}>
       <div className="titleDiv">
         <h3
           style={{
@@ -45,7 +45,7 @@ const SiteSearchModal = (props) => {
         </FormGroup>
       </div>
 
-      <div className="mainBlurbDiv">
+      <div className="mainBlurbDiv" style={{overflow: "hidden"}}>
         <DiveSiteAutoComplete
           setSiteSearchModalYCoord={setSiteSearchModalYCoord}
         />

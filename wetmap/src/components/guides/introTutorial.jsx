@@ -115,6 +115,11 @@ export default function IntroTutorial(props) {
 
   useEffect(() => {
     setMovingBack(false);
+    let characterWidth = document.getElementsByClassName("character")[0]
+    .clientWidth;
+
+    let textBoxHeight = document.getElementsByClassName("talkbox")[0]
+    .clientHeight;
 
     switch (chapter) {
       case "Getting around the map":
@@ -123,10 +128,10 @@ export default function IntroTutorial(props) {
         setItterator(6);
         setGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-600);
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth + (windowHeigth - 400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setPixY(3.5 * windowHeigth + (windowHeigth - picBoxHeigth) / 2);
         break;
@@ -137,10 +142,10 @@ export default function IntroTutorial(props) {
         setItterator(9);
         setGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-600);
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth + (windowHeigth - 400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setClusterAnchorY(2 * windowHeigth + (windowHeigth - 500) / 2);
         setHeatPotintY(2 * windowHeigth + (windowHeigth - 200) / 3);
@@ -154,10 +159,10 @@ export default function IntroTutorial(props) {
         setGuideModal(true);
         setIntroGuideModalYCoord(-windowHeigth);
         setTimeout(() => {
-          setCharacterX(-600);
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth + (windowHeigth - 400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setArrowY(2 * windowHeigth + (windowHeigth - 250) / 6);
         if (selectedDiveSite.SiteName === "") {
@@ -440,13 +445,19 @@ export default function IntroTutorial(props) {
   }, [itterator, textPrinting]);
 
   useEffect(() => {
+    let characterWidth = document.getElementsByClassName("character")[0]
+    .clientWidth;
+
+    let textBoxHeight = document.getElementsByClassName("talkbox")[0]
+    .clientHeight;
+
     if (itterator === 0) {
       setTimeout(() => {
-        setCharacterX(-600);
+        setCharacterX(-windowWidth+characterWidth*1.2);
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeigth + (windowHeigth - 400));
+        setTextBoxY(-windowHeigth/5);
       }, 1000);
     }
 
@@ -700,6 +711,8 @@ export default function IntroTutorial(props) {
       >
         {pics &&
           pics.map((pic) => {
+            let photoName = pic.photofile.split("/").pop();
+
             return (
               <div
                 key={pic.id}
@@ -713,7 +726,7 @@ export default function IntroTutorial(props) {
                 </div>
                 <div className="shadowbox">
                   <img
-                    src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${pic.photofile}`}
+                    src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
                     // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${pic.photofile}`}
                     id={pic.id}
                     style={{
@@ -770,7 +783,7 @@ export default function IntroTutorial(props) {
           sx={{
             height: "100%",
             width: "100%",
-            color: "aquamarine",
+            color: "#538dbd",
           }}
         />
       </animated.div>
@@ -785,7 +798,7 @@ export default function IntroTutorial(props) {
           sx={{
             height: "100%",
             width: "100%",
-            color: "aquamarine",
+            color: "#538dbd",
           }}
         />
       </animated.div>

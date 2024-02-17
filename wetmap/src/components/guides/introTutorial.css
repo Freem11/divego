@@ -14,30 +14,28 @@
     position: absolute;
     bottom: -10vh; 
     left: 100vw; 
-    height: 700px;
-    width: 700px;
+    height: 90vh;
+    width: 50vw;
     opacity: rgb(0,0,0,1);
     /* background-color: green */
   }
 
   .talkbox {
     position: absolute;
-    top: 120%;
-    left: 33%;
-    width: 600px;
+    top: 100vh;
+    left: 25vw;
+    width: 50vw;
     height: min-content;
-    font-family: Itim;
-    font-size: 24px;
     background-color: white;
     border-radius: 15px;
     align-self: center;
-    padding:5px;
-    padding-bottom: 25px;
+    padding: 0.5vw;
+    padding-bottom: 1vh;
   }
 
   .textcontain {
     font-family: Itim;
-    font-size: 24px;
+    font-size: 1.8vw;
     height: min-content;
     /* background-color: khaki; */
   }
@@ -50,20 +48,20 @@
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 5vw;
+    height: 5vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .explorebuttonwrapper {
     position: absolute;
     top: -200vh;
     left: 30%;
-    width: 100px;
-    height: 100px;
-    background-color: black;
-    border-radius: 50px;
+    width: 10vw;
+    height: 10vw;
+    background-color: white;
+    border-radius: 5vw;
   }
 
   .container3 {
@@ -71,34 +69,33 @@
     position: absolute;
     top: -350vh;
     left: 6vw;
-    z-index: 10;
+    z-index: 200;
     background-color: transparent;
     align-items: center;
     /* margin-top: -3%; */
-    height: min-content;
+    /* height: 20vh; */
     margin-right: 10px;
     margin-left: 10px;
-    padding-bottom: 15px;
+    margin-bottom: 0vh;
     border-radius: 15;
     /* background-color: green */
   }
 
   .picContainer3 {
-    width:  346px;
-    height: 200px;
-    margin-bottom: 5;
+    width: 18vw;
+    height: 22vh;
+    margin-bottom: -4vh;
     /* background-color: #538bdb; */
-    margin-top: 0%;
     border-radius: 15;
-    z-index: 10;
+    z-index: 250;
   }
 
   .usernamerwrapper{
     position: absolute;
     top: -200vh;
-    left: 39%;
-    width:  350px;
-    height: 300px;
+    left: 35vw;
+    width:  30vw;
+    height: 35vh;
     margin-bottom: 5px;
     /* background-color: #538bdb; */
     margin-top: 0%;
@@ -107,8 +104,9 @@
   }
 
   .shadowbox{
-    width:  350px;
-    height: 200px;
+    width:  100%;
+    height: 100%;
+    z-index: 220;
   }
 
   .userContainer {
@@ -158,23 +156,23 @@
   .micro {
     display: flex;
     flex-direction: row;
+    align-items: center;
     position: relative;
     background-color: black;
     opacity: 0.6;
     width: 96%;
+    height: 3vh;
     border-radius: 5;
     z-index: 2;
     left: 5%;
-    top: -3%;
+    top: -10%;
   }
 
   .titleTextX {
-    margin-top: 8px;
-    margin-left: 10px;
+    margin-left: 1vw;
     font-family: 'Itim';
     color: #F0EEEB;
-    font-size: 18px;
-    /* margin-left: 2%; */
+    font-size: 1vw;
   }
 
   
@@ -187,14 +185,15 @@
     position: absolute;
     top: -250vh;
     left: 10%;
-    height: 500px;
-    width: 500px;
+    height: 60vh;
+    width: 28vw;
     opacity: 1;
     /* background-color: khaki; */
   }
 
   .anchorclust {
-    margin-top: 40%;
+    margin-top: 22vh;
+    margin-left: 1vw;
   }
 
   .anchor1 {
@@ -203,10 +202,10 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    top: 0px;
-    left: 350px;
-    height: 45;
-    width: 45;
+    top: 0;
+    left: 20vw;
+    height: 10vw;
+    width: 10vw;
     opacity: 1;
     margin-bottom: 15;
   }
@@ -218,9 +217,9 @@
     border-radius: 50;
     position: absolute;
     top: 0px;
-    left: 50px;
-    height: 45;
-    width: 45;
+    left: 3vw;
+    height: 10vw;
+    width: 10vw;
     opacity: 1;
     margin-bottom: 15;
   }
@@ -231,10 +230,10 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    top: 400px;
-    left: 50px;
-    height: 45;
-    width: 45;
+    top: 46vh;
+    left: 3vw;
+    height: 10vw;
+    width: 10vw;
     opacity: 1;
     margin-bottom: 15;
   }
@@ -245,10 +244,10 @@
     justify-content: center;
     border-radius: 50;
     position: absolute;
-    top: 400px;
-    left: 350px;
-    height: 45;
-    width: 45;
+    top: 46vh;
+    left: 20vw;
+    height: 10vw;
+    width: 10vw;
     opacity: 1;
     margin-bottom: 15;
   }
@@ -284,8 +283,8 @@
     position: absolute;
     top: -200vh;
     left:  25%;
-    height: 250px;
-    width: 600px;
+    height: 25vh;
+    width: 25vw;
     opacity: 1;
     /* background-color: plum; */
   }
@@ -294,8 +293,8 @@
     position: absolute;
     top: 0;
     left: 0;
-    height: 25;
-    width: 25;
+    height: 5vw;
+    width: 5vw;
     border-radius: 10;
     /* background-color: blue; */
   }
@@ -304,8 +303,8 @@
     /* position: absolute;
     top: 38%;
     left: 85%; */
-    height: 25px;
-    width: 25px;
+    height: 1.5vw;
+    width: 1.5vw;
     border-radius: 10;
     /* background-color: blue; */
   }
@@ -314,19 +313,22 @@
     position: absolute;
     top: 38%;
     left: 77%;
-    height: 25px;
-    width: 25px;
+    height: 1.5vw;
+    width: 1.5vw;
     border-radius: 10;
     margin-bottom: 5px;
     /* background-color: blue; */
   }
 
   .guidebutton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     position: absolute;
     top: -200vh;
     left: 30%;
-    height: 55px;
-    width: 180px;
+    height: 8vh;
+    width: 9vw;
     border-radius: 20px;
     animation: changeBg 4s linear infinite;
     border-radius: 15;
@@ -354,10 +356,10 @@
   .guidetext {
     color: black;
     font-family: 'Patrick Hand', cursive;
-    font-size: 20px;
-    margin-top: 12px;
-    padding-right: 10px;
-    padding-left: 10px;
+    font-size: 1.5vw;
+    /* margin-top: 12px; */
+    /* padding-right: 10px;
+    padding-left: 10px; */
   }
 
 

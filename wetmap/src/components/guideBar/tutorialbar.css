@@ -7,36 +7,38 @@
   }
 
   .library {
-    /* z-index: 60; */
-    height: auto;
-    width: 100%;
-    margin-top: 5px;
-    margin-left: 0px;
+    width: 28vw;
     border-radius: 15px;
-    background-color: #538dbd;
+    margin-top: -1vh;
   }
 
   .chapter {
     justify-content: center;
-    height: 45px;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-top: 1px;
-    padding-bottom:5px;
-    /* background-color: pink; */
+    height: 3vh;
+    padding-left: 2vw;
+    padding-right: 2vw;
   }
 
   .chapterItem{
+    display: flex;
     text-align: center;
+    justify-content: center;
     font-family:'Patrick Hand', cursive;
-    height: 5px;
-    font-size: 20px;
+    background-color: #538dbd;
+    font-size: 2vw;
     color: white;
     pointer-events: all;
+    margin-bottom: 0;
+    margin-top: 2vh;
+    padding: 0.5vw;
+    border-radius: 1vw;
   }
   .guidebuttonBar {
-    height: 52%;
-    width: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 8vh;
+    width: 12vw;
     border-radius: 20px;
     animation: changeBg 4s linear infinite;
     border-radius: 15px;
@@ -65,9 +67,7 @@
   .guidetextBar {
     color: black;
     font-family: 'Patrick Hand', cursive;
-    font-size: 20px;
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-left: 10px;
+    font-size: 2vw;
+
   }
 

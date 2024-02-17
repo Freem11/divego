@@ -128,7 +128,6 @@ export default function TutorialBar() {
                     >
                       {listItem}
                     </p>
-                    <div style={{height: 1, width: "101%", backgroundColor: "white", marginLeft: -2}}></div>
                   </div>
               );
             })}

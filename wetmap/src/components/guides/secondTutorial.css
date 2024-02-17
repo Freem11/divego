@@ -15,20 +15,20 @@
     position: absolute;
     bottom: -10vh; 
     left: 100vw; 
-    height: 700px;
-    width: 700px;
+    height: 90vh;
+    width: 50vw;
     opacity: rgb(0,0,0,1);
     /* background-color: green */
   }
 
   .talkbox2 {
     position: absolute;
-    top: 120%;
-    left: 35%;
-    width: 60vh;
+    top: 100vh;
+    left: 25vw;
+    width: 50vw;
     height: min-content;
     font-family: Itim;
-    font-size: 24px;
+    font-size: 1.8vw;
     background-color: white;
     border-radius: 15px;
     align-self: center;

@@ -99,13 +99,13 @@ export default function UserNamer() {
         inputProps={{
           style: {
             textAlign: "center",
-            fontFamily: "Indie Flower",
-            fontSize: "20px",
+            fontFamily: "Itim",
+            fontSize: "2vw",
             textOverflow: "ellipsis",
             backgroundColor: "#538dbd",
-            height: "35px",
+            height: "4vh",
             color: "lightgrey",
-            width: "220px",
+            width: "15vw",
             borderRadius: "20px",
             boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
             marginBottom: "15px"

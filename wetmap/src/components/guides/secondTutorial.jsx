@@ -88,7 +88,11 @@ export default function SecondTutorial(props) {
   let modalHeigth = 700;
   
   useEffect(() => {
-    // setDiveSiteAdderModal(false);
+    let characterWidth = document.getElementsByClassName("character2")[0]
+    .clientWidth;
+
+    let textBoxHeight = document.getElementsByClassName("talkbox2")[0]
+    .clientHeight;
 
     switch (chapter) {
       case "Checking for a dive site":
@@ -97,10 +101,10 @@ export default function SecondTutorial(props) {
         setSecondGuideModalYCoord(-windowHeigth)
         setSecondGuideModal(true);
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setDsSearchY((2*windowHeigth)+(windowHeigth-100)/3);
         break;
@@ -110,10 +114,10 @@ export default function SecondTutorial(props) {
         setItterator2(8);
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setDiveSiteY((2*windowHeigth)+(windowHeigth-100)/3);
         break;
@@ -125,10 +129,10 @@ export default function SecondTutorial(props) {
         setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         break;
 
@@ -138,10 +142,10 @@ export default function SecondTutorial(props) {
         setDsAddermodal(true)
         setSecondGuideModalYCoord(-windowHeigth)
         setTimeout(() => {
-          setCharacterX((-600));
+          setCharacterX(-windowWidth+characterWidth*1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth+(windowHeigth-400));
+          setTextBoxY(-windowHeigth/4);
         }, 300);
         setLocationY((2*windowHeigth)+(windowHeigth-100)/3)
         break;
@@ -377,13 +381,19 @@ export default function SecondTutorial(props) {
   }, [itterator2, textPrinting]);
 
   useEffect(() => {
+    let characterWidth = document.getElementsByClassName("character2")[0]
+    .clientWidth;
+
+    let textBoxHeight = document.getElementsByClassName("talkbox2")[0]
+    .clientHeight;
+
     if (itterator2 === 0) {
       setTimeout(() => {
-        setCharacterX((-600));
+        setCharacterX(-windowWidth+characterWidth*1.2);
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeigth+(windowHeigth-400));
+        setTextBoxY(-windowHeigth/4);
       }, 1000);
     }
 
