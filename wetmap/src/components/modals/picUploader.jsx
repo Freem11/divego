@@ -108,8 +108,8 @@ const PicUploader = React.memo((props) => {
   }, [pin.PicDate]);
 
   const handleChange = async (e) => {
-    setPhotoFile(null);
     if (e.target.name === "PicFile") {
+      setPhotoFile(null);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -723,7 +723,7 @@ const PicUploader = React.memo((props) => {
                   contentEditable={false}
                   value={pin.Longitude}
                   onChange={handleChange}
-                  onClick={handleNoGPSClose}
+                  onClick={handleNoGPSCloseOnMapChange}
                   inputProps={{
                     readOnly: true,
                     style: {
