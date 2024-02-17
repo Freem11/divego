@@ -28,7 +28,12 @@ const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 export default function ThirdTutorial(props) {
-  const { animateThirdGuideModal, setThirdGuideModalYCoord, setPicAddermodal } = props;
+  const {
+    animateThirdGuideModal,
+    setThirdGuideModalYCoord,
+    setPicAddermodal,
+    setPicModalYCoord,
+  } = props;
 
   window.addEventListener("resize", trackDimensions);
 
@@ -79,83 +84,89 @@ export default function ThirdTutorial(props) {
   }, [tutorialReset]);
 
   let modalHeigth = 700;
-  
+
   useEffect(() => {
     setMasterSwitch(true);
     let characterWidth = document.getElementsByClassName("character3")[0]
-    .clientWidth;
+      .clientWidth;
 
     let textBoxHeight = document.getElementsByClassName("talkbox3")[0]
-    .clientHeight;
+      .clientHeight;
+
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     switch (chapter) {
       case "Contributing photos overview":
         resetTutorial();
         setItterator3(3);
-        setThirdGuideModalYCoord(-windowHeigth)
+        setThirdGuideModalYCoord(-windowHeigth);
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth+characterWidth*1.2);
+          setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth/4);
+          setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setPicAddermodal(false)
-        setCameraY((2*windowHeigth)+(windowHeigth-100)/3);
+        setPicAddermodal(false);
+        setCameraY(2 * windowHeigth + (windowHeigth - 100) / 3);
         break;
 
       case "Adding your photo":
         resetTutorial();
         setItterator3(6);
-        setThirdGuideModalYCoord(-windowHeigth)
+        setThirdGuideModalYCoord(-windowHeigth);
         setThirdGuideModal(true);
         setTutorialRunning(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth+characterWidth*1.2);
+          setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth/4);
+          setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setPicAddermodal(true)
+        setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
+        setPicAddermodal(true);
         break;
 
       case "Name that sea creature!":
         resetTutorial();
         setItterator3(12);
-        setThirdGuideModalYCoord(-windowHeigth)
+        setThirdGuideModalYCoord(-windowHeigth);
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth+characterWidth*1.2);
+          setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth/4);
+          setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setPicAddermodal(true)
+        setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
+        setPicAddermodal(true);
         break;
 
       case "Dropping the pin":
         resetTutorial();
         setItterator3(15);
-        setThirdGuideModalYCoord(-windowHeigth)
+        setThirdGuideModalYCoord(-windowHeigth);
         setThirdGuideModal(true);
         setTimeout(() => {
-          setCharacterX(-windowWidth+characterWidth*1.2);
+          setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
         setTimeout(() => {
-          setTextBoxY(-windowHeigth/4);
+          setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setPicAddermodal(true)
-        setPinY((2*windowHeigth)+(windowHeigth-100)/3);
+        setPicAddermodal(true);
+        setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
+        setPinY(2 * windowHeigth + (windowHeigth - 100) / 3);
         break;
 
       case "Exit Guide":
         setThirdGuideModalYCoord(0);
         handleClearTutorial();
         setTutorialRunning(false);
-        setPicAddermodal(false)
+        setPicAddermodal(false);
         break;
     }
-    setChapter(null)
+    setChapter(null);
   }, [chapter]);
 
   const handleClearTutorial = async () => {
@@ -176,12 +187,12 @@ export default function ThirdTutorial(props) {
   };
 
   const resetTutorial = async () => {
-    setCharacterX(0)
-    setTextBoxY(0)
-    setCameraY(0)
-    setPhotoY(0)
-    setPinY(0)
-    setMantaY(0)
+    setCharacterX(0);
+    setTextBoxY(0);
+    setCameraY(0);
+    setPhotoY(0);
+    setPinY(0);
+    setMantaY(0);
     setTutorialReset(false);
   };
 
@@ -360,108 +371,119 @@ export default function ThirdTutorial(props) {
 
   useEffect(() => {
     let characterWidth = document.getElementsByClassName("character3")[0]
-    .clientWidth;
+      .clientWidth;
 
     let textBoxHeight = document.getElementsByClassName("talkbox3")[0]
-    .clientHeight;
-
+      .clientHeight;
 
     if (itterator3 === 0) {
       setTimeout(() => {
-        setCharacterX(-windowWidth+characterWidth*1.2);
+        setCharacterX(-windowWidth + characterWidth * 1.2);
       }, 600);
 
       setTimeout(() => {
-        setTextBoxY(-windowHeigth/4);
+        setTextBoxY(-windowHeigth / 4);
       }, 1000);
     }
 
     if (itterator3 === 3) {
-      setCameraY((2*windowHeigth)+(windowHeigth-100)/3);
+      setCameraY(2 * windowHeigth + (windowHeigth - 100) / 3);
     }
 
     if (itterator3 === 5) {
       setCameraY(0);
-      setThirdGuideModalYCoord(0)
+      setThirdGuideModalYCoord(0);
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 6) {
-      setThirdGuideModalYCoord(-windowHeigth)
+      setThirdGuideModalYCoord(-windowHeigth);
+      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+        .clientHeight;
+      setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 7) {
-      setPhotoY((2*windowHeigth)+(windowHeigth-100)/3);
+      setPhotoY(2 * windowHeigth + (windowHeigth - 100) / 3);
     }
 
     if (itterator3 === 8) {
       setPhotoY(0);
-      setThirdGuideModalYCoord(0)
+      setThirdGuideModalYCoord(0);
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 9) {
-      setThirdGuideModalYCoord(-windowHeigth)
+      setThirdGuideModalYCoord(-windowHeigth);
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 11) {
-      setThirdGuideModalYCoord(0)
+      setThirdGuideModalYCoord(0);
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 12) {
-      setThirdGuideModalYCoord(-windowHeigth)
+      setThirdGuideModalYCoord(-windowHeigth);
+      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+        .clientHeight;
+      setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
       // animateThirdGuideModal()
     }
-  
+
     if (itterator3 === 14) {
-      setThirdGuideModalYCoord(0)
+      setThirdGuideModalYCoord(0);
+      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+        .clientHeight;
+      setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 15) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
-      setThirdGuideModalYCoord(-windowHeigth)
+      setThirdGuideModalYCoord(-windowHeigth);
+      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+        .clientHeight;
+      setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
       // animateThirdGuideModal()
       setTimeout(() => {
-        setPinY((2*windowHeigth)+(windowHeigth-100)/3);
+        setPinY(2 * windowHeigth + (windowHeigth - 100) / 3);
       }, 1000);
     }
 
     if (itterator3 === 16) {
-      setThirdGuideModalYCoord(0)
+      setThirdGuideModalYCoord(0);
       // animateThirdGuideModal()
       setPinY(0);
     }
 
-    if (itterator3 === 17) {;
-      setThirdGuideModalYCoord(-windowHeigth)
+    if (itterator3 === 17) {
+      setThirdGuideModalYCoord(-windowHeigth);
       // animateThirdGuideModal()
       setTimeout(() => {
-        setMantaY((2*windowHeigth)+(windowHeigth-120)/3);
+        setMantaY(2 * windowHeigth + (windowHeigth - 120) / 3);
       }, 1000);
     }
 
     if (itterator3 === 19) {
-      setThirdGuideModalYCoord(0)
+      setThirdGuideModalYCoord(0);
       // animateThirdGuideModal()
       setMantaY(0);
     }
 
     if (itterator3 === 20) {
-      setThirdGuideModalYCoord(-windowHeigth)
+      setThirdGuideModalYCoord(-windowHeigth);
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 22) {
-      setThirdGuideModalYCoord(0)
+      setThirdGuideModalYCoord(0);
       // animateThirdGuideModal()
     }
 
     if (itterator3 === 23) {
-      setThirdGuideModalYCoord(-windowHeigth)
+      setThirdGuideModalYCoord(-windowHeigth);
       // animateThirdGuideModal()
     }
 
@@ -471,10 +493,10 @@ export default function ThirdTutorial(props) {
 
     if (itterator3 === feederArray.length - 1) {
       setItterator3(null);
-      setThirdGuideModalYCoord(0)
+      setThirdGuideModalYCoord(0);
       // animateThirdGuideModal()
-      setMapZoom(10)
-      resetTutorial()
+      setMapZoom(10);
+      resetTutorial();
     }
   }, [itterator3]);
 
@@ -510,7 +532,6 @@ export default function ThirdTutorial(props) {
     to: { transform: `translate3d(0,${mantaY}px,0)` },
   });
 
-
   useEffect(() => {
     if (tutorialRunning) {
       if (itterator3 === null) {
@@ -522,10 +543,8 @@ export default function ThirdTutorial(props) {
   const moveMap = (values) => {
     setMapCoords([values.lat, values.lng]);
     setJump(!jump);
-
   };
 
-  
   return (
     <div className="wrapper3" onClick={() => setupText(1)}>
       <animated.div
@@ -554,8 +573,8 @@ export default function ThirdTutorial(props) {
           sx={{
             height: "90%",
             width: "90%",
-            color: "aquamarine",
-            marginTop: "0.5vh"
+            color: "#538dbd",
+            marginTop: "0.5vh",
           }}
         />
       </animated.div>
@@ -568,12 +587,12 @@ export default function ThirdTutorial(props) {
           sx={{
             height: "90%",
             width: "90%",
-            color: "aquamarine",
-            marginTop: "0.5vh"
+            color: "#538dbd",
+            marginTop: "0.5vh",
           }}
         />
       </animated.div>
-  
+
       <animated.div
         ref={pinRef}
         className="pinbuttonwrapper"
@@ -583,7 +602,7 @@ export default function ThirdTutorial(props) {
           sx={{
             height: "100%",
             width: "100%",
-            color: "aquamarine",
+            color: "#538dbd",
           }}
         />
       </animated.div>

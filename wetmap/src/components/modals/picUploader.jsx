@@ -400,7 +400,7 @@ const PicUploader = React.memo((props) => {
     fontFamily: "Patrick Hand",
     fontSize: "1.2vw",
     textTransform: "none",
-    color: "gold",
+    color: "#538dbd",
     cursor: "pointer",
     // backgroundColor: "pink",
     // marginTop: "9px",
@@ -410,16 +410,16 @@ const PicUploader = React.memo((props) => {
     color: "gold",
     width: "2vw",
     height: "4vh",
-    marginTop: "0.3vh",
+    marginTop: "1vh",
     cursor: "pointer",
     // backgroundColor: "green"
   };
 
   const iconStyleAlt = {
     color: "#538dbd",
-    width: "3.5vw",
+    width: "2vw",
     height: "4vh",
-    marginTop: "0.3vh",
+    marginTop: "1vh",
     cursor: "pointer",
   };
 
@@ -750,7 +750,7 @@ const PicUploader = React.memo((props) => {
           <div className="smallBox"></div>
           <div className="smallBox2">
             <div
-              className={pinButState ? "GboxAlt" : "Gbox"}
+              className={pinButState ? "Gbox Gbox2" : "Gbox"}
               onClick={handleNoGPSCloseOnMapChange}
             >
               <PlaceIcon

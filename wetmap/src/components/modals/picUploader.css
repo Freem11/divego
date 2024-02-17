@@ -50,11 +50,11 @@
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
-.autosuggestboxAlt {
+.autosuggestboxPhotoAlt {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 20px;
+  margin-top: 2vh;
   margin-bottom: 4px;
   border: transparent;
   height: 5vh;
@@ -292,17 +292,10 @@
   box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
 
-.GboxAlt {
-  display: flex;
-  width: 3vw;
-  height: 5vh;
-  align-items: center;
-  justify-content: center;
+.Gbox2 {
   background-color: white;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
+
 
 .Gbox:hover {
   background-color: #3e7dd7;
@@ -342,7 +335,7 @@
 .picHolder {
   align-items: center;
   width: 100%;
-  height: 220px;
+  height: 18vh;
   border-radius: 15px;
   object-fit: cover;
 }
@@ -364,10 +357,11 @@
 .picSelectDivAlt {
   display: flex;
   flex-direction: row;
+  align-items: center;
   cursor: pointer;
   background-color: white;
-  width: 185px;
-  height: 40px;
+  width: 12vw;
+  height: 5vh;
   text-align: center;
   border-radius: 5px;
   box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);

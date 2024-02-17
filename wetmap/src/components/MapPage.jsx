@@ -1304,6 +1304,7 @@ const MapPage = React.memo((props) => {
           animateThirdGuideModal={animateThirdGuideModal}
           setThirdGuideModalYCoord={setThirdGuideModalYCoord}
           setPicAddermodal={setPicAddermodal}
+          setPicModalYCoord={setPicModalYCoord}
         />
       </animated.div>
 
