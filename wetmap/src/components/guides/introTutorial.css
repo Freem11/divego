@@ -164,7 +164,10 @@
     opacity: 0.6;
     width: 96%;
     height: 3vh;
-    border-radius: 5;
+    border-radius: 1vw;
+    margin-top: 5vh;
+    margin-bottom: -5.5vh;
+    margin-left: -2.5%;
     z-index: 2;
     left: 5%;
     top: -10%;

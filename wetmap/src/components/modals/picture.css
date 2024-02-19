@@ -1,65 +1,67 @@
-.pictureBoxQ{
+.pictureBoxQ {
   display: flex;
   flex-direction: column;
-  width: 99%;
-  margin-bottom: -10%;
+  width: 98%;
+  margin-left: 1%;
+  overflow: hidden;
+  margin-bottom: 1vh;
+  border-radius: 1vw;
+  position: relative;
+}
+
+.helper {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  width: 96%;
+  height: 2vw;
+  padding: 0.1vw;
+  margin-left: 2%;
+  margin-top: 2%;
+  background-color: black;
+  opacity: 0.8;
+  border-radius: 1vw;
+}
+
+.animalLabelP {
+  display: flex;
+  align-items: center;
+  width: 90%;
+  font-family: "Itim";
+  font-size: 2vw;
+  text-align: left;
+  padding-left: 0.5vw;
+  color: #f0eeeb;
+  opacity: 0.7;
   overflow: hidden;
 }
 
-.micro{
-   display: flex;
-   align-items: center;
-   flex-direction: row;
-   height: 5vh;
-   width: 100%;
-   margin-top: 5vh;
-   margin-bottom: -6vh;
-   margin-left: -2.5%;
-   margin-right: -30%;
-   z-index: 4;
-   overflow: hidden;
-   border-radius: 10px;
-}
-
- .animalLabel{
-   height: 6vh;
-   width: 100%;
-   font-family: 'Itim';
-   font-size: 2vw;
-   text-align: left;
-   margin-top: 7vh;
-   padding-left: 1vw;
-   color: #F0EEEB;
-   background-color: black;
-   opacity: 0.7;
-   overflow: hidden;
+.atagp {
+  /* background-color: white; */
+  display: flex;
+  align-items: center;
+  margin-right: -0.5vw;
+  /* margin-top: 12vh; */
+  padding: 0.5vw;
+  width: 3vw;
+  z-index: 6;
 }
 
 .userLabel {
-   height: 4vh;
-   align-self: end;
-   width: fit-content;
-   border-radius: 10px;
-   font-family: 'Itim';
-   font-size: 1.5vw;
-   text-align: left;
-   margin-top: -5vh;
-   margin-right: 2%;
-   padding-bottom: -5px;
-   padding-left: 15px;
-   padding-right: 15px;
-   color: #F0EEEB;
-   background-color: black;
-   opacity: 0.6;
-   overflow: hidden;
+  display: flex;
+  align-self: end;
+  width: fit-content;
+  border-radius: 10px;
+  font-family: "Itim";
+  font-size: 1vw;
+  text-align: left;
+  padding: 0.1vw;
+  padding-left: 1%;
+  padding-right: 1%;
+  margin-right: 2%;
+  color: #f0eeeb;
+  background-color: black;
+  opacity: 0.8;
+  position: absolute;
+  bottom: -1vh;
 }
-
-.atag{
-   /* background-color: white; */
-   margin-left: -9%;
-   margin-right: 1vw;
-   margin-top: -3vh;
-   /* height: 0px; */
-   width: 3vw;
-   z-index: 6;
-} 

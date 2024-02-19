@@ -12,11 +12,12 @@ export default function PhotoFilterer() {
   const { areaPics, setAreaPics } = useContext(AreaPicsContext);
 
   const handleChange = async (e) => {
-    console.log(e.target.value)
+    console.log(e.target.value);
     setTextValue(e.target.value);
   };
 
   const handleClear = () => {
+    console.log("yo");
     setTextValue("");
   };
 
@@ -34,42 +35,48 @@ export default function PhotoFilterer() {
             className="suggestInput"
             inputProps={{
               style: {
-                fontSize: "1rem",
+                fontSize: "1vw",
                 width: "20vw",
                 textAlign: "center",
                 height: "5vh",
                 backgroundColor: "white",
-                borderRadius: "1rem",
-                marginBottom: "15px",
-                pointerEvents: 'auto'
+                borderRadius: "1vw",
+                pointerEvents: "auto",
+                // marginLeft: "3.5vw"
               },
             }}
           />
         </FormGroup>
-        {textvalue.length > 1 && (
-        <div
-          variant="text"
-          className="xButton"
-          onClick={handleClear}
-          style={{marginBottom: -4}}
-        >
-          <HighlightOffIcon
-            onClick={handleClear}
-            sx={{
-              color: "black",
-              height: "2vh",
-              width: "2vw",
-              // marginBottom: "500%",
-              position: "absolute",
-              top: "2.5vh",
-              left: "63%",
-            }}
-          ></HighlightOffIcon>
-        </div>
-      )}
+        {/* {textvalue.length > 1 && (
+          <div
+            variant="text"
+            className="xButton"
+            onClick={() => handleChange}
+            // style={{marginBottom: -4}}
+          >
+            <HighlightOffIcon
+              onClick={handleClear}
+              sx={{
+                color: "black",
+                height: "1.5vw",
+                width: "2vw",
+                position: "absolute",
+                top: "1.5vw",
+                left: "32vw",
+                pointerEvents: "auto",
+              }}
+            ></HighlightOffIcon>
+          </div>
+        )}
+        {textvalue.length <= 1 && (
+          <div
+            variant="text"
+            className="blankButton"
+            onClick={() => handleChange}
+            style={{ height: "1.5vw", width: "2vw" }}
+          ></div>
+        )} */}
       </div>
-
-   
     </div>
   );
 }

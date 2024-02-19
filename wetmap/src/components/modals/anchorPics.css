@@ -24,16 +24,16 @@
 .DiveSiteLabel{
     font-family: 'Patrick Hand', cursive;
     /* background-color: khaki; */
-    margin-top: 1vh;
+    margin-top: 0vh;
     height: 3vh;
-    font-size: 0.6em;
+    font-size: 2vw;
     color: #F0EEEB;
 }
 
 .DiveSiteCredit{
     font-family: 'Itim', cursive;
     margin-top: -2vh;
-    font-size: 0.5em;
+    font-size: 0.7vw;
     height: 3vh;
     /* background-color: blue; */
 
@@ -55,7 +55,7 @@
     display: flex;
     align-content: center;
     justify-content: center;
-    margin-top: 1vh;
+    margin-top: -0.5vh;
     height: 7vh;
     /* background-color: mediumblue; */
 }
@@ -68,7 +68,7 @@
 }
 
 .picScollA{
-    margin-top: 14%;
+    margin-top: 17%;
     margin-left: 0.3%;
     display: flex;
     flex-direction: column;

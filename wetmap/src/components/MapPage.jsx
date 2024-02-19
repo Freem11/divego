@@ -248,7 +248,7 @@ const MapPage = React.memo((props) => {
   const toggleButtonStyle = {
     "&.Mui-selected": {
       backgroundColor: "#538bdb",
-      width: "30%",
+      width: "70%",
       height: "40%",
       // border: "1px solid #538bdb",
     },
@@ -258,7 +258,7 @@ const MapPage = React.memo((props) => {
       backgroundColor: "white",
     },
     backgroundColor: "white",
-    width: "30%",
+    width: "70%",
     height: "40%",
     // border: "1px solid white",
     // marginTop: "5px",
@@ -548,6 +548,7 @@ const MapPage = React.memo((props) => {
     setSiteModalYCoord(0);
     setSettingsModalYCoord(0);
     setAnchorModalYCoord(0);
+    setSiteModal(false);
     setLaunchModalYCoord(0);
     setMapSearchYCoord(0);
     setSiteSearchModalYCoord(0);
@@ -640,7 +641,7 @@ const MapPage = React.memo((props) => {
       .clientHeight;
 
     if (fabsYCoord === 0) {
-      setfabsYCoord(-containerHeight + (containerHeight / 100) * 12);
+      setfabsYCoord(-containerHeight + (containerHeight / 100) * 20);
     } else {
       setfabsYCoord(0);
     }
@@ -966,7 +967,7 @@ const MapPage = React.memo((props) => {
                     handleSettingsButton();
                   }}
                 >
-                  <SettingsIcon sx={{ width: "2vw" }} />
+                  <SettingsIcon sx={{ width: "3vw", height: "1.5vw" }} />
                 </ToggleButton>
                 <p className="buttonFont">Settings</p>
               </div>
@@ -982,7 +983,7 @@ const MapPage = React.memo((props) => {
                     handleTutorialButton();
                   }}
                 >
-                  <QuestionMarkIcon sx={{ width: "2vw" }} />
+                  <QuestionMarkIcon sx={{ width: "3vw", height: "1.5vw"}} />
                 </ToggleButton>
                 <p className="buttonFont">Guides</p>
               </div>
@@ -1001,7 +1002,7 @@ const MapPage = React.memo((props) => {
                     handleGeocodingSearchButton();
                   }}
                 >
-                  <ExploreIcon sx={{ width: "2vw" }} />
+                  <ExploreIcon sx={{ width: "3vw", height: "1.5vw" }} />
                 </ToggleButton>
                 <p className="buttonFont">Map Search</p>
                 {/* <Collapse
@@ -1027,7 +1028,7 @@ const MapPage = React.memo((props) => {
                     handleDiveSiteSearchButton();
                   }}
                 >
-                  <TravelExploreIcon sx={{ width: "2vw" }} />
+                  <TravelExploreIcon sx={{ width: "3vw", height: "1.5vw" }} />
                 </ToggleButton>
                 <p className="buttonFont">Site Search</p>
                 {/* <Collapse
@@ -1050,7 +1051,7 @@ const MapPage = React.memo((props) => {
                     handlePhotoModalButton();
                   }}
                 >
-                  <PhotoCameraIcon sx={{ width: "2vw" }} />
+                  <PhotoCameraIcon sx={{ width: "3vw", height: "1.5vw" }} />
                 </ToggleButton>
                 <p className="buttonFont">Photo Add</p>
               </div>
@@ -1066,7 +1067,7 @@ const MapPage = React.memo((props) => {
                     handleDiveSiteModalButton();
                   }}
                 >
-                  <AddLocationAltIcon sx={{ width: "2vw" }} />
+                  <AddLocationAltIcon sx={{ width: "3vw", height: "1.5vw" }} />
                 </ToggleButton>
                 <p className="buttonFont">Site Add</p>
               </div>
@@ -1083,7 +1084,7 @@ const MapPage = React.memo((props) => {
                     handleAnchorButton();
                   }}
                 >
-                  <AnchorIcon sx={{ width: "2vw" }} />
+                  <AnchorIcon sx={{ width: "3vw", height: "1.5vw" }} />
                 </ToggleButton>
                 <p className="buttonFont">Show/Hide</p>
               </div>

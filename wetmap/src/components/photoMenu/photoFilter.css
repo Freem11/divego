@@ -2,18 +2,15 @@
   .containerF {
     display: flex;
     flex-direction: row;
-    /* background-color: blue; */
+    background-color: blue;
     /* align-items: center; */
     justify-content: center;
     align-self: center;
-    width: 96%;
+    width: 10vw;
     height: 6vh;
     z-index: 1;
     border-radius: 10%;
-    /* margin-left: -5%; */
-    padding-right: 4%;
-    /* padding-left: 15%; */
-    font-size: 2rem;
+
   }
 
   .inputboxF {
@@ -31,10 +28,17 @@
     /* font-size:  2rem; */
     width: 100%;
   }
-
+/* 
   .xButton {
     z-index: 10;
-    height: 5%;
-    width: 5%;
+    height: 1vw;
+    width: 1vw;
     /* background-color: pink; */
   }
+
+  .blankButton {
+    z-index: 10;
+    height: 1vw;
+    width: 1vw;
+    /* background-color: pink; */
+  } */
