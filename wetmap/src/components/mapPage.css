@@ -365,7 +365,7 @@
     @media only screen and (max-height: 400px) {
         .fabContainer {
             position: absolute;
-            bottom: -20vh;
+            bottom: -14vh;
             left: 20vw;
             display: flex;
             align-items: center;
