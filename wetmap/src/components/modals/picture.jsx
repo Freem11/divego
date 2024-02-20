@@ -13,7 +13,6 @@ function Picture(props) {
 
   const getImageDimensions = async () => {
     let containerWidth = document.getElementsByClassName("picScollA")[0].clientWidth;
-    console.log(containerWidth)
 
     const img = new Image();
     img.src = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`
@@ -25,30 +24,6 @@ function Picture(props) {
   };
 
   getImageDimensions()
-
-  console.log(imgHeigth, imgWidth)
-  
-
-  // let screenWidthInital = window.innerWidth;
-  // const [windowWidth, setWindowWidth] = useState(screenWidthInital);
-  // const [windowHeight, setWindowHeight] = useState(screenHeigthInital);
-
-  // window.addEventListener("resize", trackScreen);
-
-  // function trackScreen() {
-  //   setWindowWidth(window.innerWidth);
-  //   setWindowHeight(window.innerHeight);
-  //   setMenuUp(false);
-  //   setfabsYCoord(0);
-  //   setPicModalYCoord(0);
-  //   setSiteModalYCoord(0);
-  //   setSettingsModalYCoord(0);
-  //   setAnchorModalYCoord(0);
-  //   setSiteModal(false);
-  //   setLaunchModalYCoord(0);
-  //   setMapSearchYCoord(0);
-  //   setSiteSearchModalYCoord(0);
-  // }
 
   
   return (
