@@ -920,6 +920,13 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePulltab = () => {
+    setDsAddermodal(false);
+    setPicAddermodal(false);
+    setSettingsModal(false);
+    setGuideLaunchModal(false);
+    setDiveSiteSearchModal(false);
+    setMapSearchModal(false);
+    setSiteModal(false);
     setShowFilterer(!showFilterer);
   };
 

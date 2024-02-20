@@ -4,6 +4,13 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { animated, useSpring } from "react-spring";
 import { rotation } from "exifr";
 import zIndex from "@mui/material/styles/zIndex";
+import { AnchorModalContext } from "../contexts/anchorModalContext";
+import { DiveSiteAdderModalContext } from "../contexts/diveSiteAdderModalContext";
+import { PicAdderModalContext } from "../contexts/picAdderModalContext";
+import { DiveSiteSearchModalContext } from "../contexts/diveSiteSearchModalContext";
+import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
+import { GuideLaunchModalContext } from "../contexts/guideLaunchModalContext";
+import { SettingsModalContext } from "../contexts/settingsModalContext";
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -22,6 +29,22 @@ const PhotoMenuListItem = (props) => {
     setBoxWidth,
   } = props;
 
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  const { dsAdderModal, setDsAddermodal } = useContext(
+    DiveSiteAdderModalContext
+  );
+  const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
+  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(
+    DiveSiteSearchModalContext
+  );
+  const { mapSearchModal, setMapSearchModal } = useContext(
+    MapSearchModalContext
+  );
+  const { guideLaunchModal, setGuideLaunchModal } = useContext(
+    GuideLaunchModalContext
+  );
+  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+
   let photoName = photoURL.split("/").pop();
 
   const tileRef = useRef(null);
@@ -32,6 +55,15 @@ const PhotoMenuListItem = (props) => {
   const [xCoord, setXCoord] = useState(0);
 
   const handleSelect = (name) => {
+    
+    setDsAddermodal(false);
+    setPicAddermodal(false);
+    setSettingsModal(false);
+    setGuideLaunchModal(false);
+    setDiveSiteSearchModal(false);
+    setMapSearchModal(false);
+    setSiteModal(false);
+
     if (animalVal.includes(name)) {
       setAnimalVal(animalVal.filter((item) => item !== name));
     } else {
@@ -85,6 +117,14 @@ const PhotoMenuListItem = (props) => {
 
   const onDoubleClick = (e, id) => {
     setSelectedID(id);
+
+    setDsAddermodal(false);
+    setPicAddermodal(false);
+    setSettingsModal(false);
+    setGuideLaunchModal(false);
+    setDiveSiteSearchModal(false);
+    setMapSearchModal(false);
+    setSiteModal(false);
 
     let WidthofTile = e.target.width;
     let HeightOfTile = e.target.height;
