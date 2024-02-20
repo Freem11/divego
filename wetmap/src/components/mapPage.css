@@ -168,8 +168,9 @@
     align-items: center;
     justify-content: center;
 	gap: 0.5rem;
-	bottom: 40px;
-	right: 30px;
+	bottom: 3%;
+    right: 2%;
+    /* background-color: burlywood; */
 }
 
 .animateFont {
@@ -234,8 +235,10 @@
     width: 145px;
     z-index: 2;
     position: absolute;
+    pointer-events: none;
     /* margin-top: 100vh; */
     bottom: 0;
+    /* background-color: burlywood; */
     
 }
 
@@ -357,6 +360,23 @@
         font-weight: bold;
         margin-left: clamp(10px, 22vw, 2000px);
         width: 75vw;
+    }
+
+    @media only screen and (max-height: 400px) {
+        .fabContainer {
+            position: absolute;
+            bottom: -20vh;
+            left: 20vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 20vh;
+            width: 60vw;	
+            flex-direction: column;
+            z-index: 5;
+            pointer-events: none;
+            /* background-color: pink; */
+        }
     }
 
 }

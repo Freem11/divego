@@ -657,7 +657,12 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("fabButtons")[0].clientHeight;
 
     if (fabsYCoord === 0) {
-      setfabsYCoord(-containerHeight + (containerHeight / 100) * 20);
+      if(windowHeight < 400 ) {
+        setfabsYCoord(-containerHeight-(buttonSectionHeight/2));
+      } else {
+        setfabsYCoord(-containerHeight+(buttonSectionHeight/2));
+      }
+     
     } else {
       setfabsYCoord(0);
     }

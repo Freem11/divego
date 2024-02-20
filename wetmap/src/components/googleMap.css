@@ -4,6 +4,10 @@
   z-index: 1;
 }
 
+.gm-style-cc {
+  display: none;
+}
+
 .aligner {
   position: absolute;
   pointer-events: none;
