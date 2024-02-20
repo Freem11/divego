@@ -53,6 +53,7 @@ import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContex
 import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "./contexts/settingsModalContext";
+import { PullTabContext } from "./contexts/pullTabContext";
 import { TutorialContext } from "./contexts/tutorialContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
@@ -83,7 +84,6 @@ const MapPage = React.memo((props) => {
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
   const [showAdminPortal, setShowAdminPortal] = useState(false);
-  const [showFilterer, setShowFilterer] = useState(false);
   const { animalVal } = useContext(AnimalContext);
   const { showGeoCoder, setShowGeoCoder } = useContext(GeoCoderContext);
   const { showAnimalSearch, setShowAnimalSearch } =
@@ -112,6 +112,7 @@ const MapPage = React.memo((props) => {
   const { mapSearchModal, setMapSearchModal } = useContext(MapSearchModalContext);
   const { guideLaunchModal, setGuideLaunchModal } = useContext(GuideLaunchModalContext);
   const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+  const { showFilterer, setShowFilterer } = useContext(PullTabContext);
 
   const togglePicModal = () => {
     setPicModal(!picModal);
@@ -389,6 +390,7 @@ const MapPage = React.memo((props) => {
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
+    setShowFilterer(false);
     if (pin.PicFile !== null) {
       removePhoto({
         filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -423,7 +425,7 @@ const MapPage = React.memo((props) => {
       return;
     }
 
-    // animateSiteSearchModal();
+    animateSiteSearchModal();
     setMapSearchYCoord(0);
     setPicModalYCoord(0);
     // setSiteModalYCoord(0);
@@ -431,7 +433,8 @@ const MapPage = React.memo((props) => {
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
-    setDiveSiteSearchModal(true);
+    // setDiveSiteSearchModal(true);
+    setShowFilterer(false)
     if (pin.PicFile !== null) {
       removePhoto({
         filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -682,6 +685,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setPicAddermodal(true);
+      setShowFilterer(false);
     } else {
       setPicAddermodal(false);
       // setPicModalYCoord(0);
@@ -712,13 +716,6 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (siteModalYCoord === 0) {
-      // setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      // setPicModalYCoord(0);
-      // setSettingsModalYCoord(0);
-      // setLaunchModalYCoord(0);
-      // setAnchorModalYCoord(0);
-      // setSiteSearchModalYCoord(0);
-      // setMapSearchYCoord(0);
       setSiteModal(false);
       setPicAddermodal(false);
       setSettingsModal(false);
@@ -726,6 +723,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setDsAddermodal(true);
+      setShowFilterer(false);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -733,8 +731,7 @@ const MapPage = React.memo((props) => {
         });
       }
     } else {
-      // setSiteModalYCoord(0);
-      setSiteModal(false);
+      setDsAddermodal(false);
     }
   };
 
@@ -753,13 +750,6 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (launchModalYCoord === 0) {
-      // setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      // setPicModalYCoord(0);
-      // setSiteModalYCoord(0);
-      // setSettingsModalYCoord(0);
-      // setAnchorModalYCoord(0);
-      // setSiteSearchModalYCoord(0);
-      // setMapSearchYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
@@ -767,6 +757,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setGuideLaunchModal(true);
+      setShowFilterer(false);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -775,7 +766,6 @@ const MapPage = React.memo((props) => {
       }
     } else {
       setGuideLaunchModal(false);
-      // setLaunchModalYCoord(0);
     }
   };
 
@@ -784,13 +774,6 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (settingsModalYCoord === 0) {
-      // setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      // setPicModalYCoord(0);
-      // setSiteModalYCoord(0);
-      // setLaunchModalYCoord(0);
-      // setAnchorModalYCoord(0);
-      // setMapSearchYCoord(0);
-      // setSiteSearchModalYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
@@ -798,6 +781,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setSettingsModal(true);
+      setShowFilterer(false);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -806,7 +790,6 @@ const MapPage = React.memo((props) => {
       }
     } else {
       setSettingsModal(false);
-      // setSettingsModalYCoord(0);
     }
   };
 
@@ -839,13 +822,6 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (anchorModalYCoord === 0) {
-      // setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      // setPicModalYCoord(0);
-      // setSiteModalYCoord(0);
-      // setSettingsModalYCoord(0);
-      // setLaunchModalYCoord(0);
-      // setMapSearchYCoord(0);
-      // setSiteSearchModalYCoord(0);
       setDsAddermodal(false);
       setPicAddermodal(false);
       setSettingsModal(false);
@@ -853,6 +829,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setSiteModal(true);
+      setShowFilterer(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -860,7 +837,6 @@ const MapPage = React.memo((props) => {
         });
       }
     } else {
-      // setAnchorModalYCoord(0);
       setSiteModal(false);
     }
   };
@@ -870,15 +846,6 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("searchModalDiv")[0].clientHeight;
 
     if (siteSearchModalYCoord === 0) {
-      // setSiteSearchModalYCoord(
-      //   -windowHeight + (windowHeight - modalHeigth) / 3
-      // );
-      // setPicModalYCoord(0);
-      // setSiteModalYCoord(0);
-      // setSettingsModalYCoord(0);
-      // setLaunchModalYCoord(0);
-      // setAnchorModalYCoord(0);
-      // setMapSearchYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
@@ -886,10 +853,9 @@ const MapPage = React.memo((props) => {
       setGuideLaunchModal(false);
       setMapSearchModal(false);
       setDiveSiteSearchModal(true);
+      setShowFilterer(true);
     } else {
       setDiveSiteSearchModal(false);
-      // setSiteSearchModalYCoord(0);
-      // setSiteModal(false);
     }
   };
 
@@ -898,13 +864,6 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("searchModalDiv")[0].clientHeight;
 
     if (mapSearchYCoord === 0) {
-      // setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 3);
-      // setPicModalYCoord(0);
-      // setSiteModalYCoord(0);
-      // setSettingsModalYCoord(0);
-      // setLaunchModalYCoord(0);
-      // setAnchorModalYCoord(0);
-      // setSiteSearchModalYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
@@ -912,14 +871,14 @@ const MapPage = React.memo((props) => {
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(true);
+      setShowFilterer(true);
     } else {
       setMapSearchModal(false);
-      // setMapSearchYCoord(0);
-      // setSiteModal(false);
     }
   };
 
   const animatePulltab = () => {
+    console.log(showFilterer)
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
