@@ -7,6 +7,10 @@ import SearchTextContextProvider from './searchTextContext';
 import AnchordModalContextProvider from './anchorModalContext';
 import DiveSiteAdderModalContextProvider from './diveSiteAdderModalContext';
 import PicAdderModalContextProvider from './picAdderModalContext';
+import DiveSiteSearchModalContextProvider from './diveSiteSearchModalContext';
+import MapSearchModalContextProvider from './mapSearchModalContext';
+import GuideLaunchModalContextProvider from './guideLaunchModalContext';
+import SettingsModalContextProvider from './settingsModalContext';
 import ThirdTutorialModalContextProvider from './thirdTutorialModalContext';
 import SecondTutorialModalContextProvider from './secondTutorialModalContext';
 import TutorialModalContextProvider from './tutorialModalContext';
@@ -46,6 +50,10 @@ const providers = [
     AnchordModalContextProvider,
     DiveSiteAdderModalContextProvider,
     PicAdderModalContextProvider,
+    DiveSiteSearchModalContextProvider,
+    MapSearchModalContextProvider,
+    GuideLaunchModalContextProvider,
+    SettingsModalContextProvider,
     ThirdTutorialModalContextProvider,
     SecondTutorialModalContextProvider,
     TutorialModalContextProvider,

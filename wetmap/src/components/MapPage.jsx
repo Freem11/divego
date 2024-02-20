@@ -49,6 +49,10 @@ import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
 import { PicAdderModalContext } from "./contexts/picAdderModalContext";
+import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContext";
+import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
+import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
+import { SettingsModalContext } from "./contexts/settingsModalContext";
 import { TutorialContext } from "./contexts/tutorialContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
@@ -104,7 +108,11 @@ const MapPage = React.memo((props) => {
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { dsAdderModal, setDsAddermodal } = useContext(DiveSiteAdderModalContext);
   const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
-  
+  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(DiveSiteSearchModalContext);
+  const { mapSearchModal, setMapSearchModal } = useContext(MapSearchModalContext);
+  const { guideLaunchModal, setGuideLaunchModal } = useContext(GuideLaunchModalContext);
+  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+
   const togglePicModal = () => {
     setPicModal(!picModal);
   };
@@ -423,7 +431,7 @@ const MapPage = React.memo((props) => {
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
-    setDsAddermodal(true);
+    setDiveSiteSearchModal(true);
     if (pin.PicFile !== null) {
       removePhoto({
         filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -662,13 +670,17 @@ const MapPage = React.memo((props) => {
     if (picModalYCoord === 0) {
       // setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       // setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
+      // setSettingsModalYCoord(0);
+      // setLaunchModalYCoord(0);
       // setAnchorModalYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setMapSearchYCoord(0);
+      // setSiteSearchModalYCoord(0);
+      // setMapSearchYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
+      setSettingsModal(false);
+      setGuideLaunchModal(false);
+      setDiveSiteSearchModal(false);
+      setMapSearchModal(false);
       setPicAddermodal(true);
     } else {
       setPicAddermodal(false);
@@ -702,14 +714,18 @@ const MapPage = React.memo((props) => {
     if (siteModalYCoord === 0) {
       // setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       // setPicModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
+      // setSettingsModalYCoord(0);
+      // setLaunchModalYCoord(0);
       // setAnchorModalYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setMapSearchYCoord(0);
+      // setSiteSearchModalYCoord(0);
+      // setMapSearchYCoord(0);
       setSiteModal(false);
+      setPicAddermodal(false);
+      setSettingsModal(false);
+      setGuideLaunchModal(false);
+      setDiveSiteSearchModal(false);
+      setMapSearchModal(false);
       setDsAddermodal(true);
-      setPicAddermodal(false)
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -737,16 +753,20 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (launchModalYCoord === 0) {
-      setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      // setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       // setPicModalYCoord(0);
       // setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
+      // setSettingsModalYCoord(0);
       // setAnchorModalYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setMapSearchYCoord(0);
+      // setSiteSearchModalYCoord(0);
+      // setMapSearchYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
+      setSettingsModal(false);
+      setDiveSiteSearchModal(false);
+      setMapSearchModal(false);
+      setGuideLaunchModal(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -754,7 +774,8 @@ const MapPage = React.memo((props) => {
         });
       }
     } else {
-      setLaunchModalYCoord(0);
+      setGuideLaunchModal(false);
+      // setLaunchModalYCoord(0);
     }
   };
 
@@ -763,16 +784,20 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (settingsModalYCoord === 0) {
-      setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      // setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       // setPicModalYCoord(0);
       // setSiteModalYCoord(0);
-      setLaunchModalYCoord(0);
+      // setLaunchModalYCoord(0);
       // setAnchorModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
+      // setMapSearchYCoord(0);
+      // setSiteSearchModalYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
+      setGuideLaunchModal(false);
+      setDiveSiteSearchModal(false);
+      setMapSearchModal(false);
+      setSettingsModal(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -780,7 +805,8 @@ const MapPage = React.memo((props) => {
         });
       }
     } else {
-      setSettingsModalYCoord(0);
+      setSettingsModal(false);
+      // setSettingsModalYCoord(0);
     }
   };
 
@@ -816,13 +842,17 @@ const MapPage = React.memo((props) => {
       // setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
       // setPicModalYCoord(0);
       // setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setSiteModal(true);
+      // setSettingsModalYCoord(0);
+      // setLaunchModalYCoord(0);
+      // setMapSearchYCoord(0);
+      // setSiteSearchModalYCoord(0);
       setDsAddermodal(false);
       setPicAddermodal(false);
+      setSettingsModal(false);
+      setGuideLaunchModal(false);
+      setDiveSiteSearchModal(false);
+      setMapSearchModal(false);
+      setSiteModal(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -840,21 +870,26 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("searchModalDiv")[0].clientHeight;
 
     if (siteSearchModalYCoord === 0) {
-      setSiteSearchModalYCoord(
-        -windowHeight + (windowHeight - modalHeigth) / 3
-      );
+      // setSiteSearchModalYCoord(
+      //   -windowHeight + (windowHeight - modalHeigth) / 3
+      // );
       // setPicModalYCoord(0);
       // setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
+      // setSettingsModalYCoord(0);
+      // setLaunchModalYCoord(0);
       // setAnchorModalYCoord(0);
-      setMapSearchYCoord(0);
+      // setMapSearchYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
+      setSettingsModal(false);
+      setGuideLaunchModal(false);
+      setMapSearchModal(false);
+      setDiveSiteSearchModal(true);
     } else {
-      setSiteSearchModalYCoord(0);
-      setSiteModal(false);
+      setDiveSiteSearchModal(false);
+      // setSiteSearchModalYCoord(0);
+      // setSiteModal(false);
     }
   };
 
@@ -863,19 +898,24 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("searchModalDiv")[0].clientHeight;
 
     if (mapSearchYCoord === 0) {
-      setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 3);
+      // setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 3);
       // setPicModalYCoord(0);
       // setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
+      // setSettingsModalYCoord(0);
+      // setLaunchModalYCoord(0);
       // setAnchorModalYCoord(0);
-      setSiteSearchModalYCoord(0);
+      // setSiteSearchModalYCoord(0);
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
+      setSettingsModal(false);
+      setGuideLaunchModal(false);
+      setDiveSiteSearchModal(false);
+      setMapSearchModal(true);
     } else {
-      setMapSearchYCoord(0);
-      setSiteModal(false);
+      setMapSearchModal(false);
+      // setMapSearchYCoord(0);
+      // setSiteModal(false);
     }
   };
 
@@ -947,6 +987,82 @@ const MapPage = React.memo((props) => {
       setPicModalYCoord(0);
     }
   }, [picAdderModal]);
+
+  useEffect(() => {
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+
+    if (settingsModal) {
+      setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setAnchorModalYCoord(0);
+      setSiteModalYCoord(0);
+      setPicModalYCoord(0);
+      setLaunchModalYCoord(0);
+      setMapSearchYCoord(0);
+      setSiteSearchModalYCoord(0);
+    }
+
+    if (!settingsModal) {
+      setSettingsModalYCoord(0);
+    }
+  }, [settingsModal]);
+
+  useEffect(() => {
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+
+    if (guideLaunchModal) {
+      setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setAnchorModalYCoord(0);
+      setSiteModalYCoord(0);
+      setPicModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setMapSearchYCoord(0);
+      setSiteSearchModalYCoord(0);
+    }
+
+    if (!guideLaunchModal) {
+      setLaunchModalYCoord(0);
+    }
+  }, [guideLaunchModal]);
+
+  useEffect(() => {
+    let modalHeigth =
+      document.getElementsByClassName("searchModalDiv")[0].clientHeight;
+
+    if (diveSiteSearchModal) {
+      setSiteSearchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setAnchorModalYCoord(0);
+      setSiteModalYCoord(0);
+      setPicModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setMapSearchYCoord(0);
+      setLaunchModalYCoord(0);
+    }
+
+    if (!diveSiteSearchModal) {
+      setSiteSearchModalYCoord(0);
+    }
+  }, [diveSiteSearchModal])
+
+  useEffect(() => {
+    let modalHeigth =
+      document.getElementsByClassName("searchModalDiv")[0].clientHeight;
+
+    if (mapSearchModal) {
+      setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setAnchorModalYCoord(0);
+      setSiteModalYCoord(0);
+      setPicModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setSiteSearchModalYCoord(0);
+      setLaunchModalYCoord(0);
+    }
+
+    if (!mapSearchModal) {
+      setMapSearchYCoord(0);
+    }
+  }, [mapSearchModal])
 
   // useEffect(() => {
   //   let modalHeigth =

@@ -43,6 +43,10 @@ import { DiveSpotContext } from "./contexts/diveSpotContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
 import { PicAdderModalContext } from "./contexts/picAdderModalContext";
+import { SettingsModalContext } from "./contexts/settingsModalContext";
+import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
+import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContext";
+import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
 import { TutorialContext } from "./contexts/tutorialContext";
@@ -98,7 +102,11 @@ function Map() {
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { dsAdderModal, setDsAddermodal } = useContext(DiveSiteAdderModalContext);
   const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
-  
+  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+  const { guideLaunchModal, setGuideLaunchModal } = useContext(GuideLaunchModalContext);
+  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(DiveSiteSearchModalContext);
+  const { mapSearchModal, setMapSearchModal } = useContext(MapSearchModalContext);
+
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
 
@@ -358,6 +366,10 @@ function Map() {
     setSiteModal(false);
     setDsAddermodal(false);
     setPicAddermodal(false);
+    setSettingsModal(false);
+    setGuideLaunchModal(false);
+    setDiveSiteSearchModal(false);
+    setMapSearchModal(false);
   };
 
   return (
