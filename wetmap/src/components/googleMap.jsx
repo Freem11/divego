@@ -41,6 +41,8 @@ import { MapBoundsContext } from "./contexts/mapBoundariesContext";
 import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
+import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
+import { PicAdderModalContext } from "./contexts/picAdderModalContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
 import { TutorialContext } from "./contexts/tutorialContext";
@@ -94,6 +96,9 @@ function Map() {
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  const { dsAdderModal, setDsAddermodal } = useContext(DiveSiteAdderModalContext);
+  const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
+  
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
 
@@ -351,6 +356,8 @@ function Map() {
 
   const cleanupModals = () => {
     setSiteModal(false);
+    setDsAddermodal(false);
+    setPicAddermodal(false);
   };
 
   return (

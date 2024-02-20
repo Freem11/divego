@@ -5,6 +5,8 @@ import { combineComponents } from '../combineComponents';
 import AreaPicsContextProvider from './areaPicsContext';
 import SearchTextContextProvider from './searchTextContext';
 import AnchordModalContextProvider from './anchorModalContext';
+import DiveSiteAdderModalContextProvider from './diveSiteAdderModalContext';
+import PicAdderModalContextProvider from './picAdderModalContext';
 import ThirdTutorialModalContextProvider from './thirdTutorialModalContext';
 import SecondTutorialModalContextProvider from './secondTutorialModalContext';
 import TutorialModalContextProvider from './tutorialModalContext';
@@ -42,6 +44,8 @@ const providers = [
     AreaPicsContextProvider,
     SearchTextContextProvider,
     AnchordModalContextProvider,
+    DiveSiteAdderModalContextProvider,
+    PicAdderModalContextProvider,
     ThirdTutorialModalContextProvider,
     SecondTutorialModalContextProvider,
     TutorialModalContextProvider,
