@@ -54,6 +54,7 @@ import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "./contexts/settingsModalContext";
 import { PullTabContext } from "./contexts/pullTabContext";
+import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
 import { TutorialContext } from "./contexts/tutorialContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
@@ -113,6 +114,7 @@ const MapPage = React.memo((props) => {
   const { guideLaunchModal, setGuideLaunchModal } = useContext(GuideLaunchModalContext);
   const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
+  const { tiles, setTiles } = useContext(CarrouselTilesContext);
 
   const togglePicModal = () => {
     setPicModal(!picModal);
@@ -686,6 +688,7 @@ const MapPage = React.memo((props) => {
       setMapSearchModal(false);
       setPicAddermodal(true);
       setShowFilterer(false);
+      setTiles(true);
     } else {
       setPicAddermodal(false);
       // setPicModalYCoord(0);
@@ -724,6 +727,7 @@ const MapPage = React.memo((props) => {
       setMapSearchModal(false);
       setDsAddermodal(true);
       setShowFilterer(false);
+      setTiles(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -758,6 +762,7 @@ const MapPage = React.memo((props) => {
       setMapSearchModal(false);
       setGuideLaunchModal(true);
       setShowFilterer(false);
+      setTiles(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -782,6 +787,7 @@ const MapPage = React.memo((props) => {
       setMapSearchModal(false);
       setSettingsModal(true);
       setShowFilterer(false);
+      setTiles(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -830,6 +836,7 @@ const MapPage = React.memo((props) => {
       setMapSearchModal(false);
       setSiteModal(true);
       setShowFilterer(false);
+      setTiles(true);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -854,6 +861,7 @@ const MapPage = React.memo((props) => {
       setMapSearchModal(false);
       setDiveSiteSearchModal(true);
       setShowFilterer(true);
+      setTiles(true);
     } else {
       setDiveSiteSearchModal(false);
     }
@@ -872,6 +880,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(true);
       setShowFilterer(true);
+      setTiles(true);
     } else {
       setMapSearchModal(false);
     }

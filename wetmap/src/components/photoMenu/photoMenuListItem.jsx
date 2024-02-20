@@ -11,6 +11,7 @@ import { DiveSiteSearchModalContext } from "../contexts/diveSiteSearchModalConte
 import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "../contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "../contexts/settingsModalContext";
+import { CarrouselTilesContext } from "../contexts/carrouselTilesContext";
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -44,6 +45,7 @@ const PhotoMenuListItem = (props) => {
     GuideLaunchModalContext
   );
   const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+  const { tiles, setTiles } = useContext(CarrouselTilesContext);
 
   let photoName = photoURL.split("/").pop();
 
@@ -55,7 +57,7 @@ const PhotoMenuListItem = (props) => {
   const [xCoord, setXCoord] = useState(0);
 
   const handleSelect = (name) => {
-    
+
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
@@ -163,6 +165,14 @@ const PhotoMenuListItem = (props) => {
     setZdex(0);
   };
 
+  useEffect(() => {
+    if (tiles){
+      pressReleaseAnimations()
+      setTiles(false)
+    }
+  }, [tiles]);
+
+  
   useEffect(() => {
     if (selectedID !== id) {
       pressReleaseAnimations();

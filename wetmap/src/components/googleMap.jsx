@@ -47,6 +47,7 @@ import { SettingsModalContext } from "./contexts/settingsModalContext";
 import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
 import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContext";
 import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
+import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
 import { TutorialContext } from "./contexts/tutorialContext";
@@ -106,6 +107,7 @@ function Map() {
   const { guideLaunchModal, setGuideLaunchModal } = useContext(GuideLaunchModalContext);
   const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(DiveSiteSearchModalContext);
   const { mapSearchModal, setMapSearchModal } = useContext(MapSearchModalContext);
+  const { tiles, setTiles } = useContext(CarrouselTilesContext);
 
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
@@ -269,6 +271,7 @@ function Map() {
   }, [mapZoom]);
 
   const handleBoundsChange = () => {
+    cleanupModals()
     if (mapRef) {
       window.clearTimeout(mapBoundariesTimoutHandler);
       mapBoundariesTimoutHandler = window.setTimeout(function () {
@@ -370,6 +373,7 @@ function Map() {
     setGuideLaunchModal(false);
     setDiveSiteSearchModal(false);
     setMapSearchModal(false);
+    setTiles(true);
   };
 
   return (
