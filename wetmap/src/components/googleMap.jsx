@@ -271,7 +271,7 @@ function Map() {
   }, [mapZoom]);
 
   const handleBoundsChange = () => {
-    cleanupModals()
+    cleanupModalsNoAnchor()
     if (mapRef) {
       window.clearTimeout(mapBoundariesTimoutHandler);
       mapBoundariesTimoutHandler = window.setTimeout(function () {
@@ -367,6 +367,16 @@ function Map() {
 
   const cleanupModals = () => {
     setSiteModal(false);
+    setDsAddermodal(false);
+    setPicAddermodal(false);
+    setSettingsModal(false);
+    setGuideLaunchModal(false);
+    setDiveSiteSearchModal(false);
+    setMapSearchModal(false);
+    setTiles(true);
+  };
+
+  const cleanupModalsNoAnchor = () => {
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
