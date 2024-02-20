@@ -829,7 +829,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setSiteModal(true);
-      setShowFilterer(true);
+      setShowFilterer(false);
       if (pin.PicFile !== null) {
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -909,6 +909,7 @@ const MapPage = React.memo((props) => {
       setLaunchModalYCoord(0);
       setMapSearchYCoord(0);
       setSiteSearchModalYCoord(0);
+      setShowFilterer(false)
     }
 
     if (!siteModal) {
