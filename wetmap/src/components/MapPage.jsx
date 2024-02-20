@@ -80,15 +80,11 @@ const MapPage = React.memo((props) => {
   const [showFilterer, setShowFilterer] = useState(false);
   const { animalVal } = useContext(AnimalContext);
   const { showGeoCoder, setShowGeoCoder } = useContext(GeoCoderContext);
-  const { showAnimalSearch, setShowAnimalSearch } = useContext(
-    AnimalRevealContext
-  );
+  const { showAnimalSearch, setShowAnimalSearch } =
+    useContext(AnimalRevealContext);
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { photoFile, setPhotoFile } = useContext(PictureContext);
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const [dsAdderModal, setDsAddermodal] = useState(false);
-  const [picAdderModal, setPicAddermodal] = useState(false);
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
@@ -103,6 +99,10 @@ const MapPage = React.memo((props) => {
   const { areaPics, setAreaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
 
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  const [dsAdderModal, setDsAddermodal] = useState(false);
+  const [picAdderModal, setPicAddermodal] = useState(false);
+  
   const togglePicModal = () => {
     setPicModal(!picModal);
   };
@@ -635,10 +635,10 @@ const MapPage = React.memo((props) => {
   // let modalHeigth = 700;
 
   const animateFabs = () => {
-    let containerHeight = document.getElementsByClassName("fabContainer")[0]
-      .clientHeight;
-    let buttonSectionHeight = document.getElementsByClassName("fabButtons")[0]
-      .clientHeight;
+    let containerHeight =
+      document.getElementsByClassName("fabContainer")[0].clientHeight;
+    let buttonSectionHeight =
+      document.getElementsByClassName("fabButtons")[0].clientHeight;
 
     if (fabsYCoord === 0) {
       setfabsYCoord(-containerHeight + (containerHeight / 100) * 20);
@@ -653,8 +653,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePicModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (picModalYCoord === 0) {
       setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -690,8 +690,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSiteModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (siteModalYCoord === 0) {
       setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -724,8 +724,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateLaunchModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (launchModalYCoord === 0) {
       setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -748,8 +748,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSettingsModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (settingsModalYCoord === 0) {
       setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -796,8 +796,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateAnchorModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (anchorModalYCoord === 0) {
       setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -821,8 +821,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSiteSearchModal = () => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("searchModalDiv")[0].clientHeight;
 
     if (siteSearchModalYCoord === 0) {
       setSiteSearchModalYCoord(
@@ -842,8 +842,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateMapSearchModal = () => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("searchModalDiv")[0].clientHeight;
 
     if (mapSearchYCoord === 0) {
       setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 3);
@@ -873,8 +873,8 @@ const MapPage = React.memo((props) => {
   }, [showFilterer]);
 
   useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (siteModal) {
       setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -892,8 +892,8 @@ const MapPage = React.memo((props) => {
   }, [siteModal]);
 
   useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (dsAdderModal) {
       setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -905,8 +905,8 @@ const MapPage = React.memo((props) => {
   }, [dsAdderModal]);
 
   useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    let modalHeigth =
+      document.getElementsByClassName("picModalDiv")[0].clientHeight;
 
     if (picAdderModal) {
       setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -983,7 +983,7 @@ const MapPage = React.memo((props) => {
                     handleTutorialButton();
                   }}
                 >
-                  <QuestionMarkIcon sx={{ width: "3vw", height: "1.5vw"}} />
+                  <QuestionMarkIcon sx={{ width: "3vw", height: "1.5vw" }} />
                 </ToggleButton>
                 <p className="buttonFont">Guides</p>
               </div>

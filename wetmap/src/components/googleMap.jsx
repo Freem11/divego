@@ -348,6 +348,11 @@ function Map() {
     setSiteModal(true);
   };
 
+
+  const cleanupModals = () => {
+    setSiteModal(false);
+  };
+
   return (
     <GoogleMap
       zoom={zoom}
@@ -359,6 +364,7 @@ function Map() {
       onZoomChanged={handleMapZoomChange}
       onBoundsChanged={handleBoundsChange}
       disableDefaultUI={true}
+      onClick={cleanupModals}
     >
       {masterSwitch && (
         <div className="aligner">
