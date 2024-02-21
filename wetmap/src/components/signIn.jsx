@@ -222,7 +222,6 @@ export default function SignInRoute() {
         return;
       }
       let checker = await sessionCheck();
-      //  console.log("checkerbox", checker)
     }
   };
 
@@ -231,43 +230,19 @@ export default function SignInRoute() {
     setLoginFail(null);
   };
 
-  // const divegoTheme = {
-  //   default: {
-  //     colors: {
-  //       brand: "#538bdb",
-  //       brandAccent: "#538dbd",
-  //       brandButtonText: "white",
-  //     }
-  //   },
-  //   dark: {
-  //     colors: {
-  //       brand: "#538dbd",
-  //       brandAccent: "#538dbd",
-  //       brandButtonText: "pink"
-  //     }
-  //   }
-  // }
-
   return (
     <div className="containerDiv">
-      {/* <Auth 
-      supabaseClient={supabase}
-      appearance={{ theme: divegoTheme}}
-      providers={['google','facebook']}
-      /> */}
       <Form onSubmit={handleSignInSubmit} className="formstyle">
         <div className="headlinerdiv">
           <img
             style={{
               height: "20vh",
-              // maxWidth: "80%",
-              // height: "0%",
               marginTop: "-2vh",
               marginBottom: "0%",
               backgroundColor: "#538dbd",
             }}
             src={manta}
-          />
+          /><br/>
           <h1 className="logoTag">Scuba SEAsons</h1>
         </div>
 
