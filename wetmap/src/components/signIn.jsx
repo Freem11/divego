@@ -285,7 +285,7 @@ export default function SignInRoute() {
 
           <div className="OAuthButton">
             <LoginSocialApple
-              client_id={appleAppId || ""}
+              client_id={appleAppId || "1"}
               scope={"name email"}
               redirect_uri={REDIRECT_URI}
               onResolve={({ provider, data }) => {
