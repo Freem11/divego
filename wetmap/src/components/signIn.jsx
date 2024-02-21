@@ -11,7 +11,6 @@ import {
 } from "../supabaseCalls/authenticateSupabaseCalls";
 import { createProfile } from "../supabaseCalls/accountSupabaseCalls";
 import { Auth } from "@supabase/auth-ui-react";
-import { supabase } from "../supabase";
 import "./authenication.css";
 import InputBase from "@mui/material/InputBase";
 import {
@@ -48,16 +47,6 @@ export default function SignInRoute() {
     emailVal: false,
     passwordVal: false,
   });
-
-  useEffect(() => {
-    async function getUserData() {
-      await supabase.auth.getSession().then((value) => {
-        localStorage.setItem("token", JSON.stringify(value.data.session));
-        setActiveSession(value.data.session);
-      });
-    }
-    getUserData();
-  }, []);
 
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
@@ -212,7 +201,7 @@ export default function SignInRoute() {
     } else {
       let accessToken = await signInStandard(formVals);
       if (accessToken.data.session !== null) {
-        await localStorage.setItem(
+        localStorage.setItem(
           "token",
           JSON.stringify(accessToken.data.session.refresh_token)
         );
@@ -221,7 +210,7 @@ export default function SignInRoute() {
         setLoginFail("The credentials you supplied are not valid");
         return;
       }
-      let checker = await sessionCheck();
+      let _ = await sessionCheck();
     }
   };
 
