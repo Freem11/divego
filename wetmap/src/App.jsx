@@ -27,7 +27,7 @@ function App() {
         const valuless = localStorage.getItem("token");
         if (valuless) {
           const value = JSON.parse(valuless);
-          if (value !== null) {
+          if (value && value.session) {
             if (value.session.refresh_token) {
               let newSession = await sessionRefresh(
                 value.session.refresh_token
