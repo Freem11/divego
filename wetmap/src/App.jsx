@@ -1,5 +1,6 @@
 import "./App.css";
-import { useState, useLayoutEffect, useCallback } from "react";
+import { useState, useEffect, useLayoutEffect, useCallback } from "react";
+import { supabase } from "./supabase";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
 import MapPage from "./components/MapPage";
@@ -21,13 +22,24 @@ function App() {
   const [mapCoords, setMapCoords] = useState([49.316666, -123.066666]);
   const [activeSession, setActiveSession] = useState(null);
 
+
+  useEffect(() => {
+    async function getUserData() {
+      await supabase.auth.getSession().then((value) => {
+        localStorage.setItem("token", JSON.stringify(value.data.session));
+        setActiveSession(value.data.session);
+      });
+    }
+    getUserData();
+  }, []);
+
   useLayoutEffect(() => {
     window.onload = async function () {
       try {
         const valuless = localStorage.getItem("token");
         if (valuless) {
           const value = JSON.parse(valuless);
-          if (value !== null) {
+          if (value && value.session) {
             if (value.session.refresh_token) {
               let newSession = await sessionRefresh(
                 value.session.refresh_token

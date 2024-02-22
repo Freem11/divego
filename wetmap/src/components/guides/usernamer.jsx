@@ -94,7 +94,6 @@ export default function UserNamer() {
         placeholder="User Name"
         placeholdertextcolor="darkgrey"
         color="#F0EEEB"
-        on={() => setUserFail(null)}
         onChange={(e) => handleChange(e)}
         inputProps={{
           style: {

@@ -11,7 +11,6 @@ import {
 } from "../supabaseCalls/authenticateSupabaseCalls";
 import { createProfile } from "../supabaseCalls/accountSupabaseCalls";
 import { Auth } from "@supabase/auth-ui-react";
-import { supabase } from "../supabase";
 import "./authenication.css";
 import InputBase from "@mui/material/InputBase";
 import {
@@ -48,16 +47,6 @@ export default function SignInRoute() {
     emailVal: false,
     passwordVal: false,
   });
-
-  useEffect(() => {
-    async function getUserData() {
-      await supabase.auth.getSession().then((value) => {
-        localStorage.setItem("token", JSON.stringify(value.data.session));
-        setActiveSession(value.data.session);
-      });
-    }
-    getUserData();
-  }, []);
 
   function parseJwt(token) {
     var base64Url = token.split(".")[1];
@@ -212,7 +201,7 @@ export default function SignInRoute() {
     } else {
       let accessToken = await signInStandard(formVals);
       if (accessToken.data.session !== null) {
-        await localStorage.setItem(
+        localStorage.setItem(
           "token",
           JSON.stringify(accessToken.data.session.refresh_token)
         );
@@ -221,8 +210,7 @@ export default function SignInRoute() {
         setLoginFail("The credentials you supplied are not valid");
         return;
       }
-      let checker = await sessionCheck();
-      //  console.log("checkerbox", checker)
+      let _ = await sessionCheck();
     }
   };
 
@@ -231,43 +219,19 @@ export default function SignInRoute() {
     setLoginFail(null);
   };
 
-  // const divegoTheme = {
-  //   default: {
-  //     colors: {
-  //       brand: "#538bdb",
-  //       brandAccent: "#538dbd",
-  //       brandButtonText: "white",
-  //     }
-  //   },
-  //   dark: {
-  //     colors: {
-  //       brand: "#538dbd",
-  //       brandAccent: "#538dbd",
-  //       brandButtonText: "pink"
-  //     }
-  //   }
-  // }
-
   return (
     <div className="containerDiv">
-      {/* <Auth 
-      supabaseClient={supabase}
-      appearance={{ theme: divegoTheme}}
-      providers={['google','facebook']}
-      /> */}
       <Form onSubmit={handleSignInSubmit} className="formstyle">
         <div className="headlinerdiv">
           <img
             style={{
               height: "20vh",
-              // maxWidth: "80%",
-              // height: "0%",
               marginTop: "-2vh",
               marginBottom: "0%",
               backgroundColor: "#538dbd",
             }}
             src={manta}
-          />
+          /><br/>
           <h1 className="logoTag">Scuba SEAsons</h1>
         </div>
 
@@ -310,7 +274,7 @@ export default function SignInRoute() {
 
           <div className="OAuthButton">
             <LoginSocialApple
-              client_id={appleAppId || ""}
+              client_id={appleAppId || "1"}
               scope={"name email"}
               redirect_uri={REDIRECT_URI}
               onResolve={({ provider, data }) => {
