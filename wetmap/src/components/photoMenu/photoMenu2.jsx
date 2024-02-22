@@ -192,6 +192,7 @@ const PhotoMenu = () => {
   const leftButtonRef = useRef(null);
   const rightButtonRef = useRef(null);
   const [clicked, setClicked] = useState(false);
+  const [tilesShifted, setTilesShifted] = useState(0);
 
   const [xCoord, setXCoord] = useState(0);
   let tilesToMove = 5
@@ -220,13 +221,16 @@ const PhotoMenu = () => {
         } else if (xCoord >= maxLength) {
           setXCoord(maxLength)
           setTilesRemaining(tilesRemaining + 5)
+          setTilesShifted(tilesShifted - 5)
         } else {
           if (xCoord + tilesToMove*(tileWidth) + (tilesToMove*1.5) < 0){
             setXCoord(xCoord + tilesToMove*(tileWidth) + tilesToMove*(1.5))
             setTilesRemaining(tilesRemaining + 5)
+            setTilesShifted(tilesShifted - 5)
           } else {
             setTilesRemaining(tilesRemaining + 5)
             setXCoord(0)
+            setTilesShifted(tilesShifted - tilesRemaining)
           }
         }
 
@@ -240,13 +244,18 @@ const PhotoMenu = () => {
               if(tilesRemaining < -5 ){
 
               } else {
+             
                 setXCoord((xCoord - ((tilesRemaining + 5) *tileWidth) - ((tilesRemaining+5)*(1.5))  ))
                 setTilesRemaining(tilesRemaining - 5)
+
+                setTilesShifted(tilesShifted + tilesRemaining + 5)
               }
                 
             } else {
+              
               setXCoord(xCoord - tilesToMove*(tileWidth)- tilesToMove*(1.5))
               setTilesRemaining(tilesRemaining - 5)
+              setTilesShifted(tilesShifted + 5)
             }
           } else {
             setXCoord(-(maxLength - tilesToMove*(tileWidth) + tilesToMove*(1.5)))
@@ -256,7 +265,6 @@ const PhotoMenu = () => {
       };
     }
 }
-
 
   const move = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -275,7 +283,8 @@ const PhotoMenu = () => {
     setXCoord(0);
     setTilesRemaining(areaPics.length-10)
     setClicked(false);
-
+    setTilesShifted(0);
+    
     if(areaPics.length < 4){
       setXCoord((5*tileWidth - (areaPics.length*tileWidth))/2)
     }
@@ -328,6 +337,7 @@ const PhotoMenu = () => {
                   setTileWidth={setTileWidth}
                   boxWidth={boxWidth}
                   setBoxWidth={setBoxWidth}
+                  tilesShifted={tilesShifted}
                 />
               );
             })}

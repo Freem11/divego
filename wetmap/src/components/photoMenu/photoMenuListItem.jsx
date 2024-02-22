@@ -28,6 +28,7 @@ const PhotoMenuListItem = (props) => {
     setTileWidth,
     boxWidth,
     setBoxWidth,
+    tilesShifted
   } = props;
 
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
@@ -131,15 +132,15 @@ const PhotoMenuListItem = (props) => {
     let WidthofTile = e.target.width;
     let HeightOfTile = e.target.height;
 
-    let yClick = e.nativeEvent.clientY;
-    let xClick = e.nativeEvent.clientX;
-    let yClickI = e.nativeEvent.layerY;
-    let xClickI = e.nativeEvent.layerX;
+    let yClick = e.nativeEvent.layerY;
+    let xClick = e.nativeEvent.layerX;
+    let yClickI = e.nativeEvent.screenY;
+    let xClickI = e.nativeEvent.screenX;
 
-    let distanceToItemMiddleX = WidthofTile / 2 - xClickI;
-    let centererPressX = xClick + distanceToItemMiddleX;
+    let distanceToItemMiddleX = WidthofTile / 2 - xClick - (tilesShifted*WidthofTile);
+    let centererPressX = xClickI + distanceToItemMiddleX;
     let distanceToItemMiddleY = HeightOfTile / 2 - yClickI;
-    let centererPressY = yClick + distanceToItemMiddleY;
+    let centererPressY = yClickI + distanceToItemMiddleY;
     let moverWidth = (windowW / 2 - centererPressX) / 2.5;
     let moverHeigth = (windowH / 2 - centererPressY) / 3;
 
@@ -242,6 +243,7 @@ const PhotoMenuListItem = (props) => {
           borderLeft: "1px grey solid",
           borderRight: "1px grey solid",
           objectFit: "cover",
+          zIndex: 500
         }}
       />
     </animated.div>
