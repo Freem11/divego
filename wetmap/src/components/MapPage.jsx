@@ -1021,6 +1021,7 @@ const MapPage = React.memo((props) => {
                   color: "white",
                   marginTop: "-2vh",
                   marginBottom: "1vh",
+                  cursor: "pointer"
                 }}
               />
             ) : (
@@ -1030,6 +1031,7 @@ const MapPage = React.memo((props) => {
                   color: "white",
                   marginTop: "-2vh",
                   marginBottom: "1vh",
+                  cursor: "pointer"
                 }}
               />
             )}

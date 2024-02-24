@@ -178,6 +178,7 @@
     font-size: 2vh;
     color: white;
     pointer-events: all;
+    cursor: pointer;
 }
 
 .buttonFont {
@@ -187,6 +188,7 @@
     font-family: Itim;
     font-size: 0.8vw;
     color: white;
+    cursor: pointer;
     /* background-color: lawngreen; */
 }
 
@@ -322,6 +324,7 @@
     z-index: -1;
     align-self: center;
     justify-self: center;
+    cursor: pointer;
   }
 
 @media only screen and (max-width: 500px) {

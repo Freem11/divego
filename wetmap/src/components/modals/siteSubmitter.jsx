@@ -352,6 +352,7 @@ const SiteSubmitter = (props) => {
                   width: "2vw",
                   height: "4vh",
                   marginRight: "1vw",
+                  cursor: "pointer"
                   // backgroundColor: 'gray',
                 }}
               ></QuestionMarkIcon>
@@ -362,6 +363,7 @@ const SiteSubmitter = (props) => {
                   color: "lightgrey",
                   width: "2vw",
                   height: "5vh",
+                  cursor: "pointer"
                   // backgroundColor: "pink"
                 }}
               ></CloseIcon>

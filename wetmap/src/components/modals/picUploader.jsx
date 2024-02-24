@@ -459,12 +459,14 @@ const PicUploader = React.memo((props) => {
     color: "gold",
     width: "3.5vw",
     height: "4.5vh",
+    cursor: "pointer"
   };
 
   const buttonStyleAlt = {
     color: "#538dbd",
     width: "3.5vw",
     height: "4.5vh",
+    cursor: "pointer"
   };
 
   // AutoSuggest props
@@ -539,6 +541,7 @@ const PicUploader = React.memo((props) => {
             width: "2vw",
             height: "4vh",
             marginRight: "1vw",
+            cursor: "pointer"
           }}
         ></QuestionMarkIcon>
         {/* </Button> */}
@@ -554,6 +557,7 @@ const PicUploader = React.memo((props) => {
             color: "lightgrey",
             width: "2vw",
             height: "5vh",
+            cursor: "pointer"
           }}
         ></CloseIcon>
         {/* </Button> */}
