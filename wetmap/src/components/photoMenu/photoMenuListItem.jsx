@@ -1,9 +1,6 @@
-import { Translate } from "@mui/icons-material";
 import "./photoMenu.css";
 import { useState, useContext, useEffect, useRef } from "react";
 import { animated, useSpring } from "react-spring";
-import { rotation } from "exifr";
-import zIndex from "@mui/material/styles/zIndex";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
 import { DiveSiteAdderModalContext } from "../contexts/diveSiteAdderModalContext";
 import { PicAdderModalContext } from "../contexts/picAdderModalContext";
@@ -87,23 +84,12 @@ const PhotoMenuListItem = (props) => {
     setWindowHeight(window.innerHeight);
   }
 
-  // window.addEventListener("resize", trackWidth);
-
   useEffect(() => {
     if (selectedID !== id) {
       pressReleaseAnimations();
     }
   }, [selectedID]);
 
-  // function trackWidth() {
-  //   setBoxWidth(window.innerWidth * 0.9);
-  //   settileWidth(window.innerWidth * 0.9);
-  //   // settileWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
-  // }
-
-  let screenInital = window.innerWidth;
-  // const [boxWidth, setBoxWidth] = useState((screenInital * 0.8));
-  // const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/5);
   const [windowW, setWindowW] = useState(window.innerWidth);
   const [windowH, setWindowH] = useState(window.innerHeight);
 
@@ -129,20 +115,16 @@ const PhotoMenuListItem = (props) => {
     setMapSearchModal(false);
     setSiteModal(false);
 
-    let WidthofTile = e.target.width;
-    let HeightOfTile = e.target.height;
+    const WidthofTile = e.target.width;
+    const HeightOfTile = e.target.height;
 
-    let yClick = e.nativeEvent.layerY;
-    let xClick = e.nativeEvent.layerX;
-    let yClickI = e.nativeEvent.screenY;
-    let xClickI = e.nativeEvent.screenX;
+    const distanceToItemMiddleX = WidthofTile / 2 - (tilesShifted*WidthofTile);
+    const centererPressX = e.target.x + distanceToItemMiddleX;
+    const distanceToItemMiddleY = HeightOfTile / 2;
+    const centererPressY = e.target.y + distanceToItemMiddleY;
 
-    let distanceToItemMiddleX = WidthofTile / 2 - xClick - (tilesShifted*WidthofTile);
-    let centererPressX = xClickI + distanceToItemMiddleX;
-    let distanceToItemMiddleY = HeightOfTile / 2 - yClickI;
-    let centererPressY = yClickI + distanceToItemMiddleY;
-    let moverWidth = (windowW / 2 - centererPressX) / 2.5;
-    let moverHeigth = (windowH / 2 - centererPressY) / 3;
+    const moverWidth = (windowW / 2 - centererPressX) / 2.5;
+    const moverHeigth = (windowH / 2 - centererPressY) / 3;
 
     if (scale === 1) {
       setYCoord(moverHeigth);
@@ -196,10 +178,7 @@ const PhotoMenuListItem = (props) => {
     },
   });
 
-  let labelLength = name.length;
-  let labelFont = 120 / labelLength + 6;
-
-  let picWidth = {
+  const picWidth = {
     width: tileWidth,
     height: "150%",
   };
@@ -230,8 +209,6 @@ const PhotoMenuListItem = (props) => {
       </div>
       <img
         src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
-        // src={`https://bca075819c975f1f381667bcdff15b92.r2.cloudflarestorage.com/scubaseasons/${photoName}`}
-        // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoURL}`}
         width={tileWidth}
         height={picWidth.height}
         onDragStart={handleDragStart}
