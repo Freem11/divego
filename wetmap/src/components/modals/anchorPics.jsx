@@ -23,7 +23,8 @@ import "./anchorPics.css";
 import { animated } from "react-spring";
 
 const AnchorPics = (props) => {
-  const { animateAnchorModal, setAnchorModalYCoord } = props;
+  const { animateAnchorModal, setAnchorModalYCoord, animateFullScreenModal } =
+    props;
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext
@@ -193,7 +194,13 @@ const AnchorPics = (props) => {
       <div className="picScollA">
         {anchorPics &&
           anchorPics.map((pic) => {
-            return <Picture key={pic.id} pic={pic}></Picture>;
+            return (
+              <Picture
+                key={pic.id}
+                pic={pic}
+                animateFullScreenModal={animateFullScreenModal}
+              ></Picture>
+            );
           })}
         {anchorPics.length === 0 && (
           <div className="emptysite">No Sightings At This Site Yet!</div>

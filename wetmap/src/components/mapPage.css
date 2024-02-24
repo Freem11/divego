@@ -77,6 +77,19 @@
     border: 1px solid lightgrey;
 }
 
+.fullScreenModalDiv {
+    z-index: 200;
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    top: 100vh;
+    left: 0vw;
+    width: 100vw;
+    height: 100vh;
+}
+
 .col2rowT {
 	display: flex;
 	flex-direction: column;
