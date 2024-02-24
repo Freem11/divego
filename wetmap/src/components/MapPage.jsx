@@ -229,11 +229,12 @@ const MapPage = React.memo((props) => {
     getProfile();
   }, []);
 
+  const sideLength = "3.5vw"
   const toggleButtonStyle = {
     "&.Mui-selected": {
       backgroundColor: "#538bdb",
-      width: "70%",
-      height: "40%",
+      width: sideLength,
+      height: sideLength,
     },
     "&.Mui-selected:hover": { backgroundColor: "lightgrey", color: "white" },
     "&:hover": {
@@ -241,8 +242,8 @@ const MapPage = React.memo((props) => {
       backgroundColor: "white",
     },
     backgroundColor: "white",
-    width: "70%",
-    height: "40%",
+    width: sideLength,
+    height: sideLength,
     color: "#538bdb",
     boxShadow: "-2px 4px 4px #00000064",
     borderRadius: "100%",

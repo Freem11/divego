@@ -154,7 +154,7 @@
     border-radius: 1vw;
     align-items: center;
     justify-content: space-evenly;
-    gap: 0.5vw;
+    gap: 1vw;
     min-width: fit-content;
     min-height: fit-content;
     pointer-events: all;
