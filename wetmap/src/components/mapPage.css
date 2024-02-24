@@ -84,7 +84,7 @@
     height: 100px;
 	width: 55vw;
     position: absolute;
-    z-index: 4;
+    z-index: -1;
     top: 230px;
     border-radius: 8px;
 	padding: 0.5rem 0.75rem;
@@ -262,7 +262,6 @@
     top: 14%;
     left: 10%;
     pointer-events: none;
-    /* background-color: maroon; */
     height: 100px;
     width: 300px;
     z-index: 300;
@@ -271,7 +270,6 @@
 .tutorialBar {
     width: 100%;
     height: 100%;
-    /* background-color: pink; */
   }
 
   .filterer {
@@ -283,10 +281,6 @@
     pointer-events: none;
     left: 25vw;
     top: 21.8vh;
-    /* height: 0vh; */
-    /* width: 10vw; */
-    z-index: 301;
-    /* background-color: green; */
   }
 
   .emptyBox {
@@ -299,7 +293,6 @@
     height: -2vh;
     pointer-events: none;
     /* width: 20vw; */
-    z-index: 3;
     /* background-color: grey */
   }
 
@@ -313,7 +306,6 @@
     pointer-events: none;
     /* margin-top: 0vh; */
     /* margin-bottom: -1vh; */
-    z-index: 5;
   }
 
   .pullTab {
@@ -327,7 +319,7 @@
     background-color: gold;
     border-bottom-right-radius: 7px;
     border-bottom-left-radius: 7px;
-    /* z-index: 310; */
+    z-index: -1;
     align-self: center;
     justify-self: center;
   }

@@ -17,14 +17,14 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    /* background-color: blue; */
+    background-color: blue;
     /* margin-top: -2vh; */
     height: 6vh;
     /* width: 10vw; */
   }
 
   .suggestInput {
-    /* background-color: purple; */
+    background-color: purple;
     /* font-size:  2rem; */
     width: 100%;
   }
@@ -34,11 +34,11 @@
     height: 1vw;
     width: 1vw;
     /* background-color: pink; */
-  }
+  /* } */
 
   .blankButton {
     z-index: 10;
     height: 1vw;
     width: 1vw;
     /* background-color: pink; */
-  } */
+  }
