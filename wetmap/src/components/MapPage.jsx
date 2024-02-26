@@ -62,7 +62,6 @@ import ThirdTutorial from "./guides/thirdTutorial";
 import SiteSearchModal from "./modals/siteSearchModal";
 import MapSearchModal from "./modals/mapSearchModal";
 import FullScreenModal from "./modals/fullScreenModal";
-import Lightbox from "react-image-lightbox";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
 import Histogram from "./histogram/histogramBody";
@@ -1436,13 +1435,6 @@ const MapPage = React.memo((props) => {
           animateFullScreenModal={animateFullScreenModal}
         />
       </animated.div>
-      {/* 
-      {lightbox && (
-        <Lightbox
-          mainSrc={selectedPic}
-          onCloseRequest={() => setLightbox(false)}
-        />
-      )} */}
     </div>
   );
 });
