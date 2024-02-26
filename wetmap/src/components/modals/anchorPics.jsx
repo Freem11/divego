@@ -1,44 +1,32 @@
-import { Container, Form, FormGroup, Label, Button } from "reactstrap";
+import { FormGroup, Button } from "reactstrap";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
-import { SliderContext } from "../contexts/sliderContext";
 import { AnimalContext } from "../contexts/animalContext";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
-import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { IterratorContext } from "../contexts/iterratorContext";
 import { TutorialContext } from "../contexts/tutorialContext";
-import { ReverseContext } from "../contexts/reverseContext";
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
 import { getDiveSiteByName } from "../../supabaseCalls/diveSiteSupabaseCalls";
-import {
-  getPhotosforAnchor,
-  getPhotosforAnchorMulti,
-} from "../../supabaseCalls/photoSupabaseCalls";
+import { getPhotosforAnchorMulti } from "../../supabaseCalls/photoSupabaseCalls";
 import "photoswipe/dist/photoswipe.css";
 import Picture from "./picture";
 import FlagIcon from "@mui/icons-material/Flag";
 import CloseIcon from "@mui/icons-material/Close";
-import { Gallery, Item } from "react-photoswipe-gallery";
 import "./anchorPics.css";
-import { animated } from "react-spring";
 
 const AnchorPics = (props) => {
   const { animateAnchorModal, setAnchorModalYCoord, animateFullScreenModal } =
     props;
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { selectedDiveSite, setSelectedDiveSite } = useContext(
+  const { selectedDiveSite } = useContext(
     SelectedDiveSiteContext
   );
-  const { sliderVal } = useContext(SliderContext);
   const { animalVal } = useContext(AnimalContext);
-  const { boundaries } = useContext(MapBoundsContext);
-  const [monthVal, setMonthVal] = useState("");
   const [anchorPics, setAnchorPics] = useState([]);
   const [site, setSite] = useState("");
 
   const { itterator, setItterator } = useContext(IterratorContext);
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-  const { movingBack, setMovingBack } = useContext(ReverseContext);
+  const { tutorialRunning } = useContext(TutorialContext);
 
   const filterAnchorPhotos = async () => {
     let { minLat, maxLat, minLng, maxLng } = siteGPSBoundaries(
@@ -69,47 +57,6 @@ const AnchorPics = (props) => {
       console.log({ title: "Error", message: e.message });
     }
   };
-
-  useEffect(() => {
-    switch (sliderVal) {
-      case 1:
-        setMonthVal("January");
-        break;
-      case 2:
-        setMonthVal("February");
-        break;
-      case 3:
-        setMonthVal("March");
-        break;
-      case 4:
-        setMonthVal("April");
-        break;
-      case 5:
-        setMonthVal("May");
-        break;
-      case 6:
-        setMonthVal("June");
-        break;
-      case 7:
-        setMonthVal("July");
-        break;
-      case 8:
-        setMonthVal("August");
-        break;
-      case 9:
-        setMonthVal("September");
-        break;
-      case 10:
-        setMonthVal("October");
-        break;
-      case 11:
-        setMonthVal("November");
-        break;
-      case 12:
-        setMonthVal("December");
-        break;
-    }
-  }, [sliderVal]);
 
   useEffect(() => {
     if (selectedDiveSite.SiteName !== "") {
@@ -152,14 +99,9 @@ const AnchorPics = (props) => {
       setItterator(itterator + 1);
     }
     setSiteModal(false);
-    //  setSelectedDiveSite({
-    //   SiteName: "",
-    //   Latitude: "",
-    //   Longitude: "",
-    // })
     animateAnchorModal();
   };
-  // console.log("this", selectedDiveSite)
+
   return (
     <div className="masterDivA">
       <div className="fixerDiv">
