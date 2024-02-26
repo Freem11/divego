@@ -23,7 +23,6 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ToggleButton from "@mui/material/ToggleButton";
 import { animated, useSpring } from "react-spring";
-import AliceCarousel from "react-alice-carousel";
 import "react-alice-carousel/lib/alice-carousel.css";
 
 let waiter2;
@@ -136,8 +135,6 @@ const PhotoMenu = () => {
     }
   };
 
- 
-
   useEffect(() => {
       clearTimeout(waiter2);
   
@@ -158,29 +155,14 @@ const PhotoMenu = () => {
   }, [boundaries, textvalue]);
 
   let screenInital = window.innerWidth;
-  let caddyWidthNew = {
-    width: "90vw"
-  }
 
   const [boxWidth, setBoxWidth] = useState((screenInital * 0.8));
   const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
-
-  // const [tileWidth, setTileWidth] = useState(
-  //   Math.floor(screenInital / 192) * 193 - 192
-  // );
 
   window.addEventListener("resize", trackWidth);
 
   function trackWidth() {
     setBoxWidth((window.innerWidth * 0.8));
-    // setTileWidth(boxWidth/5);
-    // if(boxWidth < 930){
-    //   setTileWidth(boxWidth/5.40);
-    // } else {
-    //   setTileWidth(((window.innerWidth * 0.8)/5)-1.5);
-    // }
-    
-    // setTileWidth(Math.floor(window.innerWidth / 192) * 193 - 192);
   }
 
   useEffect(() => {
@@ -195,7 +177,7 @@ const PhotoMenu = () => {
   const [tilesShifted, setTilesShifted] = useState(0);
 
   const [xCoord, setXCoord] = useState(0);
-  let tilesToMove = 5
+  const tilesToMove = 5
   const [tilesRemaining, setTilesRemaining] = useState(areaPics.length - 10);
 
   const onClicko = (direction) => {
@@ -208,8 +190,7 @@ const PhotoMenu = () => {
     setMapSearchModal(false);
     setSiteModal(false);
 
-      let maxLength = areaPics.length*tileWidth
-
+    const maxLength = areaPics.length*tileWidth
  
     if(areaPics.length < tilesToMove) {
       setXCoord((tilesToMove*tileWidth - (areaPics.length*tileWidth))/2)
@@ -228,42 +209,36 @@ const PhotoMenu = () => {
             setTilesRemaining(tilesRemaining + 5)
             setTilesShifted(tilesShifted - 5)
           } else {
-            setTilesRemaining(tilesRemaining + 5)
+            const tilesRemainingTemp = tilesRemaining + 5;
+            setTilesRemaining(tilesRemainingTemp);
             setXCoord(0)
-            setTilesShifted(tilesShifted - tilesRemaining)
+            setTilesShifted(tilesShifted - tilesRemainingTemp)
           }
         }
-
-        } else {
-          //"shiftRight"  aka right BUTTON clicked
-          if (xCoord > 0) {
-            setXCoord(0)
-          } else if (xCoord > -(maxLength)) {
-            if (xCoord - tilesToMove*(tileWidth+1.5) < -(maxLength - tilesToMove*(tileWidth+1.5))){
-
-              if(tilesRemaining < -5 ){
-
-              } else {
-             
-                setXCoord((xCoord - ((tilesRemaining + 5) *tileWidth) - ((tilesRemaining+5)*(1.5))  ))
-                setTilesRemaining(tilesRemaining - 5)
-
-                setTilesShifted(tilesShifted + tilesRemaining + 5)
-              }
-                
+      } else {
+        //"shiftRight"  aka right BUTTON clicked
+        if (xCoord > 0) {
+          setXCoord(0)
+        } else if (xCoord > -(maxLength)) {
+          if (xCoord - tilesToMove*(tileWidth+1.5) < -(maxLength - tilesToMove*(tileWidth+1.5))){
+            if(tilesRemaining < -5 ){
             } else {
-              
-              setXCoord(xCoord - tilesToMove*(tileWidth)- tilesToMove*(1.5))
+              setXCoord((xCoord - ((tilesRemaining + 5) *tileWidth) - ((tilesRemaining+5)*(1.5))  ))
               setTilesRemaining(tilesRemaining - 5)
-              setTilesShifted(tilesShifted + 5)
+              setTilesShifted(tilesShifted + tilesRemaining + 5)
             }
           } else {
-            setXCoord(-(maxLength - tilesToMove*(tileWidth) + tilesToMove*(1.5)))
+            setXCoord(xCoord - tilesToMove*(tileWidth)- tilesToMove*(1.5))
+            setTilesRemaining(tilesRemaining - 5)
+            setTilesShifted(tilesShifted + 5)
           }
-    
-        setClicked(true);
-      };
-    }
+        } else {
+          setXCoord(-(maxLength - tilesToMove*(tileWidth) + tilesToMove*(1.5)))
+        }
+  
+      setClicked(true);
+    };
+  }
 }
 
   const move = useSpring({
@@ -302,7 +277,6 @@ const PhotoMenu = () => {
   };
 
   return (
-    // <div className="masterDivX" style={{ width: boxWidth }}>
     <div className="masterDivX">
       <ToggleButton
         className="backTog"
@@ -313,12 +287,10 @@ const PhotoMenu = () => {
       >
         <ArrowBackIosIcon />
       </ToggleButton>
-      {/* <div className="picScollY" style={{ width: caddyWidth }} ref={wrapperRef} value="web"> */}
       <div className="picScollY" style={{width: boxWidth}} ref={wrapperRef} value="web">
         <animated.div
           className="picScollX"
           style={({ width: boxWidth }, move)}
-          // style={(move)}
           ref={caddyRef}
         >
           {areaPics &&

@@ -103,9 +103,10 @@
     flex-direction: row;
     width: 100%;
     height: 7vh;
-    /* background-color: blueviolet; */
+    background-color: #538bdb;
     font-family: 'Patrick Hand', cursive;
     font-size: 3vw;
+    border-radius: 1vw;
     color: #F0EEEB;
 }
 

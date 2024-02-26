@@ -28,4 +28,6 @@
     min-height: 50px;
     flex-wrap: wrap;
     justify-content: center;
+    cursor: pointer;
+    /* background-color: maroon; */
 }

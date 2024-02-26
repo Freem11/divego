@@ -17,6 +17,7 @@
     height: 3vh;
     padding-left: 2vw;
     padding-right: 2vw;
+    cursor: pointer;
   }
 
   .chapterItem{
@@ -43,7 +44,7 @@
     animation: changeBg 4s linear infinite;
     border-radius: 15px;
     pointer-events: all;
-   
+    cursor: pointer;
   }
 
   @keyframes changeBg {
@@ -68,6 +69,5 @@
     color: black;
     font-family: 'Patrick Hand', cursive;
     font-size: 2vw;
-
   }
 

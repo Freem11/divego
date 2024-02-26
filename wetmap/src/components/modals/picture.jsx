@@ -1,14 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
+import { SelectedPicContext } from"../contexts/selectPicContext"
 import FlagIcon from "@mui/icons-material/Flag";
 import "./picture.css";
 
 function Picture(props) {
-  const { pic } = props;
+  const { pic, animateFullScreenModal } = props;
+  const { setSelectedPic } = useContext(SelectedPicContext);
 
   let photoName = pic.photoFile.split("/").pop();
 
   const [imgHeigth, setImgHeigth] = useState(0);
   const [imgWidth, setImgWidth] = useState(0);
+
+  const handleModalOpen = (picture) => {
+    setSelectedPic(picture)
+    animateFullScreenModal()
+  }
 
 
   const getImageDimensions = async () => {
@@ -30,6 +37,7 @@ function Picture(props) {
     <div
       key={pic.id}
       className="pictureBoxQ"
+      onClick={() => handleModalOpen(photoName)}
       style={{
         backgroundImage: `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName})`,
         backgroundRepeat: 'no-repeat',

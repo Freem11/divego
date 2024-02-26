@@ -61,6 +61,7 @@ import SecondTutorial from "./guides/secondTutorial";
 import ThirdTutorial from "./guides/thirdTutorial";
 import SiteSearchModal from "./modals/siteSearchModal";
 import MapSearchModal from "./modals/mapSearchModal";
+import FullScreenModal from "./modals/fullScreenModal";
 import Lightbox from "react-image-lightbox";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
@@ -100,11 +101,19 @@ const MapPage = React.memo((props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { dsAdderModal, setDsAddermodal } = useContext(DiveSiteAdderModalContext);
+  const { dsAdderModal, setDsAddermodal } = useContext(
+    DiveSiteAdderModalContext
+  );
   const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
-  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(DiveSiteSearchModalContext);
-  const { mapSearchModal, setMapSearchModal } = useContext(MapSearchModalContext);
-  const { guideLaunchModal, setGuideLaunchModal } = useContext(GuideLaunchModalContext);
+  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(
+    DiveSiteSearchModalContext
+  );
+  const { mapSearchModal, setMapSearchModal } = useContext(
+    MapSearchModalContext
+  );
+  const { guideLaunchModal, setGuideLaunchModal } = useContext(
+    GuideLaunchModalContext
+  );
   const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { setTiles } = useContext(CarrouselTilesContext);
@@ -229,11 +238,12 @@ const MapPage = React.memo((props) => {
     getProfile();
   }, []);
 
+  const sideLength = "3.5vw";
   const toggleButtonStyle = {
     "&.Mui-selected": {
       backgroundColor: "#538bdb",
-      width: "70%",
-      height: "40%",
+      width: sideLength,
+      height: sideLength,
     },
     "&.Mui-selected:hover": { backgroundColor: "lightgrey", color: "white" },
     "&:hover": {
@@ -241,8 +251,8 @@ const MapPage = React.memo((props) => {
       backgroundColor: "white",
     },
     backgroundColor: "white",
-    width: "70%",
-    height: "40%",
+    width: sideLength,
+    height: sideLength,
     color: "#538bdb",
     boxShadow: "-2px 4px 4px #00000064",
     borderRadius: "100%",
@@ -400,7 +410,7 @@ const MapPage = React.memo((props) => {
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
-    setShowFilterer(false)
+    setShowFilterer(false);
     if (pin.PicFile !== null) {
       removePhoto({
         filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
@@ -532,6 +542,7 @@ const MapPage = React.memo((props) => {
     setLaunchModalYCoord(0);
     setMapSearchYCoord(0);
     setSiteSearchModalYCoord(0);
+    setFullScreenModalYCoord(0);
   }
 
   const picModalRef = useRef(null);
@@ -544,6 +555,7 @@ const MapPage = React.memo((props) => {
   const anchorModalRef = useRef(null);
   const siteSearchModalRef = useRef(null);
   const mapSearchModalRef = useRef(null);
+  const fullScreenModalRef = useRef(null);
   const [picModalYCoord, setPicModalYCoord] = useState(0);
   const [siteModalYCoord, setSiteModalYCoord] = useState(0);
   const [launchModalYCoord, setLaunchModalYCoord] = useState(0);
@@ -553,6 +565,7 @@ const MapPage = React.memo((props) => {
   const [thirdGuideModalYCoord, setThirdGuideModalYCoord] = useState(0);
   const [siteSearchModalYCoord, setSiteSearchModalYCoord] = useState(0);
   const [mapSearchYCoord, setMapSearchYCoord] = useState(0);
+  const [fullScreenModalYCoord, setFullScreenModalYCoord] = useState(0);
   const [anchorModalYCoord, setAnchorModalYCoord] = useState(0);
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
@@ -612,6 +625,11 @@ const MapPage = React.memo((props) => {
     to: { transform: `translate3d(0,${mapSearchYCoord}px,0)` },
   });
 
+  const moveFullScreenModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${fullScreenModalYCoord}px,0)` },
+  });
+
   const animateFabs = () => {
     let containerHeight =
       document.getElementsByClassName("fabContainer")[0].clientHeight;
@@ -619,12 +637,11 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("fabButtons")[0].clientHeight;
 
     if (fabsYCoord === 0) {
-      if(windowHeight < 400 ) {
-        setfabsYCoord(-containerHeight-(buttonSectionHeight/2));
+      if (windowHeight < 400) {
+        setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
       } else {
-        setfabsYCoord(-containerHeight+(buttonSectionHeight/2));
+        setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
       }
-     
     } else {
       setfabsYCoord(0);
     }
@@ -807,6 +824,17 @@ const MapPage = React.memo((props) => {
     }
   };
 
+  const animateFullScreenModal = () => {
+    let modalHeigth =
+      document.getElementsByClassName("fullScreenModalDiv")[0].clientHeight;
+
+    if (fullScreenModalYCoord === 0) {
+      setFullScreenModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+    } else {
+      setFullScreenModalYCoord(0);
+    }
+  };
+
   const animateSiteSearchModal = () => {
     let modalHeigth =
       document.getElementsByClassName("searchModalDiv")[0].clientHeight;
@@ -846,7 +874,7 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePulltab = () => {
-    console.log(showFilterer)
+    console.log(showFilterer);
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
@@ -877,7 +905,7 @@ const MapPage = React.memo((props) => {
       setLaunchModalYCoord(0);
       setMapSearchYCoord(0);
       setSiteSearchModalYCoord(0);
-      setShowFilterer(false)
+      setShowFilterer(false);
     }
 
     if (!siteModal) {
@@ -966,7 +994,9 @@ const MapPage = React.memo((props) => {
       document.getElementsByClassName("searchModalDiv")[0].clientHeight;
 
     if (diveSiteSearchModal) {
-      setSiteSearchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setSiteSearchModalYCoord(
+        -windowHeight + (windowHeight - modalHeigth) / 2
+      );
       setAnchorModalYCoord(0);
       setSiteModalYCoord(0);
       setPicModalYCoord(0);
@@ -978,7 +1008,7 @@ const MapPage = React.memo((props) => {
     if (!diveSiteSearchModal) {
       setSiteSearchModalYCoord(0);
     }
-  }, [diveSiteSearchModal])
+  }, [diveSiteSearchModal]);
 
   useEffect(() => {
     let modalHeigth =
@@ -997,7 +1027,7 @@ const MapPage = React.memo((props) => {
     if (!mapSearchModal) {
       setMapSearchYCoord(0);
     }
-  }, [mapSearchModal])
+  }, [mapSearchModal]);
 
   return (
     <div className="mappagemaster">
@@ -1020,6 +1050,7 @@ const MapPage = React.memo((props) => {
                   color: "white",
                   marginTop: "-2vh",
                   marginBottom: "1vh",
+                  cursor: "pointer",
                 }}
               />
             ) : (
@@ -1029,6 +1060,7 @@ const MapPage = React.memo((props) => {
                   color: "white",
                   marginTop: "-2vh",
                   marginBottom: "1vh",
+                  cursor: "pointer",
                 }}
               />
             )}
@@ -1066,9 +1098,7 @@ const MapPage = React.memo((props) => {
             )}
 
             {masterSwitch && (
-              <div
-                className="gearBox"
-              >
+              <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
                   value="check"
@@ -1084,9 +1114,7 @@ const MapPage = React.memo((props) => {
             )}
 
             {masterSwitch && (
-              <div
-                className="gearBox"
-              >
+              <div className="gearBox">
                 <ToggleButton
                   sx={searButState ? toggleButtonStyleAlt : toggleButtonStyle}
                   value="check"
@@ -1371,6 +1399,7 @@ const MapPage = React.memo((props) => {
         <AnchorPics
           animateAnchorModal={animateAnchorModal}
           setAnchorModalYCoord={setAnchorModalYCoord}
+          animateFullScreenModal={animateFullScreenModal}
         />
       </animated.div>
 
@@ -1397,12 +1426,23 @@ const MapPage = React.memo((props) => {
         />
       </animated.div>
 
+      <animated.div
+        className="fullScreenModalDiv"
+        style={moveFullScreenModal}
+        ref={fullScreenModalRef}
+        onClick={() => setFullScreenModalYCoord(0)}
+      >
+        <FullScreenModal
+          animateFullScreenModal={animateFullScreenModal}
+        />
+      </animated.div>
+      {/* 
       {lightbox && (
         <Lightbox
           mainSrc={selectedPic}
           onCloseRequest={() => setLightbox(false)}
         />
-      )}
+      )} */}
     </div>
   );
 });
