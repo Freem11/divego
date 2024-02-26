@@ -1,5 +1,4 @@
-import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-// import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Form, Label } from "reactstrap";
 import React, { useState, useContext } from "react";
 import { SessionContext } from "./contexts/sessionContext";
 import {
@@ -15,10 +14,9 @@ let passwordVar = false;
 let firstVar = false;
 let lastVar = false;
 import manta from "../images/Matt_Manta_White.png"
-import headliner from "../images/Headliner.png";
 
 export default function SignUpRoute() {
-  const { activeSession, setActiveSession } = useContext(SessionContext);
+  const { setActiveSession } = useContext(SessionContext);
 
   const [formVals, setFormVals] = useState({
     email: "",
@@ -88,7 +86,6 @@ export default function SignUpRoute() {
         setRegFail(`You have already registered this account, please sign in`);
       }
       let checker = await sessionCheck();
-      //  console.log("checkerbox", checker)
     }
   };
 
@@ -103,8 +100,6 @@ export default function SignUpRoute() {
           <img
             style={{
               height: "20vh",
-              // maxWidth: "80%",
-              // height: "0%",
               marginTop: "5vh",
               marginBottom: "0%",
               backgroundColor: "#538dbd",
@@ -115,8 +110,6 @@ export default function SignUpRoute() {
         </div>
         <div className="inptBx">
           <InputBase
-            // id="standard-basic"
-            // label="Latitude"
             placeholder="Email"
             variant="standard"
             className="inpts"
@@ -141,10 +134,7 @@ export default function SignUpRoute() {
           />
 
           <InputBase
-            // id="standard-basic"
-            // label="Latitude"
             placeholder="Password"
-            // variant="standard"
             className="inpts"
             type="password"
             name="password"
@@ -167,10 +157,7 @@ export default function SignUpRoute() {
           />
 
           <InputBase
-            // id="standard-basic"
-            // label="Latitude"
             placeholder="First Name"
-            // variant="standard"
             className="inpts"
             type="text"
             name="firstName"
@@ -193,10 +180,7 @@ export default function SignUpRoute() {
           />
 
           <InputBase
-            // id="standard-basic"
-            // label="Latitude"
             placeholder="Last Name"
-            // variant="standard"
             className="inpts"
             type="text"
             name="lastName"
