@@ -1,16 +1,12 @@
-// import AsyncStorage from "@react-native-async-storage/async-storage";
-import React, { useState, useContext, useEffect } from "react";
-import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
+import React, { useState, useContext } from "react";
+import { Form, Label } from "reactstrap";
 import { SessionContext } from "./contexts/sessionContext";
 import {
   sessionCheck,
   signInStandard,
   register,
-  signInFaceBook,
-  signInGoogle,
 } from "../supabaseCalls/authenticateSupabaseCalls";
 import { createProfile } from "../supabaseCalls/accountSupabaseCalls";
-import { Auth } from "@supabase/auth-ui-react";
 import "./authenication.css";
 import InputBase from "@mui/material/InputBase";
 import {
@@ -24,7 +20,6 @@ import {
   AppleLoginButton,
 } from "react-social-login-buttons";
 import manta from "../images/Matt_Manta_White.png"
-import headliner from "../images/Headliner.png";
 
 let emailVar = false;
 let passwordVar = false;
@@ -34,7 +29,7 @@ const appleAppId = import.meta.env.VITE_APPLE_APP_ID;
 const REDIRECT_URI = window.location.href;
 
 export default function SignInRoute() {
-  const { activeSession, setActiveSession } = useContext(SessionContext);
+  const { setActiveSession } = useContext(SessionContext);
   const [profile, setProfile] = useState(null);
   const [formVals, setFormVals] = useState({
     email: "",
@@ -69,7 +64,6 @@ export default function SignInRoute() {
         email: userData.user.email,
         id: decoded.sub,
       };
-      // await localStorage.setItem("appletoken", JSON.stringify(appleObject));
       handleOAuthSubmit(appleObject);
     } else {
       let reUsedApple = {
@@ -77,14 +71,6 @@ export default function SignInRoute() {
         id: decoded.sub,
       };
       handleOAuthSubmit(reUsedApple);
-      // let reUsedApple = JSON.parse(await localStorage.getItem("appletoken"));
-      // if (reUsedApple && reUsedApple.email === decoded.email) {
-      //   handleOAuthSubmit(reUsedApple);
-      // } else {
-      //   setLoginFail(
-      //     "Invalid Credentials (email and name required for sign in)"
-      //   );
-      // }
     }
   };
 
@@ -96,7 +82,6 @@ export default function SignInRoute() {
         headers: { Authorization: `Bearer ${token}` },
       });
       const user = await res.json();
-      // console.log("helloG?", user);
       handleOAuthSubmit(user);
     } catch (err) {
       console.log("error", err);
@@ -112,7 +97,6 @@ export default function SignInRoute() {
       );
       const user2 = await res2.json();
       handleOAuthSubmit(user2);
-      // console.log("helloF?", user2);
     } catch (err) {
       console.log("error", err);
     }
@@ -292,10 +276,7 @@ export default function SignInRoute() {
 
         <div className="inptBx">
           <InputBase
-            // id="standard-basic"
-            // label="Latitude"
             placeholder="Email"
-            // variant="standard"
             className="inpts"
             type="text"
             name="email"
@@ -318,10 +299,7 @@ export default function SignInRoute() {
           />
 
           <InputBase
-            // id="standard-basic"
-            // label="Latitude"
             placeholder="Password"
-            // variant="standard"
             className="inpts"
             type="password"
             name="password"
