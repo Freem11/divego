@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import {
   Button,
   Dialog,
   DialogTitle,
   DialogContent,
-  DialogContentText,
   DialogActions,
 } from "@mui/material";
 import { SessionContext } from "../contexts/sessionContext";
@@ -36,10 +35,7 @@ const ActDelDialog = (props) => {
       UserID: activeSession.user.id,
     });
 
-     //test me
-     await deleteProfile(activeSession.user.id)
-     /////
-
+    await deleteProfile(activeSession.user.id)
     await userDelete(activeSession.user.id);
     await setActiveSession(null);
     await localStorage.removeItem("token");
