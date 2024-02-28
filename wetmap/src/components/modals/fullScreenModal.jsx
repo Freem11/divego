@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from "react";
+import { useContext, useState } from "react";
 import { FormGroup, Button } from "reactstrap";
 import "./fullScreenModal.css";
 import { SelectedPicContext } from "../contexts/selectPicContext";
@@ -12,43 +12,37 @@ const FullScreenModal = (props) => {
 
   const getImageDimensions = async () => {
     let screenWidthInital = window.innerWidth;
-    let screenHeitghInital = window.innerHeight;
+    let screenHeigthInital = window.innerHeight;
 
     const img = new Image();
     img.src = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${selectedPic}`
-    const imageBitmap = await createImageBitmap(img)
-    let ratio = imageBitmap.height/imageBitmap.width
-    let inverseRatio = imageBitmap.width/imageBitmap.height
+    const imageBitmap = await createImageBitmap(img);
+    let ratio = imageBitmap.height/imageBitmap.width;
+    let inverseRatio = imageBitmap.width/imageBitmap.height;
 
-    console.log(screenHeitghInital)
-    console.log(imageBitmap.height, imageBitmap.width)
-
-  let newWidth
-  let newHeigth
-
+    let newWidth;
+    let newHeigth;
     if (imageBitmap.height > imageBitmap.width) {
-       newHeigth = screenHeitghInital * 0.96
-       newWidth =  screenHeitghInital * 0.96 * inverseRatio
+      newHeigth = screenHeigthInital * 0.96;
+      newWidth =  screenHeigthInital * 0.96 * inverseRatio;
     } else {
-      newWidth = screenWidthInital * 0.96
-      newHeigth = screenWidthInital * 0.96 * ratio
+      newWidth = screenWidthInital * 0.96;
+      newHeigth = screenWidthInital * 0.96 * ratio;
     }
 
-    if(newHeigth > screenHeitghInital){
-      setImgHeigth(screenHeitghInital*0.96)
-      setImgWidth((screenHeitghInital*0.96)*inverseRatio)
-
+    if(newHeigth > screenHeigthInital){
+      setImgHeigth(screenHeigthInital*0.96);
+      setImgWidth((screenHeigthInital*0.96)*inverseRatio);
     } else if (newWidth > screenWidthInital){
-      setImgWidth(screenWidthInital*0.96)
-      setImgHeigth((screenWidthInital*0.96)*ratio)
+      setImgWidth(screenWidthInital*0.96);
+      setImgHeigth((screenWidthInital*0.96)*ratio);
     } else {
-      setImgWidth(newWidth)
-      setImgHeigth(newHeigth)
+      setImgWidth(newWidth);
+      setImgHeigth(newHeigth);
     }
-
   };
 
-  getImageDimensions()
+  getImageDimensions();
 
   return (
     <div
