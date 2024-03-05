@@ -163,6 +163,8 @@ const PhotoMenu = () => {
 
   function trackWidth() {
     setBoxWidth((window.innerWidth * 0.8));
+    setXCoord(0);
+    setTilesShifted(0);
   }
 
   useEffect(() => {
