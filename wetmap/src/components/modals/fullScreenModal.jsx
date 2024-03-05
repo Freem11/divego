@@ -42,14 +42,16 @@ const FullScreenModal = (props) => {
     }
   };
 
-  getImageDimensions();
+  if (selectedPic) {
+    getImageDimensions();
+  }
 
   return (
     <div
       className="bodyDiv"
       onClick={(e) => e.stopPropagation()}
       style={{
-        backgroundImage: `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${selectedPic})`,
+        backgroundImage: selectedPic ? `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${selectedPic})` : "",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         width: imgWidth,
