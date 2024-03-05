@@ -212,7 +212,7 @@ const PhotoMenu = () => {
             const tilesRemainingTemp = tilesRemaining + 5;
             setTilesRemaining(tilesRemainingTemp);
             setXCoord(0)
-            setTilesShifted(tilesShifted - tilesRemainingTemp)
+            setTilesShifted(tilesShifted - 5)
           }
         }
       } else {

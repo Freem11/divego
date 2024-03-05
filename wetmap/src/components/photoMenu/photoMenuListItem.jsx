@@ -130,7 +130,7 @@ const PhotoMenuListItem = (props) => {
     } else {
       transform_x = 0;
     }
-    if (transform_x === NaN) {
+    if (transform_x === NaN || transform_x < 0) {
       transform_x = 0;
     }
     
