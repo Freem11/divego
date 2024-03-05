@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FormGroup, Button } from "reactstrap";
 import "./fullScreenModal.css";
 import { SelectedPicContext } from "../contexts/selectPicContext";
@@ -42,7 +42,10 @@ const FullScreenModal = (props) => {
     }
   };
 
-  getImageDimensions();
+  useEffect(() => {
+    getImageDimensions();
+  }, [selectedPic])
+    
 
   return (
     <div

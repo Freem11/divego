@@ -1,11 +1,11 @@
-import React, {useState, useContext} from "react";
+import React, {useState, useContext, useEffect} from "react";
 import { SelectedPicContext } from"../contexts/selectPicContext"
 import FlagIcon from "@mui/icons-material/Flag";
 import "./picture.css";
 
 function Picture(props) {
   const { pic, animateFullScreenModal } = props;
-  const { setSelectedPic } = useContext(SelectedPicContext);
+  const { setSelectedPic, selectedPic } = useContext(SelectedPicContext);
 
   let photoName = pic.photoFile.split("/").pop();
 
@@ -22,14 +22,15 @@ function Picture(props) {
 
     const img = new Image();
     img.src = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`
-    const imageBitmap = await createImageBitmap(img)
-    let ratio = imageBitmap.height/imageBitmap.width
-    setImgWidth(containerWidth)
-    setImgHeigth(containerWidth*ratio)
-
+      const imageBitmap = await createImageBitmap(img)
+      let ratio = imageBitmap.height/imageBitmap.width
+      setImgWidth(containerWidth)
+      setImgHeigth(containerWidth*ratio)
   };
 
-  getImageDimensions()
+  useEffect(() => {
+    getImageDimensions();
+  }, [pic])
 
   return (
     <div
