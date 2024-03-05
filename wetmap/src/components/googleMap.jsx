@@ -8,7 +8,6 @@ import "./googleMap.css";
 import useSupercluster from "use-supercluster";
 import "@reach/combobox/styles.css";
 import Collapse from "@mui/material/Collapse";
-import { diveSitesFake, heatVals } from "./data/testdata";
 import anchorIcon from "../images/anchor11.png";
 import anchorClust from "../images/anchor3.png";
 import Manta from "../images/Manta32.png";
@@ -20,7 +19,6 @@ import {
   useEffect,
   useLayoutEffect,
 } from "react";
-import { animated, useSpring } from "react-spring";
 import PlacesAutoComplete from "./locationSearch/placesAutocomplete";
 import { CoordsContext } from "./contexts/mapCoordsContext";
 import { ZoomContext } from "./contexts/mapZoomContext";
@@ -28,14 +26,11 @@ import { JumpContext } from "./contexts/jumpContext";
 import { DiveSitesContext } from "./contexts/diveSitesContext";
 import { SliderContext } from "./contexts/sliderContext";
 import { AnimalContext } from "./contexts/animalContext";
-import { AnimalMultiSelectContext } from "./contexts/animalMultiSelectContext";
 import { GeoCoderContext } from "./contexts/geoCoderContext";
 import { PinContext } from "./contexts/staticPinContext";
 import { MasterContext } from "./contexts/masterContext";
 import { PinSpotContext } from "./contexts/pinSpotContext";
 import { SelectedDiveSiteContext } from "./contexts/selectedDiveSiteContext";
-import { LightBoxContext } from "./contexts/lightBoxContext";
-import { SelectedPicContext } from "./contexts/selectPicContext";
 import { HeatPointsContext } from "./contexts/heatPointsContext";
 import { MapBoundsContext } from "./contexts/mapBoundariesContext";
 import { ModalSelectContext } from "./contexts/modalSelectContext";
@@ -51,19 +46,12 @@ import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
 import { TutorialContext } from "./contexts/tutorialContext";
-import { newGPSBoundaries } from "../helpers/mapHelpers";
 import { formatHeatVals } from "../helpers/heatPointHelpers";
 import { setupClusters } from "../helpers/clusterHelpers";
-// import { diveSites } from "../axiosCalls/diveSiteAxiosCalls";
 import { diveSites } from "../supabaseCalls/diveSiteSupabaseCalls";
-// import { heatPoints } from "../axiosCalls/heatPointAxiosCalls";
 import {
-  heatPoints,
   multiHeatPoints,
-  picClickheatPoints,
 } from "../supabaseCalls/heatPointSupabaseCalls";
-import Lightbox from "react-image-lightbox";
-import zIndex from "@mui/material/styles/zIndex";
 
 const LIB = ["visualization", "places"];
 
@@ -88,41 +76,33 @@ function Map() {
   const { divesTog } = useContext(DiveSitesContext);
   const { boundaries, setBoundaries } = useContext(MapBoundsContext);
   const { animalVal } = useContext(AnimalContext);
-  const { animalMultiSelection } = useContext(AnimalMultiSelectContext);
   const { sliderVal } = useContext(SliderContext);
-  const { showGeoCoder, setShowGeoCoder } = useContext(GeoCoderContext);
+  const { showGeoCoder } = useContext(GeoCoderContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext
   );
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
-  const { itterator, setItterator } = useContext(IterratorContext);
-  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { itterator } = useContext(IterratorContext);
+  const { itterator2 } = useContext(Iterrator2Context);
+  const { tutorialRunning } = useContext(TutorialContext);
 
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { dsAdderModal, setDsAddermodal } = useContext(DiveSiteAdderModalContext);
-  const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
-  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
-  const { guideLaunchModal, setGuideLaunchModal } = useContext(GuideLaunchModalContext);
-  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(DiveSiteSearchModalContext);
-  const { mapSearchModal, setMapSearchModal } = useContext(MapSearchModalContext);
-  const { tiles, setTiles } = useContext(CarrouselTilesContext);
-
-  const { lightbox, setLightbox } = useContext(LightBoxContext);
-  const { selectedPic } = useContext(SelectedPicContext);
+  const { setSiteModal } = useContext(AnchorModalContext);
+  const { setDsAddermodal } = useContext(DiveSiteAdderModalContext);
+  const { setPicAddermodal } = useContext(PicAdderModalContext);
+  const { setSettingsModal } = useContext(SettingsModalContext);
+  const { setGuideLaunchModal } = useContext(GuideLaunchModalContext);
+  const { setDiveSiteSearchModal } = useContext(DiveSiteSearchModalContext);
+  const { setMapSearchModal } = useContext(MapSearchModalContext);
+  const { setTiles } = useContext(CarrouselTilesContext);
 
   const [newSites, setnewSites] = useState([]);
-  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+  const { chosenModal } = useContext(ModalSelectContext);
   const [mapRef, setMapRef] = useState(null);
 
   const [selected, setSelected] = useState(null);
   const { dragPin, setDragPin } = useContext(PinSpotContext);
   const [tempMarker, setTempMarker] = useState(false);
-
-  const toggleSiteModal = () => {
-    setSiteModal(!siteModal);
-  };
 
   let center = useMemo(() => ({ lat: mapCoords[0], lng: mapCoords[1] }), []);
   let zoom = useMemo(() => mapZoom, []);
@@ -364,7 +344,6 @@ function Map() {
     setSiteModal(true);
   };
 
-
   const cleanupModals = () => {
     setSiteModal(false);
     setDsAddermodal(false);
@@ -487,16 +466,6 @@ function Map() {
           onDragEnd={handleDragEnd}
         ></Marker>
       )}
-
-      {/* 
-      {lightbox && (
-        <div className="boxLight">
-          <Lightbox
-            mainSrc={selectedPic}
-            onCloseRequest={() => setLightbox(false)}
-          />
-          </div>
-        )} */}
     </GoogleMap>
   );
 }

@@ -1,14 +1,7 @@
 import { useState, useContext } from "react";
-import { AnimalContext } from "../contexts/animalContext";
 import { useEffect } from "react";
-import { photos } from "../data/testdata";
-import Autocomplete from "@mui/material/Autocomplete";
 import AutoSuggest from "../autoSuggest/autoSuggest";
-import TextField from "@mui/material/TextField";
-import { diveSites, getSiteNamesThatFit } from "../../supabaseCalls/diveSiteSupabaseCalls";
-// import { getAnimalNames } from "../supabaseCalls/photoSupabaseCalls";
-// import { getAnimalNames } from "../axiosCalls/photoAxiosCalls";
-import { AnimalRevealContext } from "../contexts/animalRevealContext";
+import { getSiteNamesThatFit } from "../../supabaseCalls/diveSiteSupabaseCalls";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
@@ -20,14 +13,12 @@ export default function DiveSiteAutoComplete(props) {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext
   );
-  const { boundaries, setBoundaries } = useContext(MapBoundsContext);
-  const { setShowAnimalSearch } = useContext(AnimalRevealContext);
-  const { setAnimalVal } = useContext(AnimalContext);
+  const { boundaries } = useContext(MapBoundsContext);
   const [list, setList] = useState([]);
   const [searchText, setSearchText] = useState("");
 
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+  const { tutorialRunning } = useContext(TutorialContext);
 
   let diveSiteNames;
 

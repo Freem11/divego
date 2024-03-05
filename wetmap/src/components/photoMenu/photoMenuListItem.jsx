@@ -118,8 +118,24 @@ const PhotoMenuListItem = (props) => {
     const WidthofTile = e.target.width;
     const HeightOfTile = e.target.height;
 
+    //I'm not sure it is the best approach to this issue... but it works pretty well
+    //We get the parent with the x transformation and we add it to the final transformation
+    let transform_x = e.target.parentElement.parentElement.style.transform;
+    if (transform_x) {
+      transform_x = transform_x.split('(')[1];
+      if (transform_x.length > 1) {
+        transform_x = transform_x.split(',')[0];
+      }
+      transform_x = parseFloat(transform_x.replace('px', ''));
+    } else {
+      transform_x = 0;
+    }
+    if (transform_x === NaN) {
+      transform_x = 0;
+    }
+    
     const distanceToItemMiddleX = WidthofTile / 2 - (tilesShifted*WidthofTile);
-    const centererPressX = e.target.x + distanceToItemMiddleX;
+    const centererPressX = transform_x + e.target.x + distanceToItemMiddleX;
     const distanceToItemMiddleY = HeightOfTile / 2;
     const centererPressY = e.target.y + distanceToItemMiddleY;
 
