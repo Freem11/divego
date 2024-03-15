@@ -43,7 +43,9 @@ const FullScreenModal = (props) => {
   };
 
   useEffect(() => {
-    getImageDimensions();
+    if (selectedPic) {
+      getImageDimensions();
+    }
   }, [selectedPic])
     
 
