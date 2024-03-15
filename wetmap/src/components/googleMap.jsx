@@ -51,6 +51,8 @@ import { setupClusters } from "../helpers/clusterHelpers";
 import { diveSites } from "../supabaseCalls/diveSiteSupabaseCalls";
 import {
   multiHeatPoints,
+  getHeatPointsWithUser,
+  getHeatPointsWithUserEmpty,
 } from "../supabaseCalls/heatPointSupabaseCalls";
 
 const LIB = ["visualization", "places"];
@@ -126,90 +128,144 @@ function Map() {
   }));
 
   const handleMapUpdates = async () => {
-    if(mapRef){
-    let boundaries = mapRef.getBounds();
-    let lats = boundaries[Object.keys(boundaries)[0]];
-    let lngs = boundaries[Object.keys(boundaries)[1]];
+    if (mapRef) {
+      let boundaries = mapRef.getBounds();
+      let lats = boundaries[Object.keys(boundaries)[0]];
+      let lngs = boundaries[Object.keys(boundaries)[1]];
 
-    if (boundaries) {
-      if (lngs.lo > lngs.hi) {
-        try {
-          const AmericanDiveSites = await diveSites({
-            minLat: lats.lo,
-            maxLat: lats.hi,
-            minLng: -180,
-            maxLng: lngs.hi,
-          });
-          const AsianDiveSites = await diveSites({
-            minLat: lats.lo,
-            maxLat: lats.hi,
-            minLng: lngs.lo,
-            maxLng: 180,
-          });
-
-          let diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
-          !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
-        } catch (e) {
-          console.log({ title: "Error", message: e.message });
-        }
-
-        try {
-          const AmericanHeatPoints = await multiHeatPoints(
-            {
+      if (boundaries) {
+        if (lngs.lo > lngs.hi) {
+          try {
+            const AmericanDiveSites = await diveSites({
               minLat: lats.lo,
               maxLat: lats.hi,
               minLng: -180,
               maxLng: lngs.hi,
-            },
-            animalVal
-          );
-          const AsianHeatPoints = await multiHeatPoints(
-            {
+            });
+            const AsianDiveSites = await diveSites({
               minLat: lats.lo,
               maxLat: lats.hi,
               minLng: lngs.lo,
               maxLng: 180,
-            },
-            animalVal
-          );
+            });
 
-          let heatPointList = [...AsianHeatPoints, ...AmericanHeatPoints];
-          setHeatPts(formatHeatVals(heatPointList));
-        } catch (e) {
-          console.log({ title: "Error", message: e.message });
-        }
-      } else {
-        try {
-          const diveSiteList = await diveSites({
-            minLat: lats.lo,
-            maxLat: lats.hi,
-            minLng: lngs.lo,
-            maxLng: lngs.hi,
-          });
+            let diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
+            !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
+          } catch (e) {
+            console.log({ title: "Error", message: e.message });
+          }
 
-          !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
-        } catch (e) {
-          console.log({ title: "Error", message: e.message });
-        }
+          try {
+            let AmericanHeatPoints;
+            let AsianHeatPoints;
+            if (animalVal.length === 0) {
+              AmericanHeatPoints = await getHeatPointsWithUserEmpty({
+                myCreatures : "",
+                minLat: lats.lo,
+                maxLat: lats.hi,
+                minLng: -180,
+                maxLng: lngs.hi,
+              });
+              AsianHeatPoints = await getHeatPointsWithUserEmpty({
+                myCreatures : "",
+                minLat: lats.lo,
+                maxLat: lats.hi,
+                minLng: lngs.lo,
+                maxLng: 180,
+              });
+            } else {
+              AmericanHeatPoints = await getHeatPointsWithUser({
+                myCreatures: "",
+                minLat: lats.lo,
+                maxLat: lats.hi,
+                minLng: -180,
+                maxLng: lngs.hi,
+                animalMultiSelection: animalVal,
+              });
+              AsianHeatPoints = await getHeatPointsWithUser({
+                myCreatures: "",
+                minLat: lats.lo,
+                maxLat: lats.hi,
+                minLng: lngs.lo,
+                maxLng: 180,
+                animalMultiSelection: animalVal,
+              });
+            }
+            // const AmericanHeatPoints = await multiHeatPoints(
+            //   {
+            //     minLat: lats.lo,
+            //     maxLat: lats.hi,
+            //     minLng: -180,
+            //     maxLng: lngs.hi,
+            //   },
+            //   animalVal
+            // );
+            // const AsianHeatPoints = await multiHeatPoints(
+            //   {
+            //     minLat: lats.lo,
+            //     maxLat: lats.hi,
+            //     minLng: lngs.lo,
+            //     maxLng: 180,
+            //   },
+            //   animalVal
+            // );
 
-        try {
-          const heatPointList = await multiHeatPoints(
-            {
+            let heatPointList = [...AsianHeatPoints, ...AmericanHeatPoints];
+            setHeatPts(formatHeatVals(heatPointList));
+          } catch (e) {
+            console.log({ title: "Error", message: e.message });
+          }
+        } else {
+          try {
+            const diveSiteList = await diveSites({
               minLat: lats.lo,
               maxLat: lats.hi,
               minLng: lngs.lo,
               maxLng: lngs.hi,
-            },
-            animalVal
-          );
+            });
 
-          setHeatPts(formatHeatVals(heatPointList));
-        } catch (e) {
-          console.log({ title: "Error", message: e.message });
+            !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
+          } catch (e) {
+            console.log({ title: "Error", message: e.message });
+          }
+
+          try {
+            let heatPointList;
+            if (animalVal.length === 0) {
+              heatPointList = await getHeatPointsWithUserEmpty({
+                myCreatures: "",
+                minLat: lats.lo,
+                maxLat: lats.hi,
+                minLng: lngs.lo,
+                maxLng: lngs.hi,
+              });
+            } else {
+              heatPointList = await getHeatPointsWithUser({
+                animalMultiSelection: animalVal,
+                myCreatures: "",
+                minLat: lats.lo,
+                maxLat: lats.hi,
+                minLng: lngs.lo,
+                maxLng: lngs.hi,
+              });
+            }
+            // const heatPointList = await multiHeatPoints(
+            //   {
+            //     minLat: lats.lo,
+            //     maxLat: lats.hi,
+            //     minLng: lngs.lo,
+            //     maxLng: lngs.hi,
+            //   },
+            //   animalVal
+            // );
+
+            setHeatPts(formatHeatVals(heatPointList));
+          } catch (e) {
+            console.log({ title: "Error", message: e.message });
+          }
         }
       }
     }
-  }
   };
 
   useLayoutEffect(() => {
@@ -251,7 +307,7 @@ function Map() {
   }, [mapZoom]);
 
   const handleBoundsChange = () => {
-    cleanupModalsNoAnchor()
+    cleanupModalsNoAnchor();
     if (mapRef) {
       window.clearTimeout(mapBoundariesTimoutHandler);
       mapBoundariesTimoutHandler = window.setTimeout(function () {

@@ -13,8 +13,6 @@ import { SessionContext } from "../contexts/sessionContext";
 import { grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
 import { newGPSBoundaries } from "../../helpers/mapHelpers";
 import {
-  // getPhotosforAnchorMulti,
-  getPhotosforAnchor,
   getPhotosWithUser,
   getPhotosWithUserEmpty,
 } from "../../supabaseCalls/photoSupabaseCalls";
