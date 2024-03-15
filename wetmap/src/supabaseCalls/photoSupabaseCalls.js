@@ -23,7 +23,6 @@ export const insertphoto = async (values, monthID) => {
       longitude: values.longitude,
       month: monthID,
       UserID: values.UserID,
-      userName: values.userName,
     },
   ]);
 
@@ -95,69 +94,69 @@ export const getAnimalMultiSelect = async (text) => {
   }
 };
 
-export const getPhotosforAnchorMulti = async (value) => {
-  let creatureList;
-  value.animalVal.forEach((creature) => {
-    if (creatureList === undefined) {
-      creatureList = creature + ",";
-    } else {
-      creatureList = creatureList + creature + ",";
-    }
-  });
+// export const getPhotosforAnchorMulti = async (value) => {
+//   let creatureList;
+//   value.animalVal.forEach((creature) => {
+//     if (creatureList === undefined) {
+//       creatureList = creature + ",";
+//     } else {
+//       creatureList = creatureList + creature + ",";
+//     }
+//   });
 
-  let creatureListFinal;
-  if (creatureList !== undefined) {
-    creatureListFinal = creatureList.slice(0, -1);
-  }
+//   let creatureListFinal;
+//   if (creatureList !== undefined) {
+//     creatureListFinal = creatureList.slice(0, -1);
+//   }
 
-  if (creatureListFinal === undefined) {
-    creatureListFinal = "";
-  }
+//   if (creatureListFinal === undefined) {
+//     creatureListFinal = "";
+//   }
 
-  if (value.animalVal.length === 0 || value.animalVal === null) {
-    const { data, error } = await supabase
-      .from("photos")
-      .select()
-      // .ilike("userName", "%" + value.myCreatures + "%")
-      // .eq("month", value.sliderVal)
-      .ilike("label", "%" + creatureListFinal + "%")
-      .gte("latitude", value.minLat)
-      .gte("longitude", value.minLng)
-      .lte("latitude", value.maxLat)
-      .lte("longitude", value.maxLng)
-      .order("id", { ascending: false });
+//   if (value.animalVal.length === 0 || value.animalVal === null) {
+//     const { data, error } = await supabase
+//       .from("photos")
+//       .select()
+//       // .ilike("userName", "%" + value.myCreatures + "%")
+//       // .eq("month", value.sliderVal)
+//       .ilike("label", "%" + creatureListFinal + "%")
+//       .gte("latitude", value.minLat)
+//       .gte("longitude", value.minLng)
+//       .lte("latitude", value.maxLat)
+//       .lte("longitude", value.maxLng)
+//       .order("id", { ascending: false });
 
-    if (error) {
-      console.log("couldn't do it 24,", error);
-      return [];
-    }
+//     if (error) {
+//       console.log("couldn't do it 24,", error);
+//       return [];
+//     }
 
-    if (data) {
-      return data;
-    }
-  } else {
-    const { data, error } = await supabase
-      .from("photos")
-      .select()
-      .filter("label", "in", "(" + creatureListFinal + ")")
-      // .ilike("userName", "%" + value.myCreatures + "%")
-      // .eq("month", value.sliderVal)
-      .gte("latitude", value.minLat)
-      .gte("longitude", value.minLng)
-      .lte("latitude", value.maxLat)
-      .lte("longitude", value.maxLng)
-      .order("id", { ascending: false });
+//     if (data) {
+//       return data;
+//     }
+//   } else {
+//     const { data, error } = await supabase
+//       .from("photos")
+//       .select()
+//       .filter("label", "in", "(" + creatureListFinal + ")")
+//       // .ilike("userName", "%" + value.myCreatures + "%")
+//       // .eq("month", value.sliderVal)
+//       .gte("latitude", value.minLat)
+//       .gte("longitude", value.minLng)
+//       .lte("latitude", value.maxLat)
+//       .lte("longitude", value.maxLng)
+//       .order("id", { ascending: false });
 
-    if (error) {
-      console.log("couldn't do it 25,", error);
-      return [];
-    }
+//     if (error) {
+//       console.log("couldn't do it 25,", error);
+//       return [];
+//     }
 
-    if (data) {
-      return data;
-    }
-  }
-};
+//     if (data) {
+//       return data;
+//     }
+//   }
+// };
 
 export const getPhotosforMapArea = async (value) => {
   const { data, error } = await supabase
@@ -171,6 +170,45 @@ export const getPhotosforMapArea = async (value) => {
 
   if (error) {
     console.log("couldn't do it,", error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
+
+export const getPhotosWithUser = async (values) => {
+  const { data, error } = await supabase.rpc("get_photos_with_user", {
+    animals: values.animalMultiSelection,
+    max_lat: values.maxLat,
+    min_lat: values.minLat,
+    max_lng: values.maxLng,
+    min_lng: values.minLng,
+    userid: values.myCreatures,
+  });
+
+  if (error) {
+    console.log("couldn't do it 27,", error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
+
+export const getPhotosWithUserEmpty = async (values) => {
+  const { data, error } = await supabase.rpc("get_photos_with_username", {
+    max_lat: values.maxLat,
+    min_lat: values.minLat,
+    max_lng: values.maxLng,
+    min_lng: values.minLng,
+    userid: values.myCreatures,
+  });
+
+  if (error) {
+    console.log("couldn't do it 27,", error);
     return [];
   }
 

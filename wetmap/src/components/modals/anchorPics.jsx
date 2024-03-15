@@ -7,7 +7,11 @@ import { TutorialContext } from "../contexts/tutorialContext";
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
 import { getDiveSiteByName } from "../../supabaseCalls/diveSiteSupabaseCalls";
-import { getPhotosforAnchorMulti } from "../../supabaseCalls/photoSupabaseCalls";
+import {
+  // getPhotosforAnchorMulti,
+  getPhotosWithUser,
+  getPhotosWithUserEmpty,
+} from "../../supabaseCalls/photoSupabaseCalls";
 import "photoswipe/dist/photoswipe.css";
 import Picture from "./picture";
 import FlagIcon from "@mui/icons-material/Flag";
@@ -15,12 +19,13 @@ import CloseIcon from "@mui/icons-material/Close";
 import "./anchorPics.css";
 
 const AnchorPics = (props) => {
-  const { animateAnchorModal, setAnchorModalYCoord, animateFullScreenModal } =
-    props;
+  const {
+    animateAnchorModal,
+    setAnchorModalYCoord,
+    animateFullScreenModal,
+  } = props;
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { selectedDiveSite } = useContext(
-    SelectedDiveSiteContext
-  );
+  const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { animalVal } = useContext(AnimalContext);
   const [anchorPics, setAnchorPics] = useState([]);
   const [site, setSite] = useState("");
@@ -35,13 +40,25 @@ const AnchorPics = (props) => {
     );
 
     try {
-      const photos = await getPhotosforAnchorMulti({
-        animalVal,
-        minLat: minLat,
-        maxLat: maxLat,
-        minLng: minLng,
-        maxLng: maxLng,
-      });
+      let photos;
+      if(animalVal.length === 0){
+         photos = await getPhotosWithUserEmpty({
+          myCreatures : "",
+          minLat,
+          maxLat,
+          minLng,
+          maxLng,
+        })
+      } else {
+         photos = await getPhotosWithUser({
+          animalMultiSelection: animalVal,
+          myCreatures: "",
+          minLat,
+          maxLat,
+          minLng,
+          maxLng,
+        })
+      }
       if (photos) {
         setAnchorPics(photos);
 

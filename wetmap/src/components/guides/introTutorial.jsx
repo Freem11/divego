@@ -13,8 +13,10 @@ import { SessionContext } from "../contexts/sessionContext";
 import { grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
 import { newGPSBoundaries } from "../../helpers/mapHelpers";
 import {
-  getPhotosforAnchorMulti,
+  // getPhotosforAnchorMulti,
   getPhotosforAnchor,
+  getPhotosWithUser,
+  getPhotosWithUserEmpty,
 } from "../../supabaseCalls/photoSupabaseCalls";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { getToday } from "../../helpers/picUploaderHelpers.js";
@@ -661,14 +663,25 @@ export default function IntroTutorial(props) {
     );
 
     try {
-      const photos = await getPhotosforAnchorMulti({
-        animalVal,
-        // sliderVal,
-        minLat,
-        maxLat,
-        minLng,
-        maxLng,
-      });
+      let photos;
+      if(animalVal.length === 0){
+         photos = await getPhotosWithUserEmpty({
+          myCreatures : "",
+          minLat,
+          maxLat,
+          minLng,
+          maxLng,
+        })
+      } else {
+         photos = await getPhotosWithUser({
+          animalMultiSelection: animalVal,
+          myCreatures: "",
+          minLat,
+          maxLat,
+          minLng,
+          maxLng,
+        })
+      }
       if (photos) {
         let count = 0;
         photos.forEach((obj) => {
