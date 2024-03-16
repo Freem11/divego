@@ -4,9 +4,10 @@ import { AnimalContext } from "../contexts/animalContext";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
 import { IterratorContext } from "../contexts/iterratorContext";
 import { TutorialContext } from "../contexts/tutorialContext";
+import { UserProfileContext } from "../contexts/userProfileContext";
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
-import { getDiveSiteByName } from "../../supabaseCalls/diveSiteSupabaseCalls";
+import { getDiveSiteByName, getDiveSiteWithUserName } from "../../supabaseCalls/diveSiteSupabaseCalls";
 import {
   // getPhotosforAnchorMulti,
   getPhotosWithUser,
@@ -24,6 +25,7 @@ const AnchorPics = (props) => {
     setAnchorModalYCoord,
     animateFullScreenModal,
   } = props;
+  const { profile } = useContext(UserProfileContext);
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { animalVal } = useContext(AnimalContext);
@@ -44,6 +46,7 @@ const AnchorPics = (props) => {
       if(animalVal.length === 0){
          photos = await getPhotosWithUserEmpty({
           myCreatures : "",
+          userId: profile[0].UserID,
           minLat,
           maxLat,
           minLng,
@@ -53,6 +56,7 @@ const AnchorPics = (props) => {
          photos = await getPhotosWithUser({
           animalMultiSelection: animalVal,
           myCreatures: "",
+          userId: profile[0].UserID,
           minLat,
           maxLat,
           minLng,
@@ -100,11 +104,15 @@ const AnchorPics = (props) => {
     }
   }, [itterator]);
 
-  const getDiveSite = async (site) => {
+  const getDiveSite = async () => {
     try {
-      const selectedSite = await getDiveSiteByName(site);
+      const selectedSite = await getDiveSiteWithUserName({
+        siteName: selectedDiveSite.SiteName,
+        lat: selectedDiveSite.Latitude,
+        lng: selectedDiveSite.Longitude,
+      });
       if (selectedSite.length > 0) {
-        setSite(selectedSite[0].userName);
+        setSite(selectedSite[0].newusername);
       }
     } catch (e) {
       console.log({ title: "Error", message: e.message });

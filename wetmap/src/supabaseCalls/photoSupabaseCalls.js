@@ -186,6 +186,7 @@ export const getPhotosWithUser = async (values) => {
     max_lng: values.maxLng,
     min_lng: values.minLng,
     userid: values.myCreatures,
+    connecteduserid: values.userId,
   });
 
   if (error) {
@@ -205,6 +206,7 @@ export const getPhotosWithUserEmpty = async (values) => {
     max_lng: values.maxLng,
     min_lng: values.minLng,
     userid: values.myCreatures,
+    connecteduserid: values.userId,
   });
 
   if (error) {
