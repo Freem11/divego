@@ -48,7 +48,10 @@ import { Iterrator2Context } from "./contexts/iterrator2Context";
 import { TutorialContext } from "./contexts/tutorialContext";
 import { formatHeatVals } from "../helpers/heatPointHelpers";
 import { setupClusters } from "../helpers/clusterHelpers";
-import { diveSites } from "../supabaseCalls/diveSiteSupabaseCalls";
+import {
+  diveSites,
+  getDiveSitesWithUser,
+} from "../supabaseCalls/diveSiteSupabaseCalls";
 import {
   multiHeatPoints,
   getHeatPointsWithUser,
@@ -136,18 +139,35 @@ function Map() {
       if (boundaries) {
         if (lngs.lo > lngs.hi) {
           try {
-            const AmericanDiveSites = await diveSites({
+            let AmericanDiveSites;
+            let AsianDiveSites;
+            AmericanDiveSites = await getDiveSitesWithUser({
+              myDiveSites: "",
               minLat: lats.lo,
               maxLat: lats.hi,
               minLng: -180,
               maxLng: lngs.hi,
             });
-            const AsianDiveSites = await diveSites({
+            AsianDiveSites = await getDiveSitesWithUser({
+              myDiveSites: "",
               minLat: lats.lo,
               maxLat: lats.hi,
               minLng: lngs.lo,
               maxLng: 180,
             });
+
+            // const AmericanDiveSites = await diveSites({
+            //   minLat: lats.lo,
+            //   maxLat: lats.hi,
+            //   minLng: -180,
+            //   maxLng: lngs.hi,
+            // });
+            // const AsianDiveSites = await diveSites({
+            //   minLat: lats.lo,
+            //   maxLat: lats.hi,
+            //   minLng: lngs.lo,
+            //   maxLng: 180,
+            // });
 
             let diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
             !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
@@ -160,14 +180,14 @@ function Map() {
             let AsianHeatPoints;
             if (animalVal.length === 0) {
               AmericanHeatPoints = await getHeatPointsWithUserEmpty({
-                myCreatures : "",
+                myCreatures: "",
                 minLat: lats.lo,
                 maxLat: lats.hi,
                 minLng: -180,
                 maxLng: lngs.hi,
               });
               AsianHeatPoints = await getHeatPointsWithUserEmpty({
-                myCreatures : "",
+                myCreatures: "",
                 minLat: lats.lo,
                 maxLat: lats.hi,
                 minLng: lngs.lo,
@@ -217,12 +237,19 @@ function Map() {
           }
         } else {
           try {
-            const diveSiteList = await diveSites({
+            const diveSiteList = await getDiveSitesWithUser({
+              myDiveSites: "",
               minLat: lats.lo,
               maxLat: lats.hi,
               minLng: lngs.lo,
               maxLng: lngs.hi,
             });
+            // const diveSiteList = await diveSites({
+            //   minLat: lats.lo,
+            //   maxLat: lats.hi,
+            //   minLng: lngs.lo,
+            //   maxLng: lngs.hi,
+            // });
 
             !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
           } catch (e) {

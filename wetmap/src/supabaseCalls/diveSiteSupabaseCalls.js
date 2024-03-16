@@ -34,6 +34,26 @@ if (data) {
 }
 };
 
+export const getDiveSitesWithUser = async (values) => {
+  const { data, error } = await supabase.rpc("get_divesites_with_username", {
+    max_lat: values.maxLat,
+    min_lat: values.minLat,
+    max_lng: values.maxLng,
+    min_lng: values.minLng,
+    userid: values.myDiveSites,
+  });
+
+  if (error) {
+    console.log("couldn't do it 27,", error);
+    return [];
+  }
+
+  if (data) {
+    // console.log(data)
+    return data;
+  }
+};
+
 export const getSiteNamesThatFit = async (GPSBubble, value) => {
 
   if(value === "") {
