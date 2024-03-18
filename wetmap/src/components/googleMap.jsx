@@ -8,10 +8,10 @@ import "./googleMap.css";
 import useSupercluster from "use-supercluster";
 import "@reach/combobox/styles.css";
 import Collapse from "@mui/material/Collapse";
-import anchorIcon from "../images/anchor11.png";
-import anchorClust from "../images/anchor3.png";
+import anchorIcon from "../images/mapIcons/AnchorBlue1.png";
+import anchorClust from "../images/mapIcons/AnchorCluster.png";
 import Manta from "../images/Manta32.png";
-import gold from "../images/icons8-anchor-24.png";
+import gold from "../images/mapIcons/AnchorGold.png";
 import {
   useMemo,
   useState,
