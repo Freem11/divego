@@ -665,6 +665,7 @@ export default function IntroTutorial(props) {
       if(animalVal.length === 0){
          photos = await getPhotosWithUserEmpty({
           myCreatures : "",
+          userId: profile[0] ? profile[0].UserID : "",
           minLat,
           maxLat,
           minLng,
@@ -674,6 +675,7 @@ export default function IntroTutorial(props) {
          photos = await getPhotosWithUser({
           animalMultiSelection: animalVal,
           myCreatures: "",
+          userId: profile[0] ? profile[0].UserID : "",
           minLat,
           maxLat,
           minLng,
