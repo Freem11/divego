@@ -369,6 +369,7 @@ const MapPage = React.memo((props) => {
     setSiteModal(false);
     setShowFilterer(false);
     if (pin.PicFile !== null) {
+      console.log("called 1")
       removePhoto({
         filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
@@ -411,6 +412,7 @@ const MapPage = React.memo((props) => {
     setSiteModal(false);
     setShowFilterer(false);
     if (pin.PicFile !== null) {
+      console.log("called 2")
       removePhoto({
         filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
@@ -667,12 +669,13 @@ const MapPage = React.memo((props) => {
       setTiles(true);
     } else {
       setPicAddermodal(false);
-      if (pin.PicFile !== null) {
-        removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-          fileName: `${pin.PicFile}`,
-        });
-      }
+      // if (pin.PicFile !== null) {
+      //   console.log("called 3")
+      //   removePhoto({
+      //     filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+      //     fileName: `${pin.PicFile}`,
+      //   });
+      // }
     }
   };
 
@@ -704,6 +707,7 @@ const MapPage = React.memo((props) => {
       setShowFilterer(false);
       setTiles(true);
       if (pin.PicFile !== null) {
+        console.log("called 4")
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
@@ -739,6 +743,7 @@ const MapPage = React.memo((props) => {
       setShowFilterer(false);
       setTiles(true);
       if (pin.PicFile !== null) {
+        console.log("called 5")
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
@@ -764,6 +769,7 @@ const MapPage = React.memo((props) => {
       setShowFilterer(false);
       setTiles(true);
       if (pin.PicFile !== null) {
+        console.log("called 6")
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,
@@ -813,6 +819,7 @@ const MapPage = React.memo((props) => {
       setShowFilterer(false);
       setTiles(true);
       if (pin.PicFile !== null) {
+        console.log("called 7")
         removePhoto({
           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
           fileName: `${pin.PicFile}`,

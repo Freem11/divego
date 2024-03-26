@@ -127,7 +127,7 @@ const PicUploader = React.memo((props) => {
         data.append("image", e.target.files[0]);
         const newFilePath = await uploadphoto(image, fileName);
         setPhotoFile(fileName);
-
+        console.log("create file", photoFile)
         //scrape off photo info
         let formattedDate = pin.PicDate;
         let newLatitude = pin.Latitude;
@@ -151,6 +151,7 @@ const PicUploader = React.memo((props) => {
           }
         });
 
+        console.log("pin data", fileName, formattedDate, newLatitude, newLongitude)
         setPin({
           ...pin,
           PicFile: `animalphotos/public/${fileName}`,
@@ -176,7 +177,10 @@ const PicUploader = React.memo((props) => {
     } else {
       setPin({ ...pin, [e.target.name]: e.target.value });
     }
+    
   };
+
+  console.log("pin check", pin)
 
   const handleNoGPSClose = (e) => {
     setShowNoGPS(false);
@@ -318,13 +322,14 @@ const PicUploader = React.memo((props) => {
 
       let rightNow = getToday(Rnow);
 
-      if (tutorialRunning) {
+      // if (tutorialRunning) {
         if (itterator3 === 22) {
           setItterator3(itterator3 + 1);
         } else {
-          insertPhotoWaits({ ...pin, PicFile: photoFile });
+          insertPhotoWaits({ ...pin });
+          // insertPhotoWaits({ ...pin, PicFile: photoFile });
         }
-      }
+      // }
 
       setPin({
         ...pin,
@@ -357,6 +362,7 @@ const PicUploader = React.memo((props) => {
     }
 
     if (pin.PicFile !== null) {
+      console.log("called")
       removePhoto({
         filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
