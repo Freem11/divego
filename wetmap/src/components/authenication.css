@@ -63,11 +63,17 @@
   color: gold;
 }
 
+.registerClick {
+  font-family: Itim;
+  color: lightgray;
+  margin-left: 20vw;
+}
+
 .erroMsg {
   margin: 1vw;
   padding: 1vw;
   color: pink;
-  font-family: Indie Flower;
+  font-family: Itim;
   font-size: 2vw;
   border-radius: 10px;
   border: 1px dashed darkblue;
