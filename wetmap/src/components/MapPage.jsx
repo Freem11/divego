@@ -168,7 +168,7 @@ const MapPage = React.memo((props) => {
         blinker = setInterval(diveSiteAdd, 1500);
       }
     }
-    return () => cleanUp();
+    return () => {cleanUp()};
   }, [itterator2]);
 
   useEffect(() => {
@@ -177,7 +177,7 @@ const MapPage = React.memo((props) => {
         blinker = setInterval(photoAdd, 1500);
       }
     }
-    return () => cleanUp();
+    return () => {cleanUp()};
   }, [itterator3]);
 
   const returnToPicModal = () => {

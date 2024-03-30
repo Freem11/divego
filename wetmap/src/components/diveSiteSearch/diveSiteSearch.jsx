@@ -49,11 +49,11 @@ export default function DiveSiteAutoComplete(props) {
     setList(diveSiteArray);
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     handleDiveSiteList();
   }, []);
 
-  useEffect(async () => {
+  useEffect(() => {
     handleDiveSiteList();
   }, [boundaries, searchText]);
 
