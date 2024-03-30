@@ -1400,6 +1400,7 @@ const MapPage = React.memo((props) => {
           animateAnchorModal={animateAnchorModal}
           setAnchorModalYCoord={setAnchorModalYCoord}
           animateFullScreenModal={animateFullScreenModal}
+          setPicModalYCoord={setPicModalYCoord}
         />
       </animated.div>
 

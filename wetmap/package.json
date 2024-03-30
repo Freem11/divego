@@ -39,6 +39,7 @@
     "react-autosuggest": "^10.1.0",
     "react-awesome-slider": "^4.1.0",
     "react-dom": "^18.2.0",
+    "react-drag-drop-files": "^2.3.10",
     "react-facebook-login": "^4.1.1",
     "react-fs": "^0.0.0",
     "react-geocode": "^0.2.3",

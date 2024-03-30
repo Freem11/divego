@@ -2,9 +2,11 @@ import { FormGroup, Button } from "reactstrap";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { AnimalContext } from "../contexts/animalContext";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
+import { PicAdderModalContext } from "../contexts/picAdderModalContext";
 import { IterratorContext } from "../contexts/iterratorContext";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
+import { PinContext } from "../contexts/staticPinContext";
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
 import { getDiveSiteByName, getDiveSiteWithUserName } from "../../supabaseCalls/diveSiteSupabaseCalls";
@@ -16,6 +18,7 @@ import {
 import Picture from "./picture";
 import FlagIcon from "@mui/icons-material/Flag";
 import CloseIcon from "@mui/icons-material/Close";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import "./anchorPics.css";
 
 const AnchorPics = (props) => {
@@ -23,11 +26,15 @@ const AnchorPics = (props) => {
     animateAnchorModal,
     setAnchorModalYCoord,
     animateFullScreenModal,
+    setPicModalYCoord,
   } = props;
   const { profile } = useContext(UserProfileContext);
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  const { setPicAddermodal } = useContext(PicAdderModalContext);
   const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { animalVal } = useContext(AnimalContext);
+  const { pin, setPin } = useContext(PinContext);
+
   const [anchorPics, setAnchorPics] = useState([]);
   const [site, setSite] = useState("");
 
@@ -126,6 +133,19 @@ const AnchorPics = (props) => {
     animateAnchorModal();
   };
 
+  const handleSwitch = () => {
+    if (itterator === 11 || itterator == 15) {
+      return;
+    }
+    setPin({
+      ...pin,
+      Latitude: selectedDiveSite.Latitude,
+      Longitude: selectedDiveSite.Longitude,
+    });
+    setSiteModal(false);
+    setPicAddermodal(true);
+  };
+
   return (
     <div className="masterDivA">
       <div className="fixerDiv">
@@ -143,17 +163,26 @@ const AnchorPics = (props) => {
               <h3 className="DiveSiteLabel">{selectedDiveSite.SiteName}</h3>
               <h3 className="DiveSiteCredit">Added by: {site}</h3>
             </div>
-            <FormGroup>
+
+              <Button
+                variant="text"
+                id="plusButton"
+                onClick={() => handleSwitch()}
+              >
+                <AddPhotoAlternateIcon
+                  sx={{ color: "gold", width: "4vw", height: "5vh"}}
+                ></AddPhotoAlternateIcon>
+              </Button>
+
               <Button
                 variant="text"
                 id="closeButton2"
                 onClick={() => handleClose()}
               >
                 <CloseIcon
-                  sx={{ color: "lightgrey", width: "4vw", height: "7vh" }}
+                  sx={{ color: "lightgrey", width: "4vw", height: "6vh" }}
                 ></CloseIcon>
               </Button>
-            </FormGroup>
           </div>
         </div>
       </div>
