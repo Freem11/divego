@@ -13,7 +13,6 @@ import {
   getPhotosWithUser,
   getPhotosWithUserEmpty,
 } from "../../supabaseCalls/photoSupabaseCalls";
-import "photoswipe/dist/photoswipe.css";
 import Picture from "./picture";
 import FlagIcon from "@mui/icons-material/Flag";
 import CloseIcon from "@mui/icons-material/Close";

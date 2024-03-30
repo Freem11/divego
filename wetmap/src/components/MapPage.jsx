@@ -67,11 +67,11 @@ import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
 import Histogram from "./histogram/histogramBody";
 import TutorialBar from "./guideBar/tutorialBarContainer";
 
-const adminPortalZone = (
-  <div style={{ marginLeft: "10px", marginBottom: "40px" }}>
-    <AdminPortal></AdminPortal>
-  </div>
-);
+// const adminPortalZone = (
+//   <div style={{ marginLeft: "10px", marginBottom: "40px" }}>
+//     <AdminPortal></AdminPortal>
+//   </div>
+// );
 
 const MapPage = React.memo((props) => {
   const { screenHeigthInital } = props;
@@ -79,7 +79,7 @@ const MapPage = React.memo((props) => {
   const { setProfile } = useContext(UserProfileContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
-  const [showAdminPortal, setShowAdminPortal] = useState(false);
+  // const [showAdminPortal, setShowAdminPortal] = useState(false);
   const { showGeoCoder } = useContext(GeoCoderContext);
   const { showAnimalSearch } = useContext(AnimalRevealContext);
   const { pin, setPin } = useContext(PinContext);
@@ -1211,17 +1211,17 @@ const MapPage = React.memo((props) => {
       )}
 
       <div className="col1rowB">
-        <Collapse
+        {/* <Collapse
           in={showAdminPortal}
           orientation="horizontal"
           collapsedSize="0px"
         >
           {adminPortalZone}
-        </Collapse>
-        <Logo
+        </Collapse> */}
+        {/* <Logo
           setShowAdminPortal={setShowAdminPortal}
           showAdminPortal={showAdminPortal}
-        />
+        /> */}
       </div>
 
       <div>
