@@ -31,6 +31,7 @@
   height: 10vh;
   z-index: 5;
   cursor: pointer;
+  position: relative;
   /* width: 20vw; */
 }
 
