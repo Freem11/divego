@@ -63,7 +63,7 @@
   background-color: black;
   opacity: 0.6;
   position: absolute;
-  bottom: -0.9vh;
+  bottom: -1.4vh;
 }
 
 .countIndicator {
@@ -90,5 +90,16 @@
   display: flex;
   align-self: end;
   margin-right: 3%;
+  cursor: pointer;
+}
+
+.commentPrompt {
+  display: flex;
+  flex-direction: row;
+  margin-top: 0.5vh;
+  margin-bottom: 2vh;
+  color: #f0eeeb;
+  font-family: "Itim";
+  font-size: 1vw;
   cursor: pointer;
 }

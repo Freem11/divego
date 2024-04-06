@@ -45,6 +45,8 @@ import PinContextProvider from './staticPinContext';
 import PicModalContextProvider from './picModalContext';
 import JumpContextProvider from './jumpContext';
 import DiveSitesContextProvider from './diveSitesContext';
+import CommentsModalContextProvider from './commentsModalContext';
+import SelectedPictureContextProvider from './selectedPictureContext';
 
 const providers = [
     AreaPicsContextProvider,
@@ -90,6 +92,8 @@ const providers = [
     PicModalContextProvider,
     JumpContextProvider,
     DiveSitesContextProvider,
+    CommentsModalContextProvider,
+    SelectedPictureContextProvider,
 ]
 
 export const AppContextProvider = combineComponents(...providers);

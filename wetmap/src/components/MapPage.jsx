@@ -49,6 +49,7 @@ import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContex
 import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "./contexts/settingsModalContext";
+import { CommentsModalContext } from "./contexts/commentsModalContext";
 import { PullTabContext } from "./contexts/pullTabContext";
 import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
 import { TutorialContext } from "./contexts/tutorialContext";
@@ -62,6 +63,7 @@ import ThirdTutorial from "./guides/thirdTutorial";
 import SiteSearchModal from "./modals/siteSearchModal";
 import MapSearchModal from "./modals/mapSearchModal";
 import FullScreenModal from "./modals/fullScreenModal";
+import CommentsModal from "./modals/commentsModal";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
 import Histogram from "./histogram/histogramBody";
@@ -114,6 +116,7 @@ const MapPage = React.memo((props) => {
     GuideLaunchModalContext
   );
   const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+  const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { setTiles } = useContext(CarrouselTilesContext);
 
@@ -168,7 +171,9 @@ const MapPage = React.memo((props) => {
         blinker = setInterval(diveSiteAdd, 1500);
       }
     }
-    return () => {cleanUp()};
+    return () => {
+      cleanUp();
+    };
   }, [itterator2]);
 
   useEffect(() => {
@@ -177,7 +182,9 @@ const MapPage = React.memo((props) => {
         blinker = setInterval(photoAdd, 1500);
       }
     }
-    return () => {cleanUp()};
+    return () => {
+      cleanUp();
+    };
   }, [itterator3]);
 
   const returnToPicModal = () => {
@@ -552,6 +559,7 @@ const MapPage = React.memo((props) => {
   const secondGuideModalRef = useRef(null);
   const thirdGuideModalRef = useRef(null);
   const anchorModalRef = useRef(null);
+  const commentsModalRef = useRef(null);
   const siteSearchModalRef = useRef(null);
   const mapSearchModalRef = useRef(null);
   const fullScreenModalRef = useRef(null);
@@ -566,6 +574,7 @@ const MapPage = React.memo((props) => {
   const [mapSearchYCoord, setMapSearchYCoord] = useState(0);
   const [fullScreenModalYCoord, setFullScreenModalYCoord] = useState(0);
   const [anchorModalYCoord, setAnchorModalYCoord] = useState(0);
+  const [commmentsModalYCoord, setCommentsModalYCoord] = useState(0);
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
 
@@ -614,6 +623,11 @@ const MapPage = React.memo((props) => {
     to: { transform: `translate3d(0,${anchorModalYCoord}px,0)` },
   });
 
+  const moveCommentsModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${commmentsModalYCoord}px,0)` },
+  });
+
   const moveSiteSearchModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${siteSearchModalYCoord}px,0)` },
@@ -630,10 +644,10 @@ const MapPage = React.memo((props) => {
   });
 
   const animateFabs = () => {
-    let containerHeight =
-      document.getElementsByClassName("fabContainer")[0].clientHeight;
-    let buttonSectionHeight =
-      document.getElementsByClassName("fabButtons")[0].clientHeight;
+    let containerHeight = document.getElementsByClassName("fabContainer")[0]
+      .clientHeight;
+    let buttonSectionHeight = document.getElementsByClassName("fabButtons")[0]
+      .clientHeight;
 
     if (fabsYCoord === 0) {
       if (windowHeight < 400) {
@@ -652,8 +666,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePicModal = () => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (picModalYCoord === 0) {
       setSiteModal(false);
@@ -691,8 +705,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSiteModal = () => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (siteModalYCoord === 0) {
       setSiteModal(false);
@@ -726,8 +740,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateLaunchModal = () => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (launchModalYCoord === 0) {
       setSiteModal(false);
@@ -751,8 +765,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSettingsModal = () => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (settingsModalYCoord === 0) {
       setSiteModal(false);
@@ -800,8 +814,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateAnchorModal = () => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (anchorModalYCoord === 0) {
       setDsAddermodal(false);
@@ -824,20 +838,34 @@ const MapPage = React.memo((props) => {
     }
   };
 
+  const animateCommentsModal = () => {
+    let modalHeigth = document.getElementsByClassName("commentScreen")[0]
+      .clientHeight;
+
+    if (commmentsModalYCoord === 0) {
+      setCommentsModalYCoord(-windowHeight)
+    } else {
+      setCommentsModalYCoord(0)
+      setCommentsModal(false)
+    }
+  };
+
   const animateFullScreenModal = () => {
-    let modalHeigth =
-      document.getElementsByClassName("fullScreenModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("fullScreenModalDiv")[0]
+      .clientHeight;
 
     if (fullScreenModalYCoord === 0) {
-      setFullScreenModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setFullScreenModalYCoord(
+        -windowHeight + (windowHeight - modalHeigth) / 2
+      );
     } else {
       setFullScreenModalYCoord(0);
     }
   };
 
   const animateSiteSearchModal = () => {
-    let modalHeigth =
-      document.getElementsByClassName("searchModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+      .clientHeight;
 
     if (siteSearchModalYCoord === 0) {
       setSiteModal(false);
@@ -855,8 +883,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateMapSearchModal = () => {
-    let modalHeigth =
-      document.getElementsByClassName("searchModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+      .clientHeight;
 
     if (mapSearchYCoord === 0) {
       setSiteModal(false);
@@ -894,8 +922,8 @@ const MapPage = React.memo((props) => {
   }, [showFilterer]);
 
   useEffect(() => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (siteModal) {
       setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -914,8 +942,19 @@ const MapPage = React.memo((props) => {
   }, [siteModal]);
 
   useEffect(() => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    if (commentsModal) {
+      setCommentsModalYCoord(-windowHeight);
+    }
+
+    if (!siteModal) {
+      setCommentsModalYCoord(0);
+    }
+  }, [commentsModal]);
+
+
+  useEffect(() => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (dsAdderModal) {
       setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -933,8 +972,8 @@ const MapPage = React.memo((props) => {
   }, [dsAdderModal]);
 
   useEffect(() => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (picAdderModal) {
       setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -952,8 +991,8 @@ const MapPage = React.memo((props) => {
   }, [picAdderModal]);
 
   useEffect(() => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (settingsModal) {
       setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -971,8 +1010,8 @@ const MapPage = React.memo((props) => {
   }, [settingsModal]);
 
   useEffect(() => {
-    let modalHeigth =
-      document.getElementsByClassName("picModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
 
     if (guideLaunchModal) {
       setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -990,8 +1029,8 @@ const MapPage = React.memo((props) => {
   }, [guideLaunchModal]);
 
   useEffect(() => {
-    let modalHeigth =
-      document.getElementsByClassName("searchModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+      .clientHeight;
 
     if (diveSiteSearchModal) {
       setSiteSearchModalYCoord(
@@ -1011,8 +1050,8 @@ const MapPage = React.memo((props) => {
   }, [diveSiteSearchModal]);
 
   useEffect(() => {
-    let modalHeigth =
-      document.getElementsByClassName("searchModalDiv")[0].clientHeight;
+    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+      .clientHeight;
 
     if (mapSearchModal) {
       setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
@@ -1405,6 +1444,18 @@ const MapPage = React.memo((props) => {
       </animated.div>
 
       <animated.div
+        className="commentScreen"
+        style={moveCommentsModal}
+        ref={commentsModalRef}
+      >
+        <div className="commentsModal">
+          <CommentsModal 
+          animateCommentsModal={animateCommentsModal}
+          />
+        </div>
+      </animated.div>
+
+      <animated.div
         className="searchModalDiv"
         style={moveMapSearchModal}
         ref={mapSearchModalRef}
@@ -1433,9 +1484,7 @@ const MapPage = React.memo((props) => {
         ref={fullScreenModalRef}
         onClick={() => setFullScreenModalYCoord(0)}
       >
-        <FullScreenModal
-          animateFullScreenModal={animateFullScreenModal}
-        />
+        <FullScreenModal animateFullScreenModal={animateFullScreenModal} />
       </animated.div>
     </div>
   );

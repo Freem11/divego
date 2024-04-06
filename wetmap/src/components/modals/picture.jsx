@@ -1,6 +1,8 @@
 import React, { useState, useContext, useEffect } from "react";
 import { SelectedPicContext } from "../contexts/selectPicContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
+import { CommentsModalContext } from "../contexts/commentsModalContext";
+import { SelectedPictureContext } from "../contexts/selectedPictureContext";
 
 import {
   insertPhotoLike,
@@ -18,11 +20,19 @@ function Picture(props) {
   const [picLiked, setPicLiked] = useState(pic.likedbyuser);
   const [likeData, setLikeData] = useState(pic.likeid);
   const [countOfLikes, setCountOfLikes] = useState(pic.likecount);
+  const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
+  const { setSelectedPicture } = useContext(SelectedPictureContext);
 
   let photoName = pic.photofile.split("/").pop();
 
   const [imgHeigth, setImgHeigth] = useState(0);
   const [imgWidth, setImgWidth] = useState(0);
+
+  const handleCommentModal = () => {
+    console.log(commentsModal)
+    setCommentsModal(true);
+    setSelectedPicture(pic);
+  };
 
   const handleLike = async (e) => {
     e.stopPropagation();
@@ -33,9 +43,9 @@ function Picture(props) {
       setCountOfLikes(countOfLikes - 1);
     } else {
       const newRecord = await insertPhotoLike(profile[0].UserID, pic.id);
-        setPicLiked(true);
-        setLikeData(newRecord[0].id);
-        setCountOfLikes(countOfLikes + 1);
+      setPicLiked(true);
+      setLikeData(newRecord[0].id);
+      setCountOfLikes(countOfLikes + 1);
     }
   };
 
@@ -61,6 +71,7 @@ function Picture(props) {
   }, [pic]);
 
   return (
+    <div>
     <div
       key={pic.id}
       className="pictureBoxQ"
@@ -98,6 +109,24 @@ function Picture(props) {
           width: 30,
         }}
       />
+    </div>
+
+    <div
+        onClick={() => handleCommentModal(pic)}
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          marginLeft: 20,
+          zIndex: 4,
+        }}
+      >
+        <p className="commentPrompt" onClick={() => handleCommentModal(pic)}>
+          {pic.commentcount < 1
+            ? "Be first to Comment"
+            : `Comment / View all ${pic.commentcount} Comments`}{" "}
+        </p>
+      </div>
+
     </div>
   );
 }

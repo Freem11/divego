@@ -90,6 +90,30 @@
     height: 100vh;
 }
 
+.commentScreen{
+    z-index: 200;
+    background-color: rgba(0,0,0,0.5);
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    top: 100vh;
+    left: 0vw;
+    width: 100vw;
+    height: 100vh;
+}
+
+.commentsModal {
+    z-index: 200;
+    width: 60vw;
+    height: 62vh;
+    margin-top: 38vh;
+    background-color: #538bdb;
+    border-radius: 2vw;
+    border: 1px solid lightgrey;
+}
+
 .col2rowT {
 	display: flex;
 	flex-direction: column;
