@@ -180,8 +180,6 @@ const PicUploader = React.memo((props) => {
     
   };
 
-  console.log("pin check", pin)
-
   const handleNoGPSClose = (e) => {
     setShowNoGPS(false);
     handleChange(e);

@@ -49,7 +49,7 @@
 
 .userLabel {
   display: flex;
-  align-self: end;
+  align-self: start;
   width: fit-content;
   border-radius: 10px;
   font-family: "Itim";
@@ -58,10 +58,37 @@
   padding: 0.1vw;
   padding-left: 1%;
   padding-right: 1%;
-  margin-right: 2%;
+  margin-left: 2%;
   color: #f0eeeb;
   background-color: black;
-  opacity: 0.8;
+  opacity: 0.6;
   position: absolute;
-  bottom: -1vh;
+  bottom: -0.9vh;
+}
+
+.countIndicator {
+  position: absolute;
+  bottom: 1.1vh;
+  display: flex;
+  align-self: end;
+  align-items: center;
+  justify-content: center;
+  margin-right: 8%;
+  color: #f0eeeb;
+  font-family: "Itim";
+  background-color: black;
+  opacity: 0.6;
+  height: 2.3vh;
+  width: 3vw;
+  border-bottom-left-radius: 1vw;
+  border-top-left-radius: 1vw;
+}
+
+.likeIcon {
+  position: absolute;
+  bottom: 1vh;
+  display: flex;
+  align-self: end;
+  margin-right: 3%;
+  cursor: pointer;
 }

@@ -17,7 +17,7 @@ export const diveSiteWaits = async () => {
 };
 
 export const insertDiveSiteWaits = async (values) => {
-  console.log("Supa got", values)
+  
   const { data, error } = await supabase
   .from("diveSiteWait")
   .insert([

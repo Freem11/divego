@@ -1,36 +1,64 @@
-import React, {useState, useContext, useEffect} from "react";
-import { SelectedPicContext } from"../contexts/selectPicContext"
+import React, { useState, useContext, useEffect } from "react";
+import { SelectedPicContext } from "../contexts/selectPicContext";
+import { UserProfileContext } from "../contexts/userProfileContext";
+
+import {
+  insertPhotoLike,
+  deletePhotoLike,
+} from "../../supabaseCalls/photoLikeSupabaseCalls";
 import FlagIcon from "@mui/icons-material/Flag";
+import notLiked from "../../images/Hand-Hollow-Blue.png";
+import liked from "../../images/Hand-Filled-Blue.png";
 import "./picture.css";
 
 function Picture(props) {
   const { pic, animateFullScreenModal } = props;
+  const { profile } = useContext(UserProfileContext);
   const { setSelectedPic, selectedPic } = useContext(SelectedPicContext);
+  const [picLiked, setPicLiked] = useState(pic.likedbyuser);
+  const [likeData, setLikeData] = useState(pic.likeid);
+  const [countOfLikes, setCountOfLikes] = useState(pic.likecount);
 
   let photoName = pic.photofile.split("/").pop();
 
   const [imgHeigth, setImgHeigth] = useState(0);
   const [imgWidth, setImgWidth] = useState(0);
 
+  const handleLike = async (e) => {
+    e.stopPropagation();
+
+    if (picLiked) {
+      deletePhotoLike(likeData);
+      setPicLiked(false);
+      setCountOfLikes(countOfLikes - 1);
+    } else {
+      const newRecord = await insertPhotoLike(profile[0].UserID, pic.id);
+        setPicLiked(true);
+        setLikeData(newRecord[0].id);
+        setCountOfLikes(countOfLikes + 1);
+    }
+  };
+
   const handleModalOpen = (picture) => {
-    setSelectedPic(picture)
-    animateFullScreenModal()
-  }
+    setSelectedPic(picture);
+    animateFullScreenModal();
+  };
 
   const getImageDimensions = async () => {
-    let containerWidth = document.getElementsByClassName("picScollA")[0].clientWidth;
+    let containerWidth = document.getElementsByClassName("picScollA")[0]
+      .clientWidth;
 
     const img = new Image();
-    img.src = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`
-      const imageBitmap = await createImageBitmap(img)
-      let ratio = imageBitmap.height/imageBitmap.width
-      setImgWidth(containerWidth)
-      setImgHeigth(containerWidth*ratio)
+    img.src = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
+    const imageBitmap = await createImageBitmap(img);
+    let ratio = imageBitmap.height / imageBitmap.width;
+    setImgWidth(containerWidth);
+    setImgHeigth(containerWidth * ratio);
   };
 
   useEffect(() => {
     getImageDimensions();
-  }, [pic])
+  }, [pic]);
 
   return (
     <div
@@ -39,8 +67,8 @@ function Picture(props) {
       onClick={() => handleModalOpen(photoName)}
       style={{
         backgroundImage: `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName})`,
-        backgroundRepeat: 'no-repeat',
-        backgroundSize: 'cover',
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
         width: imgWidth,
         height: imgHeigth,
       }}
@@ -55,6 +83,21 @@ function Picture(props) {
         </a>
       </div>
       <h4 className="userLabel">Added by: {pic.newusername}</h4>
+
+      {countOfLikes > 0 ? (
+        <div className="countIndicator">
+          <p className="countDisplay">{countOfLikes}</p>
+        </div>
+      ) : null}
+      <img
+        src={picLiked ? liked : notLiked}
+        className="likeIcon"
+        onClick={(e) => handleLike(e, pic.id)}
+        style={{
+          height: 30,
+          width: 30,
+        }}
+      />
     </div>
   );
 }
