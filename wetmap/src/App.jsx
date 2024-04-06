@@ -6,7 +6,6 @@ import { Routes, Route } from "react-router-dom";
 import MapPage from "./components/MapPage";
 import AuthenticationPage from "./components/authenticationPage";
 import LoadingScreen from "./LoadingScreen";
-import AdminPage from "./components/adminComponents/adminPage";
 import { getMostRecentPhoto } from "./supabaseCalls/photoSupabaseCalls";
 import { sessionCheck, sessionRefresh } from "./supabaseCalls/authenticateSupabaseCalls";
 import { GoogleOAuthProvider } from "@react-oauth/google";
@@ -93,12 +92,12 @@ function App() {
                       )
                     }
                   />
-                  <Route
+                  {/* <Route
                     path="/admin"
                     element={
                       <AdminPage />
                     }
-                  />
+                  /> */}
                 </Routes>
               </BrowserRouter>
             </SessionContext.Provider>

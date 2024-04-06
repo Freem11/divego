@@ -450,7 +450,7 @@ export default function IntroTutorial(props) {
       }
     }
 
-    return () => cleanUp();
+    return () => {cleanUp()};
   }, [itterator, textPrinting]);
 
   useEffect(() => {

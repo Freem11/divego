@@ -19,7 +19,6 @@ import { DiveSiteSearchModalContext } from "../contexts/diveSiteSearchModalConte
 import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "../contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "../contexts/settingsModalContext";
-import "photoswipe/dist/photoswipe.css";
 import { formatHeatVals } from "../../helpers/heatPointHelpers";
 import "./photoMenu.css";
 import PhotoMenuListItem from "./photoMenuListItem";

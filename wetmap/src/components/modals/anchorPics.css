@@ -39,9 +39,22 @@
 
 }
 
-#closeButton2 {
+#plusButton {
+    display: flex;
     background-color: transparent;
+    justify-content: center;
+    align-items: center;
     border: none;
+    width: 3vw;
+}
+
+#closeButton2 {
+    display: flex;
+    background-color: transparent;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    width: 4vw;
 }
 
 .monthlyLabel{

@@ -376,7 +376,7 @@ function Map() {
     }, 2000);
   }, [selectedDiveSite]);
 
-  useEffect(async () => {
+  useEffect(() => {
     if (tutorialRunning && itterator === 7) {
       setMapZoom(8);
     }
