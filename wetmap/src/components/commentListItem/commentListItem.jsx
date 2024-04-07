@@ -13,6 +13,7 @@ export default function CommentListItem(props) {
   let newDate = new Date(commentDetails.created_at);
   let finalDate = newDate.toLocaleString().substring(0, 10);
 
+  console.log(replyTo, commentDetails.username)
   return (
     <div>
       <div className="container" key={commentDetails.id}>
@@ -26,7 +27,7 @@ export default function CommentListItem(props) {
       <p
         className="replyTxt"
         onClick={() => {
-          replyTo
+          replyTo && replyTo[0] === commentDetails.username
             ? setReplyTo(null)
             : setReplyTo([commentDetails.username, commentDetails.id]);
         }}

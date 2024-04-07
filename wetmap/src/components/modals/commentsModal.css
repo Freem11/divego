@@ -19,12 +19,22 @@
   align-items: center;
   justify-content: center;
   flex-direction: row;
-  /* background-color: green; */
-  height: 6vh;
+  /* background-color: pink; */
   width: 95%;
   font-family: 'Patrick Hand', cursive;
   color: #F0EEEB;
-  margin-top: -50vh;
+}
+
+.commentListContainer {
+  /* background-color: green; */
+  overflow: hidden;
+}
+
+.middleContainer{
+  width: 98%;
+  height: 75%;
+  overflow: hidden;
+  overflow-y: auto;
 }
 
 .mainBlurbDiv{

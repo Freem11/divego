@@ -1,7 +1,9 @@
 .container {
+  display: flex;
+  flex-direction: column;
   background-color: #537bdb;
   border-radius: 10;
-  width: 96%;
+  width: 94%;
   margin-left: 1%;
   margin-top: 2%;
   padding: 2%;
@@ -13,6 +15,7 @@
   justify-content: space-between;
   width: 100%;
   margin-bottom: -2vh;
+  margin-top: -1vh;
   /* background-color: pink; */
 }
 
@@ -46,3 +49,38 @@
   border-bottom-width: 0;
   cursor: pointer;
 }
+
+.commentEntryContainer {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    /* background-color: green; */
+    /* background-color: #538bdb; */
+    margin-top: 1%;
+  }
+
+  .replyBox {
+    display: flex;
+    /* flex-direction: row; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
+    width: 90%;
+    /* height: 100%; */
+  }
+
+  .replyLine {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    align-self: center;
+    background-color: #537dbd;
+    border-top-right-radius: 1vw;
+    border-top-left-radius: 1vw;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-left: -10%;
+    margin-bottom: -2.5%;
+    height: 3vh;
+    width: 70%;
+  }

@@ -1,5 +1,6 @@
 import { useState, useContext, useEffect, useRef } from "react";
 import { Container, Form, FormGroup, Label, Button } from "reactstrap";
+import InputBase from "@mui/material/InputBase";
 import CommentListItem from "../commentListItem/commentListItem";
 import CloseIcon from "@mui/icons-material/Close";
 import bubbles from "../../images/bubbles.png";
@@ -39,28 +40,40 @@ const CommentsModal = (props) => {
   };
 
   const hideRepliesForChildren = (parentId, newSelectedReplyId) => {
-    newSelectedReplyId = [...newSelectedReplyId.filter((id) => parentId !== id)];
+    newSelectedReplyId = [
+      ...newSelectedReplyId.filter((id) => parentId !== id),
+    ];
     for (const comment of listOfComments) {
       if (comment.replied_to === parentId) {
-        newSelectedReplyId = hideRepliesForChildren(comment.id, newSelectedReplyId);  
+        newSelectedReplyId = hideRepliesForChildren(
+          comment.id,
+          newSelectedReplyId
+        );
       }
     }
 
     return newSelectedReplyId;
-  }
+  };
 
   const toggleShowReplies = (comment) => {
     if (selectedReplyId.includes(comment.id)) {
-      let selectedReplyIdTemp = hideRepliesForChildren(comment.id, selectedReplyId);
+      let selectedReplyIdTemp = hideRepliesForChildren(
+        comment.id,
+        selectedReplyId
+      );
       setSelectedReplyId(selectedReplyIdTemp);
     } else {
-      setSelectedReplyId([...selectedReplyId,comment.id]);
+      setSelectedReplyId([...selectedReplyId, comment.id]);
     }
-  }
+  };
+
+  const handleChange = (e) => {
+    setCommentContent(e.target.value);
+  };
 
   const getCommentListView = (commentId, level = 0) => {
     let marginLeft = 5 * level;
-    let width = 98 - marginLeft;
+    let width = 100 - marginLeft;
     const marginStyle = {
       commentLevelShift: {
         marginLeft: `${marginLeft}%`,
@@ -139,11 +152,77 @@ const CommentsModal = (props) => {
         </FormGroup>
       </div>
 
-            <div style={{height: "1vh", width: "100%"}}>
-            {getCommentListView(null)}
+      <div className="middleContainer"> {getCommentListView(null)}</div>
 
-            </div>
-      
+      <div className="commentEntryContainer">
+        {replyTo ? (
+          <div className="replyLine">
+            <p className="userTxt">@{replyTo[0]}</p>
+            <Button
+              variant="text"
+              id="microCloseButton"
+              onClick={() => setReplyTo(null)}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                backgroundColor: "transparent",
+                border: "none",
+                cursor: "pointer",
+              }}
+            >
+              <CloseIcon
+                sx={{ color: "lightgrey", width: "1vw", height: "1vw", zIndex: 200 }}
+              ></CloseIcon>
+            </Button>
+          </div>
+        ) : null}
+        <div className="replyBox">
+          <div className="inputboxType2">
+            <FormGroup>
+              <InputBase
+                id="standard-basic"
+                // label="Latitude"
+                placeholder="Blow some bubbles"
+                variant="standard"
+                type="text"
+                name="commentEntry"
+                value={commentContent}
+                onChange={(e) => setCommentContent(e.target.value)}
+                // onClick={(e) => handleChange(e)}
+                inputProps={{
+                  style: {
+                    textAlign: "center",
+                    fontFamily: "Itim",
+                    fontSize: "1.5vw",
+                    textOverflow: "ellipsis",
+                    backgroundColor: "transparent",
+                    height: "5vh",
+                    width: "56vw",
+                    color: "#F0EEEB",
+                    borderBottom: "none",
+                    borderColor: "transparent",
+                    borderRadius: "20px",
+                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                    marginLeft: "5%",
+                    marginRight: "5%",
+                  },
+                }}
+              />
+            </FormGroup>
+          </div>
+          {/* <TouchableWithoutFeedback onPress={() => handleCommentInsert()}> */}
+          <img
+            src={bubbles}
+            style={{
+              height: "4vw",
+              width: "4vw",
+              paddingTop: "2vh",
+              cursor: "pointer",
+            }}
+          />
+          {/* </TouchableWithoutFeedback> */}
+        </div>
+      </div>
     </div>
   );
 };
