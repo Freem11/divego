@@ -13,7 +13,6 @@ export default function CommentListItem(props) {
   let newDate = new Date(commentDetails.created_at);
   let finalDate = newDate.toLocaleString().substring(0, 10);
 
-  console.log(replyTo, commentDetails.username)
   return (
     <div>
       <div className="container" key={commentDetails.id}>

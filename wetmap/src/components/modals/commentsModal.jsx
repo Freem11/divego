@@ -25,14 +25,43 @@ const CommentsModal = (props) => {
 
   const handleCommentModalClose = async () => {
     setReplyTo(null);
+    setCommentContent("");
     setCommentsModal(false);
     animateCommentsModal();
   };
+
   useEffect(() => {
     if (selectedPicture) {
       getAllPictureComments(selectedPicture.id);
     }
+    setCommentContent(null);
   }, [commentsModal]);
+
+  const handleCommentInsert = async () => {
+    let userIdentity = null
+    if (replyTo){
+      userIdentity = replyTo[1]
+    }
+    if (commentContent === null || commentContent === "") {
+      return;
+    } else {
+      let finalContent
+      if (replyTo) {
+        finalContent = "@" + replyTo[0] + " - " + commentContent
+      } else {
+        finalContent = commentContent
+      }
+      let newComment = await insertPhotoComment(
+        profile[0].UserID,
+        selectedPicture.id,
+        finalContent,
+        userIdentity
+      );
+      setCommentContent("");
+      setReplyTo(null);
+      getAllPictureComments(selectedPicture.id);
+    }
+  };
 
   const getAllPictureComments = async (picId) => {
     let picComments = await grabPhotoCommentsByPicId(picId);
@@ -65,10 +94,6 @@ const CommentsModal = (props) => {
     } else {
       setSelectedReplyId([...selectedReplyId, comment.id]);
     }
-  };
-
-  const handleChange = (e) => {
-    setCommentContent(e.target.value);
   };
 
   const getCommentListView = (commentId, level = 0) => {
@@ -134,7 +159,7 @@ const CommentsModal = (props) => {
           <Button
             variant="text"
             id="closeButton"
-            onClick={() => animateCommentsModal()}
+            onClick={() => handleCommentModalClose()}
             style={{
               display: "flex",
               flexDirection: "column",
@@ -210,8 +235,8 @@ const CommentsModal = (props) => {
               />
             </FormGroup>
           </div>
-          {/* <TouchableWithoutFeedback onPress={() => handleCommentInsert()}> */}
           <img
+            onClick={() => handleCommentInsert()}
             src={bubbles}
             style={{
               height: "4vw",
@@ -220,7 +245,6 @@ const CommentsModal = (props) => {
               cursor: "pointer",
             }}
           />
-          {/* </TouchableWithoutFeedback> */}
         </div>
       </div>
     </div>
