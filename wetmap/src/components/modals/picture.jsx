@@ -29,7 +29,6 @@ function Picture(props) {
   const [imgWidth, setImgWidth] = useState(0);
 
   const handleCommentModal = () => {
-    console.log(commentsModal)
     setCommentsModal(true);
     setSelectedPicture(pic);
   };

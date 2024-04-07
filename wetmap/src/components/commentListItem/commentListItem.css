@@ -1,0 +1,48 @@
+.container {
+  background-color: #537bdb;
+  border-radius: 10;
+  width: 96%;
+  margin-left: 1%;
+  margin-top: 2%;
+  padding: 2%;
+}
+
+.topBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+  margin-bottom: -2vh;
+  /* background-color: pink; */
+}
+
+.userTxt {
+  font-family: Itim;
+  font-size: 1rem;
+  color: black;
+}
+
+.dateTxt {
+  font-family: Itim;
+  font-size: 1rem;
+  color: lightgrey;
+}
+
+.contentTxt {
+  /* background-color: green; */
+  font-family: Itim;
+  font-size: 1.5rem;
+  color: black;
+  align-self: start;
+  margin-bottom: 0vh;
+}
+
+.replyTxt {
+  font-family: Itim;
+  font-size: 1.5rem;
+  color: white;
+  margin-top: 1vh;
+  margin-left: 0vw;
+  border-bottom-width: 0;
+  cursor: pointer;
+}
