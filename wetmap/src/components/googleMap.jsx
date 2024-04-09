@@ -39,6 +39,7 @@ import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
 import { PicAdderModalContext } from "./contexts/picAdderModalContext";
 import { SettingsModalContext } from "./contexts/settingsModalContext";
+import { ProfileModalContext } from "./contexts/profileModalContext";
 import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
 import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContext";
 import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
@@ -96,6 +97,7 @@ function Map() {
   const { setDsAddermodal } = useContext(DiveSiteAdderModalContext);
   const { setPicAddermodal } = useContext(PicAdderModalContext);
   const { setSettingsModal } = useContext(SettingsModalContext);
+  const { setProfileModal } = useContext(ProfileModalContext);
   const { setGuideLaunchModal } = useContext(GuideLaunchModalContext);
   const { setDiveSiteSearchModal } = useContext(DiveSiteSearchModalContext);
   const { setMapSearchModal } = useContext(MapSearchModalContext);
@@ -432,6 +434,7 @@ function Map() {
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
+    setProfileModal(false);
     setGuideLaunchModal(false);
     setDiveSiteSearchModal(false);
     setMapSearchModal(false);
@@ -442,6 +445,7 @@ function Map() {
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
+    setProfileModal(false);
     setGuideLaunchModal(false);
     setDiveSiteSearchModal(false);
     setMapSearchModal(false);

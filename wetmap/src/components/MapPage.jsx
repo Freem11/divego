@@ -22,6 +22,7 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
+import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -49,6 +50,7 @@ import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContex
 import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "./contexts/settingsModalContext";
+import { ProfileModalContext } from "./contexts/profileModalContext";
 import { CommentsModalContext } from "./contexts/commentsModalContext";
 import { PullTabContext } from "./contexts/pullTabContext";
 import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
@@ -116,6 +118,7 @@ const MapPage = React.memo((props) => {
     GuideLaunchModalContext
   );
   const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+  const { profileModal, setProfileModal } = useContext(ProfileModalContext);
   const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { setTiles } = useContext(CarrouselTilesContext);
@@ -279,6 +282,36 @@ const MapPage = React.memo((props) => {
     borderRadius: "100%",
   };
 
+  const handleProfileButton = () => {
+    if (
+      itterator === 11 ||
+      itterator === 13 ||
+      itterator === 16 ||
+      itterator === 19 ||
+      itterator === 25 ||
+      itterator2 === 3 ||
+      itterator2 === 5 ||
+      itterator2 === 9 ||
+      itterator2 === 13 ||
+      itterator2 === 16 ||
+      itterator2 === 19 ||
+      itterator2 === 23 ||
+      itterator2 === 26 ||
+      itterator3 === 5 ||
+      itterator3 === 8 ||
+      itterator3 === 11 ||
+      itterator3 === 14 ||
+      itterator3 === 16 ||
+      itterator3 === 19 ||
+      itterator3 === 22 ||
+      itterator3 === 26
+    ) {
+      return;
+    }
+
+    animateProfileModal();
+  };
+
   const handleSettingsButton = () => {
     if (
       itterator === 11 ||
@@ -371,6 +404,7 @@ const MapPage = React.memo((props) => {
     setPicModalYCoord(0);
     setSiteModalYCoord(0);
     setSettingsModalYCoord(0);
+    setProfileModalYCoord(0);
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
@@ -413,6 +447,7 @@ const MapPage = React.memo((props) => {
     setMapSearchYCoord(0);
     setPicModalYCoord(0);
     setSettingsModalYCoord(0);
+    setProfileModalYCoord(0);
     setLaunchModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
@@ -543,6 +578,7 @@ const MapPage = React.memo((props) => {
     setPicModalYCoord(0);
     setSiteModalYCoord(0);
     setSettingsModalYCoord(0);
+    setProfileModalYCoord(0);
     setAnchorModalYCoord(0);
     setSiteModal(false);
     setLaunchModalYCoord(0);
@@ -555,6 +591,7 @@ const MapPage = React.memo((props) => {
   const siteModalRef = useRef(null);
   const launchModalRef = useRef(null);
   const settingsModalRef = useRef(null);
+  const profileModalRef = useRef(null);
   const introGuideModalRef = useRef(null);
   const secondGuideModalRef = useRef(null);
   const thirdGuideModalRef = useRef(null);
@@ -567,6 +604,7 @@ const MapPage = React.memo((props) => {
   const [siteModalYCoord, setSiteModalYCoord] = useState(0);
   const [launchModalYCoord, setLaunchModalYCoord] = useState(0);
   const [settingsModalYCoord, setSettingsModalYCoord] = useState(0);
+  const [profileModalYCoord, setProfileModalYCoord] = useState(0);
   const [introGuideModalYCoord, setIntroGuideModalYCoord] = useState(0);
   const [secondGuideModalYCoord, setSecondGuideModalYCoord] = useState(0);
   const [thirdGuideModalYCoord, setThirdGuideModalYCoord] = useState(0);
@@ -601,6 +639,11 @@ const MapPage = React.memo((props) => {
   const moveSettingsModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${settingsModalYCoord}px,0)` },
+  });
+
+  const moveProfileModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${profileModalYCoord}px,0)` },
   });
 
   const moveIntroGuidModal = useSpring({
@@ -673,6 +716,7 @@ const MapPage = React.memo((props) => {
       setSiteModal(false);
       setDsAddermodal(false);
       setSettingsModal(false);
+      setProfileModal(false);
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
@@ -712,6 +756,7 @@ const MapPage = React.memo((props) => {
       setSiteModal(false);
       setPicAddermodal(false);
       setSettingsModal(false);
+      setProfileModal(false);
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
@@ -748,6 +793,7 @@ const MapPage = React.memo((props) => {
       setDsAddermodal(false);
       setPicAddermodal(false);
       setSettingsModal(false);
+      setProfileModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setGuideLaunchModal(true);
@@ -776,6 +822,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setSettingsModal(true);
+      setProfileModal(false);
       setShowFilterer(false);
       setTiles(true);
       if (pin.PicFile !== null) {
@@ -786,6 +833,32 @@ const MapPage = React.memo((props) => {
       }
     } else {
       setSettingsModal(false);
+    }
+  };
+
+  const animateProfileModal = () => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
+
+    if (profileModalYCoord === 0) {
+      setSiteModal(false);
+      setDsAddermodal(false);
+      setPicAddermodal(false);
+      setGuideLaunchModal(false);
+      setDiveSiteSearchModal(false);
+      setMapSearchModal(false);
+      setSettingsModal(false);
+      setShowFilterer(false);
+      setProfileModal(true);
+      setTiles(true);
+      if (pin.PicFile !== null) {
+        removePhoto({
+          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          fileName: `${pin.PicFile}`,
+        });
+      }
+    } else {
+      setProfileModal(false);
     }
   };
 
@@ -817,10 +890,11 @@ const MapPage = React.memo((props) => {
     let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
       .clientHeight;
 
-    if (anchorModalYCoord === 0) {
+    if (siteModal === 0) {
       setDsAddermodal(false);
       setPicAddermodal(false);
       setSettingsModal(false);
+      setProfileModal(false);
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
@@ -872,6 +946,7 @@ const MapPage = React.memo((props) => {
       setDsAddermodal(false);
       setPicAddermodal(false);
       setSettingsModal(false);
+      setProfileModal(false);
       setGuideLaunchModal(false);
       setMapSearchModal(false);
       setDiveSiteSearchModal(true);
@@ -891,6 +966,7 @@ const MapPage = React.memo((props) => {
       setDsAddermodal(false);
       setPicAddermodal(false);
       setSettingsModal(false);
+      setProfileModal(false);
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(true);
@@ -906,6 +982,7 @@ const MapPage = React.memo((props) => {
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
+    setProfileModal(false);
     setGuideLaunchModal(false);
     setDiveSiteSearchModal(false);
     setMapSearchModal(false);
@@ -933,6 +1010,7 @@ const MapPage = React.memo((props) => {
       setLaunchModalYCoord(0);
       setMapSearchYCoord(0);
       setSiteSearchModalYCoord(0);
+      setProfileModalYCoord(0);
       setShowFilterer(false);
     }
 
@@ -964,6 +1042,7 @@ const MapPage = React.memo((props) => {
       setLaunchModalYCoord(0);
       setMapSearchYCoord(0);
       setSiteSearchModalYCoord(0);
+      setProfileModalYCoord(0);
     }
 
     if (!dsAdderModal) {
@@ -983,12 +1062,34 @@ const MapPage = React.memo((props) => {
       setLaunchModalYCoord(0);
       setMapSearchYCoord(0);
       setSiteSearchModalYCoord(0);
+      setProfileModalYCoord(0);
     }
 
     if (!picAdderModal) {
       setPicModalYCoord(0);
     }
   }, [picAdderModal]);
+
+  useEffect(() => {
+    console.log(profileModal)
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
+
+    if (profileModal) {
+      setProfileModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setAnchorModalYCoord(0);
+      setSiteModalYCoord(0);
+      setPicModalYCoord(0);
+      setLaunchModalYCoord(0);
+      setMapSearchYCoord(0);
+      setSiteSearchModalYCoord(0);
+      setSettingsModalYCoord(0);
+    }
+
+    if (!profileModal) {
+      setProfileModalYCoord(0);
+    }
+  }, [profileModal]);
 
   useEffect(() => {
     let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
@@ -1002,6 +1103,7 @@ const MapPage = React.memo((props) => {
       setLaunchModalYCoord(0);
       setMapSearchYCoord(0);
       setSiteSearchModalYCoord(0);
+      setProfileModalYCoord(0);
     }
 
     if (!settingsModal) {
@@ -1021,6 +1123,7 @@ const MapPage = React.memo((props) => {
       setSettingsModalYCoord(0);
       setMapSearchYCoord(0);
       setSiteSearchModalYCoord(0);
+      setProfileModalYCoord(0);
     }
 
     if (!guideLaunchModal) {
@@ -1042,6 +1145,7 @@ const MapPage = React.memo((props) => {
       setSettingsModalYCoord(0);
       setMapSearchYCoord(0);
       setLaunchModalYCoord(0);
+      setProfileModalYCoord(0);
     }
 
     if (!diveSiteSearchModal) {
@@ -1061,6 +1165,7 @@ const MapPage = React.memo((props) => {
       setSettingsModalYCoord(0);
       setSiteSearchModalYCoord(0);
       setLaunchModalYCoord(0);
+      setProfileModalYCoord(0);
     }
 
     if (!mapSearchModal) {
@@ -1106,6 +1211,21 @@ const MapPage = React.memo((props) => {
           </div>
 
           <div className="fabButtons">
+          {masterSwitch && (
+              <div className="gearBox">
+                <ToggleButton
+                  sx={toggleButtonStyle}
+                  value="check"
+                  onChange={() => {
+                    handleProfileButton();
+                  }}
+                >
+                  <PersonIcon sx={{ width: "3vw", height: "2vw" }} />
+                </ToggleButton>
+                <p className="buttonFont">Profile</p>
+              </div>
+            )}
+
             {masterSwitch && (
               <div className="gearBox">
                 <ToggleButton
@@ -1379,6 +1499,14 @@ const MapPage = React.memo((props) => {
           animateSecondGuideModal={animateSecondGuideModal}
           animateThirdGuideModal={animateThirdGuideModal}
         />
+      </animated.div>
+
+      <animated.div
+        className="picModalDiv"
+        style={moveProfileModal}
+        ref={profileModalRef}
+      >
+        <p>blank me!</p>
       </animated.div>
 
       <animated.div

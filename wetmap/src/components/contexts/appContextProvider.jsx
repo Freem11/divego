@@ -11,6 +11,7 @@ import DiveSiteSearchModalContextProvider from './diveSiteSearchModalContext';
 import MapSearchModalContextProvider from './mapSearchModalContext';
 import GuideLaunchModalContextProvider from './guideLaunchModalContext';
 import SettingsModalContextProvider from './settingsModalContext';
+import ProfileModalContextProvider from './profileModalContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
 import ThirdTutorialModalContextProvider from './thirdTutorialModalContext';
@@ -58,6 +59,7 @@ const providers = [
     MapSearchModalContextProvider,
     GuideLaunchModalContextProvider,
     SettingsModalContextProvider,
+    ProfileModalContextProvider,
     PullTabContextProvider,
     CarrouselTilesContextProvider,
     ThirdTutorialModalContextProvider,
