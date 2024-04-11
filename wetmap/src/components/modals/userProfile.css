@@ -1,0 +1,112 @@
+.containerBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 2%;
+  width: 98%;
+  margin-left: 2%;
+  /* min-height: 490; */
+}
+
+/* .titleDiv {
+    position: absolute;
+    top: -1%
+} */
+
+.inputContainer {
+  width: 96%;
+  margin-top: 20%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  /* background-color: green; */
+}
+
+.statsContainer {
+  /* background-color: pink; */
+  margin-top: 10%;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.inputbox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px;
+  margin-top: 15px;
+  width: 100%;
+  font-family: "Itim", cursive;
+  border: none;
+  border-bottom: none;
+  border-color: transparent;
+}
+
+.inputboxMini {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-left: 0px;
+  margin-top: 15px;
+  /* width: 100%; */
+  font-family: "Itim", cursive;
+  border: none;
+  border-bottom: none;
+  /* background-color: green; */
+}
+
+.inputSmall {
+  font-family: Itim;
+  font-size: 16;
+  color: white;
+}
+
+.followButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Itim', cursive;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: #538bdb;
+    width: 12vw;
+    height: 4vh;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+    margin-top: 5%;
+  }
+  
+  .followButton:hover {
+    background-color: #3e7dd7;
+  }
+  .followButton:active {
+    background-color: #538dbd;
+  }
+  .followButtoAlt {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Itim', cursive;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: white;
+    width: 12vw;
+    height: 4vh;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+    margin-top: 5%;
+  }

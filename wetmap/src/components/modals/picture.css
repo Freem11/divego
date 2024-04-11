@@ -51,19 +51,21 @@
   display: flex;
   align-self: start;
   width: fit-content;
+  /* height: 2vh; */
   border-radius: 10px;
   font-family: "Itim";
   font-size: 1vw;
   text-align: left;
   padding: 0.1vw;
-  padding-left: 1%;
-  padding-right: 1%;
+  padding-left: 2%;
+  padding-right: 2%;
   margin-left: 2%;
   color: #f0eeeb;
   background-color: black;
   opacity: 0.6;
   position: absolute;
   bottom: -1.4vh;
+  cursor: pointer;
 }
 
 .countIndicator {

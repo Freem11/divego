@@ -6,6 +6,7 @@ import AdminPortal from "./adminPortal";
 import PicUploader from "./modals/picUploader";
 import SiteSubmitter from "./modals/siteSubmitter";
 import HowToGuide from "./modals/howToGuide";
+import UserProfileModal from "./modals/userProfileModal";
 import AnchorPics from "./modals/anchorPics";
 import Settings from "./modals/setting";
 import PhotoMenu from "./photoMenu/photoMenu2";
@@ -1071,7 +1072,6 @@ const MapPage = React.memo((props) => {
   }, [picAdderModal]);
 
   useEffect(() => {
-    console.log(profileModal)
     let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
       .clientHeight;
 
@@ -1506,7 +1506,7 @@ const MapPage = React.memo((props) => {
         style={moveProfileModal}
         ref={profileModalRef}
       >
-        <p>blank me!</p>
+        <UserProfileModal animateProfileModal={animateProfileModal}/>
       </animated.div>
 
       <animated.div

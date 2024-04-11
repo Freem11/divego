@@ -48,6 +48,8 @@ import JumpContextProvider from './jumpContext';
 import DiveSitesContextProvider from './diveSitesContext';
 import CommentsModalContextProvider from './commentsModalContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
+import SelectedProfileContextProvider from './selectedProfileModalContext';
+
 
 const providers = [
     AreaPicsContextProvider,
@@ -96,6 +98,7 @@ const providers = [
     DiveSitesContextProvider,
     CommentsModalContextProvider,
     SelectedPictureContextProvider,
+    SelectedProfileContextProvider,
 ]
 
 export const AppContextProvider = combineComponents(...providers);

@@ -3,11 +3,14 @@ import { SelectedPicContext } from "../contexts/selectPicContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { CommentsModalContext } from "../contexts/commentsModalContext";
 import { SelectedPictureContext } from "../contexts/selectedPictureContext";
-
+import { ProfileModalContext } from "../contexts/profileModalContext";
+import { SelectedProfileContext } from "../contexts/selectedProfileModalContext";
+import { AnchorModalContext } from "../contexts/anchorModalContext";
 import {
   insertPhotoLike,
   deletePhotoLike,
 } from "../../supabaseCalls/photoLikeSupabaseCalls";
+import { grabProfileByUserName } from "../../supabaseCalls/accountSupabaseCalls";
 import FlagIcon from "@mui/icons-material/Flag";
 import notLiked from "../../images/Hand-Hollow-Blue.png";
 import liked from "../../images/Hand-Filled-Blue.png";
@@ -22,11 +25,31 @@ function Picture(props) {
   const [countOfLikes, setCountOfLikes] = useState(pic.likecount);
   const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
   const { setSelectedPicture } = useContext(SelectedPictureContext);
-
+  const { setProfileModal } = useContext(ProfileModalContext);
+  const { selectedProfile, setSelectedProfile } = useContext(
+    SelectedProfileContext
+  );
+  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   let photoName = pic.photofile.split("/").pop();
 
   const [imgHeigth, setImgHeigth] = useState(0);
   const [imgWidth, setImgWidth] = useState(0);
+
+  const handleFollow = async (e, userName) => {
+    console.log(e, userName)
+    e.stopPropagation();
+
+    let picOwnerAccount = await grabProfileByUserName(userName);
+
+    if (profile[0].UserID === picOwnerAccount[0].UserID){
+      return
+    }
+
+    setSelectedProfile(picOwnerAccount[0].UserID)
+    setSiteModal(false)
+    setProfileModal(true)
+
+  };
 
   const handleCommentModal = () => {
     setCommentsModal(true);
@@ -92,8 +115,7 @@ function Picture(props) {
           <FlagIcon sx={{ color: "red", height: "3vh", width: "3vw" }} />
         </a>
       </div>
-      <h4 className="userLabel">Added by: {pic.newusername}</h4>
-
+      <h4 className="userLabel" onClick={(e) => handleFollow(e, pic.newusername)}>Added by: {pic.newusername}</h4>
       {countOfLikes > 0 ? (
         <div className="countIndicator">
           <p className="countDisplay">{countOfLikes}</p>
