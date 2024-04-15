@@ -1,0 +1,106 @@
+.masterBox {
+  width: 100%;
+  margin-bottom: 10;
+}
+
+.shadowbox {
+  display: flex;
+  flex-direction: row;
+  background-color: #538dbd;
+  border-radius: 10;
+  margin-bottom: 10;
+  width: 100%;
+  height: 80;
+}
+
+.moreBox {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: 100%;
+}
+
+.tripName {
+  font-family: 'Itim', cursive;
+  color: #F0EEEB;
+  font-size: 15;
+  margin-left: 10;
+  margin-top: 5;
+  height: 60%;
+}
+
+.opener {
+  font-family: 'Itim', cursive;
+  color: #F0EEEB;
+  font-size: 12;
+  margin-left: 70;
+  margin-top: 0;
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 40%;
+  height: 100%;
+}
+
+.sitesButton {
+  margin-left: 20;
+  background-color: black;
+  height: 35;
+  width: 35;
+  border-radius: 30;
+  justify-content: center;
+  align-items: center;
+}
+
+.bookButton {
+  margin-right: 20;
+  background-color: white;
+  height: 35;
+  width: 35;
+  border-radius: 30;
+  justify-content: center;
+  align-items: center;
+}
+
+.extraBox {
+  z-index: -1;
+  margin-left: 5%;
+  width: 93%;
+  margin-top: -10;
+  background-color: #F0EEEB;
+  border-bottom-right-radius: 10;
+  border-bottom-left-radius: 10;
+}
+
+.topRail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 10;
+  margin-left: 20;
+  margin-right: 20;
+}
+
+.dateText {
+  font-family: 'Itim', cursive;
+  font-size: 12;
+  color: #000000;
+}
+
+.priceText {
+  font-family: 'Itim', cursive;
+  font-size: 12;
+  color: #000000;
+}
+
+.lowerText {
+  margin-top: 15;
+  margin-left: 30;
+  font-family: 'Itim', cursive;
+  font-size: 11;
+  color: #000000;
+}
