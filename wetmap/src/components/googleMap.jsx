@@ -406,10 +406,10 @@ function Map() {
     if (zoomHelper) {
       let zoomHelp;
       if (shopModal) {
-        zoomHelp = 16;
+        setMapZoom(16);
         setMinorSwitch(true);
       } else if (!shopModal) {
-        zoomHelp = 12;
+        setMapZoom(12);
         setMinorSwitch(false);
       }
       setZoomHelper(false);
@@ -668,7 +668,16 @@ function Map() {
           );
         })} */}
 
-      {masterSwitch && (
+      {masterSwitch && heatpts.length > 0 && (
+        <HeatmapLayer
+          data={heatpts}
+          options={heatOpts}
+          opacity={1}
+          radius={9}
+        ></HeatmapLayer>
+      )}
+
+      {!masterSwitch && !minorSwitch && heatpts.length > 0 && (
         <HeatmapLayer
           data={heatpts}
           options={heatOpts}
