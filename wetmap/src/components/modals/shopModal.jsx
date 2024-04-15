@@ -1,17 +1,17 @@
 
 import React, { useState, useContext, useEffect } from "react";
-// import Itinerary from "../itineraries/itinerary";
+import { Container, Form, FormGroup, Label, Button } from "reactstrap";
+import Itinerary from "../itineraries/itinerary";
 import { itineraries } from "../../supabaseCalls/itinerarySupabaseCalls";
 import { SelectedShopContext } from "../contexts/selectedShopContext";
 import { ShopModalContext } from "../contexts/shopModalContext";
 import { MasterContext } from "../contexts/masterContext";
-import { MapCenterContext } from "../contexts/mapCenterContext";
+import { CoordsContext } from "../contexts/mapCoordsContext";
 import { ZoomHelperContext } from "../contexts/zoomHelperContext";
+import CloseIcon from "@mui/icons-material/Close";
+
 import "./shopModal.css";
 import { shops } from "../../supabaseCalls/shopsSupabaseCalls";
-
-const windowWidth = Dimensions.get("window").width;
-const windowHeight = Dimensions.get("window").height;
 
 export default function ShopModal(props) {
   // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
@@ -21,7 +21,7 @@ export default function ShopModal(props) {
   const [itineraryList, setItineraryList] = useState("");
   const [selectedID, setSelectedID] = useState(null);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
-  const { mapCenter, setMapCenter } = useContext(MapCenterContext);
+  const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function ShopModal(props) {
 
   useEffect(() => {
     if (shopModal && zoomHelper) {
-      setMapCenter({
+      setMapCoords({
       lat: selectedShop[0].lat,
       lng: selectedShop[0].lng,
     });
@@ -52,6 +52,7 @@ export default function ShopModal(props) {
     }
   };
 
+  console.log(itineraryList)
   const handleShopModalClose = () => {
     setSelectedShop({ ...selectedShop, id: 0, orgName: "" });
     setItineraryList("");
@@ -67,7 +68,7 @@ export default function ShopModal(props) {
       }}
     >
       <div className="titleAlt">
-        <div style={{ width: scale(250) }}>
+        <div>
           <h3 className="headerAlt">
             {selectedShop[0] && selectedShop[0].orgName}
           </h3>
@@ -95,7 +96,7 @@ export default function ShopModal(props) {
       </div>
 
       <div style={{ marginTop: "3%", width: "100%", borderRadius: 15 }}>
-        <div className="container3">
+        <div className="container5">
           {itineraryList &&
             itineraryList.map((itinerary) => {
               return (

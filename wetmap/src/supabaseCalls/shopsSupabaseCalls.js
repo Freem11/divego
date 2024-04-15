@@ -10,12 +10,13 @@ export const shops = async (GPSBubble) => {
     minLng = GPSBubble.minLng;
     maxLng = GPSBubble.maxLng;
   } else {
-    minLat = GPSBubble.southWest.latitude;
-    maxLat = GPSBubble.northEast.latitude;
-    minLng = GPSBubble.southWest.longitude;
-    maxLng = GPSBubble.northEast.longitude;
+    minLat = GPSBubble.Zh.lo;
+    maxLat = GPSBubble.Zh.hi;
+    minLng = GPSBubble.Jh.lo;
+    maxLng = GPSBubble.Jh.hi;
   }
-  
+
+
   const { data, error } = await supabase
   .from("shops")
   .select()

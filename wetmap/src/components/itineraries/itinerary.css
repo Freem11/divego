@@ -1,15 +1,18 @@
 .masterBox {
-  width: 100%;
-  margin-bottom: 10;
+  width: 96%;
+  margin-left: 2%;
+  height: fit-content;
+  margin-bottom: 3%;
 }
 
 .shadowbox {
   display: flex;
   flex-direction: row;
+  box-shadow:  1px 3px 5px #00000080;
   background-color: #538dbd;
-  border-radius: 10;
-  margin-bottom: 10;
-  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  width: 90%;
   height: 80;
 }
 
@@ -68,39 +71,45 @@
 
 .extraBox {
   z-index: -1;
+  overflow: hidden;
   margin-left: 5%;
   width: 93%;
-  margin-top: -10;
+  margin-top: -2%;
   background-color: #F0EEEB;
-  border-bottom-right-radius: 10;
-  border-bottom-left-radius: 10;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow:  1px 3px 5px #00000080;
 }
 
 .topRail {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: 10;
-  margin-left: 20;
-  margin-right: 20;
+  margin-top: -2%;
+  margin-left: 4%;
+  margin-right: 4%;
 }
 
 .dateText {
   font-family: 'Itim', cursive;
-  font-size: 12;
+  font-size: 1.1em;
   color: #000000;
 }
 
 .priceText {
   font-family: 'Itim', cursive;
-  font-size: 12;
+  font-size: 1.1em;
   color: #000000;
 }
 
 .lowerText {
-  margin-top: 15;
-  margin-left: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 1%;
+  margin-left: 4%;
   font-family: 'Itim', cursive;
-  font-size: 11;
+  font-size: 1em;
   color: #000000;
 }

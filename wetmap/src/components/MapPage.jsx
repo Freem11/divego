@@ -8,6 +8,7 @@ import SiteSubmitter from "./modals/siteSubmitter";
 import HowToGuide from "./modals/howToGuide";
 import UserProfileModal from "./modals/userProfileModal";
 import AnchorPics from "./modals/anchorPics";
+import ShopModal from "./modals/shopModal";
 import Settings from "./modals/setting";
 import PhotoMenu from "./photoMenu/photoMenu2";
 import PhotoFilterer from "./photoMenu/photoFilter";
@@ -45,6 +46,8 @@ import { PinContext } from "./contexts/staticPinContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
 import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
+import { ShopModalContext } from "./contexts/shopModalContext";
+import { SitesArrayContext } from "./contexts/sitesArrayContext";
 import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
 import { PicAdderModalContext } from "./contexts/picAdderModalContext";
 import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContext";
@@ -105,6 +108,8 @@ const MapPage = React.memo((props) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  const { shopModal, setShopModal } = useContext(ShopModalContext);
+
   const { dsAdderModal, setDsAddermodal } = useContext(
     DiveSiteAdderModalContext
   );
@@ -597,6 +602,7 @@ const MapPage = React.memo((props) => {
   const secondGuideModalRef = useRef(null);
   const thirdGuideModalRef = useRef(null);
   const anchorModalRef = useRef(null);
+  const shopModalRef = useRef(null);
   const commentsModalRef = useRef(null);
   const siteSearchModalRef = useRef(null);
   const mapSearchModalRef = useRef(null);
@@ -613,6 +619,7 @@ const MapPage = React.memo((props) => {
   const [mapSearchYCoord, setMapSearchYCoord] = useState(0);
   const [fullScreenModalYCoord, setFullScreenModalYCoord] = useState(0);
   const [anchorModalYCoord, setAnchorModalYCoord] = useState(0);
+  const [shopModalYCoord, setShopModalYCoord] = useState(0);
   const [commmentsModalYCoord, setCommentsModalYCoord] = useState(0);
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
@@ -630,6 +637,11 @@ const MapPage = React.memo((props) => {
   const moveSiteModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${siteModalYCoord}px,0)` },
+  });
+
+  const moveShopModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${shopModalYCoord}px,0)` },
   });
 
   const moveLaunchModal = useSpring({
@@ -900,6 +912,7 @@ const MapPage = React.memo((props) => {
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
       setSiteModal(true);
+      setShopModal(true);
       setShowFilterer(false);
       setTiles(true);
       if (pin.PicFile !== null) {
@@ -910,6 +923,33 @@ const MapPage = React.memo((props) => {
       }
     } else {
       setSiteModal(false);
+    }
+  };
+
+  const animateShopModal = () => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
+
+    if (siteModal === 0) {
+      setDsAddermodal(false);
+      setPicAddermodal(false);
+      setSettingsModal(false);
+      setProfileModal(false);
+      setGuideLaunchModal(false);
+      setDiveSiteSearchModal(false);
+      setMapSearchModal(false);
+      setSiteModal(false);
+      setShopModal(true);
+      setShowFilterer(false);
+      setTiles(true);
+      if (pin.PicFile !== null) {
+        removePhoto({
+          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          fileName: `${pin.PicFile}`,
+        });
+      }
+    } else {
+      setShopModal(false);
     }
   };
 
@@ -988,6 +1028,7 @@ const MapPage = React.memo((props) => {
     setDiveSiteSearchModal(false);
     setMapSearchModal(false);
     setSiteModal(false);
+    setShopModal(true);
     setShowFilterer(!showFilterer);
   };
 
@@ -1019,6 +1060,28 @@ const MapPage = React.memo((props) => {
       setAnchorModalYCoord(0);
     }
   }, [siteModal]);
+
+  useEffect(() => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+      .clientHeight;
+
+    if (shopModal) {
+      setShopModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+      setAnchorModalYCoord(0);
+      setPicModalYCoord(0);
+      setSiteModalYCoord(0);
+      setSettingsModalYCoord(0);
+      setLaunchModalYCoord(0);
+      setMapSearchYCoord(0);
+      setSiteSearchModalYCoord(0);
+      setProfileModalYCoord(0);
+      setShowFilterer(false);
+    }
+
+    if (!shopModal) {
+      setShopModalYCoord(0);
+    }
+  }, [shopModal]);
 
   useEffect(() => {
     if (commentsModal) {
@@ -1568,6 +1631,17 @@ const MapPage = React.memo((props) => {
           setAnchorModalYCoord={setAnchorModalYCoord}
           animateFullScreenModal={animateFullScreenModal}
           setPicModalYCoord={setPicModalYCoord}
+        />
+      </animated.div>
+
+      <animated.div
+        className="picModalDiv"
+        style={moveShopModal}
+        ref={shopModalRef}
+      >
+        <ShopModal
+          animateShopModal={animateShopModal}
+          setShopModalYCoord={setShopModalYCoord}
         />
       </animated.div>
 

@@ -149,3 +149,22 @@ export const getDiveSiteWithUserName= async (values) => {
     return data;
   }
 };
+
+export const getDiveSitesByIDs = async (valueArray) => {
+  let Q1 = valueArray.substring(1, valueArray.length)
+  let Q2 = Q1.substring(Q1.length-1,0)
+
+  const { data, error } = await supabase
+  .from("diveSites")
+  .select()
+  .or(`id.in.(${Q2})`,)
+
+if (error) {
+  console.log("couldn't do it 7,", error);
+  return [];
+}
+
+if (data) {
+  return data;
+}
+};

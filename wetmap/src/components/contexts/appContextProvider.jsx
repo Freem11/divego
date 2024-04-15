@@ -33,6 +33,7 @@ import LightBoxContextProvider from './lightBoxContext';
 import SelectedPicContextProvider from './selectPicContext';
 import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
 import MasterContextProvider from './masterContext';
+import MinorContextProvider from './minorContext';
 import DiveSpotContextProvider from './diveSpotContext';
 import PinSpotContextProvider from './pinSpotContext';
 import AnimalRevealContextProvider from './animalRevealContext';
@@ -49,7 +50,10 @@ import DiveSitesContextProvider from './diveSitesContext';
 import CommentsModalContextProvider from './commentsModalContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SelectedProfileContextProvider from './selectedProfileModalContext';
+import SelectedShopContextProvider from './selectedShopContext';
 import ShopModalContextProvider from "./shopModalContext";
+import ZoomHelperContextProvider from "./zoomHelperContext";
+import SitesArrayContextProvider from './sitesArrayContext';
 
 const providers = [
     AreaPicsContextProvider,
@@ -83,6 +87,7 @@ const providers = [
     SelectedPicContextProvider,
     SelectedDiveSiteContextProvider,
     MasterContextProvider,
+    MinorContextProvider,
     DiveSpotContextProvider,
     PinSpotContextProvider,
     AnimalRevealContextProvider,
@@ -99,7 +104,10 @@ const providers = [
     CommentsModalContextProvider,
     SelectedPictureContextProvider,
     SelectedProfileContextProvider,
+    SelectedShopContextProvider,
     ShopModalContextProvider,
+    ZoomHelperContextProvider,
+    SitesArrayContextProvider,
 ]
 
 export const AppContextProvider = combineComponents(...providers);
