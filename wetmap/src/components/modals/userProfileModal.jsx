@@ -186,7 +186,7 @@ export default function UserProfileModal(props) {
                     style: {
                       textAlign: "center",
                       fontFamily: "Itim",
-                      fontSize: "2vw",
+                      fontSize: "1.5vw",
                       textOverflow: "ellipsis",
                       backgroundColor: "#538BDB",
                       height: "5vh",
@@ -212,7 +212,7 @@ export default function UserProfileModal(props) {
                     style: {
                       textAlign: "center",
                       fontFamily: "Itim",
-                      fontSize: "2vw",
+                      fontSize: "1.5vw",
                       textOverflow: "ellipsis",
                       backgroundColor: "#538BDB",
                       height: "5vh",
@@ -244,7 +244,7 @@ export default function UserProfileModal(props) {
                   style: {
                     textAlign: "center",
                     fontFamily: "Itim",
-                    fontSize: "1.5vw",
+                    fontSize: "1.2vw",
                     textOverflow: "ellipsis",
                     backgroundColor: "#538BDB",
                     height: "5vh",
@@ -274,7 +274,7 @@ export default function UserProfileModal(props) {
                   style: {
                     textAlign: "center",
                     fontFamily: "Itim",
-                    fontSize: "1.5vw",
+                    fontSize: "1.2vw",
                     textOverflow: "ellipsis",
                     backgroundColor: "#538BDB",
                     height: "5vh",
@@ -304,7 +304,7 @@ export default function UserProfileModal(props) {
                   style: {
                     textAlign: "center",
                     fontFamily: "Itim",
-                    fontSize: "1.5vw",
+                    fontSize: "1.2vw",
                     textOverflow: "ellipsis",
                     backgroundColor: "#538BDB",
                     height: "5vh",
@@ -333,7 +333,7 @@ export default function UserProfileModal(props) {
                   style: {
                     textAlign: "center",
                     fontFamily: "Itim",
-                    fontSize: "1.5vw",
+                    fontSize: "1.2vw",
                     textOverflow: "ellipsis",
                     backgroundColor: "#538BDB",
                     height: "5vh",
@@ -360,7 +360,7 @@ export default function UserProfileModal(props) {
                   style: {
                     textAlign: "center",
                     fontFamily: "Itim",
-                    fontSize: "1.5vw",
+                    fontSize: "1.2vw",
                     textOverflow: "ellipsis",
                     backgroundColor: "#538BDB",
                     height: "5vh",
