@@ -34,10 +34,7 @@ export default function ShopModal(props) {
 
   useEffect(() => {
     if (shopModal && zoomHelper) {
-      setMapCoords({
-      lat: selectedShop[0].lat,
-      lng: selectedShop[0].lng,
-    });
+      setMapCoords([selectedShop[0].lat,selectedShop[0].lng]);
     }
   }, [shopModal]);
 
@@ -52,7 +49,6 @@ export default function ShopModal(props) {
     }
   };
 
-  console.log(itineraryList)
   const handleShopModalClose = () => {
     setSelectedShop({ ...selectedShop, id: 0, orgName: "" });
     setItineraryList("");

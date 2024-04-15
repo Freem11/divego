@@ -31,6 +31,7 @@ import { AnimalContext } from "./contexts/animalContext";
 import { GeoCoderContext } from "./contexts/geoCoderContext";
 import { PinContext } from "./contexts/staticPinContext";
 import { MasterContext } from "./contexts/masterContext";
+import { MinorContext } from "./contexts/minorContext";
 import { PinSpotContext } from "./contexts/pinSpotContext";
 import { SelectedDiveSiteContext } from "./contexts/selectedDiveSiteContext";
 import { SelectedShopContext } from "./contexts/selectedShopContext";
@@ -41,6 +42,7 @@ import { DiveSpotContext } from "./contexts/diveSpotContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { ShopModalContext } from "./contexts/shopModalContext";
 import { SitesArrayContext } from "./contexts/sitesArrayContext";
+import { ZoomHelperContext } from "./contexts/zoomHelperContext";
 import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
 import { PicAdderModalContext } from "./contexts/picAdderModalContext";
 import { SettingsModalContext } from "./contexts/settingsModalContext";
@@ -79,6 +81,7 @@ export default function Home() {
 
 function Map() {
   const { masterSwitch } = useContext(MasterContext);
+  const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const [pinRef, setPinRef] = useState(null);
@@ -87,6 +90,7 @@ function Map() {
   const { jump, setJump } = useContext(JumpContext);
   const { divesTog } = useContext(DiveSitesContext);
   const { boundaries, setBoundaries } = useContext(MapBoundsContext);
+  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
   const { animalVal } = useContext(AnimalContext);
   const { sliderVal } = useContext(SliderContext);
   const { showGeoCoder } = useContext(GeoCoderContext);
@@ -398,6 +402,23 @@ function Map() {
     if (tutorialRunning && (itterator2 === 2 || itterator2 === 16)) {
       setMapZoom(8);
     }
+
+    if (zoomHelper) {
+      let zoomHelp;
+      if (shopModal) {
+        zoomHelp = 16;
+        setMinorSwitch(true);
+      } else if (!shopModal) {
+        zoomHelp = 12;
+        setMinorSwitch(false);
+      }
+      setZoomHelper(false);
+    }
+
+    if (mapRef) {
+      mapRef.panTo({ lat: mapCoords[0], lng: mapCoords[1] });
+    }
+
     handleMapUpdates();
   }, [mapCoords, divesTog, sliderVal, animalVal]);
 
@@ -450,6 +471,7 @@ function Map() {
 
   const setupShopModal = async (shopName) => {
     let chosenShop = await getShopByName(shopName);
+    console.log("whoops", chosenShop);
     setSelectedShop(chosenShop);
     setShopModal(true);
   };
@@ -565,8 +587,9 @@ function Map() {
             return (
               <Marker
                 key={cluster.properties.siteID}
-                coordinate={{ lat: latitude, lng: longitude }}
+                position={{ lat: latitude, lng: longitude }}
                 icon={gold}
+                title={cluster.properties.siteID}
                 onClick={() =>
                   setupAnchorModal(
                     cluster.properties.siteID,
@@ -656,7 +679,7 @@ function Map() {
 
       {tempMarker && <Marker position={tempMarker} icon={gold}></Marker>}
 
-      {!masterSwitch && (
+      {!masterSwitch && minorSwitch && (
         <Marker
           position={dragPin}
           draggable={true}

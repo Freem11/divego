@@ -7,6 +7,8 @@ import { MinorContext } from "../contexts/minorContext";
 import { MasterContext } from "../contexts/masterContext";
 import "./itinerary.css";
 import { getDiveSitesByIDs } from "../../supabaseCalls/diveSiteSupabaseCalls";
+import gold from "../../images/mapIcons/AnchorGold.png";
+import diveFlag from "../../images/diveflag.png";
 
 export default function Itinerary(props) {
   const { itinerary, selectedID, setSelectedID, setShopModal } = props;
@@ -58,10 +60,7 @@ export default function Itinerary(props) {
     setZoomHelper(true);
     setShopModal(false);
     setMasterSwitch(false);
-    setMapCoords({
-      lat: moveLat,
-      lng: moveLng,
-    });
+    setMapCoords([moveLat, moveLng]);
   };
 
   return (
@@ -81,14 +80,10 @@ export default function Itinerary(props) {
             className="sitesButton"
             onClick={() => flipMap(itinerary.siteList)}
           >
-            {/* <FontAwesome5 name="anchor" size={24} color="gold" /> */}
+            <img src={gold} style={{ height: "30px", width: "30px" }} />
           </div>
           <div className="bookButton">
-            {/* <MaterialCommunityIcons
-            name="diving-scuba-flag"
-            size={24}
-            color="red"
-          /> */}
+            <img src={diveFlag} style={{ height: "30px", width: "30px" }} />
           </div>
         </div>
       </div>

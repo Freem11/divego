@@ -8,6 +8,7 @@
 .shadowbox {
   display: flex;
   flex-direction: row;
+  align-items: center;
   box-shadow:  1px 3px 5px #00000080;
   background-color: #538dbd;
   border-radius: 10px;
@@ -47,26 +48,31 @@
   align-items: center;
   width: 40%;
   height: 100%;
+  /* background-color: green; */
 }
 
 .sitesButton {
-  margin-left: 20;
+  display: flex;
+  margin-left: 10%;
   background-color: black;
-  height: 35;
-  width: 35;
-  border-radius: 30;
+  height: 50px;
+  width: 50px;
+  border-radius: 40px;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .bookButton {
-  margin-right: 20;
+  display: flex;
+  margin-right: 15%;
   background-color: white;
-  height: 35;
-  width: 35;
-  border-radius: 30;
+  height: 50px;
+  width: 50px;
+  border-radius: 40px;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 
 .extraBox {

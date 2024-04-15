@@ -24,7 +24,7 @@ import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import PersonIcon from '@mui/icons-material/Person';
+import PersonIcon from "@mui/icons-material/Person";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
 import RemoveIcon from "@mui/icons-material/Remove";
@@ -37,7 +37,10 @@ import { PictureContext } from "./contexts/pictureContext";
 import { GeoCoderContext } from "./contexts/geoCoderContext";
 import { AnimalRevealContext } from "./contexts/animalRevealContext";
 import { MasterContext } from "./contexts/masterContext";
+import { MinorContext } from "./contexts/minorContext";
 import { LightBoxContext } from "./contexts/lightBoxContext";
+import { CoordsContext } from "./contexts/mapCoordsContext";
+import { SelectedShopContext } from "./contexts/selectedShopContext";
 import { SelectedPicContext } from "./contexts/selectPicContext";
 import { ZoomContext } from "./contexts/mapZoomContext";
 import { UserProfileContext } from "./contexts/userProfileContext";
@@ -48,6 +51,7 @@ import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { ShopModalContext } from "./contexts/shopModalContext";
 import { SitesArrayContext } from "./contexts/sitesArrayContext";
+import { ZoomHelperContext } from "./contexts/zoomHelperContext";
 import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
 import { PicAdderModalContext } from "./contexts/picAdderModalContext";
 import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContext";
@@ -86,6 +90,8 @@ const MapPage = React.memo((props) => {
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
+  const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
+  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
   // const [showAdminPortal, setShowAdminPortal] = useState(false);
   const { showGeoCoder } = useContext(GeoCoderContext);
@@ -95,7 +101,9 @@ const MapPage = React.memo((props) => {
   const { setPhotoFile } = useContext(PictureContext);
   const { lightbox, setLightbox } = useContext(LightBoxContext);
   const { selectedPic } = useContext(SelectedPicContext);
+  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
+  const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { picModal } = useContext(PicModalContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
 
@@ -107,6 +115,7 @@ const MapPage = React.memo((props) => {
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
 
+  const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { shopModal, setShopModal } = useContext(ShopModalContext);
 
@@ -218,6 +227,16 @@ const MapPage = React.memo((props) => {
         }
       }
     }
+  };
+
+  const onShopNavigate = () => {
+    setSiteModal(false);
+    setShopModal(true);
+    setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
+    setMasterSwitch(true);
+    setMinorSwitch(true);
+    setZoomHelper(true);
+    setSitesArray([]);
   };
 
   useEffect(() => {
@@ -958,10 +977,10 @@ const MapPage = React.memo((props) => {
       .clientHeight;
 
     if (commmentsModalYCoord === 0) {
-      setCommentsModalYCoord(-windowHeight)
+      setCommentsModalYCoord(-windowHeight);
     } else {
-      setCommentsModalYCoord(0)
-      setCommentsModal(false)
+      setCommentsModalYCoord(0);
+      setCommentsModal(false);
     }
   };
 
@@ -1092,7 +1111,6 @@ const MapPage = React.memo((props) => {
       setCommentsModalYCoord(0);
     }
   }, [commentsModal]);
-
 
   useEffect(() => {
     let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
@@ -1274,7 +1292,7 @@ const MapPage = React.memo((props) => {
           </div>
 
           <div className="fabButtons">
-          {masterSwitch && (
+            {masterSwitch && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -1487,7 +1505,7 @@ const MapPage = React.memo((props) => {
         </div>
       </div>
 
-      {!masterSwitch && (
+      {!masterSwitch && minorSwitch && (
         <div
           style={{
             display: "flex",
@@ -1524,6 +1542,48 @@ const MapPage = React.memo((props) => {
               }}
             >
               Set Pin
+            </Button>
+          </div>
+        </div>
+      )}
+
+      {!masterSwitch && !minorSwitch && (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            position: "absolute",
+            width: "90%",
+            marginLeft: "10%",
+            top: "5px",
+            zIndex: "2",
+          }}
+        >
+          <div
+            style={{
+              width: "90%",
+              position: "relative",
+              zIndex: "2",
+            }}
+          >
+            <Button
+              onClick={onShopNavigate}
+              sx={{
+                "&:hover": { backgroundColor: "lightblue" },
+                color: "gold",
+                fontFamily: "Permanent Marker, cursive",
+                fontSize: "2vw",
+                width: "20vw",
+                height: "80%",
+                textAlign: "center",
+                backgroundColor: "#538bdb",
+                marginTop: "15px",
+                borderRadius: "10px",
+                boxShadow: " 5px 5px 5px 5px rgba(0,0,0, 0.7)",
+                zIndex: 3,
+              }}
+            >
+              Return to Shop
             </Button>
           </div>
         </div>
@@ -1569,7 +1629,7 @@ const MapPage = React.memo((props) => {
         style={moveProfileModal}
         ref={profileModalRef}
       >
-        <UserProfileModal animateProfileModal={animateProfileModal}/>
+        <UserProfileModal animateProfileModal={animateProfileModal} />
       </animated.div>
 
       <animated.div
@@ -1651,9 +1711,7 @@ const MapPage = React.memo((props) => {
         ref={commentsModalRef}
       >
         <div className="commentsModal">
-          <CommentsModal 
-          animateCommentsModal={animateCommentsModal}
-          />
+          <CommentsModal animateCommentsModal={animateCommentsModal} />
         </div>
       </animated.div>
 
