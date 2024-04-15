@@ -1,0 +1,60 @@
+
+  .container3 {
+    /*  flex: 1; */
+    /*  backgroundColor: "blue"; */
+    align-items: "center";
+    /*  marginTop: "-3%"; */
+    /*  height: "100%"; */
+    width: 300;
+    margin-right: 10;
+    margin-left: 10;
+    /*  marginBottom: 16; */
+    border-radius: 15;
+    /*  backgroundColor: "green" */
+  }
+
+.headerAlt {
+  display: flex;
+  flex-wrap: wrap;
+  font-family: 'Patrick Hand' , cursive;
+  color: #F0EEEB;
+  font-size: scale(22);
+  width: 90%;
+  height: 120%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-top: 0;
+  margin-bottom: -10;
+  flex-wrap: wrap;
+  /*  backgroundColor: pink */
+}
+
+.titleAlt {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin-top: 4%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 3%;
+  width: 92%;
+  height: scale(30);
+  /* backgroundColor: 'pink' */
+}
+
+.noSightings {
+  flex: 1 ;
+  width: 60% ;
+  align-items: center ;
+  justify-content: center ;
+  text-align: center ;
+  margin-top: 40% ;
+  font-family: 'Itim', cursive;
+  font-size: 18 ;
+  color: #F0EEEB ;
+  /*  backgroundColor: green */
+}
+

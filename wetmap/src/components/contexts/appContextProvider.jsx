@@ -49,7 +49,7 @@ import DiveSitesContextProvider from './diveSitesContext';
 import CommentsModalContextProvider from './commentsModalContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SelectedProfileContextProvider from './selectedProfileModalContext';
-
+import ShopModalContextProvider from "./shopModalContext";
 
 const providers = [
     AreaPicsContextProvider,
@@ -99,6 +99,7 @@ const providers = [
     CommentsModalContextProvider,
     SelectedPictureContextProvider,
     SelectedProfileContextProvider,
+    ShopModalContextProvider,
 ]
 
 export const AppContextProvider = combineComponents(...providers);
