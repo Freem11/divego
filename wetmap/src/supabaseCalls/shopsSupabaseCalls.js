@@ -2,6 +2,9 @@ import { supabase } from "../supabase";
 
 export const shops = async (GPSBubble) => {
 
+  let lats = GPSBubble[Object.keys(GPSBubble)[0]];
+  let lngs = GPSBubble[Object.keys(GPSBubble)[1]];
+
   let minLat, maxLat, minLng, maxLng;
 
   if (GPSBubble.maxLat) {
@@ -10,10 +13,10 @@ export const shops = async (GPSBubble) => {
     minLng = GPSBubble.minLng;
     maxLng = GPSBubble.maxLng;
   } else {
-    minLat = GPSBubble.Zh.lo;
-    maxLat = GPSBubble.Zh.hi;
-    minLng = GPSBubble.Jh.lo;
-    maxLng = GPSBubble.Jh.hi;
+    minLat = lats.lo;
+    maxLat = lats.hi;
+    minLng = lngs.lo;
+    maxLng = lngs.hi;
   }
 
 

@@ -272,6 +272,7 @@ function Map() {
             console.log({ title: "Error", message: e.message });
           }
 
+          // console.log("here", lats, lngs)
           try {
             let heatPointList;
             if (animalVal.length === 0) {
@@ -305,6 +306,7 @@ function Map() {
             setHeatPts(formatHeatVals(heatPointList));
 
             let filteredShops = await shops(boundaries);
+            // console.log("ME", filteredShops)
             !divesTog ? setnewShops([]) : setnewShops(filteredShops);
           } catch (e) {
             console.log({ title: "Error", message: e.message });
@@ -430,6 +432,7 @@ function Map() {
     points.push(entity);
   });
 
+  // console.log(points, shopPoints)
   const { clusters, supercluster } = useSupercluster({
     points,
     bounds: boundaries,
@@ -471,7 +474,6 @@ function Map() {
 
   const setupShopModal = async (shopName) => {
     let chosenShop = await getShopByName(shopName);
-    console.log("whoops", chosenShop);
     setSelectedShop(chosenShop);
     setShopModal(true);
   };
@@ -496,7 +498,7 @@ function Map() {
     setGuideLaunchModal(false);
     setDiveSiteSearchModal(false);
     setMapSearchModal(false);
-    setTiles(true);
+    // setTiles(true);
   };
 
   return (
