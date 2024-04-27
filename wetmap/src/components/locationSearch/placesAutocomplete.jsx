@@ -3,13 +3,6 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import {
-  Combobox,
-  ComboboxInput,
-  ComboboxPopover,
-  ComboboxList,
-  ComboboxOption,
-} from "@reach/combobox";
 import "@reach/combobox/styles.css";
 import { JumpContext } from "../contexts/jumpContext";
 import { GeoCoderContext } from "../contexts/geoCoderContext";
@@ -28,13 +21,13 @@ const PlacesAutoComplete = (props) => {
     setValue,
     suggestions: { status, data },
     clearSuggestions,
-  } = usePlacesAutocomplete({inOnMount : false});
+  } = usePlacesAutocomplete({ inOnMount: false });
 
   useEffect(() => {
-    if(mapSearchYCoord !== 0){
-      init()
+    if (mapSearchYCoord !== 0) {
+      init();
     }
-  }, [mapSearchYCoord])
+  }, [mapSearchYCoord]);
 
   const handleSelect = async (address) => {
     setValue(address, false);
@@ -50,8 +43,8 @@ const PlacesAutoComplete = (props) => {
   };
 
   return (
-    <Combobox onSelect={handleSelect}>
-      <ComboboxInput
+    <div>
+      <input
         value={value}
         onChange={(e) => setValue(e.target.value)}
         placeholder="  Search Places..."
@@ -62,22 +55,55 @@ const PlacesAutoComplete = (props) => {
           height: "3.5vh",
           borderRadius: "10px",
           fontSize: "1.5vw",
-          zIndex: 209
+          zIndex: 209,
         }}
       />
-      <ComboboxPopover className="popover">
-        <ComboboxList className="poplist">
-          {status === "OK" &&
-            data.map(({ place_id, description }) => (
-              <ComboboxOption
-                key={place_id}
-                value={description}
-                className="popopt"
-              />
-            ))}
-        </ComboboxList>
-      </ComboboxPopover>
-    </Combobox>
+      <div
+        className="popover"
+        style={{
+          marginTop: "0vh",
+          marginLeft: "-1.5vw",
+          height: "auto",
+          zIndex: "100",
+          position: "absolute",
+        }}
+      >
+        {status === "OK" &&
+          data.map(({ place_id, description }) => (
+            <li
+              style={{
+                display: "flex",
+                height: "2.5vh",
+                width: "20vw",
+                paddingLeft: "1vw",
+                paddingRight: "1vw",
+                listStyle: "none",
+                backgroundColor: "white",
+                marginBottom: "0.1vh",
+                borderRadius: "5px",
+                alignItems: "center",
+                justifyContent: "center",
+                cursor: "pointer",
+              }}
+              key={place_id}
+              value={description}
+              className="popopt"
+              onClick={() => handleSelect(description)}
+            >
+              <div
+                style={{
+                  color: "black",
+                  fontSize: "1vw",
+                  fontFamily: "Itim, cursive",
+                  fontWeight: "normal",
+                }}
+              >
+                {description}
+              </div>
+            </li>
+          ))}
+      </div>
+    </div>
   );
 };
 
