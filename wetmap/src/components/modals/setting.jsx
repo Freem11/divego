@@ -67,8 +67,6 @@ const Settings = (props) => {
                 btnStyle={{
                     display: "flex",
                     flexDirection: "column",
-                    // marginRight: 20,
-                    // marginTop: 10,
                     backgroundColor: "transparent",
                     border: "none",
                     cursor: "pointer",
