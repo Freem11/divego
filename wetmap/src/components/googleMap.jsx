@@ -330,7 +330,7 @@ function Map() {
     setMapRef(map);
   };
 
-  const handleMapCenterChange = () => {
+  const handleMapCenterChange = async () => {
     if (mapRef) {
       window.clearTimeout(mapCenterTimoutHandler);
       mapCenterTimoutHandler = window.setTimeout(function () {
@@ -354,7 +354,7 @@ function Map() {
     }
   }, [mapZoom]);
 
-  const handleBoundsChange = () => {
+  const handleBoundsChange = async () => {
     cleanupModalsNoAnchor();
     if (mapRef) {
       window.clearTimeout(mapBoundariesTimoutHandler);
@@ -463,6 +463,7 @@ function Map() {
   };
 
   const setupAnchorModal = (diveSiteName, lat, lng) => {
+    handleMapUpdates();
     setSelectedDiveSite({
       ...selectedDiveSite,
       SiteName: diveSiteName,
@@ -531,10 +532,8 @@ function Map() {
       {clusters &&
         clusters.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates;
-          const {
-            cluster: isCluster,
-            point_count: pointCount,
-          } = cluster.properties;
+          const { cluster: isCluster, point_count: pointCount } =
+            cluster.properties;
 
           if (isCluster) {
             return (
