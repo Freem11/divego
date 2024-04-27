@@ -1047,7 +1047,7 @@ const MapPage = React.memo((props) => {
     setDiveSiteSearchModal(false);
     setMapSearchModal(false);
     setSiteModal(false);
-    setShopModal(true);
+    setShopModal(false);
     setShowFilterer(!showFilterer);
   };
 

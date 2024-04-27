@@ -114,18 +114,21 @@ const PhotoMenuListItem = (props) => {
     setMapSearchModal(false);
     setSiteModal(false);
 
-    const WidthofTile = e.target.width;
-    const HeightOfTile = e.target.height;
-
-    console.log("tile", WidthofTile, HeightOfTile);
+    // const WidthofTile = e.target.width;
+    // const HeightOfTile = e.target.height;
+const WidthofTile = e.target.clientWidth;
+const HeightOfTile = e.target.clientHeight;
 
     //I'm not sure it is the best approach to this issue... but it works pretty well
     //We get the parent with the x transformation and we add it to the final transformation
+    console.log("find me", e)
+    //scale(1) translate3d(0px, 0px, 0px)
     let transform_x = e.target.parentElement.parentElement.style.transform;
     if (transform_x) {
-      transform_x = transform_x.split("(")[1];
+      transform_x = transform_x.split(" ")[1];
+      console.log("TX", transform_x)
       if (transform_x.length > 1) {
-        transform_x = transform_x.split(",")[0];
+        transform_x = transform_x.split(")")[0];
       }
       transform_x = parseFloat(transform_x.replace("px", ""));
     } else {
@@ -135,10 +138,11 @@ const PhotoMenuListItem = (props) => {
       transform_x = 0;
     }
 
+    console.log("tfor", transform_x)
     const distanceToItemMiddleX = WidthofTile / 2 - tilesShifted * WidthofTile;
-    const centererPressX = transform_x + e.target.x + distanceToItemMiddleX;
+    const centererPressX = 0 + e.clientX - distanceToItemMiddleX;
     const distanceToItemMiddleY = HeightOfTile / 2;
-    const centererPressY = e.target.y + distanceToItemMiddleY;
+    const centererPressY = e.pageY - distanceToItemMiddleY;
 
     const moverWidth = (windowW / 2 - centererPressX) / 2.5;
     const moverHeigth = (windowH / 2 - centererPressY) / 3;
@@ -270,7 +274,7 @@ const PhotoMenuListItem = (props) => {
   return (
     <animated.div
       key={id}
-      className="pictureBoxA"
+      className={animalVal.includes(name) ? "pictureBoxASelected" : "pictureBoxA"}
       ref={tileRef}
       style={move}
       onDoubleClick={(e) => onDoubleClick(e, id)}
@@ -278,7 +282,7 @@ const PhotoMenuListItem = (props) => {
     >
       <div
         style={{ width: tileWidth }}
-        className={animalVal.includes(name) ? "microsSelected" : "micros"}
+        className={"micros"}
       >
         <h4
           style={{ fontSize: "1vw" }}
@@ -291,6 +295,7 @@ const PhotoMenuListItem = (props) => {
           {name}
         </h4>
       </div>
+      <div className="backgroundImage">
       <img
         src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
         width={tileWidth}
@@ -305,8 +310,10 @@ const PhotoMenuListItem = (props) => {
           borderRight: "1px grey solid",
           objectFit: "cover",
           zIndex: 500,
+          pointerEvents: "none"
         }}
       />
+      </div>
       {/* <OpenWithIcon onClick={(e) => onExpanderClick(e, id)} sx={{ color: "lightgrey", height: "1vw", width: "1vw", marginBottom: "20vh", position: "absolute", top: "175%", left: "90%"}} />  */}
     </animated.div>
   );
