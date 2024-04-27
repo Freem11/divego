@@ -9,7 +9,7 @@ import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "../contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "../contexts/settingsModalContext";
 import { CarrouselTilesContext } from "../contexts/carrouselTilesContext";
-import OpenWithIcon from '@mui/icons-material/OpenWith';
+import OpenWithIcon from "@mui/icons-material/OpenWith";
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -26,7 +26,7 @@ const PhotoMenuListItem = (props) => {
     setTileWidth,
     boxWidth,
     setBoxWidth,
-    tilesShifted
+    tilesShifted,
   } = props;
 
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
@@ -56,7 +56,6 @@ const PhotoMenuListItem = (props) => {
   const [xCoord, setXCoord] = useState(0);
 
   const handleSelect = (name) => {
-
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
@@ -107,7 +106,6 @@ const PhotoMenuListItem = (props) => {
 
   const onDoubleClick = (e, id) => {
     setSelectedID(id);
-
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
@@ -119,25 +117,25 @@ const PhotoMenuListItem = (props) => {
     const WidthofTile = e.target.width;
     const HeightOfTile = e.target.height;
 
-    console.log("tile", WidthofTile, HeightOfTile)
+    console.log("tile", WidthofTile, HeightOfTile);
 
     //I'm not sure it is the best approach to this issue... but it works pretty well
     //We get the parent with the x transformation and we add it to the final transformation
     let transform_x = e.target.parentElement.parentElement.style.transform;
     if (transform_x) {
-      transform_x = transform_x.split('(')[1];
+      transform_x = transform_x.split("(")[1];
       if (transform_x.length > 1) {
-        transform_x = transform_x.split(',')[0];
+        transform_x = transform_x.split(",")[0];
       }
-      transform_x = parseFloat(transform_x.replace('px', ''));
+      transform_x = parseFloat(transform_x.replace("px", ""));
     } else {
       transform_x = 0;
     }
     if (transform_x === NaN || transform_x < 0) {
       transform_x = 0;
     }
-    
-    const distanceToItemMiddleX = WidthofTile / 2 - (tilesShifted*WidthofTile);
+
+    const distanceToItemMiddleX = WidthofTile / 2 - tilesShifted * WidthofTile;
     const centererPressX = transform_x + e.target.x + distanceToItemMiddleX;
     const distanceToItemMiddleY = HeightOfTile / 2;
     const centererPressY = e.target.y + distanceToItemMiddleY;
@@ -172,20 +170,20 @@ const PhotoMenuListItem = (props) => {
     setSiteModal(false);
 
     const WidthofTile = e.target.parentElement.parentElement.clientWidth;
-    const HeightOfTile = e.target.parentElement.parentElement.clientHeight * 0.8;
+    const HeightOfTile =
+      e.target.parentElement.parentElement.clientHeight * 0.8;
 
-
-    console.log("dimensions", WidthofTile, HeightOfTile )
+    console.log("dimensions", WidthofTile, HeightOfTile);
 
     //I'm not sure it is the best approach to this issue... but it works pretty well
     //We get the parent with the x transformation and we add it to the final transformation
     let transform_x = e.target.parentElement.parentElement.style.transform;
     if (transform_x) {
-      transform_x = transform_x.split('(')[1];
+      transform_x = transform_x.split("(")[1];
       if (transform_x.length > 1) {
-        transform_x = transform_x.split(',')[0];
+        transform_x = transform_x.split(",")[0];
       }
-      transform_x = parseFloat(transform_x.replace('px', ''));
+      transform_x = parseFloat(transform_x.replace("px", ""));
     } else {
       transform_x = 0;
     }
@@ -193,16 +191,22 @@ const PhotoMenuListItem = (props) => {
       transform_x = 0;
     }
 
-    const distanceToItemMiddleX = WidthofTile / 2 - (tilesShifted*WidthofTile);
-    console.log("dist", transform_x, e.target.parentElement, distanceToItemMiddleX)
-    const centererPressX = transform_x + e.target.screenX + distanceToItemMiddleX;
+    const distanceToItemMiddleX = WidthofTile / 2 - tilesShifted * WidthofTile;
+    console.log(
+      "dist",
+      transform_x,
+      e.target.parentElement,
+      distanceToItemMiddleX
+    );
+    const centererPressX =
+      transform_x + e.target.screenX + distanceToItemMiddleX;
     const distanceToItemMiddleY = HeightOfTile / 2;
-    console.log("distH", distanceToItemMiddleY, HeightOfTile)
+    console.log("distH", distanceToItemMiddleY, HeightOfTile);
     const centererPressY = e.target.screenY + distanceToItemMiddleY;
 
-    console.log("expanderY", centererPressY, e.target.screenY )
+    console.log("expanderY", centererPressY, e.target.screenY);
     // console.log("expanderX", distanceToItemMiddleX, WidthofTile, e.target.parentElement)
-    console.log("arrghh", e.target )
+    console.log("arrghh", e.target);
 
     const moverWidth = (windowW / 2 - distanceToItemMiddleX) / 2.5;
     const moverHeigth = (windowH / 2 - distanceToItemMiddleY) / 3;
@@ -222,7 +226,6 @@ const PhotoMenuListItem = (props) => {
     }
   };
 
-
   const pressReleaseAnimations = () => {
     setYCoord(0);
     setXCoord(0);
@@ -231,13 +234,12 @@ const PhotoMenuListItem = (props) => {
   };
 
   useEffect(() => {
-    if (tiles){
-      pressReleaseAnimations()
-      setTiles(false)
+    if (tiles) {
+      pressReleaseAnimations();
+      setTiles(false);
     }
   }, [tiles]);
 
-  
   useEffect(() => {
     if (selectedID !== id) {
       pressReleaseAnimations();
@@ -302,10 +304,10 @@ const PhotoMenuListItem = (props) => {
           borderLeft: "1px grey solid",
           borderRight: "1px grey solid",
           objectFit: "cover",
-          zIndex: 500
+          zIndex: 500,
         }}
       />
-       {/* <OpenWithIcon onClick={(e) => onExpanderClick(e, id)} sx={{ color: "lightgrey", height: "1vw", width: "1vw", marginBottom: "20vh", position: "absolute", top: "175%", left: "90%"}} />  */}
+      {/* <OpenWithIcon onClick={(e) => onExpanderClick(e, id)} sx={{ color: "lightgrey", height: "1vw", width: "1vw", marginBottom: "20vh", position: "absolute", top: "175%", left: "90%"}} />  */}
     </animated.div>
   );
 };

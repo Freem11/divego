@@ -7,7 +7,10 @@ import MapPage from "./components/MapPage";
 import AuthenticationPage from "./components/authenticationPage";
 import LoadingScreen from "./LoadingScreen";
 import { getMostRecentPhoto } from "./supabaseCalls/photoSupabaseCalls";
-import { sessionCheck, sessionRefresh } from "./supabaseCalls/authenticateSupabaseCalls";
+import {
+  sessionCheck,
+  sessionRefresh,
+} from "./supabaseCalls/authenticateSupabaseCalls";
 import { GoogleOAuthProvider } from "@react-oauth/google";
 import { AppContextProvider } from "./components/contexts/appContextProvider";
 import { CoordsContext } from "./components/contexts/mapCoordsContext";
@@ -20,7 +23,6 @@ function App() {
   const [appIsReady, setAppIsReady] = useState(false);
   const [mapCoords, setMapCoords] = useState([49.316666, -123.066666]);
   const [activeSession, setActiveSession] = useState(null);
-
 
   useEffect(() => {
     async function getUserData() {
@@ -75,18 +77,16 @@ function App() {
       <GoogleOAuthProvider clientId="803518830612-ullrhq9lgcfe9ornlc5tffhtch7o5t07.apps.googleusercontent.com">
         <AppContextProvider>
           <CoordsContext.Provider value={{ mapCoords, setMapCoords }}>
-            <SessionContext.Provider value={{ activeSession, setActiveSession }}>
+            <SessionContext.Provider
+              value={{ activeSession, setActiveSession }}
+            >
               <BrowserRouter>
                 <Routes>
                   <Route
                     path="/"
                     element={
                       activeSession ? (
-                        <MapPage
-                          screenHeigthInital={
-                            screenHeigthInital
-                          }
-                        />
+                        <MapPage screenHeigthInital={screenHeigthInital} />
                       ) : (
                         <AuthenticationPage />
                       )

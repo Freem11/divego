@@ -74,39 +74,39 @@
 }
 
 .followButton {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Itim', cursive;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: #538bdb;
-    width: 12vw;
-    height: 4vh;
-    text-align: center;
-    border-radius: 15px;
-    box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-    margin-top: 5%;
-  }
-  
-  .followButton:hover {
-    background-color: #3e7dd7;
-  }
-  .followButton:active {
-    background-color: #538dbd;
-  }
-  .followButtoAlt {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-family: 'Itim', cursive;
-    font-size: 1em;
-    cursor: pointer;
-    background-color: white;
-    width: 12vw;
-    height: 4vh;
-    text-align: center;
-    border-radius: 15px;
-    box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-    margin-top: 5%;
-  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Itim", cursive;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #538bdb;
+  width: 12vw;
+  height: 4vh;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+  margin-top: 5%;
+}
+
+.followButton:hover {
+  background-color: #3e7dd7;
+}
+.followButton:active {
+  background-color: #538dbd;
+}
+.followButtoAlt {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Itim", cursive;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: white;
+  width: 12vw;
+  height: 4vh;
+  text-align: center;
+  border-radius: 15px;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+  margin-top: 5%;
+}
