@@ -7,6 +7,7 @@ import { SessionContext } from "../contexts/sessionContext";
 import "./settings.css";
 import ActDelDialog from "./dialog";
 import CloseIcon from "@mui/icons-material/Close";
+import CloseButton from "../closeButton/closeButton";
 
 const Settings = (props) => {
   const { animateSettingsModal } = props;
@@ -60,24 +61,17 @@ const Settings = (props) => {
           Settings
         </h3>
         <FormGroup>
-          <Button
-            variant="text"
-            id="closeButton"
-            onClick={() => animateSettingsModal()}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              // marginRight: 20,
-              // marginTop: 10,
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <CloseIcon
-              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
-            ></CloseIcon>
-          </Button>
+            <CloseButton
+                id='closeButton'
+                onClick={animateSettingsModal}
+                btnStyle={{
+                    display: "flex",
+                    flexDirection: "column",
+                    backgroundColor: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                }}
+            />
         </FormGroup>
       </div>
 

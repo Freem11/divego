@@ -2,7 +2,7 @@
     overflow-y: hidden;
     overflow-x: hidden;
     max-height: 98%;
-    width: 100%;
+    width: calc(100% - 1%);
     /* background-color: turquoise; */
     /* margin-top: 45px; */
   }
@@ -10,6 +10,27 @@
   .masterDivA:hover{
     overflow-y: auto;
   }
+
+.masterDivA::-webkit-scrollbar {
+    width: 8px;
+    margin-right: 12px;
+}
+
+.masterDivA::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+    margin: 70px 0 10px;
+}
+
+.masterDivA::-webkit-scrollbar-thumb {
+    background: #8aabdb;
+    border-radius: 4px;
+}
+
+.masterDivA::-webkit-scrollbar-thumb:hover {
+    background: #1a5cba;
+    cursor: pointer;
+}
 
   .dsInfo {
       /* background-color: brown; */
@@ -46,6 +67,7 @@
     align-items: center;
     border: none;
     width: 3vw;
+    cursor: pointer;
 }
 
 #closeButton2 {
@@ -55,6 +77,7 @@
     align-items: center;
     border: none;
     width: 4vw;
+    cursor: pointer;
 }
 
 .monthlyLabel{
@@ -94,6 +117,7 @@
 .fixerDiv {
     margin-bottom: 8%;
     /* background-color: lawngreen; */
+
 }
 
 .fixDiv {
