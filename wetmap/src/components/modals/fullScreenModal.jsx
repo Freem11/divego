@@ -3,6 +3,7 @@ import { FormGroup, Button } from "reactstrap";
 import "./fullScreenModal.css";
 import { SelectedPicContext } from "../contexts/selectPicContext";
 import CloseIcon from "@mui/icons-material/Close";
+import CloseButton from "../closeButton/closeButton";
 
 const FullScreenModal = (props) => {
   const { animateFullScreenModal } = props;
@@ -63,11 +64,10 @@ const FullScreenModal = (props) => {
     >
       <div className="closerDiv">
         <FormGroup>
-          <Button
-            variant="text"
-            id="closeButton"
-            onClick={() => animateFullScreenModal()}
-            style={{
+          <CloseButton
+            id='closeButton'
+            onClick={animateFullScreenModal}
+            btnStyle={{
               display: "flex",
               flexDirection: "column",
               // marginRight: 20,
@@ -76,11 +76,7 @@ const FullScreenModal = (props) => {
               border: "none",
               cursor: "pointer",
             }}
-          >
-            <CloseIcon
-              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
-            ></CloseIcon>
-          </Button>
+          />
         </FormGroup>
       </div>
     </div>

@@ -4,6 +4,7 @@ import "./siteSubmitter.css";
 import { TutorialContext } from "../contexts/tutorialContext";
 import CloseIcon from "@mui/icons-material/Close";
 import DiveSiteAutoComplete from "../diveSiteSearch/diveSiteSearch";
+import CloseButton from "../closeButton/closeButton";
 
 const SiteSearchModal = (props) => {
   const { animateSiteSearchModal, setSiteSearchModalYCoord } = props;
@@ -24,24 +25,19 @@ const SiteSearchModal = (props) => {
           Dive Site Search
         </h3>
         <FormGroup>
-          <Button
-            variant="text"
-            id="closeButton"
-            onClick={() => animateSiteSearchModal()}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              // marginRight: 20,
-              // marginTop: 10,
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
-            <CloseIcon
-              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
-            ></CloseIcon>
-          </Button>
+            <CloseButton
+                id='closeButton'
+                onClick={animateSiteSearchModal}
+                btnStyle={{
+                    display: "flex",
+                    flexDirection: "column",
+                    // marginRight: 20,
+                    // marginTop: 10,
+                    backgroundColor: "transparent",
+                    border: "none",
+                    cursor: "pointer",
+                }}
+            />
         </FormGroup>
       </div>
 

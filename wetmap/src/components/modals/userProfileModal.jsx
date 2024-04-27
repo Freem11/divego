@@ -17,6 +17,7 @@ import {
 } from "../../supabaseCalls/userFollowSupabaseCalls";
 import CloseIcon from "@mui/icons-material/Close";
 import "./userProfile.css";
+import CloseButton from "../closeButton/closeButton";
 
 export default function UserProfileModal(props) {
   const { animateProfileModal } = props;
@@ -134,11 +135,10 @@ export default function UserProfileModal(props) {
             : "My Diver Profile"}
         </h3>
         <FormGroup>
-          <Button
-            variant="text"
-            id="closeButton"
-            onClick={() => toggleProfileModal()}
-            style={{
+          <CloseButton
+            id='closeButton'
+            onClick={toggleProfileModal}
+            btnStyle={{
               display: "flex",
               flexDirection: "column",
               // marginRight: 20,
@@ -147,11 +147,7 @@ export default function UserProfileModal(props) {
               border: "none",
               cursor: "pointer",
             }}
-          >
-            <CloseIcon
-              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
-            ></CloseIcon>
-          </Button>
+          />
         </FormGroup>
       </div>
 

@@ -12,6 +12,7 @@ import {
   grabPhotoCommentsByPicId,
 } from "../../supabaseCalls/photoCommentSupabaseCalls";
 import "./commentsModal.css";
+import CloseButton from "../closeButton/closeButton";
 
 const CommentsModal = (props) => {
   const { animateCommentsModal } = props;
@@ -156,24 +157,18 @@ const CommentsModal = (props) => {
           Comments
         </h3>
         <FormGroup>
-          <Button
-            variant="text"
+          <CloseButton
+            onClick={handleCommentModalClose}
             id="closeButton"
-            onClick={() => handleCommentModalClose()}
-            style={{
+            btnStyle={{
               display: "flex",
               flexDirection: "column",
-              // marginRight: 20,
-              // marginTop: 10,
               backgroundColor: "transparent",
               border: "none",
               cursor: "pointer",
             }}
-          >
-            <CloseIcon
-              sx={{ color: "lightgrey", width: "3vw", height: "5vh" }}
-            ></CloseIcon>
-          </Button>
+            iconStyle={{ color: "#F0EEEB", width: "3vw", height: "5vh" }}
+          />
         </FormGroup>
       </div>
 
@@ -183,22 +178,18 @@ const CommentsModal = (props) => {
         {replyTo ? (
           <div className="replyLine">
             <p className="userTxt">@{replyTo[0]}</p>
-            <Button
-              variant="text"
-              id="microCloseButton"
+            <CloseButton
+              id='microCloseButton'
               onClick={() => setReplyTo(null)}
-              style={{
+              btnStyle={{
                 display: "flex",
                 flexDirection: "column",
                 backgroundColor: "transparent",
                 border: "none",
                 cursor: "pointer",
               }}
-            >
-              <CloseIcon
-                sx={{ color: "lightgrey", width: "1vw", height: "1vw", zIndex: 200 }}
-              ></CloseIcon>
-            </Button>
+              iconStyle={{ color: "#F0EEEB", width: "1vw", height: "1vw", zIndex: 200 }}
+            />
           </div>
         ) : null}
         <div className="replyBox">
