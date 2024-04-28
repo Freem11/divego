@@ -75,7 +75,9 @@
 }
 
 .animalLabelArea {
-  margin-top: 5%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";
@@ -83,6 +85,9 @@
 }
 
 .animalLabelAreaSelected {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 5%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
