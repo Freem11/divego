@@ -1047,7 +1047,7 @@ const MapPage = React.memo((props) => {
     setDiveSiteSearchModal(false);
     setMapSearchModal(false);
     setSiteModal(false);
-    setShopModal(true);
+    setShopModal(false);
     setShowFilterer(!showFilterer);
   };
 
@@ -1529,7 +1529,7 @@ const MapPage = React.memo((props) => {
               sx={{
                 "&:hover": { backgroundColor: "lightblue" },
                 color: "gold",
-                fontFamily: "Permanent Marker, cursive",
+                fontFamily: "Patrick Hand",
                 fontSize: "2vw",
                 width: "20vw",
                 height: "80%",
@@ -1571,7 +1571,7 @@ const MapPage = React.memo((props) => {
               sx={{
                 "&:hover": { backgroundColor: "lightblue" },
                 color: "gold",
-                fontFamily: "Permanent Marker, cursive",
+                fontFamily: "Patrick Hand",
                 fontSize: "2vw",
                 width: "20vw",
                 height: "80%",
