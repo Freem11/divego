@@ -22,7 +22,7 @@
 .masterDivA::-webkit-scrollbar-track {
     background: #f1f1f1;
     border-radius: 4px;
-    margin: 70px 0 10px;
+    margin: 10vh 0 2vh;
 }
 
 .masterDivA::-webkit-scrollbar-thumb {

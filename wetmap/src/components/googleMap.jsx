@@ -471,6 +471,7 @@ function Map() {
       Longitude: lng,
     });
     setSiteModal(true);
+    setJump(!jump)
   };
 
   const setupShopModal = async (shopName) => {

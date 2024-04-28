@@ -6,10 +6,11 @@ import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { TutorialContext } from "../contexts/tutorialContext";
+import { JumpContext } from "../contexts/jumpContext";
 
 export default function DiveSiteAutoComplete(props) {
   const { setSiteSearchModalYCoord } = props;
-
+  const { jump, setJump } = useContext(JumpContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext
   );
@@ -99,6 +100,7 @@ export default function DiveSiteAutoComplete(props) {
                 }
               }
               setSiteSearchModalYCoord(0);
+              setJump(!jump);
               setSearchText("");
             }
           });
