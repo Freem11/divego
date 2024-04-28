@@ -135,13 +135,23 @@ const PhotoMenuListItem = (props) => {
     // if (transform_x === NaN || transform_x < 0) {
     //   transform_x = 0;
     // }
-
+    let ChromeMover = 0
+    if (navigator.userAgent.indexOf("Chrome") != -1) {
+      ChromeMover = tilesShifted * (WidthofTile + 1)
+    } else  {
+      console.log('NOT Chrome', navigator.userAgent);
+    }
+     
+    // if (navigator.userAgent.indexOf("Safari") != -1) {
+    //   alert('Safari');
+    // }
+  
     const distanceToItemMiddleX = WidthofTile / 2 - e.nativeEvent.layerX;
     const centererPressX = e.nativeEvent.clientX + distanceToItemMiddleX;
     const distanceToItemMiddleY = HeightOfTile / 2 - e.nativeEvent.layerY;
     const centererPressY = e.nativeEvent.clientY + distanceToItemMiddleY;
 
-    const moverWidth = (windowW / 2 - centererPressX) / 2.5;
+    const moverWidth = (windowW / 2 - centererPressX + ChromeMover) / 2.5;
     const moverHeigth = (windowH / 2 - centererPressY) / 2;
 
     if (scale === 1) {

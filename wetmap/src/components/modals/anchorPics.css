@@ -9,6 +9,9 @@
   
   .masterDivA:hover{
     overflow-y: auto;
+    /* scrollbar-color: #8aabdb #f1f1f1;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable; */
   }
 
 .masterDivA::-webkit-scrollbar {
@@ -31,6 +34,31 @@
     background: #1a5cba;
     cursor: pointer;
 }
+
+.masterDivA::-moz-scrollbar {
+    width: 8px;
+    margin-right: 12px;
+}
+
+.masterDivA::-moz-scrollbar-track {
+    color: #f1f1f1;
+    background-color: #f1f1f1;
+    border-radius: 4px;
+    margin: 70px 0 10px;
+}
+
+.masterDivA::-moz-scrollbar-thumb {
+    color: #8aabdb;
+    background-color: #8aabdb;
+    border-radius: 4px;
+}
+
+.masterDivA::-moz-scrollbar-thumb:hover {
+    color: #1a5cba;
+    background-color: #1a5cba;
+    cursor: pointer;
+}
+  
 
   .dsInfo {
       /* background-color: brown; */
