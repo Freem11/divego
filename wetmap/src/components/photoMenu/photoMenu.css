@@ -29,7 +29,7 @@
 .pictureBoxA {
   display: flex;
   flex-direction: column;
-  height: 14vh;
+  height: 19vh;
   z-index: 5;
   cursor: pointer;
   background-color: darkblue;
@@ -37,13 +37,13 @@
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  margin-top: -10vh;
+  margin-top: -5vh;
 }
 
 .pictureBoxASelected {
   display: flex;
   flex-direction: column;
-  height: 14vh;
+  height: 19vh;
   z-index: 5;
   cursor: pointer;
   background-color: gold;
@@ -51,10 +51,12 @@
   border-top-right-radius: 10px;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
-  margin-top: -10vh;
+  margin-top: -5vh;
 }
 
 .micros {
+  display: flex;
+  justify-content: center;
   color: white;
   border: grey 1px solid;
   border-top-left-radius: 10px;
@@ -69,11 +71,11 @@
 .backgroundImage{
   pointer-events: none;
   height: 70%;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .animalLabelArea {
-  margin-top: 3%;
+  margin-top: 6%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";
@@ -81,7 +83,7 @@
 }
 
 .animalLabelAreaSelected {
-  margin-top: 3%;
+  margin-top: 6%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   font-family: "Itim";

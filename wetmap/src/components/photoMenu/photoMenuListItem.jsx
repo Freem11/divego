@@ -116,36 +116,33 @@ const PhotoMenuListItem = (props) => {
 
     // const WidthofTile = e.target.width;
     // const HeightOfTile = e.target.height;
-const WidthofTile = e.target.clientWidth;
-const HeightOfTile = e.target.clientHeight;
+    const WidthofTile = e.target.clientWidth;
+    const HeightOfTile = e.target.clientHeight;
+
 
     //I'm not sure it is the best approach to this issue... but it works pretty well
     //We get the parent with the x transformation and we add it to the final transformation
-    console.log("find me", e)
-    //scale(1) translate3d(0px, 0px, 0px)
-    let transform_x = e.target.parentElement.parentElement.style.transform;
-    if (transform_x) {
-      transform_x = transform_x.split(" ")[1];
-      console.log("TX", transform_x)
-      if (transform_x.length > 1) {
-        transform_x = transform_x.split(")")[0];
-      }
-      transform_x = parseFloat(transform_x.replace("px", ""));
-    } else {
-      transform_x = 0;
-    }
-    if (transform_x === NaN || transform_x < 0) {
-      transform_x = 0;
-    }
+    // let transform_x = e.target.parentElement.parentElement.style.transform;
+    // if (transform_x) {
+    //   transform_x = transform_x.split(" ")[1];
+    //   if (transform_x.length > 1) {
+    //     transform_x = transform_x.split(")")[0];
+    //   }
+    //   transform_x = parseFloat(transform_x.replace("px", ""));
+    // } else {
+    //   transform_x = 0;
+    // }
+    // if (transform_x === NaN || transform_x < 0) {
+    //   transform_x = 0;
+    // }
 
-    console.log("tfor", transform_x)
-    const distanceToItemMiddleX = WidthofTile / 2 - tilesShifted * WidthofTile;
-    const centererPressX = 0 + e.clientX - distanceToItemMiddleX;
-    const distanceToItemMiddleY = HeightOfTile / 2;
-    const centererPressY = e.pageY - distanceToItemMiddleY;
+    const distanceToItemMiddleX = WidthofTile / 2 - e.nativeEvent.layerX;
+    const centererPressX = e.nativeEvent.clientX + distanceToItemMiddleX;
+    const distanceToItemMiddleY = HeightOfTile / 2 - e.nativeEvent.layerY;
+    const centererPressY = e.nativeEvent.clientY + distanceToItemMiddleY;
 
     const moverWidth = (windowW / 2 - centererPressX) / 2.5;
-    const moverHeigth = (windowH / 2 - centererPressY) / 3;
+    const moverHeigth = (windowH / 2 - centererPressY) / 2;
 
     if (scale === 1) {
       setYCoord(moverHeigth);
@@ -196,24 +193,14 @@ const HeightOfTile = e.target.clientHeight;
     }
 
     const distanceToItemMiddleX = WidthofTile / 2 - tilesShifted * WidthofTile;
-    console.log(
-      "dist",
-      transform_x,
-      e.target.parentElement,
-      distanceToItemMiddleX
-    );
     const centererPressX =
       transform_x + e.target.screenX + distanceToItemMiddleX;
     const distanceToItemMiddleY = HeightOfTile / 2;
-    console.log("distH", distanceToItemMiddleY, HeightOfTile);
     const centererPressY = e.target.screenY + distanceToItemMiddleY;
-
-    console.log("expanderY", centererPressY, e.target.screenY);
     // console.log("expanderX", distanceToItemMiddleX, WidthofTile, e.target.parentElement)
-    console.log("arrghh", e.target);
 
     const moverWidth = (windowW / 2 - distanceToItemMiddleX) / 2.5;
-    const moverHeigth = (windowH / 2 - distanceToItemMiddleY) / 3;
+    const moverHeigth = (windowH / 2 - distanceToItemMiddleY) / 2.5;
 
     if (scale === 1) {
       setYCoord(moverHeigth);
@@ -274,18 +261,17 @@ const HeightOfTile = e.target.clientHeight;
   return (
     <animated.div
       key={id}
-      className={animalVal.includes(name) ? "pictureBoxASelected" : "pictureBoxA"}
+      className={
+        animalVal.includes(name) ? "pictureBoxASelected" : "pictureBoxA"
+      }
       ref={tileRef}
       style={move}
       onDoubleClick={(e) => onDoubleClick(e, id)}
       onClick={() => handleSelect(name)}
     >
-      <div
-        style={{ width: tileWidth }}
-        className={"micros"}
-      >
+      <div style={{ width: tileWidth, pointerEvents: "none" }} className={"micros"}>
         <h4
-          style={{ fontSize: "1vw" }}
+          style={{ fontSize: "1em", pointerEvents: "none" }}
           className={
             animalVal.includes(name)
               ? "animalLabelAreaSelected"
@@ -296,23 +282,23 @@ const HeightOfTile = e.target.clientHeight;
         </h4>
       </div>
       <div className="backgroundImage">
-      <img
-        src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
-        width={tileWidth}
-        height={picWidth.height}
-        onDragStart={handleDragStart}
-        style={{
-          marginLeft: "-1px",
-          borderBottomLeftRadius: "10px",
-          borderBottomRightRadius: "10px",
-          borderBottom: "1px grey solid",
-          borderLeft: "1px grey solid",
-          borderRight: "1px grey solid",
-          objectFit: "cover",
-          zIndex: 500,
-          pointerEvents: "none"
-        }}
-      />
+        <img
+          src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
+          width={"100%"}
+          height={"100%"}
+          onDragStart={handleDragStart}
+          style={{
+            marginLeft: "-1px",
+            borderBottomLeftRadius: "10px",
+            borderBottomRightRadius: "10px",
+            borderBottom: "1px grey solid",
+            borderLeft: "1px grey solid",
+            borderRight: "1px grey solid",
+            objectFit: "cover",
+            zIndex: 500,
+            pointerEvents: "none",
+          }}
+        />
       </div>
       {/* <OpenWithIcon onClick={(e) => onExpanderClick(e, id)} sx={{ color: "lightgrey", height: "1vw", width: "1vw", marginBottom: "20vh", position: "absolute", top: "175%", left: "90%"}} />  */}
     </animated.div>
