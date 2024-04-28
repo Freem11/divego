@@ -9,7 +9,7 @@ import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "../contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "../contexts/settingsModalContext";
 import { CarrouselTilesContext } from "../contexts/carrouselTilesContext";
-import OpenWithIcon from '@mui/icons-material/OpenWith';
+import OpenWithIcon from "@mui/icons-material/OpenWith";
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -26,7 +26,7 @@ const PhotoMenuListItem = (props) => {
     setTileWidth,
     boxWidth,
     setBoxWidth,
-    tilesShifted
+    tilesShifted,
   } = props;
 
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
@@ -56,7 +56,6 @@ const PhotoMenuListItem = (props) => {
   const [xCoord, setXCoord] = useState(0);
 
   const handleSelect = (name) => {
-
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
@@ -107,7 +106,6 @@ const PhotoMenuListItem = (props) => {
 
   const onDoubleClick = (e, id) => {
     setSelectedID(id);
-
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
@@ -116,34 +114,45 @@ const PhotoMenuListItem = (props) => {
     setMapSearchModal(false);
     setSiteModal(false);
 
-    const WidthofTile = e.target.width;
-    const HeightOfTile = e.target.height;
+    // const WidthofTile = e.target.width;
+    // const HeightOfTile = e.target.height;
+    const WidthofTile = e.target.clientWidth;
+    const HeightOfTile = e.target.clientHeight;
 
-    console.log("tile", WidthofTile, HeightOfTile)
 
     //I'm not sure it is the best approach to this issue... but it works pretty well
     //We get the parent with the x transformation and we add it to the final transformation
-    let transform_x = e.target.parentElement.parentElement.style.transform;
-    if (transform_x) {
-      transform_x = transform_x.split('(')[1];
-      if (transform_x.length > 1) {
-        transform_x = transform_x.split(',')[0];
-      }
-      transform_x = parseFloat(transform_x.replace('px', ''));
-    } else {
-      transform_x = 0;
+    // let transform_x = e.target.parentElement.parentElement.style.transform;
+    // if (transform_x) {
+    //   transform_x = transform_x.split(" ")[1];
+    //   if (transform_x.length > 1) {
+    //     transform_x = transform_x.split(")")[0];
+    //   }
+    //   transform_x = parseFloat(transform_x.replace("px", ""));
+    // } else {
+    //   transform_x = 0;
+    // }
+    // if (transform_x === NaN || transform_x < 0) {
+    //   transform_x = 0;
+    // }
+    let ChromeMover = 0
+    if (navigator.userAgent.indexOf("Chrome") != -1) {
+      ChromeMover = tilesShifted * (WidthofTile + 1)
+    } else  {
+      console.log('NOT Chrome', navigator.userAgent);
     }
-    if (transform_x === NaN || transform_x < 0) {
-      transform_x = 0;
-    }
-    
-    const distanceToItemMiddleX = WidthofTile / 2 - (tilesShifted*WidthofTile);
-    const centererPressX = transform_x + e.target.x + distanceToItemMiddleX;
-    const distanceToItemMiddleY = HeightOfTile / 2;
-    const centererPressY = e.target.y + distanceToItemMiddleY;
+     
+    // if (navigator.userAgent.indexOf("Safari") != -1) {
+    //   alert('Safari');
+    // }
+  
+    const distanceToItemMiddleX = WidthofTile / 2 - e.nativeEvent.layerX;
+    const centererPressX = e.nativeEvent.clientX + distanceToItemMiddleX;
+    const distanceToItemMiddleY = HeightOfTile / 2 - e.nativeEvent.layerY;
+    const centererPressY = e.nativeEvent.clientY + distanceToItemMiddleY;
 
-    const moverWidth = (windowW / 2 - centererPressX) / 2.5;
-    const moverHeigth = (windowH / 2 - centererPressY) / 3;
+    const moverWidth = (windowW / 2 - centererPressX + ChromeMover) / 2.5;
+    const moverHeigth = (windowH / 2 - centererPressY) / 2;
 
     if (scale === 1) {
       setYCoord(moverHeigth);
@@ -172,20 +181,20 @@ const PhotoMenuListItem = (props) => {
     setSiteModal(false);
 
     const WidthofTile = e.target.parentElement.parentElement.clientWidth;
-    const HeightOfTile = e.target.parentElement.parentElement.clientHeight * 0.8;
+    const HeightOfTile =
+      e.target.parentElement.parentElement.clientHeight * 0.8;
 
-
-    console.log("dimensions", WidthofTile, HeightOfTile )
+    console.log("dimensions", WidthofTile, HeightOfTile);
 
     //I'm not sure it is the best approach to this issue... but it works pretty well
     //We get the parent with the x transformation and we add it to the final transformation
     let transform_x = e.target.parentElement.parentElement.style.transform;
     if (transform_x) {
-      transform_x = transform_x.split('(')[1];
+      transform_x = transform_x.split("(")[1];
       if (transform_x.length > 1) {
-        transform_x = transform_x.split(',')[0];
+        transform_x = transform_x.split(",")[0];
       }
-      transform_x = parseFloat(transform_x.replace('px', ''));
+      transform_x = parseFloat(transform_x.replace("px", ""));
     } else {
       transform_x = 0;
     }
@@ -193,19 +202,15 @@ const PhotoMenuListItem = (props) => {
       transform_x = 0;
     }
 
-    const distanceToItemMiddleX = WidthofTile / 2 - (tilesShifted*WidthofTile);
-    console.log("dist", transform_x, e.target.parentElement, distanceToItemMiddleX)
-    const centererPressX = transform_x + e.target.screenX + distanceToItemMiddleX;
+    const distanceToItemMiddleX = WidthofTile / 2 - tilesShifted * WidthofTile;
+    const centererPressX =
+      transform_x + e.target.screenX + distanceToItemMiddleX;
     const distanceToItemMiddleY = HeightOfTile / 2;
-    console.log("distH", distanceToItemMiddleY, HeightOfTile)
     const centererPressY = e.target.screenY + distanceToItemMiddleY;
-
-    console.log("expanderY", centererPressY, e.target.screenY )
     // console.log("expanderX", distanceToItemMiddleX, WidthofTile, e.target.parentElement)
-    console.log("arrghh", e.target )
 
     const moverWidth = (windowW / 2 - distanceToItemMiddleX) / 2.5;
-    const moverHeigth = (windowH / 2 - distanceToItemMiddleY) / 3;
+    const moverHeigth = (windowH / 2 - distanceToItemMiddleY) / 2.5;
 
     if (scale === 1) {
       setYCoord(moverHeigth);
@@ -222,7 +227,6 @@ const PhotoMenuListItem = (props) => {
     }
   };
 
-
   const pressReleaseAnimations = () => {
     setYCoord(0);
     setXCoord(0);
@@ -231,13 +235,12 @@ const PhotoMenuListItem = (props) => {
   };
 
   useEffect(() => {
-    if (tiles){
-      pressReleaseAnimations()
-      setTiles(false)
+    if (tiles) {
+      pressReleaseAnimations();
+      setTiles(false);
     }
   }, [tiles]);
 
-  
   useEffect(() => {
     if (selectedID !== id) {
       pressReleaseAnimations();
@@ -268,18 +271,17 @@ const PhotoMenuListItem = (props) => {
   return (
     <animated.div
       key={id}
-      className="pictureBoxA"
+      className={
+        animalVal.includes(name) ? "pictureBoxASelected" : "pictureBoxA"
+      }
       ref={tileRef}
       style={move}
       onDoubleClick={(e) => onDoubleClick(e, id)}
       onClick={() => handleSelect(name)}
     >
-      <div
-        style={{ width: tileWidth }}
-        className={animalVal.includes(name) ? "microsSelected" : "micros"}
-      >
+      <div style={{ width: tileWidth, pointerEvents: "none" }} className={"micros"}>
         <h4
-          style={{ fontSize: "1vw" }}
+          style={{ fontSize: "1em", pointerEvents: "none" }}
           className={
             animalVal.includes(name)
               ? "animalLabelAreaSelected"
@@ -289,23 +291,26 @@ const PhotoMenuListItem = (props) => {
           {name}
         </h4>
       </div>
-      <img
-        src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
-        width={tileWidth}
-        height={picWidth.height}
-        onDragStart={handleDragStart}
-        style={{
-          marginLeft: "-1px",
-          borderBottomLeftRadius: "10px",
-          borderBottomRightRadius: "10px",
-          borderBottom: "1px grey solid",
-          borderLeft: "1px grey solid",
-          borderRight: "1px grey solid",
-          objectFit: "cover",
-          zIndex: 500
-        }}
-      />
-       {/* <OpenWithIcon onClick={(e) => onExpanderClick(e, id)} sx={{ color: "lightgrey", height: "1vw", width: "1vw", marginBottom: "20vh", position: "absolute", top: "175%", left: "90%"}} />  */}
+      <div className="backgroundImage">
+        <img
+          src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
+          width={"100%"}
+          height={"100%"}
+          onDragStart={handleDragStart}
+          style={{
+            marginLeft: "-1px",
+            borderBottomLeftRadius: "10px",
+            borderBottomRightRadius: "10px",
+            borderBottom: "1px grey solid",
+            borderLeft: "1px grey solid",
+            borderRight: "1px grey solid",
+            objectFit: "cover",
+            zIndex: 500,
+            pointerEvents: "none",
+          }}
+        />
+      </div>
+      {/* <OpenWithIcon onClick={(e) => onExpanderClick(e, id)} sx={{ color: "lightgrey", height: "1vw", width: "1vw", marginBottom: "20vh", position: "absolute", top: "175%", left: "90%"}} />  */}
     </animated.div>
   );
 };

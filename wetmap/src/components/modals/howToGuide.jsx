@@ -17,6 +17,7 @@ import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 
 import "./howToGuide.css";
+import CloseButton from "../closeButton/closeButton";
 
 const HowToGuide = (props) => {
   const { itterator, setItterator } = useContext(IterratorContext);
@@ -78,24 +79,19 @@ const HowToGuide = (props) => {
           How to use Scuba SEAsons
         </h3>
         <FormGroup>
-          <Button
-            variant="text"
-            id="closeButton"
-            onClick={() => animateLaunchModal()}
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              // marginRight: 20,
-              // marginTop: 10,
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer"
-            }}
-          >
-            <CloseIcon
-              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
-            ></CloseIcon>
-          </Button>
+            <CloseButton
+                id='closeButton'
+                onClick={animateLaunchModal}
+                btnStyle={{
+                    display: "flex",
+                    flexDirection: "column",
+                    // marginRight: 20,
+                    // marginTop: 10,
+                    backgroundColor: "transparent",
+                    border: "none",
+                    cursor: "pointer"
+                }}
+            />
         </FormGroup>
       </div>
 

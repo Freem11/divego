@@ -8,8 +8,8 @@ export default defineConfig({
       "/api": "http://localhost:5000/",
     },
     https: {
-      key: "/Users/matthewfreeman/key.pem",
-      cert: "/Users/matthewfreeman/cert.pem",
+      key: "../../key.pem",
+      cert: "../../cert.pem",
     },
   },
   build: {

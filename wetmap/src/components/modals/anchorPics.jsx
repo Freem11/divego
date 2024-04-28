@@ -20,6 +20,7 @@ import FlagIcon from "@mui/icons-material/Flag";
 import CloseIcon from "@mui/icons-material/Close";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import "./anchorPics.css";
+import CloseButton from "../closeButton/closeButton";
 
 const AnchorPics = (props) => {
   const {
@@ -174,15 +175,21 @@ const AnchorPics = (props) => {
                 ></AddPhotoAlternateIcon>
               </Button>
 
-              <Button
-                variant="text"
+              {/*<Button*/}
+              {/*  variant="text"*/}
+              {/*  id="closeButton2"*/}
+              {/*  onClick={() => handleClose()}*/}
+              {/*>*/}
+              {/*  <CloseIcon*/}
+              {/*    sx={{ color: "#F0EEEB", width: "4vw", height: "6vh" }}*/}
+              {/*  ></CloseIcon>*/}
+              {/*</Button>*/}
+
+              <CloseButton
+                onClick={handleClose}
                 id="closeButton2"
-                onClick={() => handleClose()}
-              >
-                <CloseIcon
-                  sx={{ color: "lightgrey", width: "4vw", height: "6vh" }}
-                ></CloseIcon>
-              </Button>
+                iconStyle={{ color: "#F0EEEB", width: "4vw", height: "6vh" }}
+              />
           </div>
         </div>
       </div>

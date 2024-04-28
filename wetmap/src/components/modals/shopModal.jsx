@@ -12,6 +12,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 import "./shopModal.css";
 import { shops } from "../../supabaseCalls/shopsSupabaseCalls";
+import CloseButton from "../closeButton/closeButton";
 
 export default function ShopModal(props) {
   // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
@@ -70,11 +71,10 @@ export default function ShopModal(props) {
           </h3>
         </div>
         <FormGroup>
-          <Button
-            variant="text"
-            id="closeButton"
-            onClick={() => handleShopModalClose()}
-            style={{
+          <CloseButton
+            id='closeButton'
+            onClick={handleShopModalClose}
+            btnStyle={{
               display: "flex",
               flexDirection: "column",
               // marginRight: 20,
@@ -83,11 +83,7 @@ export default function ShopModal(props) {
               border: "none",
               cursor: "pointer",
             }}
-          >
-            <CloseIcon
-              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
-            ></CloseIcon>
-          </Button>
+          />
         </FormGroup>
       </div>
 
