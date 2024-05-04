@@ -65,7 +65,7 @@ export default function AuthenticationPage() {
         </Tabs>
       </Box>
       <TabPanel value={value} index={0} style={{backgroundColor: '#538dbd', height: "100%"}}>
-       <SignInRoute/>
+       <SignInRoute setValue={setValue}/>
       </TabPanel>
       <TabPanel value={value} index={1} style={{backgroundColor: '#538dbd', height: "100%"}}>
       <SignUpRoute/>

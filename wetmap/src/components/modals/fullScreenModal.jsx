@@ -1,8 +1,9 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { FormGroup, Button } from "reactstrap";
 import "./fullScreenModal.css";
 import { SelectedPicContext } from "../contexts/selectPicContext";
 import CloseIcon from "@mui/icons-material/Close";
+import CloseButton from "../closeButton/closeButton";
 
 const FullScreenModal = (props) => {
   const { animateFullScreenModal } = props;
@@ -42,14 +43,19 @@ const FullScreenModal = (props) => {
     }
   };
 
-  getImageDimensions();
+  useEffect(() => {
+    if (selectedPic) {
+      getImageDimensions();
+    }
+  }, [selectedPic])
+    
 
   return (
     <div
       className="bodyDiv"
       onClick={(e) => e.stopPropagation()}
       style={{
-        backgroundImage: `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${selectedPic})`,
+        backgroundImage: selectedPic ? `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${selectedPic})` : "",
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         width: imgWidth,
@@ -58,11 +64,10 @@ const FullScreenModal = (props) => {
     >
       <div className="closerDiv">
         <FormGroup>
-          <Button
-            variant="text"
-            id="closeButton"
-            onClick={() => animateFullScreenModal()}
-            style={{
+          <CloseButton
+            id='closeButton'
+            onClick={animateFullScreenModal}
+            btnStyle={{
               display: "flex",
               flexDirection: "column",
               // marginRight: 20,
@@ -71,11 +76,7 @@ const FullScreenModal = (props) => {
               border: "none",
               cursor: "pointer",
             }}
-          >
-            <CloseIcon
-              sx={{ color: "lightgrey", width: "2vw", height: "5vh" }}
-            ></CloseIcon>
-          </Button>
+          />
         </FormGroup>
       </div>
     </div>

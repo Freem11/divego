@@ -5,6 +5,7 @@ import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import exifr from "exifr";
 import AutoSuggest from "../autoSuggest/autoSuggest";
+import { FileUploader } from "react-drag-drop-files";
 import { useNavigate } from "react-router-dom";
 import { MasterContext } from "../contexts/masterContext";
 import { PinContext } from "../contexts/staticPinContext";
@@ -72,6 +73,9 @@ const PicUploader = React.memo((props) => {
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { chapter, setChapter } = useContext(ChapterContext);
 
+  const fileTypes = ["JPG", "JPEG", "PNG"];
+
+
   // const [uploadedFile, setUploadedFile] = useState({
   //   selectedFile: null,
   // });
@@ -108,7 +112,14 @@ const PicUploader = React.memo((props) => {
   }, [pin.PicDate]);
 
   const handleChange = async (e) => {
-    if (e.target.name === "PicFile") {
+
+    if(typeof(e) === "object"){
+      console.log("gotch!", typeof(e))
+      // return
+    }
+
+    if (e.target && e.target.name === "PicFile" || typeof(e) === "object") {
+      console.log("here?", e)
       setPhotoFile(null);
       if (pin.PicFile !== null) {
         removePhoto({
@@ -117,27 +128,33 @@ const PicUploader = React.memo((props) => {
         });
       }
 
-      if (e.target.files[0]) {
-        let image = e.target.files[0];
-        let extension = image.name.split(".").pop();
+      let imageFile
+      if (e.target && e.target.files[0]) {
+        imageFile = e.target.files[0];
+      } else if (e.name) {
+        imageFile = e;
+      }
+
+      console.log("yo",imageFile)
+        let extension = imageFile.name.split(".").pop();
         const fileName = Date.now() + "." + extension;
 
         //uploadPhoto
         const data = new FormData();
-        data.append("image", e.target.files[0]);
-        const newFilePath = await uploadphoto(image, fileName);
+        data.append("image", imageFile);
+        const newFilePath = await uploadphoto(imageFile, fileName);
         setPhotoFile(fileName);
-
+        console.log("create file", photoFile);
         //scrape off photo info
         let formattedDate = pin.PicDate;
         let newLatitude = pin.Latitude;
         let newLongitude = pin.Longitude;
-        let baseDate = image.lastModified;
+        let baseDate = imageFile.lastModified;
         var convDate = new Date(baseDate);
 
         formattedDate = getToday(convDate);
 
-        exifr.parse(image, true).then((output) => {
+        exifr.parse(imageFile, true).then((output) => {
           let EXIFData = exifGPSHelper(
             output.GPSLatitude,
             output.GPSLongitude,
@@ -151,6 +168,13 @@ const PicUploader = React.memo((props) => {
           }
         });
 
+        console.log(
+          "pin data",
+          fileName,
+          formattedDate,
+          newLatitude,
+          newLongitude
+        );
         setPin({
           ...pin,
           PicFile: `animalphotos/public/${fileName}`,
@@ -158,7 +182,7 @@ const PicUploader = React.memo((props) => {
           Latitude: newLatitude,
           Longitude: newLongitude,
         });
-      }
+      
       // fetch("http://localhost:5000/api/upload", {
       //   method: "POST",
       //   body: data,
@@ -318,13 +342,14 @@ const PicUploader = React.memo((props) => {
 
       let rightNow = getToday(Rnow);
 
-      if (tutorialRunning) {
-        if (itterator3 === 22) {
-          setItterator3(itterator3 + 1);
-        } else {
-          insertPhotoWaits({ ...pin, PicFile: photoFile });
-        }
+      // if (tutorialRunning) {
+      if (itterator3 === 22) {
+        setItterator3(itterator3 + 1);
+      } else {
+        insertPhotoWaits({ ...pin });
+        // insertPhotoWaits({ ...pin, PicFile: photoFile });
       }
+      // }
 
       setPin({
         ...pin,
@@ -357,6 +382,7 @@ const PicUploader = React.memo((props) => {
     }
 
     if (pin.PicFile !== null) {
+      console.log("called");
       removePhoto({
         filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
         fileName: `${pin.PicFile}`,
@@ -459,14 +485,14 @@ const PicUploader = React.memo((props) => {
     color: "gold",
     width: "3.5vw",
     height: "4.5vh",
-    cursor: "pointer"
+    cursor: "pointer",
   };
 
   const buttonStyleAlt = {
     color: "#538dbd",
     width: "3.5vw",
     height: "4.5vh",
-    cursor: "pointer"
+    cursor: "pointer",
   };
 
   // AutoSuggest props
@@ -541,7 +567,7 @@ const PicUploader = React.memo((props) => {
             width: "2vw",
             height: "4vh",
             marginRight: "1vw",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         ></QuestionMarkIcon>
         {/* </Button> */}
@@ -557,7 +583,7 @@ const PicUploader = React.memo((props) => {
             color: "lightgrey",
             width: "2vw",
             height: "5vh",
-            cursor: "pointer"
+            cursor: "pointer",
           }}
         ></CloseIcon>
         {/* </Button> */}
@@ -575,7 +601,18 @@ const PicUploader = React.memo((props) => {
         </div>
       )}
 
-      {photoFile === null && <div className="blankPic"></div>}
+      {photoFile === null && (
+         <div className="pickie">
+        <FileUploader
+          handleChange={handleChange}
+          name="file"
+          types={fileTypes}
+          multiple={false}
+          label=" "
+          hoverTitle="Drop Here"
+        />
+          </div>
+      )}
 
       <div className="uploadbox2">
         <div

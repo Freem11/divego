@@ -13,8 +13,8 @@ import { SessionContext } from "../contexts/sessionContext";
 import { grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
 import { newGPSBoundaries } from "../../helpers/mapHelpers";
 import {
-  getPhotosforAnchorMulti,
-  getPhotosforAnchor,
+  getPhotosWithUser,
+  getPhotosWithUserEmpty,
 } from "../../supabaseCalls/photoSupabaseCalls";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { getToday } from "../../helpers/picUploaderHelpers.js";
@@ -392,6 +392,7 @@ export default function IntroTutorial(props) {
           setTextRead("");
           setTextRead(feederArray[itterator]);
           setTextPrinting(false);
+          console.log(textRead);
         } else {
           setItterator((prev) => prev + pushVal);
           setTextPrinting(true);
@@ -405,7 +406,7 @@ export default function IntroTutorial(props) {
   };
 
   let textArray;
-
+  //////////////////////////////// issue here with 1st letter not printing out 
   function printOutText() {
     if (textArray.length > 0) {
       if (itterator === 10 && textArray.length <= 64) {
@@ -431,6 +432,7 @@ export default function IntroTutorial(props) {
     setTextRead("");
     setTextRead2("");
     let textVal = feederArray[itterator];
+    console.log("??", textVal);
     if (textVal) {
       textArray = textVal.split("");
       if (textPrinting) {
@@ -450,7 +452,9 @@ export default function IntroTutorial(props) {
       }
     }
 
-    return () => cleanUp();
+    return () => {
+      cleanUp();
+    };
   }, [itterator, textPrinting]);
 
   useEffect(() => {
@@ -661,14 +665,27 @@ export default function IntroTutorial(props) {
     );
 
     try {
-      const photos = await getPhotosforAnchorMulti({
-        animalVal,
-        // sliderVal,
-        minLat,
-        maxLat,
-        minLng,
-        maxLng,
-      });
+      let photos;
+      if (animalVal.length === 0) {
+        photos = await getPhotosWithUserEmpty({
+          myCreatures: "",
+          userId: profile[0] ? profile[0].UserID : "",
+          minLat,
+          maxLat,
+          minLng,
+          maxLng,
+        });
+      } else {
+        photos = await getPhotosWithUser({
+          animalMultiSelection: animalVal,
+          myCreatures: "",
+          userId: profile[0] ? profile[0].UserID : "",
+          minLat,
+          maxLat,
+          minLng,
+          maxLng,
+        });
+      }
       if (photos) {
         let count = 0;
         photos.forEach((obj) => {

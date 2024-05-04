@@ -6,10 +6,11 @@ import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { TutorialContext } from "../contexts/tutorialContext";
+import { JumpContext } from "../contexts/jumpContext";
 
 export default function DiveSiteAutoComplete(props) {
   const { setSiteSearchModalYCoord } = props;
-
+  const { jump, setJump } = useContext(JumpContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext
   );
@@ -35,7 +36,10 @@ export default function DiveSiteAutoComplete(props) {
       diveSiteNames = null;
       diveSiteArray = [];
 
-      diveSiteNames = await getSiteNamesThatFit({ minLat, maxLat, minLng, maxLng },searchText);
+      diveSiteNames = await getSiteNamesThatFit(
+        { minLat, maxLat, minLng, maxLng },
+        searchText
+      );
     }
 
     if (diveSiteNames) {
@@ -49,17 +53,17 @@ export default function DiveSiteAutoComplete(props) {
     setList(diveSiteArray);
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     handleDiveSiteList();
   }, []);
 
-  useEffect(async () => {
+  useEffect(() => {
     handleDiveSiteList();
   }, [boundaries, searchText]);
 
   const handleChange = (e) => {
     setSearchText(e.target.value);
-  }
+  };
 
   const handleSelect = (value) => {
     setSearchText(value);
@@ -70,13 +74,14 @@ export default function DiveSiteAutoComplete(props) {
       let minLng2 = boundaries[0];
       let maxLng2 = boundaries[2];
 
-      let diveSiteSet = getSiteNamesThatFit({
-        minLat: minLat2,
-        maxLat: maxLat2,
-        minLng: minLng2,
-        maxLng: maxLng2,
-      },
-      searchText
+      let diveSiteSet = getSiteNamesThatFit(
+        {
+          minLat: minLat2,
+          maxLat: maxLat2,
+          minLng: minLng2,
+          maxLng: maxLng2,
+        },
+        searchText
       );
 
       Promise.all([diveSiteSet])
@@ -95,7 +100,8 @@ export default function DiveSiteAutoComplete(props) {
                 }
               }
               setSiteSearchModalYCoord(0);
-              setSearchText("")
+              setJump(!jump);
+              setSearchText("");
             }
           });
         })
@@ -103,7 +109,7 @@ export default function DiveSiteAutoComplete(props) {
           console.log(error);
         });
     }
-  }
+  };
 
   return (
     <div className={"autosuggestboxWhite"}>
@@ -123,12 +129,12 @@ export default function DiveSiteAutoComplete(props) {
         }}
         style1={{
           marginTop: "0vh",
-          marginLeft: "1vw"
+          marginLeft: "-1.5vw",
         }}
         style2={{
           display: "flex",
           height: "2.5vh",
-          width: "15vw",
+          width: "20vw",
           paddingLeft: "1vw",
           paddingRight: "1vw",
           listStyle: "none",
@@ -136,13 +142,14 @@ export default function DiveSiteAutoComplete(props) {
           marginBottom: "0.1vh",
           borderRadius: "5px",
           alignItems: "center",
-          justifyContent: "center"
+          justifyContent: "center",
+          cursor: "pointer",
         }}
         style3={{
           color: "black",
           fontSize: "1vw",
           fontFamily: "Itim, cursive",
-          fontWeight: "normal"
+          fontWeight: "normal",
         }}
       />
     </div>

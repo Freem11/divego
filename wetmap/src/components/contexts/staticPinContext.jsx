@@ -10,7 +10,6 @@ const PinContextProvider = ({children}) => {
         Latitude: "",
         Longitude: "",
         UserID: "",
-        UserName: "",
       });
 
     return (

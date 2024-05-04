@@ -4,7 +4,6 @@ import { multiHeatPoints } from "../../supabaseCalls/heatPointSupabaseCalls";
 import { getPhotosforMapArea } from "../../supabaseCalls/photoSupabaseCalls";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { HeatPointsContext } from "../contexts/heatPointsContext";
-import "photoswipe/dist/photoswipe.css";
 import { formatHeatVals } from "../../helpers/heatPointHelpers";
 import "./photoMenu.css";
 import PhotoMenuListItem from "./photoMenuListItem";

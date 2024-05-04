@@ -11,6 +11,7 @@ import DiveSiteSearchModalContextProvider from './diveSiteSearchModalContext';
 import MapSearchModalContextProvider from './mapSearchModalContext';
 import GuideLaunchModalContextProvider from './guideLaunchModalContext';
 import SettingsModalContextProvider from './settingsModalContext';
+import ProfileModalContextProvider from './profileModalContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
 import ThirdTutorialModalContextProvider from './thirdTutorialModalContext';
@@ -32,6 +33,7 @@ import LightBoxContextProvider from './lightBoxContext';
 import SelectedPicContextProvider from './selectPicContext';
 import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
 import MasterContextProvider from './masterContext';
+import MinorContextProvider from './minorContext';
 import DiveSpotContextProvider from './diveSpotContext';
 import PinSpotContextProvider from './pinSpotContext';
 import AnimalRevealContextProvider from './animalRevealContext';
@@ -45,6 +47,13 @@ import PinContextProvider from './staticPinContext';
 import PicModalContextProvider from './picModalContext';
 import JumpContextProvider from './jumpContext';
 import DiveSitesContextProvider from './diveSitesContext';
+import CommentsModalContextProvider from './commentsModalContext';
+import SelectedPictureContextProvider from './selectedPictureContext';
+import SelectedProfileContextProvider from './selectedProfileModalContext';
+import SelectedShopContextProvider from './selectedShopContext';
+import ShopModalContextProvider from "./shopModalContext";
+import ZoomHelperContextProvider from "./zoomHelperContext";
+import SitesArrayContextProvider from './sitesArrayContext';
 
 const providers = [
     AreaPicsContextProvider,
@@ -56,6 +65,7 @@ const providers = [
     MapSearchModalContextProvider,
     GuideLaunchModalContextProvider,
     SettingsModalContextProvider,
+    ProfileModalContextProvider,
     PullTabContextProvider,
     CarrouselTilesContextProvider,
     ThirdTutorialModalContextProvider,
@@ -77,6 +87,7 @@ const providers = [
     SelectedPicContextProvider,
     SelectedDiveSiteContextProvider,
     MasterContextProvider,
+    MinorContextProvider,
     DiveSpotContextProvider,
     PinSpotContextProvider,
     AnimalRevealContextProvider,
@@ -90,6 +101,13 @@ const providers = [
     PicModalContextProvider,
     JumpContextProvider,
     DiveSitesContextProvider,
+    CommentsModalContextProvider,
+    SelectedPictureContextProvider,
+    SelectedProfileContextProvider,
+    SelectedShopContextProvider,
+    ShopModalContextProvider,
+    ZoomHelperContextProvider,
+    SitesArrayContextProvider,
 ]
 
 export const AppContextProvider = combineComponents(...providers);

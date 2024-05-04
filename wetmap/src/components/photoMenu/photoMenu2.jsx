@@ -1,6 +1,10 @@
 import { AnimalContext } from "../contexts/animalContext";
 import { useState, useContext, useEffect, useRef } from "react";
-import { multiHeatPoints } from "../../supabaseCalls/heatPointSupabaseCalls";
+import {
+  multiHeatPoints,
+  getHeatPointsWithUser,
+  getHeatPointsWithUserEmpty,
+} from "../../supabaseCalls/heatPointSupabaseCalls";
 import { getPhotosforMapArea } from "../../supabaseCalls/photoSupabaseCalls";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { HeatPointsContext } from "../contexts/heatPointsContext";
@@ -15,7 +19,6 @@ import { DiveSiteSearchModalContext } from "../contexts/diveSiteSearchModalConte
 import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "../contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "../contexts/settingsModalContext";
-import "photoswipe/dist/photoswipe.css";
 import { formatHeatVals } from "../../helpers/heatPointHelpers";
 import "./photoMenu.css";
 import PhotoMenuListItem from "./photoMenuListItem";
@@ -38,7 +41,7 @@ const PhotoMenu = () => {
 
   const { itterator, setItterator } = useContext(IterratorContext);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-  
+
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { dsAdderModal, setDsAddermodal } = useContext(
     DiveSiteAdderModalContext
@@ -54,7 +57,6 @@ const PhotoMenu = () => {
     GuideLaunchModalContext
   );
   const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
-
 
   const filterPhotosForMapArea = async () => {
     if (boundaries) {
@@ -136,17 +138,17 @@ const PhotoMenu = () => {
   };
 
   useEffect(() => {
-      clearTimeout(waiter2);
-  
-      if (tutorialRunning) {
-        if (itterator === 19) {
-          waiter2 = setTimeout(() => {
-            setItterator(itterator + 2);
-            setSiteModal(true)
-          }, 2000);
-        }
+    clearTimeout(waiter2);
+
+    if (tutorialRunning) {
+      if (itterator === 19) {
+        waiter2 = setTimeout(() => {
+          setItterator(itterator + 2);
+          setSiteModal(true);
+        }, 2000);
       }
-  
+    }
+
     filterHeatPointsForMapArea();
   }, [animalVal]);
 
@@ -156,17 +158,19 @@ const PhotoMenu = () => {
 
   let screenInital = window.innerWidth;
 
-  const [boxWidth, setBoxWidth] = useState((screenInital * 0.8));
-  const [tileWidth, setTileWidth] = useState((screenInital * 0.8)/4);
+  const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
+  const [tileWidth, setTileWidth] = useState((screenInital * 0.8) / 4);
 
   window.addEventListener("resize", trackWidth);
 
   function trackWidth() {
-    setBoxWidth((window.innerWidth * 0.8));
+    setBoxWidth(window.innerWidth * 0.8);
+    setXCoord(0);
+    setTilesShifted(0);
   }
 
   useEffect(() => {
-    setTileWidth(boxWidth/5 -1.5);
+    setTileWidth(boxWidth / 5 - 1.5);
   }, [boxWidth]);
 
   const wrapperRef = useRef(null);
@@ -177,11 +181,10 @@ const PhotoMenu = () => {
   const [tilesShifted, setTilesShifted] = useState(0);
 
   const [xCoord, setXCoord] = useState(0);
-  const tilesToMove = 5
+  const tilesToMove = 5;
   const [tilesRemaining, setTilesRemaining] = useState(areaPics.length - 10);
 
   const onClicko = (direction) => {
-
     setDsAddermodal(false);
     setPicAddermodal(false);
     setSettingsModal(false);
@@ -190,56 +193,63 @@ const PhotoMenu = () => {
     setMapSearchModal(false);
     setSiteModal(false);
 
-    const maxLength = areaPics.length*tileWidth
- 
-    if(areaPics.length < tilesToMove) {
-      setXCoord((tilesToMove*tileWidth - (areaPics.length*tileWidth))/2)
+    const maxLength = areaPics.length * tileWidth;
+
+    if (areaPics.length < tilesToMove) {
+      setXCoord((tilesToMove * tileWidth - areaPics.length * tileWidth) / 2);
     } else {
       if (direction === "shiftLeft") {
         //left shift aka left BUTTON clicked
         if (xCoord >= 0) {
-          setXCoord(0)
+          setXCoord(0);
         } else if (xCoord >= maxLength) {
-          setXCoord(maxLength)
-          setTilesRemaining(tilesRemaining + 5)
-          setTilesShifted(tilesShifted - 5)
+          setXCoord(maxLength);
+          setTilesRemaining(tilesRemaining + 5);
+          setTilesShifted(tilesShifted - 5);
         } else {
-          if (xCoord + tilesToMove*(tileWidth) + (tilesToMove*1.5) < 0){
-            setXCoord(xCoord + tilesToMove*(tileWidth) + tilesToMove*(1.5))
-            setTilesRemaining(tilesRemaining + 5)
-            setTilesShifted(tilesShifted - 5)
+          if (xCoord + tilesToMove * tileWidth + tilesToMove * 1.5 < 0) {
+            setXCoord(xCoord + tilesToMove * tileWidth + tilesToMove * 1.5);
+            setTilesRemaining(tilesRemaining + 5);
+            setTilesShifted(tilesShifted - 5);
           } else {
             const tilesRemainingTemp = tilesRemaining + 5;
             setTilesRemaining(tilesRemainingTemp);
-            setXCoord(0)
-            setTilesShifted(tilesShifted - tilesRemainingTemp)
+            setXCoord(0);
+            setTilesShifted(tilesShifted - 5);
           }
         }
       } else {
         //"shiftRight"  aka right BUTTON clicked
         if (xCoord > 0) {
-          setXCoord(0)
-        } else if (xCoord > -(maxLength)) {
-          if (xCoord - tilesToMove*(tileWidth+1.5) < -(maxLength - tilesToMove*(tileWidth+1.5))){
-            if(tilesRemaining < -5 ){
+          setXCoord(0);
+        } else if (xCoord > -maxLength) {
+          if (
+            xCoord - tilesToMove * (tileWidth + 1.5) <
+            -(maxLength - tilesToMove * (tileWidth + 1.5))
+          ) {
+            if (tilesRemaining < -5) {
             } else {
-              setXCoord((xCoord - ((tilesRemaining + 5) *tileWidth) - ((tilesRemaining+5)*(1.5))  ))
-              setTilesRemaining(tilesRemaining - 5)
-              setTilesShifted(tilesShifted + tilesRemaining + 5)
+              setXCoord(
+                xCoord -
+                  (tilesRemaining + 5) * tileWidth -
+                  (tilesRemaining + 5) * 1.5
+              );
+              setTilesRemaining(tilesRemaining - 5);
+              setTilesShifted(tilesShifted + tilesRemaining + 5);
             }
           } else {
-            setXCoord(xCoord - tilesToMove*(tileWidth)- tilesToMove*(1.5))
-            setTilesRemaining(tilesRemaining - 5)
-            setTilesShifted(tilesShifted + 5)
+            setXCoord(xCoord - tilesToMove * tileWidth - tilesToMove * 1.5);
+            setTilesRemaining(tilesRemaining - 5);
+            setTilesShifted(tilesShifted + 5);
           }
         } else {
-          setXCoord(-(maxLength - tilesToMove*(tileWidth) + tilesToMove*(1.5)))
+          setXCoord(-(maxLength - tilesToMove * tileWidth + tilesToMove * 1.5));
         }
-  
-      setClicked(true);
-    };
-  }
-}
+
+        setClicked(true);
+      }
+    }
+  };
 
   const move = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -256,12 +266,12 @@ const PhotoMenu = () => {
 
   useEffect(() => {
     setXCoord(0);
-    setTilesRemaining(areaPics.length-10)
+    setTilesRemaining(areaPics.length - 10);
     setClicked(false);
     setTilesShifted(0);
-    
-    if(areaPics.length < 4){
-      setXCoord((5*tileWidth - (areaPics.length*tileWidth))/2)
+
+    if (areaPics.length < 4) {
+      setXCoord((5 * tileWidth - areaPics.length * tileWidth) / 2);
     }
   }, [areaPics.length]);
 
@@ -287,7 +297,12 @@ const PhotoMenu = () => {
       >
         <ArrowBackIosIcon />
       </ToggleButton>
-      <div className="picScollY" style={{width: boxWidth}} ref={wrapperRef} value="web">
+      <div
+        className="picScollY"
+        style={{ width: boxWidth }}
+        ref={wrapperRef}
+        value="web"
+      >
         <animated.div
           className="picScollX"
           style={({ width: boxWidth }, move)}
@@ -316,10 +331,10 @@ const PhotoMenu = () => {
         </animated.div>
       </div>
       {areaPics.length === 0 && (
-            <div className="emptyPhotos">
-              No Sea Creatures have been added for this area yet
-            </div>
-          )}
+        <div className="emptyPhotos">
+          No Sea Creatures have been added for this area yet
+        </div>
+      )}
       <ToggleButton
         className="backTog"
         sx={toggleButtonStyle}

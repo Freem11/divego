@@ -21,6 +21,16 @@
   /* background-color: green; */
 }
 
+
+.guZdik{
+  height: 16vh !important;
+  width: auto !important;
+  min-width: 22vw !important;
+  /* height: auto !important; */
+  border-radius: 15px !important;
+  border: solid grey 1px !important;
+}
+
 .inputboxType2 {
   display: flex;
   flex-direction: column;

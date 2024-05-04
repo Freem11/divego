@@ -2,26 +2,40 @@ import { FormGroup, Button } from "reactstrap";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { AnimalContext } from "../contexts/animalContext";
 import { AnchorModalContext } from "../contexts/anchorModalContext";
+import { PicAdderModalContext } from "../contexts/picAdderModalContext";
 import { IterratorContext } from "../contexts/iterratorContext";
 import { TutorialContext } from "../contexts/tutorialContext";
+import { UserProfileContext } from "../contexts/userProfileContext";
+import { PinContext } from "../contexts/staticPinContext";
 import { useState, useContext, useEffect } from "react";
 import { siteGPSBoundaries } from "../../helpers/mapHelpers";
-import { getDiveSiteByName } from "../../supabaseCalls/diveSiteSupabaseCalls";
-import { getPhotosforAnchorMulti } from "../../supabaseCalls/photoSupabaseCalls";
-import "photoswipe/dist/photoswipe.css";
+import { getDiveSiteByName, getDiveSiteWithUserName } from "../../supabaseCalls/diveSiteSupabaseCalls";
+import {
+  // getPhotosforAnchorMulti,
+  getPhotosWithUser,
+  getPhotosWithUserEmpty,
+} from "../../supabaseCalls/photoSupabaseCalls";
 import Picture from "./picture";
 import FlagIcon from "@mui/icons-material/Flag";
 import CloseIcon from "@mui/icons-material/Close";
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import "./anchorPics.css";
+import CloseButton from "../closeButton/closeButton";
 
 const AnchorPics = (props) => {
-  const { animateAnchorModal, setAnchorModalYCoord, animateFullScreenModal } =
-    props;
+  const {
+    animateAnchorModal,
+    setAnchorModalYCoord,
+    animateFullScreenModal,
+    setPicModalYCoord,
+  } = props;
+  const { profile } = useContext(UserProfileContext);
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { selectedDiveSite } = useContext(
-    SelectedDiveSiteContext
-  );
+  const { setPicAddermodal } = useContext(PicAdderModalContext);
+  const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { animalVal } = useContext(AnimalContext);
+  const { pin, setPin } = useContext(PinContext);
+
   const [anchorPics, setAnchorPics] = useState([]);
   const [site, setSite] = useState("");
 
@@ -35,13 +49,27 @@ const AnchorPics = (props) => {
     );
 
     try {
-      const photos = await getPhotosforAnchorMulti({
-        animalVal,
-        minLat: minLat,
-        maxLat: maxLat,
-        minLng: minLng,
-        maxLng: maxLng,
-      });
+      let photos;
+      if(animalVal.length === 0){
+         photos = await getPhotosWithUserEmpty({
+          myCreatures : "",
+          userId: profile[0].UserID,
+          minLat,
+          maxLat,
+          minLng,
+          maxLng,
+        })
+      } else {
+         photos = await getPhotosWithUser({
+          animalMultiSelection: animalVal,
+          myCreatures: "",
+          userId: profile[0].UserID,
+          minLat,
+          maxLat,
+          minLng,
+          maxLng,
+        })
+      }
       if (photos) {
         setAnchorPics(photos);
 
@@ -83,11 +111,15 @@ const AnchorPics = (props) => {
     }
   }, [itterator]);
 
-  const getDiveSite = async (site) => {
+  const getDiveSite = async () => {
     try {
-      const selectedSite = await getDiveSiteByName(site);
+      const selectedSite = await getDiveSiteWithUserName({
+        siteName: selectedDiveSite.SiteName,
+        lat: selectedDiveSite.Latitude,
+        lng: selectedDiveSite.Longitude,
+      });
       if (selectedSite.length > 0) {
-        setSite(selectedSite[0].userName);
+        setSite(selectedSite[0].newusername);
       }
     } catch (e) {
       console.log({ title: "Error", message: e.message });
@@ -100,6 +132,19 @@ const AnchorPics = (props) => {
     }
     setSiteModal(false);
     animateAnchorModal();
+  };
+
+  const handleSwitch = () => {
+    if (itterator === 11 || itterator == 15) {
+      return;
+    }
+    setPin({
+      ...pin,
+      Latitude: selectedDiveSite.Latitude,
+      Longitude: selectedDiveSite.Longitude,
+    });
+    setSiteModal(false);
+    setPicAddermodal(true);
   };
 
   return (
@@ -119,17 +164,32 @@ const AnchorPics = (props) => {
               <h3 className="DiveSiteLabel">{selectedDiveSite.SiteName}</h3>
               <h3 className="DiveSiteCredit">Added by: {site}</h3>
             </div>
-            <FormGroup>
+
               <Button
                 variant="text"
-                id="closeButton2"
-                onClick={() => handleClose()}
+                id="plusButton"
+                onClick={() => handleSwitch()}
               >
-                <CloseIcon
-                  sx={{ color: "lightgrey", width: "4vw", height: "7vh" }}
-                ></CloseIcon>
+                <AddPhotoAlternateIcon
+                  sx={{ color: "gold", width: "4vw", height: "5vh"}}
+                ></AddPhotoAlternateIcon>
               </Button>
-            </FormGroup>
+
+              {/*<Button*/}
+              {/*  variant="text"*/}
+              {/*  id="closeButton2"*/}
+              {/*  onClick={() => handleClose()}*/}
+              {/*>*/}
+              {/*  <CloseIcon*/}
+              {/*    sx={{ color: "#F0EEEB", width: "4vw", height: "6vh" }}*/}
+              {/*  ></CloseIcon>*/}
+              {/*</Button>*/}
+
+              <CloseButton
+                onClick={handleClose}
+                id="closeButton2"
+                iconStyle={{ color: "#F0EEEB", width: "4vw", height: "6vh" }}
+              />
           </div>
         </div>
       </div>

@@ -28,7 +28,8 @@ const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID;
 const appleAppId = import.meta.env.VITE_APPLE_APP_ID;
 const REDIRECT_URI = window.location.href;
 
-export default function SignInRoute() {
+export default function SignInRoute(props) {
+  const { setValue } = props
   const { setActiveSession } = useContext(SessionContext);
   const [profile, setProfile] = useState(null);
   const [formVals, setFormVals] = useState({
@@ -203,6 +204,11 @@ export default function SignInRoute() {
     setLoginFail(null);
   };
 
+  const  handlePageSwap = () => {
+    setValue(1)
+  };
+ 
+
   return (
     <div className="containerDiv">
       <Form onSubmit={handleSignInSubmit} className="formstyle">
@@ -321,7 +327,7 @@ export default function SignInRoute() {
             }}
           />
         </div>
-
+        <Label className="registerClick" onClick={handlePageSwap}>Need An Account? Register Here</Label>
         {loginFail && <Label className="erroMsg">{loginFail}</Label>}
       </Form>
       <div className="authwrapper">

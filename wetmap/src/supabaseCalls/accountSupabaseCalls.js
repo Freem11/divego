@@ -95,3 +95,34 @@ export const grabProfileById = async (id) => {
     return data;
   }
 };
+
+export const grabProfileByUserName = async (userName) => {
+  const { data, error } = await supabase
+    .from("UserProfiles")
+    .select()
+    .eq("UserName", userName)
+
+  if (error) {
+    console.log("couldn't do it 5,", error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
+
+export const getProfileWithStats = async (userId) => {
+  const { data, error } = await supabase.rpc("get_userprofile_with_stats", {
+    userid: userId,
+  });
+
+  if (error) {
+    console.error("couldn't do it 27,", error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};

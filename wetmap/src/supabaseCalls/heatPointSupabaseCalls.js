@@ -58,8 +58,7 @@ export const insertHeatPoint = async (values) => {
       lat: values.lat,
       lng: values.lng,
       weight: 1,
-      UserID: values.UserID,
-      userName: values.userName,
+      UserID: values.UserID
     },
   ]);
 
@@ -164,6 +163,47 @@ export const multiHeatPoints = async (GPSBubble, animalArray) => {
 }
  
 };
+
+export const getHeatPointsWithUser = async (values) => {
+  const { data, error } = await supabase.rpc("get_heatpoints_with_user", {
+    animals: values.animalMultiSelection,
+    max_lat: values.maxLat,
+    min_lat: values.minLat,
+    max_lng: values.maxLng,
+    min_lng: values.minLng,
+    userid: values.myCreatures,
+  });
+
+  if (error) {
+    console.log("couldn't do it 27,", error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
+
+export const getHeatPointsWithUserEmpty = async (values) => {
+  const { data, error } = await supabase.rpc("get_heatpoints_with_username", {
+    max_lat: values.maxLat,
+    min_lat: values.minLat,
+    max_lng: values.maxLng,
+    min_lng: values.minLng,
+    userid: values.myCreatures,
+  });
+
+  if (error) {
+    console.log("couldn't do it 27,", error);
+    return [];
+  }
+
+  if (data) {
+    // console.log(data)
+    return data;
+  }
+};
+
 
 export const picClickheatPoints = async (GPSBubble, animal) => {
   // console.log("HIHIHIH", GPSBubble, animal)

@@ -34,6 +34,26 @@ if (data) {
 }
 };
 
+export const getDiveSitesWithUser = async (values) => {
+  const { data, error } = await supabase.rpc("get_divesites_with_username", {
+    max_lat: values.maxLat,
+    min_lat: values.minLat,
+    max_lng: values.maxLng,
+    min_lng: values.minLng,
+    userid: values.myDiveSites,
+  });
+
+  if (error) {
+    console.log("couldn't do it 27,", error);
+    return [];
+  }
+
+  if (data) {
+    // console.log(data)
+    return data;
+  }
+};
+
 export const getSiteNamesThatFit = async (GPSBubble, value) => {
 
   if(value === "") {
@@ -83,8 +103,7 @@ export const insertDiveSite = async (values) => {
       name: values.name,
       lat: values.lat,
       lng: values.lng,
-      UserID: values.UserID,
-      userName: values.userName
+      UserID: values.UserID
     },
   ]);
 
@@ -103,6 +122,42 @@ export const getDiveSiteByName = async (value) => {
   .from("diveSites")
   .select()
   .eq("name", value)
+
+if (error) {
+  console.log("couldn't do it 7,", error);
+  return [];
+}
+
+if (data) {
+  return data;
+}
+};
+
+export const getDiveSiteWithUserName= async (values) => {
+  const { data, error } = await supabase.rpc("get_single_divesites_with_username", {
+    sitename: values.siteName,
+    sitelat: values.lat,
+    sitelng: values.lng,
+  });
+
+  if (error) {
+    console.log("couldn't do it 27,", error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
+
+export const getDiveSitesByIDs = async (valueArray) => {
+  let Q1 = valueArray.substring(1, valueArray.length)
+  let Q2 = Q1.substring(Q1.length-1,0)
+
+  const { data, error } = await supabase
+  .from("diveSites")
+  .select()
+  .or(`id.in.(${Q2})`,)
 
 if (error) {
   console.log("couldn't do it 7,", error);

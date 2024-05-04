@@ -81,7 +81,7 @@ export default function SignUpRoute() {
           "token",
           JSON.stringify(registrationToken.data.session.refresh_token)
         );
-        setActiveSession(registrationToken.data.user);
+        setActiveSession(registrationToken.data);
       } else {
         setRegFail(`You have already registered this account, please sign in`);
       }
@@ -121,7 +121,7 @@ export default function SignUpRoute() {
             inputProps={{
               style: {
                 textAlign: "center",
-                fontFamily: "Indie Flower",
+                fontFamily: "Itim",
                 textOverflow: "ellipsis",
                 backgroundColor: "#538dbd",
                 width: "25vw",
@@ -144,7 +144,7 @@ export default function SignUpRoute() {
             inputProps={{
               style: {
                 textAlign: "center",
-                fontFamily: "Indie Flower",
+                fontFamily: "Itim",
                 textOverflow: "ellipsis",
                 backgroundColor: "#538dbd",
                 width: "25vw",
@@ -167,7 +167,7 @@ export default function SignUpRoute() {
             inputProps={{
               style: {
                 textAlign: "center",
-                fontFamily: "Indie Flower",
+                fontFamily: "Itim",
                 textOverflow: "ellipsis",
                 backgroundColor: "#538dbd",
                 width: "25vw",
@@ -190,7 +190,7 @@ export default function SignUpRoute() {
             inputProps={{
               style: {
                 textAlign: "center",
-                fontFamily: "Indie Flower",
+                fontFamily: "Itim",
                 textOverflow: "ellipsis",
                 backgroundColor: "#538dbd",
                 width: "25vw",
