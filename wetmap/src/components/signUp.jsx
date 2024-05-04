@@ -81,7 +81,7 @@ export default function SignUpRoute() {
           "token",
           JSON.stringify(registrationToken.data.session.refresh_token)
         );
-        setActiveSession(registrationToken.data.user);
+        setActiveSession(registrationToken.data);
       } else {
         setRegFail(`You have already registered this account, please sign in`);
       }

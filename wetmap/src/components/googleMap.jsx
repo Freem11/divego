@@ -149,10 +149,11 @@ function Map() {
   const handleMapUpdates = async () => {
     if (mapRef) {
       let boundaries = mapRef.getBounds();
-      let lats = boundaries[Object.keys(boundaries)[0]];
-      let lngs = boundaries[Object.keys(boundaries)[1]];
 
       if (boundaries) {
+        let lats = boundaries[Object.keys(boundaries)[0]];
+        let lngs = boundaries[Object.keys(boundaries)[1]];
+        
         if (lngs.lo > lngs.hi) {
           try {
             let AmericanDiveSites;

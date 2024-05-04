@@ -29,7 +29,7 @@ export default function UserProfileModal(props) {
   const [userFollows, setUserFollows] = useState(false);
   const [picUri, setPicUri] = useState(null);
   const { profileModal, setProfileModal } = useContext(ProfileModalContext);
-  const [userStats, setUserStats] = useState(null);
+  const [userStats, setUserStats] = useState("");
   const { selectedProfile, setSelectedProfile } = useContext(
     SelectedProfileContext
   );
@@ -100,7 +100,7 @@ export default function UserProfileModal(props) {
 
     try {
       const success = await getProfileWithStats(userID);
-      if (success) {
+      if (success & success.length > 0) {
         setUserStats(success);
       }
     } catch (e) {

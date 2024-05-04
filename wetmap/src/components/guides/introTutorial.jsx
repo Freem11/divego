@@ -392,6 +392,7 @@ export default function IntroTutorial(props) {
           setTextRead("");
           setTextRead(feederArray[itterator]);
           setTextPrinting(false);
+          console.log(textRead);
         } else {
           setItterator((prev) => prev + pushVal);
           setTextPrinting(true);
@@ -405,7 +406,7 @@ export default function IntroTutorial(props) {
   };
 
   let textArray;
-
+  //////////////////////////////// issue here with 1st letter not printing out 
   function printOutText() {
     if (textArray.length > 0) {
       if (itterator === 10 && textArray.length <= 64) {
@@ -431,6 +432,7 @@ export default function IntroTutorial(props) {
     setTextRead("");
     setTextRead2("");
     let textVal = feederArray[itterator];
+    console.log("??", textVal);
     if (textVal) {
       textArray = textVal.split("");
       if (textPrinting) {
@@ -450,7 +452,9 @@ export default function IntroTutorial(props) {
       }
     }
 
-    return () => {cleanUp()};
+    return () => {
+      cleanUp();
+    };
   }, [itterator, textPrinting]);
 
   useEffect(() => {
@@ -662,17 +666,17 @@ export default function IntroTutorial(props) {
 
     try {
       let photos;
-      if(animalVal.length === 0){
-         photos = await getPhotosWithUserEmpty({
-          myCreatures : "",
+      if (animalVal.length === 0) {
+        photos = await getPhotosWithUserEmpty({
+          myCreatures: "",
           userId: profile[0] ? profile[0].UserID : "",
           minLat,
           maxLat,
           minLng,
           maxLng,
-        })
+        });
       } else {
-         photos = await getPhotosWithUser({
+        photos = await getPhotosWithUser({
           animalMultiSelection: animalVal,
           myCreatures: "",
           userId: profile[0] ? profile[0].UserID : "",
@@ -680,7 +684,7 @@ export default function IntroTutorial(props) {
           maxLat,
           minLng,
           maxLng,
-        })
+        });
       }
       if (photos) {
         let count = 0;

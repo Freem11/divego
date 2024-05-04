@@ -19,7 +19,7 @@ const CommentsModal = (props) => {
   const { profile } = useContext(UserProfileContext);
   const { selectedPicture } = useContext(SelectedPictureContext);
   const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
-  const [commentContent, setCommentContent] = useState(null);
+  const [commentContent, setCommentContent] = useState("");
   const [listOfComments, setListOfComments] = useState(null);
   const [replyTo, setReplyTo] = useState(null);
   const [selectedReplyId, setSelectedReplyId] = useState([]);
@@ -35,7 +35,7 @@ const CommentsModal = (props) => {
     if (selectedPicture) {
       getAllPictureComments(selectedPicture.id);
     }
-    setCommentContent(null);
+    setCommentContent("");
   }, [commentsModal]);
 
   const handleCommentInsert = async () => {

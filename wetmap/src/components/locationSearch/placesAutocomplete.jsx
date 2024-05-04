@@ -3,16 +3,19 @@ import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from "use-places-autocomplete";
-import "@reach/combobox/styles.css";
 import { JumpContext } from "../contexts/jumpContext";
 import { GeoCoderContext } from "../contexts/geoCoderContext";
 import { CoordsContext } from "../contexts/mapCoordsContext";
+import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
 
 const PlacesAutoComplete = (props) => {
   const { setMapSearchYCoord, mapSearchYCoord } = props;
   const { jump, setJump } = useContext(JumpContext);
   const { setShowGeoCoder } = useContext(GeoCoderContext);
   const { setMapCoords } = useContext(CoordsContext);
+  const { mapSearchModal, setMapSearchModal } = useContext(
+    MapSearchModalContext
+  );
 
   const {
     ready,
@@ -23,11 +26,12 @@ const PlacesAutoComplete = (props) => {
     clearSuggestions,
   } = usePlacesAutocomplete({ inOnMount: false });
 
+
   useEffect(() => {
-    if (mapSearchYCoord !== 0) {
+    if (mapSearchModal) {
       init();
     }
-  }, [mapSearchYCoord]);
+  }, [mapSearchModal]);
 
   const handleSelect = async (address) => {
     setValue(address, false);
@@ -61,10 +65,10 @@ const PlacesAutoComplete = (props) => {
       <div
         className="popover"
         style={{
-          marginTop: "0vh",
+          marginTop: "2vh",
           marginLeft: "-1.5vw",
           height: "auto",
-          zIndex: "100",
+          // zIndex: "100",
           position: "absolute",
         }}
       >
