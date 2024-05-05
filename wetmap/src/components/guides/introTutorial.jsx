@@ -409,12 +409,13 @@ export default function IntroTutorial(props) {
   //////////////////////////////// issue here with 1st letter not printing out 
   function printOutText() {
     if (textArray.length > 0) {
+      const charToConcat = textArray[0];
       if (itterator === 10 && textArray.length <= 64) {
-        setTextRead2((prev) => prev + textArray[0]);
+        setTextRead2((prev) => prev + charToConcat);
       } else if (itterator === 12 && textArray.length <= 63) {
-        setTextRead2((prev) => prev + textArray[0]);
+        setTextRead2((prev) => prev + charToConcat);
       } else {
-        setTextRead((prev) => prev + textArray[0]);
+        setTextRead((prev) => prev + charToConcat);
       }
       textArray = textArray.slice(1);
     } else {
@@ -432,7 +433,6 @@ export default function IntroTutorial(props) {
     setTextRead("");
     setTextRead2("");
     let textVal = feederArray[itterator];
-    console.log("??", textVal);
     if (textVal) {
       textArray = textVal.split("");
       if (textPrinting) {
