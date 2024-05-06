@@ -341,7 +341,8 @@ export default function ThirdTutorial(props) {
 
   function printOutText() {
     if (textArray.length > 0) {
-      setTextRead((prev) => prev + textArray[0]);
+      const charToConcat = textArray[0];
+      setTextRead((prev) => prev + charToConcat);
       textArray = textArray.slice(1);
     } else {
       setTextPrinting(false);
