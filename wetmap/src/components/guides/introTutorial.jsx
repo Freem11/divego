@@ -405,8 +405,7 @@ export default function IntroTutorial(props) {
     }
   };
 
-  let textArray;
-  //////////////////////////////// issue here with 1st letter not printing out 
+  let textArray; 
   function printOutText() {
     if (textArray.length > 0) {
       const charToConcat = textArray[0];
