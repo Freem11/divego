@@ -77,8 +77,9 @@ const PlacesAutoComplete = (props) => {
             <li
               style={{
                 display: "flex",
-                height: "2.5vh",
                 width: "20vw",
+                paddingTop: "0.5vh",
+                paddingBottom: "0.5vh",
                 paddingLeft: "1vw",
                 paddingRight: "1vw",
                 listStyle: "none",

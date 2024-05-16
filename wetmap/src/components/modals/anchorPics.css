@@ -62,8 +62,6 @@
 
   .dsInfo {
       /* background-color: brown; */
-      margin-left: 2vw;
-      height: 7vh;
       width: 80%;
       display: flex;
       flex-direction: column;
@@ -74,8 +72,8 @@
     font-family: 'Patrick Hand', cursive;
     /* background-color: khaki; */
     margin-top: 0vh;
-    height: 3vh;
-    font-size: 2vw;
+    /* height: 3vh; */
+    font-size: 1.7vw;
     color: #F0EEEB;
 }
 
@@ -176,15 +174,14 @@
 }
 
 .emptysite{
+    display: flex;
     align-items: center;
+    justify-content: center;
     margin-top: 25vh;
-    margin-left: 13%;
     text-align: center;
     font-family: 'Patrick Hand', cursive;
     font-size: 2vw;
     font-weight: bolder;
-    height: 40px;
-    width: 80%;
     color: #F0EEEB;
 }
 

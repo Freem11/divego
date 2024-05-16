@@ -88,7 +88,7 @@ export default function UserProfileModal(props) {
     }
 
     followCheck();
-  }, [profileModal]);
+  }, [profileModal, selectedProfile]);
 
   const getProfile = async () => {
     let userID;
@@ -100,7 +100,7 @@ export default function UserProfileModal(props) {
 
     try {
       const success = await getProfileWithStats(userID);
-      if (success & success.length > 0) {
+      if (success) {
         setUserStats(success);
       }
     } catch (e) {
@@ -131,7 +131,7 @@ export default function UserProfileModal(props) {
           }}
         >
           {selectedProfile
-            ? userStats[0].username + "'s Diving"
+            ? userStats && userStats[0].username + "'s Diving"
             : "My Diver Profile"}
         </h3>
         <FormGroup>

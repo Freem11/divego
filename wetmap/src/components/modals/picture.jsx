@@ -36,7 +36,6 @@ function Picture(props) {
   const [imgWidth, setImgWidth] = useState(0);
 
   const handleFollow = async (e, userName) => {
-    console.log(e, userName);
     e.stopPropagation();
 
     let picOwnerAccount = await grabProfileByUserName(userName);
