@@ -56,7 +56,7 @@ export const updateProfile = async (values) => {
 
   if (error) {
     console.log("couldn't do it,", error);
-    return [];
+    throw error;
   }
 
   if (data) {
