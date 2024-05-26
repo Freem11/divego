@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { useEffect } from "react";
 import AutoSuggest from "../autoSuggest/autoSuggest";
-import { getSiteNamesThatFit } from "../../supabaseCalls/diveSiteSupabaseCalls";
+import { getSiteNamesThatFit, getSingleDiveSiteByNameAndRegion} from "../../supabaseCalls/diveSiteSupabaseCalls";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { MapBoundsContext } from "../contexts/mapBoundariesContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
@@ -27,26 +27,22 @@ export default function DiveSiteAutoComplete(props) {
     let diveSiteArray = [];
 
     if (boundaries && boundaries.length > 0) {
-      let minLat = boundaries[1];
-      let maxLat = boundaries[3];
-
-      let minLng = boundaries[0];
-      let maxLng = boundaries[2];
 
       diveSiteNames = null;
       diveSiteArray = [];
 
-      diveSiteNames = await getSiteNamesThatFit(
-        { minLat, maxLat, minLng, maxLng },
-        searchText
-      );
+      diveSiteNames = await getSiteNamesThatFit(searchText);
     }
 
     if (diveSiteNames) {
-      diveSiteNames.forEach((site) => {
-        if (!diveSiteArray.includes(site.name)) {
-          diveSiteArray.push(site.name);
-        }
+      diveSiteNames.forEach((diveSite) => {
+        let fullDSName;
+          if (diveSite.region) {
+            fullDSName = `${diveSite.name} ~ ${diveSite.region}`;
+          } else {
+            fullDSName = diveSite.name;
+          }
+          diveSiteArray.push(fullDSName);
       });
     }
 
@@ -65,49 +61,29 @@ export default function DiveSiteAutoComplete(props) {
     setSearchText(e.target.value);
   };
 
-  const handleSelect = (value) => {
+  const handleSelect = async (value) => {
     setSearchText(value);
     if (value !== null) {
-      let minLat2 = boundaries[1];
-      let maxLat2 = boundaries[3];
-
-      let minLng2 = boundaries[0];
-      let maxLng2 = boundaries[2];
-
-      let diveSiteSet = getSiteNamesThatFit(
-        {
-          minLat: minLat2,
-          maxLat: maxLat2,
-          minLng: minLng2,
-          maxLng: maxLng2,
-        },
-        searchText
-      );
-
-      Promise.all([diveSiteSet])
-        .then((response) => {
-          response[0].forEach((site) => {
-            if (site.name === value) {
-              setSelectedDiveSite({
-                ...selectedDiveSite,
-                SiteName: site.name,
-                Latitude: site.lat,
-                Longitude: site.lng,
-              });
-              if (tutorialRunning) {
-                if (itterator2 === 5) {
-                  setItterator2(itterator2 + 1);
-                }
-              }
-              setSiteSearchModalYCoord(0);
-              setJump(!jump);
-              setSearchText("");
-            }
-          });
-        })
-        .catch((error) => {
-          console.log(error);
+      let nameOnly = value.split(" ~ ");
+      let diveSiteSet = await getSingleDiveSiteByNameAndRegion({ name: nameOnly[0], region: nameOnly[1] });
+  
+      if (diveSiteSet) {
+    
+        setSelectedDiveSite({
+          SiteName: diveSiteSet[0].name,
+          Latitude: diveSiteSet[0].lat,
+          Longitude: diveSiteSet[0].lng,
         });
+
+        if (tutorialRunning) {
+          if (itterator2 === 5) {
+            setItterator2(itterator2 + 1);
+          }
+        }
+      }
+      setSiteSearchModalYCoord(0);
+      setJump(!jump);
+      setSearchText("");
     }
   };
 

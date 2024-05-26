@@ -39,7 +39,7 @@ export default function UserProfileModal(props) {
   const [followData, setFollowData] = useState(activeSession.user.id);
   const [username, setUsername] = useState(null);
   const [formError, setFormError] = useState(null);
-  
+  const [saveButState, setSaveButState] = useState(false);
 
   const handleFollow = async (userName) => {
     // if (profile[0].UserID === picOwnerAccount[0].UserID){
@@ -123,18 +123,18 @@ export default function UserProfileModal(props) {
   };
 
   const handleSubmit = async () => {
-    if(!userStats || !userStats[0]){
+    if (!userStats || !userStats[0]) {
       return true;
     }
-    if(username === null){
+    if (username === null) {
       // user never touched the input
       return true;
     }
-    if(username === userStats[0].username){
+    if (username === userStats[0].username) {
       // no changes
       return true;
     }
-    if(username === ""){
+    if (username === "") {
       setFormError("Your Username cannot be blank!");
       return false;
     }
@@ -146,20 +146,20 @@ export default function UserProfileModal(props) {
       });
       return true;
     } catch (e) {
-      if(e && e.code === "23505"){
+      if (e && e.code === "23505") {
         setFormError("This username belongs to another user");
-        return false;  
+        return false;
       }
       setFormError("Something went wrong. Please try later.");
       console.log({ title: "Error", message: e.message });
       return false;
     }
-  }
+  };
 
   return (
-    <div className="containerBox">   
+    <div className="containerBox">
       <div className="titleDiv">
-        <h3   
+        <h3
           style={{
             marginLeft: "1vw",
             width: "100vw",
@@ -175,7 +175,7 @@ export default function UserProfileModal(props) {
         </h3>
         <FormGroup>
           <CloseButton
-            id='closeButton'
+            id="closeButton"
             onClick={toggleProfileModal}
             btnStyle={{
               display: "flex",
@@ -192,7 +192,10 @@ export default function UserProfileModal(props) {
 
       <div className="inputContainer">
         {selectedProfile ? (
-          <div onClick={() => handleFollow()} className={userFollows ? "followButtoAlt" : "followButton"}>
+          <div
+            onClick={() => handleFollow()}
+            className={userFollows ? "followButtoAlt" : "followButton"}
+          >
             <Label
               style={{
                 fontFamily: "Itim",
@@ -209,50 +212,56 @@ export default function UserProfileModal(props) {
           </div>
         ) : (
           <>
-            <div className="inputbox">
-              <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  placeholder="Diver Name"
-                  type="text"
-                  name="userField"
-                  value={username !== null ? username : (userStats && userStats[0].username)}
-                  onChange={(e) => setUsername(e.target.value)}
-                  inputProps={{
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Itim",
-                      fontSize: "1.5vw",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "#538BDB",
-                      height: "5vh",
-                      width: "21vw",
-                      color: "#F0EEEB",
-                      borderRadius: "120px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
-                />
-  
-  <div style={{display: "inline-flex", verticalAlign: "middle", height: "6vh",}}>
-                  <SaveIcon
-                    onClick={async () => {await handleSubmit() && toggleProfileModal()}}
-                    sx={{
-                      height: "2.7vw",
-                      cursor: "pointer",
-                      textAlign: "center",
-                      fontFamily: "Itim",
-                      fontSize: "1.5vw",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "#538BDB",
-                      width: "3vw",
-                      color: "#F0EEEB",
-                      borderRadius: "120px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)"
-                   }}
+            <div style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "center", width: "100%"}}>
+              <div className="inputboxS">
+                <FormGroup>
+                  <InputBase
+                    id="standard-basic"
+                    placeholder="Diver Name"
+                    type="text"
+                    name="userField"
+                    value={
+                      username !== null
+                        ? username
+                        : userStats && userStats[0].username
+                    }
+                    onChange={(e) => setUsername(e.target.value)}
+                    inputProps={{
+                      style: {
+                        textAlign: "center",
+                        fontFamily: "Itim",
+                        fontSize: "1.5vw",
+                        textOverflow: "ellipsis",
+                        backgroundColor: "#538BDB",
+                        height: "5vh",
+                        width: "21vw",
+                        color: "#F0EEEB",
+                        borderRadius: "120px",
+                        boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                      },
+                    }}
                   />
-          </div>
               </FormGroup>
+            </div>
+
+            <div className={saveButState ? "Gbox Gbox2" : "Gbox"}>
+                    <SaveIcon
+                      onClick={async () => {
+                        (await handleSubmit()) && toggleProfileModal();
+                      }}
+                      sx={{
+                        cursor: "pointer",
+                        textAlign: "center",
+                        fontFamily: "Itim",
+                        fontSize: "1.5vw",
+                        textOverflow: "ellipsis",
+                        backgroundColor: "#538BDB",
+                        color: "gold",
+                        borderRadius: "120px",
+                        boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                      }}
+                    />
+                  </div>
             </div>
 
             <div className="inputbox">
@@ -430,7 +439,6 @@ export default function UserProfileModal(props) {
           </div>
 
           {formError && <p className="erroMsgU">{formError}</p>}
-
         </div>
       </div>
     </div>

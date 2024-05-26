@@ -41,10 +41,24 @@
 
 .inputbox {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   margin-left: 0px;
+  margin-top: 15px;
+  width: 100%;
+  font-family: "Itim", cursive;
+  border: none;
+  border-bottom: none;
+  border-color: transparent;
+}
+
+.inputboxS {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-left: -3vw;
   margin-top: 15px;
   width: 100%;
   font-family: "Itim", cursive;
@@ -109,4 +123,23 @@
   border-radius: 15px;
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
   margin-top: 5%;
+}
+
+.Gbox {
+  display: flex;
+  width: 3vw;
+  height: 3vh;
+  align-items: center;
+  justify-content: center;
+  background-color: #538bdb;
+  border-radius: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
+  margin-left: -3vw;
+}
+
+.Gbox:hover {
+  background-color: #3e7dd7;
+}
+.Gbox:active {
+  background-color: #538dbd;
 }

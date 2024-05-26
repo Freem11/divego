@@ -576,10 +576,10 @@ function Map() {
                 key={cluster.properties.siteID}
                 position={{ lat: latitude, lng: longitude }}
                 icon={anchorIcon}
-                title={cluster.properties.siteID}
+                title={cluster.properties.siteName}
                 onClick={() =>
                   setupAnchorModal(
-                    cluster.properties.siteID,
+                    cluster.properties.siteName,
                     latitude,
                     longitude
                   )
@@ -592,10 +592,10 @@ function Map() {
                 key={cluster.properties.siteID}
                 position={{ lat: latitude, lng: longitude }}
                 icon={gold}
-                title={cluster.properties.siteID}
+                title={cluster.properties.siteName}
                 onClick={() =>
                   setupAnchorModal(
-                    cluster.properties.siteID,
+                    cluster.properties.siteName,
                     latitude,
                     longitude
                   )
