@@ -4,6 +4,7 @@ import InputBase from "@mui/material/InputBase";
 import {
   grabProfileById,
   getProfileWithStats,
+  updateProfile,
 } from "../../supabaseCalls/accountSupabaseCalls";
 import { SessionContext } from "../contexts/sessionContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
@@ -18,6 +19,7 @@ import {
 import CloseIcon from "@mui/icons-material/Close";
 import "./userProfile.css";
 import CloseButton from "../closeButton/closeButton";
+import SaveIcon from "@mui/icons-material/Save";
 
 export default function UserProfileModal(props) {
   const { animateProfileModal } = props;
@@ -35,6 +37,9 @@ export default function UserProfileModal(props) {
   );
   const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const [followData, setFollowData] = useState(activeSession.user.id);
+  const [username, setUsername] = useState(null);
+  const [formError, setFormError] = useState(null);
+  
 
   const handleFollow = async (userName) => {
     // if (profile[0].UserID === picOwnerAccount[0].UserID){
@@ -117,10 +122,44 @@ export default function UserProfileModal(props) {
     }
   };
 
+  const handleSubmit = async () => {
+    if(!userStats || !userStats[0]){
+      return true;
+    }
+    if(username === null){
+      // user never touched the input
+      return true;
+    }
+    if(username === userStats[0].username){
+      // no changes
+      return true;
+    }
+    if(username === ""){
+      setFormError("Your Username cannot be blank!");
+      return false;
+    }
+
+    try {
+      await updateProfile({
+        id: activeSession.user.id,
+        username: username,
+      });
+      return true;
+    } catch (e) {
+      if(e && e.code === "23505"){
+        setFormError("This username belongs to another user");
+        return false;  
+      }
+      setFormError("Something went wrong. Please try later.");
+      console.log({ title: "Error", message: e.message });
+      return false;
+    }
+  }
+
   return (
-    <div className="containerBox">
+    <div className="containerBox">   
       <div className="titleDiv">
-        <h3
+        <h3   
           style={{
             marginLeft: "1vw",
             width: "100vw",
@@ -177,7 +216,8 @@ export default function UserProfileModal(props) {
                   placeholder="Diver Name"
                   type="text"
                   name="userField"
-                  value={userStats && userStats[0].username}
+                  value={username !== null ? username : (userStats && userStats[0].username)}
+                  onChange={(e) => setUsername(e.target.value)}
                   inputProps={{
                     style: {
                       textAlign: "center",
@@ -186,13 +226,32 @@ export default function UserProfileModal(props) {
                       textOverflow: "ellipsis",
                       backgroundColor: "#538BDB",
                       height: "5vh",
-                      width: "24vw",
+                      width: "21vw",
                       color: "#F0EEEB",
                       borderRadius: "120px",
                       boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
                     },
                   }}
                 />
+  
+  <div style={{display: "inline-flex", verticalAlign: "middle", height: "6vh",}}>
+                  <SaveIcon
+                    onClick={async () => {await handleSubmit() && toggleProfileModal()}}
+                    sx={{
+                      height: "2.7vw",
+                      cursor: "pointer",
+                      textAlign: "center",
+                      fontFamily: "Itim",
+                      fontSize: "1.5vw",
+                      textOverflow: "ellipsis",
+                      backgroundColor: "#538BDB",
+                      width: "3vw",
+                      color: "#F0EEEB",
+                      borderRadius: "120px",
+                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)"
+                   }}
+                  />
+          </div>
               </FormGroup>
             </div>
 
@@ -369,6 +428,9 @@ export default function UserProfileModal(props) {
               />
             </FormGroup>
           </div>
+
+          {formError && <p className="erroMsgU">{formError}</p>}
+
         </div>
       </div>
     </div>
