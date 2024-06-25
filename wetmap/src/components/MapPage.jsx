@@ -59,6 +59,7 @@ import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
 import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
 import { SettingsModalContext } from "./contexts/settingsModalContext";
 import { ProfileModalContext } from "./contexts/profileModalContext";
+import { PartnerModalContext } from "./contexts/partnerAccountRequestModalContext";
 import { CommentsModalContext } from "./contexts/commentsModalContext";
 import { PullTabContext } from "./contexts/pullTabContext";
 import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
@@ -134,6 +135,9 @@ const MapPage = React.memo((props) => {
   );
   const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
   const { profileModal, setProfileModal } = useContext(ProfileModalContext);
+  const { partnerModal, setPartnerModal } = useContext(
+    PartnerModalContext
+  );
   const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { setTiles } = useContext(CarrouselTilesContext);
@@ -626,6 +630,7 @@ const MapPage = React.memo((props) => {
   const siteSearchModalRef = useRef(null);
   const mapSearchModalRef = useRef(null);
   const fullScreenModalRef = useRef(null);
+  const partnerModalRef = useRef(null);
   const [picModalYCoord, setPicModalYCoord] = useState(0);
   const [siteModalYCoord, setSiteModalYCoord] = useState(0);
   const [launchModalYCoord, setLaunchModalYCoord] = useState(0);
@@ -642,6 +647,7 @@ const MapPage = React.memo((props) => {
   const [commmentsModalYCoord, setCommentsModalYCoord] = useState(0);
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
+  const [partnerModalYCoord, setPartnerModalYCoord] = useState(0);
 
   const moveFabModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -716,6 +722,11 @@ const MapPage = React.memo((props) => {
   const moveFullScreenModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${fullScreenModalYCoord}px,0)` },
+  });
+
+  const movePartnerModal = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${partnerModalYCoord}px,0)` },
   });
 
   const animateFabs = () => {
@@ -1017,6 +1028,14 @@ const MapPage = React.memo((props) => {
     }
   };
 
+  const animatePartnerModal = () => {
+    if (partnerModalYCoord === 0) {
+      setPartnerModalYCoord(-windowHeight);
+    } else {
+      setPartnerModalYCoord(0);
+    }
+  };
+
   const animateMapSearchModal = () => {
     let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
       .clientHeight;
@@ -1253,6 +1272,19 @@ const MapPage = React.memo((props) => {
       setMapSearchYCoord(0);
     }
   }, [mapSearchModal]);
+
+  useEffect(() => {
+    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+    .clientHeight;
+
+    if (partnerModal) {
+      setPartnerModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+    }
+
+    if (!partnerModal) {
+      setPartnerModalYCoord(0);
+    }
+  }, [partnerModal]);
 
   return (
     <div className="mappagemaster">
@@ -1745,6 +1777,14 @@ const MapPage = React.memo((props) => {
         onClick={() => setFullScreenModalYCoord(0)}
       >
         <FullScreenModal animateFullScreenModal={animateFullScreenModal} />
+      </animated.div>
+
+      <animated.div
+        className="picModalDiv"
+        style={movePartnerModal}
+        ref={partnerModalRef}
+      >
+        <UserProfileModal animatePartnerModal={animatePartnerModal} />
       </animated.div>
     </div>
   );

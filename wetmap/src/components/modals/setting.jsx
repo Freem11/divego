@@ -4,6 +4,8 @@ import Collapse from "@mui/material/Collapse";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 import { signOut } from "../../supabaseCalls/authenticateSupabaseCalls";
 import { SessionContext } from "../contexts/sessionContext";
+import { PartnerModalContext } from "../contexts/partnerAccountRequestModalContext";
+import { SettingsModalContext } from "../contexts/settingsModalContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import "./settings.css";
 import ActDelDialog from "./dialog";
@@ -15,6 +17,10 @@ const Settings = (props) => {
   const { animateSettingsModal } = props;
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
+  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+  const { partnerModal, setPartnerModal } = useContext(
+    PartnerModalContext
+  );
   const [showDangerZone, setShowDangerZone] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [requestCheck, setRequestCheck] = useState([]);
@@ -26,7 +32,7 @@ const Settings = (props) => {
 
   const handlePartnerButton = () => {
     setPartnerModal(true);
-    setGearModal(false);
+    setSettingsModal(false);
   };
   useEffect(() => {
     checkForRequest(activeSession.user.id);
