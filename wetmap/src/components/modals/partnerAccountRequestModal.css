@@ -1,0 +1,90 @@
+.Logoutbutton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Itim", cursive;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #538bdb;
+  width: 12vw;
+  height: 4vh;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+  /* margin-top: 1vh; */
+}
+
+.Logoutbutton:hover {
+  background-color: #3e7dd7;
+}
+.Logoutbutton:active {
+  background-color: #538dbd;
+}
+
+.inputboxType2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 2vh;
+  width: 100%;
+  font-family: "Itim", cursive;
+  border: none;
+  border-bottom: none;
+  border-color: transparent;
+  /* background-color: blueviolet; */
+}
+
+.container {
+  display: flex;
+  background-color: #538bdb;
+  /* background-color: green; */
+  align-items: center;
+  justify-content: center;
+  margin-top: 5%;
+  margin-bottom: 2%;
+  width: 98%;
+  margin-left: 2;
+  min-height: 490;
+}
+
+.title {
+  position: absolute;
+  top: -1%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  margin-top: 5%;
+  margin-left: 12%;
+  width: 85%;
+  height: 30;
+}
+
+.header2 {
+  flex-wrap: wrap;
+  font-family: PatrickHand_400Regular;
+  font-size: scale(24);
+  align-self: center;
+  height: scale(70);
+  color: #f0eeeb;
+  margin-top: 11%;
+  margin-left: 7%;
+  margin-right: 10%;
+  /* backgroundColor: green */
+}
+
+.explainer {
+  color: #f0eeeb;
+  font-size: 14;
+  text-align: center;
+  margin: 20;
+  margin-top: -60;
+}
+
+.explainerMicro {
+  color: #f0eeeb;
+  font-size: 12;
+  text-align: center;
+}

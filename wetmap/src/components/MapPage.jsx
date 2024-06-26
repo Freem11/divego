@@ -10,6 +10,7 @@ import UserProfileModal from "./modals/userProfileModal";
 import AnchorPics from "./modals/anchorPics";
 import ShopModal from "./modals/shopModal";
 import Settings from "./modals/setting";
+import PartnerAccountRequestModal from "./modals/partnerAccountRequestModal";
 import PhotoMenu from "./photoMenu/photoMenu2";
 import PhotoFilterer from "./photoMenu/photoFilter";
 import { useState, useContext, useEffect, useRef } from "react";
@@ -1784,7 +1785,7 @@ const MapPage = React.memo((props) => {
         style={movePartnerModal}
         ref={partnerModalRef}
       >
-        <UserProfileModal animatePartnerModal={animatePartnerModal} />
+        <PartnerAccountRequestModal animatePartnerModal={animatePartnerModal} />
       </animated.div>
     </div>
   );
