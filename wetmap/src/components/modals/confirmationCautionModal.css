@@ -1,0 +1,69 @@
+.cautionModal {
+  z-index: 200;
+  display: flex;
+  position: absolute;
+  top: 120vh;
+  left: 0;
+  width: 30vw;
+  height: 30vh;
+  background-color: pink;
+  border-radius: 2vw;
+  border: 1px solid lightgrey;
+}
+
+.containerFC {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 15;
+}
+.titleF {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0%;
+  width: 90%;
+}
+.textF {
+  font-size: 1.2rem;
+  color: #36454f;
+  font-family: "Itim", cursive;
+  align-self: center;
+  text-align: center;
+  margin-bottom: 10%;
+  width: 90%;
+}
+.text2F {
+  font-size: 1rem;
+  width: 90%;
+  color: #36454f;
+  font-family: "Itim", cursive;
+  align-self: center;
+  text-align: center;
+
+}
+
+.OKbuttonF {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: "Itim", cursive;
+  font-size: 1em;
+  cursor: pointer;
+  background-color: #fa8072;
+  width: 12vw;
+  height: 4vh;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+  margin-top: 10%;
+}
+
+.OKbuttonF:hover {
+  background-color: #3e7dd7;
+}
+.OKbuttonF:active {
+  background-color: #538dbd;
+}

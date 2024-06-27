@@ -30,6 +30,8 @@ const Settings = (props) => {
     setRequestCheck(returnedCheck);
   };
 
+  console.log("HEY", requestCheck)
+
   const handlePartnerButton = () => {
     setPartnerModal(true);
     setSettingsModal(false);

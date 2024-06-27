@@ -1,24 +1,18 @@
-.Logoutbutton {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: "Itim", cursive;
-  font-size: 1em;
-  cursor: pointer;
-  background-color: #538bdb;
-  width: 12vw;
-  height: 4vh;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  /* margin-top: 1vh; */
-}
-
-.Logoutbutton:hover {
-  background-color: #3e7dd7;
-}
-.Logoutbutton:active {
-  background-color: #538dbd;
+#modalButtonDivPa {
+  width: 30vw;
+  height: 6vh;
+  /* background-color: lightcoral; */
+  margin-top: 35%;
+  padding-top: 4px;
+  font-family: "Patrick Hand", cursive;
+  font-size: 2vw;
+  font-weight: bolder;
+  color: gold;
+  border-radius: 0;
+  border-top: 1px solid #f0eeeb;
+  text-transform: none;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
 }
 
 .inputboxType2 {
@@ -35,56 +29,51 @@
   /* background-color: blueviolet; */
 }
 
-.container {
+.containerP {
   display: flex;
-  background-color: #538bdb;
+  flex-direction: column;
   /* background-color: green; */
   align-items: center;
   justify-content: center;
-  margin-top: 5%;
-  margin-bottom: 2%;
+  margin-left: 1%;
   width: 98%;
-  margin-left: 2;
-  min-height: 490;
+  margin-top: 4%;
+  height: 96%;
 }
 
 .title {
   position: absolute;
-  top: -1%;
+  top: 1%;
   display: flex;
   flex-direction: row;
   align-items: center;
   align-content: center;
   justify-content: center;
-  margin-top: 5%;
-  margin-left: 12%;
-  width: 85%;
-  height: 30;
+  width: 90%;
 }
 
 .header2 {
-  flex-wrap: wrap;
-  font-family: PatrickHand_400Regular;
-  font-size: scale(24);
+  font-family: "Patrick Hand", cursive;
+  font-size: 2rem;
   align-self: center;
-  height: scale(70);
   color: #f0eeeb;
-  margin-top: 11%;
-  margin-left: 7%;
-  margin-right: 10%;
-  /* backgroundColor: green */
+  width: 90%;
+  /* background-color: green */
 }
 
 .explainer {
   color: #f0eeeb;
-  font-size: 14;
+  font-size: 1rem;
   text-align: center;
-  margin: 20;
-  margin-top: -60;
+  width: 90%;
+  font-family: "Itim", cursive;
+  margin-top: 50%;
+  margin-bottom: 10%;
 }
 
 .explainerMicro {
   color: #f0eeeb;
-  font-size: 12;
+  font-size: 0.8rem;
   text-align: center;
+  font-family: "Itim", cursive;
 }

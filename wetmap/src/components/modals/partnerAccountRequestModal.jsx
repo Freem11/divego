@@ -6,11 +6,13 @@ import { PartnerModalContext } from "../contexts/partnerAccountRequestModalConte
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { createPartnerAccountRequest } from "../../supabaseCalls/partnerSupabaseCalls";
 import "./partnerAccountRequestModal.css";
+import "./confirmationSuccessModal.css";
+import "./confirmationCautionModal.css";
 import CloseButton from "../closeButton/closeButton";
 import InputBase from "@mui/material/InputBase";
 // import InputField from "../reusables/textInputs";
-// import SuccessModal from "./confirmationSuccessModal";
-// import FailModal from "./confirmationCautionModal";
+import SuccessModal from "./confirmationSuccessModal";
+import FailModal from "./confirmationCautionModal";
 
 // const windowWidth = Dimensions.get("window").width;
 // const windowHeight = Dimensions.get("window").height;
@@ -20,7 +22,18 @@ export default function PartnerAccountRequestModal() {
   const { profile, setProfile } = useContext(UserProfileContext);
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const [closeButtonState, setCloseButtonState] = useState(false);
-  const [subButState, setSubButState] = useState(false);
+
+  let screenWidthInital = window.innerWidth;
+  let screenHeigthInital = window.innerHeight;
+  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
+  const [windowHeight, setWindowHeight] = useState(screenHeigthInital);
+
+  window.addEventListener("resize", trackScreen);
+
+  function trackScreen() {
+    setWindowWidth(window.innerWidth);
+    setWindowHeight(window.innerHeight);
+  }
 
   useEffect(() => {
     setFormValues({ ...formValues, UserId: activeSession.user.id });
@@ -139,16 +152,16 @@ export default function PartnerAccountRequestModal() {
       formValues.Longitude == "" ||
       isNaN(formValues.Longitude)
     ) {
-      failBoxY.value = withTiming(scale(-50));
+      animateCautionModal();
       return;
     } else {
       createPartnerAccountRequest(formValues);
-      successBoxY.value = withTiming(scale(-50));
+      animateSuccessModal();
     }
   };
 
   return (
-    <div className="container">
+    <div className="containerP">
       <div className="title">
         <Label className="header2">Partner Account Request</Label>
         <FormGroup>
@@ -166,274 +179,178 @@ export default function PartnerAccountRequestModal() {
         </FormGroup>
       </div>
 
-      {/* <Label className="explainer">
+      <Label className="explainer">
         To qualify for a "Partner Account" Your Account must represent a diving
         business that takes divers out diving. {"\n"} Examples include: Dive
         Shops, Dive Charters, Diver Centres and Liveaboards
-      </Label> */}
-
+      </Label>
 
       <div className="inputboxType2">
-              <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  placeholder="Full Business Name"
-                  variant="standard"
-                  type="text"
-                  name="Full Business Name"
-                  value={formValues.BusinessName}
-                  onChange={(text) =>
-                    setFormValues({ ...formValues, BusinessName: text })
-                  }
-                  inputProps={{
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Itim",
-                      fontSize: "1.5vw",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "transparent",
-                      height: "5vh",
-                      width: "18vw",
-                      color: "#F0EEEB",
-                      borderBottom: "none",
-                      borderColor: "transparent",
-                      borderRadius: "20px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
-                />
-              </FormGroup>
-            </div>
+        <FormGroup>
+          <InputBase
+            id="standard-basic"
+            placeholder="Full Business Name"
+            variant="standard"
+            type="text"
+            name="Full Business Name"
+            value={formValues.BusinessName}
+            onChange={(text) =>
+              setFormValues({ ...formValues, BusinessName: text.target.value })
+            }
+            inputProps={{
+              style: {
+                textAlign: "center",
+                fontFamily: "Itim",
+                fontSize: "1.5vw",
+                textOverflow: "ellipsis",
+                backgroundColor: "transparent",
+                height: "5vh",
+                width: "18vw",
+                color: "#F0EEEB",
+                borderBottom: "none",
+                borderColor: "transparent",
+                borderRadius: "20px",
+                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+              },
+            }}
+          />
+        </FormGroup>
+      </div>
 
       <Label className="explainerMicro">(For display purposes)</Label>
 
       <div className="inputboxType2">
-              <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  placeholder="Website URL"
-                  variant="standard"
-                  type="text"
-                  name="Website URL"
-                  value={formValues.WebsiteLink}
-                  onChange={(text) =>
-                    setFormValues({ ...formValues, WebsiteLink: text })
-                  }
-                  inputProps={{
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Itim",
-                      fontSize: "1.5vw",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "transparent",
-                      height: "5vh",
-                      width: "18vw",
-                      color: "#F0EEEB",
-                      borderBottom: "none",
-                      borderColor: "transparent",
-                      borderRadius: "20px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
-                />
-              </FormGroup>
-            </div>
+        <FormGroup>
+          <InputBase
+            id="standard-basic"
+            placeholder="Website URL"
+            variant="standard"
+            type="text"
+            name="Website URL"
+            value={formValues.WebsiteLink}
+            onChange={(text) =>
+              setFormValues({ ...formValues, WebsiteLink: text.target.value })
+            }
+            inputProps={{
+              style: {
+                textAlign: "center",
+                fontFamily: "Itim",
+                fontSize: "1.5vw",
+                textOverflow: "ellipsis",
+                backgroundColor: "transparent",
+                height: "5vh",
+                width: "18vw",
+                color: "#F0EEEB",
+                borderBottom: "none",
+                borderColor: "transparent",
+                borderRadius: "20px",
+                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+              },
+            }}
+          />
+        </FormGroup>
+      </div>
 
       <Label className="explainerMicro">(To validate your business)</Label>
 
       <div className="inputboxType2">
-              <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  placeholder="Latitude"
-                  variant="standard"
-                  type="decimal"
-                  name="Latitude"
-                  value={formValues.Latitude}
-                  onChange={(text) =>
-                    setFormValues({ ...formValues, Latitude: text })
-                  }
-                  inputProps={{
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Itim",
-                      fontSize: "1.5vw",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "transparent",
-                      height: "5vh",
-                      width: "18vw",
-                      color: "#F0EEEB",
-                      borderBottom: "none",
-                      borderColor: "transparent",
-                      borderRadius: "20px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
-                />
-              </FormGroup>
-            </div>
-
-            <div className="inputboxType2">
-              <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  placeholder="Longitude"
-                  variant="standard"
-                  type="decimal"
-                  name="Longitude"
-                  value={formValues.Longitude}
-                  onChange={(text) =>
-                    setFormValues({ ...formValues, Longitude: text })
-                  }
-                  inputProps={{
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Itim",
-                      fontSize: "1.5vw",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "transparent",
-                      height: "5vh",
-                      width: "18vw",
-                      color: "#F0EEEB",
-                      borderBottom: "none",
-                      borderColor: "transparent",
-                      borderRadius: "20px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
-                />
-              </FormGroup>
-            </div>
-      <Label className="explainerMicro">(For map placement)</Label>
-
-      <div
-        onClick={() => handleSubmit(formValues)}
-        className="Logoutbutton"
-      >
-          <Label
-            style={{
-              color: "gold",
-              fontSize: 26,
-              marginTop: 4,
-              marginBottom: -6,
-              fontFamily: "PatrickHand_400Regular",
-              width: "100%",
-              alignSelf: "center",
-              justifyContent: "center",
-              alignContent: "center",
-              textAlign: "center",
+        <FormGroup>
+          <InputBase
+            id="standard-basic"
+            placeholder="Latitude"
+            variant="standard"
+            type="decimal"
+            name="Latitude"
+            value={formValues.Latitude}
+            onChange={(text) =>
+              setFormValues({ ...formValues, Latitude: text.target.value })
+            }
+            inputProps={{
+              style: {
+                textAlign: "center",
+                fontFamily: "Itim",
+                fontSize: "1.5vw",
+                textOverflow: "ellipsis",
+                backgroundColor: "transparent",
+                height: "5vh",
+                width: "18vw",
+                color: "#F0EEEB",
+                borderBottom: "none",
+                borderColor: "transparent",
+                borderRadius: "20px",
+                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+              },
             }}
-          >
-            Submit Account Request
-          </Label>
+          />
+        </FormGroup>
       </div>
 
-      {/* <animated.div style={sucessModalSlide} ref={successModalRef}>
+      <div className="inputboxType2">
+        <FormGroup>
+          <InputBase
+            id="standard-basic"
+            placeholder="Longitude"
+            variant="standard"
+            type="decimal"
+            name="Longitude"
+            value={formValues.Longitude}
+            onChange={(text) =>
+              setFormValues({ ...formValues, Longitude: text.target.value })
+            }
+            inputProps={{
+              style: {
+                textAlign: "center",
+                fontFamily: "Itim",
+                fontSize: "1.5vw",
+                textOverflow: "ellipsis",
+                backgroundColor: "transparent",
+                height: "5vh",
+                width: "18vw",
+                color: "#F0EEEB",
+                borderBottom: "none",
+                borderColor: "transparent",
+                borderRadius: "20px",
+                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+              },
+            }}
+          />
+        </FormGroup>
+      </div>
+      <Label className="explainerMicro">(For map placement)</Label>
+
+      <FormGroup>
+        <Button
+          variant="text"
+          id="modalButtonDivPa"
+          style={{ backgroundColor: "#538bdb" }}
+          onClick={() => handleSubmit(formValues)}
+        >
+          Submit Account Request
+        </Button>
+      </FormGroup>
+
+      <animated.div
+        className="successModal"
+        style={sucessModalSlide}
+        ref={successModalRef}
+      >
         <SuccessModal
           submissionItem="partner account creation request"
-          confirmationSucessClose={confirmationSucessClose}
           animateSuccessModal={animateSuccessModal}
+          handleClose={handleClose}
         ></SuccessModal>
       </animated.div>
 
-      <animated.div style={cautionModalSlide} ref={cautionModalRef}>
+      <animated.div
+        className="cautionModal"
+        style={cautionModalSlide}
+        ref={cautionModalRef}
+      >
         <FailModal
           submissionItem="partner account creation request"
           animateCautionModal={animateCautionModal}
         ></FailModal>
-      </animated.div> */}
+      </animated.div>
     </div>
   );
 }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: "#538bdb",
-//     // backgroundColor: 'green',
-//     alignItems: "center",
-//     justifyContent: "center",
-//     marginTop: "5%",
-//     marginBottom: "2%",
-//     width: "98%",
-//     marginLeft: 2,
-//     minHeight: Platform.OS === "android" ? 490 : 0,
-//   },
-//   explainer: {
-//     color: "#F0EEEB",
-//     fontSize: moderateScale(14),
-//     textAlign: "center",
-//     margin: moderateScale(20),
-//     marginTop: windowWidth > 500 ? 0 : moderateScale(-60),
-//   },
-//   explainerMicro: {
-//     color: "#F0EEEB",
-//     fontSize: moderateScale(12),
-//     textAlign: "center",
-//   },
-//   title: {
-//     position: "absolute",
-//     top: "-1%",
-//     display: "flex",
-//     flexDirection: "row",
-//     alignItems: "center",
-//     alignContent: "center",
-//     justifyContent: "center",
-//     marginTop: "5%",
-//     marginLeft: "12%",
-//     width: "85%",
-//     height: scale(30),
-//   },
-//   header2: {
-//     flexWrap: "wrap",
-//     fontFamily: "PatrickHand_400Regular",
-//     fontSize: scale(24),
-//     alignSelf: "center",
-//     height: scale(70),
-//     color: "#F0EEEB",
-//     marginTop: "11%",
-//     marginLeft: "7%",
-//     marginRight: "10%",
-//     // backgroundColor: "green"
-//   },
-//   closeButton: {
-//     position: "relative",
-//     borderRadius: scale(42 / 2),
-//     height: scale(30),
-//     width: scale(30),
-//     justifyContent: "center",
-//     alignItems: "center",
-//   },
-//   closeButtonPressed: {
-//     position: "relative",
-//     borderRadius: scale(42 / 2),
-//     height: scale(30),
-//     width: scale(30),
-//     justifyContent: "center",
-//     alignItems: "center",
-//     backgroundColor: "lightgrey",
-//     opacity: 0.3,
-//   },
-//   SubmitButton: {
-//     position: "absolute",
-//     marginBottom: "0%",
-//     borderTopWidth: 0.5,
-//     width: "85%",
-//     borderTopColor: "darkgrey",
-//     borderBottomColor: "transparent",
-//     bottom: Platform.OS === "android" ? "1%" : "1%",
-//   },
-//   SubmitButtonPressed: {
-//     position: "absolute",
-//     marginBottom: "0%",
-//     borderTopWidth: 0.5,
-//     width: "85%",
-//     borderTopColor: "darkgrey",
-//     borderBottomColor: "transparent",
-//     bottom: Platform.OS === "android" ? "1%" : "1%",
-//     backgroundColor: "#538dbd",
-//   },
-//   confirmationBox: {
-//     position: "absolute",
-//   },
-// });
