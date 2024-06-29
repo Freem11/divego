@@ -1,6 +1,5 @@
 .successModal {
   z-index: 200;
-  display: flex;
   position: absolute;
   top: 120vh;
   left: 0;
@@ -17,6 +16,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 15;
+  margin-top: 10%;
 }
 .titleS {
   display: flex;
@@ -62,8 +62,8 @@
 }
 
 .OKbuttonS:hover {
-  background-color: #3e7dd7;
+  background-color: #6ca7b9;
 }
 .OKbuttonS:active {
-  background-color: #538dbd;
+  background-color: #93c7d7;
 }

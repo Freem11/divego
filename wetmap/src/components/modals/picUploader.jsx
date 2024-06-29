@@ -1,5 +1,10 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import { Container, Form, FormGroup, Label, Input } from "reactstrap";
+import { animated, useSpring } from "react-spring";
+import SuccessModal from "./confirmationSuccessModal";
+import FailModal from "./confirmationCautionModal";
+import "./confirmationSuccessModal.css";
+import "./confirmationCautionModal.css";
 import "./picUploader.css";
 import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
@@ -75,10 +80,36 @@ const PicUploader = React.memo((props) => {
 
   const fileTypes = ["JPG", "JPEG", "PNG"];
 
-
-  // const [uploadedFile, setUploadedFile] = useState({
-  //   selectedFile: null,
-  // });
+  const successModalRef = useRef(null);
+  const cautionModalRef = useRef(null);
+  const [successModalYCoord, setSuccessModalYCoord] = useState(0);
+  const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
+  
+  const sucessModalSlide = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${successModalYCoord}px,0)` },
+  });
+  
+  const cautionModalSlide = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
+  });
+  
+  const animateSuccessModal = () => {
+    if (successModalYCoord === 0) {
+      setSuccessModalYCoord(-windowHeight);
+    } else {
+      setSuccessModalYCoord(0);
+    }
+  };
+  
+  const animateCautionModal = () => {
+    if (cautionModalYCoord === 0) {
+      setCautionModalYCoord(-windowHeight);
+    } else {
+      setCautionModalYCoord(0);
+    }
+  };
 
   window.addEventListener("resize", trackDimensions);
 
@@ -346,10 +377,9 @@ const PicUploader = React.memo((props) => {
       if (itterator3 === 22) {
         setItterator3(itterator3 + 1);
       } else {
-        insertPhotoWaits({ ...pin });
+        // insertPhotoWaits({ ...pin });
         // insertPhotoWaits({ ...pin, PicFile: photoFile });
       }
-      // }
 
       setPin({
         ...pin,
@@ -360,8 +390,10 @@ const PicUploader = React.memo((props) => {
         Longitude: "",
       });
       setPhotoFile("");
-      animatePicModal();
+      animateSuccessModal();
       return;
+    } else {
+      animateCautionModal();
     }
   };
 
@@ -812,6 +844,29 @@ const PicUploader = React.memo((props) => {
           Submit Photo
         </Button>
       </FormGroup>
+
+      <animated.div
+        className="successModal"
+        style={sucessModalSlide}
+        ref={successModalRef}
+      >
+        <SuccessModal
+          submissionItem="sea creature submission"
+          animateSuccessModal={animateSuccessModal}
+          handleClose={handleModalClose}
+        ></SuccessModal>
+      </animated.div>
+
+      <animated.div
+        className="cautionModal"
+        style={cautionModalSlide}
+        ref={cautionModalRef}
+      >
+        <FailModal
+          submissionItem="sea creature submission"
+          animateCautionModal={animateCautionModal}
+        ></FailModal>
+      </animated.div>
     </div>
   );
 });

@@ -39,8 +39,6 @@ export default function PartnerAccountRequestModal() {
     setFormValues({ ...formValues, UserId: activeSession.user.id });
   }, []);
 
-  // const successBoxY = useSharedValue(scale(1200));
-  // const failBoxY = useSharedValue(scale(1200));
   const successModalRef = useRef(null);
   const cautionModalRef = useRef(null);
   const [successModalYCoord, setSuccessModalYCoord] = useState(0);

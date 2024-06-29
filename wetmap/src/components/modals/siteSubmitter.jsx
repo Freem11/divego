@@ -1,5 +1,10 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useRef } from "react";
 import { Container, Form, FormGroup, Label, Input } from "reactstrap";
+import { animated, useSpring } from "react-spring";
+import SuccessModal from "./confirmationSuccessModal";
+import FailModal from "./confirmationCautionModal";
+import "./confirmationSuccessModal.css";
+import "./confirmationCautionModal.css";
 import "./siteSubmitter.css";
 import exifr from "exifr";
 import InputBase from "@mui/material/InputBase";
@@ -53,6 +58,37 @@ const SiteSubmitter = (props) => {
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
   });
+
+  const successModalRef = useRef(null);
+  const cautionModalRef = useRef(null);
+  const [successModalYCoord, setSuccessModalYCoord] = useState(0);
+  const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
+  
+  const sucessModalSlide = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${successModalYCoord}px,0)` },
+  });
+  
+  const cautionModalSlide = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
+  });
+  
+  const animateSuccessModal = () => {
+    if (successModalYCoord === 0) {
+      setSuccessModalYCoord(-windowHeight);
+    } else {
+      setSuccessModalYCoord(0);
+    }
+  };
+  
+  const animateCautionModal = () => {
+    if (cautionModalYCoord === 0) {
+      setCautionModalYCoord(-windowHeight);
+    } else {
+      setCautionModalYCoord(0);
+    }
+  };
 
   window.addEventListener("resize", trackDimensions);
 
@@ -266,8 +302,10 @@ const SiteSubmitter = (props) => {
     ) {
       insertDiveSiteWaits(addSiteVals);
       setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
-      animateSiteModal();
+      animateSuccessModal();
       return;
+    } else {
+      animateCautionModal();
     }
   };
 
@@ -479,6 +517,29 @@ const SiteSubmitter = (props) => {
           Submit Dive Site
         </Button>
       </FormGroup>
+
+      <animated.div
+        className="successModal"
+        style={sucessModalSlide}
+        ref={successModalRef}
+      >
+        <SuccessModal
+          submissionItem="dive site"
+          animateSuccessModal={animateSuccessModal}
+          handleClose={handleModalClose}
+        ></SuccessModal>
+      </animated.div>
+
+      <animated.div
+        className="cautionModal"
+        style={cautionModalSlide}
+        ref={cautionModalRef}
+      >
+        <FailModal
+          submissionItem="dive site"
+          animateCautionModal={animateCautionModal}
+        ></FailModal>
+      </animated.div>
     </div>
   );
 };

@@ -5,8 +5,6 @@ import "./confirmationSuccessModal.css";
 export default function SuccessModal(props) {
   const {
     submissionItem,
-    toggleDiveModal,
-    togglePicModal,
     itterator2,
     setItterator2,
     itterator3,
@@ -16,14 +14,13 @@ export default function SuccessModal(props) {
   } = props;
 
   const tidyUp = () => {
-    console.log(submissionItem)
     if (submissionItem === "dive site") {
-      toggleDiveModal();
+      handleClose();
       if (itterator2 > 0) {
         setItterator2(itterator2 + 1);
       }
     } else if (submissionItem === "sea creature submission") {
-      togglePicModal();
+      handleClose();
       if (itterator3 > 0) {
         setItterator3(itterator3 + 1);
       }
