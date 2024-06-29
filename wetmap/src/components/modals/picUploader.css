@@ -398,7 +398,3 @@
   filter: invert(100%) sepia(300%) saturate(1000%) hue-rotate(1000deg)
     brightness(180%) contrast(60%);
 }
-
-.jWkLDY {
-  color: gold;
-}
