@@ -20,6 +20,8 @@ import CloseIcon from "@mui/icons-material/Close";
 import "./userProfile.css";
 import CloseButton from "../closeButton/closeButton";
 import SaveIcon from "@mui/icons-material/Save";
+import InputFieldSmall from "../reusables/inputFieldSmall";
+
 
 export default function UserProfileModal(props) {
   const { animateProfileModal } = props;
@@ -295,145 +297,50 @@ export default function UserProfileModal(props) {
         <div className="statsContainer">
           <div className="inputboxMini">
             <FormGroup>
-              <InputBase
-                id="standard-basic"
-                placeholder="PhotoCount"
-                type="text"
+              <InputFieldSmall
                 name="photoCountField"
-                value={
-                  "Sea Life: " + (userStats && " " + userStats[0].photocount)
-                }
+                value={ "Sea Life: " + (userStats && " " + userStats[0].photocount) }
                 contentEditable={false}
-                inputProps={{
-                  style: {
-                    textAlign: "center",
-                    fontFamily: "Itim",
-                    fontSize: "1.2vw",
-                    textOverflow: "ellipsis",
-                    backgroundColor: "#538BDB",
-                    height: "5vh",
-                    width: "12vw",
-                    color: "#F0EEEB",
-                    borderRadius: "120px",
-                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                  },
-                }}
               />
             </FormGroup>
           </div>
 
           <div className="inputboxMini">
             <FormGroup>
-              <InputBase
-                id="standard-basic"
-                placeholder="DiveSiteCount"
-                type="text"
+              <InputFieldSmall
                 name="diveSiteCountField"
-                value={
-                  "Dive Sites: " +
-                  (userStats && " " + userStats[0].divesitecount)
-                }
+                value={ "Dive Sites: " + (userStats && " " + userStats[0].divesitecount) }
                 contentEditable={false}
-                inputProps={{
-                  style: {
-                    textAlign: "center",
-                    fontFamily: "Itim",
-                    fontSize: "1.2vw",
-                    textOverflow: "ellipsis",
-                    backgroundColor: "#538BDB",
-                    height: "5vh",
-                    width: "12vw",
-                    color: "#F0EEEB",
-                    borderRadius: "120px",
-                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                  },
-                }}
               />
             </FormGroup>
           </div>
 
           <div className="inputboxMini">
             <FormGroup>
-              <InputBase
-                id="standard-basic"
-                placeholder="FollowerCount"
-                type="text"
+              <InputFieldSmall
                 name="followerCountField"
-                value={
-                  "Followers: " +
-                  (userStats && " " + userStats[0].followercount)
-                }
+                value={ "Followers: " + (userStats && " " + userStats[0].followercount) }
                 contentEditable={false}
-                inputProps={{
-                  style: {
-                    textAlign: "center",
-                    fontFamily: "Itim",
-                    fontSize: "1.2vw",
-                    textOverflow: "ellipsis",
-                    backgroundColor: "#538BDB",
-                    height: "5vh",
-                    width: "12vw",
-                    color: "#F0EEEB",
-                    borderRadius: "120px",
-                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                  },
-                }}
               />
             </FormGroup>
           </div>
 
           <div className="inputboxMini">
             <FormGroup>
-              <InputBase
-                id="standard-basic"
-                placeholder="CommentCount"
-                type="text"
+              <InputFieldSmall
                 name="commentCountField"
-                value={
-                  "Comments: " + (userStats && " " + userStats[0].commentcount)
-                }
+                value={  "Comments: " + (userStats && " " + userStats[0].commentcount) }
                 contentEditable={false}
-                inputProps={{
-                  style: {
-                    textAlign: "center",
-                    fontFamily: "Itim",
-                    fontSize: "1.2vw",
-                    textOverflow: "ellipsis",
-                    backgroundColor: "#538BDB",
-                    height: "5vh",
-                    width: "12vw",
-                    color: "#F0EEEB",
-                    borderRadius: "120px",
-                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                  },
-                }}
               />
             </FormGroup>
           </div>
 
           <div className="inputboxMini">
             <FormGroup>
-              <InputBase
-                id="standard-basic"
-                placeholder="LikeCount"
-                type="text"
+              <InputFieldSmall
                 name="likeCountField"
                 value={"Likes: " + (userStats && " " + userStats[0].likecount)}
                 contentEditable={false}
-                inputProps={{
-                  style: {
-                    textAlign: "center",
-                    fontFamily: "Itim",
-                    fontSize: "1.2vw",
-                    textOverflow: "ellipsis",
-                    backgroundColor: "#538BDB",
-                    height: "5vh",
-                    width: "12vw",
-                    color: "#F0EEEB",
-                    borderRadius: "120px",
-                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                  },
-                }}
               />
             </FormGroup>
           </div>

@@ -9,8 +9,7 @@ import "./partnerAccountRequestModal.css";
 import "./confirmationSuccessModal.css";
 import "./confirmationCautionModal.css";
 import CloseButton from "../closeButton/closeButton";
-import InputBase from "@mui/material/InputBase";
-// import InputField from "../reusables/textInputs";
+import InputField from "../reusables/inputField";
 import SuccessModal from "./confirmationSuccessModal";
 import FailModal from "./confirmationCautionModal";
 
@@ -185,32 +184,12 @@ export default function PartnerAccountRequestModal() {
 
       <div className="inputboxType2">
         <FormGroup>
-          <InputBase
-            id="standard-basic"
+          <InputField
             placeholder="Full Business Name"
-            variant="standard"
-            type="text"
-            name="Full Business Name"
             value={formValues.BusinessName}
             onChange={(text) =>
               setFormValues({ ...formValues, BusinessName: text.target.value })
             }
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                fontSize: "1.5vw",
-                textOverflow: "ellipsis",
-                backgroundColor: "transparent",
-                height: "5vh",
-                width: "18vw",
-                color: "#F0EEEB",
-                borderBottom: "none",
-                borderColor: "transparent",
-                borderRadius: "20px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
         </FormGroup>
       </div>
@@ -219,32 +198,12 @@ export default function PartnerAccountRequestModal() {
 
       <div className="inputboxType2">
         <FormGroup>
-          <InputBase
-            id="standard-basic"
+          <InputField
             placeholder="Website URL"
-            variant="standard"
-            type="text"
-            name="Website URL"
             value={formValues.WebsiteLink}
             onChange={(text) =>
               setFormValues({ ...formValues, WebsiteLink: text.target.value })
             }
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                fontSize: "1.5vw",
-                textOverflow: "ellipsis",
-                backgroundColor: "transparent",
-                height: "5vh",
-                width: "18vw",
-                color: "#F0EEEB",
-                borderBottom: "none",
-                borderColor: "transparent",
-                borderRadius: "20px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
         </FormGroup>
       </div>
@@ -253,64 +212,24 @@ export default function PartnerAccountRequestModal() {
 
       <div className="inputboxType2">
         <FormGroup>
-          <InputBase
-            id="standard-basic"
+          <InputField
             placeholder="Latitude"
-            variant="standard"
-            type="decimal"
-            name="Latitude"
             value={formValues.Latitude}
             onChange={(text) =>
               setFormValues({ ...formValues, Latitude: text.target.value })
             }
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                fontSize: "1.5vw",
-                textOverflow: "ellipsis",
-                backgroundColor: "transparent",
-                height: "5vh",
-                width: "18vw",
-                color: "#F0EEEB",
-                borderBottom: "none",
-                borderColor: "transparent",
-                borderRadius: "20px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
         </FormGroup>
       </div>
 
       <div className="inputboxType2">
         <FormGroup>
-          <InputBase
-            id="standard-basic"
+          <InputField
             placeholder="Longitude"
-            variant="standard"
-            type="decimal"
-            name="Longitude"
             value={formValues.Longitude}
             onChange={(text) =>
               setFormValues({ ...formValues, Longitude: text.target.value })
             }
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                fontSize: "1.5vw",
-                textOverflow: "ellipsis",
-                backgroundColor: "transparent",
-                height: "5vh",
-                width: "18vw",
-                color: "#F0EEEB",
-                borderBottom: "none",
-                borderColor: "transparent",
-                borderRadius: "20px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
         </FormGroup>
       </div>

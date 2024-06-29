@@ -1,25 +1,21 @@
 import React from "react";
-import InputBase from "@mui/material/InputBase";
 import AutoSuggestListItem from "./autoSuggestListItem";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import "./autoSuggest.css";
+import InputField from "../reusables/inputField";
 
 export default function AutoSuggest(props) {
   const { placeholder, value, list, clear, handleSelect, handleChange, style, style1, style2, style3 } = props;
 
   return (
     <div>
-      <InputBase
+      <InputField
         className="suggestInput"
         placeholder={placeholder}
         name={placeholder}
         value={value}
         onChange={handleChange}
-        inputProps={{
-          style: { ...style
-          },
-        }}
-      ></InputBase>
+      />
 
       {value.length > 1 && (
         <div variant="text" id="XButton" onClick={clear}>
