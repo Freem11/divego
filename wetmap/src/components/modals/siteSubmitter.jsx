@@ -7,7 +7,6 @@ import "./confirmationSuccessModal.css";
 import "./confirmationCautionModal.css";
 import "./siteSubmitter.css";
 import exifr from "exifr";
-import InputBase from "@mui/material/InputBase";
 import Button from "@mui/material/Button";
 import MyLocationIcon from "@mui/icons-material/MyLocation";
 import PlaceIcon from "@mui/icons-material/Place";
@@ -24,6 +23,7 @@ import { ModalSelectContext } from "../contexts/modalSelectContext";
 import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { ChapterContext } from "../contexts/chapterContext";
+import InputField from "../reusables/inputField";
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -333,32 +333,6 @@ const SiteSubmitter = (props) => {
     }
   };
 
-  const inputStyle = {
-    textAlign: "center",
-    fontFamily: "Itim",
-    fontSize: "2vw",
-    textOverflow: "ellipsis",
-    backgroundColor: "#538bdb",
-    height: "5vh",
-    width: "18vw",
-    color: "#F0EEEB",
-    borderRadius: "120px",
-    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-  };
-
-  const inputStyleAlt = {
-    textAlign: "center",
-    fontFamily: "Itim",
-    fontSize: "2vw",
-    textOverflow: "ellipsis",
-    backgroundColor: "pink",
-    height: "5vh",
-    width: "18vw",
-    color: "black",
-    borderRadius: "120px",
-    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-  };
-
   return (
     <div
       style={{
@@ -384,6 +358,7 @@ const SiteSubmitter = (props) => {
         </Label>
 
         <QuestionMarkIcon
+          onClick={() => activateGuide()}
           sx={{
             color: "lightgrey",
             width: "2vw",
@@ -409,73 +384,40 @@ const SiteSubmitter = (props) => {
       <div className="lowerBoxSite">
         <div className="inputbox">
           <FormGroup>
-            <InputBase
-              id="standard-basic"
+            <InputField
               placeholder="Site Name"
               type="text"
               name="Site"
               value={addSiteVals.Site}
               onChange={handleChange}
               onClick={handleNoGPSClose}
-              inputProps={{
-                style: siteNameState ? inputStyleAlt : inputStyle,
-              }}
+              highlighted={siteNameState}
             />
           </FormGroup>
         </div>
 
         <div className="inputbox">
           <FormGroup>
-            <InputBase
-              id="standard-basic"
+            <InputField
               placeholder="Latitude"
               type="decimal"
               name="Latitude"
               value={addSiteVals.Latitude}
               onChange={handleChange}
               onClick={handleNoGPSClose}
-              inputProps={{
-                style: {
-                  textAlign: "center",
-                  fontFamily: "Itim",
-                  fontSize: "2vw",
-                  textOverflow: "ellipsis",
-                  backgroundColor: "#538BDB",
-                  height: "5vh",
-                  width: "18vw",
-                  color: "#F0EEEB",
-                  borderRadius: "120px",
-                  boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                },
-              }}
             />
           </FormGroup>
         </div>
 
         <div className="inputbox">
           <FormGroup>
-            <InputBase
-              id="standard-basic"
+            <InputField
               placeholder="Longitude"
               type="decimal"
               name="Longitude"
               value={addSiteVals.Longitude}
               onChange={handleChange}
               onClick={handleNoGPSClose}
-              inputProps={{
-                style: {
-                  textAlign: "center",
-                  fontFamily: "Itim",
-                  fontSize: "2vw",
-                  textOverflow: "ellipsis",
-                  backgroundColor: "#538bdb",
-                  height: "5vh",
-                  width: "18vw",
-                  color: "#F0EEEB",
-                  borderRadius: "120px",
-                  boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                },
-              }}
             />
           </FormGroup>
         </div>
