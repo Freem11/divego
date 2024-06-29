@@ -320,7 +320,7 @@ export default function PartnerAccountRequestModal() {
         <Button
           variant="text"
           id="modalButtonDivPa"
-          style={{ backgroundColor: "#538bdb" }}
+          style={{ backgroundColor: "#538bdb", cursor: "pointer" }}
           onClick={() => handleSubmit(formValues)}
         >
           Submit Account Request

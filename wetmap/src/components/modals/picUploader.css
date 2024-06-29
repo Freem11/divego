@@ -343,6 +343,15 @@
   border: lightblue 1px solid;
 }
 
+.pickie label {
+  border: none !important;
+}
+
+.pickie label div span {
+  color: gold !important;
+  font-size: 13px;
+}
+
 .picHolder {
   align-items: center;
   width: 100%;
@@ -388,4 +397,8 @@
 ::-webkit-calendar-picker-indicator {
   filter: invert(100%) sepia(300%) saturate(1000%) hue-rotate(1000deg)
     brightness(180%) contrast(60%);
+}
+
+.jWkLDY {
+  color: gold;
 }

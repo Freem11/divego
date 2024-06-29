@@ -640,8 +640,8 @@ const PicUploader = React.memo((props) => {
           name="file"
           types={fileTypes}
           multiple={false}
-          label=" "
           hoverTitle="Drop Here"
+          label="Upload or drop a file right here"
         />
           </div>
       )}
