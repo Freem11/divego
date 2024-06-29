@@ -481,7 +481,6 @@ const PicUploader = React.memo((props) => {
     marginTop: "1vh",
     cursor: "pointer",
   };
-
   const buttonStyle = {
     color: "gold",
     width: "3.5vw",
@@ -609,8 +608,8 @@ const PicUploader = React.memo((props) => {
           name="file"
           types={fileTypes}
           multiple={false}
-          label=" "
           hoverTitle="Drop Here"
+          label="Upload or drop a file right here"
         />
           </div>
       )}

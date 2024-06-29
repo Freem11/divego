@@ -341,6 +341,15 @@
   border: lightblue 1px solid;
 }
 
+.pickie label {
+  border: none !important;
+}
+
+.pickie label div span {
+  color: gold !important;
+  font-size: 13px;
+}
+
 .picHolder {
   align-items: center;
   width: 100%;

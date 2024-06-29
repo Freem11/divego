@@ -47,9 +47,18 @@ const Settings = (props) => {
         width: "90%",
         color: "pink",
         borderRadius: "15px",
+        position: "absolute",
+        bottom: "5%",
+        left: "30%",
+        textAlign: "center"
       }}
     >
-      <div onClick={() => setOpenDialog(true)} className="AccountDeleteButton">
+      <div 
+        onClick={() => {
+          setOpenDialog(true);
+          setShowDangerZone(false);
+        }}
+        className="AccountDeleteButton">
         <Label
           style={{
             fontFamily: "Itim",
@@ -108,7 +117,7 @@ const Settings = (props) => {
               fontWeight: "bold",
               color: "gold",
               cursor: "pointer",
-              fontSize: "1.5vw",
+              fontSize: "1.4vw",
             }}
           >
             Sign Out
@@ -123,9 +132,10 @@ const Settings = (props) => {
             <Label
               style={{
                 paddingBottom: 3,
+                fontWeight: "bold",
                 fontFamily: "Itim",
                 color: requestCheck.length > 0 ? "lightgrey" : "gold",
-                fontSize: "1.5vw",
+                fontSize: "1.4vw",
               }}
             >
               {requestCheck.length > 0
@@ -137,7 +147,7 @@ const Settings = (props) => {
 
         <div
           className="dangerZonebar"
-          onDoubleClick={() => setShowDangerZone(!showDangerZone)}
+          onClick={() => setShowDangerZone(!showDangerZone)}
         >
           <ErrorOutlineIcon
             sx={{
