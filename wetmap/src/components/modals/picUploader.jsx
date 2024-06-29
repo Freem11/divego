@@ -495,6 +495,7 @@ const PicUploader = React.memo((props) => {
     alignItems: "center",
     borderRadius: "20px",
     boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+    paddingRight: "7px"
   };
 
   const inputStyleAlt = {
