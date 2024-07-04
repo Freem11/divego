@@ -38,6 +38,7 @@ import {
 // import { removePhoto } from "../../axiosCalls/uploadAxiosCalls";
 import { getAnimalNamesThatFit } from "../../supabaseCalls/photoSupabaseCalls";
 import { userCheck } from "../../supabaseCalls/authenticateSupabaseCalls";
+import InputField from "../reusables/inputField";
 
 let filePath1 = "./wetmap/src/components/uploads/";
 let filePath = "/src/components/uploads/";
@@ -149,7 +150,7 @@ const PicUploader = React.memo((props) => {
       // return
     }
 
-    if (e.target && e.target.name === "PicFile" || typeof(e) === "object") {
+    if (e.target && e.target.name === "PicFile") {
       console.log("here?", e)
       setPhotoFile(null);
       if (pin.PicFile !== null) {
@@ -480,39 +481,6 @@ const PicUploader = React.memo((props) => {
     marginTop: "1vh",
     cursor: "pointer",
   };
-
-  const inputStyle = {
-    textAlign: "center",
-    fontFamily: "Itim",
-    fontSize: "1.5vw",
-    textOverflow: "ellipsis",
-    backgroundColor: "transparent",
-    height: "5vh",
-    width: "18vw",
-    color: "#F0EEEB",
-    borderBottom: "none",
-    borderColor: "transparent",
-    alignItems: "center",
-    borderRadius: "20px",
-    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-  };
-
-  const inputStyleAlt = {
-    textAlign: "center",
-    fontFamily: "Itim",
-    fontSize: "1.5vw",
-    textOverflow: "ellipsis",
-    backgroundColor: "pink",
-    height: "5vh",
-    width: "18vw",
-    color: "#F0EEEB",
-    borderBottom: "none",
-    borderColor: "transparent",
-    alignItems: "center",
-    borderRadius: "20px",
-    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-  };
-
   const buttonStyle = {
     color: "gold",
     width: "3.5vw",
@@ -640,8 +608,8 @@ const PicUploader = React.memo((props) => {
           name="file"
           types={fileTypes}
           multiple={false}
-          label=" "
           hoverTitle="Drop Here"
+          label="Upload or drop a file right here"
         />
           </div>
       )}
@@ -687,19 +655,14 @@ const PicUploader = React.memo((props) => {
           <div className="coordDiv">
             <div className="inputboxType1">
               <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  // label="Date Taken"
+                <InputField
                   placeholder="Date Taken"
-                  variant="standard"
                   type="date"
                   name="PicDate"
                   value={pin.PicDate}
                   onChange={handleChange}
                   onClick={handleNoGPSClose}
-                  inputProps={{
-                    style: datButState ? inputStyleAlt : inputStyle,
-                  }}
+                  highlighted={datButState}
                 />
               </FormGroup>
             </div>
@@ -716,16 +679,6 @@ const PicUploader = React.memo((props) => {
                 clear={clearAnimal}
                 handleChange={handleChangeAutoSuggest}
                 handleSelect={handleSelectAutoSuggest}
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  textAlign: "center",
-                  height: "5vh",
-                  fontFamily: "itim",
-                  color: "white",
-                  fontSize: "1.5vw",
-                }}
                 style1={{
                   marginTop: "2vh",
                   marginLeft: "1vw",
@@ -753,67 +706,24 @@ const PicUploader = React.memo((props) => {
             </div>
             <div className="inputboxType2">
               <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  // label="Latitude"
+                <InputField
                   placeholder="Latitude"
-                  variant="standard"
                   type="decimal"
                   name="Latitude"
                   value={pin.Latitude}
                   onChange={handleChange}
-                  onClick={handleNoGPSClose}
-                  inputProps={{
-                    readOnly: true,
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Itim",
-                      fontSize: "1.5vw",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "transparent",
-                      height: "5vh",
-                      width: "18vw",
-                      color: "#F0EEEB",
-                      borderBottom: "none",
-                      borderColor: "transparent",
-                      borderRadius: "20px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
                 />
               </FormGroup>
             </div>
 
             <div className="inputboxType2">
               <FormGroup>
-                <InputBase
-                  id="standard-basic"
-                  // label="Longitude"
+                <InputField
                   placeholder="Longitude"
-                  variant="standard"
                   type="decimal"
                   name="Longitude"
-                  contentEditable={false}
                   value={pin.Longitude}
                   onChange={handleChange}
-                  onClick={handleNoGPSCloseOnMapChange}
-                  inputProps={{
-                    readOnly: true,
-                    style: {
-                      textAlign: "center",
-                      fontFamily: "Itim",
-                      fontSize: "1.5vw",
-                      textOverflow: "ellipsis",
-                      backgroundColor: "transparent",
-                      height: "5vh",
-                      width: "18vw",
-                      color: "#F0EEEB",
-                      borderBottom: "none",
-                      borderColor: "transparent",
-                      borderRadius: "20px",
-                      boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    },
-                  }}
                 />
               </FormGroup>
             </div>

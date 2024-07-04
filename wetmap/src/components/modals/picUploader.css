@@ -58,7 +58,6 @@
   border-radius: 20px;
   padding-bottom: 5px;
   padding-top: 3px;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .autosuggestboxPhotoAlt {
@@ -74,7 +73,6 @@
   border-radius: 20px;
   padding-bottom: 5px;
   padding-top: 3px;
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.5);
 }
 
 .autosuggestboxWhite {
@@ -341,6 +339,15 @@
   margin-bottom: 2vh;
   border-radius: 15px;
   border: lightblue 1px solid;
+}
+
+.pickie label {
+  border: none !important;
+}
+
+.pickie label div span {
+  color: gold !important;
+  font-size: 13px;
 }
 
 .picHolder {

@@ -22,12 +22,13 @@ export default function FailModal(props) {
   }
 
   return (
+    <div className="overlay">
     <div className="containerFC">
       <div className="titleF">
-        <Label className="textF">
+        <Label className="textF" style={{width: "100%"}}>
           Your {submissionItem} cannot be completed just yet.
         </Label>
-        <Label className="text2F">{blurb}</Label>
+        <Label className="text2F" style={{width: "100%"}}>{blurb}</Label>
         <div onClick={() => tidyUp()} className="OKbuttonF">
           <Label
             style={{
@@ -42,6 +43,7 @@ export default function FailModal(props) {
           </Label>
         </div>
       </div>
+    </div>
     </div>
   );
 }

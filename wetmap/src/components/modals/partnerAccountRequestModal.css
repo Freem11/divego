@@ -1,15 +1,32 @@
+.containerP {
+  display: flex;
+  flex-direction: column;
+  /* background-color: green; */
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  margin-left: 1%;
+  width: 98%;
+  /* margin-top: 3%; */
+  height: 100%;
+}
+
 #modalButtonDivPa {
   width: 30vw;
-  height: 6vh;
-  /* background-color: lightcoral; */
-  margin-top: 17%;
-  padding-top: 4px;
+  height: 7vh;
+  position: absolute;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
   font-family: "Patrick Hand", cursive;
   font-size: 2vw;
   font-weight: bolder;
   color: gold;
   border-radius: 0;
   border-top: 1px solid #f0eeeb;
+  border-bottom: none;
+  border-left: none;
+  border-right: none;
   text-transform: none;
   border-bottom-left-radius: 25px;
   border-bottom-right-radius: 25px;
@@ -27,18 +44,6 @@
   border-bottom: none;
   border-color: transparent;
   /* background-color: blueviolet; */
-}
-
-.containerP {
-  display: flex;
-  flex-direction: column;
-  /* background-color: green; */
-  align-items: center;
-  justify-content: center;
-  margin-left: 1%;
-  width: 98%;
-  margin-top: 4%;
-  height: 96%;
 }
 
 .title {
@@ -67,7 +72,7 @@
   text-align: center;
   width: 90%;
   font-family: "Itim", cursive;
-  margin-top: 50%;
+  margin-top: 10%;
   margin-bottom: 10%;
 }
 
