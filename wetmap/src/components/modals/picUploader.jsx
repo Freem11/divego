@@ -561,28 +561,21 @@ const PicUploader = React.memo((props) => {
 					<strong>Submit Your Picture</strong>
 				</Label>
 
-				{/* <Button
-          variant="text"
-          // id="questionButton"
-          
-        > */}
-				<QuestionMarkIcon
+				<CustomButton
 					onClick={() => activateGuide()}
-					sx={{
-						color: 'lightgrey',
-						width: '2vw',
-						height: '4vh',
-						marginRight: '1vw',
-						cursor: 'pointer',
-					}}
-				></QuestionMarkIcon>
-				{/* </Button> */}
+					svg={
+						<QuestionMarkIcon
+							sx={{
+								color: 'gold',
+								width: '3.5vw',
+								height: '3.5vh',
+								padding: '1px',
+								cursor: 'pointer',
+							}}
+						/>
+					}
+				/>
 
-				{/* <Button
-          variant="text"
-          // id="closeButton"
-          
-        > */}
 				<CloseIcon
 					onClick={() => handleModalClose()}
 					sx={{
@@ -590,9 +583,10 @@ const PicUploader = React.memo((props) => {
 						width: '2vw',
 						height: '5vh',
 						cursor: 'pointer',
+						marginRight: '-7px',
+						marginLeft: '10px',
 					}}
 				></CloseIcon>
-				{/* </Button> */}
 			</div>
 
 			{photoFile !== null && (
