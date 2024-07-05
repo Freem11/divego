@@ -1,784 +1,784 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import { Container, Form, FormGroup, Label, Input } from "reactstrap";
-import { animated, useSpring } from "react-spring";
-import SuccessModal from "./confirmationSuccessModal";
-import FailModal from "./confirmationCautionModal";
-import "./confirmationSuccessModal.css";
-import "./confirmationCautionModal.css";
-import "./picUploader.css";
-import InputBase from "@mui/material/InputBase";
-import Button from "@mui/material/Button";
-import exifr from "exifr";
-import AutoSuggest from "../autoSuggest/autoSuggest";
-import { FileUploader } from "react-drag-drop-files";
-import { useNavigate } from "react-router-dom";
-import { MasterContext } from "../contexts/masterContext";
-import { PinContext } from "../contexts/staticPinContext";
-import { PictureContext } from "../contexts/pictureContext";
-import { SessionContext } from "../contexts/sessionContext";
-import { UserProfileContext } from "../contexts/userProfileContext";
-import { ModalSelectContext } from "../contexts/modalSelectContext";
-import { Iterrator3Context } from "../contexts/iterrator3Context";
-import { TutorialContext } from "../contexts/tutorialContext";
-import { ChapterContext } from "../contexts/chapterContext";
-import PlaceIcon from "@mui/icons-material/Place";
-import PhotoIcon from "@mui/icons-material/Photo";
-import CloseIcon from "@mui/icons-material/Close";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
-import { getToday } from "../../helpers/picUploaderHelpers.js";
-import Collapse from "@mui/material/Collapse";
-import { insertPhotoWaits } from "../../supabaseCalls/photoWaitSupabaseCalls";
+import React, { useState, useContext, useEffect, useRef } from 'react';
+import { Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import { animated, useSpring } from 'react-spring';
+import SuccessModal from './confirmationSuccessModal';
+import FailModal from './confirmationCautionModal';
+import './confirmationSuccessModal.css';
+import './confirmationCautionModal.css';
+import './picUploader.css';
+import InputBase from '@mui/material/InputBase';
+import Button from '@mui/material/Button';
+import exifr from 'exifr';
+import AutoSuggest from '../autoSuggest/autoSuggest';
+import { FileUploader } from 'react-drag-drop-files';
+import { useNavigate } from 'react-router-dom';
+import { MasterContext } from '../contexts/masterContext';
+import { PinContext } from '../contexts/staticPinContext';
+import { PictureContext } from '../contexts/pictureContext';
+import { SessionContext } from '../contexts/sessionContext';
+import { UserProfileContext } from '../contexts/userProfileContext';
+import { ModalSelectContext } from '../contexts/modalSelectContext';
+import { Iterrator3Context } from '../contexts/iterrator3Context';
+import { TutorialContext } from '../contexts/tutorialContext';
+import { ChapterContext } from '../contexts/chapterContext';
+import PlaceIcon from '@mui/icons-material/Place';
+import PhotoIcon from '@mui/icons-material/Photo';
+import CloseIcon from '@mui/icons-material/Close';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
+import { getToday } from '../../helpers/picUploaderHelpers.js';
+import Collapse from '@mui/material/Collapse';
+import { insertPhotoWaits } from '../../supabaseCalls/photoWaitSupabaseCalls';
 // import { insertPhotoWaits } from "../../axiosCalls/photoWaitAxiosCalls";
 // import { uploadphoto, removePhoto } from "../../supabaseCalls/uploadSupabaseCalls";
 import {
-  uploadphoto,
-  removePhoto,
-} from "../../cloudflareBucketCalls/cloudflareAWSCalls";
+	uploadphoto,
+	removePhoto,
+} from '../../cloudflareBucketCalls/cloudflareAWSCalls';
 // import { removePhoto } from "../../axiosCalls/uploadAxiosCalls";
-import { getAnimalNamesThatFit } from "../../supabaseCalls/photoSupabaseCalls";
-import { userCheck } from "../../supabaseCalls/authenticateSupabaseCalls";
-import InputField from "../reusables/inputField";
+import { getAnimalNamesThatFit } from '../../supabaseCalls/photoSupabaseCalls';
+import { userCheck } from '../../supabaseCalls/authenticateSupabaseCalls';
+import InputField from '../reusables/inputField';
+import CustomButton from '../reusables/button/button.jsx';
 
-let filePath1 = "./wetmap/src/components/uploads/";
-let filePath = "/src/components/uploads/";
-let UserId = "";
+let filePath1 = './wetmap/src/components/uploads/';
+let filePath = '/src/components/uploads/';
+let UserId = '';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 const noGPSZone = (
-  <div
-    style={{
-      marginLeft: "2%",
-      backgroundColor: "pink",
-      height: "40px",
-      width: "95%",
-      color: "red",
-      borderRadius: "15px",
-    }}
-  >
-    <h4 style={{ marginLeft: "35px", paddingTop: "10px" }}>
-      No GPS Coordinates Found!
-    </h4>
-  </div>
+	<div
+		style={{
+			marginLeft: '2%',
+			backgroundColor: 'pink',
+			height: '40px',
+			width: '95%',
+			color: 'red',
+			borderRadius: '15px',
+		}}
+	>
+		<h4 style={{ marginLeft: '35px', paddingTop: '10px' }}>
+			No GPS Coordinates Found!
+		</h4>
+	</div>
 );
 
 const PicUploader = React.memo((props) => {
-  const { animatePicModal, setPicModalYCoord } = props;
-  let navigate = useNavigate();
-  const { setMasterSwitch } = useContext(MasterContext);
-  const { pin, setPin } = useContext(PinContext);
-  const [showNoGPS, setShowNoGPS] = useState(false);
-  const [list, setList] = useState([]);
-  const { photoFile, setPhotoFile } = useContext(PictureContext);
-  const { activeSession, setActiveSession } = useContext(SessionContext);
-  const { profile, setProfile } = useContext(UserProfileContext);
-  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
-  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-  const { chapter, setChapter } = useContext(ChapterContext);
+	const { animatePicModal, setPicModalYCoord } = props;
+	let navigate = useNavigate();
+	const { setMasterSwitch } = useContext(MasterContext);
+	const { pin, setPin } = useContext(PinContext);
+	const [showNoGPS, setShowNoGPS] = useState(false);
+	const [list, setList] = useState([]);
+	const { photoFile, setPhotoFile } = useContext(PictureContext);
+	const { activeSession, setActiveSession } = useContext(SessionContext);
+	const { profile, setProfile } = useContext(UserProfileContext);
+	const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+	const { itterator3, setItterator3 } = useContext(Iterrator3Context);
+	const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+	const { chapter, setChapter } = useContext(ChapterContext);
 
-  const fileTypes = ["JPG", "JPEG", "PNG"];
+	const fileTypes = ['JPG', 'JPEG', 'PNG'];
 
-  const successModalRef = useRef(null);
-  const cautionModalRef = useRef(null);
-  const [successModalYCoord, setSuccessModalYCoord] = useState(0);
-  const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
-  
-  const sucessModalSlide = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${successModalYCoord}px,0)` },
-  });
-  
-  const cautionModalSlide = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
-  });
-  
-  const animateSuccessModal = () => {
-    if (successModalYCoord === 0) {
-      setSuccessModalYCoord(-windowHeight);
-    } else {
-      setSuccessModalYCoord(0);
-    }
-  };
-  
-  const animateCautionModal = () => {
-    if (cautionModalYCoord === 0) {
-      setCautionModalYCoord(-windowHeight);
-    } else {
-      setCautionModalYCoord(0);
-    }
-  };
+	const successModalRef = useRef(null);
+	const cautionModalRef = useRef(null);
+	const [successModalYCoord, setSuccessModalYCoord] = useState(0);
+	const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
 
-  window.addEventListener("resize", trackDimensions);
+	const sucessModalSlide = useSpring({
+		from: { transform: `translate3d(0,0,0)` },
+		to: { transform: `translate3d(0,${successModalYCoord}px,0)` },
+	});
 
-  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
-  const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
+	const cautionModalSlide = useSpring({
+		from: { transform: `translate3d(0,0,0)` },
+		to: { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
+	});
 
-  function trackDimensions() {
-    setWindowWidth(window.innerWidth);
-    setWindowHeigth(window.innerHeight);
-  }
+	const animateSuccessModal = () => {
+		if (successModalYCoord === 0) {
+			setSuccessModalYCoord(-windowHeight);
+		} else {
+			setSuccessModalYCoord(0);
+		}
+	};
 
-  useEffect(() => {
-    if (pin.PicDate === "") {
-      let Rnow = new Date();
+	const animateCautionModal = () => {
+		if (cautionModalYCoord === 0) {
+			setCautionModalYCoord(-windowHeight);
+		} else {
+			setCautionModalYCoord(0);
+		}
+	};
 
-      let rightNow = getToday(Rnow);
+	window.addEventListener('resize', trackDimensions);
 
-      setPin({
-        ...pin,
-        PicDate: rightNow,
-      });
-    }
-  }, []);
+	const [windowWidth, setWindowWidth] = useState(screenWidthInital);
+	const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
 
-  useEffect(() => {
-    if (tutorialRunning) {
-      if (itterator3 === 11) {
-        setItterator3(itterator3 + 1);
-      }
-    }
-  }, [pin.PicDate]);
+	function trackDimensions() {
+		setWindowWidth(window.innerWidth);
+		setWindowHeigth(window.innerHeight);
+	}
 
-  const handleChange = async (e) => {
+	useEffect(() => {
+		if (pin.PicDate === '') {
+			let Rnow = new Date();
 
-    if(typeof(e) === "object"){
-      console.log("gotch!", typeof(e))
-      // return
-    }
+			let rightNow = getToday(Rnow);
 
-    if (e.target && e.target.name === "PicFile") {
-      console.log("here?", e)
-      setPhotoFile(null);
-      if (pin.PicFile !== null) {
-        removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-          fileName: `${pin.PicFile}`,
-        });
-      }
+			setPin({
+				...pin,
+				PicDate: rightNow,
+			});
+		}
+	}, []);
 
-      let imageFile
-      if (e.target && e.target.files[0]) {
-        imageFile = e.target.files[0];
-      } else if (e.name) {
-        imageFile = e;
-      }
+	useEffect(() => {
+		if (tutorialRunning) {
+			if (itterator3 === 11) {
+				setItterator3(itterator3 + 1);
+			}
+		}
+	}, [pin.PicDate]);
 
-      console.log("yo",imageFile)
-        let extension = imageFile.name.split(".").pop();
-        const fileName = Date.now() + "." + extension;
+	const handleChange = async (e) => {
+		if (typeof e === 'object') {
+			console.log('gotch!', typeof e);
+			// return
+		}
 
-        //uploadPhoto
-        const data = new FormData();
-        data.append("image", imageFile);
-        const newFilePath = await uploadphoto(imageFile, fileName);
-        setPhotoFile(fileName);
-        console.log("create file", photoFile);
-        //scrape off photo info
-        let formattedDate = pin.PicDate;
-        let newLatitude = pin.Latitude;
-        let newLongitude = pin.Longitude;
-        let baseDate = imageFile.lastModified;
-        var convDate = new Date(baseDate);
+		if (e.target && e.target.name === 'PicFile') {
+			console.log('here?', e);
+			setPhotoFile(null);
+			if (pin.PicFile !== null) {
+				removePhoto({
+					filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+					fileName: `${pin.PicFile}`,
+				});
+			}
 
-        formattedDate = getToday(convDate);
+			let imageFile;
+			if (e.target && e.target.files[0]) {
+				imageFile = e.target.files[0];
+			} else if (e.name) {
+				imageFile = e;
+			}
 
-        exifr.parse(imageFile, true).then((output) => {
-          let EXIFData = exifGPSHelper(
-            output.GPSLatitude,
-            output.GPSLongitude,
-            output.GPSLatitudeRef,
-            output.GPSLongitudeRef
-          );
+			console.log('yo', imageFile);
+			let extension = imageFile.name.split('.').pop();
+			const fileName = Date.now() + '.' + extension;
 
-          if (EXIFData) {
-            newLatitude = EXIFData[0];
-            newLongitude = EXIFData[1];
-          }
-        });
+			//uploadPhoto
+			const data = new FormData();
+			data.append('image', imageFile);
+			const newFilePath = await uploadphoto(imageFile, fileName);
+			setPhotoFile(fileName);
+			console.log('create file', photoFile);
+			//scrape off photo info
+			let formattedDate = pin.PicDate;
+			let newLatitude = pin.Latitude;
+			let newLongitude = pin.Longitude;
+			let baseDate = imageFile.lastModified;
+			var convDate = new Date(baseDate);
 
-        console.log(
-          "pin data",
-          fileName,
-          formattedDate,
-          newLatitude,
-          newLongitude
-        );
-        setPin({
-          ...pin,
-          PicFile: `animalphotos/public/${fileName}`,
-          PicDate: formattedDate,
-          Latitude: newLatitude,
-          Longitude: newLongitude,
-        });
-      
-      // fetch("http://localhost:5000/api/upload", {
-      //   method: "POST",
-      //   body: data,
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     setPhotoFile(data.fileName);
-      //   });
+			formattedDate = getToday(convDate);
 
-      if (tutorialRunning) {
-        if (itterator3 === 8) {
-          setItterator3(itterator3 + 1);
-        }
-      }
-    } else {
-      setPin({ ...pin, [e.target.name]: e.target.value });
-    }
-  };
+			exifr.parse(imageFile, true).then((output) => {
+				let EXIFData = exifGPSHelper(
+					output.GPSLatitude,
+					output.GPSLongitude,
+					output.GPSLatitudeRef,
+					output.GPSLongitudeRef
+				);
 
-  const handleNoGPSClose = (e) => {
-    setShowNoGPS(false);
-    handleChange(e);
-    return;
-  };
+				if (EXIFData) {
+					newLatitude = EXIFData[0];
+					newLongitude = EXIFData[1];
+				}
+			});
 
-  const handleSelect = (e) => {
-    setShowNoGPS(false);
-    return;
-  };
+			console.log(
+				'pin data',
+				fileName,
+				formattedDate,
+				newLatitude,
+				newLongitude
+			);
+			setPin({
+				...pin,
+				PicFile: `animalphotos/public/${fileName}`,
+				PicDate: formattedDate,
+				Latitude: newLatitude,
+				Longitude: newLongitude,
+			});
 
-  const handleNoGPSCloseOnMapChange = () => {
-    if (
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 22
-    ) {
-      return;
-    }
+			// fetch("http://localhost:5000/api/upload", {
+			//   method: "POST",
+			//   body: data,
+			// })
+			//   .then((response) => response.json())
+			//   .then((data) => {
+			//     setPhotoFile(data.fileName);
+			//   });
 
-    setChosenModal("Photos");
-    setShowNoGPS(false);
-    setMasterSwitch(false);
-    animatePicModal();
-    if (tutorialRunning) {
-      if (itterator3 === 16) {
-        setItterator3(itterator3 + 1);
-      }
-    }
-    return;
-  };
+			if (tutorialRunning) {
+				if (itterator3 === 8) {
+					setItterator3(itterator3 + 1);
+				}
+			}
+		} else {
+			setPin({ ...pin, [e.target.name]: e.target.value });
+		}
+	};
 
-  let counter = 0;
-  let blinker;
+	const handleNoGPSClose = (e) => {
+		setShowNoGPS(false);
+		handleChange(e);
+		return;
+	};
 
-  const [imgButState, setImgButState] = useState(false);
-  const [datButState, setDatButState] = useState(false);
-  const [autoButState, setAutoButState] = useState(false);
-  const [pinButState, setPinButState] = useState(false);
-  const [subButState, setSubButState] = useState(false);
+	const handleSelect = (e) => {
+		setShowNoGPS(false);
+		return;
+	};
 
-  function imageBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setImgButState(false);
-    } else {
-      setImgButState(true);
-    }
-  }
+	const handleNoGPSCloseOnMapChange = () => {
+		if (
+			itterator3 === 8 ||
+			itterator3 === 11 ||
+			itterator3 === 14 ||
+			itterator3 === 22
+		) {
+			return;
+		}
 
-  function calendarBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setDatButState(false);
-    } else {
-      setDatButState(true);
-    }
-  }
+		setChosenModal('Photos');
+		setShowNoGPS(false);
+		setMasterSwitch(false);
+		animatePicModal();
+		if (tutorialRunning) {
+			if (itterator3 === 16) {
+				setItterator3(itterator3 + 1);
+			}
+		}
+		return;
+	};
 
-  function animalField() {
-    counter++;
-    if (counter % 2 == 0) {
-      setAutoButState(false);
-    } else {
-      setAutoButState(true);
-    }
-  }
+	let counter = 0;
+	let blinker;
 
-  function pinBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setPinButState(false);
-    } else {
-      setPinButState(true);
-    }
-  }
+	const [imgButState, setImgButState] = useState(false);
+	const [datButState, setDatButState] = useState(false);
+	const [autoButState, setAutoButState] = useState(false);
+	const [pinButState, setPinButState] = useState(false);
+	const [subButState, setSubButState] = useState(false);
 
-  function subBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setSubButState(false);
-    } else {
-      setSubButState(true);
-    }
-  }
+	function imageBut() {
+		counter++;
+		if (counter % 2 == 0) {
+			setImgButState(false);
+		} else {
+			setImgButState(true);
+		}
+	}
 
-  function cleanUp() {
-    clearInterval(blinker);
-    setImgButState(false);
-    setDatButState(false);
-    setAutoButState(false);
-    setPinButState(false);
-    setSubButState(false);
-  }
+	function calendarBut() {
+		counter++;
+		if (counter % 2 == 0) {
+			setDatButState(false);
+		} else {
+			setDatButState(true);
+		}
+	}
 
-  let modalHeigth = 700;
+	function animalField() {
+		counter++;
+		if (counter % 2 == 0) {
+			setAutoButState(false);
+		} else {
+			setAutoButState(true);
+		}
+	}
 
-  useEffect(() => {
-    if (tutorialRunning) {
-      if (itterator3 === 8) {
-        blinker = setInterval(imageBut, 1000);
-      } else if (itterator3 === 11) {
-        blinker = setInterval(calendarBut, 1000);
-      } else if (itterator3 === 14) {
-        blinker = setInterval(animalField, 1000);
-      } else if (itterator3 === 3) {
-        setPicModalYCoord(0);
-      } else if (itterator3 === 3) {
-        setPicModalYCoord(0);
-      } else if (itterator3 === 6 || itterator3 === 12 || itterator3 === 15) {
-        setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      } else if (itterator3 === 16) {
-        blinker = setInterval(pinBut, 1000);
-      } else if (itterator3 === 22) {
-        blinker = setInterval(subBut, 1000);
-      }
-    }
-    return () => cleanUp();
-  }, [itterator3]);
+	function pinBut() {
+		counter++;
+		if (counter % 2 == 0) {
+			setPinButState(false);
+		} else {
+			setPinButState(true);
+		}
+	}
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let AnimalV = pin.Animal.toString();
-    let LatV = parseFloat(pin.Latitude);
-    let LngV = parseFloat(pin.Longitude);
+	function subBut() {
+		counter++;
+		if (counter % 2 == 0) {
+			setSubButState(false);
+		} else {
+			setSubButState(true);
+		}
+	}
 
-    if (
-      pin.PicFile &&
-      AnimalV &&
-      typeof AnimalV === "string" &&
-      LatV &&
-      typeof LatV == "number" &&
-      LngV &&
-      typeof LngV == "number"
-    ) {
-      let Rnow = new Date();
+	function cleanUp() {
+		clearInterval(blinker);
+		setImgButState(false);
+		setDatButState(false);
+		setAutoButState(false);
+		setPinButState(false);
+		setSubButState(false);
+	}
 
-      let rightNow = getToday(Rnow);
+	let modalHeigth = 700;
 
-      // if (tutorialRunning) {
-      if (itterator3 === 22) {
-        setItterator3(itterator3 + 1);
-      } else {
-        // insertPhotoWaits({ ...pin });
-        // insertPhotoWaits({ ...pin, PicFile: photoFile });
-      }
+	useEffect(() => {
+		if (tutorialRunning) {
+			if (itterator3 === 8) {
+				blinker = setInterval(imageBut, 1000);
+			} else if (itterator3 === 11) {
+				blinker = setInterval(calendarBut, 1000);
+			} else if (itterator3 === 14) {
+				blinker = setInterval(animalField, 1000);
+			} else if (itterator3 === 3) {
+				setPicModalYCoord(0);
+			} else if (itterator3 === 3) {
+				setPicModalYCoord(0);
+			} else if (itterator3 === 6 || itterator3 === 12 || itterator3 === 15) {
+				setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+			} else if (itterator3 === 16) {
+				blinker = setInterval(pinBut, 1000);
+			} else if (itterator3 === 22) {
+				blinker = setInterval(subBut, 1000);
+			}
+		}
+		return () => cleanUp();
+	}, [itterator3]);
 
-      setPin({
-        ...pin,
-        PicFile: "",
-        PicDate: rightNow,
-        Animal: "",
-        Latitude: "",
-        Longitude: "",
-      });
-      setPhotoFile("");
-      animateSuccessModal();
-      return;
-    } else {
-      animateCautionModal();
-    }
-  };
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		let AnimalV = pin.Animal.toString();
+		let LatV = parseFloat(pin.Latitude);
+		let LngV = parseFloat(pin.Longitude);
 
-  const clearAnimal = () => {
-    setPin({ ...pin, Animal: "" });
-    setList([]);
-  };
+		if (
+			pin.PicFile &&
+			AnimalV &&
+			typeof AnimalV === 'string' &&
+			LatV &&
+			typeof LatV == 'number' &&
+			LngV &&
+			typeof LngV == 'number'
+		) {
+			let Rnow = new Date();
 
-  const handleModalClose = () => {
-    if (
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 22
-    ) {
-      return;
-    }
+			let rightNow = getToday(Rnow);
 
-    if (pin.PicFile !== null) {
-      console.log("called");
-      removePhoto({
-        filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-        fileName: `${pin.PicFile}`,
-      });
-    }
+			// if (tutorialRunning) {
+			if (itterator3 === 22) {
+				setItterator3(itterator3 + 1);
+			} else {
+				// insertPhotoWaits({ ...pin });
+				// insertPhotoWaits({ ...pin, PicFile: photoFile });
+			}
 
-    setPin({
-      ...pin,
-      PicFile: "",
-      PicDate: "",
-      Animal: "",
-      Latitude: "",
-      Longitude: "",
-    });
-    setShowNoGPS(false);
-    setPhotoFile(null);
-    animatePicModal();
-  };
+			setPin({
+				...pin,
+				PicFile: '',
+				PicDate: rightNow,
+				Animal: '',
+				Latitude: '',
+				Longitude: '',
+			});
+			setPhotoFile('');
+			animateSuccessModal();
+			return;
+		} else {
+			animateCautionModal();
+		}
+	};
 
-  function handleClick() {
-    document.getElementById("file").click();
-  }
+	const clearAnimal = () => {
+		setPin({ ...pin, Animal: '' });
+		setList([]);
+	};
 
-  const activateGuide = () => {
-    setChapter("Adding your photo");
-  };
+	const handleModalClose = () => {
+		if (
+			itterator3 === 8 ||
+			itterator3 === 11 ||
+			itterator3 === 14 ||
+			itterator3 === 16 ||
+			itterator3 === 22
+		) {
+			return;
+		}
 
-  const labelStyle = {
-    display: "flex",
-    fontFamily: "Patrick Hand",
-    fontSize: "1.2vw",
-    textTransform: "none",
-    color: "gold",
-    cursor: "pointer",
-    // backgroundColor: "pink",
-    // marginTop: "9px",
-  };
+		if (pin.PicFile !== null) {
+			console.log('called');
+			removePhoto({
+				filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+				fileName: `${pin.PicFile}`,
+			});
+		}
 
-  const labelStyleAlt = {
-    display: "flex",
-    fontFamily: "Patrick Hand",
-    fontSize: "1.2vw",
-    textTransform: "none",
-    color: "#538dbd",
-    cursor: "pointer",
-    // backgroundColor: "pink",
-    // marginTop: "9px",
-  };
+		setPin({
+			...pin,
+			PicFile: '',
+			PicDate: '',
+			Animal: '',
+			Latitude: '',
+			Longitude: '',
+		});
+		setShowNoGPS(false);
+		setPhotoFile(null);
+		animatePicModal();
+	};
 
-  const iconStyle = {
-    color: "gold",
-    width: "2vw",
-    height: "4vh",
-    marginTop: "1vh",
-    cursor: "pointer",
-    // backgroundColor: "green"
-  };
+	function handleClick() {
+		document.getElementById('file').click();
+	}
 
-  const iconStyleAlt = {
-    color: "#538dbd",
-    width: "2vw",
-    height: "4vh",
-    marginTop: "1vh",
-    cursor: "pointer",
-  };
-  const buttonStyle = {
-    color: "gold",
-    width: "3.5vw",
-    height: "4.5vh",
-    cursor: "pointer",
-  };
+	const activateGuide = () => {
+		setChapter('Adding your photo');
+	};
 
-  const buttonStyleAlt = {
-    color: "#538dbd",
-    width: "3.5vw",
-    height: "4.5vh",
-    cursor: "pointer",
-  };
+	const labelStyle = {
+		display: 'flex',
+		fontFamily: 'Patrick Hand',
+		fontSize: '1.2vw',
+		textTransform: 'none',
+		color: 'gold',
+		cursor: 'pointer',
+		// backgroundColor: "pink",
+		// marginTop: "9px",
+	};
 
-  // AutoSuggest props
-  const handleChangeAutoSuggest = async (e) => {
-    setPin({ ...pin, Animal: e.target.value });
+	const labelStyleAlt = {
+		display: 'flex',
+		fontFamily: 'Patrick Hand',
+		fontSize: '1.2vw',
+		textTransform: 'none',
+		color: '#538dbd',
+		cursor: 'pointer',
+		// backgroundColor: "pink",
+		// marginTop: "9px",
+	};
 
-    if (e.target.value.length > 0) {
-      let fitleredListOfAnimals = await getAnimalNamesThatFit(e.target.value);
-      let animalArray = [];
-      fitleredListOfAnimals.forEach((animal) => {
-        if (!animalArray.includes(animal.label)) {
-          animalArray.push(animal.label);
-        }
-      });
-      setList(animalArray);
-    } else {
-      setList([]);
-    }
-  };
+	const iconStyle = {
+		color: 'gold',
+		width: '2vw',
+		height: '4vh',
+		marginTop: '1vh',
+		cursor: 'pointer',
+		// backgroundColor: "green"
+	};
 
-  const handleSelectAutoSuggest = (name) => {
-    setPin({ ...pin, Animal: name });
-    setList([]);
-  };
+	const iconStyleAlt = {
+		color: '#538dbd',
+		width: '2vw',
+		height: '4vh',
+		marginTop: '1vh',
+		cursor: 'pointer',
+	};
+	const buttonStyle = {
+		color: 'gold',
+		width: '3.5vw',
+		height: '3.5vh',
+		cursor: 'pointer',
+	};
 
-  let waiter;
-  useEffect(() => {
-    clearTimeout(waiter);
+	const buttonStyleAlt = {
+		color: '#538dbd',
+		width: '3.5vw',
+		height: '3.5vh',
+		cursor: 'pointer',
+	};
 
-    if (tutorialRunning) {
-      if (itterator3 === 14) {
-        waiter = setTimeout(() => {
-          setItterator3(itterator3 + 1);
-        }, 2000);
-      }
-    }
-  }, [pin.Animal]);
+	const customBtnStyle = {
+		width: '4.5vw',
+		height: '2.9vh',
+		padding: '20px',
+	};
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        height: "100%",
-        // backgroundColor: "palegoldenrod"
-      }}
-    >
-      <div className="modalTitle2">
-        <Label
-          style={{
-            width: "20vw",
-            marginLeft: "1vw",
-            textAlign: "left",
-            fontFamily: "Patrick Hand",
-            fontSize: "2vw",
-            // backgroundColor: "pink",
-          }}
-        >
-          <strong>Submit Your Picture</strong>
-        </Label>
+	// AutoSuggest props
+	const handleChangeAutoSuggest = async (e) => {
+		setPin({ ...pin, Animal: e.target.value });
 
-        {/* <Button
+		if (e.target.value.length > 0) {
+			let fitleredListOfAnimals = await getAnimalNamesThatFit(e.target.value);
+			let animalArray = [];
+			fitleredListOfAnimals.forEach((animal) => {
+				if (!animalArray.includes(animal.label)) {
+					animalArray.push(animal.label);
+				}
+			});
+			setList(animalArray);
+		} else {
+			setList([]);
+		}
+	};
+
+	const handleSelectAutoSuggest = (name) => {
+		setPin({ ...pin, Animal: name });
+		setList([]);
+	};
+
+	let waiter;
+	useEffect(() => {
+		clearTimeout(waiter);
+
+		if (tutorialRunning) {
+			if (itterator3 === 14) {
+				waiter = setTimeout(() => {
+					setItterator3(itterator3 + 1);
+				}, 2000);
+			}
+		}
+	}, [pin.Animal]);
+
+	return (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				height: '100%',
+				// backgroundColor: "palegoldenrod"
+			}}
+		>
+			<div className='modalTitle2'>
+				<Label
+					style={{
+						width: '20vw',
+						marginLeft: '1vw',
+						textAlign: 'left',
+						fontFamily: 'Patrick Hand',
+						fontSize: '2vw',
+						// backgroundColor: "pink",
+					}}
+				>
+					<strong>Submit Your Picture</strong>
+				</Label>
+
+				{/* <Button
           variant="text"
           // id="questionButton"
           
         > */}
-        <QuestionMarkIcon
-          onClick={() => activateGuide()}
-          sx={{
-            color: "lightgrey",
-            width: "2vw",
-            height: "4vh",
-            marginRight: "1vw",
-            cursor: "pointer",
-          }}
-        ></QuestionMarkIcon>
-        {/* </Button> */}
+				<QuestionMarkIcon
+					onClick={() => activateGuide()}
+					sx={{
+						color: 'lightgrey',
+						width: '2vw',
+						height: '4vh',
+						marginRight: '1vw',
+						cursor: 'pointer',
+					}}
+				></QuestionMarkIcon>
+				{/* </Button> */}
 
-        {/* <Button
+				{/* <Button
           variant="text"
           // id="closeButton"
           
         > */}
-        <CloseIcon
-          onClick={() => handleModalClose()}
-          sx={{
-            color: "lightgrey",
-            width: "2vw",
-            height: "5vh",
-            cursor: "pointer",
-          }}
-        ></CloseIcon>
-        {/* </Button> */}
-      </div>
+				<CloseIcon
+					onClick={() => handleModalClose()}
+					sx={{
+						color: 'lightgrey',
+						width: '2vw',
+						height: '5vh',
+						cursor: 'pointer',
+					}}
+				></CloseIcon>
+				{/* </Button> */}
+			</div>
 
-      {photoFile !== null && (
-        <div className="pickie">
-          {/* <div>{photoFile}</div> */}
-          <img
-            src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoFile}`}
-            // src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoFile}`}
-            height="200px"
-            className="picHolder"
-          ></img>
-        </div>
-      )}
+			{photoFile !== null && (
+				<div className='pickie'>
+					{/* <div>{photoFile}</div> */}
+					<img
+						src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoFile}`}
+						// src={`https://lsakqvscxozherlpunqx.supabase.co/storage/v1/object/public/${photoFile}`}
+						height='200px'
+						className='picHolder'
+					></img>
+				</div>
+			)}
 
-      {photoFile === null && (
-         <div className="pickie">
-        <FileUploader
-          handleChange={handleChange}
-          name="file"
-          types={fileTypes}
-          multiple={false}
-          hoverTitle="Drop Here"
-          label="Upload or drop a file right here"
-        />
-          </div>
-      )}
+			{photoFile === null && (
+				<div className='pickie'>
+					<FileUploader
+						handleChange={handleChange}
+						name='file'
+						types={fileTypes}
+						multiple={false}
+						hoverTitle='Drop Here'
+						label='Upload or drop a file right here'
+					/>
+				</div>
+			)}
 
-      <div className="uploadbox2">
-        <div
-          onClick={handleClick}
-          className={imgButState ? "picSelectDivAlt" : "picSelectDiv"}
-        >
-          <div style={{ marginLeft: "0vw", marginRight: "1vw" }}>
-            <PhotoIcon sx={imgButState ? iconStyleAlt : iconStyle}></PhotoIcon>
-          </div>
+			<div className='uploadbox2'>
+				<div
+					onClick={handleClick}
+					className={imgButState ? 'picSelectDivAlt' : 'picSelectDiv'}
+				>
+					<div style={{ marginLeft: '0vw', marginRight: '1vw' }}>
+						<PhotoIcon sx={imgButState ? iconStyleAlt : iconStyle}></PhotoIcon>
+					</div>
 
-          <Label style={imgButState ? labelStyleAlt : labelStyle}>
-            Choose an Image
-          </Label>
-        </div>
-        <FormGroup>
-          <Input
-            placeholder="Upload"
-            className="modalInputs2"
-            style={{
-              textAlign: "center",
-              // fontFamily: "Itim, cursive",
-              display: "none",
-            }}
-            id="file"
-            type="file"
-            name="PicFile"
-            bsSize="lg"
-            onChange={handleChange}
-            onClick={(e) => handleNoGPSClose(e)}
-          ></Input>
-        </FormGroup>
-      </div>
+					<Label style={imgButState ? labelStyleAlt : labelStyle}>
+						Choose an Image
+					</Label>
+				</div>
+				<FormGroup>
+					<Input
+						placeholder='Upload'
+						className='modalInputs2'
+						style={{
+							textAlign: 'center',
+							// fontFamily: "Itim, cursive",
+							display: 'none',
+						}}
+						id='file'
+						type='file'
+						name='PicFile'
+						bsSize='lg'
+						onChange={handleChange}
+						onClick={(e) => handleNoGPSClose(e)}
+					></Input>
+				</FormGroup>
+			</div>
 
-      <div className="lowerBoxPhoto">
-        {/* <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
+			<div className='lowerBoxPhoto'>
+				{/* <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
           {noGPSZone}
         </Collapse> */}
 
-        <div className="Tbox">
-          <div className="coordDiv">
-            <div className="inputboxType1">
-              <FormGroup>
-                <InputField
-                  placeholder="Date Taken"
-                  type="date"
-                  name="PicDate"
-                  value={pin.PicDate}
-                  onChange={handleChange}
-                  onClick={handleNoGPSClose}
-                  highlighted={datButState}
-                />
-              </FormGroup>
-            </div>
-            <div
-              className={
-                autoButState ? "autosuggestboxPhotoAlt" : "autosuggestboxPhoto"
-              }
-              onClick={handleSelect}
-            >
-              <AutoSuggest
-                placeholder="Animal"
-                value={pin.Animal}
-                list={list}
-                clear={clearAnimal}
-                handleChange={handleChangeAutoSuggest}
-                handleSelect={handleSelectAutoSuggest}
-                style1={{
-                  marginTop: "2vh",
-                  marginLeft: "1vw",
-                }}
-                style2={{
-                  display: "flex",
-                  height: "2.5vh",
-                  paddingLeft: "1vw",
-                  paddingRight: "1vw",
-                  listStyle: "none",
-                  backgroundColor: "#538bdb",
-                  borderRadius: "5px",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  boxShadow: "3px 3px rgba(0, 0, 0, 0.5)",
-                  marginBottom: "0.2vh",
-                  marginLeft: "2vw",
-                }}
-                style3={{
-                  color: "white",
-                  fontFamily: "itim",
-                  fontSize: "1vw",
-                }}
-              />
-            </div>
-            <div className="inputboxType2">
-              <FormGroup>
-                <InputField
-                  placeholder="Latitude"
-                  type="decimal"
-                  name="Latitude"
-                  value={pin.Latitude}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-            </div>
+				<div className='Tbox'>
+					<div className='coordDiv'>
+						<div className='inputboxType1'>
+							<FormGroup>
+								<InputField
+									placeholder='Date Taken'
+									type='date'
+									name='PicDate'
+									value={pin.PicDate}
+									onChange={handleChange}
+									onClick={handleNoGPSClose}
+									highlighted={datButState}
+								/>
+							</FormGroup>
+						</div>
+						<div
+							className={
+								autoButState ? 'autosuggestboxPhotoAlt' : 'autosuggestboxPhoto'
+							}
+							onClick={handleSelect}
+						>
+							<AutoSuggest
+								placeholder='Animal'
+								value={pin.Animal}
+								list={list}
+								clear={clearAnimal}
+								handleChange={handleChangeAutoSuggest}
+								handleSelect={handleSelectAutoSuggest}
+								style1={{
+									marginTop: '2vh',
+									marginLeft: '1vw',
+								}}
+								style2={{
+									display: 'flex',
+									height: '2.5vh',
+									paddingLeft: '1vw',
+									paddingRight: '1vw',
+									listStyle: 'none',
+									backgroundColor: '#538bdb',
+									borderRadius: '5px',
+									alignItems: 'center',
+									justifyContent: 'center',
+									boxShadow: '3px 3px rgba(0, 0, 0, 0.5)',
+									marginBottom: '0.2vh',
+									marginLeft: '2vw',
+								}}
+								style3={{
+									color: 'white',
+									fontFamily: 'itim',
+									fontSize: '1vw',
+								}}
+							/>
+						</div>
+						<div className='inputboxType2'>
+							<FormGroup>
+								<InputField
+									placeholder='Latitude'
+									type='decimal'
+									name='Latitude'
+									value={pin.Latitude}
+									onChange={handleChange}
+								/>
+							</FormGroup>
+						</div>
 
-            <div className="inputboxType2">
-              <FormGroup>
-                <InputField
-                  placeholder="Longitude"
-                  type="decimal"
-                  name="Longitude"
-                  value={pin.Longitude}
-                  onChange={handleChange}
-                />
-              </FormGroup>
-            </div>
-          </div>
-        </div>
-        <div className="Tbox2">
-          <div className="smallBox"></div>
-          <div className="smallBox2">
-            <div
-              className={pinButState ? "Gbox Gbox2" : "Gbox"}
-              onClick={handleNoGPSCloseOnMapChange}
-            >
-              <PlaceIcon
-                sx={pinButState ? buttonStyleAlt : buttonStyle}
-              ></PlaceIcon>
-            </div>
-          </div>
-        </div>
-      </div>
+						<div className='inputboxType2'>
+							<FormGroup>
+								<InputField
+									placeholder='Longitude'
+									type='decimal'
+									name='Longitude'
+									value={pin.Longitude}
+									onChange={handleChange}
+								/>
+							</FormGroup>
+						</div>
+					</div>
+				</div>
+				<div className='Tbox2'>
+					<CustomButton
+						onClick={handleNoGPSCloseOnMapChange}
+						svg={<PlaceIcon sx={pinButState ? buttonStyleAlt : buttonStyle} />}
+						btnState={pinButState}
+						className={customBtnStyle}
+					/>
+				</div>
+			</div>
+			<FormGroup>
+				<Button
+					variant='text'
+					id='modalButtonDivP'
+					style={{ backgroundColor: subButState ? '#538dbd' : '#538bdb' }}
+					onClick={handleSubmit}
+				>
+					Submit Photo
+				</Button>
+			</FormGroup>
 
-      <FormGroup>
-        <Button
-          variant="text"
-          id="modalButtonDivP"
-          style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
-          onClick={handleSubmit}
-        >
-          Submit Photo
-        </Button>
-      </FormGroup>
+			<animated.div
+				className='successModal'
+				style={sucessModalSlide}
+				ref={successModalRef}
+			>
+				<SuccessModal
+					submissionItem='sea creature submission'
+					animateSuccessModal={animateSuccessModal}
+					handleClose={handleModalClose}
+				></SuccessModal>
+			</animated.div>
 
-      <animated.div
-        className="successModal"
-        style={sucessModalSlide}
-        ref={successModalRef}
-      >
-        <SuccessModal
-          submissionItem="sea creature submission"
-          animateSuccessModal={animateSuccessModal}
-          handleClose={handleModalClose}
-        ></SuccessModal>
-      </animated.div>
-
-      <animated.div
-        className="cautionModal"
-        style={cautionModalSlide}
-        ref={cautionModalRef}
-      >
-        <FailModal
-          submissionItem="sea creature submission"
-          animateCautionModal={animateCautionModal}
-        ></FailModal>
-      </animated.div>
-    </div>
-  );
+			<animated.div
+				className='cautionModal'
+				style={cautionModalSlide}
+				ref={cautionModalRef}
+			>
+				<FailModal
+					submissionItem='sea creature submission'
+					animateCautionModal={animateCautionModal}
+				></FailModal>
+			</animated.div>
+		</div>
+	);
 });
 
 export default PicUploader;
