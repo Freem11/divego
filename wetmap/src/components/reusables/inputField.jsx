@@ -9,7 +9,7 @@ export default function InputField(props) {
     textOverflow: "ellipsis",
     backgroundColor: "transparent",
     height: "5vh",
-    width: "18vw",
+    // width: "18vw",
     color: "#F0EEEB",
     borderBottom: "none",
     borderColor: "transparent",
