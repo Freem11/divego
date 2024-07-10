@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
 import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-import InputBase from "@mui/material/InputBase";
 import {
   grabProfileById,
   getProfileWithStats,
@@ -225,6 +224,8 @@ export default function UserProfileModal(props) {
                         : userStats && userStats[0].username
                     }
                     onChange={(e) => setUsername(e.target.value)}
+                    style={{width: "21vw"}}
+
                   />
             </div>
 
@@ -248,11 +249,12 @@ export default function UserProfileModal(props) {
                   </div>
             </div>
 
-            <div className="inputbox1">
+            <div className="inputbox">
                 <InputField
                   placeholder="Email"
                   name="emailField"
                   value={userStats && userStats[0].email}
+                  style={{width: "25vw"}}
                 />
             </div>
           </>

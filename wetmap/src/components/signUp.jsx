@@ -6,7 +6,6 @@ import {
   sessionCheck,
 } from "../supabaseCalls/authenticateSupabaseCalls";
 import "./authenication.css";
-import InputBase from "@mui/material/InputBase";
 import { createProfile } from "../supabaseCalls/accountSupabaseCalls";
 
 let emailVar = false;
@@ -14,6 +13,7 @@ let passwordVar = false;
 let firstVar = false;
 let lastVar = false;
 import manta from "../images/Matt_Manta_White.png"
+import InputField from "./reusables/inputField";
 
 export default function SignUpRoute() {
   const { setActiveSession } = useContext(SessionContext);
@@ -109,31 +109,16 @@ export default function SignUpRoute() {
           <h1 className="logoTag">Scuba SEAsons</h1>
         </div>
         <div className="inptBx">
-          <InputBase
+          <InputField
             placeholder="Email"
-            variant="standard"
             className="inpts"
-            type="text"
             name="email"
             value={formVals.email}
             onChange={handleChange}
             onFocus={() => setRegFail(null)}
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                textOverflow: "ellipsis",
-                backgroundColor: "#538dbd",
-                width: "25vw",
-                height: "4vh",
-                color: "#F0EEEB",
-                borderRadius: "10px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
 
-          <InputBase
+          <InputField
             placeholder="Password"
             className="inpts"
             type="password"
@@ -141,65 +126,24 @@ export default function SignUpRoute() {
             value={formVals.password}
             onChange={handleChange}
             onFocus={() => setRegFail(null)}
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                textOverflow: "ellipsis",
-                backgroundColor: "#538dbd",
-                width: "25vw",
-                height: "4vh",
-                color: "#F0EEEB",
-                borderRadius: "10px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
 
-          <InputBase
+          <InputField
             placeholder="First Name"
             className="inpts"
-            type="text"
             name="firstName"
             value={formVals.firstName}
             onChange={handleChange}
             onFocus={() => setRegFail(null)}
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                textOverflow: "ellipsis",
-                backgroundColor: "#538dbd",
-                width: "25vw",
-                height: "4vh",
-                color: "#F0EEEB",
-                borderRadius: "10px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
 
-          <InputBase
+          <InputField
             placeholder="Last Name"
             className="inpts"
-            type="text"
             name="lastName"
             value={formVals.lastName}
             onChange={handleChange}
             onFocus={() => setRegFail(null)}
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                textOverflow: "ellipsis",
-                backgroundColor: "#538dbd",
-                width: "25vw",
-                height: "4vh",
-                color: "#F0EEEB",
-                borderRadius: "10px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
           {regFail && <Label className="erroMsg">{regFail}</Label>}
         </div>
