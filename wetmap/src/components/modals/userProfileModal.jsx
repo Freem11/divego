@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
-import InputBase from '@mui/material/InputBase';
 import {
 	grabProfileById,
 	getProfileWithStats,
@@ -20,7 +19,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import './userProfile.css';
 import CloseButton from '../closeButton/closeButton';
 import SaveIcon from '@mui/icons-material/Save';
-import InputFieldSmall from '../reusables/inputFieldSmall';
+import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button';
 
 export default function UserProfileModal(props) {
@@ -232,34 +231,17 @@ export default function UserProfileModal(props) {
 							}}
 						>
 							<div className='inputboxS'>
-								<FormGroup>
-									<InputBase
-										id='standard-basic'
-										placeholder='Diver Name'
-										type='text'
-										name='userField'
-										value={
-											username !== null
-												? username
-												: userStats && userStats[0].username
-										}
-										onChange={(e) => setUsername(e.target.value)}
-										inputProps={{
-											style: {
-												textAlign: 'center',
-												fontFamily: 'Itim',
-												fontSize: '1.5vw',
-												textOverflow: 'ellipsis',
-												backgroundColor: '#538BDB',
-												height: '5vh',
-												width: '21vw',
-												color: '#F0EEEB',
-												borderRadius: '120px',
-												boxShadow: 'inset 0 0 15px rgba(0,0,0, 0.5)',
-											},
-										}}
-									/>
-								</FormGroup>
+								<InputField
+									placeholder='Diver Name'
+									name='userField'
+									value={
+										username !== null
+											? username
+											: userStats && userStats[0].username
+									}
+									onChange={(e) => setUsername(e.target.value)}
+									style={{width: "22vw"}}
+								/>
 							</div>
 							<CustomButton
 								onClick={async () => {
@@ -272,92 +254,65 @@ export default function UserProfileModal(props) {
 						</div>
 
 						<div className='inputbox'>
-							<FormGroup>
-								<InputBase
-									id='standard-basic'
-									placeholder='Email'
-									type='text'
-									name='emailField'
-									value={userStats && userStats[0].email}
-									inputProps={{
-										style: {
-											textAlign: 'center',
-											fontFamily: 'Itim',
-											fontSize: '1.5vw',
-											textOverflow: 'ellipsis',
-											backgroundColor: '#538BDB',
-											height: '5vh',
-											width: '24vw',
-											color: '#F0EEEB',
-											borderRadius: '120px',
-											boxShadow: 'inset 0 0 15px rgba(0,0,0, 0.5)',
-										},
-									}}
-								/>
-							</FormGroup>
+							<InputField
+								placeholder='Email'
+								name='emailField'
+								value={userStats && userStats[0].email}
+								style={{width: "25vw"}}
+							/>
 						</div>
 					</>
 				)}
 
 				<div className='statsContainer'>
 					<div className='inputboxMini'>
-						<FormGroup>
-							<InputFieldSmall
-								name='photoCountField'
-								value={
-									'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
-								}
-								contentEditable={false}
-							/>
-						</FormGroup>
+						<InputField
+							name='photoCountField'
+							value={
+								'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
+							}
+							contentEditable={false}
+						/>
 					</div>
 
 					<div className='inputboxMini'>
-						<FormGroup>
-							<InputFieldSmall
-								name='diveSiteCountField'
-								value={
-									'Dive Sites: ' +
-									(userStats && ' ' + userStats[0].divesitecount)
-								}
-								contentEditable={false}
-							/>
-						</FormGroup>
+						<InputField
+							name='diveSiteCountField'
+							value={
+								'Dive Sites: ' +
+								(userStats && ' ' + userStats[0].divesitecount)
+							}
+							contentEditable={false}
+						/>
 					</div>
 
 					<div className='inputboxMini'>
-						<FormGroup>
-							<InputFieldSmall
-								name='followerCountField'
-								value={
-									'Followers: ' +
-									(userStats && ' ' + userStats[0].followercount)
-								}
-								contentEditable={false}
-							/>
-						</FormGroup>
+						<InputField
+							name='followerCountField'
+							value={
+								'Followers: ' +
+								(userStats && ' ' + userStats[0].followercount)
+							}
+							contentEditable={false}
+						/>
 					</div>
 
 					<div className='inputboxMini'>
-						<FormGroup>
-							<InputFieldSmall
-								name='commentCountField'
-								value={
-									'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
-								}
-								contentEditable={false}
-							/>
-						</FormGroup>
+						<InputField
+							name='commentCountField'
+							value={
+								'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
+							}
+							contentEditable={false}
+						/>
 					</div>
 
 					<div className='inputboxMini'>
-						<FormGroup>
-							<InputFieldSmall
-								name='likeCountField'
-								value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
-								contentEditable={false}
-							/>
-						</FormGroup>
+						<InputField
+							name='likeCountField'
+							value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
+							contentEditable={false}
+						/>
 					</div>
 
 					{formError && <p className='erroMsgU'>{formError}</p>}
