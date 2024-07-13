@@ -1,489 +1,485 @@
-import { useState, useEffect, useContext, useRef } from "react";
-import { Container, Form, FormGroup, Label, Input } from "reactstrap";
-import { animated, useSpring } from "react-spring";
-import SuccessModal from "./confirmationSuccessModal";
-import FailModal from "./confirmationCautionModal";
-import "./confirmationSuccessModal.css";
-import "./confirmationCautionModal.css";
-import "./siteSubmitter.css";
-import exifr from "exifr";
-import Button from "@mui/material/Button";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
-import PlaceIcon from "@mui/icons-material/Place";
-import CloseIcon from "@mui/icons-material/Close";
-import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
-import Collapse from "@mui/material/Collapse";
-import { insertDiveSiteWaits } from "../../supabaseCalls/diveSiteWaitSupabaseCalls";
-import { userCheck } from "../../supabaseCalls/authenticateSupabaseCalls";
-import { DiveSpotContext } from "../contexts/diveSpotContext";
-import { MasterContext } from "../contexts/masterContext";
-import { ModalSelectContext } from "../contexts/modalSelectContext";
-import { Iterrator2Context } from "../contexts/iterrator2Context";
-import { TutorialContext } from "../contexts/tutorialContext";
-import { ChapterContext } from "../contexts/chapterContext";
-import InputField from "../reusables/inputField";
+import { useState, useEffect, useContext, useRef } from 'react';
+import { Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import { animated, useSpring } from 'react-spring';
+import SuccessModal from './confirmationSuccessModal';
+import FailModal from './confirmationCautionModal';
+import './confirmationSuccessModal.css';
+import './confirmationCautionModal.css';
+import './siteSubmitter.css';
+import exifr from 'exifr';
+import Button from '@mui/material/Button';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
+import PlaceIcon from '@mui/icons-material/Place';
+import CloseIcon from '@mui/icons-material/Close';
+import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
+import Collapse from '@mui/material/Collapse';
+import { insertDiveSiteWaits } from '../../supabaseCalls/diveSiteWaitSupabaseCalls';
+import { userCheck } from '../../supabaseCalls/authenticateSupabaseCalls';
+import { DiveSpotContext } from '../contexts/diveSpotContext';
+import { MasterContext } from '../contexts/masterContext';
+import { ModalSelectContext } from '../contexts/modalSelectContext';
+import { Iterrator2Context } from '../contexts/iterrator2Context';
+import { TutorialContext } from '../contexts/tutorialContext';
+import { ChapterContext } from '../contexts/chapterContext';
+import InputField from '../reusables/inputField';
+import CustomButton from '../reusables/button/button';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 const noGPSZone = (
-  <div
-    style={{
-      marginLeft: "2%",
-      backgroundColor: "pink",
-      height: "40px",
-      width: "95%",
-      color: "red",
-      borderRadius: "15px",
-    }}
-  >
-    <h4 style={{ marginLeft: "35px", paddingTop: "10px" }}>
-      No GPS Coordinates Found!
-    </h4>
-  </div>
+	<div
+		style={{
+			marginLeft: '2%',
+			backgroundColor: 'pink',
+			height: '40px',
+			width: '95%',
+			color: 'red',
+			borderRadius: '15px',
+		}}
+	>
+		<h4 style={{ marginLeft: '35px', paddingTop: '10px' }}>
+			No GPS Coordinates Found!
+		</h4>
+	</div>
 );
 
 const SiteSubmitter = (props) => {
-  const { animateSiteModal, setSiteModalYCoord } = props;
-  const [showNoGPS, setShowNoGPS] = useState(false);
-  const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
-  const { setMasterSwitch } = useContext(MasterContext);
-  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
-  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-  const { chapter, setChapter } = useContext(ChapterContext);
+	const { animateSiteModal, setSiteModalYCoord } = props;
+	const [showNoGPS, setShowNoGPS] = useState(false);
+	const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
+	const { setMasterSwitch } = useContext(MasterContext);
+	const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+	const { itterator2, setItterator2 } = useContext(Iterrator2Context);
+	const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
+	const { chapter, setChapter } = useContext(ChapterContext);
 
-  const [uploadedFile, setUploadedFile] = useState({
-    selectedFile: null,
-  });
+	const [uploadedFile, setUploadedFile] = useState({
+		selectedFile: null,
+	});
 
-  const successModalRef = useRef(null);
-  const cautionModalRef = useRef(null);
-  const [successModalYCoord, setSuccessModalYCoord] = useState(0);
-  const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
-  
-  const sucessModalSlide = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${successModalYCoord}px,0)` },
-  });
-  
-  const cautionModalSlide = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
-  });
-  
-  const animateSuccessModal = () => {
-    if (successModalYCoord === 0) {
-      setSuccessModalYCoord(-windowHeight);
-    } else {
-      setSuccessModalYCoord(0);
-    }
-  };
-  
-  const animateCautionModal = () => {
-    if (cautionModalYCoord === 0) {
-      setCautionModalYCoord(-windowHeight);
-    } else {
-      setCautionModalYCoord(0);
-    }
-  };
+	const successModalRef = useRef(null);
+	const cautionModalRef = useRef(null);
+	const [successModalYCoord, setSuccessModalYCoord] = useState(0);
+	const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
 
-  window.addEventListener("resize", trackDimensions);
+	const sucessModalSlide = useSpring({
+		from: { transform: `translate3d(0,0,0)` },
+		to: { transform: `translate3d(0,${successModalYCoord}px,0)` },
+	});
 
-  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
-  const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
+	const cautionModalSlide = useSpring({
+		from: { transform: `translate3d(0,0,0)` },
+		to: { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
+	});
 
-  function trackDimensions() {
-    setWindowWidth(window.innerWidth);
-    setWindowHeigth(window.innerHeight);
-  }
+	const animateSuccessModal = () => {
+		if (successModalYCoord === 0) {
+			setSuccessModalYCoord(-windowHeight);
+		} else {
+			setSuccessModalYCoord(0);
+		}
+	};
 
-  const handleChange = (e) => {
-    setAddSiteVals({ ...addSiteVals, [e.target.name]: e.target.value });
+	const animateCautionModal = () => {
+		if (cautionModalYCoord === 0) {
+			setCautionModalYCoord(-windowHeight);
+		} else {
+			setCautionModalYCoord(0);
+		}
+	};
 
-    if (e.target.name === "PicFile") {
-      setUploadedFile({ ...uploadedFile, selectedFile: e.target.files[0] });
+	window.addEventListener('resize', trackDimensions);
 
-      exifr.parse(e.target.files[0]).then((output) => {
-        let EXIFData = exifGPSHelper(
-          output.GPSLatitude,
-          output.GPSLongitude,
-          output.GPSLatitudeRef,
-          output.GPSLongitudeRef
-        );
+	const [windowWidth, setWindowWidth] = useState(screenWidthInital);
+	const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
 
-        if (EXIFData) {
-          setAddSiteVals({
-            ...addSiteVals,
-            Latitude: EXIFData[0],
-            Longitude: EXIFData[1],
-          });
-        } else {
-          setAddSiteVals({ ...addSiteVals });
-          setShowNoGPS(true);
-        }
-      });
-    }
-  };
+	function trackDimensions() {
+		setWindowWidth(window.innerWidth);
+		setWindowHeigth(window.innerHeight);
+	}
 
-  const handleDiveSiteGPS = () => {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          setAddSiteVals({
-            ...addSiteVals,
-            Latitude: position.coords.latitude,
-            Longitude: position.coords.longitude,
-          });
-        },
-        function (error) {
-          console.log("location permissions denied", error.message);
-        },
-        { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
-      );
-      if (tutorialRunning) {
-        if (itterator2 === 13) {
-          setItterator2(itterator2 + 1);
-          setLocButState(false);
-        }
-      }
-    } else {
-      console.log("unsupported");
-    }
-  };
+	const handleChange = (e) => {
+		setAddSiteVals({ ...addSiteVals, [e.target.name]: e.target.value });
 
-  const handleNoGPSClose = () => {
-    setShowNoGPS(false);
-    return;
-  };
+		if (e.target.name === 'PicFile') {
+			setUploadedFile({ ...uploadedFile, selectedFile: e.target.files[0] });
 
-  const handleNoGPSCloseOnMapChange = () => {
-    if (itterator2 === 13 || itterator2 === 23) {
-      return;
-    }
+			exifr.parse(e.target.files[0]).then((output) => {
+				let EXIFData = exifGPSHelper(
+					output.GPSLatitude,
+					output.GPSLongitude,
+					output.GPSLatitudeRef,
+					output.GPSLongitudeRef
+				);
 
-    setChosenModal("DiveSite");
-    setShowNoGPS(false);
-    setMasterSwitch(false);
-    animateSiteModal();
+				if (EXIFData) {
+					setAddSiteVals({
+						...addSiteVals,
+						Latitude: EXIFData[0],
+						Longitude: EXIFData[1],
+					});
+				} else {
+					setAddSiteVals({ ...addSiteVals });
+					setShowNoGPS(true);
+				}
+			});
+		}
+	};
 
-    if (tutorialRunning) {
-      if (itterator2 === 16) {
-        setItterator2(itterator2 + 1);
-        setPinButState(false);
-      }
-    }
-  };
+	const handleDiveSiteGPS = () => {
+		if (navigator.geolocation) {
+			navigator.geolocation.getCurrentPosition(
+				function (position) {
+					setAddSiteVals({
+						...addSiteVals,
+						Latitude: position.coords.latitude,
+						Longitude: position.coords.longitude,
+					});
+				},
+				function (error) {
+					console.log('location permissions denied', error.message);
+				},
+				{ enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
+			);
+			if (tutorialRunning) {
+				if (itterator2 === 13) {
+					setItterator2(itterator2 + 1);
+					setLocButState(false);
+				}
+			}
+		} else {
+			console.log('unsupported');
+		}
+	};
 
-  let counter1 = 0;
-  let counter2 = 0;
-  let blinker1;
-  let blinker2;
-  let timer2;
+	const handleNoGPSClose = () => {
+		setShowNoGPS(false);
+		return;
+	};
 
-  const [locButState, setLocButState] = useState(false);
-  const [pinButState, setPinButState] = useState(false);
-  const [siteNameState, setSiteNameState] = useState(false);
-  const [subButState, setSubButState] = useState(false);
+	const handleNoGPSCloseOnMapChange = () => {
+		if (itterator2 === 13 || itterator2 === 23) {
+			return;
+		}
 
-  function locationBut() {
-    counter1++;
-    if (counter1 % 2 == 0) {
-      setLocButState(false);
-    } else {
-      setLocButState(true);
-    }
-  }
+		setChosenModal('DiveSite');
+		setShowNoGPS(false);
+		setMasterSwitch(false);
+		animateSiteModal();
 
-  function pinBut() {
-    counter1++;
-    if (counter1 % 2 == 0) {
-      setPinButState(false);
-    } else {
-      setPinButState(true);
-    }
-  }
+		if (tutorialRunning) {
+			if (itterator2 === 16) {
+				setItterator2(itterator2 + 1);
+				setPinButState(false);
+			}
+		}
+	};
 
-  function siteField() {
-    counter1++;
-    if (counter1 % 2 == 0) {
-      setSiteNameState(false);
-    } else {
-      setSiteNameState(true);
-    }
-  }
+	let counter1 = 0;
+	let counter2 = 0;
+	let blinker1;
+	let blinker2;
+	let timer2;
 
-  function subButTimeout() {
-    blinker2 = setInterval(subBut, 1000);
-  }
+	const [locButState, setLocButState] = useState(false);
+	const [pinButState, setPinButState] = useState(false);
+	const [siteNameState, setSiteNameState] = useState(false);
+	const [subButState, setSubButState] = useState(false);
 
-  function subBut() {
-    counter2++;
-    if (counter2 % 2 == 0) {
-      setSubButState(false);
-    } else {
-      setSubButState(true);
-    }
-  }
+	function locationBut() {
+		counter1++;
+		if (counter1 % 2 == 0) {
+			setLocButState(false);
+		} else {
+			setLocButState(true);
+		}
+	}
 
-  function cleanUp() {
-    clearInterval(blinker1);
-    clearInterval(blinker2);
-    setLocButState(false);
-    setPinButState(false);
-    setSiteNameState(false);
-    setSubButState(false);
-  }
+	function pinBut() {
+		counter1++;
+		if (counter1 % 2 == 0) {
+			setPinButState(false);
+		} else {
+			setPinButState(true);
+		}
+	}
 
-  let modalHeigth = 700;
+	function siteField() {
+		counter1++;
+		if (counter1 % 2 == 0) {
+			setSiteNameState(false);
+		} else {
+			setSiteNameState(true);
+		}
+	}
 
-  useEffect(() => {
-    if (tutorialRunning) {
-      if (itterator2 === 16) {
-        blinker1 = setInterval(pinBut, 600);
-      } else if (itterator2 === 13) {
-        blinker1 = setInterval(locationBut, 1000);
-      } else if (itterator2 === 15 || itterator2 == 10) {
-        setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      } else if (itterator2 === 8 || itterator2 === 1) {
-        setSiteModalYCoord(0);
-      } else if (itterator2 === 23) {
-        blinker1 = setInterval(siteField, 1000);
-        timer2 = setTimeout(subButTimeout, 300);
-      } else if (itterator2 === 26) {
-        setAddSiteVals({
-          ...addSiteVals,
-          Site: "",
-          Latitude: "",
-          Longitude: "",
-        });
-        animateSiteModal();
-      }
-    }
-    return () => cleanUp();
-  }, [itterator2]);
+	function subButTimeout() {
+		blinker2 = setInterval(subBut, 1000);
+	}
 
-  const buttonColor = {
-    color: "gold",
-    height: "4vw",
-    width: "4vh",
-    cursor: "pointer",
-    marginTop: "4px",
-  };
+	function subBut() {
+		counter2++;
+		if (counter2 % 2 == 0) {
+			setSubButState(false);
+		} else {
+			setSubButState(true);
+		}
+	}
 
-  const buttonColorAlt = {
-    color: "#538bdb",
-    height: "4vw",
-    width: "4vh",
-    cursor: "pointer",
-    marginTop: "4px",
-  };
+	function cleanUp() {
+		clearInterval(blinker1);
+		clearInterval(blinker2);
+		setLocButState(false);
+		setPinButState(false);
+		setSiteNameState(false);
+		setSubButState(false);
+	}
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+	let modalHeigth = 700;
 
-    let SiteV = addSiteVals.Site.toString();
-    let LatV = parseFloat(addSiteVals.Latitude);
-    let LngV = parseFloat(addSiteVals.Longitude);
+	useEffect(() => {
+		if (tutorialRunning) {
+			if (itterator2 === 16) {
+				blinker1 = setInterval(pinBut, 600);
+			} else if (itterator2 === 13) {
+				blinker1 = setInterval(locationBut, 1000);
+			} else if (itterator2 === 15 || itterator2 == 10) {
+				setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+			} else if (itterator2 === 8 || itterator2 === 1) {
+				setSiteModalYCoord(0);
+			} else if (itterator2 === 23) {
+				blinker1 = setInterval(siteField, 1000);
+				timer2 = setTimeout(subButTimeout, 300);
+			} else if (itterator2 === 26) {
+				setAddSiteVals({
+					...addSiteVals,
+					Site: '',
+					Latitude: '',
+					Longitude: '',
+				});
+				animateSiteModal();
+			}
+		}
+		return () => cleanUp();
+	}, [itterator2]);
 
-    if (tutorialRunning) {
-      if (itterator2 === 23) {
-        setItterator2(itterator2 + 1);
-      }
-    } else if (
-      SiteV &&
-      typeof SiteV === "string" &&
-      LatV &&
-      typeof LatV === "number" &&
-      LngV &&
-      typeof LngV === "number"
-    ) {
-      insertDiveSiteWaits(addSiteVals);
-      setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
-      animateSuccessModal();
-      return;
-    } else {
-      animateCautionModal();
-    }
-  };
+	const buttonColor = {
+		color: 'gold',
+		height: '4vw',
+		width: '4vh',
+		cursor: 'pointer',
+		marginTop: '4px',
+	};
 
-  function handleClick() {
-    document.getElementById("file").click();
-  }
+	const buttonColorAlt = {
+		color: '#538bdb',
+		height: '4vw',
+		width: '4vh',
+		cursor: 'pointer',
+		marginTop: '4px',
+	};
 
-  const handleModalClose = () => {
-    if (
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23
-    ) {
-      return;
-    }
-    setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
-    animateSiteModal();
-  };
+	const customBtnStyle = {
+		width: '3.5vw',
+		height: '6vh',
+		borderRadius: '10px',
+	};
 
-  const activateGuide = () => {
-    if (tutorialRunning) {
-    } else {
-      setChapter("DS Help");
-    }
-  };
+	const handleSubmit = (e) => {
+		e.preventDefault();
 
-  return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        height: "100%",
-        // backgroundColor: "palegoldenrod"
-      }}
-    >
-      <div className="modalTitle3">
-        <Label
-          style={{
-            width: "100vw",
-            marginLeft: "1vw",
-            textAlign: "left",
-            fontFamily: "Patrick Hand",
-            fontSize: "2vw",
-            // backgroundColor: "pink",
-          }}
-        >
-          <strong>Submit Your Dive Site</strong>
-        </Label>
+		let SiteV = addSiteVals.Site.toString();
+		let LatV = parseFloat(addSiteVals.Latitude);
+		let LngV = parseFloat(addSiteVals.Longitude);
 
-        <QuestionMarkIcon
-          onClick={() => activateGuide()}
-          sx={{
-            color: "lightgrey",
-            width: "2vw",
-            height: "4vh",
-            marginRight: "1vw",
-            cursor: "pointer",
-            // backgroundColor: 'gray',
-          }}
-        ></QuestionMarkIcon>
+		if (tutorialRunning) {
+			if (itterator2 === 23) {
+				setItterator2(itterator2 + 1);
+			}
+		} else if (
+			SiteV &&
+			typeof SiteV === 'string' &&
+			LatV &&
+			typeof LatV === 'number' &&
+			LngV &&
+			typeof LngV === 'number'
+		) {
+			insertDiveSiteWaits(addSiteVals);
+			setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
+			animateSuccessModal();
+			return;
+		} else {
+			animateCautionModal();
+		}
+	};
 
-        <CloseIcon
-          onClick={() => handleModalClose()}
-          sx={{
-            color: "lightgrey",
-            width: "2vw",
-            height: "5vh",
-            cursor: "pointer",
-            // backgroundColor: "pink"
-          }}
-        ></CloseIcon>
-      </div>
+	function handleClick() {
+		document.getElementById('file').click();
+	}
 
-      <div className="lowerBoxSite">
-        <div className="inputbox">
-          <FormGroup>
-            <InputField
-              placeholder="Site Name"
-              type="text"
-              name="Site"
-              value={addSiteVals.Site}
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-              highlighted={siteNameState}
-            />
-          </FormGroup>
-        </div>
+	const handleModalClose = () => {
+		if (
+			itterator2 === 13 ||
+			itterator2 === 16 ||
+			itterator2 === 19 ||
+			itterator2 === 23
+		) {
+			return;
+		}
+		setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
+		animateSiteModal();
+	};
 
-        <div className="inputbox">
-          <FormGroup>
-            <InputField
-              placeholder="Latitude"
-              type="decimal"
-              name="Latitude"
-              value={addSiteVals.Latitude}
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-            />
-          </FormGroup>
-        </div>
+	const activateGuide = () => {
+		if (tutorialRunning) {
+		} else {
+			setChapter('DS Help');
+		}
+	};
 
-        <div className="inputbox">
-          <FormGroup>
-            <InputField
-              placeholder="Longitude"
-              type="decimal"
-              name="Longitude"
-              value={addSiteVals.Longitude}
-              onChange={handleChange}
-              onClick={handleNoGPSClose}
-            />
-          </FormGroup>
-        </div>
-      </div>
+	return (
+		<div
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				alignItems: 'center',
+				height: '100%',
+				// backgroundColor: "palegoldenrod"
+			}}
+		>
+			<div className='modalTitle3'>
+				<Label
+					style={{
+						width: '100vw',
+						marginLeft: '1vw',
+						textAlign: 'left',
+						fontFamily: 'Patrick Hand',
+						fontSize: '2vw',
+						// backgroundColor: "pink",
+					}}
+				>
+					<strong>Submit Your Dive Site</strong>
+				</Label>
 
-      <div className="buttonBox">
-        <FormGroup>
-          <div
-            onClick={handleDiveSiteGPS}
-            className={locButState ? "GPSbuttonAlt" : "GPSbutton"}
-          >
-            <div>
-              <MyLocationIcon
-                sx={locButState ? buttonColorAlt : buttonColor}
-              ></MyLocationIcon>
-            </div>
-          </div>
-        </FormGroup>
+				<QuestionMarkIcon
+					onClick={() => activateGuide()}
+					sx={{
+						color: 'lightgrey',
+						width: '2vw',
+						height: '4vh',
+						marginRight: '1vw',
+						cursor: 'pointer',
+						// backgroundColor: 'gray',
+					}}
+				></QuestionMarkIcon>
 
-        <FormGroup>
-          <div
-            onClick={handleNoGPSCloseOnMapChange}
-            className={pinButState ? "pinButtonDalt" : "pinButtonD"}
-          >
-            <PlaceIcon
-              sx={pinButState ? buttonColorAlt : buttonColor}
-            ></PlaceIcon>
-          </div>
-        </FormGroup>
-      </div>
+				<CloseIcon
+					onClick={() => handleModalClose()}
+					sx={{
+						color: 'lightgrey',
+						width: '2vw',
+						height: '5vh',
+						cursor: 'pointer',
+						// backgroundColor: "pink"
+					}}
+				></CloseIcon>
+			</div>
 
-      <FormGroup>
-        <Button
-          variant="text"
-          id="modalButtonDivD"
-          style={{ backgroundColor: subButState ? "#538dbd" : "#538bdb" }}
-          onClick={handleSubmit}
-        >
-          Submit Dive Site
-        </Button>
-      </FormGroup>
+			<div className='lowerBoxSite'>
+				<div className='inputbox'>
+					<FormGroup>
+						<InputField
+							placeholder='Site Name'
+							type='text'
+							name='Site'
+							value={addSiteVals.Site}
+							onChange={handleChange}
+							onClick={handleNoGPSClose}
+							highlighted={siteNameState}
+						/>
+					</FormGroup>
+				</div>
 
-      <animated.div
-        className="successModal"
-        style={sucessModalSlide}
-        ref={successModalRef}
-      >
-        <SuccessModal
-          submissionItem="dive site"
-          animateSuccessModal={animateSuccessModal}
-          handleClose={handleModalClose}
-        ></SuccessModal>
-      </animated.div>
+				<div className='inputbox'>
+					<FormGroup>
+						<InputField
+							placeholder='Latitude'
+							type='decimal'
+							name='Latitude'
+							value={addSiteVals.Latitude}
+							onChange={handleChange}
+							onClick={handleNoGPSClose}
+						/>
+					</FormGroup>
+				</div>
 
-      <animated.div
-        className="cautionModal"
-        style={cautionModalSlide}
-        ref={cautionModalRef}
-      >
-        <FailModal
-          submissionItem="dive site"
-          animateCautionModal={animateCautionModal}
-        ></FailModal>
-      </animated.div>
-    </div>
-  );
+				<div className='inputbox'>
+					<FormGroup>
+						<InputField
+							placeholder='Longitude'
+							type='decimal'
+							name='Longitude'
+							value={addSiteVals.Longitude}
+							onChange={handleChange}
+							onClick={handleNoGPSClose}
+						/>
+					</FormGroup>
+				</div>
+			</div>
+
+			<div className='buttonBoxLocation'>
+				<CustomButton
+					onClick={handleDiveSiteGPS}
+					svg={<MyLocationIcon sx={locButState ? buttonColorAlt : buttonColor} />}
+					btnState={locButState}
+					className={customBtnStyle}
+				/>
+				<CustomButton
+					onClick={handleNoGPSCloseOnMapChange}
+					svg={<PlaceIcon sx={pinButState ? buttonColorAlt : buttonColor} />}
+					btnState={pinButState}
+					className={customBtnStyle}
+				/>
+			</div>
+
+			<FormGroup>
+				<Button
+					variant='text'
+					id='modalButtonDivD'
+					style={{ backgroundColor: subButState ? '#538dbd' : '#538bdb' }}
+					onClick={handleSubmit}
+				>
+					Submit Dive Site
+				</Button>
+			</FormGroup>
+
+			<animated.div
+				className='successModal'
+				style={sucessModalSlide}
+				ref={successModalRef}
+			>
+				<SuccessModal
+					submissionItem='dive site'
+					animateSuccessModal={animateSuccessModal}
+					handleClose={handleModalClose}
+				></SuccessModal>
+			</animated.div>
+
+			<animated.div
+				className='cautionModal'
+				style={cautionModalSlide}
+				ref={cautionModalRef}
+			>
+				<FailModal
+					submissionItem='dive site'
+					animateCautionModal={animateCautionModal}
+				></FailModal>
+			</animated.div>
+		</div>
+	);
 };
 
 export default SiteSubmitter;
