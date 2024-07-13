@@ -13,6 +13,7 @@ import {
 } from "../../supabaseCalls/photoCommentSupabaseCalls";
 import "./commentsModal.css";
 import CloseButton from "../closeButton/closeButton";
+import InputField from "../reusables/inputField";
 
 const CommentsModal = (props) => {
   const { animateCommentsModal } = props;
@@ -195,7 +196,7 @@ const CommentsModal = (props) => {
         <div className="replyBox">
           <div className="inputboxType2">
             <FormGroup>
-              <InputBase
+              <InputField
                 id="standard-basic"
                 // label="Latitude"
                 placeholder="Blow some bubbles"
@@ -204,25 +205,25 @@ const CommentsModal = (props) => {
                 name="commentEntry"
                 value={commentContent}
                 onChange={(e) => setCommentContent(e.target.value)}
-                // onClick={(e) => handleChange(e)}
-                inputProps={{
-                  style: {
-                    textAlign: "center",
-                    fontFamily: "Itim",
-                    fontSize: "1.5vw",
-                    textOverflow: "ellipsis",
-                    backgroundColor: "transparent",
-                    height: "5vh",
-                    width: "56vw",
-                    color: "#F0EEEB",
-                    borderBottom: "none",
-                    borderColor: "transparent",
-                    borderRadius: "20px",
-                    boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    marginLeft: "5%",
-                    marginRight: "5%",
-                  },
-                }}
+                
+                  style={{
+                  //   textAlign: "center",
+                  //   fontFamily: "Itim",
+                  //   fontSize: "1.5vw",
+                  //   textOverflow: "ellipsis",
+                  //   backgroundColor: "transparent",
+                  //   height: "5vh",
+                    width: "46vw",
+                    // color: "#F0EEEB",
+                    // borderBottom: "none",
+                    // borderColor: "transparent",
+                    // borderRadius: "20px",
+                    // boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
+                    // marginLeft: "5%",
+                    // marginRight: "5%",
+                  }}
+                
+                
               />
             </FormGroup>
           </div>
