@@ -152,80 +152,12 @@
   background-color: #538dbd;
 }
 
-.buttonBox {
+.buttonBoxLocation {
   display: flex;
-  justify-content: center;
-  width: 90%;
-  height: 20%;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 35%;
+  height: 100%;
+  padding-top: 8%;
   /* background-color: lemonchiffon; */
-}
-
-.GPSbutton {
-  margin-left: 5vw;
-  margin-top: 0vh;
-  display: flex;
-  width: 3.5vw;
-  height: 6vh;
-  align-items: center;
-  justify-content: center;
-  background-color: #538bdb;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
-}
-
-.GPSbutton:hover {
-  background-color: #3e7dd7;
-}
-.GPSbutton:active {
-  background-color: #538dbd;
-}
-
-.GPSbuttonAlt {
-  margin-left: 5vw;
-  margin-top: 0vh;
-  display: flex;
-  width: 3.5vw;
-  height: 6vh;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
-}
-
-.pinButtonD {
-  margin-left: 2vw;
-  margin-top: 0vh;
-  display: flex;
-  width: 3.5vw;
-  height: 6vh;
-  align-items: center;
-  justify-content: center;
-  background-color: #538bdb;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
-}
-
-.pinButtonD:hover {
-  background-color: #3e7dd7;
-}
-.pinButtonD:active {
-  background-color: #538dbd;
-}
-
-.pinButtonDalt {
-  margin-left: 2vw;
-  margin-top: 0vh;
-  display: flex;
-  width: 3.5vw;
-  height: 6vh;
-  align-items: center;
-  justify-content: center;
-  background-color: white;
-  text-align: center;
-  border-radius: 10px;
-  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.4);
 }
