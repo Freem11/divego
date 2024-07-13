@@ -205,22 +205,8 @@ const CommentsModal = (props) => {
                 name="commentEntry"
                 value={commentContent}
                 onChange={(e) => setCommentContent(e.target.value)}
-                
                   style={{
-                  //   textAlign: "center",
-                  //   fontFamily: "Itim",
-                  //   fontSize: "1.5vw",
-                  //   textOverflow: "ellipsis",
-                  //   backgroundColor: "transparent",
-                  //   height: "5vh",
                     width: "46vw",
-                    // color: "#F0EEEB",
-                    // borderBottom: "none",
-                    // borderColor: "transparent",
-                    // borderRadius: "20px",
-                    // boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-                    // marginLeft: "5%",
-                    // marginRight: "5%",
                   }}
                 
                 
