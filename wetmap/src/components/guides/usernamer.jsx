@@ -6,7 +6,7 @@ import { PinContext } from "../contexts/staticPinContext";
 import { DiveSpotContext } from "../contexts/diveSpotContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { updateProfile, grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
-import InputBase from "@mui/material/InputBase";
+import InputField from "../reusables/inputField";
 import "./usernamer.css";
 
 let userVar = false;
@@ -88,29 +88,14 @@ export default function UserNamer() {
   return (
     <div className="container">
       <p className="titleText">What is your diver name?</p>
-      <InputBase
+      <InputField
         value={formVal.userName}
         name="userName"
         placeholder="User Name"
         placeholdertextcolor="darkgrey"
         color="#F0EEEB"
         onChange={(e) => handleChange(e)}
-        inputProps={{
-          style: {
-            textAlign: "center",
-            fontFamily: "Itim",
-            fontSize: "2vw",
-            textOverflow: "ellipsis",
-            backgroundColor: "#538dbd",
-            height: "4vh",
-            color: "lightgrey",
-            width: "15vw",
-            borderRadius: "20px",
-            boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-            marginBottom: "15px"
-          }
-        }}
-      ></InputBase>
+      />
 
       {userFail && <p className="erroMsgU">{userFail}</p>}
 

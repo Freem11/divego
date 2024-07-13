@@ -8,7 +8,6 @@ import {
 } from "../supabaseCalls/authenticateSupabaseCalls";
 import { createProfile } from "../supabaseCalls/accountSupabaseCalls";
 import "./authenication.css";
-import InputBase from "@mui/material/InputBase";
 import {
   LoginSocialGoogle,
   LoginSocialFacebook,
@@ -20,6 +19,7 @@ import {
   AppleLoginButton,
 } from "react-social-login-buttons";
 import manta from "../images/Matt_Manta_White.png"
+import InputField from "./reusables/inputField";
 
 let emailVar = false;
 let passwordVar = false;
@@ -281,30 +281,16 @@ export default function SignInRoute(props) {
         </div>
 
         <div className="inptBx">
-          <InputBase
+          <InputField
             placeholder="Email"
             className="inpts"
-            type="text"
             name="email"
             value={formVals.email}
             onChange={handleChange}
             onFocus={() => setLoginFail(null)}
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                textOverflow: "ellipsis",
-                backgroundColor: "#538dbd",
-                width: "25vw",
-                height: "4vh",
-                color: "#F0EEEB",
-                borderRadius: "10px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
 
-          <InputBase
+          <InputField
             placeholder="Password"
             className="inpts"
             type="password"
@@ -312,19 +298,6 @@ export default function SignInRoute(props) {
             value={formVals.password}
             onChange={handleChange}
             onFocus={() => setLoginFail(null)}
-            inputProps={{
-              style: {
-                textAlign: "center",
-                fontFamily: "Itim",
-                textOverflow: "ellipsis",
-                backgroundColor: "#538dbd",
-                width: "25vw",
-                height: "4vh",
-                color: "#F0EEEB",
-                borderRadius: "10px",
-                boxShadow: "inset 0 0 15px rgba(0,0,0, 0.5)",
-              },
-            }}
           />
         </div>
         <Label className="registerClick" onClick={handlePageSwap}>Need An Account? Register Here</Label>

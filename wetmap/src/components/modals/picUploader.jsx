@@ -6,7 +6,6 @@ import FailModal from './confirmationCautionModal';
 import './confirmationSuccessModal.css';
 import './confirmationCautionModal.css';
 import './picUploader.css';
-import InputBase from '@mui/material/InputBase';
 import Button from '@mui/material/Button';
 import exifr from 'exifr';
 import AutoSuggest from '../autoSuggest/autoSuggest';
