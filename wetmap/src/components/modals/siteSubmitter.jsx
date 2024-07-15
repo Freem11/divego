@@ -268,24 +268,16 @@ const SiteSubmitter = (props) => {
 
 	const buttonColor = {
 		color: 'gold',
-		height: '4vw',
-		width: '4vh',
+		width: '3.5vw',
+		height: '3.5vh',
 		cursor: 'pointer',
-		marginTop: '4px',
 	};
 
 	const buttonColorAlt = {
 		color: '#538bdb',
-		height: '4vw',
-		width: '4vh',
-		cursor: 'pointer',
-		marginTop: '4px',
-	};
-
-	const customBtnStyle = {
 		width: '3.5vw',
-		height: '6vh',
-		borderRadius: '10px',
+		height: '3.5vh',
+		cursor: 'pointer',
 	};
 
 	const handleSubmit = (e) => {
@@ -363,19 +355,20 @@ const SiteSubmitter = (props) => {
 				>
 					<strong>Submit Your Dive Site</strong>
 				</Label>
-
-				<QuestionMarkIcon
+				<CustomButton
 					onClick={() => activateGuide()}
-					sx={{
-						color: 'lightgrey',
-						width: '2vw',
-						height: '4vh',
-						marginRight: '1vw',
-						cursor: 'pointer',
-						// backgroundColor: 'gray',
-					}}
-				></QuestionMarkIcon>
-
+					svg={
+						<QuestionMarkIcon
+							sx={{
+								color: 'gold',
+								width: '3.5vw',
+								height: '3.5vh',
+								padding: '1px',
+								cursor: 'pointer',
+							}}
+						/>
+					}
+				/>
 				<CloseIcon
 					onClick={() => handleModalClose()}
 					sx={{
@@ -383,7 +376,8 @@ const SiteSubmitter = (props) => {
 						width: '2vw',
 						height: '5vh',
 						cursor: 'pointer',
-						// backgroundColor: "pink"
+						marginRight: '-7px',
+						marginLeft: '10px',
 					}}
 				></CloseIcon>
 			</div>
@@ -433,15 +427,15 @@ const SiteSubmitter = (props) => {
 			<div className='buttonBoxLocation'>
 				<CustomButton
 					onClick={handleDiveSiteGPS}
-					svg={<MyLocationIcon sx={locButState ? buttonColorAlt : buttonColor} />}
+					svg={
+						<MyLocationIcon sx={locButState ? buttonColorAlt : buttonColor} />
+					}
 					btnState={locButState}
-					className={customBtnStyle}
 				/>
 				<CustomButton
 					onClick={handleNoGPSCloseOnMapChange}
 					svg={<PlaceIcon sx={pinButState ? buttonColorAlt : buttonColor} />}
 					btnState={pinButState}
-					className={customBtnStyle}
 				/>
 			</div>
 

@@ -158,9 +158,9 @@ export default function UserProfileModal(props) {
 	};
 
 	const customBtnStyle = {
-		width: '3.4vw',
-		height: '3.3vh',
-		padding: '13px',
+    width: '3.4vw',
+    height: '3.3vh',
+    padding: '13px',
 		marginLeft: '-20px',
 		marginRight: '10px',
 	};
