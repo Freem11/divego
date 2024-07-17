@@ -1,10 +1,8 @@
 import { useState, useEffect, useContext, useRef } from 'react';
 import { Container, Form, FormGroup, Label, Input } from 'reactstrap';
 import { animated, useSpring } from 'react-spring';
-import SuccessModal from './confirmationSuccessModal';
-import FailModal from './confirmationCautionModal';
-import './confirmationSuccessModal.css';
-import './confirmationCautionModal.css';
+import ConfirmationModal from './confirmationModal';
+import './confirmationModal.css';
 import './siteSubmitter.css';
 import exifr from 'exifr';
 import Button from '@mui/material/Button';
@@ -451,26 +449,28 @@ const SiteSubmitter = (props) => {
 			</FormGroup>
 
 			<animated.div
-				className='successModal'
+				className='successModal modalBase'
 				style={sucessModalSlide}
 				ref={successModalRef}
 			>
-				<SuccessModal
+				<ConfirmationModal
 					submissionItem='dive site'
-					animateSuccessModal={animateSuccessModal}
+					animateModal={animateSuccessModal}
 					handleClose={handleModalClose}
-				></SuccessModal>
+					isSuccess={true}
+				/>
 			</animated.div>
 
 			<animated.div
-				className='cautionModal'
+				className='cautionModal modalBase'
 				style={cautionModalSlide}
 				ref={cautionModalRef}
 			>
-				<FailModal
+				<ConfirmationModal
 					submissionItem='dive site'
-					animateCautionModal={animateCautionModal}
-				></FailModal>
+					animateModal={animateCautionModal}
+					isSuccess={false}
+				/>
 			</animated.div>
 		</div>
 	);

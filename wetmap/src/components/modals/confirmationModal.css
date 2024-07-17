@@ -1,0 +1,113 @@
+.modalBase {
+	z-index: 200;
+	position: absolute;
+	top: 120vh;
+	left: 0;
+	width: 30vw;
+	height: 29vh;
+	border-radius: 3vw;
+	border: 1px solid lightgrey;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+.successModal {
+	background-color: #99edc3;
+}
+
+.cautionModal {
+	background-color: pink;
+}
+
+@media (max-width: 992px) {
+	.modalBase {
+		height: 32vh;
+	}
+}
+
+@media (max-width: 768px) {
+	.modalBase {
+		height: 35vh;
+	}
+}
+
+.containerModal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	padding-top: 7%;
+}
+
+.titleModal {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-bottom: 0%;
+	width: 90%;
+}
+
+.textModal {
+	font-size: 1.2rem;
+	color: #36454f;
+	font-family: 'Itim', cursive;
+	align-self: center;
+	text-align: center;
+	margin-bottom: 7%;
+	width: 90%;
+}
+
+.text2Modal {
+	font-size: 1rem;
+	width: 90%;
+	color: #36454f;
+	font-family: 'Itim', cursive;
+	align-self: center;
+	text-align: center;
+}
+
+.OKbuttonS {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Itim', cursive;
+	font-size: 1em;
+	cursor: pointer;
+	background-color: #79bace;
+	width: 12vw;
+	height: 4vh;
+	text-align: center;
+	border-radius: 5px;
+	box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+	margin-top: 7%;
+}
+
+.OKbuttonF {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-family: 'Itim', cursive;
+	font-size: 1em;
+	cursor: pointer;
+	background-color: #fa8072;
+	width: 12vw;
+	height: 4vh;
+	text-align: center;
+	border-radius: 5px;
+	box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+	margin-top: 7%;
+}
+
+.OKbuttonS:hover {
+	background-color: #6ca7b9;
+}
+.OKbuttonS:active {
+	background-color: #93c7d7;
+}
+
+.OKbuttonF:hover {
+	background-color: #e17366;
+}
+.OKbuttonF:active {
+	background-color: #fdd8d4;
+}
