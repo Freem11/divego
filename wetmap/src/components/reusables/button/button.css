@@ -6,6 +6,9 @@
 	border-radius: 20px;
 	border: none;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
+	width: 4.5vw;
+	height: 2.9vh;
+	padding: 20px;
 }
 
 .btnBox2 {
@@ -16,6 +19,9 @@
 	border: none;
 	box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.3);
 	background-color: white;
+	width: 4.5vw;
+	height: 2.9vh;
+	padding: 20px;
 }
 
 .btnBox:hover {

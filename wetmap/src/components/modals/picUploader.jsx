@@ -1,10 +1,8 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { Container, Form, FormGroup, Label, Input } from 'reactstrap';
 import { animated, useSpring } from 'react-spring';
-import SuccessModal from './confirmationSuccessModal';
-import FailModal from './confirmationCautionModal';
-import './confirmationSuccessModal.css';
-import './confirmationCautionModal.css';
+import ConfirmationModal from './confirmationModal.jsx';
+import './confirmationModal.css';
 import './picUploader.css';
 import Button from '@mui/material/Button';
 import exifr from 'exifr';
@@ -449,8 +447,6 @@ const PicUploader = React.memo((props) => {
 		textTransform: 'none',
 		color: 'gold',
 		cursor: 'pointer',
-		// backgroundColor: "pink",
-		// marginTop: "9px",
 	};
 
 	const labelStyleAlt = {
@@ -460,8 +456,6 @@ const PicUploader = React.memo((props) => {
 		textTransform: 'none',
 		color: '#538dbd',
 		cursor: 'pointer',
-		// backgroundColor: "pink",
-		// marginTop: "9px",
 	};
 
 	const iconStyle = {
@@ -470,7 +464,6 @@ const PicUploader = React.memo((props) => {
 		height: '4vh',
 		marginTop: '1vh',
 		cursor: 'pointer',
-		// backgroundColor: "green"
 	};
 
 	const iconStyleAlt = {
@@ -749,26 +742,28 @@ const PicUploader = React.memo((props) => {
 			</FormGroup>
 
 			<animated.div
-				className='successModal'
+				className='successModal modalBase'
 				style={sucessModalSlide}
 				ref={successModalRef}
 			>
-				<SuccessModal
+				<ConfirmationModal
 					submissionItem='sea creature submission'
-					animateSuccessModal={animateSuccessModal}
+					animateModal={animateSuccessModal}
 					handleClose={handleModalClose}
-				></SuccessModal>
+					isSuccess={true}
+				/>
 			</animated.div>
 
 			<animated.div
-				className='cautionModal'
+				className='cautionModal modalBase'
 				style={cautionModalSlide}
 				ref={cautionModalRef}
 			>
-				<FailModal
+				<ConfirmationModal
 					submissionItem='sea creature submission'
-					animateCautionModal={animateCautionModal}
-				></FailModal>
+					animateModal={animateCautionModal}
+					isSuccess={false}
+				/>
 			</animated.div>
 		</div>
 	);

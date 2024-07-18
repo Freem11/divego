@@ -6,12 +6,10 @@ import { PartnerModalContext } from "../contexts/partnerAccountRequestModalConte
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { createPartnerAccountRequest } from "../../supabaseCalls/partnerSupabaseCalls";
 import "./partnerAccountRequestModal.css";
-import "./confirmationSuccessModal.css";
-import "./confirmationCautionModal.css";
+import "./confirmationModal.css";
 import CloseButton from "../closeButton/closeButton";
 import InputField from "../reusables/inputField";
-import SuccessModal from "./confirmationSuccessModal";
-import FailModal from "./confirmationCautionModal";
+import ConfirmationModal from "./confirmationModal";
 
 // const windowWidth = Dimensions.get("window").width;
 // const windowHeight = Dimensions.get("window").height;
@@ -247,26 +245,28 @@ export default function PartnerAccountRequestModal() {
       </FormGroup>
 
       <animated.div
-        className="successModal"
+        className="successModal modalBase"
         style={sucessModalSlide}
         ref={successModalRef}
       >
-        <SuccessModal
-          submissionItem="partner account creation request"
-          animateSuccessModal={animateSuccessModal}
-          handleClose={handleClose}
-        ></SuccessModal>
+        <ConfirmationModal
+					submissionItem='partner account creation request'
+					animateModal={animateSuccessModal}
+					handleClose={handleClose}
+					isSuccess={true}
+				/>
       </animated.div>
 
       <animated.div
-        className="cautionModal"
+        className="cautionModal modalBase"
         style={cautionModalSlide}
         ref={cautionModalRef}
       >
-        <FailModal
-          submissionItem="partner account creation request"
-          animateCautionModal={animateCautionModal}
-        ></FailModal>
+        <ConfirmationModal
+					submissionItem='partner account creation request'
+					animateModal={animateCautionModal}
+					isSuccess={false}
+				/>
       </animated.div>
     </div>
   );

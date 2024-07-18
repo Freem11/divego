@@ -96,16 +96,6 @@
     cursor: pointer;
 }
 
-#closeButton2 {
-    display: flex;
-    background-color: transparent;
-    justify-content: center;
-    align-items: center;
-    border: none;
-    width: 4vw;
-    cursor: pointer;
-}
-
 .monthlyLabel{
     font-family: "Caveat", cursive;
     font-size: larger;
