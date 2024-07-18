@@ -1,7 +1,7 @@
 .modalBase {
 	z-index: 200;
 	position: absolute;
-	top: 120vh;
+	top: 120%;
 	left: 0;
 	width: 30vw;
 	height: 29vh;
