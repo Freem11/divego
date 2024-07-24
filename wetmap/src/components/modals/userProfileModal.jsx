@@ -18,9 +18,8 @@ import {
 import CloseIcon from '@mui/icons-material/Close';
 import './userProfile.css';
 import CloseButton from '../closeButton/closeButton';
-import SaveIcon from '@mui/icons-material/Save';
 import InputField from '../reusables/inputField';
-import CustomButton from '../reusables/button/button';
+import SubmitButton from '../reusables/button/submitButton';
 
 export default function UserProfileModal(props) {
 	const { animateProfileModal } = props;
@@ -240,17 +239,9 @@ export default function UserProfileModal(props) {
 											: userStats && userStats[0].username
 									}
 									onChange={(e) => setUsername(e.target.value)}
-									style={{width: "22vw"}}
+									style={{width: "25vw"}}
 								/>
 							</div>
-							<CustomButton
-								onClick={async () => {
-									(await handleSubmit()) && toggleProfileModal();
-								}}
-								svg={<SaveIcon sx={{ cursor: 'pointer', color: 'gold' }} />}
-								btnState={saveButState}
-								className={customBtnStyle}
-							/>
 						</div>
 
 						<div className='inputbox'>
@@ -316,6 +307,14 @@ export default function UserProfileModal(props) {
 					</div>
 
 					{formError && <p className='erroMsgU'>{formError}</p>}
+
+					<SubmitButton
+						onClick={async () => {
+							(await handleSubmit()) && toggleProfileModal();
+						}}
+					>
+						Save changes
+					</SubmitButton>
 				</div>
 			</div>
 		</div>
