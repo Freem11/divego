@@ -20,7 +20,6 @@ import {
 } from '../../supabaseCalls/photoSupabaseCalls';
 import Picture from './picture';
 import FlagIcon from '@mui/icons-material/Flag';
-import CloseIcon from '@mui/icons-material/Close';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './anchorPics.css';
 import CloseButton from '../closeButton/closeButton';
@@ -182,16 +181,9 @@ const AnchorPics = (props) => {
 								/>
 							}
 						/>
-						<CloseIcon
-							onClick={() => handleClose()}
-							sx={{
-								color: 'lightgrey',
-								width: '2.3vw',
-								height: '5vh',
-								cursor: 'pointer',
-								marginLeft: '10px',
-							}}
-						></CloseIcon>
+						<FormGroup>
+							<CloseButton onClick={handleClose} />
+						</FormGroup>
 					</div>
 				</div>
 			</div>

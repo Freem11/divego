@@ -2,7 +2,6 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { Container, Form, FormGroup, Label, Button } from "reactstrap";
 import InputBase from "@mui/material/InputBase";
 import CommentListItem from "../commentListItem/commentListItem";
-import CloseIcon from "@mui/icons-material/Close";
 import bubbles from "../../images/bubbles.png";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { SelectedPictureContext } from "../contexts/selectedPictureContext";
@@ -160,15 +159,6 @@ const CommentsModal = (props) => {
         <FormGroup>
           <CloseButton
             onClick={handleCommentModalClose}
-            id="closeButton"
-            btnStyle={{
-              display: "flex",
-              flexDirection: "column",
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-            }}
-            iconStyle={{ color: "#F0EEEB", width: "3vw", height: "5vh" }}
           />
         </FormGroup>
       </div>
@@ -180,15 +170,7 @@ const CommentsModal = (props) => {
           <div className="replyLine">
             <p className="userTxt">@{replyTo[0]}</p>
             <CloseButton
-              id='microCloseButton'
               onClick={() => setReplyTo(null)}
-              btnStyle={{
-                display: "flex",
-                flexDirection: "column",
-                backgroundColor: "transparent",
-                border: "none",
-                cursor: "pointer",
-              }}
               iconStyle={{ color: "#F0EEEB", width: "1vw", height: "1vw", zIndex: 200 }}
             />
           </div>

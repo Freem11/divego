@@ -8,7 +8,6 @@ import { Iterrator3Context } from "../contexts/iterrator3Context";
 import { TutorialModelContext } from "../contexts/tutorialModalContext";
 import { SecondTutorialModalContext } from "../contexts/secondTutorialModalContext";
 import { ThirdTutorialModalContext } from "../contexts/thirdTutorialModalContext";
-import CloseIcon from "@mui/icons-material/Close";
 import ExploreIcon from "@mui/icons-material/Explore";
 import SearchIcon from "@mui/icons-material/Search";
 import AnchorIcon from "@mui/icons-material/Anchor";
@@ -80,17 +79,7 @@ const HowToGuide = (props) => {
         </h3>
         <FormGroup>
             <CloseButton
-                id='closeButton'
                 onClick={animateLaunchModal}
-                btnStyle={{
-                    display: "flex",
-                    flexDirection: "column",
-                    // marginRight: 20,
-                    // marginTop: 10,
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer"
-                }}
             />
         </FormGroup>
       </div>

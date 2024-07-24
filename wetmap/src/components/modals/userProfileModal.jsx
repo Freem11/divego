@@ -15,7 +15,6 @@ import {
 	deleteUserFollow,
 	checkIfUserFollows,
 } from '../../supabaseCalls/userFollowSupabaseCalls';
-import CloseIcon from '@mui/icons-material/Close';
 import './userProfile.css';
 import CloseButton from '../closeButton/closeButton';
 import SaveIcon from '@mui/icons-material/Save';
@@ -161,8 +160,8 @@ export default function UserProfileModal(props) {
     width: '3.4vw',
     height: '3.3vh',
     padding: '13px',
-		marginLeft: '-20px',
-		marginRight: '10px',
+	marginLeft: '-20px',
+	marginRight: '10px',
 	};
 
 	return (
@@ -184,17 +183,7 @@ export default function UserProfileModal(props) {
 				</h3>
 				<FormGroup>
 					<CloseButton
-						id='closeButton'
 						onClick={toggleProfileModal}
-						btnStyle={{
-							display: 'flex',
-							flexDirection: 'column',
-							// marginRight: 20,
-							// marginTop: 10,
-							backgroundColor: 'transparent',
-							border: 'none',
-							cursor: 'pointer',
-						}}
 					/>
 				</FormGroup>
 			</div>
