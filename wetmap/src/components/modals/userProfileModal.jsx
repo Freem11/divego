@@ -166,6 +166,35 @@ export default function UserProfileModal(props) {
 	};
 
 	return (
+		<div className='p-6'>
+			<div className='columns'>
+				<h1 className='column col-11 text-left text-light'>
+					{selectedProfile
+						? userStats && userStats[0].username + "'s Diving"
+						: 'My Diver Profile'}
+				</h1>
+
+				{/* <CloseIcon  /> */}
+				<div className='icon-refresh'></div>
+
+				<CloseButton
+					onClick={toggleProfileModal}
+					className="column col-1"
+					// btnStyle={{
+					// 	display: 'flex',
+					// 	flexDirection: 'column',
+					// 	marginRight: 20,
+					// 	marginTop: 10,
+					// 	backgroundColor: 'transparent',
+					// 	border: 'none',
+					// 	cursor: 'pointer',
+					// }}
+				/>
+			</div>
+		</div>
+	)
+
+	return(
 		<div className='containerBox'>
 			<div className='titleDiv'>
 				<h3

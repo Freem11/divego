@@ -23,7 +23,6 @@ import FlagIcon from '@mui/icons-material/Flag';
 import CloseIcon from '@mui/icons-material/Close';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './anchorPics.css';
-import CloseButton from '../closeButton/closeButton';
 import CustomButton from '../reusables/button/button';
 
 const AnchorPics = (props) => {
