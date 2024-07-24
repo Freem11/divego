@@ -165,7 +165,7 @@ export default function UserProfileModal(props) {
 		marginRight: '10px',
 	};
 
-	return (
+	return <>
 		<div className='p-6'>
 			<div className='columns'>
 				<h1 className='column col-11 text-left text-light'>
@@ -174,25 +174,117 @@ export default function UserProfileModal(props) {
 						: 'My Diver Profile'}
 				</h1>
 
-				{/* <CloseIcon  /> */}
-				<div className='icon-refresh'></div>
-
 				<CloseButton
 					onClick={toggleProfileModal}
 					className="column col-1"
-					// btnStyle={{
-					// 	display: 'flex',
-					// 	flexDirection: 'column',
-					// 	marginRight: 20,
-					// 	marginTop: 10,
-					// 	backgroundColor: 'transparent',
-					// 	border: 'none',
-					// 	cursor: 'pointer',
-					// }}
 				/>
 			</div>
 		</div>
-	)
+
+		<div className="p-6">
+			{selectedProfile ? (
+				<div
+					onClick={() => handleFollow()}
+					className={userFollows ? 'followButtoAlt' : 'followButton'}
+				>
+					<Label
+						style={{
+							fontFamily: 'Itim',
+							fontWeight: 'bold',
+							color: userFollows ? 'black' : 'pink',
+							cursor: 'pointer',
+							fontSize: '1vw',
+						}}
+					>
+						{userFollows
+							? 'Following ' + (userStats && userStats[0].username)
+							: 'Follow ' + (userStats && userStats[0].username)}
+					</Label>
+				</div>
+			) : (
+				<>
+					<div className='columns mb-2'>
+						<InputField
+							className="column col-12"
+							placeholder='Diver Name'
+							name='userField'
+							value={
+								username !== null
+									? username
+									: userStats && userStats[0].username
+							}
+							onChange={(e) => setUsername(e.target.value)}
+						/>
+					</div>
+					
+					<div className='columns mb-2'>
+						<InputField
+							className="column col-12"
+							placeholder='Email'
+							name='emailField'
+							value={userStats && userStats[0].email}
+						/>
+					</div>
+				</>
+			)}
+
+			<div className="columns mb-2">
+				<InputField
+					className="column col-6"
+					name='photoCountField'
+					value={
+						'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
+					}
+					contentEditable={false}
+				/>
+				<InputField
+					className="column col-6"
+					name='diveSiteCountField'
+					value={
+						'Dive Sites: ' +
+						(userStats && ' ' + userStats[0].divesitecount)
+					}
+					contentEditable={false}
+				/>
+			</div>
+			<div className="columns mb-2">
+				<InputField
+					className="column col-6"
+					name='followerCountField'
+					value={
+						'Followers: ' +
+						(userStats && ' ' + userStats[0].followercount)
+					}
+					contentEditable={false}
+				/>
+				<InputField
+					className="column col-6"
+					name='commentCountField'
+					value={
+						'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
+					}
+					contentEditable={false}
+				/>
+			</div>
+			<div className="columns mb-2">
+				<div className="column col-3"></div>
+				<InputField
+					className="column col-6"
+					name='likeCountField'
+					value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
+					contentEditable={false}
+				/>
+				<div className="column col-3"></div>
+			</div>
+		</div>
+		<CustomButton
+			variant='text'
+			// style={{ backgroundColor: subButState ? '#538dbd' : '#538bdb' }}
+			onClick={handleSubmit}
+		>
+			Submit Photo
+		</CustomButton>
+	</>
 
 	return(
 		<div className='containerBox'>
