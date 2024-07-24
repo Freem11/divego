@@ -171,7 +171,7 @@ const CommentsModal = (props) => {
             <p className="userTxt">@{replyTo[0]}</p>
             <CloseButton
               onClick={() => setReplyTo(null)}
-              iconStyle={{ color: "#F0EEEB", width: "1vw", height: "1vw", zIndex: 200 }}
+              // iconStyle={{ color: "#F0EEEB", width: "1vw", height: "1vw", zIndex: 200 }}
             />
           </div>
         ) : null}
