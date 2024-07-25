@@ -10,6 +10,7 @@ import "./confirmationModal.css";
 import CloseButton from "../closeButton/closeButton";
 import InputField from "../reusables/inputField";
 import ConfirmationModal from "./confirmationModal";
+import SubmitButton from "../reusables/button/submitButton";
 
 // const windowWidth = Dimensions.get("window").width;
 // const windowHeight = Dimensions.get("window").height;
@@ -226,14 +227,11 @@ export default function PartnerAccountRequestModal() {
       <Label className="explainerMicro">(For map placement)</Label>
 
       <FormGroup>
-        <Button
-          variant="text"
-          id="modalButtonDivPa"
-          style={{ backgroundColor: "#538bdb", cursor: "pointer" }}
+        <SubmitButton
           onClick={() => handleSubmit(formValues)}
         >
           Submit Account Request
-        </Button>
+        </SubmitButton>
       </FormGroup>
 
       <animated.div

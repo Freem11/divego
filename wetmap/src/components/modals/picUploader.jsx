@@ -37,6 +37,7 @@ import { userCheck } from '../../supabaseCalls/authenticateSupabaseCalls';
 import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button.jsx';
 import CloseButton from "../closeButton/closeButton";
+import SubmitButton from '../reusables/button/submitButton.jsx';
 
 let filePath1 = './wetmap/src/components/uploads/';
 let filePath = '/src/components/uploads/';
@@ -723,14 +724,12 @@ const PicUploader = React.memo((props) => {
 				</div>
 			</div>
 			<FormGroup>
-				<Button
-					variant='text'
-					id='modalButtonDivP'
-					style={{ backgroundColor: subButState ? '#538dbd' : '#538bdb' }}
+				<SubmitButton
+					active={ !!subButState}
 					onClick={handleSubmit}
 				>
 					Submit Photo
-				</Button>
+				</SubmitButton>
 			</FormGroup>
 
 			<animated.div

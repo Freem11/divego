@@ -23,6 +23,8 @@ import { ChapterContext } from '../contexts/chapterContext';
 import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button';
 import CloseButton from '../closeButton/closeButton';
+import SubmitButton from '../reusables/button/submitButton';
+
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -432,14 +434,12 @@ const SiteSubmitter = (props) => {
 			</div>
 
 			<FormGroup>
-				<Button
-					variant='text'
-					id='modalButtonDivD'
-					style={{ backgroundColor: subButState ? '#538dbd' : '#538bdb' }}
+				<SubmitButton
+					active={ !!subButState}
 					onClick={handleSubmit}
 				>
 					Submit Dive Site
-				</Button>
+				</SubmitButton>
 			</FormGroup>
 
 			<animated.div
