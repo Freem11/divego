@@ -1,3 +1,5 @@
+@import '../../../styles/variables.scss';
+
 .button {
 	width: 100%;
 	position: fixed;
@@ -5,7 +7,6 @@
 	left: 0;
 	height: 8vh;
 	padding-top: 4px;
-	font-family: "Patrick Hand", cursive;
 	font-size: 2vw;
 	font-weight: bolder;
 	color: gold;
@@ -13,15 +14,15 @@
 	text-transform: none;
 	border-bottom-left-radius: 2vw;
 	border-bottom-right-radius: 2vw;
-	border-color: #538bdb;
-	background-color: #538bdb;
+	border-color: $primary-color;
+	background-color: $primary-color;
 	cursor: pointer;
-	border-top: 1px solid #f0eeeb;
+	border-top: 1px solid $light-color;
   }
   
   .button:hover {
-	background-color: #3e7dd7;
-	border-color: #3e7dd7;
+	background-color: $primary-color-light;
+	border-color: $primary-color-light;
 	border-top: 1px solid #f0eeeb;
   }
 

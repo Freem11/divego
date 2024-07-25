@@ -11,15 +11,10 @@
 /* font-family: 'Spinnaker', sans-serif; */
 
 
-// Define variables to override default ones
+// Styles
+@import "./styles/variables.scss";
+@import "./styles/base.scss";
 
-$light-color: #f0eeeb;
-$base-font-family: "Patrick Hand";
-
-// Import full Spectre source code
-@import "node_modules/spectre.css/src/spectre";
-
-@include padding-variant(6, $unit-6);
 
 .App {
   text-align: center;

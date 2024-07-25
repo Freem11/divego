@@ -156,13 +156,6 @@ export default function UserProfileModal(props) {
 		}
 	};
 
-	const customBtnStyle = {
-    width: '3.4vw',
-    height: '3.3vh',
-    padding: '13px',
-		marginLeft: '-20px',
-		marginRight: '10px',
-	};
 
 	return <>
 		<div className='p-6'>
@@ -179,30 +172,25 @@ export default function UserProfileModal(props) {
 				/>
 			</div>
 		</div>
+		
+		<div className="p-6"></div>
+		<div className="p-6"></div>
 
 		<div className="p-6">
 			{selectedProfile ? (
-				<div
-					onClick={() => handleFollow()}
-					className={userFollows ? 'followButtoAlt' : 'followButton'}
-				>
-					<Label
-						style={{
-							fontFamily: 'Itim',
-							fontWeight: 'bold',
-							color: userFollows ? 'black' : 'pink',
-							cursor: 'pointer',
-							fontSize: '1vw',
-						}}
+				<div className='columns'>
+					<strong
+						onClick={() => handleFollow()}
+						className={`column col-6 p-centered btn btn-lg extra-shadow ${userFollows ? '': 'btn-primary'}`}
 					>
 						{userFollows
 							? 'Following ' + (userStats && userStats[0].username)
 							: 'Follow ' + (userStats && userStats[0].username)}
-					</Label>
+					</strong>
 				</div>
 			) : (
 				<>
-					<div className='columns mb-2'>
+					<div className='columns mb-4'>
 						<InputField
 							className="column col-12"
 							placeholder='Diver Name'
@@ -216,7 +204,7 @@ export default function UserProfileModal(props) {
 						/>
 					</div>
 					
-					<div className='columns mb-2'>
+					<div className='columns'>
 						<InputField
 							className="column col-12"
 							placeholder='Email'
@@ -226,8 +214,11 @@ export default function UserProfileModal(props) {
 					</div>
 				</>
 			)}
+		</div>
 
-			<div className="columns mb-2">
+		<div className="p-4"></div>
+		<div className="p-6">
+			<div className="columns mb-4">
 				<InputField
 					className="column col-6"
 					name='photoCountField'
@@ -246,7 +237,7 @@ export default function UserProfileModal(props) {
 					contentEditable={false}
 				/>
 			</div>
-			<div className="columns mb-2">
+			<div className="columns mb-4">
 				<InputField
 					className="column col-6"
 					name='followerCountField'
@@ -276,168 +267,13 @@ export default function UserProfileModal(props) {
 				<div className="column col-3"></div>
 			</div>
 		</div>
-		<CustomButton
-			variant='text'
-			// style={{ backgroundColor: subButState ? '#538dbd' : '#538bdb' }}
-			onClick={handleSubmit}
-		>
-			Submit Photo
-		</CustomButton>
+		{!selectedProfile && <SubmitButton
+			onClick={async () => {
+				(await handleSubmit()) && toggleProfileModal();
+			}}
+			>
+			Save changes
+		</SubmitButton>
+		}
 	</>
-
-	return(
-		<div className='containerBox'>
-			<div className='titleDiv'>
-				<h3
-					style={{
-						marginLeft: '1vw',
-						width: '100vw',
-						textAlign: 'left',
-						fontFamily: 'Patrick Hand',
-						fontSize: '2vw',
-						// backgroundColor: "pink"
-					}}
-				>
-					{selectedProfile
-						? userStats && userStats[0].username + "'s Diving"
-						: 'My Diver Profile'}
-				</h3>
-				<FormGroup>
-					<CloseButton
-						id='closeButton'
-						onClick={toggleProfileModal}
-						btnStyle={{
-							display: 'flex',
-							flexDirection: 'column',
-							// marginRight: 20,
-							// marginTop: 10,
-							backgroundColor: 'transparent',
-							border: 'none',
-							cursor: 'pointer',
-						}}
-					/>
-				</FormGroup>
-			</div>
-
-			<div className='inputContainer'>
-				{selectedProfile ? (
-					<div
-						onClick={() => handleFollow()}
-						className={userFollows ? 'followButtoAlt' : 'followButton'}
-					>
-						<Label
-							style={{
-								fontFamily: 'Itim',
-								fontWeight: 'bold',
-								color: userFollows ? 'black' : 'pink',
-								cursor: 'pointer',
-								fontSize: '1vw',
-							}}
-						>
-							{userFollows
-								? 'Following ' + (userStats && userStats[0].username)
-								: 'Follow ' + (userStats && userStats[0].username)}
-						</Label>
-					</div>
-				) : (
-					<>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'row',
-								alignItems: 'center',
-								justifyContent: 'center',
-								width: '100%',
-							}}
-						>
-							<div className='inputboxS'>
-								<InputField
-									placeholder='Diver Name'
-									name='userField'
-									value={
-										username !== null
-											? username
-											: userStats && userStats[0].username
-									}
-									onChange={(e) => setUsername(e.target.value)}
-									style={{width: "25vw"}}
-								/>
-							</div>
-						</div>
-
-						<div className='inputbox'>
-							<InputField
-								placeholder='Email'
-								name='emailField'
-								value={userStats && userStats[0].email}
-								style={{width: "25vw"}}
-							/>
-						</div>
-					</>
-				)}
-
-				<div className='statsContainer'>
-					<div className='inputboxMini'>
-						<InputField
-							name='photoCountField'
-							value={
-								'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='diveSiteCountField'
-							value={
-								'Dive Sites: ' +
-								(userStats && ' ' + userStats[0].divesitecount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='followerCountField'
-							value={
-								'Followers: ' +
-								(userStats && ' ' + userStats[0].followercount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='commentCountField'
-							value={
-								'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='likeCountField'
-							value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
-							contentEditable={false}
-						/>
-					</div>
-
-					{formError && <p className='erroMsgU'>{formError}</p>}
-
-					<SubmitButton
-						onClick={async () => {
-							(await handleSubmit()) && toggleProfileModal();
-						}}
-					>
-						Save changes
-					</SubmitButton>
-				</div>
-			</div>
-		</div>
-	);
 }
