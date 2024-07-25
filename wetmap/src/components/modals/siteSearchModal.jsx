@@ -2,7 +2,6 @@ import { useState, useContext, useEffect, useRef } from "react";
 import { Container, Form, FormGroup, Label, Button } from "reactstrap";
 import "./siteSubmitter.css";
 import { TutorialContext } from "../contexts/tutorialContext";
-import CloseIcon from "@mui/icons-material/Close";
 import DiveSiteAutoComplete from "../diveSiteSearch/diveSiteSearch";
 import CloseButton from "../closeButton/closeButton";
 
@@ -26,17 +25,7 @@ const SiteSearchModal = (props) => {
         </h3>
         <FormGroup>
             <CloseButton
-                id='closeButton'
                 onClick={animateSiteSearchModal}
-                btnStyle={{
-                    display: "flex",
-                    flexDirection: "column",
-                    // marginRight: 20,
-                    // marginTop: 10,
-                    backgroundColor: "transparent",
-                    border: "none",
-                    cursor: "pointer",
-                }}
             />
         </FormGroup>
       </div>

@@ -1,20 +1,35 @@
-import {Button} from "reactstrap";
-import CloseIcon from "@mui/icons-material/Close";
+import { Button } from 'reactstrap';
+import CloseIcon from '@mui/icons-material/Close';
 
-const CloseButton = ({onClick, id, className, btnStyle={backgroundColor: "transparent", border: "none", cursor: "pointer"}, iconStyle={ color: "#F0EEEB", fontSize: "2rem" }}) => {
-    return (
-        <Button
-            variant="text"
-            id={id}
-            className={className}
-            onClick={onClick}
-            style={btnStyle}
-        >
-            <CloseIcon
-                sx={iconStyle}
-            ></CloseIcon>
-        </Button>
-    )
-}
+const CloseButton = ({
+	onClick,
+	className,
+	btnStyle,
+}) => {
+	return (
+		<Button
+			variant='text'
+			className={className}
+			onClick={onClick}
+			style={{
+				display: 'flex',
+				flexDirection: 'column',
+				backgroundColor: 'transparent',
+				border: 'none',
+				cursor: 'pointer',
+			}}
+		>
+			<CloseIcon
+				sx={{
+					color: 'lightgrey',
+					width: '2vw',
+					height: '5vh',
+					cursor: 'pointer',
+					marginRight: '-3px',
+				}}
+			></CloseIcon>
+		</Button>
+	);
+};
 
-export default CloseButton
+export default CloseButton;

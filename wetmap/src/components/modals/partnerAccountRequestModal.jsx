@@ -162,15 +162,7 @@ export default function PartnerAccountRequestModal() {
         <Label className="header2">Partner Account Request</Label>
         <FormGroup>
           <CloseButton
-            id="closeButton"
             onClick={handleClose}
-            btnStyle={{
-              display: "flex",
-              flexDirection: "column",
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-            }}
           />
         </FormGroup>
       </div>

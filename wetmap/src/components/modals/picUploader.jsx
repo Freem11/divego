@@ -20,7 +20,6 @@ import { TutorialContext } from '../contexts/tutorialContext';
 import { ChapterContext } from '../contexts/chapterContext';
 import PlaceIcon from '@mui/icons-material/Place';
 import PhotoIcon from '@mui/icons-material/Photo';
-import CloseIcon from '@mui/icons-material/Close';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
 import { getToday } from '../../helpers/picUploaderHelpers.js';
@@ -37,6 +36,7 @@ import { getAnimalNamesThatFit } from '../../supabaseCalls/photoSupabaseCalls';
 import { userCheck } from '../../supabaseCalls/authenticateSupabaseCalls';
 import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button.jsx';
+import CloseButton from "../closeButton/closeButton";
 import SubmitButton from '../reusables/button/submitButton.jsx';
 
 let filePath1 = './wetmap/src/components/uploads/';
@@ -537,6 +537,7 @@ const PicUploader = React.memo((props) => {
 				flexDirection: 'column',
 				alignItems: 'center',
 				height: '100%',
+				position: 'relative'
 				// backgroundColor: "palegoldenrod"
 			}}
 		>
@@ -568,18 +569,9 @@ const PicUploader = React.memo((props) => {
 						/>
 					}
 				/>
-
-				<CloseIcon
-					onClick={() => handleModalClose()}
-					sx={{
-						color: 'lightgrey',
-						width: '2vw',
-						height: '5vh',
-						cursor: 'pointer',
-						marginRight: '-7px',
-						marginLeft: '10px',
-					}}
-				></CloseIcon>
+				<FormGroup>
+					<CloseButton onClick={handleModalClose} />
+				</FormGroup>
 			</div>
 
 			{photoFile !== null && (

@@ -15,7 +15,6 @@ import {
 	deleteUserFollow,
 	checkIfUserFollows,
 } from '../../supabaseCalls/userFollowSupabaseCalls';
-import CloseIcon from '@mui/icons-material/Close';
 import './userProfile.css';
 import CloseButton from '../closeButton/closeButton';
 import InputField from '../reusables/inputField';
