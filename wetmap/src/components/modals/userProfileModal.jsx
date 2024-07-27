@@ -177,7 +177,7 @@ export default function UserProfileModal(props) {
 					}}
 				>
 					{selectedProfile
-						? userStats && userStats[0].username + "'s Diving"
+						? userStats[0] && userStats[0].username + "'s Diving"
 						: 'My Diver Profile'}
 				</h3>
 				<FormGroup>
@@ -203,8 +203,8 @@ export default function UserProfileModal(props) {
 							}}
 						>
 							{userFollows
-								? 'Following ' + (userStats && userStats[0].username)
-								: 'Follow ' + (userStats && userStats[0].username)}
+								? 'Following ' + (userStats[0] && userStats[0].username)
+								: 'Follow ' + (userStats[0] && userStats[0].username)}
 						</Label>
 					</div>
 				) : (
@@ -225,7 +225,7 @@ export default function UserProfileModal(props) {
 									value={
 										username !== null
 											? username
-											: userStats && userStats[0].username
+											: userStats[0] && userStats[0].username
 									}
 									onChange={(e) => setUsername(e.target.value)}
 									style={{width: "25vw"}}
@@ -237,7 +237,7 @@ export default function UserProfileModal(props) {
 							<InputField
 								placeholder='Email'
 								name='emailField'
-								value={userStats && userStats[0].email}
+								value={userStats[0] && userStats[0].email}
 								style={{width: "25vw"}}
 							/>
 						</div>
@@ -249,7 +249,7 @@ export default function UserProfileModal(props) {
 						<InputField
 							name='photoCountField'
 							value={
-								'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
+								'Sea Life: ' + (userStats[0] && ' ' + userStats[0].photocount)
 							}
 							contentEditable={false}
 						/>
@@ -260,7 +260,7 @@ export default function UserProfileModal(props) {
 							name='diveSiteCountField'
 							value={
 								'Dive Sites: ' +
-								(userStats && ' ' + userStats[0].divesitecount)
+								(userStats[0] && ' ' + userStats[0].divesitecount)
 							}
 							contentEditable={false}
 						/>
@@ -271,7 +271,7 @@ export default function UserProfileModal(props) {
 							name='followerCountField'
 							value={
 								'Followers: ' +
-								(userStats && ' ' + userStats[0].followercount)
+								(userStats[0] && ' ' + userStats[0].followercount)
 							}
 							contentEditable={false}
 						/>
@@ -281,7 +281,7 @@ export default function UserProfileModal(props) {
 						<InputField
 							name='commentCountField'
 							value={
-								'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
+								'Comments: ' + (userStats[0] && ' ' + userStats[0].commentcount)
 							}
 							contentEditable={false}
 						/>
@@ -290,7 +290,7 @@ export default function UserProfileModal(props) {
 					<div className='inputboxMini'>
 						<InputField
 							name='likeCountField'
-							value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
+							value={'Likes: ' + (userStats[0] && ' ' + userStats[0].likecount)}
 							contentEditable={false}
 						/>
 					</div>
