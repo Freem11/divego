@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const CloseButton = ({ onClick, className, btnStyle }) => {
 	return (
-		<div className='column col-1'>
+		<div>
 			<Button
 				variant='text'
 				className={className}

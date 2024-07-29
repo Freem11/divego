@@ -2,7 +2,6 @@ import { Label } from 'reactstrap';
 
 const TitleModal = ({ title, className }) => {
 	return (
-		<div className='column col-9'>
 			<Label
 				style={{
 					width: '100vw',
@@ -15,7 +14,6 @@ const TitleModal = ({ title, className }) => {
 			>
 				<strong>{title}</strong>
 			</Label>
-		</div>
 	);
 };
 

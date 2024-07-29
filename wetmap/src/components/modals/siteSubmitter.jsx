@@ -342,7 +342,7 @@ const SiteSubmitter = (props) => {
 				// backgroundColor: "palegoldenrod"
 			}}
 		>
-			<div className='columns'>
+			<div className='modalTitle3'>
 				<TitleModal title={'Submit Your Dive Site'} />
 				<CustomButton
 					onClick={() => activateGuide()}

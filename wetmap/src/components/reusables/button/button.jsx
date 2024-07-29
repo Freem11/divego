@@ -27,7 +27,7 @@ export default function Button(props) {
     const StyledSvg = React.cloneElement(svg, { sx: appliedStyles });
 
 	return (
-		<div className='column col-2'>
+		<div>
 			<button
 				className={`${btnState ? 'btnBox2' : 'btnBox'}`}
 				onClick={onClick}
