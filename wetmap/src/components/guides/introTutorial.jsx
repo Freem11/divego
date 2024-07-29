@@ -405,7 +405,7 @@ export default function IntroTutorial(props) {
     }
   };
 
-  let textArray; 
+  let textArray;
   function printOutText() {
     if (textArray.length > 0) {
       const charToConcat = textArray[0];
@@ -476,7 +476,7 @@ export default function IntroTutorial(props) {
     if (itterator === 1) {
       getProfile();
 
-      if (profile[0].UserName) {
+      if (profile[0]&& profile[0].UserName) {
         setItterator((prev) => prev + 1);
         return;
       }
