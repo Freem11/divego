@@ -36,8 +36,9 @@ import { getAnimalNamesThatFit } from '../../supabaseCalls/photoSupabaseCalls';
 import { userCheck } from '../../supabaseCalls/authenticateSupabaseCalls';
 import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button.jsx';
-import CloseButton from "../closeButton/closeButton";
+import CloseButton from '../closeButton/closeButton';
 import SubmitButton from '../reusables/button/submitButton.jsx';
+import TitleModal from '../reusables/titleModal';
 
 let filePath1 = './wetmap/src/components/uploads/';
 let filePath = '/src/components/uploads/';
@@ -474,19 +475,6 @@ const PicUploader = React.memo((props) => {
 		marginTop: '1vh',
 		cursor: 'pointer',
 	};
-	const buttonStyle = {
-		color: 'gold',
-		width: '3.5vw',
-		height: '3.5vh',
-		cursor: 'pointer',
-	};
-
-	const buttonStyleAlt = {
-		color: '#538dbd',
-		width: '3.5vw',
-		height: '3.5vh',
-		cursor: 'pointer',
-	};
 
 	const customBtnStyle = {
 		width: '4.5vw',
@@ -537,41 +525,17 @@ const PicUploader = React.memo((props) => {
 				flexDirection: 'column',
 				alignItems: 'center',
 				height: '100%',
-				position: 'relative'
+				position: 'relative',
 				// backgroundColor: "palegoldenrod"
 			}}
 		>
 			<div className='modalTitle2'>
-				<Label
-					style={{
-						width: '20vw',
-						marginLeft: '1vw',
-						textAlign: 'left',
-						fontFamily: 'Patrick Hand',
-						fontSize: '2vw',
-						// backgroundColor: "pink",
-					}}
-				>
-					<strong>Submit Your Picture</strong>
-				</Label>
-
+				<TitleModal title={'Submit Your Picture'} />
 				<CustomButton
 					onClick={() => activateGuide()}
-					svg={
-						<QuestionMarkIcon
-							sx={{
-								color: 'gold',
-								width: '3.5vw',
-								height: '3.5vh',
-								padding: '1px',
-								cursor: 'pointer',
-							}}
-						/>
-					}
+					svg={<QuestionMarkIcon />}
 				/>
-				<FormGroup>
-					<CloseButton onClick={handleModalClose} />
-				</FormGroup>
+				<CloseButton onClick={handleModalClose} />
 			</div>
 
 			{photoFile !== null && (
@@ -717,17 +681,14 @@ const PicUploader = React.memo((props) => {
 				<div className='Tbox2'>
 					<CustomButton
 						onClick={handleNoGPSCloseOnMapChange}
-						svg={<PlaceIcon sx={pinButState ? buttonStyleAlt : buttonStyle} />}
+						svg={<PlaceIcon />}
 						btnState={pinButState}
 						className={customBtnStyle}
 					/>
 				</div>
 			</div>
 			<FormGroup>
-				<SubmitButton
-					active={ !!subButState}
-					onClick={handleSubmit}
-				>
+				<SubmitButton active={!!subButState} onClick={handleSubmit}>
 					Submit Photo
 				</SubmitButton>
 			</FormGroup>

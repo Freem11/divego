@@ -19,6 +19,7 @@ import './userProfile.css';
 import CloseButton from '../closeButton/closeButton';
 import InputField from '../reusables/inputField';
 import SubmitButton from '../reusables/button/submitButton';
+import TitleModal from '../reusables/titleModal';
 
 export default function UserProfileModal(props) {
 	const { animateProfileModal } = props;
@@ -156,35 +157,24 @@ export default function UserProfileModal(props) {
 	};
 
 	const customBtnStyle = {
-    width: '3.4vw',
-    height: '3.3vh',
-    padding: '13px',
-	marginLeft: '-20px',
-	marginRight: '10px',
+		width: '3.4vw',
+		height: '3.3vh',
+		padding: '13px',
+		marginLeft: '-20px',
+		marginRight: '10px',
 	};
 
 	return (
 		<div className='containerBox'>
 			<div className='titleDiv'>
-				<h3
-					style={{
-						marginLeft: '1vw',
-						width: '100vw',
-						textAlign: 'left',
-						fontFamily: 'Patrick Hand',
-						fontSize: '2vw',
-						// backgroundColor: "pink"
-					}}
-				>
-					{selectedProfile
-						? userStats && userStats[0].username + "'s Diving"
-						: 'My Diver Profile'}
-				</h3>
-				<FormGroup>
-					<CloseButton
-						onClick={toggleProfileModal}
-					/>
-				</FormGroup>
+				<TitleModal
+					title={
+						selectedProfile
+							? userStats && userStats[0].username + "'s Diving"
+							: 'My Diver Profile'
+					}
+				/>
+				<CloseButton onClick={toggleProfileModal} />
 			</div>
 
 			<div className='inputContainer'>
@@ -228,7 +218,7 @@ export default function UserProfileModal(props) {
 											: userStats && userStats[0].username
 									}
 									onChange={(e) => setUsername(e.target.value)}
-									style={{width: "25vw"}}
+									style={{ width: '25vw' }}
 								/>
 							</div>
 						</div>
@@ -238,7 +228,7 @@ export default function UserProfileModal(props) {
 								placeholder='Email'
 								name='emailField'
 								value={userStats && userStats[0].email}
-								style={{width: "25vw"}}
+								style={{ width: '25vw' }}
 							/>
 						</div>
 					</>
@@ -259,8 +249,7 @@ export default function UserProfileModal(props) {
 						<InputField
 							name='diveSiteCountField'
 							value={
-								'Dive Sites: ' +
-								(userStats && ' ' + userStats[0].divesitecount)
+								'Dive Sites: ' + (userStats && ' ' + userStats[0].divesitecount)
 							}
 							contentEditable={false}
 						/>
@@ -270,8 +259,7 @@ export default function UserProfileModal(props) {
 						<InputField
 							name='followerCountField'
 							value={
-								'Followers: ' +
-								(userStats && ' ' + userStats[0].followercount)
+								'Followers: ' + (userStats && ' ' + userStats[0].followercount)
 							}
 							contentEditable={false}
 						/>

@@ -169,21 +169,9 @@ const AnchorPics = (props) => {
 						</div>
 						<CustomButton
 							onClick={() => handleSwitch()}
-							svg={
-								<AddPhotoAlternateIcon
-									sx={{
-										color: 'gold',
-										width: '3.5vw',
-										height: '3.5vh',
-										padding: '1px',
-										cursor: 'pointer',
-									}}
-								/>
-							}
+							svg={<AddPhotoAlternateIcon />}
 						/>
-						<FormGroup>
-							<CloseButton onClick={handleClose} />
-						</FormGroup>
+						<CloseButton onClick={handleClose} />
 					</div>
 				</div>
 			</div>

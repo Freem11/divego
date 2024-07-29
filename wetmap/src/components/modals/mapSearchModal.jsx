@@ -1,40 +1,28 @@
-import { useState, useContext, useEffect, useRef } from "react";
-import { Container, Form, FormGroup, Label, Button } from "reactstrap";
-import "./siteSubmitter.css";
-import { TutorialContext } from "../contexts/tutorialContext";
-import PlacesAutoComplete from "../locationSearch/placesAutocomplete";
-import CloseButton from "../closeButton/closeButton";
+import { useState, useContext, useEffect, useRef } from 'react';
+import './siteSubmitter.css';
+import { TutorialContext } from '../contexts/tutorialContext';
+import PlacesAutoComplete from '../locationSearch/placesAutocomplete';
+import CloseButton from '../closeButton/closeButton';
+import TitleModal from '../reusables/titleModal';
 
 const MapSearchModal = (props) => {
-  const { animateMapSearchModal, setMapSearchYCoord, mapSearchYCoord} = props;
- 
-  return (
-    <div className="masterDiv">
-      <div className="titleDiv">
-        <h3
-          style={{
-            marginLeft: "1vw",
-            width: "100vw",
-            textAlign: "left",
-            fontFamily: "Patrick Hand",
-            fontSize: "2vw",
-            // backgroundColor: "pink"
-          }}
-        >
-          Map Search
-        </h3>
-        <FormGroup>
-            <CloseButton
-                onClick={animateMapSearchModal}
-            />
-        </FormGroup>
-      </div>
+	const { animateMapSearchModal, setMapSearchYCoord, mapSearchYCoord } = props;
 
-      <div className="mainBlurbDiv">
-        <PlacesAutoComplete setMapSearchYCoord={setMapSearchYCoord} mapSearchYCoord={mapSearchYCoord}/>
-      </div>
-    </div>
-  );
+	return (
+		<div className='masterDiv'>
+			<div className='titleDiv'>
+				<TitleModal title={'Map Search'} />
+				<CloseButton onClick={animateMapSearchModal} />
+			</div>
+
+			<div className='mainBlurbDiv'>
+				<PlacesAutoComplete
+					setMapSearchYCoord={setMapSearchYCoord}
+					mapSearchYCoord={mapSearchYCoord}
+				/>
+			</div>
+		</div>
+	);
 };
 
 export default MapSearchModal;

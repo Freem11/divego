@@ -24,7 +24,7 @@ import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button';
 import CloseButton from '../closeButton/closeButton';
 import SubmitButton from '../reusables/button/submitButton';
-
+import TitleModal from '../reusables/titleModal';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -342,38 +342,13 @@ const SiteSubmitter = (props) => {
 				// backgroundColor: "palegoldenrod"
 			}}
 		>
-			<div className='modalTitle3'>
-				<Label
-					style={{
-						width: '100vw',
-						marginLeft: '1vw',
-						textAlign: 'left',
-						fontFamily: 'Patrick Hand',
-						fontSize: '2vw',
-						// backgroundColor: "pink",
-					}}
-				>
-					<strong>Submit Your Dive Site</strong>
-				</Label>
+			<div className='columns'>
+				<TitleModal title={'Submit Your Dive Site'} />
 				<CustomButton
 					onClick={() => activateGuide()}
-					svg={
-						<QuestionMarkIcon
-							sx={{
-								color: 'gold',
-								width: '3.5vw',
-								height: '3.5vh',
-								padding: '1px',
-								cursor: 'pointer',
-							}}
-						/>
-					}
+					svg={<QuestionMarkIcon />}
 				/>
-				<FormGroup>
-					<CloseButton
-						onClick={handleModalClose}
-					/>
-				</FormGroup>
+				<CloseButton onClick={handleModalClose} />
 			</div>
 
 			<div className='lowerBoxSite'>
@@ -434,10 +409,7 @@ const SiteSubmitter = (props) => {
 			</div>
 
 			<FormGroup>
-				<SubmitButton
-					active={ !!subButState}
-					onClick={handleSubmit}
-				>
+				<SubmitButton active={!!subButState} onClick={handleSubmit}>
 					Submit Dive Site
 				</SubmitButton>
 			</FormGroup>
