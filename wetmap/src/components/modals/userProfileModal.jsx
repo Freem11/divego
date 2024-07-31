@@ -171,99 +171,97 @@ export default function UserProfileModal(props) {
 				/>
 			</div>
 		</div>
-		
-		<div className="p-6"></div>
-		<div className="p-6"></div>
-
-		<div className="p-6">
-			{selectedProfile ? (
-				<div className='columns'>
-					<strong
-						onClick={() => handleFollow()}
-						className={`column col-6 p-centered btn btn-lg extra-shadow ${userFollows ? '': 'btn-primary'}`}
-					>
-						{userFollows
-							? 'Following ' + (userStats && userStats[0].username)
-							: 'Follow ' + (userStats && userStats[0].username)}
-					</strong>
-				</div>
-			) : (
-				<>
-					<div className='columns mb-4'>
-						<InputField
-							className="column col-12"
-							placeholder='Diver Name'
-							name='userField'
-							value={
-								username !== null
-									? username
-									: userStats && userStats[0].username
-							}
-							onChange={(e) => setUsername(e.target.value)}
-						/>
-					</div>
-					
+	
+		<div className="hero hero-sm mx-4">
+			<div className="hero-body">
+				{selectedProfile ? (
 					<div className='columns'>
-						<InputField
-							className="column col-12"
-							placeholder='Email'
-							name='emailField'
-							value={userStats && userStats[0].email}
-						/>
+						<strong
+							onClick={() => handleFollow()}
+							className={`column col-6 p-centered btn btn-lg extra-shadow ${userFollows ? '': 'btn-primary'}`}
+						>
+							{userFollows
+								? 'Following ' + (userStats && userStats[0].username)
+								: 'Follow ' + (userStats && userStats[0].username)}
+						</strong>
 					</div>
-				</>
-			)}
-		</div>
+				) : (
+					<>
+						<div className='columns mb-4'>
+							<InputField
+								className="column col-12"
+								placeholder='Diver Name'
+								name='userField'
+								value={
+									username !== null
+										? username
+										: userStats && userStats[0].username
+								}
+								onChange={(e) => setUsername(e.target.value)}
+							/>
+						</div>
+						
+						<div className='columns'>
+							<InputField
+								className="column col-12"
+								placeholder='Email'
+								name='emailField'
+								value={userStats && userStats[0].email}
+							/>
+						</div>
+					</>
+				)}
+			</div>
 
-		<div className="p-4"></div>
-		<div className="p-6">
-			<div className="columns mb-4">
-				<InputField
-					className="column col-6"
-					name='photoCountField'
-					value={
-						'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
-					}
-					contentEditable={false}
-				/>
-				<InputField
-					className="column col-6"
-					name='diveSiteCountField'
-					value={
-						'Dive Sites: ' +
-						(userStats && ' ' + userStats[0].divesitecount)
-					}
-					contentEditable={false}
-				/>
-			</div>
-			<div className="columns mb-4">
-				<InputField
-					className="column col-6"
-					name='followerCountField'
-					value={
-						'Followers: ' +
-						(userStats && ' ' + userStats[0].followercount)
-					}
-					contentEditable={false}
-				/>
-				<InputField
-					className="column col-6"
-					name='commentCountField'
-					value={
-						'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
-					}
-					contentEditable={false}
-				/>
-			</div>
-			<div className="columns mb-2">
-				<div className="column col-3"></div>
-				<InputField
-					className="column col-6"
-					name='likeCountField'
-					value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
-					contentEditable={false}
-				/>
-				<div className="column col-3"></div>
+			<div className="hero-body">
+				<div className="columns mb-4">
+					<InputField
+						className="column col-6"
+						name='photoCountField'
+						value={
+							'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
+						}
+						contentEditable={false}
+					/>
+					<InputField
+						className="column col-6"
+						name='diveSiteCountField'
+						value={
+							'Dive Sites: ' +
+							(userStats && ' ' + userStats[0].divesitecount)
+						}
+						contentEditable={false}
+					/>
+				</div>
+				<div className="columns mb-4">
+					<InputField
+						className="column col-6"
+						name='followerCountField'
+						value={
+							'Followers: ' +
+							(userStats && ' ' + userStats[0].followercount)
+						}
+						contentEditable={false}
+					/>
+					<InputField
+						className="column col-6"
+						name='commentCountField'
+						value={
+							'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
+						}
+						contentEditable={false}
+					/>
+				</div>
+				<div className="columns mb-2">
+					<div className="column col-3"></div>
+					<InputField
+						className="column col-6"
+						name='likeCountField'
+						value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
+						contentEditable={false}
+					/>
+					<div className="column col-3"></div>
+				</div>
 			</div>
 		</div>
 		{!selectedProfile && <SubmitButton
