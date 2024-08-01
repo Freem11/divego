@@ -100,10 +100,10 @@ export default function UserNamer() {
       {userFail && <p className="erroMsgU">{userFail}</p>}
 
       <FormGroup>
-          <div onClick={handleSubmit} className="pinButton">
+        <div onClick={handleSubmit} className="pinButton">
           <p className="buttontext">Ok</p>
-          </div>
-        </FormGroup>
+        </div>
+      </FormGroup>
     </div>
   );
 }

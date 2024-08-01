@@ -161,7 +161,7 @@ export default function UserProfileModal(props) {
 			<div className='columns'>
 				<h1 className='column col-11 text-left text-light'>
 					{selectedProfile
-						? userStats && userStats[0].username + "'s Diving"
+						? userStats[0] && userStats[0].username + "'s Diving"
 						: 'My Diver Profile'}
 				</h1>
 
@@ -181,8 +181,8 @@ export default function UserProfileModal(props) {
 							className={`column col-6 p-centered btn btn-lg extra-shadow ${userFollows ? '': 'btn-primary'}`}
 						>
 							{userFollows
-								? 'Following ' + (userStats && userStats[0].username)
-								: 'Follow ' + (userStats && userStats[0].username)}
+								? 'Following ' + (userStats && userStats[0] && userStats[0].username)
+								: 'Follow ' + (userStats && userStats[0] && userStats[0].username)}
 						</strong>
 					</div>
 				) : (
@@ -206,7 +206,7 @@ export default function UserProfileModal(props) {
 								className="column col-12"
 								placeholder='Email'
 								name='emailField'
-								value={userStats && userStats[0].email}
+								value={userStats[0] && userStats[0].email}
 							/>
 						</div>
 					</>
@@ -219,7 +219,7 @@ export default function UserProfileModal(props) {
 						className="column col-6"
 						name='photoCountField'
 						value={
-							'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
+							'Sea Life: ' + (userStats && userStats[0] &&  ' ' + userStats[0].photocount)
 						}
 						contentEditable={false}
 					/>
@@ -228,7 +228,7 @@ export default function UserProfileModal(props) {
 						name='diveSiteCountField'
 						value={
 							'Dive Sites: ' +
-							(userStats && ' ' + userStats[0].divesitecount)
+							(userStats && userStats[0] && ' ' + userStats[0].divesitecount)
 						}
 						contentEditable={false}
 					/>
@@ -239,7 +239,7 @@ export default function UserProfileModal(props) {
 						name='followerCountField'
 						value={
 							'Followers: ' +
-							(userStats && ' ' + userStats[0].followercount)
+							(userStats && userStats[0] && ' ' + userStats[0].followercount)
 						}
 						contentEditable={false}
 					/>
@@ -247,7 +247,7 @@ export default function UserProfileModal(props) {
 						className="column col-6"
 						name='commentCountField'
 						value={
-							'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
+							'Comments: ' + (userStats && userStats[0] && ' ' + userStats[0].commentcount)
 						}
 						contentEditable={false}
 					/>
@@ -257,7 +257,7 @@ export default function UserProfileModal(props) {
 					<InputField
 						className="column col-6"
 						name='likeCountField'
-						value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
+						value={'Likes: ' + (userStats && userStats[0] && ' ' + userStats[0].likecount)}
 						contentEditable={false}
 					/>
 					<div className="column col-3"></div>

@@ -29,8 +29,6 @@ const Settings = (props) => {
     setRequestCheck(returnedCheck);
   };
 
-  console.log("HEY", requestCheck)
-
   const handlePartnerButton = () => {
     setPartnerModal(true);
     setSettingsModal(false);
@@ -52,7 +50,7 @@ const Settings = (props) => {
         textAlign: "center"
       }}
     >
-      <div 
+      <div
         onClick={() => {
           setOpenDialog(true);
           setShowDangerZone(false);
