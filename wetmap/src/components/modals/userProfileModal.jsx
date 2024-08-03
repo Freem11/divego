@@ -160,7 +160,7 @@ export default function UserProfileModal(props) {
 
 	return <>
 		<div className='p-6'>
-			<div className='columns'>
+			<div className='rows' style={{display: 'flex', flexDirection: 'row'}}>
 				<h1 className='column col-11 text-left text-light'>
 					{selectedProfile
 						? userStats[0] && userStats[0].username + "'s Diving"
