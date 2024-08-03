@@ -19,6 +19,7 @@ import './userProfile.css';
 import CloseButton from '../closeButton/closeButton';
 import InputField from '../reusables/inputField';
 import SubmitButton from '../reusables/button/submitButton';
+import TitleModal from '../reusables/titleModal';
 
 export default function UserProfileModal(props) {
 	const { animateProfileModal } = props;
@@ -155,6 +156,7 @@ export default function UserProfileModal(props) {
 		}
 	};
 
+			
 
 	return <>
 		<div className='p-6'>
@@ -165,10 +167,8 @@ export default function UserProfileModal(props) {
 						: 'My Diver Profile'}
 				</h1>
 
-				<CloseButton
-					onClick={toggleProfileModal}
-					className="column col-1"
-				/>
+					<CloseButton onClick={toggleProfileModal} />
+
 			</div>
 		</div>
 	
@@ -187,6 +187,7 @@ export default function UserProfileModal(props) {
 					</div>
 				) : (
 					<>
+
 						<div className='columns mb-4'>
 							<InputField
 								className="column col-12"
