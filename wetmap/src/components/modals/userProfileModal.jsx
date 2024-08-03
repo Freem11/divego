@@ -156,146 +156,122 @@ export default function UserProfileModal(props) {
 		}
 	};
 
-	const customBtnStyle = {
-		width: '3.4vw',
-		height: '3.3vh',
-		padding: '13px',
-		marginLeft: '-20px',
-		marginRight: '10px',
-	};
+			
 
-	return (
-		<div className='containerBox'>
-			<div className='titleDiv'>
-				<TitleModal
-					title={
-						selectedProfile
-							? userStats[0] && userStats[0].username + "'s Diving"
-							: 'My Diver Profile'
-					}
-				/>
-				<CloseButton onClick={toggleProfileModal} />
+	return <>
+		<div className='p-6'>
+			<div className='columns'>
+				<h1 className='column col-11 text-left text-light'>
+					{selectedProfile
+						? userStats[0] && userStats[0].username + "'s Diving"
+						: 'My Diver Profile'}
+				</h1>
+
+					<CloseButton onClick={toggleProfileModal} />
+
 			</div>
-
-			<div className='inputContainer'>
+		</div>
+	
+		<div className="hero hero-sm mx-4">
+			<div className="hero-body">
 				{selectedProfile ? (
-					<div
-						onClick={() => handleFollow()}
-						className={userFollows ? 'followButtoAlt' : 'followButton'}
-					>
-						<Label
-							style={{
-								fontFamily: 'Itim',
-								fontWeight: 'bold',
-								color: userFollows ? 'black' : 'pink',
-								cursor: 'pointer',
-								fontSize: '1vw',
-							}}
+					<div className='columns'>
+						<strong
+							onClick={() => handleFollow()}
+							className={`column col-6 p-centered btn btn-lg extra-shadow ${userFollows ? '': 'btn-primary'}`}
 						>
 							{userFollows
-								? 'Following ' + (userStats[0] && userStats[0].username)
-								: 'Follow ' + (userStats[0] && userStats[0].username)}
-						</Label>
+								? 'Following ' + (userStats && userStats[0] && userStats[0].username)
+								: 'Follow ' + (userStats && userStats[0] && userStats[0].username)}
+						</strong>
 					</div>
 				) : (
 					<>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'row',
-								alignItems: 'center',
-								justifyContent: 'center',
-								width: '100%',
-							}}
-						>
-							<div className='inputboxS'>
-								<InputField
-									placeholder='Diver Name'
-									name='userField'
-									value={
-										username !== null
-											? username
-											: userStats[0] && userStats[0].username
-									}
-									onChange={(e) => setUsername(e.target.value)}
-									style={{ width: '25vw' }}
-								/>
-							</div>
-						</div>
 
-						<div className='inputbox'>
+						<div className='columns mb-4'>
 							<InputField
+								className="column col-12"
+								placeholder='Diver Name'
+								name='userField'
+								value={
+									username !== null
+										? username
+										: userStats && userStats[0].username
+								}
+								onChange={(e) => setUsername(e.target.value)}
+							/>
+						</div>
+						
+						<div className='columns'>
+							<InputField
+								className="column col-12"
 								placeholder='Email'
 								name='emailField'
 								value={userStats[0] && userStats[0].email}
-								style={{width: "25vw"}}
 							/>
 						</div>
 					</>
 				)}
+			</div>
 
-				<div className='statsContainer'>
-					<div className='inputboxMini'>
-						<InputField
-							name='photoCountField'
-							value={
-								'Sea Life: ' + (userStats[0] && ' ' + userStats[0].photocount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='diveSiteCountField'
-							value={
-								'Dive Sites: ' +
-								(userStats[0] && ' ' + userStats[0].divesitecount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='followerCountField'
-							value={
-								'Followers: ' +
-								(userStats[0] && ' ' + userStats[0].followercount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='commentCountField'
-							value={
-								'Comments: ' + (userStats[0] && ' ' + userStats[0].commentcount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='likeCountField'
-							value={'Likes: ' + (userStats[0] && ' ' + userStats[0].likecount)}
-							contentEditable={false}
-						/>
-					</div>
-
-					{formError && <p className='erroMsgU'>{formError}</p>}
-
-					<SubmitButton
-						onClick={async () => {
-							(await handleSubmit()) && toggleProfileModal();
-						}}
-					>
-						Save changes
-					</SubmitButton>
+			<div className="hero-body">
+				<div className="columns mb-4">
+					<InputField
+						className="column col-6"
+						name='photoCountField'
+						value={
+							'Sea Life: ' + (userStats && userStats[0] &&  ' ' + userStats[0].photocount)
+						}
+						contentEditable={false}
+					/>
+					<InputField
+						className="column col-6"
+						name='diveSiteCountField'
+						value={
+							'Dive Sites: ' +
+							(userStats && userStats[0] && ' ' + userStats[0].divesitecount)
+						}
+						contentEditable={false}
+					/>
+				</div>
+				<div className="columns mb-4">
+					<InputField
+						className="column col-6"
+						name='followerCountField'
+						value={
+							'Followers: ' +
+							(userStats && userStats[0] && ' ' + userStats[0].followercount)
+						}
+						contentEditable={false}
+					/>
+					<InputField
+						className="column col-6"
+						name='commentCountField'
+						value={
+							'Comments: ' + (userStats && userStats[0] && ' ' + userStats[0].commentcount)
+						}
+						contentEditable={false}
+					/>
+				</div>
+				<div className="columns mb-2">
+					<div className="column col-3"></div>
+					<InputField
+						className="column col-6"
+						name='likeCountField'
+						value={'Likes: ' + (userStats && userStats[0] && ' ' + userStats[0].likecount)}
+						contentEditable={false}
+					/>
+					<div className="column col-3"></div>
 				</div>
 			</div>
 		</div>
-	);
+		{!selectedProfile && <SubmitButton
+			onClick={async () => {
+				(await handleSubmit()) && toggleProfileModal();
+			}}
+			>
+			Save changes
+		</SubmitButton>
+		}
+	</>
 }
