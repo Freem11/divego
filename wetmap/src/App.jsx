@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import { useState, useEffect, useLayoutEffect, useCallback } from "react";
 import { supabase } from "./supabase";
 import { BrowserRouter } from "react-router-dom";

@@ -20,9 +20,9 @@ import {
 } from '../../supabaseCalls/photoSupabaseCalls';
 import Picture from './picture';
 import FlagIcon from '@mui/icons-material/Flag';
+import CloseButton from "../closeButton/closeButton";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './anchorPics.css';
-import CloseButton from '../closeButton/closeButton';
 import CustomButton from '../reusables/button/button';
 
 const AnchorPics = (props) => {

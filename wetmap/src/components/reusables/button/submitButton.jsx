@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './submitButton.module.css';
+import style from './submitButton.module.scss';
 
 export default function SubmitButton(_props) {
 	const {active, ...props} = _props
