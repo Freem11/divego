@@ -8,7 +8,6 @@ import exifr from 'exifr';
 import Button from '@mui/material/Button';
 import MyLocationIcon from '@mui/icons-material/MyLocation';
 import PlaceIcon from '@mui/icons-material/Place';
-import CloseIcon from '@mui/icons-material/Close';
 import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
@@ -23,6 +22,9 @@ import { TutorialContext } from '../contexts/tutorialContext';
 import { ChapterContext } from '../contexts/chapterContext';
 import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button';
+import CloseButton from '../closeButton/closeButton';
+import SubmitButton from '../reusables/button/submitButton';
+
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -367,17 +369,11 @@ const SiteSubmitter = (props) => {
 						/>
 					}
 				/>
-				<CloseIcon
-					onClick={() => handleModalClose()}
-					sx={{
-						color: 'lightgrey',
-						width: '2vw',
-						height: '5vh',
-						cursor: 'pointer',
-						marginRight: '-7px',
-						marginLeft: '10px',
-					}}
-				></CloseIcon>
+				<FormGroup>
+					<CloseButton
+						onClick={handleModalClose}
+					/>
+				</FormGroup>
 			</div>
 
 			<div className='lowerBoxSite'>
@@ -438,14 +434,12 @@ const SiteSubmitter = (props) => {
 			</div>
 
 			<FormGroup>
-				<Button
-					variant='text'
-					id='modalButtonDivD'
-					style={{ backgroundColor: subButState ? '#538dbd' : '#538bdb' }}
+				<SubmitButton
+					active={ !!subButState}
 					onClick={handleSubmit}
 				>
 					Submit Dive Site
-				</Button>
+				</SubmitButton>
 			</FormGroup>
 
 			<animated.div

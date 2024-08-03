@@ -58,7 +58,7 @@ export default function SignInRoute(props) {
 
   const handleAppleUserData = async (userData) => {
     const decoded = parseJwt(userData.authorization.id_token);
-    
+
     if (userData.user) {
       let appleObject = {
         name: `${userData.user.name.firstName} ${userData.user.name.lastName}`,
@@ -104,7 +104,6 @@ export default function SignInRoute(props) {
   }
 
   const handleOAuthSubmit = async (user) => {
-
     let Fname;
     let LName;
     let Pword = user.id;
@@ -142,13 +141,14 @@ export default function SignInRoute(props) {
       return;
     } else {
       let registrationToken = await register(formVals);
-      if (formVals.firstName){
+
+      if (registrationToken) {
         await createProfile({
           id: registrationToken.data.session.user.id,
-          email: formVals.email,
+          email: registrationToken.data.user.email,
         });
       }
-     
+
       if (registrationToken.data.session !== null) {
         await localStorage.setItem(
           "token",
@@ -207,7 +207,7 @@ export default function SignInRoute(props) {
   const  handlePageSwap = () => {
     setValue(1)
   };
- 
+
 
   return (
     <div className="containerDiv">

@@ -250,7 +250,7 @@ const MapPage = React.memo((props) => {
       try {
         const success = await grabProfileById(sessionUserId);
         if (success) {
-          let bully = success[0].UserName;
+          let bully = success[0] && success[0].UserName;
           if (bully == null || bully === "") {
             setIntroGuideModalYCoord(-windowHeight);
             setTutorialRunning(true);

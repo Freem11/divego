@@ -8,8 +8,6 @@ import { ShopModalContext } from "../contexts/shopModalContext";
 import { MasterContext } from "../contexts/masterContext";
 import { CoordsContext } from "../contexts/mapCoordsContext";
 import { ZoomHelperContext } from "../contexts/zoomHelperContext";
-import CloseIcon from "@mui/icons-material/Close";
-
 import "./shopModal.css";
 import { shops } from "../../supabaseCalls/shopsSupabaseCalls";
 import CloseButton from "../closeButton/closeButton";
@@ -72,17 +70,7 @@ export default function ShopModal(props) {
         </div>
         <FormGroup>
           <CloseButton
-            id='closeButton'
             onClick={handleShopModalClose}
-            btnStyle={{
-              display: "flex",
-              flexDirection: "column",
-              // marginRight: 20,
-              // marginTop: 10,
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-            }}
           />
         </FormGroup>
       </div>

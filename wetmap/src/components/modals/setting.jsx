@@ -9,7 +9,6 @@ import { SettingsModalContext } from "../contexts/settingsModalContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import "./settings.css";
 import ActDelDialog from "./dialog";
-import CloseIcon from "@mui/icons-material/Close";
 import CloseButton from "../closeButton/closeButton";
 import { grabRequestById } from "../../supabaseCalls/partnerSupabaseCalls";
 
@@ -29,8 +28,6 @@ const Settings = (props) => {
     let returnedCheck = await grabRequestById(id);
     setRequestCheck(returnedCheck);
   };
-
-  console.log("HEY", requestCheck)
 
   const handlePartnerButton = () => {
     setPartnerModal(true);
@@ -53,7 +50,7 @@ const Settings = (props) => {
         textAlign: "center"
       }}
     >
-      <div 
+      <div
         onClick={() => {
           setOpenDialog(true);
           setShowDangerZone(false);
@@ -96,15 +93,7 @@ const Settings = (props) => {
         </h3>
         <FormGroup>
           <CloseButton
-            id="closeButton"
             onClick={animateSettingsModal}
-            btnStyle={{
-              display: "flex",
-              flexDirection: "column",
-              backgroundColor: "transparent",
-              border: "none",
-              cursor: "pointer",
-            }}
           />
         </FormGroup>
       </div>

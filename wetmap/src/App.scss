@@ -10,6 +10,12 @@
 /* font-family: 'Overlock', cursive; */
 /* font-family: 'Spinnaker', sans-serif; */
 
+
+// Styles
+@import "./styles/variables.scss";
+@import "./styles/base.scss";
+
+
 .App {
   text-align: center;
   width: 100vw;

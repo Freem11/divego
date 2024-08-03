@@ -15,12 +15,10 @@ import {
 	deleteUserFollow,
 	checkIfUserFollows,
 } from '../../supabaseCalls/userFollowSupabaseCalls';
-import CloseIcon from '@mui/icons-material/Close';
 import './userProfile.css';
 import CloseButton from '../closeButton/closeButton';
-import SaveIcon from '@mui/icons-material/Save';
 import InputField from '../reusables/inputField';
-import CustomButton from '../reusables/button/button';
+import SubmitButton from '../reusables/button/submitButton';
 
 export default function UserProfileModal(props) {
 	const { animateProfileModal } = props;
@@ -157,167 +155,122 @@ export default function UserProfileModal(props) {
 		}
 	};
 
-	const customBtnStyle = {
-    width: '3.4vw',
-    height: '3.3vh',
-    padding: '13px',
-		marginLeft: '-20px',
-		marginRight: '10px',
-	};
 
-	return (
-		<div className='containerBox'>
-			<div className='titleDiv'>
-				<h3
-					style={{
-						marginLeft: '1vw',
-						width: '100vw',
-						textAlign: 'left',
-						fontFamily: 'Patrick Hand',
-						fontSize: '2vw',
-						// backgroundColor: "pink"
-					}}
-				>
+	return <>
+		<div className='p-6'>
+			<div className='columns'>
+				<h1 className='column col-11 text-left text-light'>
 					{selectedProfile
-						? userStats && userStats[0].username + "'s Diving"
+						? userStats[0] && userStats[0].username + "'s Diving"
 						: 'My Diver Profile'}
-				</h3>
-				<FormGroup>
-					<CloseButton
-						id='closeButton'
-						onClick={toggleProfileModal}
-						btnStyle={{
-							display: 'flex',
-							flexDirection: 'column',
-							// marginRight: 20,
-							// marginTop: 10,
-							backgroundColor: 'transparent',
-							border: 'none',
-							cursor: 'pointer',
-						}}
-					/>
-				</FormGroup>
-			</div>
+				</h1>
 
-			<div className='inputContainer'>
+				<CloseButton
+					onClick={toggleProfileModal}
+					className="column col-1"
+				/>
+			</div>
+		</div>
+	
+		<div className="hero hero-sm mx-4">
+			<div className="hero-body">
 				{selectedProfile ? (
-					<div
-						onClick={() => handleFollow()}
-						className={userFollows ? 'followButtoAlt' : 'followButton'}
-					>
-						<Label
-							style={{
-								fontFamily: 'Itim',
-								fontWeight: 'bold',
-								color: userFollows ? 'black' : 'pink',
-								cursor: 'pointer',
-								fontSize: '1vw',
-							}}
+					<div className='columns'>
+						<strong
+							onClick={() => handleFollow()}
+							className={`column col-6 p-centered btn btn-lg extra-shadow ${userFollows ? '': 'btn-primary'}`}
 						>
 							{userFollows
-								? 'Following ' + (userStats && userStats[0].username)
-								: 'Follow ' + (userStats && userStats[0].username)}
-						</Label>
+								? 'Following ' + (userStats && userStats[0] && userStats[0].username)
+								: 'Follow ' + (userStats && userStats[0] && userStats[0].username)}
+						</strong>
 					</div>
 				) : (
 					<>
-						<div
-							style={{
-								display: 'flex',
-								flexDirection: 'row',
-								alignItems: 'center',
-								justifyContent: 'center',
-								width: '100%',
-							}}
-						>
-							<div className='inputboxS'>
-								<InputField
-									placeholder='Diver Name'
-									name='userField'
-									value={
-										username !== null
-											? username
-											: userStats && userStats[0].username
-									}
-									onChange={(e) => setUsername(e.target.value)}
-									style={{width: "22vw"}}
-								/>
-							</div>
-							<CustomButton
-								onClick={async () => {
-									(await handleSubmit()) && toggleProfileModal();
-								}}
-								svg={<SaveIcon sx={{ cursor: 'pointer', color: 'gold' }} />}
-								btnState={saveButState}
-								className={customBtnStyle}
+						<div className='columns mb-4'>
+							<InputField
+								className="column col-12"
+								placeholder='Diver Name'
+								name='userField'
+								value={
+									username !== null
+										? username
+										: userStats && userStats[0].username
+								}
+								onChange={(e) => setUsername(e.target.value)}
 							/>
 						</div>
-
-						<div className='inputbox'>
+						
+						<div className='columns'>
 							<InputField
+								className="column col-12"
 								placeholder='Email'
 								name='emailField'
-								value={userStats && userStats[0].email}
-								style={{width: "25vw"}}
+								value={userStats[0] && userStats[0].email}
 							/>
 						</div>
 					</>
 				)}
+			</div>
 
-				<div className='statsContainer'>
-					<div className='inputboxMini'>
-						<InputField
-							name='photoCountField'
-							value={
-								'Sea Life: ' + (userStats && ' ' + userStats[0].photocount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='diveSiteCountField'
-							value={
-								'Dive Sites: ' +
-								(userStats && ' ' + userStats[0].divesitecount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='followerCountField'
-							value={
-								'Followers: ' +
-								(userStats && ' ' + userStats[0].followercount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='commentCountField'
-							value={
-								'Comments: ' + (userStats && ' ' + userStats[0].commentcount)
-							}
-							contentEditable={false}
-						/>
-					</div>
-
-					<div className='inputboxMini'>
-						<InputField
-							name='likeCountField'
-							value={'Likes: ' + (userStats && ' ' + userStats[0].likecount)}
-							contentEditable={false}
-						/>
-					</div>
-
-					{formError && <p className='erroMsgU'>{formError}</p>}
+			<div className="hero-body">
+				<div className="columns mb-4">
+					<InputField
+						className="column col-6"
+						name='photoCountField'
+						value={
+							'Sea Life: ' + (userStats && userStats[0] &&  ' ' + userStats[0].photocount)
+						}
+						contentEditable={false}
+					/>
+					<InputField
+						className="column col-6"
+						name='diveSiteCountField'
+						value={
+							'Dive Sites: ' +
+							(userStats && userStats[0] && ' ' + userStats[0].divesitecount)
+						}
+						contentEditable={false}
+					/>
+				</div>
+				<div className="columns mb-4">
+					<InputField
+						className="column col-6"
+						name='followerCountField'
+						value={
+							'Followers: ' +
+							(userStats && userStats[0] && ' ' + userStats[0].followercount)
+						}
+						contentEditable={false}
+					/>
+					<InputField
+						className="column col-6"
+						name='commentCountField'
+						value={
+							'Comments: ' + (userStats && userStats[0] && ' ' + userStats[0].commentcount)
+						}
+						contentEditable={false}
+					/>
+				</div>
+				<div className="columns mb-2">
+					<div className="column col-3"></div>
+					<InputField
+						className="column col-6"
+						name='likeCountField'
+						value={'Likes: ' + (userStats && userStats[0] && ' ' + userStats[0].likecount)}
+						contentEditable={false}
+					/>
+					<div className="column col-3"></div>
 				</div>
 			</div>
 		</div>
-	);
+		{!selectedProfile && <SubmitButton
+			onClick={async () => {
+				(await handleSubmit()) && toggleProfileModal();
+			}}
+			>
+			Save changes
+		</SubmitButton>
+		}
+	</>
 }
