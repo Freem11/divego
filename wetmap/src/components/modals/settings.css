@@ -11,18 +11,6 @@
 
 }
 
-.titleDiv2{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  /* background-color: green; */
-  height: 10vh;
-  width: 90%;
-  font-family: 'Patrick Hand', cursive;
-  color: #F0EEEB;
-}
-
 .lowerBoxSettings {
   width: 90%;
   height: 40vh;

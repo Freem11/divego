@@ -1,16 +1,17 @@
 .suggestInput {
-  height: "5vh";
-  width: "18vw";
+  height: 5vh;
+  width: 18vw;
   margin-bottom: 0vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: transparent;
+  /* background-color: white; */
   border: none;
   text-align: center;
   text-overflow: ellipsis;
-  color: #f0eeeb;
-  border-radius: 5px;
+  color: #F0EEEB;
+  font-family: 'Indie Flower';
+  border-radius: 20px;
 }
 
 .suggestInput:focus {

@@ -14,6 +14,8 @@ const CloseButton = ({ onClick, className, btnStyle }) => {
 					backgroundColor: 'transparent',
 					border: 'none',
 					cursor: 'pointer',
+                    paddingBottom: '2px',
+                    paddingTop: '0px'
 				}}
 			>
 				<CloseIcon

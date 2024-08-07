@@ -1,17 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Permanent+Marker&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Bubblegum+Sans&display=swap");
 
-.lowerBoxSite {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin-top: 15vh;
-  height: 40vh;
-  width: 90%;
-  /* background-color: lawngreen; */
-}
-
 .inputbox {
   display: flex;
   flex-direction: column;
@@ -64,19 +53,6 @@
   border: none;
 }
 
-.modalTitle3 {
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  /* background-color: green; */
-  height: 10vh;
-  width: 95%;
-  margin-left: 0%;
-  margin-top: 2vh;
-  font-family: "Patrick Hand", cursive;
-  color: #f0eeeb;
-}
-
 .uploadbox {
   margin-left: 71px;
   margin-top: 50px;
@@ -122,14 +98,4 @@
 }
 .fileSelectDiv:active {
   background-color: #538dbd;
-}
-
-.buttonBoxLocation {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-  width: 35%;
-  height: 100%;
-  padding-top: 8%;
-  /* background-color: lemonchiffon; */
 }
