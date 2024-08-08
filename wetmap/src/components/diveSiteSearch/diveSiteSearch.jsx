@@ -88,7 +88,7 @@ export default function DiveSiteAutoComplete(props) {
   };
 
   return (
-    <div className={"autosuggestboxWhite"}>
+    <div className='column col-8'>
       <AutoSuggest
         placeholder={"Search Dive Sites..."}
         value={searchText}

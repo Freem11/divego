@@ -2,25 +2,32 @@ import { useState, useContext, useEffect, useRef } from 'react';
 import './siteSubmitter.css';
 import { TutorialContext } from '../contexts/tutorialContext';
 import DiveSiteAutoComplete from '../diveSiteSearch/diveSiteSearch';
-import CloseButton from '../closeButton/closeButton';
-import TitleModal from '../reusables/titleModal';
+import ModalHeader from '../reusables/modalHeader';
 
 const SiteSearchModal = (props) => {
 	const { animateSiteSearchModal, setSiteSearchModalYCoord } = props;
 
 	return (
-		<div className='masterDiv' style={{ overflow: 'hidden' }}>
-			<div className='titleDiv'>
-				<TitleModal title={'Dive Site Search'} />
-				<CloseButton onClick={animateSiteSearchModal} />
+		<>
+			<ModalHeader
+				title={'Dive Site Search'}
+				onClose={animateSiteSearchModal}
+			/>
+			<div className='mx-4'>
+				<div
+					className='columns mt-6'
+					style={{
+						display: 'flex',
+						justifyContent: 'center',
+						alignContent: 'end',
+					}}
+				>
+					<DiveSiteAutoComplete
+						setSiteSearchModalYCoord={setSiteSearchModalYCoord}
+					/>
+				</div>
 			</div>
-
-			<div className='mainBlurbDiv' style={{ overflow: 'hidden' }}>
-				<DiveSiteAutoComplete
-					setSiteSearchModalYCoord={setSiteSearchModalYCoord}
-				/>
-			</div>
-		</div>
+		</>
 	);
 };
 
