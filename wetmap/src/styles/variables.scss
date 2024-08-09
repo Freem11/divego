@@ -5,5 +5,14 @@ $light-color: #f0eeeb;
 $base-font-family: "Patrick Hand";
 $border-radius: 1rem;
 
+// Define reusable style
+.flex-center-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
 // Load default ones from spectre.css
 @import "node_modules/spectre.css/src/variables";

@@ -9,9 +9,8 @@ import { SettingsModalContext } from '../contexts/settingsModalContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import './settings.css';
 import ActDelDialog from './dialog';
-import CloseButton from '../closeButton/closeButton';
-import TitleModal from '../reusables/titleModal';
 import { grabRequestById } from '../../supabaseCalls/partnerSupabaseCalls';
+import ModalHeader from '../reusables/modalHeader';
 
 const Settings = (props) => {
 	const { animateSettingsModal } = props;
@@ -76,13 +75,12 @@ const Settings = (props) => {
 	};
 
 	return (
-		<div className='masterDivSet'>
-			<div className='titleDiv2'>
-				<TitleModal title={'Settings'} />
-				<CloseButton onClick={animateSettingsModal} />
-			</div>
-
-			<div className='lowerBoxSettings'>
+		<>
+      <ModalHeader
+      title={'Settings'}
+      onClose={animateSettingsModal}/>
+			<div className='hero hero-sm mx-4'>
+        <div className='hero-body flex-center-column'>
 				<div onClick={handleLogout} className='Logoutbutton'>
 					<Label
 						style={{
@@ -148,9 +146,10 @@ const Settings = (props) => {
 					{dangerZone}
 				</Collapse>
 			</div>
+      </div>
 
 			<ActDelDialog openDialog={openDialog} setOpenDialog={setOpenDialog} />
-		</div>
+		</>
 	);
 };
 
