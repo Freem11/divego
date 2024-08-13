@@ -16,8 +16,7 @@ import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 
 import './howToGuide.css';
-import CloseButton from '../closeButton/closeButton';
-import TitleModal from '../reusables/titleModal';
+import ModalHeader from '../reusables/modalHeader';
 
 const HowToGuide = (props) => {
 	const { itterator, setItterator } = useContext(IterratorContext);
@@ -63,14 +62,13 @@ const HowToGuide = (props) => {
 	};
 
 	return (
-		<div className='masterDiv'>
-			{/* <div className="topRead"> */}
-			<div className='titleDiv'>
-				<TitleModal title={'How to use Scuba SEAsons'} />
-				<CloseButton onClick={animateLaunchModal} />
-			</div>
+		<>
+			<ModalHeader
+				title={'How to use Scuba SEAsons'}
+				onClose={animateLaunchModal}
+			/>
 
-			<div className='mainBlurbDiv'>
+			<div className='flex-center-column' style={{ marginTop: '-25%' }}>
 				<div onClick={handleTutorialStartup} className='introGuideLaunch'>
 					<Label
 						style={{
@@ -117,8 +115,7 @@ const HowToGuide = (props) => {
 					</Label>
 				</div>
 			</div>
-			{/* </div> */}
-		</div>
+		</>
 	);
 };
 

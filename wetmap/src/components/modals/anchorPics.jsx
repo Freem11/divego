@@ -20,10 +20,9 @@ import {
 } from '../../supabaseCalls/photoSupabaseCalls';
 import Picture from './picture';
 import FlagIcon from '@mui/icons-material/Flag';
-import CloseButton from "../closeButton/closeButton";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './anchorPics.css';
-import CustomButton from '../reusables/button/button';
+import ModalHeader from '../reusables/modalHeader';
 
 const AnchorPics = (props) => {
 	const {
@@ -152,29 +151,17 @@ const AnchorPics = (props) => {
 
 	return (
 		<div className='masterDivA'>
-			<div className='fixerDiv'>
-				<div className='fixDiv'>
-					<div className='topDiv'>
-						<div className='flagContainer'>
-							<a
-								className='atagDS'
-								href={`mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20Dive%20Site:%20"${selectedDiveSite.SiteName}"%20at%20Latitude:%20${selectedDiveSite.Latitude}%20Longitude:%20${selectedDiveSite.Longitude}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Dive%20site%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20dive%20site%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Dive%20site%20GPS%20coordinates%20are%20not%20correct%0D%0A%0D%0A(Please%20provide%20a%20correct%20latitude%20and%20longitude%20and%20we%20will%20update%20the%20record)`}
-							>
-								<FlagIcon sx={{ color: 'red', height: '5vh', width: '4vw' }} />
-							</a>
-						</div>
-						<div className='dsInfo'>
-							<h3 className='DiveSiteLabel'>{selectedDiveSite.SiteName}</h3>
-							<h3 className='DiveSiteCredit'>Added by: {site}</h3>
-						</div>
-						<CustomButton
-							onClick={() => handleSwitch()}
-							svg={<AddPhotoAlternateIcon />}
-						/>
-						<CloseButton onClick={handleClose} />
-					</div>
-				</div>
-			</div>
+			<ModalHeader
+				title={selectedDiveSite.SiteName}
+				onClick={() => handleSwitch()}
+				svg={<AddPhotoAlternateIcon />}
+				onClose={handleClose}
+				flagIcon={
+					<FlagIcon sx={{ color: 'red', height: '5vh', width: '4vw', marginTop: '7px' }} />
+				}
+				flagHref={`mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20Dive%20Site:%20"${selectedDiveSite.SiteName}"%20at%20Latitude:%20${selectedDiveSite.Latitude}%20Longitude:%20${selectedDiveSite.Longitude}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Dive%20site%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20dive%20site%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Dive%20site%20GPS%20coordinates%20are%20not%20correct%0D%0A%0D%0A(Please%20provide%20a%20correct%20latitude%20and%20longitude%20and%20we%20will%20update%20the%20record)`}
+				subText={site}
+			/>
 			<div className='picScollA'>
 				{anchorPics &&
 					anchorPics.map((pic) => {

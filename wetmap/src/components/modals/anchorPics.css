@@ -68,24 +68,6 @@
       align-items: flex-start;
   }
 
-.DiveSiteLabel{
-    font-family: 'Patrick Hand', cursive;
-    /* background-color: khaki; */
-    margin-top: 0vh;
-    /* height: 3vh; */
-    font-size: 1.7vw;
-    color: #F0EEEB;
-}
-
-.DiveSiteCredit{
-    font-family: 'Itim', cursive;
-    margin-top: -2vh;
-    font-size: 0.7vw;
-    height: 3vh;
-    /* background-color: blue; */
-
-}
-
 #plusButton {
     display: flex;
     background-color: transparent;
@@ -103,30 +85,13 @@
     color: #F0EEEB;
 }
 
-.flagContainer{
-    display: flex;
-    align-content: center;
-    justify-content: center;
-    margin-top: -0.5vh;
-    height: 7vh;
-    /* background-color: mediumblue; */
-}
-
-.atagDS{
-    /* display: flex;
-    align-content: center;
-    justify-content: center; */
-    /* background-color: burlywood; */
-}
-
 .picScollA{
-    margin-top: 17%;
-    margin-left: 0.3%;
+    margin-top: 5%;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     flex-wrap: wrap;
     overflow: hidden;
-    /* background-color: khaki; */
     width: 99%;
 }
 

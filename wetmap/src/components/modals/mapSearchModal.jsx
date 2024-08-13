@@ -2,26 +2,22 @@ import { useState, useContext, useEffect, useRef } from 'react';
 import './siteSubmitter.css';
 import { TutorialContext } from '../contexts/tutorialContext';
 import PlacesAutoComplete from '../locationSearch/placesAutocomplete';
-import CloseButton from '../closeButton/closeButton';
-import TitleModal from '../reusables/titleModal';
+import ModalHeader from '../reusables/modalHeader';
 
 const MapSearchModal = (props) => {
 	const { animateMapSearchModal, setMapSearchYCoord, mapSearchYCoord } = props;
 
 	return (
-		<div className='masterDiv'>
-			<div className='titleDiv'>
-				<TitleModal title={'Map Search'} />
-				<CloseButton onClick={animateMapSearchModal} />
-			</div>
+		<>
+			<ModalHeader title={'Map Search'} onClose={animateMapSearchModal} />
 
-			<div className='mainBlurbDiv'>
+			<div className='flex-center-column' style={{ marginTop: '-10%' }}>
 				<PlacesAutoComplete
 					setMapSearchYCoord={setMapSearchYCoord}
 					mapSearchYCoord={mapSearchYCoord}
 				/>
 			</div>
-		</div>
+		</>
 	);
 };
 

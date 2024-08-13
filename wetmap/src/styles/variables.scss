@@ -2,17 +2,43 @@
 $control-size-lg: 2.5rem;
 $primary-color: #538bdb;
 $light-color: #f0eeeb;
-$base-font-family: "Patrick Hand";
+$base-font-family: 'Patrick Hand';
+$second-font-family: 'Itim', cursive;
 $border-radius: 1rem;
 
 // Define reusable style
 .flex-center-column {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.flex-column-space-between {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.flex-row {
+	display: flex;
+	flex-direction: row;
     align-items: center;
-    height: 100%;
-  }
+}
+
+.flex-column {
+	display: flex;
+	flex-direction: column;
+    align-items: center;
+}
+
+.diveSiteSubText {
+    color: $light-color;
+    font-family: $second-font-family;
+    font-size: 0.7vw;
+    align-self: self-start;
+}
 
 // Load default ones from spectre.css
-@import "node_modules/spectre.css/src/variables";
+@import 'node_modules/spectre.css/src/variables';

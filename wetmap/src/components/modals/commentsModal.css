@@ -14,17 +14,6 @@
   overflow-y: auto;
 }
 
-.titleDiv{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  /* background-color: pink; */
-  width: 95%;
-  font-family: 'Patrick Hand', cursive;
-  color: #F0EEEB;
-}
-
 .commentListContainer {
   /* background-color: green; */
   overflow: hidden;
@@ -32,7 +21,7 @@
 
 .middleContainer{
   width: 98%;
-  height: 75%;
+  height: 60%;
   overflow: hidden;
   overflow-y: auto;
 }
