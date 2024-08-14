@@ -34,7 +34,7 @@
 // @import "node_modules/spectre.css/src/dropdowns";
 // @import "node_modules/spectre.css/src/empty";
 // @import "node_modules/spectre.css/src/menus";
-// @import "node_modules/spectre.css/src/modals";
+@import "../node_modules/spectre.css/src/modals";
 // @import "node_modules/spectre.css/src/navs";
 // @import "node_modules/spectre.css/src/pagination";
 // @import "node_modules/spectre.css/src/panels";
@@ -56,4 +56,30 @@
 
 .extra-shadow{
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.modal2.active .modal-overlay{
+  background-color: transparent;
+}
+.modal2 .modal-container {
+	transform: translateY(200%);
+	transition: transform 0.5s ease-in-out;
+  background: $primary-color;
+  padding: 0;
+  position: fixed;
+}
+  
+.modal2 {
+  z-index: 2;
+  position: fixed;
+  width: 60vw;
+  height: 65vh;
+  margin: 15% auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  border: 1px solid red;
+}
+.modal2.open .modal-container {
+	transform: translateY(0);
 }

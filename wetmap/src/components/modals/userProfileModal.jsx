@@ -21,7 +21,7 @@ import InputField from '../reusables/inputField';
 import SubmitButton from '../reusables/button/submitButton';
 
 export default function UserProfileModal(props) {
-	const { animateProfileModal } = props;
+	const { onFinish } = props;
 	const { activeSession } = useContext(SessionContext);
 	const { profile, setProfile } = useContext(UserProfileContext);
 	const [profileCloseState, setProfileCloseState] = useState(false);
@@ -60,24 +60,27 @@ export default function UserProfileModal(props) {
 		}
 	};
 
+	// useEffect(() => {
+	// 	console.log("user profile effect")
+	// 	getProfile();
+
+	// 	async function followCheck() {
+	// 		let alreadyFollows = await checkIfUserFollows(
+	// 			activeSession.user.id,
+	// 			selectedProfile
+	// 		);
+	// 		if (alreadyFollows.length > 0) {
+	// 			setUserFollows(true);
+	// 			setFollowData(alreadyFollows[0].id);
+	// 		}
+	// 	}
+
+	// 	followCheck();
+	// }, []);
+
 	useEffect(() => {
-		getProfile();
+		console.log("user profile effect")
 
-		async function followCheck() {
-			let alreadyFollows = await checkIfUserFollows(
-				activeSession.user.id,
-				selectedProfile
-			);
-			if (alreadyFollows.length > 0) {
-				setUserFollows(true);
-				setFollowData(alreadyFollows[0].id);
-			}
-		}
-
-		followCheck();
-	}, []);
-
-	useEffect(() => {
 		getProfile();
 
 		async function followCheck() {
@@ -156,8 +159,11 @@ export default function UserProfileModal(props) {
 	};
 
 
+	console.log("user render")
+	
+
 	return <>
-		<div className='p-6'>
+		<div className='pb-6'>
 			<div className='columns'>
 				<h1 className='column col-11 text-left text-light'>
 					{selectedProfile
@@ -166,7 +172,7 @@ export default function UserProfileModal(props) {
 				</h1>
 
 				<CloseButton
-					onClick={toggleProfileModal}
+					onClick={() => onFinish?.()}
 					className="column col-1"
 				/>
 			</div>
@@ -263,14 +269,19 @@ export default function UserProfileModal(props) {
 					<div className="column col-3"></div>
 				</div>
 			</div>
-		</div>
-		{!selectedProfile && <SubmitButton
+
+			
+			{!selectedProfile && <div className="hero-body"><SubmitButton
 			onClick={async () => {
-				(await handleSubmit()) && toggleProfileModal();
+				(await handleSubmit()) && onFinish?.();
 			}}
 			>
 			Save changes
 		</SubmitButton>
+		</div>
 		}
+
+		</div>
+
 	</>
 }

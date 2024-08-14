@@ -80,6 +80,8 @@ import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
 import Histogram from "./histogram/histogramBody";
 import TutorialBar from "./guideBar/tutorialBarContainer";
+import { ModalContext } from "./contexts/modalContext";
+import Modal from "./reusables/modal/modal";
 
 // const adminPortalZone = (
 //   <div style={{ marginLeft: "10px", marginBottom: "40px" }}>
@@ -146,6 +148,8 @@ const MapPage = React.memo((props) => {
   const [searButState, setSearButState] = useState(false);
   const [siteButState, setSiteButState] = useState(false);
   const [photButState, setPhotButState] = useState(false);
+
+  const { modalShow, modalClose } = useContext(ModalContext);
 
   let blinker;
   let counter = 0;
@@ -881,6 +885,10 @@ const MapPage = React.memo((props) => {
   };
 
   const animateProfileModal = () => {
+    modalShow(UserProfileModal)
+    return 
+
+    
     let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
       .clientHeight;
 
@@ -1622,6 +1630,9 @@ const MapPage = React.memo((props) => {
         </div>
       )}
 
+
+      <Modal/>
+
       <animated.div
         className="picModalDiv"
         style={movePicModal}
@@ -1657,13 +1668,13 @@ const MapPage = React.memo((props) => {
         />
       </animated.div>
 
-      <animated.div
+      {/* <animated.div
         className="picModalDiv"
         style={moveProfileModal}
         ref={profileModalRef}
       >
         <UserProfileModal animateProfileModal={animateProfileModal} />
-      </animated.div>
+      </animated.div> */}
 
       <animated.div
         className="picModalDiv"

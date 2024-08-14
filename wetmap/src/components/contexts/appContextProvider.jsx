@@ -55,6 +55,7 @@ import SelectedShopContextProvider from './selectedShopContext';
 import ShopModalContextProvider from "./shopModalContext";
 import ZoomHelperContextProvider from "./zoomHelperContext";
 import SitesArrayContextProvider from './sitesArrayContext';
+import ModalContextProvider from './modalContext';
 
 const providers = [
     AreaPicsContextProvider,
@@ -110,6 +111,7 @@ const providers = [
     ShopModalContextProvider,
     ZoomHelperContextProvider,
     SitesArrayContextProvider,
+    ModalContextProvider,
 ]
 
 export const AppContextProvider = combineComponents(...providers);
