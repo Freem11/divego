@@ -22,29 +22,6 @@
   /* background-color: green; */
 }
 
-.Logoutbutton{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Itim', cursive;
-  font-size: 1em;
-  cursor: pointer;
-  background-color: #538bdb;
-  width: 13vw;
-  text-align: center;
-  padding: 4px;
-  border-radius: 10px;
-  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  /* margin-top: 1vh; */
-}
-
-.Logoutbutton:hover {
-  background-color: #3e7dd7;
-}
-.Logoutbutton:active {
-  background-color: #538dbd;
-}
-
 .AccountDeleteButton{
   display: flex;
   align-items: center;
