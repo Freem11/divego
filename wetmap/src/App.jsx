@@ -34,33 +34,35 @@ function App() {
     getUserData();
   }, []);
 
-  useLayoutEffect(() => {
-    window.onload = async function () {
-      try {
-        const valuless = localStorage.getItem("token");
-        if (valuless) {
-          const value = JSON.parse(valuless);
-          if (value && value.session) {
-            if (value.session.refresh_token) {
-              let newSession = await sessionRefresh(
-                value.session.refresh_token
-              );
-              setActiveSession(newSession);
-            }
+  const handleStartup = async() => {
+    try {
+      const valuless = localStorage.getItem("token");
+      if (valuless) {
+        const value = JSON.parse(valuless);
+        if (value && value.session) {
+          if (value.session.refresh_token) {
+            let newSession = await sessionRefresh(
+              value.session.refresh_token
+            );
+            setActiveSession(newSession);
           }
         }
-        await sessionCheck();
-        localStorage.removeItem("token");
-      } catch (error) {
-        console.log("no dice:", error);
       }
+      await sessionCheck();
+      localStorage.removeItem("token");
+    } catch (error) {
+      console.log("no dice:", error);
+    }
 
-      const photoLocation = await getMostRecentPhoto();
-      if (photoLocation) {
-        setMapCoords([photoLocation[0].latitude, photoLocation[0].longitude]);
-        setAppIsReady(true);
-      }
-    };
+    const photoLocation = await getMostRecentPhoto();
+    if (photoLocation) {
+      setMapCoords([photoLocation[0].latitude, photoLocation[0].longitude]);
+      setAppIsReady(true);
+    }
+  };
+
+  useLayoutEffect(() => {
+    handleStartup()
   }, []);
 
   const onLayoutRootView = useCallback(async () => {
