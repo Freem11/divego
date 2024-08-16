@@ -1,5 +1,4 @@
 import { useState, useContext, useEffect, useRef } from 'react';
-import { Label } from 'reactstrap';
 import './siteSubmitter.css';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { IterratorContext } from '../contexts/iterratorContext';
@@ -8,16 +7,8 @@ import { Iterrator3Context } from '../contexts/iterrator3Context';
 import { TutorialModelContext } from '../contexts/tutorialModalContext';
 import { SecondTutorialModalContext } from '../contexts/secondTutorialModalContext';
 import { ThirdTutorialModalContext } from '../contexts/thirdTutorialModalContext';
-import ExploreIcon from '@mui/icons-material/Explore';
-import SearchIcon from '@mui/icons-material/Search';
-import AnchorIcon from '@mui/icons-material/Anchor';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
-import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
-
-import './howToGuide.css';
-import CloseButton from '../closeButton/closeButton';
-import TitleModal from '../reusables/titleModal';
+import ModalHeader from '../reusables/modalHeader';
+import LargeButton from '../reusables/button/largeButton';
 
 const HowToGuide = (props) => {
 	const { itterator, setItterator } = useContext(IterratorContext);
@@ -63,62 +54,24 @@ const HowToGuide = (props) => {
 	};
 
 	return (
-		<div className='masterDiv'>
-			{/* <div className="topRead"> */}
-			<div className='titleDiv'>
-				<TitleModal title={'How to use Scuba SEAsons'} />
-				<CloseButton onClick={animateLaunchModal} />
-			</div>
+		<>
+			<ModalHeader
+				title={'How to use Scuba SEAsons'}
+				onClose={animateLaunchModal}
+			/>
 
-			<div className='mainBlurbDiv'>
-				<div onClick={handleTutorialStartup} className='introGuideLaunch'>
-					<Label
-						style={{
-							fontFamily: 'Itim',
-							fontWeight: 'bold',
-							color: 'gold',
-							cursor: 'pointer',
-							fontSize: '1vw',
-						}}
-					>
-						Intro Guide
-					</Label>
-				</div>
-
-				<div
+			<div className='flex-center-column' style={{ marginTop: '-25%' }}>
+				<LargeButton onClick={handleTutorialStartup} btnText={'Intro Guide'} />
+				<LargeButton
 					onClick={handleSecondTutorialStartup}
-					className='diveSiteGuideLaunch'
-				>
-					<Label
-						style={{
-							fontFamily: 'Itim',
-							fontWeight: 'bold',
-							color: 'gold',
-							cursor: 'pointer',
-							fontSize: '1vw',
-							width: '10vw',
-						}}
-					>
-						Fun With Dive Sites
-					</Label>
-				</div>
-
-				<div onClick={handleThirdTutorialStartup} className='photoGuideLaunch'>
-					<Label
-						style={{
-							fontFamily: 'Itim',
-							fontWeight: 'bold',
-							color: 'gold',
-							cursor: 'pointer',
-							fontSize: '1vw',
-						}}
-					>
-						Photogenics
-					</Label>
-				</div>
+					btnText={'Fun With Dive Sites'}
+				/>
+				<LargeButton
+					onClick={handleThirdTutorialStartup}
+					btnText={'Photogenics'}
+				/>
 			</div>
-			{/* </div> */}
-		</div>
+		</>
 	);
 };
 

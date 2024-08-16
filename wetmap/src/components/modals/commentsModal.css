@@ -14,17 +14,6 @@
   overflow-y: auto;
 }
 
-.titleDiv{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  /* background-color: pink; */
-  width: 95%;
-  font-family: 'Patrick Hand', cursive;
-  color: #F0EEEB;
-}
-
 .commentListContainer {
   /* background-color: green; */
   overflow: hidden;
@@ -32,90 +21,7 @@
 
 .middleContainer{
   width: 98%;
-  height: 75%;
+  height: 60%;
   overflow: hidden;
   overflow-y: auto;
-}
-
-.mainBlurbDiv{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  /* margin-top: 20%; */
-  /* margin-left: 14%; */
-  font-family: 'Indie Flower';
-  color: #F0EEEB;
-  height: 100%;
-  width: 70%;
-  /* background-color: aquamarine; */
-}
-
-.introGuideLaunch {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Itim', cursive;
-  font-size: 1em;
-  cursor: pointer;
-  background-color: #538bdb;
-  width: 12vw;
-  height: 4vh;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  margin-top: 5%;
-}
-
-.introGuideLaunch:hover {
-  background-color: #3e7dd7;
-}
-.introGuideLaunch:active {
-  background-color: #538dbd;
-}
-
-.diveSiteGuideLaunch {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Itim', cursive;
-  font-size: 1em;
-  cursor: pointer;
-  background-color: #538bdb;
-  width: 12vw;
-  height: 4vh;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  margin-top: 4vh;
-}
-
-.diveSiteGuideLaunch:hover {
-  background-color: #3e7dd7;
-}
-.diveSiteGuideLaunch:active {
-  background-color: #538dbd;
-}
-
-.photoGuideLaunch {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Itim', cursive;
-  font-size: 1em;
-  cursor: pointer;
-  background-color: #538bdb;
-  width: 12vw;
-  height: 4vh;
-  text-align: center;
-  border-radius: 5px;
-  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  margin-top: 4vh;
-}
-
-.photoGuideLaunch:hover {
-  background-color: #3e7dd7;
-}
-.photoGuideLaunch:active {
-  background-color: #538dbd;
 }

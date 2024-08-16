@@ -7,11 +7,10 @@ import { UserProfileContext } from '../contexts/userProfileContext';
 import { createPartnerAccountRequest } from '../../supabaseCalls/partnerSupabaseCalls';
 import './partnerAccountRequestModal.css';
 import './confirmationModal.css';
-import CloseButton from '../closeButton/closeButton';
 import InputField from '../reusables/inputField';
 import ConfirmationModal from './confirmationModal';
 import SubmitButton from '../reusables/button/submitButton';
-import TitleModal from '../reusables/titleModal';
+import ModalHeader from '../reusables/modalHeader';
 
 // const windowWidth = Dimensions.get("window").width;
 // const windowHeight = Dimensions.get("window").height;
@@ -158,11 +157,8 @@ export default function PartnerAccountRequestModal() {
 	};
 
 	return (
-		<div className='containerP'>
-			<div className='title'>
-				<TitleModal title={'Partner Account Request'} />
-				<CloseButton onClick={handleClose} />
-			</div>
+		<>
+			<ModalHeader title={'Partner Account Request'} onClose={handleClose} />
 
 			<Label className='explainer'>
 				To qualify for a "Partner Account" Your Account must represent a diving
@@ -253,6 +249,6 @@ export default function PartnerAccountRequestModal() {
 					isSuccess={false}
 				/>
 			</animated.div>
-		</div>
+		</>
 	);
 }

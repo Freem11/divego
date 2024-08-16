@@ -12,7 +12,7 @@ import {
 import './commentsModal.css';
 import CloseButton from '../closeButton/closeButton';
 import InputField from '../reusables/inputField';
-import TitleModal from '../reusables/titleModal';
+import ModalHeader from '../reusables/modalHeader';
 
 const CommentsModal = (props) => {
 	const { animateCommentsModal } = props;
@@ -142,10 +142,9 @@ const CommentsModal = (props) => {
 	};
 
 	return (
-		<div className='masterDiv'>
-			<div className='titleDiv'>
-				<TitleModal title={'Comments'} />
-				<CloseButton onClick={handleCommentModalClose} />
+		<>
+			<div>
+				<ModalHeader title={'Comments'} onClose={handleCommentModalClose} />
 			</div>
 
 			<div className='middleContainer'> {getCommentListView(null)}</div>
@@ -159,21 +158,19 @@ const CommentsModal = (props) => {
 				) : null}
 				<div className='replyBox'>
 					<div className='inputboxType2'>
-						<FormGroup>
-							<InputField
-								id='standard-basic'
-								// label="Latitude"
-								placeholder='Blow some bubbles'
-								variant='standard'
-								type='text'
-								name='commentEntry'
-								value={commentContent}
-								onChange={(e) => setCommentContent(e.target.value)}
-								style={{
-									width: '46vw',
-								}}
-							/>
-						</FormGroup>
+						<InputField
+							id='standard-basic'
+							// label="Latitude"
+							placeholder='Blow some bubbles'
+							variant='standard'
+							type='text'
+							name='commentEntry'
+							value={commentContent}
+							onChange={(e) => setCommentContent(e.target.value)}
+							style={{
+								width: '46vw',
+							}}
+						/>
 					</div>
 					<img
 						onClick={() => handleCommentInsert()}
@@ -187,7 +184,7 @@ const CommentsModal = (props) => {
 					/>
 				</div>
 			</div>
-		</div>
+		</>
 	);
 };
 

@@ -3,7 +3,7 @@ import CloseIcon from '@mui/icons-material/Close';
 
 const CloseButton = ({ onClick, className, btnStyle }) => {
 	return (
-		<div>
+		<div className='col-3'>
 			<Button
 				variant='text'
 				className={className}
@@ -14,7 +14,6 @@ const CloseButton = ({ onClick, className, btnStyle }) => {
 					backgroundColor: 'transparent',
 					border: 'none',
 					cursor: 'pointer',
-                    paddingBottom: '2px',
                     paddingTop: '0px'
 				}}
 			>
