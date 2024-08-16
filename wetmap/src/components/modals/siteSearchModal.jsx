@@ -13,19 +13,10 @@ const SiteSearchModal = (props) => {
 				title={'Dive Site Search'}
 				onClose={animateSiteSearchModal}
 			/>
-			<div className='mx-4'>
-				<div
-					className='columns mt-6'
-					style={{
-						display: 'flex',
-						justifyContent: 'center',
-						alignContent: 'end',
-					}}
-				>
-					<DiveSiteAutoComplete
-						setSiteSearchModalYCoord={setSiteSearchModalYCoord}
-					/>
-				</div>
+			<div className='mx-4 flex-center-column' style={{ marginTop: '-10%' }}>
+				<DiveSiteAutoComplete
+					setSiteSearchModalYCoord={setSiteSearchModalYCoord}
+				/>
 			</div>
 		</>
 	);
