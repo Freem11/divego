@@ -22,9 +22,8 @@ import { TutorialContext } from '../contexts/tutorialContext';
 import { ChapterContext } from '../contexts/chapterContext';
 import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button';
-import CloseButton from '../closeButton/closeButton';
 import SubmitButton from '../reusables/button/submitButton';
-
+import ModalHeader from '../reusables/modalHeader';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -333,140 +332,98 @@ const SiteSubmitter = (props) => {
 	};
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-				height: '100%',
-				// backgroundColor: "palegoldenrod"
-			}}
-		>
-			<div className='modalTitle3'>
-				<Label
-					style={{
-						width: '100vw',
-						marginLeft: '1vw',
-						textAlign: 'left',
-						fontFamily: 'Patrick Hand',
-						fontSize: '2vw',
-						// backgroundColor: "pink",
-					}}
-				>
-					<strong>Submit Your Dive Site</strong>
-				</Label>
-				<CustomButton
+		<>
+			<div>
+				<ModalHeader
+					title={'Submit Your Dive Site'}
 					onClick={() => activateGuide()}
-					svg={
-						<QuestionMarkIcon
-							sx={{
-								color: 'gold',
-								width: '3.5vw',
-								height: '3.5vh',
-								padding: '1px',
-								cursor: 'pointer',
-							}}
-						/>
-					}
+					svg={<QuestionMarkIcon />}
+					onClose={handleModalClose}
 				/>
-				<FormGroup>
-					<CloseButton
-						onClick={handleModalClose}
+			</div>
+			<div className='hero hero-sm mx-4 mt-6'>
+				<div className='hero-body flex-center-column'>
+					<InputField
+						className='column col-8 mb-4'
+						placeholder='Site Name'
+						type='text'
+						name='Site'
+						value={addSiteVals.Site}
+						onChange={handleChange}
+						onClick={handleNoGPSClose}
+						highlighted={siteNameState}
 					/>
-				</FormGroup>
-			</div>
 
-			<div className='lowerBoxSite'>
-				<div className='inputbox'>
-					<FormGroup>
-						<InputField
-							placeholder='Site Name'
-							type='text'
-							name='Site'
-							value={addSiteVals.Site}
-							onChange={handleChange}
-							onClick={handleNoGPSClose}
-							highlighted={siteNameState}
+					<InputField
+						className='column col-8 mb-4'
+						placeholder='Latitude'
+						type='decimal'
+						name='Latitude'
+						value={addSiteVals.Latitude}
+						onChange={handleChange}
+						onClick={handleNoGPSClose}
+					/>
+
+					<InputField
+						className='column col-8 mb-4'
+						placeholder='Longitude'
+						type='decimal'
+						name='Longitude'
+						value={addSiteVals.Longitude}
+						onChange={handleChange}
+						onClick={handleNoGPSClose}
+					/>
+
+					<div className='columns my-2'>
+						<CustomButton
+							onClick={handleDiveSiteGPS}
+							svg={
+								<MyLocationIcon
+									sx={locButState ? buttonColorAlt : buttonColor}
+								/>
+							}
+							btnState={locButState}
 						/>
-					</FormGroup>
+						<CustomButton
+							onClick={handleNoGPSCloseOnMapChange}
+							svg={
+								<PlaceIcon sx={pinButState ? buttonColorAlt : buttonColor} />
+							}
+							btnState={pinButState}
+						/>
+					</div>
 				</div>
 
-				<div className='inputbox'>
-					<FormGroup>
-						<InputField
-							placeholder='Latitude'
-							type='decimal'
-							name='Latitude'
-							value={addSiteVals.Latitude}
-							onChange={handleChange}
-							onClick={handleNoGPSClose}
-						/>
-					</FormGroup>
-				</div>
-
-				<div className='inputbox'>
-					<FormGroup>
-						<InputField
-							placeholder='Longitude'
-							type='decimal'
-							name='Longitude'
-							value={addSiteVals.Longitude}
-							onChange={handleChange}
-							onClick={handleNoGPSClose}
-						/>
-					</FormGroup>
-				</div>
-			</div>
-
-			<div className='buttonBoxLocation'>
-				<CustomButton
-					onClick={handleDiveSiteGPS}
-					svg={
-						<MyLocationIcon sx={locButState ? buttonColorAlt : buttonColor} />
-					}
-					btnState={locButState}
-				/>
-				<CustomButton
-					onClick={handleNoGPSCloseOnMapChange}
-					svg={<PlaceIcon sx={pinButState ? buttonColorAlt : buttonColor} />}
-					btnState={pinButState}
-				/>
-			</div>
-
-			<FormGroup>
-				<SubmitButton
-					active={ !!subButState}
-					onClick={handleSubmit}
-				>
+				<SubmitButton active={!!subButState} onClick={handleSubmit}>
 					Submit Dive Site
 				</SubmitButton>
-			</FormGroup>
 
-			<animated.div
-				className='successModal modalBase'
-				style={sucessModalSlide}
-				ref={successModalRef}
-			>
-				<ConfirmationModal
-					submissionItem='dive site'
-					animateModal={animateSuccessModal}
-					handleClose={handleModalClose}
-					isSuccess={true}
-				/>
-			</animated.div>
+				<animated.div
+					className='successModal modalBase'
+					style={sucessModalSlide}
+					ref={successModalRef}
+				>
+					<ConfirmationModal
+						submissionItem='dive site'
+						animateModal={animateSuccessModal}
+						handleClose={handleModalClose}
+						isSuccess={true}
+					/>
+				</animated.div>
 
-			<animated.div
-				className='cautionModal modalBase'
-				style={cautionModalSlide}
-				ref={cautionModalRef}
-			>
-				<ConfirmationModal
-					submissionItem='dive site'
-					animateModal={animateCautionModal}
-					isSuccess={false}
-				/>
-			</animated.div>
-		</div>
+				<animated.div
+					className='cautionModal modalBase'
+					style={cautionModalSlide}
+					ref={cautionModalRef}
+				>
+					<ConfirmationModal
+						submissionItem='dive site'
+						animateModal={animateCautionModal}
+						isSuccess={false}
+					/>
+				</animated.div>
+			</div>
+		</>
 	);
 };
 

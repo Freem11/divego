@@ -1,42 +1,25 @@
-import { useState, useContext, useEffect, useRef } from "react";
-import { Container, Form, FormGroup, Label, Button } from "reactstrap";
-import "./siteSubmitter.css";
-import { TutorialContext } from "../contexts/tutorialContext";
-import DiveSiteAutoComplete from "../diveSiteSearch/diveSiteSearch";
-import CloseButton from "../closeButton/closeButton";
+import { useState, useContext, useEffect, useRef } from 'react';
+import './siteSubmitter.css';
+import { TutorialContext } from '../contexts/tutorialContext';
+import DiveSiteAutoComplete from '../diveSiteSearch/diveSiteSearch';
+import ModalHeader from '../reusables/modalHeader';
 
 const SiteSearchModal = (props) => {
-  const { animateSiteSearchModal, setSiteSearchModalYCoord } = props;
+	const { animateSiteSearchModal, setSiteSearchModalYCoord } = props;
 
-  return (
-    <div className="masterDiv" style={{overflow: "hidden"}}>
-      <div className="titleDiv">
-        <h3
-          style={{
-            marginLeft: "1vw",
-            width: "100vw",
-            textAlign: "left",
-            fontFamily: "Patrick Hand",
-            fontSize: "2vw",
-            // backgroundColor: "pink"
-          }}
-        >
-          Dive Site Search
-        </h3>
-        <FormGroup>
-            <CloseButton
-                onClick={animateSiteSearchModal}
-            />
-        </FormGroup>
-      </div>
-
-      <div className="mainBlurbDiv" style={{overflow: "hidden"}}>
-        <DiveSiteAutoComplete
-          setSiteSearchModalYCoord={setSiteSearchModalYCoord}
-        />
-      </div>
-    </div>
-  );
+	return (
+		<>
+			<ModalHeader
+				title={'Dive Site Search'}
+				onClose={animateSiteSearchModal}
+			/>
+			<div className='mx-4 flex-center-column' style={{ marginTop: '-10%' }}>
+				<DiveSiteAutoComplete
+					setSiteSearchModalYCoord={setSiteSearchModalYCoord}
+				/>
+			</div>
+		</>
+	);
 };
 
 export default SiteSearchModal;

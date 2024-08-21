@@ -1,40 +1,24 @@
-import { useState, useContext, useEffect, useRef } from "react";
-import { Container, Form, FormGroup, Label, Button } from "reactstrap";
-import "./siteSubmitter.css";
-import { TutorialContext } from "../contexts/tutorialContext";
-import PlacesAutoComplete from "../locationSearch/placesAutocomplete";
-import CloseButton from "../closeButton/closeButton";
+import { useState, useContext, useEffect, useRef } from 'react';
+import './siteSubmitter.css';
+import { TutorialContext } from '../contexts/tutorialContext';
+import PlacesAutoComplete from '../locationSearch/placesAutocomplete';
+import ModalHeader from '../reusables/modalHeader';
 
 const MapSearchModal = (props) => {
-  const { animateMapSearchModal, setMapSearchYCoord, mapSearchYCoord} = props;
- 
-  return (
-    <div className="masterDiv">
-      <div className="titleDiv">
-        <h3
-          style={{
-            marginLeft: "1vw",
-            width: "100vw",
-            textAlign: "left",
-            fontFamily: "Patrick Hand",
-            fontSize: "2vw",
-            // backgroundColor: "pink"
-          }}
-        >
-          Map Search
-        </h3>
-        <FormGroup>
-            <CloseButton
-                onClick={animateMapSearchModal}
-            />
-        </FormGroup>
-      </div>
+	const { animateMapSearchModal, setMapSearchYCoord, mapSearchYCoord } = props;
 
-      <div className="mainBlurbDiv">
-        <PlacesAutoComplete setMapSearchYCoord={setMapSearchYCoord} mapSearchYCoord={mapSearchYCoord}/>
-      </div>
-    </div>
-  );
+	return (
+		<>
+			<ModalHeader title={'Map Search'} onClose={animateMapSearchModal} />
+
+			<div className='flex-center-column' style={{ marginTop: '-10%' }}>
+				<PlacesAutoComplete
+					setMapSearchYCoord={setMapSearchYCoord}
+					mapSearchYCoord={mapSearchYCoord}
+				/>
+			</div>
+		</>
+	);
 };
 
 export default MapSearchModal;

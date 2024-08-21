@@ -1,10 +1,10 @@
 .modalBase {
 	z-index: 200;
 	position: absolute;
-	top: 135%;
+	top: 145%;
 	left: 0;
 	width: 30vw;
-	height: 29vh;
+	height: 35vh;
 	border-radius: 3vw;
 	border: 1px solid lightgrey;
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 6px 20px rgba(0, 0, 0, 0.1);
@@ -53,13 +53,13 @@
 	font-family: 'Itim', cursive;
 	align-self: center;
 	text-align: center;
-	margin-bottom: 7%;
-	width: 90%;
+	margin-bottom: 5%;
+	width: 95%;
 }
 
 .text2Modal {
-	font-size: 1rem;
-	width: 90%;
+	font-size: 0.9rem;
+	width: 95%;
 	color: #36454f;
 	font-family: 'Itim', cursive;
 	align-self: center;
@@ -79,7 +79,7 @@
 	text-align: center;
 	border-radius: 5px;
 	box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-	margin-top: 7%;
+	margin-top: 5%;
 }
 
 .OKbuttonF {
@@ -95,7 +95,7 @@
 	text-align: center;
 	border-radius: 5px;
 	box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-	margin-top: 7%;
+	margin-top: 5%;
 }
 
 .OKbuttonS:hover {

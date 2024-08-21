@@ -75,11 +75,11 @@
 }
 
 .autosuggestboxWhite {
-	margin-top: 2vh;
+	margin-top: 1.5vh;
 	margin-bottom: 4px;
 	border: transparent;
-	height: 3vh;
-	width: 18vw;
+  height: 5vh;
+  width: 18vw;
 	background-color: white;
 	border-radius: 20px;
 	padding-bottom: 5px;
@@ -185,16 +185,6 @@
 	border-bottom-right-radius: 25px;
 }
 
-.modalTitle2 {
-	display: flex;
-	align-items: center;
-	flex-direction: row;
-  justify-content: center;
-	height: 10vh;
-	width: 95%;
-	font-family: 'Patrick Hand', cursive;
-	color: #f0eeeb;
-}
 .form-label {
 	width: 200px;
 }
@@ -222,7 +212,7 @@
 	align-items: center;
 	margin-top: 2vh;
 	width: 90%;
-	height: 40%;
+	/* height: 40%; */
 	flex-direction: row;
 	/* background-color: lightcoral; */
 }
@@ -273,6 +263,7 @@
 	height: 18vh;
 	align-items: center;
 	justify-content: center;
+  margin-top: 4vh;
 	margin-bottom: 2vh;
 	border-radius: 15px;
 	border: lightblue 1px solid;

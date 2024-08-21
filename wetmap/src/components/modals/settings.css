@@ -11,18 +11,6 @@
 
 }
 
-.titleDiv2{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: row;
-  /* background-color: green; */
-  height: 10vh;
-  width: 90%;
-  font-family: 'Patrick Hand', cursive;
-  color: #F0EEEB;
-}
-
 .lowerBoxSettings {
   width: 90%;
   height: 40vh;
@@ -32,29 +20,6 @@
   flex-direction: column;
   align-items: center;
   /* background-color: green; */
-}
-
-.Logoutbutton{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Itim', cursive;
-  font-size: 1em;
-  cursor: pointer;
-  background-color: #538bdb;
-  width: 13vw;
-  text-align: center;
-  padding: 4px;
-  border-radius: 10px;
-  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-  /* margin-top: 1vh; */
-}
-
-.Logoutbutton:hover {
-  background-color: #3e7dd7;
-}
-.Logoutbutton:active {
-  background-color: #538dbd;
 }
 
 .AccountDeleteButton{
@@ -96,7 +61,7 @@
   padding-right: 5px;
   cursor: pointer;
   position: absolute;
-  bottom: 7vh;
+  bottom: 8vh;
 }
 
 .dangerText{

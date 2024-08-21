@@ -36,8 +36,8 @@ import { getAnimalNamesThatFit } from '../../supabaseCalls/photoSupabaseCalls';
 import { userCheck } from '../../supabaseCalls/authenticateSupabaseCalls';
 import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button.jsx';
-import CloseButton from "../closeButton/closeButton";
 import SubmitButton from '../reusables/button/submitButton.jsx';
+import ModalHeader from '../reusables/modalHeader.jsx';
 
 let filePath1 = './wetmap/src/components/uploads/';
 let filePath = '/src/components/uploads/';
@@ -474,19 +474,6 @@ const PicUploader = React.memo((props) => {
 		marginTop: '1vh',
 		cursor: 'pointer',
 	};
-	const buttonStyle = {
-		color: 'gold',
-		width: '3.5vw',
-		height: '3.5vh',
-		cursor: 'pointer',
-	};
-
-	const buttonStyleAlt = {
-		color: '#538dbd',
-		width: '3.5vw',
-		height: '3.5vh',
-		cursor: 'pointer',
-	};
 
 	const customBtnStyle = {
 		width: '4.5vw',
@@ -531,49 +518,16 @@ const PicUploader = React.memo((props) => {
 	}, [pin.Animal]);
 
 	return (
-		<div
-			style={{
-				display: 'flex',
-				flexDirection: 'column',
-				alignItems: 'center',
-				height: '100%',
-				position: 'relative'
-				// backgroundColor: "palegoldenrod"
-			}}
-		>
-			<div className='modalTitle2'>
-				<Label
-					style={{
-						width: '20vw',
-						marginLeft: '1vw',
-						textAlign: 'left',
-						fontFamily: 'Patrick Hand',
-						fontSize: '2vw',
-						// backgroundColor: "pink",
-					}}
-				>
-					<strong>Submit Your Picture</strong>
-				</Label>
-
-				<CustomButton
-					onClick={() => activateGuide()}
-					svg={
-						<QuestionMarkIcon
-							sx={{
-								color: 'gold',
-								width: '3.5vw',
-								height: '3.5vh',
-								padding: '1px',
-								cursor: 'pointer',
-							}}
-						/>
-					}
-				/>
-				<FormGroup>
-					<CloseButton onClick={handleModalClose} />
-				</FormGroup>
+		<>
+			<div>
+				<ModalHeader
+				title={'Submit Your Picture'}
+				onClick={() => activateGuide()}
+				svg={<QuestionMarkIcon />}
+				onClose={handleModalClose}/>
 			</div>
-
+			<div className='hero hero-sm p-0'>
+			<div className='flex-center-column'>
 			{photoFile !== null && (
 				<div className='pickie'>
 					{/* <div>{photoFile}</div> */}
@@ -599,7 +553,7 @@ const PicUploader = React.memo((props) => {
 				</div>
 			)}
 
-			<div className='uploadbox2'>
+			<div className='column col-6 mb-2'>
 				<div
 					onClick={handleClick}
 					className={imgButState ? 'picSelectDivAlt' : 'picSelectDiv'}
@@ -631,7 +585,7 @@ const PicUploader = React.memo((props) => {
 				</FormGroup>
 			</div>
 
-			<div className='lowerBoxPhoto'>
+			<div className='lowerBoxPhoto mt-4'>
 				{/* <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
           {noGPSZone}
         </Collapse> */}
@@ -717,17 +671,16 @@ const PicUploader = React.memo((props) => {
 				<div className='Tbox2'>
 					<CustomButton
 						onClick={handleNoGPSCloseOnMapChange}
-						svg={<PlaceIcon sx={pinButState ? buttonStyleAlt : buttonStyle} />}
+						svg={<PlaceIcon />}
 						btnState={pinButState}
 						className={customBtnStyle}
 					/>
 				</div>
 			</div>
+			</div>
+			</div>
 			<FormGroup>
-				<SubmitButton
-					active={ !!subButState}
-					onClick={handleSubmit}
-				>
+				<SubmitButton active={!!subButState} onClick={handleSubmit}>
 					Submit Photo
 				</SubmitButton>
 			</FormGroup>
@@ -756,7 +709,7 @@ const PicUploader = React.memo((props) => {
 					isSuccess={false}
 				/>
 			</animated.div>
-		</div>
+		</>
 	);
 });
 

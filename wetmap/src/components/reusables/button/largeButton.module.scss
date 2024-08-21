@@ -1,0 +1,31 @@
+@import '../../../styles/variables.scss';
+
+.guideLaunch {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: $second-font-family;
+    font-weight: bold;
+    font-size: 1.2vw;
+    background-color: $primary-color;
+    width: 13vw;
+    height: 5vh;
+    text-align: center;
+    border-radius: 10px;
+    box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+    margin-top: 6%;
+    padding: 2px;
+  }
+  
+  .guideLaunch:hover {
+    background-color: $hover-color;
+  }
+  .guideLaunch:active {
+    background-color: $active-color;
+  }
+
+  .customStyle {
+	/* Additional styles when customStyle is true */
+    margin-top: 10%;
+    height: 8vh;
+}
