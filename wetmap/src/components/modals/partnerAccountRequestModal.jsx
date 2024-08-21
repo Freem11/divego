@@ -15,7 +15,7 @@ import SubmitButton from "../reusables/button/submitButton";
 // const windowWidth = Dimensions.get("window").width;
 // const windowHeight = Dimensions.get("window").height;
 
-export default function PartnerAccountRequestModal() {
+export default function PartnerAccountRequestModal(props) {
   const { partnerModal, setPartnerModal } = useContext(PartnerModalContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { activeSession, setActiveSession } = useContext(SessionContext);

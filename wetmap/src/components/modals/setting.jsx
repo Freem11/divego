@@ -11,18 +11,20 @@ import "./settings.css";
 import ActDelDialog from "./dialog";
 import CloseButton from "../closeButton/closeButton";
 import { grabRequestById } from "../../supabaseCalls/partnerSupabaseCalls";
+import PartnerAccountRequestModal from "./partnerAccountRequestModal";
+import { ModalContext } from "../contexts/modalContext";
 
 const Settings = (props) => {
-  const { animateSettingsModal } = props;
   const { activeSession, setActiveSession } = useContext(SessionContext);
-  const { profile, setProfile } = useContext(UserProfileContext);
-  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
-  const { partnerModal, setPartnerModal } = useContext(
-    PartnerModalContext
-  );
+  // const { profile, setProfile } = useContext(UserProfileContext);
+  // const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+  // const { partnerModal, setPartnerModal } = useContext(
+  //   PartnerModalContext
+  // );
   const [showDangerZone, setShowDangerZone] = useState(false);
   const [openDialog, setOpenDialog] = useState(false);
   const [requestCheck, setRequestCheck] = useState([]);
+  const { modalShow } = useContext(ModalContext);
 
   const checkForRequest = async (id) => {
     let returnedCheck = await grabRequestById(id);
@@ -30,8 +32,9 @@ const Settings = (props) => {
   };
 
   const handlePartnerButton = () => {
-    setPartnerModal(true);
-    setSettingsModal(false);
+    modalShow(PartnerAccountRequestModal)
+    // setPartnerModal(true);
+    // setSettingsModal(false);
   };
   useEffect(() => {
     checkForRequest(activeSession.user.id);
@@ -93,7 +96,7 @@ const Settings = (props) => {
         </h3>
         <FormGroup>
           <CloseButton
-            onClick={animateSettingsModal}
+            onClick={() => props?.onFinish?.()}
           />
         </FormGroup>
       </div>

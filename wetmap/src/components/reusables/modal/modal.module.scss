@@ -1,0 +1,31 @@
+@import '../../../styles/variables.scss';
+
+.modalWrapper {
+  display: none;
+  z-index: 6;
+  position: fixed;
+  width: 70vw;
+  max-width: 600px;
+  height: 65vh;
+  margin: 20vh auto;
+  left: 0;
+  top: 0;
+  right: 0;
+  border: 1px solid red;
+
+  &.active {
+    display: block;
+  }
+  .modalContainer {
+    transform: translateY(200%);
+    transition: transform .5s ease-in-out;
+    background: $primary-color;
+    position: absolute;
+   
+  }
+  .modalContainer.open {
+    transform: translateY(0);
+    transition: transform .5s ease-in-out;
+
+  }
+}
