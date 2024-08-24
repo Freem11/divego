@@ -286,40 +286,6 @@
 	object-fit: cover;
 }
 
-.picSelectDiv {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-evenly;
-	cursor: pointer;
-	background-color: #538bdb;
-	width: 12vw;
-	height: 5vh;
-	text-align: center;
-	border-radius: 5px;
-	box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);
-}
-
-.picSelectDivAlt {
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	cursor: pointer;
-	background-color: white;
-	width: 12vw;
-	height: 5vh;
-	text-align: center;
-	border-radius: 5px;
-	box-shadow: 2px 2px 2px 2px rgba(1, 1, 1, 0.4);
-}
-
-.picSelectDiv:hover {
-	background-color: #3e7dd7;
-}
-.picSelectDiv:active {
-	background-color: #538dbd;
-}
-
 ::-webkit-calendar-picker-indicator {
 	filter: invert(100%) sepia(300%) saturate(1000%) hue-rotate(1000deg)
 		brightness(180%) contrast(60%);

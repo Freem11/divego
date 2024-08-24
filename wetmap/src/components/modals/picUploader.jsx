@@ -441,39 +441,6 @@ const PicUploader = React.memo((props) => {
 		setChapter('Adding your photo');
 	};
 
-	const labelStyle = {
-		display: 'flex',
-		fontFamily: 'Patrick Hand',
-		fontSize: '1.2vw',
-		textTransform: 'none',
-		color: 'gold',
-		cursor: 'pointer',
-	};
-
-	const labelStyleAlt = {
-		display: 'flex',
-		fontFamily: 'Patrick Hand',
-		fontSize: '1.2vw',
-		textTransform: 'none',
-		color: '#538dbd',
-		cursor: 'pointer',
-	};
-
-	const iconStyle = {
-		color: 'gold',
-		width: '2vw',
-		height: '4vh',
-		marginTop: '1vh',
-		cursor: 'pointer',
-	};
-
-	const iconStyleAlt = {
-		color: '#538dbd',
-		width: '2vw',
-		height: '4vh',
-		marginTop: '1vh',
-		cursor: 'pointer',
-	};
 
 	const customBtnStyle = {
 		width: '4.5vw',
@@ -554,18 +521,12 @@ const PicUploader = React.memo((props) => {
 			)}
 
 			<div className='column col-6 mb-2'>
-				<div
-					onClick={handleClick}
-					className={imgButState ? 'picSelectDivAlt' : 'picSelectDiv'}
-				>
-					<div style={{ marginLeft: '0vw', marginRight: '1vw' }}>
-						<PhotoIcon sx={imgButState ? iconStyleAlt : iconStyle}></PhotoIcon>
-					</div>
-
-					<Label style={imgButState ? labelStyleAlt : labelStyle}>
-						Choose an Image
-					</Label>
-				</div>
+				<CustomButton
+				onClick={handleClick}
+				svg={<PhotoIcon />}
+				text={'Choose an Image'}
+				imgButState={imgButState}
+				/>
 				<FormGroup>
 					<Input
 						placeholder='Upload'
