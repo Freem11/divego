@@ -714,15 +714,15 @@ const MapPage = React.memo((props) => {
     to: { transform: `translate3d(0,${commmentsModalYCoord}px,0)` },
   });
 
-  const moveSiteSearchModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${siteSearchModalYCoord}px,0)` },
-  });
+  // const moveSiteSearchModal = useSpring({
+  //   from: { transform: `translate3d(0,0,0)` },
+  //   to: { transform: `translate3d(0,${siteSearchModalYCoord}px,0)` },
+  // });
 
-  const moveMapSearchModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${mapSearchYCoord}px,0)` },
-  });
+  // const moveMapSearchModal = useSpring({
+  //   from: { transform: `translate3d(0,0,0)` },
+  //   to: { transform: `translate3d(0,${mapSearchYCoord}px,0)` },
+  // });
 
   const moveFullScreenModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
@@ -757,30 +757,34 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePicModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+    modalShow(PicUploader)
+    return 
 
-    if (picModalYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(false);
-      setPicAddermodal(true);
-      setShowFilterer(false);
-      setTiles(true);
-    } else {
-      setPicAddermodal(false);
-      // if (pin.PicFile !== null) {
-      //   console.log("called 3")
-      //   removePhoto({
-      //     filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-      //     fileName: `${pin.PicFile}`,
-      //   });
-      // }
-    }
+
+    // let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+    //   .clientHeight;
+
+    // if (picModalYCoord === 0) {
+    //   setSiteModal(false);
+    //   setDsAddermodal(false);
+    //   // setSettingsModal(false);
+    //   setProfileModal(false);
+    //   setGuideLaunchModal(false);
+    //   setDiveSiteSearchModal(false);
+    //   setMapSearchModal(false);
+    //   setPicAddermodal(true);
+    //   setShowFilterer(false);
+    //   setTiles(true);
+    // } else {
+    //   setPicAddermodal(false);
+    //   // if (pin.PicFile !== null) {
+    //   //   console.log("called 3")
+    //   //   removePhoto({
+    //   //     filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+    //   //     fileName: `${pin.PicFile}`,
+    //   //   });
+    //   // }
+    // }
   };
 
   const clearPicModal = () => {
@@ -803,7 +807,7 @@ const MapPage = React.memo((props) => {
     if (siteModalYCoord === 0) {
       setSiteModal(false);
       setPicAddermodal(false);
-      setSettingsModal(false);
+      // setSettingsModal(false);
       setProfileModal(false);
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
@@ -833,6 +837,17 @@ const MapPage = React.memo((props) => {
   };
 
   const animateLaunchModal = () => {
+    modalShow(HowToGuide)
+  //   <HowToGuide
+  //   animateLaunchModal={animateLaunchModal}
+  //   animateIntroGuideModal={animateIntroGuideModal}
+  //   animateSecondGuideModal={animateSecondGuideModal}
+  //   animateThirdGuideModal={animateThirdGuideModal}
+  // />
+    return
+
+
+
     let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
       .clientHeight;
 
@@ -840,7 +855,7 @@ const MapPage = React.memo((props) => {
       setSiteModal(false);
       setDsAddermodal(false);
       setPicAddermodal(false);
-      setSettingsModal(false);
+      // setSettingsModal(false);
       setProfileModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
@@ -874,7 +889,7 @@ const MapPage = React.memo((props) => {
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
-      setSettingsModal(true);
+      // setSettingsModal(true);
       setProfileModal(false);
       setShowFilterer(false);
       setTiles(true);
@@ -885,7 +900,7 @@ const MapPage = React.memo((props) => {
         });
       }
     } else {
-      setSettingsModal(false);
+      // setSettingsModal(false);
     }
   };
 
@@ -905,7 +920,7 @@ const MapPage = React.memo((props) => {
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
       setMapSearchModal(false);
-      setSettingsModal(false);
+      // setSettingsModal(false);
       setShowFilterer(false);
       setProfileModal(true);
       setTiles(true);
@@ -951,7 +966,7 @@ const MapPage = React.memo((props) => {
     if (siteModal === 0) {
       setDsAddermodal(false);
       setPicAddermodal(false);
-      setSettingsModal(false);
+      // setSettingsModal(false);
       setProfileModal(false);
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
@@ -978,7 +993,7 @@ const MapPage = React.memo((props) => {
     if (siteModal === 0) {
       setDsAddermodal(false);
       setPicAddermodal(false);
-      setSettingsModal(false);
+      // setSettingsModal(false);
       setProfileModal(false);
       setGuideLaunchModal(false);
       setDiveSiteSearchModal(false);
@@ -1024,23 +1039,27 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSiteSearchModal = () => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
+    modalShow(SiteSearchModal)
+    return
 
-    if (siteSearchModalYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setMapSearchModal(false);
-      setDiveSiteSearchModal(true);
-      setShowFilterer(true);
-      setTiles(true);
-    } else {
-      setDiveSiteSearchModal(false);
-    }
+
+    // let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+    //   .clientHeight;
+
+    // if (siteSearchModalYCoord === 0) {
+    //   setSiteModal(false);
+    //   setDsAddermodal(false);
+    //   setPicAddermodal(false);
+    //   // setSettingsModal(false);
+    //   setProfileModal(false);
+    //   setGuideLaunchModal(false);
+    //   setMapSearchModal(false);
+    //   setDiveSiteSearchModal(true);
+    //   setShowFilterer(true);
+    //   setTiles(true);
+    // } else {
+    //   setDiveSiteSearchModal(false);
+    // }
   };
 
   // const animatePartnerModal = () => {
@@ -1052,30 +1071,33 @@ const MapPage = React.memo((props) => {
   // };
 
   const animateMapSearchModal = () => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
+    modalShow(MapSearchModal)
+    return
 
-    if (mapSearchYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(true);
-      setShowFilterer(true);
-      setTiles(true);
-    } else {
-      setMapSearchModal(false);
-    }
+    // let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+    //   .clientHeight;
+
+    // if (mapSearchYCoord === 0) {
+    //   setSiteModal(false);
+    //   setDsAddermodal(false);
+    //   setPicAddermodal(false);
+    //   // setSettingsModal(false);
+    //   setProfileModal(false);
+    //   setGuideLaunchModal(false);
+    //   setDiveSiteSearchModal(false);
+    //   setMapSearchModal(true);
+    //   setShowFilterer(true);
+    //   setTiles(true);
+    // } else {
+    //   setMapSearchModal(false);
+    // }
   };
 
   const animatePulltab = () => {
     console.log(showFilterer);
     setDsAddermodal(false);
     setPicAddermodal(false);
-    setSettingsModal(false);
+    // setSettingsModal(false);
     setProfileModal(false);
     setGuideLaunchModal(false);
     setDiveSiteSearchModal(false);
@@ -1166,25 +1188,25 @@ const MapPage = React.memo((props) => {
     }
   }, [dsAdderModal]);
 
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+  // useEffect(() => {
+  //   let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+  //     .clientHeight;
 
-    if (picAdderModal) {
-      setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
+  //   if (picAdderModal) {
+  //     setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+  //     setAnchorModalYCoord(0);
+  //     setSiteModalYCoord(0);
+  //     setSettingsModalYCoord(0);
+  //     setLaunchModalYCoord(0);
+  //     setMapSearchYCoord(0);
+  //     setSiteSearchModalYCoord(0);
+  //     setProfileModalYCoord(0);
+  //   }
 
-    if (!picAdderModal) {
-      setPicModalYCoord(0);
-    }
-  }, [picAdderModal]);
+  //   if (!picAdderModal) {
+  //     setPicModalYCoord(0);
+  //   }
+  // }, [picAdderModal]);
 
   // useEffect(() => {
   //   let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
@@ -1226,67 +1248,67 @@ const MapPage = React.memo((props) => {
   //   }
   // }, [settingsModal]);
 
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+  // useEffect(() => {
+  //   let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+  //     .clientHeight;
 
-    if (guideLaunchModal) {
-      setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
+  //   if (guideLaunchModal) {
+  //     setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+  //     setAnchorModalYCoord(0);
+  //     setSiteModalYCoord(0);
+  //     setPicModalYCoord(0);
+  //     setSettingsModalYCoord(0);
+  //     setMapSearchYCoord(0);
+  //     setSiteSearchModalYCoord(0);
+  //     setProfileModalYCoord(0);
+  //   }
 
-    if (!guideLaunchModal) {
-      setLaunchModalYCoord(0);
-    }
-  }, [guideLaunchModal]);
+  //   if (!guideLaunchModal) {
+  //     setLaunchModalYCoord(0);
+  //   }
+  // }, [guideLaunchModal]);
 
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
+  // useEffect(() => {
+  //   let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+  //     .clientHeight;
 
-    if (diveSiteSearchModal) {
-      setSiteSearchModalYCoord(
-        -windowHeight + (windowHeight - modalHeigth) / 2
-      );
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setMapSearchYCoord(0);
-      setLaunchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
+  //   if (diveSiteSearchModal) {
+  //     setSiteSearchModalYCoord(
+  //       -windowHeight + (windowHeight - modalHeigth) / 2
+  //     );
+  //     setAnchorModalYCoord(0);
+  //     setSiteModalYCoord(0);
+  //     setPicModalYCoord(0);
+  //     setSettingsModalYCoord(0);
+  //     setMapSearchYCoord(0);
+  //     setLaunchModalYCoord(0);
+  //     setProfileModalYCoord(0);
+  //   }
 
-    if (!diveSiteSearchModal) {
-      setSiteSearchModalYCoord(0);
-    }
-  }, [diveSiteSearchModal]);
+  //   if (!diveSiteSearchModal) {
+  //     setSiteSearchModalYCoord(0);
+  //   }
+  // }, [diveSiteSearchModal]);
 
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
+  // useEffect(() => {
+  //   let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
+  //     .clientHeight;
 
-    if (mapSearchModal) {
-      setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
+  //   if (mapSearchModal) {
+  //     setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+  //     setAnchorModalYCoord(0);
+  //     setSiteModalYCoord(0);
+  //     setPicModalYCoord(0);
+  //     setSettingsModalYCoord(0);
+  //     setSiteSearchModalYCoord(0);
+  //     setLaunchModalYCoord(0);
+  //     setProfileModalYCoord(0);
+  //   }
 
-    if (!mapSearchModal) {
-      setMapSearchYCoord(0);
-    }
-  }, [mapSearchModal]);
+  //   if (!mapSearchModal) {
+  //     setMapSearchYCoord(0);
+  //   }
+  // }, [mapSearchModal]);
 
   // useEffect(() => {
   //   let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
@@ -1639,7 +1661,7 @@ const MapPage = React.memo((props) => {
 
       <Modal/>
 
-      <animated.div
+      {/* <animated.div
         className="picModalDiv"
         style={movePicModal}
         ref={picModalRef}
@@ -1648,7 +1670,7 @@ const MapPage = React.memo((props) => {
           animatePicModal={animatePicModal}
           setPicModalYCoord={setPicModalYCoord}
         />
-      </animated.div>
+      </animated.div> */}
 
       <animated.div
         className="picModalDiv"
@@ -1690,7 +1712,7 @@ const MapPage = React.memo((props) => {
         <Settings animateSettingsModal={animateSettingsModal} />
       </animated.div> */}
 
-      <animated.div
+      {/* <animated.div
         className="guideModalDiv"
         style={moveIntroGuidModal}
         ref={introGuideModalRef}
@@ -1701,7 +1723,7 @@ const MapPage = React.memo((props) => {
           animateSecondGuideModal={animateSecondGuideModal}
           setSecondGuideModalYCoord={setSecondGuideModalYCoord}
         />
-      </animated.div>
+      </animated.div> */}
 
       <animated.div
         className="guideModalDiv2"
@@ -1765,7 +1787,7 @@ const MapPage = React.memo((props) => {
         </div>
       </animated.div>
 
-      <animated.div
+      {/* <animated.div
         className="searchModalDiv"
         style={moveMapSearchModal}
         ref={mapSearchModalRef}
@@ -1775,9 +1797,9 @@ const MapPage = React.memo((props) => {
           setMapSearchYCoord={setMapSearchYCoord}
           mapSearchYCoord={mapSearchYCoord}
         />
-      </animated.div>
+      </animated.div> */}
 
-      <animated.div
+      {/* <animated.div
         className="searchModalDiv"
         style={moveSiteSearchModal}
         ref={siteSearchModalRef}
@@ -1786,7 +1808,7 @@ const MapPage = React.memo((props) => {
           animateSiteSearchModal={animateSiteSearchModal}
           setSiteSearchModalYCoord={setSiteSearchModalYCoord}
         />
-      </animated.div>
+      </animated.div> */}
 
       <animated.div
         className="fullScreenModalDiv"

@@ -29,14 +29,17 @@ const ModalContextProvider = ({children}) => {
         setTimeout(() => {
             // open modal with some delay after it's rendered to play the animation
             setOpenName(component.name)
-            if(options.keepPreviousModal === false){
+        }, 1)
+
+        if(options.keepPreviousModal === false){
+            setTimeout(() => {
                 setStack(prev => {
                     return prev.filter(modal => {
-                        return modal.component.name === openName
+                        return modal.component.name === component.name
                     })
                 })
-            }
-        }, 1)
+            }, 1000);
+        }
     }
     
     const getCurrentModalName = () => {
@@ -61,7 +64,6 @@ const ModalContextProvider = ({children}) => {
             })
         }, 500);
       }
-
 
 
     return (

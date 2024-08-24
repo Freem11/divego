@@ -9,6 +9,8 @@ import { SecondTutorialModalContext } from '../contexts/secondTutorialModalConte
 import { ThirdTutorialModalContext } from '../contexts/thirdTutorialModalContext';
 import ModalHeader from '../reusables/modalHeader';
 import LargeButton from '../reusables/button/largeButton';
+import IntroTutorial from '../guides/introTutorial';
+import { ModalContext } from '../contexts/modalContext';
 
 const HowToGuide = (props) => {
 	const { itterator, setItterator } = useContext(IterratorContext);
@@ -28,9 +30,15 @@ const HowToGuide = (props) => {
 	const { thirdGuideModal, setThirdGuideModal } = useContext(
 		ThirdTutorialModalContext
 	);
+	const { modalShow } = useContext(ModalContext);
+
 
 	const handleTutorialStartup = () => {
 		setItterator(0);
+		modalShow(IntroTutorial)
+		return
+
+		
 		setTutorialRunning(true);
 		animateIntroGuideModal();
 		animateLaunchModal();
