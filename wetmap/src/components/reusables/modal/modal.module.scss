@@ -17,10 +17,11 @@
     display: block;
   }
   .modalContainer {
-    transform: translateY(200%);
+    transform: translateY(100vh);
     transition: transform .5s ease-in-out;
     background: $primary-color;
     position: absolute;
+    width: 100%;
    
   }
   .modalContainer.open {

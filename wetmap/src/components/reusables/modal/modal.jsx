@@ -10,7 +10,7 @@ export default function Modal(props) {
 
   useEffect(() => {
     const handleWrapperClick = (e) => {
-      if(!modalContext.getCurrentModalName()){
+      if(!modalContext.stack?.length){
         // not need to close modal if none is open
         return
       }

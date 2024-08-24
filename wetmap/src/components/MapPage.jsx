@@ -136,7 +136,7 @@ const MapPage = React.memo((props) => {
   const { guideLaunchModal, setGuideLaunchModal } = useContext(
     GuideLaunchModalContext
   );
-  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+  // const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
   const { profileModal, setProfileModal } = useContext(ProfileModalContext);
   // const { partnerModal, setPartnerModal } = useContext(
   //   PartnerModalContext
@@ -890,8 +890,8 @@ const MapPage = React.memo((props) => {
   };
 
   const animateProfileModal = () => {
+    console.log("PROFILE OPEN A");
     modalShow(UserProfileModal)
-    // modalShow(() => <div>AAA</div>)
     return 
 
     
@@ -1186,45 +1186,45 @@ const MapPage = React.memo((props) => {
     }
   }, [picAdderModal]);
 
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+  // useEffect(() => {
+  //   let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+  //     .clientHeight;
 
-    if (profileModal) {
-      setProfileModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setSettingsModalYCoord(0);
-    }
+  //   if (profileModal) {
+  //     setProfileModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+  //     setAnchorModalYCoord(0);
+  //     setSiteModalYCoord(0);
+  //     setPicModalYCoord(0);
+  //     setLaunchModalYCoord(0);
+  //     setMapSearchYCoord(0);
+  //     setSiteSearchModalYCoord(0);
+  //     setSettingsModalYCoord(0);
+  //   }
 
-    if (!profileModal) {
-      setProfileModalYCoord(0);
-    }
-  }, [profileModal]);
+  //   if (!profileModal) {
+  //     setProfileModalYCoord(0);
+  //   }
+  // }, [profileModal]);
 
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
+  // useEffect(() => {
+  //   let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
+  //     .clientHeight;
 
-    if (settingsModal) {
-      setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
+  //   if (settingsModal) {
+  //     setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+  //     setAnchorModalYCoord(0);
+  //     setSiteModalYCoord(0);
+  //     setPicModalYCoord(0);
+  //     setLaunchModalYCoord(0);
+  //     setMapSearchYCoord(0);
+  //     setSiteSearchModalYCoord(0);
+  //     setProfileModalYCoord(0);
+  //   }
 
-    if (!settingsModal) {
-      setSettingsModalYCoord(0);
-    }
-  }, [settingsModal]);
+  //   if (!settingsModal) {
+  //     setSettingsModalYCoord(0);
+  //   }
+  // }, [settingsModal]);
 
   useEffect(() => {
     let modalHeigth = document.getElementsByClassName("picModalDiv")[0]

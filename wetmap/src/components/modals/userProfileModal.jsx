@@ -116,12 +116,13 @@ export default function UserProfileModal(props) {
 	};
 
 	const toggleProfileModal = () => {
-		setProfileModal(false);
+		props.onFinish()
+		// setProfileModal(false);
 
-		if (selectedProfile) {
-			setSiteModal(true);
-			setSelectedProfile(null);
-		}
+		// if (selectedProfile) {
+		// 	setSiteModal(true);
+		// 	setSelectedProfile(null);
+		// }
 	};
 
 	const handleSubmit = async () => {

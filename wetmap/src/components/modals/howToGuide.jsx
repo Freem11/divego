@@ -60,7 +60,8 @@ const HowToGuide = (props) => {
 				onClose={animateLaunchModal}
 			/>
 
-			<div className='flex-center-column' style={{ marginTop: '-25%' }}>
+			{/* <div className='flex-center-column' style={{ marginTop: '-25%' }}> */}
+			<div className='flex-center-column'>
 				<LargeButton onClick={handleTutorialStartup} btnText={'Intro Guide'} />
 				<LargeButton
 					onClick={handleSecondTutorialStartup}
