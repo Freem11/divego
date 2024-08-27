@@ -13,7 +13,7 @@ const ModalHeader = ({
 	flagHref,
 }) => {
 	return (
-		<div className='m-2'>
+		<div className='m-4'>
 			<div className='col-12 flex-row'>
 				<div className='col-7 flex-row'>
 					<div className='flex-column-space-between mx-2'>
@@ -30,7 +30,9 @@ const ModalHeader = ({
 						</div>
 					)}
 					{svg && onClick && <CustomButton onClick={onClick} svg={svg} />}
-					<CloseButton onClick={onClose} />
+					<div className='pb-2'>
+						<CloseButton onClick={onClose} />
+					</div>
 				</div>
 			</div>
 		</div>
