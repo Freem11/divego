@@ -2,31 +2,32 @@
 
 .modalWrapper {
   display: none;
-  z-index: 6;
-  position: fixed;
-  width: 70vw;
-  max-width: 600px;
-  height: 65vh;
-  margin: 20vh auto;
-  left: 0;
-  top: 0;
-  right: 0;
-  border: 1px solid red;
 
   &.active {
     display: block;
   }
+
   .modalContainer {
     transform: translateY(100vh);
-    transition: transform .5s ease-in-out;
     background: $primary-color;
-    position: absolute;
-    width: 100%;
-   
-  }
-  .modalContainer.open {
-    transform: translateY(0);
-    transition: transform .5s ease-in-out;
+    width: 70vw;
+    max-width: 600px;
+    height: 65vh;
+    margin: 20vh auto;
+    z-index: 6;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
 
+    &.small {
+      height: 30vh;
+    }
+    &.medium {
+      height: 65vh;
+    }
+    &.large {
+      height: 75vh;
+    }
   }
 }
