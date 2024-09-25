@@ -134,7 +134,7 @@ function Map() {
   const options = useMemo(() => ({
     mapTypeId: "hybrid",
     clickableIcons: false,
-    maxZoom: 16,
+    maxZoom: 18,
     minZoom: 3,
     mapTypeControl: false,
     fullscreenControl: false,
