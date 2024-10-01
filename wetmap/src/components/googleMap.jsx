@@ -498,7 +498,7 @@ function Map() {
             collapsedSize="0px"
           >
             <div className="places-container">
-              AAAAAAAAAA<PlacesAutoComplete setSelected={setSelected} />
+              <PlacesAutoComplete setSelected={setSelected} />
             </div>
           </Collapse>
         </div>
