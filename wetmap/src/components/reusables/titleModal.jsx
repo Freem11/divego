@@ -4,7 +4,7 @@ const TitleModal = ({ title, className }) => {
 	return (
 			<Label
 				style={{
-					  width: '100vw',
+					width: '100vw',
 					textAlign: 'left',
 					fontFamily: 'Patrick Hand',
 					fontSize: '2vw',

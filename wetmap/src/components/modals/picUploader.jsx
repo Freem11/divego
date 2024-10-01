@@ -44,13 +44,6 @@ let filePath1 = './wetmap/src/components/uploads/';
 let filePath = '/src/components/uploads/';
 let UserId = '';
 
-
-// https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/1726599748244.png
-// https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/1726601617203.png
-// https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/1726601762457.png
-// https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/1726602049269.png
-
-
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 

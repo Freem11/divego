@@ -53,8 +53,6 @@ export default function UserProfileModal(props) {
 	};
 
 	useEffect(() => {
-		console.log("user profile effect")
-
 		getProfile();
 
 		async function followCheck() {
@@ -111,7 +109,7 @@ export default function UserProfileModal(props) {
 				id: activeSession.user.id,
 				username: username,
 			});
-			props.onModalSuccess()
+			props?.onModalSuccess?.()
 			return true;
 		} catch (e) {
 			if (e && e.code === '23505') {
