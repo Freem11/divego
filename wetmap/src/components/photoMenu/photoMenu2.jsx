@@ -12,13 +12,6 @@ import { IterratorContext } from "../contexts/iterratorContext";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { AreaPicsContext } from "../contexts/areaPicsContext";
 import { SearchTextContext } from "../contexts/searchTextContext";
-import { AnchorModalContext } from "../contexts/anchorModalContext";
-import { DiveSiteAdderModalContext } from "../contexts/diveSiteAdderModalContext";
-import { PicAdderModalContext } from "../contexts/picAdderModalContext";
-import { DiveSiteSearchModalContext } from "../contexts/diveSiteSearchModalContext";
-import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
-import { GuideLaunchModalContext } from "../contexts/guideLaunchModalContext";
-import { SettingsModalContext } from "../contexts/settingsModalContext";
 import { formatHeatVals } from "../../helpers/heatPointHelpers";
 import "./photoMenu.css";
 import PhotoMenuListItem from "./photoMenuListItem";
@@ -42,21 +35,6 @@ const PhotoMenu = () => {
   const { itterator, setItterator } = useContext(IterratorContext);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { dsAdderModal, setDsAddermodal } = useContext(
-    DiveSiteAdderModalContext
-  );
-  const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
-  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(
-    DiveSiteSearchModalContext
-  );
-  const { mapSearchModal, setMapSearchModal } = useContext(
-    MapSearchModalContext
-  );
-  const { guideLaunchModal, setGuideLaunchModal } = useContext(
-    GuideLaunchModalContext
-  );
-  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
 
   const filterPhotosForMapArea = async () => {
     if (boundaries) {
@@ -144,7 +122,6 @@ const PhotoMenu = () => {
       if (itterator === 19) {
         waiter2 = setTimeout(() => {
           setItterator(itterator + 2);
-          setSiteModal(true);
         }, 2000);
       }
     }
@@ -185,13 +162,6 @@ const PhotoMenu = () => {
   const [tilesRemaining, setTilesRemaining] = useState(areaPics.length - 10);
 
   const onClicko = (direction) => {
-    setDsAddermodal(false);
-    setPicAddermodal(false);
-    setSettingsModal(false);
-    setGuideLaunchModal(false);
-    setDiveSiteSearchModal(false);
-    setMapSearchModal(false);
-    setSiteModal(false);
 
     const maxLength = areaPics.length * tileWidth;
 

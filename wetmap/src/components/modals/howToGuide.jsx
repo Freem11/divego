@@ -30,34 +30,30 @@ const HowToGuide = (props) => {
 	const { thirdGuideModal, setThirdGuideModal } = useContext(
 		ThirdTutorialModalContext
 	);
-	const { modalShow } = useContext(ModalContext);
+	const { modalSuccess } = useContext(ModalContext);
 
 
 	const handleTutorialStartup = () => {
+		modalSuccess()
 		setItterator(0);
-		modalShow(IntroTutorial)
-		return
-
-		
 		setTutorialRunning(true);
 		animateIntroGuideModal();
-		animateLaunchModal();
 		setGuideModal(!guideModal);
 	};
 
 	const handleSecondTutorialStartup = () => {
+		modalSuccess()
 		setItterator2(0);
 		setTutorialRunning(true);
 		animateSecondGuideModal();
-		animateLaunchModal();
 		setSecondGuideModal(!secondGuideModal);
 	};
 
 	const handleThirdTutorialStartup = () => {
+		modalSuccess()
 		setItterator2(0);
 		setTutorialRunning(true);
 		animateThirdGuideModal();
-		animateLaunchModal();
 		setThirdGuideModal(!thirdGuideModal);
 	};
 
@@ -65,11 +61,11 @@ const HowToGuide = (props) => {
 		<>
 			<ModalHeader
 				title={'How to use Scuba SEAsons'}
-				onClose={animateLaunchModal}
+				onClose={props.onModalCancel}
 			/>
 
 			{/* <div className='flex-center-column' style={{ marginTop: '-25%' }}> */}
-			<div className='flex-center-column'>
+			<div className='hero flex-centered'>
 				<LargeButton onClick={handleTutorialStartup} btnText={'Intro Guide'} />
 				<LargeButton
 					onClick={handleSecondTutorialStartup}

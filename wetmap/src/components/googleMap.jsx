@@ -39,17 +39,9 @@ import { HeatPointsContext } from "./contexts/heatPointsContext";
 import { MapBoundsContext } from "./contexts/mapBoundariesContext";
 import { ModalSelectContext } from "./contexts/modalSelectContext";
 import { DiveSpotContext } from "./contexts/diveSpotContext";
-import { AnchorModalContext } from "./contexts/anchorModalContext";
 import { ShopModalContext } from "./contexts/shopModalContext";
 import { SitesArrayContext } from "./contexts/sitesArrayContext";
 import { ZoomHelperContext } from "./contexts/zoomHelperContext";
-import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
-import { PicAdderModalContext } from "./contexts/picAdderModalContext";
-import { SettingsModalContext } from "./contexts/settingsModalContext";
-import { ProfileModalContext } from "./contexts/profileModalContext";
-import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
-import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContext";
-import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
 import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
 import { IterratorContext } from "./contexts/iterratorContext";
 import { Iterrator2Context } from "./contexts/iterrator2Context";
@@ -66,6 +58,8 @@ import {
   getHeatPointsWithUserEmpty,
 } from "../supabaseCalls/heatPointSupabaseCalls";
 import { shops, getShopByName } from "../supabaseCalls/shopsSupabaseCalls";
+import { ModalContext } from "./contexts/modalContext";
+import AnchorPics from "./modals/anchorPics";
 
 const LIB = ["visualization", "places"];
 
@@ -104,15 +98,8 @@ function Map() {
   const { itterator2 } = useContext(Iterrator2Context);
   const { tutorialRunning } = useContext(TutorialContext);
 
-  const { setSiteModal } = useContext(AnchorModalContext);
   const { shopModal, setShopModal } = useContext(ShopModalContext);
-  const { setDsAddermodal } = useContext(DiveSiteAdderModalContext);
-  const { setPicAddermodal } = useContext(PicAdderModalContext);
-  const { setSettingsModal } = useContext(SettingsModalContext);
-  const { setProfileModal } = useContext(ProfileModalContext);
-  const { setGuideLaunchModal } = useContext(GuideLaunchModalContext);
-  const { setDiveSiteSearchModal } = useContext(DiveSiteSearchModalContext);
-  const { setMapSearchModal } = useContext(MapSearchModalContext);
+
   const { setTiles } = useContext(CarrouselTilesContext);
 
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
@@ -124,6 +111,7 @@ function Map() {
   const [selected, setSelected] = useState(null);
   const { dragPin, setDragPin } = useContext(PinSpotContext);
   const [tempMarker, setTempMarker] = useState(false);
+  const { modalShow } = useContext(ModalContext);
 
   let center = useMemo(() => ({ lat: mapCoords[0], lng: mapCoords[1] }), []);
   let zoom = useMemo(() => mapZoom, []);
@@ -471,7 +459,7 @@ function Map() {
       Latitude: lat,
       Longitude: lng,
     });
-    setSiteModal(true);
+    modalShow(AnchorPics);
     setJump(!jump)
   };
 
@@ -482,25 +470,10 @@ function Map() {
   };
 
   const cleanupModals = () => {
-    setSiteModal(false);
-    setDsAddermodal(false);
-    setPicAddermodal(false);
-    setSettingsModal(false);
-    setProfileModal(false);
-    setGuideLaunchModal(false);
-    setDiveSiteSearchModal(false);
-    setMapSearchModal(false);
     setTiles(true);
   };
 
   const cleanupModalsNoAnchor = () => {
-    setDsAddermodal(false);
-    setPicAddermodal(false);
-    setSettingsModal(false);
-    setProfileModal(false);
-    setGuideLaunchModal(false);
-    setDiveSiteSearchModal(false);
-    setMapSearchModal(false);
     // setTiles(true);
   };
 
@@ -525,7 +498,7 @@ function Map() {
             collapsedSize="0px"
           >
             <div className="places-container">
-              <PlacesAutoComplete setSelected={setSelected} />
+              AAAAAAAAAA<PlacesAutoComplete setSelected={setSelected} />
             </div>
           </Collapse>
         </div>

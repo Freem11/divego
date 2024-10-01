@@ -1,0 +1,22 @@
+.container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw; 
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.image {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  border-radius: 15px;
+  border: 2px solid lightgrey;
+}
+
+.close {
+  position: absolute;
+  bottom: 3vh;
+}

@@ -1,8 +1,6 @@
-import { FormGroup, Button } from 'reactstrap';
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { AnimalContext } from '../contexts/animalContext';
 import { AnchorModalContext } from '../contexts/anchorModalContext';
-import { PicAdderModalContext } from '../contexts/picAdderModalContext';
 import { IterratorContext } from '../contexts/iterratorContext';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
@@ -23,17 +21,16 @@ import FlagIcon from '@mui/icons-material/Flag';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './anchorPics.css';
 import ModalHeader from '../reusables/modalHeader';
+import PicUploader from './picUploader';
+import { cleanupPinPicture } from '../../helpers/picUploaderHelpers';
+import { ModalContext } from '../contexts/modalContext';
 
 const AnchorPics = (props) => {
 	const {
 		animateAnchorModal,
-		setAnchorModalYCoord,
-		animateFullScreenModal,
-		setPicModalYCoord,
 	} = props;
 	const { profile } = useContext(UserProfileContext);
 	const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-	const { setPicAddermodal } = useContext(PicAdderModalContext);
 	const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
 	const { animalVal } = useContext(AnimalContext);
 	const { pin, setPin } = useContext(PinContext);
@@ -43,6 +40,7 @@ const AnchorPics = (props) => {
 
 	const { itterator, setItterator } = useContext(IterratorContext);
 	const { tutorialRunning } = useContext(TutorialContext);
+	const { modalShow } = useContext(ModalContext);
 
 	const filterAnchorPhotos = async () => {
 		let { minLat, maxLat, minLng, maxLng } = siteGPSBoundaries(
@@ -75,7 +73,7 @@ const AnchorPics = (props) => {
 			if (photos) {
 				setAnchorPics(photos);
 
-				if (tutorialRunning && itterator === 11 && siteModal) {
+				if (tutorialRunning && itterator === 11) {
 					if (photos.length === 0) {
 						setItterator(itterator + 1);
 					} else {
@@ -132,8 +130,7 @@ const AnchorPics = (props) => {
 		if (tutorialRunning && itterator === 16) {
 			setItterator(itterator + 1);
 		}
-		setSiteModal(false);
-		animateAnchorModal();
+		props?.onModalCancel?.()
 	};
 
 	const handleSwitch = () => {
@@ -145,8 +142,11 @@ const AnchorPics = (props) => {
 			Latitude: selectedDiveSite.Latitude,
 			Longitude: selectedDiveSite.Longitude,
 		});
-		setSiteModal(false);
-		setPicAddermodal(true);
+		modalShow(PicUploader, {
+			name: "PictureUploader",
+			keepPreviousModal: true,
+			onCancelCallback: () => cleanupPinPicture(pin)
+		  })
 	};
 
 	return (
@@ -169,7 +169,6 @@ const AnchorPics = (props) => {
 							<Picture
 								key={pic.id}
 								pic={pic}
-								animateFullScreenModal={animateFullScreenModal}
 							></Picture>
 						);
 					})}

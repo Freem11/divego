@@ -1,42 +1,26 @@
 import { useState } from "react";
 
 import { ModalContext } from "./modalContext";
+import ModalWindow from "../reusables/modal/modalWindow";
 
 const modalAnimationDuration = 300
 
-class ModalWindow {
-    component = null;
-    options = {};
-    defaultOptions = {
-        keepPreviousModal: false,
-    };
-    constructor(component, options) {
-        this.component = component;
-        this.options = { ...this.defaultOptions, ...options };
-    }
-
-    get name() {
-        let result = this.component?.name ?? "";
-        if (this.options?.name) {
-            result += this.options.name;
-        }
-        return result;
-    }
-}
 
 const ModalContextProvider = (props) => {
     const [stack, setStack] = useState([]);
     const [currentModalName, setCurrentModalName] = useState(null);
     const [freeze, setFreeze] = useState(false);
+    const [paused, setPause] = useState(false);
 
     const modalShow = (component, options) => {
         const newModalWindow = new ModalWindow(component, options);
-        if (newModalWindow.options.keepPreviousModal === false) {
-            modalClose(true);
-        }
-
+        
         if (newModalWindow.name === currentModalName) {
             return;
+        }
+
+        if (newModalWindow.options.keepPreviousModal === false) {
+            _modalClose(true);
         }
 
         if (freeze) {
@@ -63,7 +47,25 @@ const ModalContextProvider = (props) => {
         });
     };
 
-    const modalClose = (all = false) => {
+    const modalSuccess = (a) => {
+        _modalClose(false, 'onSuccessCallback');
+    }
+    const modalCancel = () => {
+        if (paused) {
+            return
+        }
+        _modalClose(false, 'onCancelCallback');
+    }
+    const modalPause = () => {
+        setPause(true);
+        setCurrentModalName(null);
+    }
+    const modalResume = () => {
+        setCurrentModalName(_getCurrentModalName());
+        setTimeout(() => { setPause(false) });
+    }
+
+    const _modalClose = (all = false, callback = null) => {
         if (!currentModalName) {
             return;
         }
@@ -85,8 +87,11 @@ const ModalContextProvider = (props) => {
         setTimeout(() => {
             setStack((prev) => {
                 return prev.filter((modalWindow) => {
-                    
-                    return !namesToRemove.includes(modalWindow.name);
+                    const shouldBeRemoved = namesToRemove.includes(modalWindow.name)
+                    if (shouldBeRemoved && modalWindow.options[callback] && typeof modalWindow.options[callback] === "function") {
+                        modalWindow.options[callback].apply(modalWindow);
+                    }
+                    return !shouldBeRemoved
                 });
             });
             setFreeze(false);
@@ -97,7 +102,20 @@ const ModalContextProvider = (props) => {
         return stack[stack.length - 2] && stack[stack.length - 2].name;
     };
 
-    return <ModalContext.Provider value={{ modalShow, modalClose, currentModalName, stack, modalAnimationDuration }}>
+    const _getCurrentModalName = () => {
+        return stack[stack.length - 1] && stack[stack.length - 1].name;
+    };
+
+    return <ModalContext.Provider value={{
+        stack,
+        modalShow,
+        modalPause,
+        modalResume,
+        modalCancel,
+        modalSuccess,
+        currentModalName,
+        modalAnimationDuration
+    }}>
         {props.children}
     </ModalContext.Provider>;
 };

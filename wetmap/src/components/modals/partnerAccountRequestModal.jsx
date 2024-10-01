@@ -96,7 +96,7 @@ export default function PartnerAccountRequestModal(props) {
 			Latitude: '',
 			Longitude: '',
 		});
-		props.onFinish()
+		props?.onModalCancel?.()
 	};
 
 	const handleSubmit = (formValues) => {

@@ -25,6 +25,8 @@ import MyLocationIcon from "@mui/icons-material/MyLocation";
 import TravelExploreIcon from "@mui/icons-material/TravelExplore";
 import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import SiteSubmitter from "../modals/siteSubmitter";
+import { ModalContext } from "../contexts/modalContext";
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -35,8 +37,6 @@ export default function SecondTutorial(props) {
     setSecondGuideModalYCoord,
     setDsAddermodal,
     animateThirdGuideModal,
-    setThirdGuideModalYCoord,
-    setSiteModalYCoord,
   } = props;
 
   window.addEventListener("resize", trackDimensions);
@@ -69,6 +69,7 @@ export default function SecondTutorial(props) {
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { chapter, setChapter } = useContext(ChapterContext);
   const { tutorialReset, setTutorialReset } = useContext(TutorialResetContext);
+  const { modalShow } = useContext(ModalContext);
   // const { setMapCenter } = useContext(MapCenterContext);
   // const { setRegion } = useContext(MapRegionContext);
 
@@ -99,9 +100,6 @@ export default function SecondTutorial(props) {
       .clientWidth;
 
     let textBoxHeight = document.getElementsByClassName("talkbox2")[0]
-      .clientHeight;
-
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
       .clientHeight;
 
     switch (chapter) {
@@ -138,7 +136,7 @@ export default function SecondTutorial(props) {
         setTutorialRunning(true);
         setDsAddermodal(true);
         setSecondGuideModalYCoord(-windowHeigth);
-        setSiteModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
+        modalShow(SiteSubmitter)
         setTimeout(() => {
           setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
@@ -152,7 +150,7 @@ export default function SecondTutorial(props) {
         setItterator2(15);
         setDsAddermodal(true);
         setSecondGuideModalYCoord(-windowHeigth);
-        setSiteModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
+        modalShow(SiteSubmitter)
         setTimeout(() => {
           setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
@@ -451,12 +449,9 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 10) {
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
-      setSiteModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
+      // modalShow(SiteSubmitter)
       setSecondGuideModalYCoord(-windowHeigth);
-      // animateSecondGuideModal()
     }
 
     if (itterator2 === 12) {
@@ -465,36 +460,25 @@ export default function SecondTutorial(props) {
 
     if (itterator2 === 13) {
       setPinY(0);
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
-        setSiteModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-      setSecondGuideModalYCoord(0);
-      // animateSecondGuideModal()
+      // modalShow(SiteSubmitter)
+      setSecondGuideModalYCoord(0)
     }
 
     if (itterator2 === 14) {
       setSecondGuideModalYCoord(-windowHeigth);
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
-        setSiteModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-      // animateSecondGuideModal()
+      // modalShow(SiteSubmitter)
     }
 
     if (itterator2 === 15) {
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
-        setSiteModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
+      // modalShow(SiteSubmitter)
       setLocationY(2 * windowHeigth + (windowHeigth - 100) / 3);
     }
 
     if (itterator2 === 16) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
       setLocationY(0);
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
-        setSiteModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-      setSecondGuideModalYCoord(0);
-      // animateSecondGuideModal()
+      // modalShow(SiteSubmitter)
+      setSecondGuideModalYCoord(0)
     }
 
     if (itterator2 === 17) {

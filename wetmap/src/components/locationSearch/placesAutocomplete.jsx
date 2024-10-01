@@ -6,16 +6,11 @@ import usePlacesAutocomplete, {
 import { JumpContext } from "../contexts/jumpContext";
 import { GeoCoderContext } from "../contexts/geoCoderContext";
 import { CoordsContext } from "../contexts/mapCoordsContext";
-import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
 
 const PlacesAutoComplete = (props) => {
-  const { setMapSearchYCoord, mapSearchYCoord } = props;
   const { jump, setJump } = useContext(JumpContext);
-  const { setShowGeoCoder } = useContext(GeoCoderContext);
   const { setMapCoords } = useContext(CoordsContext);
-  const { mapSearchModal, setMapSearchModal } = useContext(
-    MapSearchModalContext
-  );
+
 
   const {
     ready,
@@ -28,10 +23,8 @@ const PlacesAutoComplete = (props) => {
 
 
   useEffect(() => {
-    if (mapSearchModal) {
       init();
-    }
-  }, [mapSearchModal]);
+  }, []);
 
   const handleSelect = async (address) => {
     setValue(address, false);
@@ -43,7 +36,6 @@ const PlacesAutoComplete = (props) => {
     setMapCoords([lat, lng]);
     setValue("");
     setJump(!jump);
-    setMapSearchYCoord(0);
   };
 
   return (

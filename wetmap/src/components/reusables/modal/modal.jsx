@@ -1,10 +1,13 @@
 import React, { useContext, useEffect, useRef, useState } from "react";
 import { ModalContext } from "../../contexts/modalContext";
+import { TutorialContext } from "../../contexts/tutorialContext";
+
 import style from "./modal.module.scss";
 
 export default function Modal(props) {
     const rootRef = useRef(null);
     const modalContext = useContext(ModalContext);
+    const { tutorialRunning } = useContext(TutorialContext);
 
     useEffect(() => {
         const handleWrapperClick = (e) => {
@@ -16,6 +19,10 @@ export default function Modal(props) {
             if (rootRef.current.contains(e.target)) {
                 // no need to close modal if click inside modal wrapper
                 return;
+            }
+
+            if(tutorialRunning){
+                return 
             }
 
             // close modal if click outside of modal wrapper
@@ -48,9 +55,6 @@ export default function Modal(props) {
     const closeStyle = {
         transition: `transform ${modalContext.modalAnimationDuration}ms ease-out`,
     };
-
-    
- 
  
     return (
         <div className={`${style.modalWrapper} ${style.active}`} ref={rootRef}>
@@ -63,6 +67,7 @@ export default function Modal(props) {
                 >
                     {
                         <modalWindow.component
+                            {...modalWindow.options}
                             onModalSuccess={() => {
                                 modalContext.modalSuccess();
                             }}

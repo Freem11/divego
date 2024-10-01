@@ -4,9 +4,6 @@ import Collapse from '@mui/material/Collapse';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 import { signOut } from '../../supabaseCalls/authenticateSupabaseCalls';
 import { SessionContext } from '../contexts/sessionContext';
-import { PartnerModalContext } from '../contexts/partnerAccountRequestModalContext';
-import { SettingsModalContext } from '../contexts/settingsModalContext';
-import { UserProfileContext } from '../contexts/userProfileContext';
 import './settings.css';
 import ActDelDialog from './dialog';
 import { grabRequestById } from '../../supabaseCalls/partnerSupabaseCalls';
@@ -79,7 +76,7 @@ const Settings = (props) => {
 
 	return (
 		<>
-			<ModalHeader title={'Settings'} onClose={props.onFinish} />
+			<ModalHeader title={'Settings'} onClose={props.onModalCancel} />
 			<div className='hero hero-sm mx-4'>
 				<div className='hero-body flex-center-column'>
 					<LargeButton onClick={handleLogout} btnText={'Sign Out'} />

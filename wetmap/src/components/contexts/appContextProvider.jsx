@@ -6,12 +6,6 @@ import AreaPicsContextProvider from './areaPicsContext';
 import SearchTextContextProvider from './searchTextContext';
 import AnchordModalContextProvider from './anchorModalContext';
 import DiveSiteAdderModalContextProvider from './diveSiteAdderModalContext';
-import PicAdderModalContextProvider from './picAdderModalContext';
-import DiveSiteSearchModalContextProvider from './diveSiteSearchModalContext';
-import MapSearchModalContextProvider from './mapSearchModalContext';
-import GuideLaunchModalContextProvider from './guideLaunchModalContext';
-import SettingsModalContextProvider from './settingsModalContext';
-import ProfileModalContextProvider from './profileModalContext';
 import PartnerModalContextProvider from './partnerAccountRequestModalContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
@@ -48,26 +42,18 @@ import PinContextProvider from './staticPinContext';
 import PicModalContextProvider from './picModalContext';
 import JumpContextProvider from './jumpContext';
 import DiveSitesContextProvider from './diveSitesContext';
-import CommentsModalContextProvider from './commentsModalContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
-import SelectedProfileContextProvider from './selectedProfileModalContext';
 import SelectedShopContextProvider from './selectedShopContext';
 import ShopModalContextProvider from "./shopModalContext";
 import ZoomHelperContextProvider from "./zoomHelperContext";
 import SitesArrayContextProvider from './sitesArrayContext';
-import ModalContextProvider from './modalContext';
+import ModalContextProvider from './modalContextProvider';
 
 const providers = [
     AreaPicsContextProvider,
     SearchTextContextProvider,
     AnchordModalContextProvider,
     DiveSiteAdderModalContextProvider,
-    PicAdderModalContextProvider,
-    DiveSiteSearchModalContextProvider,
-    MapSearchModalContextProvider,
-    GuideLaunchModalContextProvider,
-    SettingsModalContextProvider,
-    ProfileModalContextProvider,
     PartnerModalContextProvider,
     PullTabContextProvider,
     CarrouselTilesContextProvider,
@@ -104,9 +90,7 @@ const providers = [
     PicModalContextProvider,
     JumpContextProvider,
     DiveSitesContextProvider,
-    CommentsModalContextProvider,
     SelectedPictureContextProvider,
-    SelectedProfileContextProvider,
     SelectedShopContextProvider,
     ShopModalContextProvider,
     ZoomHelperContextProvider,

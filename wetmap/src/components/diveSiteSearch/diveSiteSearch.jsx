@@ -9,7 +9,6 @@ import { TutorialContext } from "../contexts/tutorialContext";
 import { JumpContext } from "../contexts/jumpContext";
 
 export default function DiveSiteAutoComplete(props) {
-  const { setSiteSearchModalYCoord } = props;
   const { jump, setJump } = useContext(JumpContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext
@@ -81,7 +80,9 @@ export default function DiveSiteAutoComplete(props) {
           }
         }
       }
-      setSiteSearchModalYCoord(0);
+      if(props.onSelect && typeof props.onSelect === "function") {
+        props.onSelect();
+      }
       setJump(!jump);
       setSearchText("");
     }

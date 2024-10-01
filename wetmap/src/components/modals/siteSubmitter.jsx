@@ -248,7 +248,7 @@ const SiteSubmitter = (props) => {
 			} else if (itterator2 === 13) {
 				blinker1 = setInterval(locationBut, 1000);
 			} else if (itterator2 === 15 || itterator2 == 10) {
-				setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+				//setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
 			} else if (itterator2 === 8 || itterator2 === 1) {
 				props?.onModalCancel?.()
 			} else if (itterator2 === 23) {
