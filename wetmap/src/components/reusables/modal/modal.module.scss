@@ -1,0 +1,43 @@
+@import '../../../styles/variables.scss';
+
+.modalWrapper {
+  display: none;
+
+  &.active {
+    display: block;
+  }
+
+  .modalContainer {
+    transform: translateY(100vh);
+    background: $primary-color;
+    width: 70vw;
+    max-width: 600px;
+    height: 65vh;
+    margin: 10vh auto;
+    z-index: 6;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    border-radius: 2vw;
+    border: 1px solid lightgrey;
+
+    &.small {
+      height: 30vh;
+    }
+    &.medium {
+      height: 73vh;
+    }
+    &.large {
+      height: 80vh;
+    }
+    &.full {
+      width: auto;
+      max-width: none;
+      height: auto;
+      margin: 0 auto;
+      border: none;
+      background: none;
+    }
+  }
+}

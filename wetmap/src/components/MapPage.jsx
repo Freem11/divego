@@ -10,12 +10,11 @@ import UserProfileModal from "./modals/userProfileModal";
 import AnchorPics from "./modals/anchorPics";
 import ShopModal from "./modals/shopModal";
 import Settings from "./modals/setting";
-import PartnerAccountRequestModal from "./modals/partnerAccountRequestModal";
+// import PartnerAccountRequestModal from "./modals/partnerAccountRequestModal";
 import PhotoMenu from "./photoMenu/photoMenu2";
 import PhotoFilterer from "./photoMenu/photoFilter";
 import { useState, useContext, useEffect, useRef } from "react";
 import { grabProfileById } from "./../supabaseCalls/accountSupabaseCalls";
-import { removePhoto } from "./../cloudflareBucketCalls/cloudflareAWSCalls";
 import Button from "@mui/material/Button";
 import ToggleButton from "@mui/material/ToggleButton";
 import Collapse from "@mui/material/Collapse";
@@ -54,14 +53,6 @@ import { ShopModalContext } from "./contexts/shopModalContext";
 import { SitesArrayContext } from "./contexts/sitesArrayContext";
 import { ZoomHelperContext } from "./contexts/zoomHelperContext";
 import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
-import { PicAdderModalContext } from "./contexts/picAdderModalContext";
-import { DiveSiteSearchModalContext } from "./contexts/diveSiteSearchModalContext";
-import { MapSearchModalContext } from "./contexts/mapSearchModalContext";
-import { GuideLaunchModalContext } from "./contexts/guideLaunchModalContext";
-import { SettingsModalContext } from "./contexts/settingsModalContext";
-import { ProfileModalContext } from "./contexts/profileModalContext";
-import { PartnerModalContext } from "./contexts/partnerAccountRequestModalContext";
-import { CommentsModalContext } from "./contexts/commentsModalContext";
 import { PullTabContext } from "./contexts/pullTabContext";
 import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
 import { TutorialContext } from "./contexts/tutorialContext";
@@ -74,12 +65,14 @@ import SecondTutorial from "./guides/secondTutorial";
 import ThirdTutorial from "./guides/thirdTutorial";
 import SiteSearchModal from "./modals/siteSearchModal";
 import MapSearchModal from "./modals/mapSearchModal";
-import FullScreenModal from "./modals/fullScreenModal";
-import CommentsModal from "./modals/commentsModal";
 import "./mapPage.css";
 import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
 import Histogram from "./histogram/histogramBody";
 import TutorialBar from "./guideBar/tutorialBarContainer";
+import { ModalContext } from "./contexts/modalContext";
+import Modal from "./reusables/modal/modal";
+import { ModalWindowSize } from "./reusables/modal/constants";
+import { cleanupPinPicture } from "../helpers/picUploaderHelpers";
 
 // const adminPortalZone = (
 //   <div style={{ marginLeft: "10px", marginBottom: "40px" }}>
@@ -124,28 +117,14 @@ const MapPage = React.memo((props) => {
   const { dsAdderModal, setDsAddermodal } = useContext(
     DiveSiteAdderModalContext
   );
-  const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
-  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(
-    DiveSiteSearchModalContext
-  );
-  const { mapSearchModal, setMapSearchModal } = useContext(
-    MapSearchModalContext
-  );
-  const { guideLaunchModal, setGuideLaunchModal } = useContext(
-    GuideLaunchModalContext
-  );
-  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
-  const { profileModal, setProfileModal } = useContext(ProfileModalContext);
-  const { partnerModal, setPartnerModal } = useContext(
-    PartnerModalContext
-  );
-  const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { setTiles } = useContext(CarrouselTilesContext);
 
   const [searButState, setSearButState] = useState(false);
   const [siteButState, setSiteButState] = useState(false);
   const [photButState, setPhotButState] = useState(false);
+
+  const { modalShow, modalResume } = useContext(ModalContext);
 
   let blinker;
   let counter = 0;
@@ -211,10 +190,9 @@ const MapPage = React.memo((props) => {
   }, [itterator3]);
 
   const returnToPicModal = () => {
+    modalResume()
+    setMasterSwitch(true)
     if (chosenModal === "DiveSite") {
-      animateSiteModal();
-      setMasterSwitch(true);
-      setChosenModal(null);
       if (tutorialRunning) {
         if (itterator2 === 19) {
           setItterator2(itterator2 + 1);
@@ -222,9 +200,6 @@ const MapPage = React.memo((props) => {
         }
       }
     } else if (chosenModal === "Photos") {
-      animatePicModal();
-      setMasterSwitch(true);
-      setChosenModal(null);
       if (tutorialRunning) {
         if (itterator3 === 19) {
           setItterator3(itterator3 + 1);
@@ -252,7 +227,7 @@ const MapPage = React.memo((props) => {
         if (success) {
           let bully = success[0] && success[0].UserName;
           if (bully == null || bully === "") {
-            setIntroGuideModalYCoord(-windowHeight);
+            setIntroGuideModalYCoord(-window.innerHeight);
             setTutorialRunning(true);
             setItterator(0);
           } else {
@@ -298,15 +273,19 @@ const MapPage = React.memo((props) => {
   };
 
   const toggleButtonStyleAlt = {
-    "&.Mui-selected": { backgroundColor: "#538bdb", width: "70%" },
+    "&.Mui-selected": {
+      backgroundColor: "#538bdb",
+      width: sideLength,
+      height: sideLength,
+    },
     "&.Mui-selected:hover": { backgroundColor: "#538bdb", color: "white" },
     "&:hover": {
       color: "white",
       backgroundColor: "gold",
     },
     backgroundColor: "#538dbd",
-    height: "40%",
-    width: "30%",
+    width: sideLength,
+    height: sideLength,
     color: "gold",
     boxShadow: "-2px 4px 4px #00000064",
     borderRadius: "100%",
@@ -430,21 +409,6 @@ const MapPage = React.memo((props) => {
     }
 
     animateMapSearchModal();
-    setSiteSearchModalYCoord(0);
-    setPicModalYCoord(0);
-    setSiteModalYCoord(0);
-    setSettingsModalYCoord(0);
-    setProfileModalYCoord(0);
-    setLaunchModalYCoord(0);
-    setAnchorModalYCoord(0);
-    setSiteModal(false);
-    setShowFilterer(false);
-    if (pin.PicFile !== null) {
-      removePhoto({
-        filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-        fileName: `${pin.PicFile}`,
-      });
-    }
   };
 
   const handleDiveSiteSearchButton = () => {
@@ -474,20 +438,6 @@ const MapPage = React.memo((props) => {
     }
 
     animateSiteSearchModal();
-    setMapSearchYCoord(0);
-    setPicModalYCoord(0);
-    setSettingsModalYCoord(0);
-    setProfileModalYCoord(0);
-    setLaunchModalYCoord(0);
-    setAnchorModalYCoord(0);
-    setSiteModal(false);
-    setShowFilterer(false);
-    if (pin.PicFile !== null) {
-      removePhoto({
-        filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-        fileName: `${pin.PicFile}`,
-      });
-    }
 
     if (tutorialRunning) {
       if (itterator2 === 3) {
@@ -594,95 +544,21 @@ const MapPage = React.memo((props) => {
 
     setDivesTog(!divesTog);
   };
-  let screenWidthInital = window.innerWidth;
-  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
-  const [windowHeight, setWindowHeight] = useState(screenHeigthInital);
 
-  window.addEventListener("resize", trackScreen);
 
-  function trackScreen() {
-    setWindowWidth(window.innerWidth);
-    setWindowHeight(window.innerHeight);
-    setMenuUp(false);
-    setfabsYCoord(0);
-    setPicModalYCoord(0);
-    setSiteModalYCoord(0);
-    setSettingsModalYCoord(0);
-    setProfileModalYCoord(0);
-    setAnchorModalYCoord(0);
-    setSiteModal(false);
-    setLaunchModalYCoord(0);
-    setMapSearchYCoord(0);
-    setSiteSearchModalYCoord(0);
-    setFullScreenModalYCoord(0);
-  }
-
-  const picModalRef = useRef(null);
-  const siteModalRef = useRef(null);
-  const launchModalRef = useRef(null);
-  const settingsModalRef = useRef(null);
-  const profileModalRef = useRef(null);
   const introGuideModalRef = useRef(null);
   const secondGuideModalRef = useRef(null);
   const thirdGuideModalRef = useRef(null);
-  const anchorModalRef = useRef(null);
-  const shopModalRef = useRef(null);
-  const commentsModalRef = useRef(null);
-  const siteSearchModalRef = useRef(null);
-  const mapSearchModalRef = useRef(null);
-  const fullScreenModalRef = useRef(null);
-  const partnerModalRef = useRef(null);
-  const [picModalYCoord, setPicModalYCoord] = useState(0);
-  const [siteModalYCoord, setSiteModalYCoord] = useState(0);
-  const [launchModalYCoord, setLaunchModalYCoord] = useState(0);
-  const [settingsModalYCoord, setSettingsModalYCoord] = useState(0);
-  const [profileModalYCoord, setProfileModalYCoord] = useState(0);
+
   const [introGuideModalYCoord, setIntroGuideModalYCoord] = useState(0);
   const [secondGuideModalYCoord, setSecondGuideModalYCoord] = useState(0);
   const [thirdGuideModalYCoord, setThirdGuideModalYCoord] = useState(0);
-  const [siteSearchModalYCoord, setSiteSearchModalYCoord] = useState(0);
-  const [mapSearchYCoord, setMapSearchYCoord] = useState(0);
-  const [fullScreenModalYCoord, setFullScreenModalYCoord] = useState(0);
-  const [anchorModalYCoord, setAnchorModalYCoord] = useState(0);
-  const [shopModalYCoord, setShopModalYCoord] = useState(0);
-  const [commmentsModalYCoord, setCommentsModalYCoord] = useState(0);
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
-  const [partnerModalYCoord, setPartnerModalYCoord] = useState(0);
 
   const moveFabModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${fabsYCoord}px,0)` },
-  });
-
-  const movePicModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${picModalYCoord}px,0)` },
-  });
-
-  const moveSiteModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${siteModalYCoord}px,0)` },
-  });
-
-  const moveShopModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${shopModalYCoord}px,0)` },
-  });
-
-  const moveLaunchModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${launchModalYCoord}px,0)` },
-  });
-
-  const moveSettingsModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${settingsModalYCoord}px,0)` },
-  });
-
-  const moveProfileModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${profileModalYCoord}px,0)` },
   });
 
   const moveIntroGuidModal = useSpring({
@@ -700,35 +576,6 @@ const MapPage = React.memo((props) => {
     to: { transform: `translate3d(0,${thirdGuideModalYCoord}px,0)` },
   });
 
-  const moveAnchorModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${anchorModalYCoord}px,0)` },
-  });
-
-  const moveCommentsModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${commmentsModalYCoord}px,0)` },
-  });
-
-  const moveSiteSearchModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${siteSearchModalYCoord}px,0)` },
-  });
-
-  const moveMapSearchModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${mapSearchYCoord}px,0)` },
-  });
-
-  const moveFullScreenModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${fullScreenModalYCoord}px,0)` },
-  });
-
-  const movePartnerModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${partnerModalYCoord}px,0)` },
-  });
 
   const animateFabs = () => {
     let containerHeight = document.getElementsByClassName("fabContainer")[0]
@@ -737,7 +584,7 @@ const MapPage = React.memo((props) => {
       .clientHeight;
 
     if (fabsYCoord === 0) {
-      if (windowHeight < 400) {
+      if (window.innerHeight < 400) {
         setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
       } else {
         setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
@@ -753,30 +600,10 @@ const MapPage = React.memo((props) => {
   };
 
   const animatePicModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (picModalYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(false);
-      setPicAddermodal(true);
-      setShowFilterer(false);
-      setTiles(true);
-    } else {
-      setPicAddermodal(false);
-      // if (pin.PicFile !== null) {
-      //   console.log("called 3")
-      //   removePhoto({
-      //     filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-      //     fileName: `${pin.PicFile}`,
-      //   });
-      // }
-    }
+    modalShow(PicUploader, {
+      name: "PictureUploader",
+      onCancelCallback: () => cleanupPinPicture(pin)
+    })
   };
 
   const clearPicModal = () => {
@@ -793,29 +620,7 @@ const MapPage = React.memo((props) => {
   };
 
   const animateSiteModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (siteModalYCoord === 0) {
-      setSiteModal(false);
-      setPicAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(false);
-      setDsAddermodal(true);
-      setShowFilterer(false);
-      setTiles(true);
-      if (pin.PicFile !== null) {
-        removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-          fileName: `${pin.PicFile}`,
-        });
-      }
-    } else {
-      setDsAddermodal(false);
-    }
+    modalShow(SiteSubmitter)
   };
 
   const clearSiteModal = () => {
@@ -829,86 +634,27 @@ const MapPage = React.memo((props) => {
   };
 
   const animateLaunchModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (launchModalYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(false);
-      setGuideLaunchModal(true);
-      setShowFilterer(false);
-      setTiles(true);
-      if (pin.PicFile !== null) {
-        removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-          fileName: `${pin.PicFile}`,
-        });
-      }
-    } else {
-      setGuideLaunchModal(false);
-    }
+    modalShow(() => {
+      return <HowToGuide
+        animateLaunchModal={animateLaunchModal}
+        animateIntroGuideModal={animateIntroGuideModal}
+        animateSecondGuideModal={animateSecondGuideModal}
+        animateThirdGuideModal={animateThirdGuideModal}
+      />
+    }, {name: "HowToGuide"})
   };
 
   const animateSettingsModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (settingsModalYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(false);
-      setSettingsModal(true);
-      setProfileModal(false);
-      setShowFilterer(false);
-      setTiles(true);
-      if (pin.PicFile !== null) {
-        removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-          fileName: `${pin.PicFile}`,
-        });
-      }
-    } else {
-      setSettingsModal(false);
-    }
+    modalShow(Settings)
   };
 
   const animateProfileModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (profileModalYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(false);
-      setSettingsModal(false);
-      setShowFilterer(false);
-      setProfileModal(true);
-      setTiles(true);
-      if (pin.PicFile !== null) {
-        removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-          fileName: `${pin.PicFile}`,
-        });
-      }
-    } else {
-      setProfileModal(false);
-    }
+    modalShow(UserProfileModal)
   };
 
   const animateIntroGuideModal = () => {
     if (introGuideModalYCoord === 0) {
-      setIntroGuideModalYCoord(-windowHeight);
+      setIntroGuideModalYCoord(-window.innerHeight);
     } else {
       setIntroGuideModalYCoord(0);
     }
@@ -916,7 +662,7 @@ const MapPage = React.memo((props) => {
 
   const animateSecondGuideModal = () => {
     if (secondGuideModalYCoord === 0) {
-      setSecondGuideModalYCoord(-windowHeight);
+      setSecondGuideModalYCoord(-window.innerHeight);
     } else {
       setSecondGuideModalYCoord(0);
     }
@@ -924,112 +670,20 @@ const MapPage = React.memo((props) => {
 
   const animateThirdGuideModal = () => {
     if (thirdGuideModalYCoord === 0) {
-      setThirdGuideModalYCoord(-windowHeight);
+      setThirdGuideModalYCoord(-window.innerHeight);
     } else {
       setThirdGuideModalYCoord(0);
     }
   };
 
-  const animateAnchorModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (siteModal === 0) {
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(false);
-      setSiteModal(true);
-      setShopModal(true);
-      setShowFilterer(false);
-      setTiles(true);
-      if (pin.PicFile !== null) {
-        removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-          fileName: `${pin.PicFile}`,
-        });
-      }
-    } else {
-      setSiteModal(false);
-    }
-  };
-
-  const animateShopModal = () => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (siteModal === 0) {
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(false);
-      setSiteModal(false);
-      setShopModal(true);
-      setShowFilterer(false);
-      setTiles(true);
-      if (pin.PicFile !== null) {
-        removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-          fileName: `${pin.PicFile}`,
-        });
-      }
-    } else {
-      setShopModal(false);
-    }
-  };
-
-  const animateCommentsModal = () => {
-    let modalHeigth = document.getElementsByClassName("commentScreen")[0]
-      .clientHeight;
-
-    if (commmentsModalYCoord === 0) {
-      setCommentsModalYCoord(-windowHeight);
-    } else {
-      setCommentsModalYCoord(0);
-      setCommentsModal(false);
-    }
-  };
-
-  const animateFullScreenModal = () => {
-    let modalHeigth = document.getElementsByClassName("fullScreenModalDiv")[0]
-      .clientHeight;
-
-    if (fullScreenModalYCoord === 0) {
-      setFullScreenModalYCoord(
-        -windowHeight + (windowHeight - modalHeigth) / 2
-      );
-    } else {
-      setFullScreenModalYCoord(0);
-    }
-  };
-
   const animateSiteSearchModal = () => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
-
-    if (siteSearchModalYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setMapSearchModal(false);
-      setDiveSiteSearchModal(true);
-      setShowFilterer(true);
-      setTiles(true);
-    } else {
-      setDiveSiteSearchModal(false);
-    }
+    modalShow(SiteSearchModal, {
+      size: ModalWindowSize.S
+    })
   };
 
   const animatePartnerModal = () => {
+    // todo: use modalShow
     if (partnerModalYCoord === 0) {
       setPartnerModalYCoord(-windowHeight);
     } else {
@@ -1038,36 +692,12 @@ const MapPage = React.memo((props) => {
   };
 
   const animateMapSearchModal = () => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
-
-    if (mapSearchYCoord === 0) {
-      setSiteModal(false);
-      setDsAddermodal(false);
-      setPicAddermodal(false);
-      setSettingsModal(false);
-      setProfileModal(false);
-      setGuideLaunchModal(false);
-      setDiveSiteSearchModal(false);
-      setMapSearchModal(true);
-      setShowFilterer(true);
-      setTiles(true);
-    } else {
-      setMapSearchModal(false);
-    }
+    modalShow(MapSearchModal, {
+      size: ModalWindowSize.S
+    })
   };
 
   const animatePulltab = () => {
-    console.log(showFilterer);
-    setDsAddermodal(false);
-    setPicAddermodal(false);
-    setSettingsModal(false);
-    setProfileModal(false);
-    setGuideLaunchModal(false);
-    setDiveSiteSearchModal(false);
-    setMapSearchModal(false);
-    setSiteModal(false);
-    setShopModal(false);
     setShowFilterer(!showFilterer);
   };
 
@@ -1079,213 +709,6 @@ const MapPage = React.memo((props) => {
     }
   }, [showFilterer]);
 
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (siteModal) {
-      setAnchorModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setPicModalYCoord(0);
-      setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-      setShowFilterer(false);
-    }
-
-    if (!siteModal) {
-      setAnchorModalYCoord(0);
-    }
-  }, [siteModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (shopModal) {
-      setShopModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setPicModalYCoord(0);
-      setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-      setShowFilterer(false);
-    }
-
-    if (!shopModal) {
-      setShopModalYCoord(0);
-    }
-  }, [shopModal]);
-
-  useEffect(() => {
-    if (commentsModal) {
-      setCommentsModalYCoord(-windowHeight);
-    }
-
-    if (!siteModal) {
-      setCommentsModalYCoord(0);
-    }
-  }, [commentsModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (dsAdderModal) {
-      setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setPicModalYCoord(0);
-      setAnchorModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
-
-    if (!dsAdderModal) {
-      setSiteModalYCoord(0);
-    }
-  }, [dsAdderModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (picAdderModal) {
-      setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
-
-    if (!picAdderModal) {
-      setPicModalYCoord(0);
-    }
-  }, [picAdderModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (profileModal) {
-      setProfileModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setSettingsModalYCoord(0);
-    }
-
-    if (!profileModal) {
-      setProfileModalYCoord(0);
-    }
-  }, [profileModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (settingsModal) {
-      setSettingsModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
-
-    if (!settingsModal) {
-      setSettingsModalYCoord(0);
-    }
-  }, [settingsModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
-
-    if (guideLaunchModal) {
-      setLaunchModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setMapSearchYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
-
-    if (!guideLaunchModal) {
-      setLaunchModalYCoord(0);
-    }
-  }, [guideLaunchModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
-
-    if (diveSiteSearchModal) {
-      setSiteSearchModalYCoord(
-        -windowHeight + (windowHeight - modalHeigth) / 2
-      );
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setMapSearchYCoord(0);
-      setLaunchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
-
-    if (!diveSiteSearchModal) {
-      setSiteSearchModalYCoord(0);
-    }
-  }, [diveSiteSearchModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("searchModalDiv")[0]
-      .clientHeight;
-
-    if (mapSearchModal) {
-      setMapSearchYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      setAnchorModalYCoord(0);
-      setSiteModalYCoord(0);
-      setPicModalYCoord(0);
-      setSettingsModalYCoord(0);
-      setSiteSearchModalYCoord(0);
-      setLaunchModalYCoord(0);
-      setProfileModalYCoord(0);
-    }
-
-    if (!mapSearchModal) {
-      setMapSearchYCoord(0);
-    }
-  }, [mapSearchModal]);
-
-  useEffect(() => {
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-    .clientHeight;
-
-    if (partnerModal) {
-      setPartnerModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-    }
-
-    if (!partnerModal) {
-      setPartnerModalYCoord(0);
-    }
-  }, [partnerModal]);
 
   return (
     <div className="mappagemaster">
@@ -1622,56 +1045,9 @@ const MapPage = React.memo((props) => {
         </div>
       )}
 
-      <animated.div
-        className="picModalDiv"
-        style={movePicModal}
-        ref={picModalRef}
-      >
-        <PicUploader
-          animatePicModal={animatePicModal}
-          setPicModalYCoord={setPicModalYCoord}
-        />
-      </animated.div>
 
-      <animated.div
-        className="picModalDiv"
-        style={moveSiteModal}
-        ref={siteModalRef}
-      >
-        <SiteSubmitter
-          animateSiteModal={animateSiteModal}
-          setSiteModalYCoord={setSiteModalYCoord}
-        />
-      </animated.div>
+      <Modal/>
 
-      <animated.div
-        className="picModalDiv"
-        style={moveLaunchModal}
-        ref={launchModalRef}
-      >
-        <HowToGuide
-          animateLaunchModal={animateLaunchModal}
-          animateIntroGuideModal={animateIntroGuideModal}
-          animateSecondGuideModal={animateSecondGuideModal}
-          animateThirdGuideModal={animateThirdGuideModal}
-        />
-      </animated.div>
-
-      <animated.div
-        className="picModalDiv"
-        style={moveProfileModal}
-        ref={profileModalRef}
-      >
-        <UserProfileModal animateProfileModal={animateProfileModal} />
-      </animated.div>
-
-      <animated.div
-        className="picModalDiv"
-        style={moveSettingsModal}
-        ref={settingsModalRef}
-      >
-        <Settings animateSettingsModal={animateSettingsModal} />
-      </animated.div>
 
       <animated.div
         className="guideModalDiv"
@@ -1697,7 +1073,6 @@ const MapPage = React.memo((props) => {
           setDsAddermodal={setDsAddermodal}
           animateThirdGuideModal={animateThirdGuideModal}
           setThirdGuideModalYCoord={setThirdGuideModalYCoord}
-          setSiteModalYCoord={setSiteModalYCoord}
         />
       </animated.div>
 
@@ -1709,25 +1084,12 @@ const MapPage = React.memo((props) => {
         <ThirdTutorial
           animateThirdGuideModal={animateThirdGuideModal}
           setThirdGuideModalYCoord={setThirdGuideModalYCoord}
-          setPicAddermodal={setPicAddermodal}
-          setPicModalYCoord={setPicModalYCoord}
         />
       </animated.div>
 
-      <animated.div
-        className="anchorModalDiv"
-        style={moveAnchorModal}
-        ref={anchorModalRef}
-      >
-        <AnchorPics
-          animateAnchorModal={animateAnchorModal}
-          setAnchorModalYCoord={setAnchorModalYCoord}
-          animateFullScreenModal={animateFullScreenModal}
-          setPicModalYCoord={setPicModalYCoord}
-        />
-      </animated.div>
 
-      <animated.div
+
+      {/* <animated.div
         className="picModalDiv"
         style={moveShopModal}
         ref={shopModalRef}
@@ -1736,57 +1098,15 @@ const MapPage = React.memo((props) => {
           animateShopModal={animateShopModal}
           setShopModalYCoord={setShopModalYCoord}
         />
-      </animated.div>
+      </animated.div> */}
 
-      <animated.div
-        className="commentScreen"
-        style={moveCommentsModal}
-        ref={commentsModalRef}
-      >
-        <div className="commentsModal">
-          <CommentsModal animateCommentsModal={animateCommentsModal} />
-        </div>
-      </animated.div>
-
-      <animated.div
-        className="searchModalDiv"
-        style={moveMapSearchModal}
-        ref={mapSearchModalRef}
-      >
-        <MapSearchModal
-          animateMapSearchModal={animateMapSearchModal}
-          setMapSearchYCoord={setMapSearchYCoord}
-          mapSearchYCoord={mapSearchYCoord}
-        />
-      </animated.div>
-
-      <animated.div
-        className="searchModalDiv"
-        style={moveSiteSearchModal}
-        ref={siteSearchModalRef}
-      >
-        <SiteSearchModal
-          animateSiteSearchModal={animateSiteSearchModal}
-          setSiteSearchModalYCoord={setSiteSearchModalYCoord}
-        />
-      </animated.div>
-
-      <animated.div
-        className="fullScreenModalDiv"
-        style={moveFullScreenModal}
-        ref={fullScreenModalRef}
-        onClick={() => setFullScreenModalYCoord(0)}
-      >
-        <FullScreenModal animateFullScreenModal={animateFullScreenModal} />
-      </animated.div>
-
-      <animated.div
+      {/* <animated.div
         className="picModalDiv"
         style={movePartnerModal}
         ref={partnerModalRef}
       >
         <PartnerAccountRequestModal animatePartnerModal={animatePartnerModal} />
-      </animated.div>
+      </animated.div> */}
     </div>
   );
 });

@@ -15,7 +15,7 @@ import ModalHeader from '../reusables/modalHeader';
 // const windowWidth = Dimensions.get("window").width;
 // const windowHeight = Dimensions.get("window").height;
 
-export default function PartnerAccountRequestModal() {
+export default function PartnerAccountRequestModal(props) {
 	const { partnerModal, setPartnerModal } = useContext(PartnerModalContext);
 	const { profile, setProfile } = useContext(UserProfileContext);
 	const { activeSession, setActiveSession } = useContext(SessionContext);
@@ -96,7 +96,7 @@ export default function PartnerAccountRequestModal() {
 			Latitude: '',
 			Longitude: '',
 		});
-		setPartnerModal(false);
+		props?.onModalCancel?.()
 	};
 
 	const handleSubmit = (formValues) => {

@@ -24,6 +24,7 @@ import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button';
 import SubmitButton from '../reusables/button/submitButton';
 import ModalHeader from '../reusables/modalHeader';
+import { ModalContext } from '../contexts/modalContext';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -63,6 +64,7 @@ const SiteSubmitter = (props) => {
 	const cautionModalRef = useRef(null);
 	const [successModalYCoord, setSuccessModalYCoord] = useState(0);
 	const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
+	const { modalPause } = useContext(ModalContext);
 
 	const sucessModalSlide = useSpring({
 		from: { transform: `translate3d(0,0,0)` },
@@ -167,7 +169,7 @@ const SiteSubmitter = (props) => {
 		setChosenModal('DiveSite');
 		setShowNoGPS(false);
 		setMasterSwitch(false);
-		animateSiteModal();
+		modalPause();
 
 		if (tutorialRunning) {
 			if (itterator2 === 16) {
@@ -246,9 +248,9 @@ const SiteSubmitter = (props) => {
 			} else if (itterator2 === 13) {
 				blinker1 = setInterval(locationBut, 1000);
 			} else if (itterator2 === 15 || itterator2 == 10) {
-				setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+				//setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
 			} else if (itterator2 === 8 || itterator2 === 1) {
-				setSiteModalYCoord(0);
+				props?.onModalCancel?.()
 			} else if (itterator2 === 23) {
 				blinker1 = setInterval(siteField, 1000);
 				timer2 = setTimeout(subButTimeout, 300);
@@ -259,7 +261,7 @@ const SiteSubmitter = (props) => {
 					Latitude: '',
 					Longitude: '',
 				});
-				animateSiteModal();
+				props?.onModalCancel?.()
 			}
 		}
 		return () => cleanUp();
@@ -321,7 +323,7 @@ const SiteSubmitter = (props) => {
 			return;
 		}
 		setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
-		animateSiteModal();
+		props?.onModalCancel?.()
 	};
 
 	const activateGuide = () => {

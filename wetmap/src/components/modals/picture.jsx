@@ -1,11 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
-import { SelectedPicContext } from "../contexts/selectPicContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
-import { CommentsModalContext } from "../contexts/commentsModalContext";
 import { SelectedPictureContext } from "../contexts/selectedPictureContext";
-import { ProfileModalContext } from "../contexts/profileModalContext";
-import { SelectedProfileContext } from "../contexts/selectedProfileModalContext";
-import { AnchorModalContext } from "../contexts/anchorModalContext";
 import {
   insertPhotoLike,
   deletePhotoLike,
@@ -15,21 +10,21 @@ import FlagIcon from "@mui/icons-material/Flag";
 import notLiked from "../../images/Hand-Hollow-Blue.png";
 import liked from "../../images/Hand-Filled-Blue.png";
 import "./picture.css";
+import UserProfileModal from "./userProfileModal";
+import { ModalContext } from "../contexts/modalContext";
+import CommentsModal from "./commentsModal";
+import FullScreenModal from "./fullScreenModal";
+import { ModalWindowSize } from "../reusables/modal/constants";
 
 function Picture(props) {
-  const { pic, animateFullScreenModal } = props;
+  const { pic } = props;
   const { profile } = useContext(UserProfileContext);
-  const { setSelectedPic, selectedPic } = useContext(SelectedPicContext);
   const [picLiked, setPicLiked] = useState(pic.likedbyuser);
   const [likeData, setLikeData] = useState(pic.likeid);
   const [countOfLikes, setCountOfLikes] = useState(pic.likecount);
-  const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
   const { setSelectedPicture } = useContext(SelectedPictureContext);
-  const { setProfileModal } = useContext(ProfileModalContext);
-  const { selectedProfile, setSelectedProfile } = useContext(
-    SelectedProfileContext
-  );
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+  
+  const { modalShow } = useContext(ModalContext);
   let photoName = pic.photofile.split("/").pop();
 
   const [imgHeigth, setImgHeigth] = useState(0);
@@ -44,13 +39,16 @@ function Picture(props) {
       return;
     }
 
-    setSelectedProfile(picOwnerAccount[0].UserID);
-    setSiteModal(false);
-    setProfileModal(true);
+    modalShow(UserProfileModal, {
+      keepPreviousModal: true,
+      selectedProfile: picOwnerAccount[0].UserID
+    })
   };
 
   const handleCommentModal = () => {
-    setCommentsModal(true);
+    modalShow(CommentsModal, {
+      keepPreviousModal: true,
+    })
     setSelectedPicture(pic);
   };
 
@@ -69,9 +67,12 @@ function Picture(props) {
     }
   };
 
-  const handleModalOpen = (picture) => {
-    setSelectedPic(picture);
-    animateFullScreenModal();
+  const handleModalOpen = () => {
+    modalShow(FullScreenModal, {
+      keepPreviousModal: true,
+      size: ModalWindowSize.FULL,
+      src: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`
+    })
   };
 
   const getImageDimensions = async () => {
@@ -108,7 +109,7 @@ function Picture(props) {
       <div
         key={pic.id}
         className="pictureBoxQ"
-        onClick={() => handleModalOpen(photoName)}
+        onClick={() => handleModalOpen()}
         style={{
           backgroundImage: `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName})`,
           backgroundRepeat: "no-repeat",
@@ -149,7 +150,6 @@ function Picture(props) {
       </div>
 
       <div
-        onClick={() => handleCommentModal(pic)}
         style={{
           display: "flex",
           flexDirection: "row",

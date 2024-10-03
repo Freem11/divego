@@ -18,21 +18,19 @@ import { Iterrator2Context } from "../contexts/iterrator2Context";
 import { Iterrator3Context } from "../contexts/iterrator3Context";
 import { TutorialContext } from "../contexts/tutorialContext";
 import { TutorialResetContext } from "../contexts/tutorialResetContext";
-// import { DSAdderContext } from "../contexts/DSModalContext";
-import { PinContext } from "../contexts/staticPinContext";
-// import { PictureAdderContext } from "../contexts/picModalContext";
 import { ChapterContext } from "../contexts/chapterContext";
 import { MasterContext } from "../contexts/masterContext";
+import PicUploader from "../modals/picUploader";
+import { cleanupPinPicture } from "../../helpers/picUploaderHelpers";
+import { ModalContext } from "../contexts/modalContext";
+import { PinContext } from "../contexts/staticPinContext";
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 export default function ThirdTutorial(props) {
   const {
-    animateThirdGuideModal,
     setThirdGuideModalYCoord,
-    setPicAddermodal,
-    setPicModalYCoord,
   } = props;
 
   window.addEventListener("resize", trackDimensions);
@@ -52,7 +50,6 @@ export default function ThirdTutorial(props) {
   const { activeSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
 
-  const { pinValues, setPinValues } = useContext(PinContext);
   const { uploadedFile, setUploadedFile } = useContext(PictureContext);
   // const { diveSiteAdderModal, setDiveSiteAdderModal } =
   //   useContext(DSAdderContext);
@@ -67,6 +64,8 @@ export default function ThirdTutorial(props) {
   const { tutorialReset, setTutorialReset } = useContext(TutorialResetContext);
   // const { mapCenter, setMapCenter } = useContext(MapCenterContext);
   const { setMasterSwitch } = useContext(MasterContext);
+  const { modalShow, modalCancel } = useContext(ModalContext);
+  const { pin, setPin } = useContext(PinContext);
 
   useEffect(() => {
     getProfile();
@@ -90,11 +89,6 @@ export default function ThirdTutorial(props) {
     let characterWidth = document.getElementsByClassName("character3")[0]
       .clientWidth;
 
-    let textBoxHeight = document.getElementsByClassName("talkbox3")[0]
-      .clientHeight;
-
-    let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-      .clientHeight;
 
     switch (chapter) {
       case "Contributing photos overview":
@@ -108,7 +102,7 @@ export default function ThirdTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setPicAddermodal(false);
+        // setPicAddermodal(false);
         setCameraY(2 * windowHeigth + (windowHeigth - 100) / 3);
         break;
 
@@ -124,8 +118,10 @@ export default function ThirdTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-        setPicAddermodal(true);
+        modalShow(PicUploader, {
+          name: "PictureUploader",
+          onCancelCallback: () => cleanupPinPicture(pin)
+        })
         break;
 
       case "Name that sea creature!":
@@ -139,8 +135,10 @@ export default function ThirdTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-        setPicAddermodal(true);
+        modalShow(PicUploader, {
+          name: "PictureUploader",
+          onCancelCallback: () => cleanupPinPicture(pin)
+        })
         break;
 
       case "Dropping the pin":
@@ -154,8 +152,10 @@ export default function ThirdTutorial(props) {
         setTimeout(() => {
           setTextBoxY(-windowHeigth / 4);
         }, 300);
-        setPicAddermodal(true);
-        setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
+        modalShow(PicUploader, {
+          name: "PictureUploader",
+          onCancelCallback: () => cleanupPinPicture(pin)
+        })
         setPinY(2 * windowHeigth + (windowHeigth - 100) / 3);
         break;
 
@@ -163,7 +163,7 @@ export default function ThirdTutorial(props) {
         setThirdGuideModalYCoord(0);
         handleClearTutorial();
         setTutorialRunning(false);
-        setPicAddermodal(false);
+        modalCancel();
         break;
     }
     setChapter(null);
@@ -399,10 +399,10 @@ export default function ThirdTutorial(props) {
 
     if (itterator3 === 6) {
       setThirdGuideModalYCoord(-windowHeigth);
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
-      setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-      // animateThirdGuideModal()
+      modalShow(PicUploader, {
+        name: "PictureUploader",
+        onCancelCallback: () => cleanupPinPicture(pin)
+      })
     }
 
     if (itterator3 === 7) {
@@ -427,27 +427,27 @@ export default function ThirdTutorial(props) {
 
     if (itterator3 === 12) {
       setThirdGuideModalYCoord(-windowHeigth);
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
-      setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-      // animateThirdGuideModal()
+      modalShow(PicUploader, {
+        name: "PictureUploader",
+        onCancelCallback: () => cleanupPinPicture(pin)
+      })
     }
 
     if (itterator3 === 14) {
       setThirdGuideModalYCoord(0);
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
-      setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-      // animateThirdGuideModal()
+      modalShow(PicUploader, {
+        name: "PictureUploader",
+        onCancelCallback: () => cleanupPinPicture(pin)
+      })
     }
 
     if (itterator3 === 15) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
       setThirdGuideModalYCoord(-windowHeigth);
-      let modalHeigth = document.getElementsByClassName("picModalDiv")[0]
-        .clientHeight;
-      setPicModalYCoord(-windowHeigth + (windowHeigth - modalHeigth) / 2);
-      // animateThirdGuideModal()
+      modalShow(PicUploader, {
+        name: "PictureUploader",
+        onCancelCallback: () => cleanupPinPicture(pin)
+      })
       setTimeout(() => {
         setPinY(2 * windowHeigth + (windowHeigth - 100) / 3);
       }, 1000);

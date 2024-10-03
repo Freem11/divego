@@ -7,7 +7,11 @@ const CloseButton = ({ onClick, className, btnStyle }) => {
 			<Button
 				variant='text'
 				className={className}
-				onClick={onClick}
+				onClick={() => {
+					if(onClick && typeof onClick === 'function') {
+						onClick()
+					}
+				}}
 				style={{
 					display: 'flex',
 					flexDirection: 'column',

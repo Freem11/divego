@@ -1,3 +1,5 @@
+import { removePhoto } from "../cloudflareBucketCalls/cloudflareAWSCalls";
+
 function getToday(DateVal) {
   let yearValue = DateVal.getFullYear().toString();
   let monthValue = (DateVal.getMonth() + 1).toString();
@@ -16,4 +18,13 @@ function getToday(DateVal) {
   return formattedDate;
 }
 
-export { getToday };
+function cleanupPinPicture(pin) {
+  if (pin.PicFile !== null) {
+    removePhoto({
+      filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+      fileName: `${pin.PicFile}`,
+    });
+  }
+}
+
+export { getToday, cleanupPinPicture };

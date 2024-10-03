@@ -38,6 +38,7 @@ import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button.jsx';
 import SubmitButton from '../reusables/button/submitButton.jsx';
 import ModalHeader from '../reusables/modalHeader.jsx';
+import { ModalContext } from '../contexts/modalContext.jsx';
 
 let filePath1 = './wetmap/src/components/uploads/';
 let filePath = '/src/components/uploads/';
@@ -84,6 +85,7 @@ const PicUploader = React.memo((props) => {
 	const cautionModalRef = useRef(null);
 	const [successModalYCoord, setSuccessModalYCoord] = useState(0);
 	const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
+	const { modalPause } = useContext(ModalContext);
 
 	const sucessModalSlide = useSpring({
 		from: { transform: `translate3d(0,0,0)` },
@@ -253,10 +255,10 @@ const PicUploader = React.memo((props) => {
 			return;
 		}
 
+		modalPause();
 		setChosenModal('Photos');
 		setShowNoGPS(false);
 		setMasterSwitch(false);
-		animatePicModal();
 		if (tutorialRunning) {
 			if (itterator3 === 16) {
 				setItterator3(itterator3 + 1);
@@ -340,10 +342,8 @@ const PicUploader = React.memo((props) => {
 				blinker = setInterval(animalField, 1000);
 			} else if (itterator3 === 3) {
 				setPicModalYCoord(0);
-			} else if (itterator3 === 3) {
-				setPicModalYCoord(0);
 			} else if (itterator3 === 6 || itterator3 === 12 || itterator3 === 15) {
-				setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
+				//setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
 			} else if (itterator3 === 16) {
 				blinker = setInterval(pinBut, 1000);
 			} else if (itterator3 === 22) {
@@ -412,14 +412,6 @@ const PicUploader = React.memo((props) => {
 			return;
 		}
 
-		if (pin.PicFile !== null) {
-			console.log('called');
-			removePhoto({
-				filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-				fileName: `${pin.PicFile}`,
-			});
-		}
-
 		setPin({
 			...pin,
 			PicFile: '',
@@ -430,7 +422,7 @@ const PicUploader = React.memo((props) => {
 		});
 		setShowNoGPS(false);
 		setPhotoFile(null);
-		animatePicModal();
+		props?.onModalCancel?.()
 	};
 
 	function handleClick() {
