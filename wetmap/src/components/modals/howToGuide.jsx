@@ -57,11 +57,13 @@ const HowToGuide = (props) => {
 		setThirdGuideModal(!thirdGuideModal);
 	};
 
+	const { modalCancel } = useContext(ModalContext);
+
 	return (
 		<>
 			<ModalHeader
 				title={'How to use Scuba SEAsons'}
-				onClose={props.onModalCancel}
+				onClose={modalCancel}
 			/>
 
 			{/* <div className='flex-center-column' style={{ marginTop: '-25%' }}> */}
