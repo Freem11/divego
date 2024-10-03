@@ -3,6 +3,7 @@ import './siteSubmitter.css';
 import { TutorialContext } from '../contexts/tutorialContext';
 import DiveSiteAutoComplete from '../diveSiteSearch/diveSiteSearch';
 import ModalHeader from '../reusables/modalHeader';
+import CustomButton from '../reusables/button/button';
 
 const SiteSearchModal = (props) => {
 	const { animateSiteSearchModal, setSiteSearchModalYCoord } = props;
@@ -18,6 +19,16 @@ const SiteSearchModal = (props) => {
 					setSiteSearchModalYCoord={setSiteSearchModalYCoord}
 				/>
 			</div>
+			{/* <ModalHeader title={'Site Search'} onClose={animateSiteSearchModal} />
+			<div>
+				<DiveSiteAutoComplete
+					setSiteSearchModalYCoord={setSiteSearchModalYCoord}
+				/>
+			</div>
+			<div className='flex-row'>
+				<CustomButton text={'Dive Site'} />
+				<CustomButton text={'Dive Centre'} />
+			</div> */}
 		</>
 	);
 };

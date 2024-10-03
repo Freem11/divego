@@ -5,7 +5,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: white; */
   border: none;
   text-align: center;
   text-overflow: ellipsis;
@@ -41,4 +40,28 @@
   margin-left: 14vw;
   margin-bottom: 4vh;
   background-color: blueviolet;
+}
+
+/* Spectre.css Styles for Inputs */
+.form-input {
+  display: block;
+  width: 100%;
+  padding: 0.4rem;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #333;
+  background-color: #fff;
+}
+
+.form-input::placeholder {
+  color: #aaa;
+  font-style: italic;
+}
+
+.form-input:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.25);
 }
