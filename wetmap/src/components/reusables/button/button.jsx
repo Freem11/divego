@@ -5,26 +5,23 @@ import { Label } from 'reactstrap';
 export default function Button(props) {
 	const { onClick, svg, btnState, imgButState, className, text } = props;
 
-	let btnBox, iconStyles, labelStyles;
+	// Determine button styles based on the props
+	let btnBox = imgButState 
+		? `${style.btnBox2} ${style.picSelectDivAlt}` 
+		: (btnState ? style.btnBox2 : style.btnBox);
 
-	if (imgButState) {
-		btnBox = `${style.btnBox2} ${style.picSelectDivAlt}`;
-		iconStyles = style.iconStylesAlt;
-		labelStyles = style.labelStyleAlt;
-	} else {
-		btnBox = btnState ? style.btnBox2 : style.btnBox;
-		iconStyles = btnState ? style.iconStylesAlt : style.iconStyles;
-		labelStyles = style.labelStyle;
-	}
+	const iconStyles = imgButState ? style.iconStylesAlt : (btnState ? style.iconStylesAlt : style.iconStyles);
+	const labelStyles = imgButState ? style.labelStyleAlt : style.labelStyle;
 
-	// Append `picSelectDiv` class if `text` is present
+	// Append `picSelectDiv` class if `text` is present and `imgButState` is false
 	if (text && !imgButState) {
 		btnBox += ` ${style.picSelectDiv}`;
 	}
+
 	const buttonClassName = `${btnBox} ${className || ''}`;
 
 	// Clone the SVG element and apply the styles conditionally
-	const StyledSvg = React.cloneElement(svg, { className: iconStyles });
+	const StyledSvg = svg ? React.cloneElement(svg, { className: iconStyles }) : null;
 
 	return (
 		<div className="mx-1">
