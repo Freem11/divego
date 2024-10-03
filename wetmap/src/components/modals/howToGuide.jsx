@@ -9,6 +9,8 @@ import { SecondTutorialModalContext } from '../contexts/secondTutorialModalConte
 import { ThirdTutorialModalContext } from '../contexts/thirdTutorialModalContext';
 import ModalHeader from '../reusables/modalHeader';
 import LargeButton from '../reusables/button/largeButton';
+import IntroTutorial from '../guides/introTutorial';
+import { ModalContext } from '../contexts/modalContext';
 
 const HowToGuide = (props) => {
 	const { itterator, setItterator } = useContext(IterratorContext);
@@ -28,39 +30,44 @@ const HowToGuide = (props) => {
 	const { thirdGuideModal, setThirdGuideModal } = useContext(
 		ThirdTutorialModalContext
 	);
+	const { modalSuccess } = useContext(ModalContext);
+
 
 	const handleTutorialStartup = () => {
+		modalSuccess()
 		setItterator(0);
 		setTutorialRunning(true);
 		animateIntroGuideModal();
-		animateLaunchModal();
 		setGuideModal(!guideModal);
 	};
 
 	const handleSecondTutorialStartup = () => {
+		modalSuccess()
 		setItterator2(0);
 		setTutorialRunning(true);
 		animateSecondGuideModal();
-		animateLaunchModal();
 		setSecondGuideModal(!secondGuideModal);
 	};
 
 	const handleThirdTutorialStartup = () => {
+		modalSuccess()
 		setItterator2(0);
 		setTutorialRunning(true);
 		animateThirdGuideModal();
-		animateLaunchModal();
 		setThirdGuideModal(!thirdGuideModal);
 	};
+
+	const { modalCancel } = useContext(ModalContext);
 
 	return (
 		<>
 			<ModalHeader
 				title={'How to use Scuba SEAsons'}
-				onClose={animateLaunchModal}
+				onClose={modalCancel}
 			/>
 
-			<div className='flex-center-column' style={{ marginTop: '-25%' }}>
+			{/* <div className='flex-center-column' style={{ marginTop: '-25%' }}> */}
+			<div className='hero flex-centered'>
 				<LargeButton onClick={handleTutorialStartup} btnText={'Intro Guide'} />
 				<LargeButton
 					onClick={handleSecondTutorialStartup}

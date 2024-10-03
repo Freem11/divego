@@ -7,9 +7,6 @@ import {
 } from '../../supabaseCalls/accountSupabaseCalls';
 import { SessionContext } from '../contexts/sessionContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
-import { ProfileModalContext } from '../contexts/profileModalContext';
-import { SelectedProfileContext } from '../contexts/selectedProfileModalContext';
-import { AnchorModalContext } from '../contexts/anchorModalContext';
 import {
 	insertUserFollow,
 	deleteUserFollow,
@@ -21,7 +18,6 @@ import SubmitButton from '../reusables/button/submitButton';
 import ModalHeader from '../reusables/modalHeader';
 
 export default function UserProfileModal(props) {
-	const { animateProfileModal } = props;
 	const { activeSession } = useContext(SessionContext);
 	const { profile, setProfile } = useContext(UserProfileContext);
 	const [profileCloseState, setProfileCloseState] = useState(false);
@@ -29,12 +25,8 @@ export default function UserProfileModal(props) {
 	const [followButState, setFollowButState] = useState(false);
 	const [userFollows, setUserFollows] = useState(false);
 	const [picUri, setPicUri] = useState(null);
-	const { profileModal, setProfileModal } = useContext(ProfileModalContext);
 	const [userStats, setUserStats] = useState('');
-	const { selectedProfile, setSelectedProfile } = useContext(
-		SelectedProfileContext
-	);
-	const { siteModal, setSiteModal } = useContext(AnchorModalContext);
+	const { selectedProfile } = props
 	const [followData, setFollowData] = useState(activeSession.user.id);
 	const [username, setUsername] = useState(null);
 	const [formError, setFormError] = useState(null);
@@ -75,24 +67,7 @@ export default function UserProfileModal(props) {
 		}
 
 		followCheck();
-	}, []);
-
-	useEffect(() => {
-		getProfile();
-
-		async function followCheck() {
-			let alreadyFollows = await checkIfUserFollows(
-				activeSession.user.id,
-				selectedProfile
-			);
-			if (alreadyFollows.length > 0) {
-				setUserFollows(true);
-				setFollowData(alreadyFollows[0].id);
-			}
-		}
-
-		followCheck();
-	}, [profileModal, selectedProfile]);
+	}, [selectedProfile]);
 
 	const getProfile = async () => {
 		let userID;
@@ -109,15 +84,6 @@ export default function UserProfileModal(props) {
 			}
 		} catch (e) {
 			console.log({ title: 'Error', message: e.message });
-		}
-	};
-
-	const toggleProfileModal = () => {
-		setProfileModal(false);
-
-		if (selectedProfile) {
-			setSiteModal(true);
-			setSelectedProfile(null);
 		}
 	};
 
@@ -143,6 +109,7 @@ export default function UserProfileModal(props) {
 				id: activeSession.user.id,
 				username: username,
 			});
+			props?.onModalSuccess?.()
 			return true;
 		} catch (e) {
 			if (e && e.code === '23505') {
@@ -163,7 +130,7 @@ export default function UserProfileModal(props) {
 						? userStats && userStats[0].username + "'s Diving"
 						: 'My Diver Profile'
 				}
-				onClose={toggleProfileModal}
+				onClose={props.onModalCancel}
 			/>
 
 			<div className='hero hero-sm mx-4'>
@@ -269,9 +236,7 @@ export default function UserProfileModal(props) {
 			</div>
 			{!selectedProfile && (
 				<SubmitButton
-					onClick={async () => {
-						(await handleSubmit()) && toggleProfileModal();
-					}}
+					onClick={handleSubmit}
 				>
 					Save changes
 				</SubmitButton>

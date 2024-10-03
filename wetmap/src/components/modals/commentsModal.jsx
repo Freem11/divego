@@ -4,7 +4,6 @@ import CommentListItem from '../commentListItem/commentListItem';
 import bubbles from '../../images/bubbles.png';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import { SelectedPictureContext } from '../contexts/selectedPictureContext';
-import { CommentsModalContext } from '../contexts/commentsModalContext';
 import {
 	insertPhotoComment,
 	grabPhotoCommentsByPicId,
@@ -15,28 +14,19 @@ import InputField from '../reusables/inputField';
 import ModalHeader from '../reusables/modalHeader';
 
 const CommentsModal = (props) => {
-	const { animateCommentsModal } = props;
 	const { profile } = useContext(UserProfileContext);
 	const { selectedPicture } = useContext(SelectedPictureContext);
-	const { commentsModal, setCommentsModal } = useContext(CommentsModalContext);
 	const [commentContent, setCommentContent] = useState('');
 	const [listOfComments, setListOfComments] = useState(null);
 	const [replyTo, setReplyTo] = useState(null);
 	const [selectedReplyId, setSelectedReplyId] = useState([]);
-
-	const handleCommentModalClose = async () => {
-		setReplyTo(null);
-		setCommentContent('');
-		setCommentsModal(false);
-		animateCommentsModal();
-	};
 
 	useEffect(() => {
 		if (selectedPicture) {
 			getAllPictureComments(selectedPicture.id);
 		}
 		setCommentContent('');
-	}, [commentsModal]);
+	}, []);
 
 	const handleCommentInsert = async () => {
 		let userIdentity = null;
@@ -144,7 +134,7 @@ const CommentsModal = (props) => {
 	return (
 		<>
 			<div>
-				<ModalHeader title={'Comments'} onClose={handleCommentModalClose} />
+				<ModalHeader title={'Comments'} onClose={props.onModalCancel} />
 			</div>
 
 			<div className='middleContainer'> {getCommentListView(null)}</div>
@@ -167,9 +157,6 @@ const CommentsModal = (props) => {
 							name='commentEntry'
 							value={commentContent}
 							onChange={(e) => setCommentContent(e.target.value)}
-							style={{
-								width: '46vw',
-							}}
 						/>
 					</div>
 					<img

@@ -1,15 +1,7 @@
 import "./photoMenu.css";
 import { useState, useContext, useEffect, useRef } from "react";
 import { animated, useSpring } from "react-spring";
-import { AnchorModalContext } from "../contexts/anchorModalContext";
-import { DiveSiteAdderModalContext } from "../contexts/diveSiteAdderModalContext";
-import { PicAdderModalContext } from "../contexts/picAdderModalContext";
-import { DiveSiteSearchModalContext } from "../contexts/diveSiteSearchModalContext";
-import { MapSearchModalContext } from "../contexts/mapSearchModalContext";
-import { GuideLaunchModalContext } from "../contexts/guideLaunchModalContext";
-import { SettingsModalContext } from "../contexts/settingsModalContext";
 import { CarrouselTilesContext } from "../contexts/carrouselTilesContext";
-import OpenWithIcon from "@mui/icons-material/OpenWith";
 
 const handleDragStart = (e) => e.preventDefault();
 
@@ -29,21 +21,7 @@ const PhotoMenuListItem = (props) => {
     tilesShifted,
   } = props;
 
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { dsAdderModal, setDsAddermodal } = useContext(
-    DiveSiteAdderModalContext
-  );
-  const { picAdderModal, setPicAddermodal } = useContext(PicAdderModalContext);
-  const { diveSiteSearchModal, setDiveSiteSearchModal } = useContext(
-    DiveSiteSearchModalContext
-  );
-  const { mapSearchModal, setMapSearchModal } = useContext(
-    MapSearchModalContext
-  );
-  const { guideLaunchModal, setGuideLaunchModal } = useContext(
-    GuideLaunchModalContext
-  );
-  const { settingsModal, setSettingsModal } = useContext(SettingsModalContext);
+
   const { tiles, setTiles } = useContext(CarrouselTilesContext);
 
   let photoName = photoURL.split("/").pop();
@@ -56,14 +34,6 @@ const PhotoMenuListItem = (props) => {
   const [xCoord, setXCoord] = useState(0);
 
   const handleSelect = (name) => {
-    setDsAddermodal(false);
-    setPicAddermodal(false);
-    setSettingsModal(false);
-    setGuideLaunchModal(false);
-    setDiveSiteSearchModal(false);
-    setMapSearchModal(false);
-    setSiteModal(false);
-
     if (animalVal.includes(name)) {
       setAnimalVal(animalVal.filter((item) => item !== name));
     } else {
@@ -106,16 +76,7 @@ const PhotoMenuListItem = (props) => {
 
   const onDoubleClick = (e, id) => {
     setSelectedID(id);
-    setDsAddermodal(false);
-    setPicAddermodal(false);
-    setSettingsModal(false);
-    setGuideLaunchModal(false);
-    setDiveSiteSearchModal(false);
-    setMapSearchModal(false);
-    setSiteModal(false);
 
-    // const WidthofTile = e.target.width;
-    // const HeightOfTile = e.target.height;
     const WidthofTile = e.target.clientWidth;
     const HeightOfTile = e.target.clientHeight;
 
@@ -172,19 +133,8 @@ const PhotoMenuListItem = (props) => {
   const onExpanderClick = (e, id) => {
     setSelectedID(id);
 
-    setDsAddermodal(false);
-    setPicAddermodal(false);
-    setSettingsModal(false);
-    setGuideLaunchModal(false);
-    setDiveSiteSearchModal(false);
-    setMapSearchModal(false);
-    setSiteModal(false);
-
     const WidthofTile = e.target.parentElement.parentElement.clientWidth;
-    const HeightOfTile =
-      e.target.parentElement.parentElement.clientHeight * 0.8;
-
-    console.log("dimensions", WidthofTile, HeightOfTile);
+    const HeightOfTile = e.target.parentElement.parentElement.clientHeight * 0.8;
 
     //I'm not sure it is the best approach to this issue... but it works pretty well
     //We get the parent with the x transformation and we add it to the final transformation
