@@ -45,3 +45,49 @@ $border-radius: 1rem;
 
 // Load default ones from spectre.css
 @import 'node_modules/spectre.css/src/variables';
+
+
+// export const colors = {
+// 	primaryBlue: '#0073E6',
+// 	secondaryYellow: '#fdc500',
+// 	themeWhite: '#ffffff',
+// 	themeBlack: '#00171f'
+//   }
+  
+//   export const fontSizes = {
+// 	Header: 34,
+// 	SubHeading: 24,
+// 	StandardText: 18,
+// 	SmallText: 14
+//   }
+
+
+// export const fonts = {
+// 	Black: "SFBlack",
+// 	BlackItalic: "SFBlackItalic",
+// 	Bold: "SFBold",
+// 	BoldItalic: "SFBoldItalic",
+// 	Italic: "SFItalic",
+// 	Light: "SFLight",
+// 	LightItalic: "SFLightItalic",
+// 	Medium: "SFMedium",
+// 	MediumItalic: "SFMediumItalic",
+// 	Regular: "SFRegular",
+// 	Thin: "SFThin",
+// 	ThinItalic: "SFThinItalic",
+//   }
+
+
+//font imports
+// SFBlack: require("./assets/SanFran/SF-Pro-Display-Black.otf"),
+// SFBlackItalic: require("./assets/SanFran/SF-Pro-Display-BlackItalic.otf"),
+// SFBold: require("./assets/SanFran/SF-Pro-Display-Bold.otf"),
+// SFBoldItalic: require("./assets/SanFran/SF-Pro-Display-BoldItalic.otf"),
+// SFItalic: require("./assets/SanFran/SF-Pro-Display-RegularItalic.otf"),
+// SFLight: require("./assets/SanFran/SF-Pro-Display-Light.otf"),
+// SFLightItalic: require("./assets/SanFran/SF-Pro-Display-LightItalic.otf"),
+// SFMedium: require("./assets/SanFran/SF-Pro-Display-Medium.otf"),
+// SFMediumItalic: require("./assets/SanFran/SF-Pro-Display-MediumItalic.otf"),
+// SFRegular: require("./assets/SanFran/SF-Pro-Display-Regular.otf"),
+// SFThin: require("./assets/SanFran/SF-Pro-Display-Thin.otf"),
+// SFThinItalic: require("./assets/SanFran/SF-Pro-Display-ThinItalic.otf"),
