@@ -48,6 +48,7 @@
 // Utility classes
 // @import "node_modules/spectre.css/src/animations";
 @import "node_modules/spectre.css/src/utilities";
+@import "./fonts.scss";
 
 @include padding-variant(4, $unit-4);
 @include padding-variant(6, $unit-6);
