@@ -5,7 +5,7 @@ $light-color: #f0eeeb;
 $hover-color: #3e7dd7;
 $active-color: #538dbd;
 $white: #ffffff;
-$base-font-family: 'Patrick Hand';
+$base-font-family: 'San Francisco';
 $second-font-family: 'Itim', cursive;
 $border-radius: 1rem;
 
@@ -46,20 +46,24 @@ $border-radius: 1rem;
 // Load default ones from spectre.css
 @import 'node_modules/spectre.css/src/variables';
 
+$responsive-breakpoints: (
+	"sm": $size-sm,
+	"xs": $size-xs,
+	"md": $size-md,
+	"lg": $size-lg,
+	"xl": $size-xl,
+	"2x": $size-2x,
+);
 
-// export const colors = {
-// 	primaryBlue: '#0073E6',
-// 	secondaryYellow: '#fdc500',
-// 	themeWhite: '#ffffff',
-// 	themeBlack: '#00171f'
-//   }
-  
-//   export const fontSizes = {
-// 	Header: 34,
-// 	SubHeading: 24,
-// 	StandardText: 18,
-// 	SmallText: 14
-//   }
+$primaryBlue: #0073E6;
+$secondaryYellow: #fdc500;
+$themeWhite: #ffffff;
+$themeBlack: #00171f;
+
+$fontSizeHeader: 34;
+$fontSizeSubHeading: 24;
+$fontSizeStandardText: 18;
+$fontSizeSmallText: 14;
 
 
 // export const fonts = {
