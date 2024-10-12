@@ -45,3 +45,12 @@ $border-radius: 1rem;
 
 // Load default ones from spectre.css
 @import 'node_modules/spectre.css/src/variables';
+
+$responsive-breakpoints:(
+	"xs": "480px",
+	"sm": "600px",
+	"md": "840px",
+	"lg": "960px",
+	"xl": "1280px",
+	"2x": "1440px"
+);

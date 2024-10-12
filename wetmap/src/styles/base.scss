@@ -48,12 +48,25 @@
 // Utility classes
 // @import "node_modules/spectre.css/src/animations";
 @import "node_modules/spectre.css/src/utilities";
+@import "./mixins/justify.scss";
 
 @include padding-variant(4, $unit-4);
 @include padding-variant(6, $unit-6);
 @include margin-variant(4, $unit-4);
 @include margin-variant(6, $unit-6);
 
+@include justify-variant("flex-end");
+@include justify-variant("center");
+
+@include bg-color-variant(".bg-white", $white);
+
 .extra-shadow{
-  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+     box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.container-fluid {
+  max-width: 1600px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }

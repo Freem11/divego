@@ -1,0 +1,15 @@
+@mixin justify-variant($justify-content: "flex-end") {
+
+    .justify-content-#{$justify-content} {
+        justify-content: #{$justify-content} !important;
+    }
+
+    @each $size-name, $size-px in $responsive-breakpoints {
+        @media (max-width: #{$size-px}) {
+            // .justify-content-sm-center
+            .justify-content-#{$size-name}-#{$justify-content} {
+                justify-content: #{$justify-content} !important;
+            }
+        }
+    }
+  }
