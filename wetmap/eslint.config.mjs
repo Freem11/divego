@@ -12,6 +12,7 @@ export default [
   tseslint.configs.base,
 
   {
+    name:     'general',
     files:    ['**/*.{js,ts,mjs,cjs,jsx,tsx}'],
     settings: {
       react: {
@@ -23,9 +24,6 @@ export default [
         ...globals.browser,
       },
     },
-  },
-
-  {
     rules: {
       'no-unused-vars': ['error', {
         'destructuredArrayIgnorePattern': '^_',
