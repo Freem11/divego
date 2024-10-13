@@ -1,9 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const photoWaits = () => {
-
   return axios
-    .post("/api/photoWait")
+    .post('/api/photoWait')
     .then((response) => {
       return response.data;
     })
@@ -13,14 +12,13 @@ export const photoWaits = () => {
 };
 
 export const insertPhotoWaits = (values) => {
-
   return axios
-    .post("/api/photoWaitAdd", {
-      File: values.PicFile,
+    .post('/api/photoWaitAdd', {
+      File:   values.PicFile,
       Animal: values.Animal,
-      Date: values.PicDate,
-      Lat: values.Latitude,
-      Lng: values.Longitude,
+      Date:   values.PicDate,
+      Lat:    values.Latitude,
+      Lng:    values.Longitude,
     })
     .then((response) => {
       return response.data;
@@ -31,7 +29,6 @@ export const insertPhotoWaits = (values) => {
 };
 
 export const grabPhotoWaitById = (id) => {
-
   return axios
     .get(`/api/photoWait/${id}`)
     .then((response) => {
@@ -43,12 +40,11 @@ export const grabPhotoWaitById = (id) => {
 };
 
 export const deletePhotoWait = (id) => {
-
   return axios
-    .delete(`api/photoWait/delete/${id}`, {id})
+    .delete(`api/photoWait/delete/${id}`, { id })
     .then((response) => {
     })
     .catch((err) => {
       return err;
     });
-  }
+};

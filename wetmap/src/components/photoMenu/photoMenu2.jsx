@@ -1,25 +1,25 @@
-import { AnimalContext } from "../contexts/animalContext";
-import { useState, useContext, useEffect, useRef } from "react";
+import { AnimalContext } from '../contexts/animalContext';
+import { useState, useContext, useEffect, useRef } from 'react';
 import {
   multiHeatPoints,
   getHeatPointsWithUser,
   getHeatPointsWithUserEmpty,
-} from "../../supabaseCalls/heatPointSupabaseCalls";
-import { getPhotosforMapArea } from "../../supabaseCalls/photoSupabaseCalls";
-import { MapBoundsContext } from "../contexts/mapBoundariesContext";
-import { HeatPointsContext } from "../contexts/heatPointsContext";
-import { IterratorContext } from "../contexts/iterratorContext";
-import { TutorialContext } from "../contexts/tutorialContext";
-import { AreaPicsContext } from "../contexts/areaPicsContext";
-import { SearchTextContext } from "../contexts/searchTextContext";
-import { formatHeatVals } from "../../helpers/heatPointHelpers";
-import "./photoMenu.css";
-import PhotoMenuListItem from "./photoMenuListItem";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ToggleButton from "@mui/material/ToggleButton";
-import { animated, useSpring } from "react-spring";
-import "react-alice-carousel/lib/alice-carousel.css";
+} from '../../supabaseCalls/heatPointSupabaseCalls';
+import { getPhotosforMapArea } from '../../supabaseCalls/photoSupabaseCalls';
+import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import { HeatPointsContext } from '../contexts/heatPointsContext';
+import { IterratorContext } from '../contexts/iterratorContext';
+import { TutorialContext } from '../contexts/tutorialContext';
+import { AreaPicsContext } from '../contexts/areaPicsContext';
+import { SearchTextContext } from '../contexts/searchTextContext';
+import { formatHeatVals } from '../../helpers/heatPointHelpers';
+import './photoMenu.css';
+import PhotoMenuListItem from './photoMenuListItem';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+import ToggleButton from '@mui/material/ToggleButton';
+import { animated, useSpring } from 'react-spring';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 let waiter2;
 
@@ -59,17 +59,19 @@ const PhotoMenu = () => {
 
           if (photos) {
             const animalArray = Array.from(
-              new Set(photos.map((a) => a.label))
+              new Set(photos.map(a => a.label)),
             ).map((label) => {
-              return photos.find((a) => a.label === label);
+              return photos.find(a => a.label === label);
             });
 
             setAreaPics(animalArray);
           }
-        } catch (e) {
-          console.log({ title: "Error", message: e.message });
         }
-      } else {
+        catch (e) {
+          console.log({ title: 'Error', message: e.message });
+        }
+      }
+      else {
         try {
           const photos = await getPhotosforMapArea({
             animal: textvalue,
@@ -80,15 +82,16 @@ const PhotoMenu = () => {
           });
           if (photos) {
             const animalArray = Array.from(
-              new Set(photos.map((a) => a.label))
+              new Set(photos.map(a => a.label)),
             ).map((label) => {
-              return photos.find((a) => a.label === label);
+              return photos.find(a => a.label === label);
             });
 
             setAreaPics(animalArray);
           }
-        } catch (e) {
-          console.log({ title: "Error", message: e.message });
+        }
+        catch (e) {
+          console.log({ title: 'Error', message: e.message });
         }
       }
     }
@@ -104,13 +107,14 @@ const PhotoMenu = () => {
             minLng: boundaries[0],
             maxLng: boundaries[2],
           },
-          animalVal
+          animalVal,
         );
         if (localHeatPoints) {
           setHeatPts(formatHeatVals(localHeatPoints));
         }
-      } catch (e) {
-        console.log({ title: "Error", message: e.message });
+      }
+      catch (e) {
+        console.log({ title: 'Error', message: e.message });
       }
     }
   };
@@ -138,7 +142,7 @@ const PhotoMenu = () => {
   const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
   const [tileWidth, setTileWidth] = useState((screenInital * 0.8) / 4);
 
-  window.addEventListener("resize", trackWidth);
+  window.addEventListener('resize', trackWidth);
 
   function trackWidth() {
     setBoxWidth(window.innerWidth * 0.8);
@@ -162,57 +166,66 @@ const PhotoMenu = () => {
   const [tilesRemaining, setTilesRemaining] = useState(areaPics.length - 10);
 
   const onClicko = (direction) => {
-
     const maxLength = areaPics.length * tileWidth;
 
     if (areaPics.length < tilesToMove) {
       setXCoord((tilesToMove * tileWidth - areaPics.length * tileWidth) / 2);
-    } else {
-      if (direction === "shiftLeft") {
-        //left shift aka left BUTTON clicked
+    }
+    else {
+      if (direction === 'shiftLeft') {
+        // left shift aka left BUTTON clicked
         if (xCoord >= 0) {
           setXCoord(0);
-        } else if (xCoord >= maxLength) {
+        }
+        else if (xCoord >= maxLength) {
           setXCoord(maxLength);
           setTilesRemaining(tilesRemaining + 5);
           setTilesShifted(tilesShifted - 5);
-        } else {
+        }
+        else {
           if (xCoord + tilesToMove * tileWidth + tilesToMove * 1.5 < 0) {
             setXCoord(xCoord + tilesToMove * tileWidth + tilesToMove * 1.5);
             setTilesRemaining(tilesRemaining + 5);
             setTilesShifted(tilesShifted - 5);
-          } else {
+          }
+          else {
             const tilesRemainingTemp = tilesRemaining + 5;
             setTilesRemaining(tilesRemainingTemp);
             setXCoord(0);
             setTilesShifted(tilesShifted - 5);
           }
         }
-      } else {
-        //"shiftRight"  aka right BUTTON clicked
+      }
+      else {
+        // "shiftRight"  aka right BUTTON clicked
         if (xCoord > 0) {
           setXCoord(0);
-        } else if (xCoord > -maxLength) {
+        }
+        else if (xCoord > -maxLength) {
           if (
-            xCoord - tilesToMove * (tileWidth + 1.5) <
-            -(maxLength - tilesToMove * (tileWidth + 1.5))
+            xCoord - tilesToMove * (tileWidth + 1.5)
+            < -(maxLength - tilesToMove * (tileWidth + 1.5))
           ) {
             if (tilesRemaining < -5) {
-            } else {
+              //
+            }
+            else {
               setXCoord(
-                xCoord -
-                  (tilesRemaining + 5) * tileWidth -
-                  (tilesRemaining + 5) * 1.5
+                xCoord
+                - (tilesRemaining + 5) * tileWidth
+                - (tilesRemaining + 5) * 1.5,
               );
               setTilesRemaining(tilesRemaining - 5);
               setTilesShifted(tilesShifted + tilesRemaining + 5);
             }
-          } else {
+          }
+          else {
             setXCoord(xCoord - tilesToMove * tileWidth - tilesToMove * 1.5);
             setTilesRemaining(tilesRemaining - 5);
             setTilesShifted(tilesShifted + 5);
           }
-        } else {
+        }
+        else {
           setXCoord(-(maxLength - tilesToMove * tileWidth + tilesToMove * 1.5));
         }
 
@@ -223,7 +236,7 @@ const PhotoMenu = () => {
 
   const move = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(${xCoord}px,0,0)` },
+    to:   { transform: `translate3d(${xCoord}px,0,0)` },
   });
 
   useEffect(() => {
@@ -246,14 +259,14 @@ const PhotoMenu = () => {
   }, [areaPics.length]);
 
   const toggleButtonStyle = {
-    "&.Mui-selected": { backgroundColor: "gold" },
-    "&.Mui-selected:hover": { backgroundColor: "gold" },
-    backgroundColor: "transparent",
-    height: "2vw",
-    width: "2vw",
-    marginTop: "-3vh",
-    color: "white",
-    borderRadius: "100%",
+    '&.Mui-selected':       { backgroundColor: 'gold' },
+    '&.Mui-selected:hover': { backgroundColor: 'gold' },
+    'backgroundColor':      'transparent',
+    'height':               '2vw',
+    'width':                '2vw',
+    'marginTop':            '-3vh',
+    'color':                'white',
+    'borderRadius':         '100%',
   };
 
   return (
@@ -262,7 +275,7 @@ const PhotoMenu = () => {
         className="backTog"
         sx={toggleButtonStyle}
         ref={leftButtonRef}
-        onClick={() => onClicko("shiftLeft")}
+        onClick={() => onClicko('shiftLeft')}
         value="web"
       >
         <ArrowBackIosIcon />
@@ -278,26 +291,26 @@ const PhotoMenu = () => {
           style={({ width: boxWidth }, move)}
           ref={caddyRef}
         >
-          {areaPics &&
-            areaPics.map((pic) => {
-              return (
-                <PhotoMenuListItem
-                  key={pic.id}
-                  id={pic.id}
-                  name={pic.label}
-                  photoURL={pic.photoFile}
-                  setAnimalVal={setAnimalVal}
-                  animalVal={animalVal}
-                  setSelectedID={setSelectedID}
-                  selectedID={selectedID}
-                  tileWidth={tileWidth}
-                  setTileWidth={setTileWidth}
-                  boxWidth={boxWidth}
-                  setBoxWidth={setBoxWidth}
-                  tilesShifted={tilesShifted}
-                />
-              );
-            })}
+          {areaPics
+          && areaPics.map((pic) => {
+            return (
+              <PhotoMenuListItem
+                key={pic.id}
+                id={pic.id}
+                name={pic.label}
+                photoURL={pic.photoFile}
+                setAnimalVal={setAnimalVal}
+                animalVal={animalVal}
+                setSelectedID={setSelectedID}
+                selectedID={selectedID}
+                tileWidth={tileWidth}
+                setTileWidth={setTileWidth}
+                boxWidth={boxWidth}
+                setBoxWidth={setBoxWidth}
+                tilesShifted={tilesShifted}
+              />
+            );
+          })}
         </animated.div>
       </div>
       {areaPics.length === 0 && (
@@ -310,7 +323,7 @@ const PhotoMenu = () => {
         sx={toggleButtonStyle}
         ref={rightButtonRef}
         value="web"
-        onClick={() => onClicko("shiftRight")}
+        onClick={() => onClicko('shiftRight')}
       >
         <ArrowForwardIosIcon />
       </ToggleButton>

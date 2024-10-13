@@ -1,5 +1,4 @@
 function newGPSBoundaries(Zoom, Lat, Lng) {
-
   let minLat;
   let maxLat;
 
@@ -7,7 +6,6 @@ function newGPSBoundaries(Zoom, Lat, Lng) {
   let maxLng;
 
   switch (Zoom) {
-
     case 3:
       minLat = Lat - 70;
       maxLat = Lat + 70;
@@ -111,14 +109,13 @@ function newGPSBoundaries(Zoom, Lat, Lng) {
 }
 
 function filterDiveSites(newParams, array) {
-
   let newArr = [];
   array && array.forEach((diveSite) => {
     if (
-      diveSite.lat > newParams.minLat &&
-      diveSite.lat < newParams.maxLat &&
-      diveSite.lng > newParams.minLng &&
-      diveSite.lng < newParams.maxLng
+      diveSite.lat > newParams.minLat
+      && diveSite.lat < newParams.maxLat
+      && diveSite.lng > newParams.minLng
+      && diveSite.lng < newParams.maxLng
     ) {
       newArr.push(diveSite);
     }
@@ -126,49 +123,48 @@ function filterDiveSites(newParams, array) {
   return newArr;
 }
 
-function filterHeatPoints(month, animal,  array) {
-
-let actualMonth = month + 1
+function filterHeatPoints(month, animal, array) {
+  let actualMonth = month + 1;
 
   let newArr = [];
   array && array.forEach((heatDot) => {
     if (animal === 'All') {
-      if (heatDot.month === actualMonth ) {
+      if (heatDot.month === actualMonth) {
         newArr.push(heatDot);
       }
-    } else {
+    }
+    else {
       if (heatDot.month === actualMonth & heatDot.animal === animal) {
         newArr.push(heatDot);
       }
-    }  
+    }
   });
   return newArr;
 }
 
-function setupMapValues(zoomLevel, latitude, longitude, diveSites, heatValues, slider, animal){
- 
-  let GPSBubble = newGPSBoundaries(zoomLevel, latitude, longitude)
-  let diveSpots = filterDiveSites(GPSBubble, diveSites)
+function setupMapValues(zoomLevel, latitude, longitude, diveSites, heatValues, slider, animal) {
+  let GPSBubble = newGPSBoundaries(zoomLevel, latitude, longitude);
+  let diveSpots = filterDiveSites(GPSBubble, diveSites);
 
-  let heatSpots
+  let heatSpots;
 
   if (heatValues) {
-    heatSpots = filterHeatPoints(slider, animal, filterDiveSites(GPSBubble, heatValues))
-  } else {
-    heatSpots = []
+    heatSpots = filterHeatPoints(slider, animal, filterDiveSites(GPSBubble, heatValues));
   }
-  
-  return([diveSpots, heatSpots])
+  else {
+    heatSpots = [];
+  }
+
+  return ([diveSpots, heatSpots]);
 }
 
 function siteGPSBoundaries(Lat, Lng) {
-
   let minLat = Lat - 0.005;
   let maxLat = Lat + 0.005;
   let minLng = Lng - 0.005;
   let maxLng = Lng + 0.005;
 
-return { minLat, maxLat, minLng, maxLng };
+  return { minLat, maxLat, minLng, maxLng };
 }
 
 export { newGPSBoundaries, filterDiveSites, filterHeatPoints, setupMapValues, siteGPSBoundaries };

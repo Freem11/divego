@@ -1,78 +1,78 @@
-import React from "react";
-import { animated, useSpring } from "react-spring";
-import Logo from "./logo/logo";
-import Home from "./googleMap";
-import AdminPortal from "./adminPortal";
-import PicUploader from "./modals/picUploader";
-import SiteSubmitter from "./modals/siteSubmitter";
-import HowToGuide from "./modals/howToGuide";
-import UserProfileModal from "./modals/userProfileModal";
-import AnchorPics from "./modals/anchorPics";
-import ShopModal from "./modals/shopModal";
-import Settings from "./modals/setting";
+import React from 'react';
+import { animated, useSpring } from 'react-spring';
+import Logo from './logo/logo';
+import Home from './googleMap';
+import AdminPortal from './adminPortal';
+import PicUploader from './modals/picUploader';
+import SiteSubmitter from './modals/siteSubmitter';
+import HowToGuide from './modals/howToGuide';
+import UserProfileModal from './modals/userProfileModal';
+import AnchorPics from './modals/anchorPics';
+import ShopModal from './modals/shopModal';
+import Settings from './modals/setting';
 // import PartnerAccountRequestModal from "./modals/partnerAccountRequestModal";
-import PhotoMenu from "./photoMenu/photoMenu2";
-import PhotoFilterer from "./photoMenu/photoFilter";
-import { useState, useContext, useEffect, useRef } from "react";
-import { grabProfileById } from "./../supabaseCalls/accountSupabaseCalls";
-import Button from "@mui/material/Button";
-import ToggleButton from "@mui/material/ToggleButton";
-import Collapse from "@mui/material/Collapse";
-import ExploreIcon from "@mui/icons-material/Explore";
-import AnchorIcon from "@mui/icons-material/Anchor";
-import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
-import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
-import QuestionMarkIcon from "@mui/icons-material/QuestionMark";
-import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import PersonIcon from "@mui/icons-material/Person";
-import SettingsIcon from "@mui/icons-material/Settings";
-import AddIcon from "@mui/icons-material/Add";
-import RemoveIcon from "@mui/icons-material/Remove";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-import { DiveSitesContext } from "./contexts/diveSitesContext";
-import { AnimalContext } from "./contexts/animalContext";
-import { PicModalContext } from "./contexts/picModalContext";
-import { PictureContext } from "./contexts/pictureContext";
-import { GeoCoderContext } from "./contexts/geoCoderContext";
-import { AnimalRevealContext } from "./contexts/animalRevealContext";
-import { MasterContext } from "./contexts/masterContext";
-import { MinorContext } from "./contexts/minorContext";
-import { LightBoxContext } from "./contexts/lightBoxContext";
-import { CoordsContext } from "./contexts/mapCoordsContext";
-import { SelectedShopContext } from "./contexts/selectedShopContext";
-import { SelectedPicContext } from "./contexts/selectPicContext";
-import { ZoomContext } from "./contexts/mapZoomContext";
-import { UserProfileContext } from "./contexts/userProfileContext";
-import { SessionContext } from "./contexts/sessionContext";
-import { PinContext } from "./contexts/staticPinContext";
-import { DiveSpotContext } from "./contexts/diveSpotContext";
-import { ModalSelectContext } from "./contexts/modalSelectContext";
-import { AnchorModalContext } from "./contexts/anchorModalContext";
-import { ShopModalContext } from "./contexts/shopModalContext";
-import { SitesArrayContext } from "./contexts/sitesArrayContext";
-import { ZoomHelperContext } from "./contexts/zoomHelperContext";
-import { DiveSiteAdderModalContext } from "./contexts/diveSiteAdderModalContext";
-import { PullTabContext } from "./contexts/pullTabContext";
-import { CarrouselTilesContext } from "./contexts/carrouselTilesContext";
-import { TutorialContext } from "./contexts/tutorialContext";
-import { IterratorContext } from "./contexts/iterratorContext";
-import { Iterrator2Context } from "./contexts/iterrator2Context";
-import { Iterrator3Context } from "./contexts/iterrator3Context";
-import { AreaPicsContext } from "./contexts/areaPicsContext";
-import IntroTutorial from "./guides/introTutorial";
-import SecondTutorial from "./guides/secondTutorial";
-import ThirdTutorial from "./guides/thirdTutorial";
-import SiteSearchModal from "./modals/siteSearchModal";
-import MapSearchModal from "./modals/mapSearchModal";
-import "./mapPage.css";
-import AnimalTopAutoSuggest from "./animalTags/animalTagContainer";
-import Histogram from "./histogram/histogramBody";
-import TutorialBar from "./guideBar/tutorialBarContainer";
-import { ModalContext } from "./contexts/modalContext";
-import Modal from "./reusables/modal/modal";
-import { ModalWindowSize } from "./reusables/modal/constants";
-import { cleanupPinPicture } from "../helpers/picUploaderHelpers";
+import PhotoMenu from './photoMenu/photoMenu2';
+import PhotoFilterer from './photoMenu/photoFilter';
+import { useState, useContext, useEffect, useRef } from 'react';
+import { grabProfileById } from './../supabaseCalls/accountSupabaseCalls';
+import Button from '@mui/material/Button';
+import ToggleButton from '@mui/material/ToggleButton';
+import Collapse from '@mui/material/Collapse';
+import ExploreIcon from '@mui/icons-material/Explore';
+import AnchorIcon from '@mui/icons-material/Anchor';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
+import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
+import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import PersonIcon from '@mui/icons-material/Person';
+import SettingsIcon from '@mui/icons-material/Settings';
+import AddIcon from '@mui/icons-material/Add';
+import RemoveIcon from '@mui/icons-material/Remove';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { DiveSitesContext } from './contexts/diveSitesContext';
+import { AnimalContext } from './contexts/animalContext';
+import { PicModalContext } from './contexts/picModalContext';
+import { PictureContext } from './contexts/pictureContext';
+import { GeoCoderContext } from './contexts/geoCoderContext';
+import { AnimalRevealContext } from './contexts/animalRevealContext';
+import { MasterContext } from './contexts/masterContext';
+import { MinorContext } from './contexts/minorContext';
+import { LightBoxContext } from './contexts/lightBoxContext';
+import { CoordsContext } from './contexts/mapCoordsContext';
+import { SelectedShopContext } from './contexts/selectedShopContext';
+import { SelectedPicContext } from './contexts/selectPicContext';
+import { ZoomContext } from './contexts/mapZoomContext';
+import { UserProfileContext } from './contexts/userProfileContext';
+import { SessionContext } from './contexts/sessionContext';
+import { PinContext } from './contexts/staticPinContext';
+import { DiveSpotContext } from './contexts/diveSpotContext';
+import { ModalSelectContext } from './contexts/modalSelectContext';
+import { AnchorModalContext } from './contexts/anchorModalContext';
+import { ShopModalContext } from './contexts/shopModalContext';
+import { SitesArrayContext } from './contexts/sitesArrayContext';
+import { ZoomHelperContext } from './contexts/zoomHelperContext';
+import { DiveSiteAdderModalContext } from './contexts/diveSiteAdderModalContext';
+import { PullTabContext } from './contexts/pullTabContext';
+import { CarrouselTilesContext } from './contexts/carrouselTilesContext';
+import { TutorialContext } from './contexts/tutorialContext';
+import { IterratorContext } from './contexts/iterratorContext';
+import { Iterrator2Context } from './contexts/iterrator2Context';
+import { Iterrator3Context } from './contexts/iterrator3Context';
+import { AreaPicsContext } from './contexts/areaPicsContext';
+import IntroTutorial from './guides/introTutorial';
+import SecondTutorial from './guides/secondTutorial';
+import ThirdTutorial from './guides/thirdTutorial';
+import SiteSearchModal from './modals/siteSearchModal';
+import MapSearchModal from './modals/mapSearchModal';
+import './mapPage.css';
+import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
+import Histogram from './histogram/histogramBody';
+import TutorialBar from './guideBar/tutorialBarContainer';
+import { ModalContext } from './contexts/modalContext';
+import Modal from './reusables/modal/modal';
+import { ModalWindowSize } from './reusables/modal/constants';
+import { cleanupPinPicture } from '../helpers/picUploaderHelpers';
 
 // const adminPortalZone = (
 //   <div style={{ marginLeft: "10px", marginBottom: "40px" }}>
@@ -80,7 +80,7 @@ import { cleanupPinPicture } from "../helpers/picUploaderHelpers";
 //   </div>
 // );
 
-const MapPage = React.memo((props) => {
+const MapPage = React.memo(function MapPage(props) {
   const { screenHeigthInital } = props;
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
@@ -115,7 +115,7 @@ const MapPage = React.memo((props) => {
   const { shopModal, setShopModal } = useContext(ShopModalContext);
 
   const { dsAdderModal, setDsAddermodal } = useContext(
-    DiveSiteAdderModalContext
+    DiveSiteAdderModalContext,
   );
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { setTiles } = useContext(CarrouselTilesContext);
@@ -135,7 +135,8 @@ const MapPage = React.memo((props) => {
     counter++;
     if (counter % 2 == 0) {
       setSearButState(false);
-    } else {
+    }
+    else {
       setSearButState(true);
     }
   }
@@ -144,7 +145,8 @@ const MapPage = React.memo((props) => {
     counter1++;
     if (counter1 % 2 == 0) {
       setSiteButState(false);
-    } else {
+    }
+    else {
       setSiteButState(true);
     }
   }
@@ -153,7 +155,8 @@ const MapPage = React.memo((props) => {
     counter2++;
     if (counter2 % 2 == 0) {
       setPhotButState(false);
-    } else {
+    }
+    else {
       setPhotButState(true);
     }
   }
@@ -169,7 +172,8 @@ const MapPage = React.memo((props) => {
     if (tutorialRunning) {
       if (itterator2 === 3) {
         blinker = setInterval(diveSiteSearch, 1500);
-      } else if (itterator2 === 9) {
+      }
+      else if (itterator2 === 9) {
         blinker = setInterval(diveSiteAdd, 1500);
       }
     }
@@ -190,16 +194,17 @@ const MapPage = React.memo((props) => {
   }, [itterator3]);
 
   const returnToPicModal = () => {
-    modalResume()
-    setMasterSwitch(true)
-    if (chosenModal === "DiveSite") {
+    modalResume();
+    setMasterSwitch(true);
+    if (chosenModal === 'DiveSite') {
       if (tutorialRunning) {
         if (itterator2 === 19) {
           setItterator2(itterator2 + 1);
           animateSecondGuideModal();
         }
       }
-    } else if (chosenModal === "Photos") {
+    }
+    else if (chosenModal === 'Photos') {
       if (tutorialRunning) {
         if (itterator3 === 19) {
           setItterator3(itterator3 + 1);
@@ -226,94 +231,96 @@ const MapPage = React.memo((props) => {
         const success = await grabProfileById(sessionUserId);
         if (success) {
           let bully = success[0] && success[0].UserName;
-          if (bully == null || bully === "") {
+          if (bully == null || bully === '') {
             setIntroGuideModalYCoord(-window.innerHeight);
             setTutorialRunning(true);
             setItterator(0);
-          } else {
+          }
+          else {
             setProfile(success);
             setPin({
               ...pin,
-              UserID: success[0].UserID,
+              UserID:   success[0].UserID,
               UserName: success[0].UserName,
             });
             setAddSiteVals({
               ...addSiteVals,
-              UserID: success[0].UserID,
+              UserID:   success[0].UserID,
               UserName: success[0].UserName,
             });
           }
         }
-      } catch (e) {
-        console.log({ title: "Error", message: e.message });
+      }
+      catch (e) {
+        console.log({ title: 'Error', message: e.message });
       }
     };
 
     getProfile();
   }, []);
 
-  const sideLength = "3.5vw";
+  const sideLength = '3.5vw';
   const toggleButtonStyle = {
-    "&.Mui-selected": {
-      backgroundColor: "#538bdb",
-      width: sideLength,
-      height: sideLength,
+    '&.Mui-selected': {
+      backgroundColor: '#538bdb',
+      width:           sideLength,
+      height:          sideLength,
     },
-    "&.Mui-selected:hover": { backgroundColor: "lightgrey", color: "white" },
-    "&:hover": {
-      color: "lightgrey",
-      backgroundColor: "white",
+    '&.Mui-selected:hover': { backgroundColor: 'lightgrey', color: 'white' },
+    '&:hover':              {
+      color:           'lightgrey',
+      backgroundColor: 'white',
     },
-    backgroundColor: "white",
-    width: sideLength,
-    height: sideLength,
-    color: "#538bdb",
-    boxShadow: "-2px 4px 4px #00000064",
-    borderRadius: "100%",
+    'backgroundColor': 'white',
+    'width':           sideLength,
+    'height':          sideLength,
+    'color':           '#538bdb',
+    'boxShadow':       '-2px 4px 4px #00000064',
+    'borderRadius':    '100%',
   };
 
   const toggleButtonStyleAlt = {
-    "&.Mui-selected": {
-      backgroundColor: "#538bdb",
-      width: sideLength,
-      height: sideLength,
+    '&.Mui-selected': {
+      backgroundColor: '#538bdb',
+      width:           sideLength,
+      height:          sideLength,
     },
-    "&.Mui-selected:hover": { backgroundColor: "#538bdb", color: "white" },
-    "&:hover": {
-      color: "white",
-      backgroundColor: "gold",
+    '&.Mui-selected:hover': { backgroundColor: '#538bdb', color: 'white' },
+    '&:hover':              {
+      color:           'white',
+      backgroundColor: 'gold',
     },
-    backgroundColor: "#538dbd",
-    width: sideLength,
-    height: sideLength,
-    color: "gold",
-    boxShadow: "-2px 4px 4px #00000064",
-    borderRadius: "100%",
+    'backgroundColor': '#538dbd',
+    'width':           sideLength,
+    'height':          sideLength,
+    'color':           'gold',
+    'boxShadow':       '-2px 4px 4px #00000064',
+    'borderRadius':    '100%',
   };
 
   const handleProfileButton = () => {
     if (
-      itterator === 11 ||
-      itterator === 13 ||
-      itterator === 16 ||
-      itterator === 19 ||
-      itterator === 25 ||
-      itterator2 === 3 ||
-      itterator2 === 5 ||
-      itterator2 === 9 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23 ||
-      itterator2 === 26 ||
-      itterator3 === 5 ||
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 19 ||
-      itterator3 === 22 ||
-      itterator3 === 26
+      itterator === 11
+      || itterator === 13
+      || itterator === 16
+      || itterator === 19
+      || itterator === 25
+      || itterator2 === 3
+      || itterator2 === 5
+      || itterator2 === 9
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 19
+      || itterator2 === 23
+      || itterator2 === 26
+      || itterator3 === 5
+      || itterator3 === 8
+      || itterator3 === 11
+      || itterator3 === 14
+      || itterator3 === 16
+      || itterator3 === 19
+      || itterator3 === 22
+      || itterator3 === 26
     ) {
       return;
     }
@@ -323,27 +330,27 @@ const MapPage = React.memo((props) => {
 
   const handleSettingsButton = () => {
     if (
-      itterator === 11 ||
-      itterator === 13 ||
-      itterator === 16 ||
-      itterator === 19 ||
-      itterator === 25 ||
-      itterator2 === 3 ||
-      itterator2 === 5 ||
-      itterator2 === 9 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23 ||
-      itterator2 === 26 ||
-      itterator3 === 5 ||
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 19 ||
-      itterator3 === 22 ||
-      itterator3 === 26
+      itterator === 11
+      || itterator === 13
+      || itterator === 16
+      || itterator === 19
+      || itterator === 25
+      || itterator2 === 3
+      || itterator2 === 5
+      || itterator2 === 9
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 19
+      || itterator2 === 23
+      || itterator2 === 26
+      || itterator3 === 5
+      || itterator3 === 8
+      || itterator3 === 11
+      || itterator3 === 14
+      || itterator3 === 16
+      || itterator3 === 19
+      || itterator3 === 22
+      || itterator3 === 26
     ) {
       return;
     }
@@ -353,27 +360,27 @@ const MapPage = React.memo((props) => {
 
   const handleTutorialButton = () => {
     if (
-      itterator === 11 ||
-      itterator === 13 ||
-      itterator === 16 ||
-      itterator === 19 ||
-      itterator === 25 ||
-      itterator2 === 3 ||
-      itterator2 === 5 ||
-      itterator2 === 9 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23 ||
-      itterator2 === 26 ||
-      itterator3 === 5 ||
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 19 ||
-      itterator3 === 22 ||
-      itterator3 === 26
+      itterator === 11
+      || itterator === 13
+      || itterator === 16
+      || itterator === 19
+      || itterator === 25
+      || itterator2 === 3
+      || itterator2 === 5
+      || itterator2 === 9
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 19
+      || itterator2 === 23
+      || itterator2 === 26
+      || itterator3 === 5
+      || itterator3 === 8
+      || itterator3 === 11
+      || itterator3 === 14
+      || itterator3 === 16
+      || itterator3 === 19
+      || itterator3 === 22
+      || itterator3 === 26
     ) {
       return;
     }
@@ -383,27 +390,27 @@ const MapPage = React.memo((props) => {
 
   const handleGeocodingSearchButton = () => {
     if (
-      itterator === 11 ||
-      itterator === 13 ||
-      itterator === 16 ||
-      itterator === 19 ||
-      itterator === 25 ||
-      itterator2 === 3 ||
-      itterator2 === 5 ||
-      itterator2 === 9 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23 ||
-      itterator2 === 26 ||
-      itterator3 === 5 ||
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 19 ||
-      itterator3 === 22 ||
-      itterator3 === 26
+      itterator === 11
+      || itterator === 13
+      || itterator === 16
+      || itterator === 19
+      || itterator === 25
+      || itterator2 === 3
+      || itterator2 === 5
+      || itterator2 === 9
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 19
+      || itterator2 === 23
+      || itterator2 === 26
+      || itterator3 === 5
+      || itterator3 === 8
+      || itterator3 === 11
+      || itterator3 === 14
+      || itterator3 === 16
+      || itterator3 === 19
+      || itterator3 === 22
+      || itterator3 === 26
     ) {
       return;
     }
@@ -413,26 +420,26 @@ const MapPage = React.memo((props) => {
 
   const handleDiveSiteSearchButton = () => {
     if (
-      itterator === 11 ||
-      itterator === 13 ||
-      itterator === 16 ||
-      itterator === 19 ||
-      itterator === 25 ||
-      itterator2 === 5 ||
-      itterator2 === 9 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23 ||
-      itterator2 === 26 ||
-      itterator3 === 5 ||
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 19 ||
-      itterator3 === 22 ||
-      itterator3 === 26
+      itterator === 11
+      || itterator === 13
+      || itterator === 16
+      || itterator === 19
+      || itterator === 25
+      || itterator2 === 5
+      || itterator2 === 9
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 19
+      || itterator2 === 23
+      || itterator2 === 26
+      || itterator3 === 5
+      || itterator3 === 8
+      || itterator3 === 11
+      || itterator3 === 14
+      || itterator3 === 16
+      || itterator3 === 19
+      || itterator3 === 22
+      || itterator3 === 26
     ) {
       return;
     }
@@ -448,26 +455,26 @@ const MapPage = React.memo((props) => {
 
   const handlePhotoModalButton = () => {
     if (
-      itterator === 11 ||
-      itterator === 13 ||
-      itterator === 16 ||
-      itterator === 19 ||
-      itterator === 25 ||
-      itterator2 === 3 ||
-      itterator2 === 5 ||
-      itterator2 === 9 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23 ||
-      itterator2 === 26 ||
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 19 ||
-      itterator3 === 22 ||
-      itterator3 === 26
+      itterator === 11
+      || itterator === 13
+      || itterator === 16
+      || itterator === 19
+      || itterator === 25
+      || itterator2 === 3
+      || itterator2 === 5
+      || itterator2 === 9
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 19
+      || itterator2 === 23
+      || itterator2 === 26
+      || itterator3 === 8
+      || itterator3 === 11
+      || itterator3 === 14
+      || itterator3 === 16
+      || itterator3 === 19
+      || itterator3 === 22
+      || itterator3 === 26
     ) {
       return;
     }
@@ -482,26 +489,26 @@ const MapPage = React.memo((props) => {
 
   const handleDiveSiteModalButton = () => {
     if (
-      itterator === 11 ||
-      itterator === 13 ||
-      itterator === 16 ||
-      itterator === 19 ||
-      itterator === 25 ||
-      itterator2 === 3 ||
-      itterator2 === 5 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23 ||
-      itterator2 === 26 ||
-      itterator3 === 5 ||
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 19 ||
-      itterator3 === 22 ||
-      itterator3 === 26
+      itterator === 11
+      || itterator === 13
+      || itterator === 16
+      || itterator === 19
+      || itterator === 25
+      || itterator2 === 3
+      || itterator2 === 5
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 19
+      || itterator2 === 23
+      || itterator2 === 26
+      || itterator3 === 5
+      || itterator3 === 8
+      || itterator3 === 11
+      || itterator3 === 14
+      || itterator3 === 16
+      || itterator3 === 19
+      || itterator3 === 22
+      || itterator3 === 26
     ) {
       return;
     }
@@ -517,27 +524,27 @@ const MapPage = React.memo((props) => {
 
   const handleAnchorButton = () => {
     if (
-      itterator === 11 ||
-      itterator === 13 ||
-      itterator === 16 ||
-      itterator === 19 ||
-      itterator === 25 ||
-      itterator2 === 3 ||
-      itterator2 === 5 ||
-      itterator2 === 9 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 19 ||
-      itterator2 === 23 ||
-      itterator2 === 26 ||
-      itterator3 === 5 ||
-      itterator3 === 8 ||
-      itterator3 === 11 ||
-      itterator3 === 14 ||
-      itterator3 === 16 ||
-      itterator3 === 19 ||
-      itterator3 === 22 ||
-      itterator3 === 26
+      itterator === 11
+      || itterator === 13
+      || itterator === 16
+      || itterator === 19
+      || itterator === 25
+      || itterator2 === 3
+      || itterator2 === 5
+      || itterator2 === 9
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 19
+      || itterator2 === 23
+      || itterator2 === 26
+      || itterator3 === 5
+      || itterator3 === 8
+      || itterator3 === 11
+      || itterator3 === 14
+      || itterator3 === 16
+      || itterator3 === 19
+      || itterator3 === 22
+      || itterator3 === 26
     ) {
       return;
     }
@@ -558,38 +565,40 @@ const MapPage = React.memo((props) => {
 
   const moveFabModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${fabsYCoord}px,0)` },
+    to:   { transform: `translate3d(0,${fabsYCoord}px,0)` },
   });
 
   const moveIntroGuidModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${introGuideModalYCoord}px,0)` },
+    to:   { transform: `translate3d(0,${introGuideModalYCoord}px,0)` },
   });
 
   const moveSecondGuideModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${secondGuideModalYCoord}px,0)` },
+    to:   { transform: `translate3d(0,${secondGuideModalYCoord}px,0)` },
   });
 
   const moveThirdGuideModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${thirdGuideModalYCoord}px,0)` },
+    to:   { transform: `translate3d(0,${thirdGuideModalYCoord}px,0)` },
   });
 
 
   const animateFabs = () => {
-    let containerHeight = document.getElementsByClassName("fabContainer")[0]
+    let containerHeight = document.getElementsByClassName('fabContainer')[0]
       .clientHeight;
-    let buttonSectionHeight = document.getElementsByClassName("fabButtons")[0]
+    let buttonSectionHeight = document.getElementsByClassName('fabButtons')[0]
       .clientHeight;
 
     if (fabsYCoord === 0) {
       if (window.innerHeight < 400) {
         setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
-      } else {
+      }
+      else {
         setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
       }
-    } else {
+    }
+    else {
       setfabsYCoord(0);
     }
   };
@@ -601,61 +610,64 @@ const MapPage = React.memo((props) => {
 
   const animatePicModal = () => {
     modalShow(PicUploader, {
-      name: "PictureUploader",
-      onCancelCallback: () => cleanupPinPicture(pin)
-    })
+      name:             'PictureUploader',
+      onCancelCallback: () => cleanupPinPicture(pin),
+    });
   };
 
   const clearPicModal = () => {
     animatePicModal();
     setPin({
       ...pin,
-      PicFile: "",
-      PicDate: "",
-      Animal: "",
-      Latitude: "",
-      Longitude: "",
+      PicFile:   '',
+      PicDate:   '',
+      Animal:    '',
+      Latitude:  '',
+      Longitude: '',
     });
     setPhotoFile(null);
   };
 
   const animateSiteModal = () => {
-    modalShow(SiteSubmitter)
+    modalShow(SiteSubmitter);
   };
 
   const clearSiteModal = () => {
     animateSiteModal();
     setAddSiteVals({
       ...addSiteVals,
-      Site: "",
-      Latitude: "",
-      Longitude: "",
+      Site:      '',
+      Latitude:  '',
+      Longitude: '',
     });
   };
 
   const animateLaunchModal = () => {
     modalShow(() => {
-      return <HowToGuide
-        animateLaunchModal={animateLaunchModal}
-        animateIntroGuideModal={animateIntroGuideModal}
-        animateSecondGuideModal={animateSecondGuideModal}
-        animateThirdGuideModal={animateThirdGuideModal}
-      />
-    }, {name: "HowToGuide"})
+      return (
+        <HowToGuide
+          animateLaunchModal={animateLaunchModal}
+          animateIntroGuideModal={animateIntroGuideModal}
+          animateSecondGuideModal={animateSecondGuideModal}
+          animateThirdGuideModal={animateThirdGuideModal}
+        />
+      );
+    }, { name: 'HowToGuide' });
   };
 
   const animateSettingsModal = () => {
-    modalShow(Settings)
+    modalShow(Settings);
   };
 
   const animateProfileModal = () => {
-    modalShow(UserProfileModal)
+    modalShow(UserProfileModal);
   };
 
   const animateIntroGuideModal = () => {
     if (introGuideModalYCoord === 0) {
       setIntroGuideModalYCoord(-window.innerHeight);
-    } else {
+    }
+    else {
       setIntroGuideModalYCoord(0);
     }
   };
@@ -663,7 +675,8 @@ const MapPage = React.memo((props) => {
   const animateSecondGuideModal = () => {
     if (secondGuideModalYCoord === 0) {
       setSecondGuideModalYCoord(-window.innerHeight);
-    } else {
+    }
+    else {
       setSecondGuideModalYCoord(0);
     }
   };
@@ -671,30 +684,32 @@ const MapPage = React.memo((props) => {
   const animateThirdGuideModal = () => {
     if (thirdGuideModalYCoord === 0) {
       setThirdGuideModalYCoord(-window.innerHeight);
-    } else {
+    }
+    else {
       setThirdGuideModalYCoord(0);
     }
   };
 
   const animateSiteSearchModal = () => {
     modalShow(SiteSearchModal, {
-      size: ModalWindowSize.S
-    })
+      size: ModalWindowSize.S,
+    });
   };
 
   const animatePartnerModal = () => {
     // todo: use modalShow
-    if (partnerModalYCoord === 0) {
-      setPartnerModalYCoord(-windowHeight);
-    } else {
-      setPartnerModalYCoord(0);
-    }
+    // if (partnerModalYCoord === 0) {
+    //   setPartnerModalYCoord(-windowHeight);
+    // }
+    // else {
+    //   setPartnerModalYCoord(0);
+    // }
   };
 
   const animateMapSearchModal = () => {
     modalShow(MapSearchModal, {
-      size: ModalWindowSize.S
-    })
+      size: ModalWindowSize.S,
+    });
   };
 
   const animatePulltab = () => {
@@ -704,7 +719,8 @@ const MapPage = React.memo((props) => {
   useEffect(() => {
     if (!showFilterer) {
       setIsOpen(false);
-    } else {
+    }
+    else {
       setIsOpen(true);
     }
   }, [showFilterer]);
@@ -712,9 +728,9 @@ const MapPage = React.memo((props) => {
 
   return (
     <div className="mappagemaster">
-      <div className="tutbarContainer" pointerEvents={"box-none"}>
+      <div className="tutbarContainer" pointerEvents="box-none">
         {tutorialRunning && (
-          <div className="tutorialBar" pointerEvents={"box-none"}>
+          <div className="tutorialBar" pointerEvents="box-none">
             <TutorialBar style={{ zIndex: 255 }} />
           </div>
         )}
@@ -722,29 +738,31 @@ const MapPage = React.memo((props) => {
 
       {masterSwitch && (
         <animated.div className="fabContainer" style={moveFabModal}>
-          <div className="animateBox" onClick={(e) => animateMenu(e)}>
-            <p className="animateFont">{menuUp ? "Hide Menu" : "Show Menu"}</p>
-            {menuUp ? (
-              <KeyboardArrowDownIcon
-                sx={{
-                  height: "3vh",
-                  color: "white",
-                  marginTop: "-2vh",
-                  marginBottom: "1vh",
-                  cursor: "pointer",
-                }}
-              />
-            ) : (
-              <KeyboardArrowUpIcon
-                sx={{
-                  height: "3vh",
-                  color: "white",
-                  marginTop: "-2vh",
-                  marginBottom: "1vh",
-                  cursor: "pointer",
-                }}
-              />
-            )}
+          <div className="animateBox" onClick={e => animateMenu(e)}>
+            <p className="animateFont">{menuUp ? 'Hide Menu' : 'Show Menu'}</p>
+            {menuUp
+              ? (
+                  <KeyboardArrowDownIcon
+                    sx={{
+                      height:       '3vh',
+                      color:        'white',
+                      marginTop:    '-2vh',
+                      marginBottom: '1vh',
+                      cursor:       'pointer',
+                    }}
+                  />
+                )
+              : (
+                  <KeyboardArrowUpIcon
+                    sx={{
+                      height:       '3vh',
+                      color:        'white',
+                      marginTop:    '-2vh',
+                      marginBottom: '1vh',
+                      cursor:       'pointer',
+                    }}
+                  />
+                )}
           </div>
 
           <div className="fabButtons">
@@ -757,7 +775,7 @@ const MapPage = React.memo((props) => {
                     handleProfileButton();
                   }}
                 >
-                  <PersonIcon sx={{ width: "3vw", height: "2vw" }} />
+                  <PersonIcon sx={{ width: '3vw', height: '2vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Profile</p>
               </div>
@@ -772,7 +790,7 @@ const MapPage = React.memo((props) => {
                     handleSettingsButton();
                   }}
                 >
-                  <SettingsIcon sx={{ width: "3vw", height: "1.5vw" }} />
+                  <SettingsIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Settings</p>
               </div>
@@ -787,7 +805,7 @@ const MapPage = React.memo((props) => {
                     handleTutorialButton();
                   }}
                 >
-                  <QuestionMarkIcon sx={{ width: "3vw", height: "1.5vw" }} />
+                  <QuestionMarkIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Guides</p>
               </div>
@@ -803,7 +821,7 @@ const MapPage = React.memo((props) => {
                     handleGeocodingSearchButton();
                   }}
                 >
-                  <ExploreIcon sx={{ width: "3vw", height: "1.5vw" }} />
+                  <ExploreIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Map Search</p>
               </div>
@@ -819,7 +837,7 @@ const MapPage = React.memo((props) => {
                     handleDiveSiteSearchButton();
                   }}
                 >
-                  <TravelExploreIcon sx={{ width: "3vw", height: "1.5vw" }} />
+                  <TravelExploreIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Site Search</p>
               </div>
@@ -835,7 +853,7 @@ const MapPage = React.memo((props) => {
                     handlePhotoModalButton();
                   }}
                 >
-                  <PhotoCameraIcon sx={{ width: "3vw", height: "1.5vw" }} />
+                  <PhotoCameraIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Photo Add</p>
               </div>
@@ -850,7 +868,7 @@ const MapPage = React.memo((props) => {
                     handleDiveSiteModalButton();
                   }}
                 >
-                  <AddLocationAltIcon sx={{ width: "3vw", height: "1.5vw" }} />
+                  <AddLocationAltIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Site Add</p>
               </div>
@@ -858,7 +876,7 @@ const MapPage = React.memo((props) => {
 
             {masterSwitch && (
               <div className="gearBox">
-                {" "}
+                {' '}
                 <ToggleButton
                   sx={toggleButtonStyle}
                   value="check"
@@ -867,7 +885,7 @@ const MapPage = React.memo((props) => {
                     handleAnchorButton();
                   }}
                 >
-                  <AnchorIcon sx={{ width: "3vw", height: "1.5vw" }} />
+                  <AnchorIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Show/Hide</p>
               </div>
@@ -877,7 +895,7 @@ const MapPage = React.memo((props) => {
       )}
 
       {masterSwitch && (
-        <div className="col1row8" pointerEvents={"box-none"}>
+        <div className="col1row8" pointerEvents="box-none">
           <PhotoMenu />
           <div className="filterer">
             {((areaPics && areaPics.length > 0) || isOpen) && (
@@ -887,7 +905,7 @@ const MapPage = React.memo((props) => {
                   orientation="vertical"
                   collapsedSize="0px"
                 >
-                  <div className="closer" pointerEvents={"box-none"}>
+                  <div className="closer" pointerEvents="box-none">
                     <PhotoFilterer />
                   </div>
                 </Collapse>
@@ -901,8 +919,8 @@ const MapPage = React.memo((props) => {
       )}
 
       {masterSwitch && (
-        <div className="histoBox" style={{ pointerEvents: "none" }}>
-          <Histogram pointerEvents={"none"} />
+        <div className="histoBox" style={{ pointerEvents: 'none' }}>
+          <Histogram pointerEvents="none" />
         </div>
       )}
 
@@ -923,40 +941,41 @@ const MapPage = React.memo((props) => {
       <div>
         <Home
           style={{
-            zIndex: "1",
-            height: "100%",
+            zIndex: '1',
+            height: '100%',
           }}
-        ></Home>
+        >
+        </Home>
       </div>
 
       <div className="just-testing2">
         <div
           className="colXrow1"
-          style={{ display: "flex", flexDirection: "row" }}
+          style={{ display: 'flex', flexDirection: 'row' }}
         >
           <ToggleButton
-            sx={[toggleButtonStyle, { width: "2vw", height: "4vh" }]}
+            sx={[toggleButtonStyle, { width: '2vw', height: '4vh' }]}
             value="check"
             onClick={() => {
               setMapZoom(mapZoom + 1);
             }}
           >
-            <AddIcon sx={{ height: "2vw", width: "2vw" }} />
+            <AddIcon sx={{ height: '2vw', width: '2vw' }} />
           </ToggleButton>
         </div>
 
         <div
           className="colXrow2"
-          style={{ display: "flex", flexDirection: "row" }}
+          style={{ display: 'flex', flexDirection: 'row' }}
         >
           <ToggleButton
-            sx={[toggleButtonStyle, { width: "2vw", height: "4vh" }]}
+            sx={[toggleButtonStyle, { width: '2vw', height: '4vh' }]}
             value="check"
             onClick={() => {
               setMapZoom(mapZoom - 1);
             }}
           >
-            <RemoveIcon sx={{ height: "2vw", width: "2vw" }} />
+            <RemoveIcon sx={{ height: '2vw', width: '2vw' }} />
           </ToggleButton>
         </div>
       </div>
@@ -964,37 +983,37 @@ const MapPage = React.memo((props) => {
       {!masterSwitch && minorSwitch && (
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            position: "absolute",
-            width: "90%",
-            marginLeft: "10%",
-            top: "5px",
-            zIndex: "2",
+            display:       'flex',
+            flexDirection: 'row',
+            position:      'absolute',
+            width:         '90%',
+            marginLeft:    '10%',
+            top:           '5px',
+            zIndex:        '2',
           }}
         >
           <div
             style={{
-              width: "90%",
-              position: "relative",
-              zIndex: "2",
+              width:    '90%',
+              position: 'relative',
+              zIndex:   '2',
             }}
           >
             <Button
               onClick={returnToPicModal}
               sx={{
-                "&:hover": { backgroundColor: "lightblue" },
-                color: "gold",
-                fontFamily: "Patrick Hand",
-                fontSize: "2vw",
-                width: "20vw",
-                height: "80%",
-                textAlign: "center",
-                backgroundColor: "#538bdb",
-                marginTop: "15px",
-                borderRadius: "10px",
-                boxShadow: " 5px 5px 5px 5px rgba(0,0,0, 0.7)",
-                zIndex: 3,
+                '&:hover':         { backgroundColor: 'lightblue' },
+                'color':           'gold',
+                'fontFamily':      'Patrick Hand',
+                'fontSize':        '2vw',
+                'width':           '20vw',
+                'height':          '80%',
+                'textAlign':       'center',
+                'backgroundColor': '#538bdb',
+                'marginTop':       '15px',
+                'borderRadius':    '10px',
+                'boxShadow':       ' 5px 5px 5px 5px rgba(0,0,0, 0.7)',
+                'zIndex':          3,
               }}
             >
               Set Pin
@@ -1006,37 +1025,37 @@ const MapPage = React.memo((props) => {
       {!masterSwitch && !minorSwitch && (
         <div
           style={{
-            display: "flex",
-            flexDirection: "row",
-            position: "absolute",
-            width: "90%",
-            marginLeft: "10%",
-            top: "5px",
-            zIndex: "2",
+            display:       'flex',
+            flexDirection: 'row',
+            position:      'absolute',
+            width:         '90%',
+            marginLeft:    '10%',
+            top:           '5px',
+            zIndex:        '2',
           }}
         >
           <div
             style={{
-              width: "90%",
-              position: "relative",
-              zIndex: "2",
+              width:    '90%',
+              position: 'relative',
+              zIndex:   '2',
             }}
           >
             <Button
               onClick={onShopNavigate}
               sx={{
-                "&:hover": { backgroundColor: "lightblue" },
-                color: "gold",
-                fontFamily: "Patrick Hand",
-                fontSize: "2vw",
-                width: "20vw",
-                height: "80%",
-                textAlign: "center",
-                backgroundColor: "#538bdb",
-                marginTop: "15px",
-                borderRadius: "10px",
-                boxShadow: " 5px 5px 5px 5px rgba(0,0,0, 0.7)",
-                zIndex: 3,
+                '&:hover':         { backgroundColor: 'lightblue' },
+                'color':           'gold',
+                'fontFamily':      'Patrick Hand',
+                'fontSize':        '2vw',
+                'width':           '20vw',
+                'height':          '80%',
+                'textAlign':       'center',
+                'backgroundColor': '#538bdb',
+                'marginTop':       '15px',
+                'borderRadius':    '10px',
+                'boxShadow':       ' 5px 5px 5px 5px rgba(0,0,0, 0.7)',
+                'zIndex':          3,
               }}
             >
               Return to Shop
@@ -1046,7 +1065,7 @@ const MapPage = React.memo((props) => {
       )}
 
 
-      <Modal/>
+      <Modal />
 
 
       <animated.div
@@ -1086,7 +1105,6 @@ const MapPage = React.memo((props) => {
           setThirdGuideModalYCoord={setThirdGuideModalYCoord}
         />
       </animated.div>
-
 
 
       {/* <animated.div

@@ -1,21 +1,20 @@
-import { supabase } from "../supabase";
+import { supabase } from '../supabase';
 
 export const addDeletedAccountInfo = async (values) => {
-
-  console.log("passing", values)
+  console.log('passing', values);
   const { data, error } = await supabase
-  .from("deletedUsers")
-  .insert([
-    {
-      firstName: values.firstName,
-      lastName: values.lastName,
-      email: values.email,
-      uuid: values.UserID
-    },
-  ]);
+    .from('deletedUsers')
+    .insert([
+      {
+        firstName: values.firstName,
+        lastName:  values.lastName,
+        email:     values.email,
+        uuid:      values.UserID,
+      },
+    ]);
 
   if (error) {
-    console.log("couldn't do it,", error);
+    console.log('couldn\'t do it,', error);
   }
 
   if (data) {
@@ -25,37 +24,35 @@ export const addDeletedAccountInfo = async (values) => {
 
 
 export const createProfile = async (values) => {
-
   const { data, error } = await supabase
-  .from("UserProfiles")
-  .insert([
-    {
-      Email: values.email,
-      UserID: values.id
-    },
-  ]);
+    .from('UserProfiles')
+    .insert([
+      {
+        Email:  values.email,
+        UserID: values.id,
+      },
+    ]);
 
-if (error) {
-  console.log("couldn't do it,", error);
-}
+  if (error) {
+    console.log('couldn\'t do it,', error);
+  }
 
-if (data) {
-  console.log(data);
-}
+  if (data) {
+    console.log(data);
+  }
 };
 
 export const updateProfile = async (values) => {
-
-  console.log("supabase gets", values)
+  console.log('supabase gets', values);
   const { data, error } = await supabase
-    .from("UserProfiles")
+    .from('UserProfiles')
     .update({ UserName: values.username })
-    .eq("UserID", values.id);
+    .eq('UserID', values.id);
 
-    console.log("supa sends",data, error)
+  console.log('supa sends', data, error);
 
   if (error) {
-    console.log("couldn't do it,", error);
+    console.log('couldn\'t do it,', error);
     throw error;
   }
 
@@ -66,12 +63,12 @@ export const updateProfile = async (values) => {
 
 export const deleteProfile = async (id) => {
   const { data, error } = await supabase
-    .from("UserProfiles")
+    .from('UserProfiles')
     .delete()
-    .eq("UserID", id);
+    .eq('UserID', id);
 
   if (error) {
-    console.log("couldn't do it,", error);
+    console.log('couldn\'t do it,', error);
     return [];
   }
 
@@ -82,12 +79,12 @@ export const deleteProfile = async (id) => {
 
 export const grabProfileById = async (id) => {
   const { data, error } = await supabase
-    .from("UserProfiles")
+    .from('UserProfiles')
     .select()
-    .eq("UserID", id)
+    .eq('UserID', id);
 
   if (error) {
-    console.log("couldn't do it,", error);
+    console.log('couldn\'t do it,', error);
     return [];
   }
 
@@ -98,12 +95,12 @@ export const grabProfileById = async (id) => {
 
 export const grabProfileByUserName = async (userName) => {
   const { data, error } = await supabase
-    .from("UserProfiles")
+    .from('UserProfiles')
     .select()
-    .eq("UserName", userName)
+    .eq('UserName', userName);
 
   if (error) {
-    console.log("couldn't do it 5,", error);
+    console.log('couldn\'t do it 5,', error);
     return [];
   }
 
@@ -113,12 +110,12 @@ export const grabProfileByUserName = async (userName) => {
 };
 
 export const getProfileWithStats = async (userId) => {
-  const { data, error } = await supabase.rpc("get_userprofile_with_stats", {
+  const { data, error } = await supabase.rpc('get_userprofile_with_stats', {
     userid: userId,
   });
 
   if (error) {
-    console.error("couldn't do it 27,", error);
+    console.error('couldn\'t do it 27,', error);
     return [];
   }
 

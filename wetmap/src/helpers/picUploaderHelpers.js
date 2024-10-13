@@ -1,4 +1,4 @@
-import { removePhoto } from "../cloudflareBucketCalls/cloudflareAWSCalls";
+import { removePhoto } from '../cloudflareBucketCalls/cloudflareAWSCalls';
 
 function getToday(DateVal) {
   let yearValue = DateVal.getFullYear().toString();
@@ -6,14 +6,14 @@ function getToday(DateVal) {
   let dayValue = DateVal.getDate().toString();
 
   if (dayValue.length == 1) {
-    dayValue = "0" + dayValue;
+    dayValue = '0' + dayValue;
   }
 
   if (monthValue.length == 1) {
-    monthValue = "0" + monthValue;
+    monthValue = '0' + monthValue;
   }
 
-  let formattedDate = yearValue + "-" + monthValue + "-" + dayValue;
+  let formattedDate = yearValue + '-' + monthValue + '-' + dayValue;
 
   return formattedDate;
 }

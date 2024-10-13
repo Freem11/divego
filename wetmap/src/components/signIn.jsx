@@ -1,25 +1,25 @@
-import React, { useState, useContext } from "react";
-import { Form, Label } from "reactstrap";
-import { SessionContext } from "./contexts/sessionContext";
+import React, { useState, useContext } from 'react';
+import { Form, Label } from 'reactstrap';
+import { SessionContext } from './contexts/sessionContext';
 import {
   sessionCheck,
   signInStandard,
   register,
-} from "../supabaseCalls/authenticateSupabaseCalls";
-import { createProfile } from "../supabaseCalls/accountSupabaseCalls";
-import "./authenication.css";
+} from '../supabaseCalls/authenticateSupabaseCalls';
+import { createProfile } from '../supabaseCalls/accountSupabaseCalls';
+import './authenication.css';
 import {
   LoginSocialGoogle,
   LoginSocialFacebook,
   LoginSocialApple,
-} from "reactjs-social-login";
+} from 'reactjs-social-login';
 import {
   FacebookLoginButton,
   GoogleLoginButton,
   AppleLoginButton,
-} from "react-social-login-buttons";
-import manta from "../images/Matt_Manta_White.png"
-import InputField from "./reusables/inputField";
+} from 'react-social-login-buttons';
+import manta from '../images/Matt_Manta_White.png';
+import InputField from './reusables/inputField';
 
 let emailVar = false;
 let passwordVar = false;
@@ -29,28 +29,28 @@ const appleAppId = import.meta.env.VITE_APPLE_APP_ID;
 const REDIRECT_URI = window.location.href;
 
 export default function SignInRoute(props) {
-  const { setValue } = props
+  const { setValue } = props;
   const { setActiveSession } = useContext(SessionContext);
   const [profile, setProfile] = useState(null);
   const [formVals, setFormVals] = useState({
-    email: "",
-    password: "",
+    email:    '',
+    password: '',
   });
 
   const [loginFail, setLoginFail] = useState(null);
 
   const [formValidation, SetFormValidation] = useState({
-    emailVal: false,
+    emailVal:    false,
     passwordVal: false,
   });
 
   function parseJwt(token) {
-    var base64Url = token.split(".")[1];
-    var base64 = base64Url.replace(/-/g, "+").replace(/_/g, "/");
+    var base64Url = token.split('.')[1];
+    var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
     var jsonPayload = decodeURIComponent(
-      window.atob(base64).split("").map(function (c) {
-          return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
-        }).join("")
+      window.atob(base64).split('').map(function (c) {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''),
     );
 
     return JSON.parse(jsonPayload);
@@ -61,15 +61,16 @@ export default function SignInRoute(props) {
 
     if (userData.user) {
       let appleObject = {
-        name: `${userData.user.name.firstName} ${userData.user.name.lastName}`,
+        name:  `${userData.user.name.firstName} ${userData.user.name.lastName}`,
         email: userData.user.email,
-        id: decoded.sub,
+        id:    decoded.sub,
       };
       handleOAuthSubmit(appleObject);
-    } else {
+    }
+    else {
       let reUsedApple = {
         email: decoded.email,
-        id: decoded.sub,
+        id:    decoded.sub,
       };
       handleOAuthSubmit(reUsedApple);
     }
@@ -84,8 +85,9 @@ export default function SignInRoute(props) {
       });
       const user = await res.json();
       handleOAuthSubmit(user);
-    } catch (err) {
-      console.log("error", err);
+    }
+    catch (err) {
+      console.log('error', err);
     }
   }
 
@@ -94,12 +96,13 @@ export default function SignInRoute(props) {
 
     try {
       const res2 = await fetch(
-        `https://graph.facebook.com/me?access_token=${token2}&fields=id,name,email`
+        `https://graph.facebook.com/me?access_token=${token2}&fields=id,name,email`,
       );
       const user2 = await res2.json();
       handleOAuthSubmit(user2);
-    } catch (err) {
-      console.log("error", err);
+    }
+    catch (err) {
+      console.log('error', err);
     }
   }
 
@@ -113,20 +116,22 @@ export default function SignInRoute(props) {
       if (user.family_name) {
         Fname = user.given_name;
         LName = user.family_name;
-      } else {
-        Fname = user.given_name.split(" ").slice(0, -1).join(" ");
-        LName = user.given_name.split(" ").slice(-1)[0];
       }
-    } else if (user.name) {
-      Fname = user.name.split(" ").slice(0, 1);
-      LName = user.name.split(" ").slice(-1);
+      else {
+        Fname = user.given_name.split(' ').slice(0, -1).join(' ');
+        LName = user.given_name.split(' ').slice(-1)[0];
+      }
+    }
+    else if (user.name) {
+      Fname = user.name.split(' ').slice(0, 1);
+      LName = user.name.split(' ').slice(-1);
     }
 
     let accessToken = await OAuthSignIn({
-      password: Pword,
-      email: MailE,
+      password:  Pword,
+      email:     MailE,
       firstName: Fname,
-      lastName: LName,
+      lastName:  LName,
     });
   };
 
@@ -134,65 +139,71 @@ export default function SignInRoute(props) {
     let accessToken = await signInStandard(formVals);
     if (accessToken.data.session !== null) {
       await localStorage.setItem(
-        "token",
-        JSON.stringify(accessToken.data.session.refresh_token)
+        'token',
+        JSON.stringify(accessToken.data.session.refresh_token),
       );
       setActiveSession(accessToken.data.session);
       return;
-    } else {
+    }
+    else {
       let registrationToken = await register(formVals);
 
       if (registrationToken) {
         await createProfile({
-          id: registrationToken.data.session.user.id,
+          id:    registrationToken.data.session.user.id,
           email: registrationToken.data.user.email,
         });
       }
 
       if (registrationToken.data.session !== null) {
         await localStorage.setItem(
-          "token",
-          JSON.stringify(registrationToken.data.session.refresh_token)
+          'token',
+          JSON.stringify(registrationToken.data.session.refresh_token),
         );
         setActiveSession(registrationToken.data.session);
-      } else {
-        setLoginFail("You already have an account with this email");
+      }
+      else {
+        setLoginFail('You already have an account with this email');
       }
     }
   }
 
   const handleSignInSubmit = async () => {
-    if (formVals.email === "" || formVals.email === null) {
+    if (formVals.email === '' || formVals.email === null) {
       emailVar = true;
-    } else {
+    }
+    else {
       emailVar = false;
     }
 
-    if (formVals.password === "" || formVals.password === null) {
+    if (formVals.password === '' || formVals.password === null) {
       passwordVar = true;
-    } else {
+    }
+    else {
       passwordVar = false;
     }
 
     SetFormValidation({
       ...formValidation,
-      emailVal: emailVar,
+      emailVal:    emailVar,
       passwordVal: passwordVar,
     });
 
-    if (formVals.email === "" || formVals.password == "") {
-      setLoginFail("Please fill out both email and password");
+    if (formVals.email === '' || formVals.password == '') {
+      setLoginFail('Please fill out both email and password');
       return;
-    } else {
+    }
+    else {
       let accessToken = await signInStandard(formVals);
       if (accessToken.data.session !== null) {
         localStorage.setItem(
-          "token",
-          JSON.stringify(accessToken.data.session.refresh_token)
+          'token',
+          JSON.stringify(accessToken.data.session.refresh_token),
         );
         setActiveSession(accessToken.data.session);
-      } else {
-        setLoginFail("The credentials you supplied are not valid");
+      }
+      else {
+        setLoginFail('The credentials you supplied are not valid');
         return;
       }
       let _ = await sessionCheck();
@@ -204,8 +215,8 @@ export default function SignInRoute(props) {
     setLoginFail(null);
   };
 
-  const  handlePageSwap = () => {
-    setValue(1)
+  const handlePageSwap = () => {
+    setValue(1);
   };
 
 
@@ -215,13 +226,14 @@ export default function SignInRoute(props) {
         <div className="headlinerdiv">
           <img
             style={{
-              height: "20vh",
-              marginTop: "-2vh",
-              marginBottom: "0%",
-              backgroundColor: "#538dbd",
+              height:          '20vh',
+              marginTop:       '-2vh',
+              marginBottom:    '0%',
+              backgroundColor: '#538dbd',
             }}
             src={manta}
-          /><br/>
+          />
+          <br />
           <h1 className="logoTag">Scuba SEAsons</h1>
         </div>
 
@@ -230,52 +242,52 @@ export default function SignInRoute(props) {
             <LoginSocialGoogle
               isOnlyGetToken
               scope="https://www.googleapis.com/auth/userinfo.email"
-              client_id={googleClientId || ""}
+              client_id={googleClientId || ''}
               onResolve={({ provider, data }) => {
                 setProfile(data);
                 getGoogleUserData(data.access_token);
-                console.log("google", data);
+                console.log('google', data);
               }}
               onReject={(err) => {
                 console.log(err);
               }}
             >
-              <GoogleLoginButton style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "26vw", height: "5vh", fontSize: "1.7vw" }} />
+              <GoogleLoginButton style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '26vw', height: '5vh', fontSize: '1.7vw' }} />
             </LoginSocialGoogle>
           </div>
 
           <div className="OAuthButton">
             <LoginSocialFacebook
               isOnlyGetToken
-              appId={facebookAppId || ""}
+              appId={facebookAppId || ''}
               state={false}
               onResolve={({ provider, data }) => {
                 setProfile(data);
                 getFacebookUserData(data.accessToken);
-                console.log("facebook", data);
+                console.log('facebook', data);
               }}
               onReject={(err) => {
                 console.log(err);
               }}
             >
-              <FacebookLoginButton style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "26vw", height: "5vh", fontSize: "1.7vw" }} />
+              <FacebookLoginButton style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '26vw', height: '5vh', fontSize: '1.7vw' }} />
             </LoginSocialFacebook>
           </div>
 
           <div className="OAuthButton">
             <LoginSocialApple
-              client_id={appleAppId || "1"}
-              scope={"name email"}
+              client_id={appleAppId || '1'}
+              scope="name email"
               redirect_uri={REDIRECT_URI}
               onResolve={({ provider, data }) => {
                 handleAppleUserData(data);
-                console.log("apple", data);
+                console.log('apple', data);
               }}
               onReject={(err) => {
                 console.log(err);
               }}
             >
-              <AppleLoginButton style={{ display: "flex", alignItems: "center", justifyContent: "center", width: "26vw", height: "5vh", fontSize: "1.7vw" }} />
+              <AppleLoginButton style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', width: '26vw', height: '5vh', fontSize: '1.7vw' }} />
             </LoginSocialApple>
           </div>
         </div>

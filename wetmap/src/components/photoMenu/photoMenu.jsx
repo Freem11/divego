@@ -1,14 +1,14 @@
-import { AnimalContext } from "../contexts/animalContext";
-import { useState, useContext, useEffect } from "react";
-import { multiHeatPoints } from "../../supabaseCalls/heatPointSupabaseCalls";
-import { getPhotosforMapArea } from "../../supabaseCalls/photoSupabaseCalls";
-import { MapBoundsContext } from "../contexts/mapBoundariesContext";
-import { HeatPointsContext } from "../contexts/heatPointsContext";
-import { formatHeatVals } from "../../helpers/heatPointHelpers";
-import "./photoMenu.css";
-import PhotoMenuListItem from "./photoMenuListItem";
-import AliceCarousel from "react-alice-carousel";
-import "react-alice-carousel/lib/alice-carousel.css";
+import { AnimalContext } from '../contexts/animalContext';
+import { useState, useContext, useEffect } from 'react';
+import { multiHeatPoints } from '../../supabaseCalls/heatPointSupabaseCalls';
+import { getPhotosforMapArea } from '../../supabaseCalls/photoSupabaseCalls';
+import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import { HeatPointsContext } from '../contexts/heatPointsContext';
+import { formatHeatVals } from '../../helpers/heatPointHelpers';
+import './photoMenu.css';
+import PhotoMenuListItem from './photoMenuListItem';
+import AliceCarousel from 'react-alice-carousel';
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 const PhotoMenu = () => {
   const { animalVal, setAnimalVal } = useContext(AnimalContext);
@@ -17,64 +17,65 @@ const PhotoMenu = () => {
   const [areaPics, setAreaPics] = useState([]);
 
   const filterPhotosForMapArea = async () => {
-
-    if (boundaries){
-    if (boundaries[0] > boundaries[2]) {
-      try {
-        const AmericanPhotos = await getPhotosforMapArea({
-          minLat: boundaries[1],
-          maxLat: boundaries[3],
-          minLng: -180,
-          maxLng: boundaries[2],
-        });
-        const AsianPhotos = await getPhotosforMapArea({
-          minLat: boundaries[1],
-          maxLat: boundaries[3],
-          minLng: boundaries[0],
-          maxLng: 180,
-        });
-
-        let photos = [...AsianPhotos, ...AmericanPhotos];
-
-        if (photos) {
-          const animalArray = Array.from(
-            new Set(photos.map((a) => a.label))
-          ).map((label) => {
-            return photos.find((a) => a.label === label);
+    if (boundaries) {
+      if (boundaries[0] > boundaries[2]) {
+        try {
+          const AmericanPhotos = await getPhotosforMapArea({
+            minLat: boundaries[1],
+            maxLat: boundaries[3],
+            minLng: -180,
+            maxLng: boundaries[2],
+          });
+          const AsianPhotos = await getPhotosforMapArea({
+            minLat: boundaries[1],
+            maxLat: boundaries[3],
+            minLng: boundaries[0],
+            maxLng: 180,
           });
 
-          setAreaPics(animalArray);
+          let photos = [...AsianPhotos, ...AmericanPhotos];
+
+          if (photos) {
+            const animalArray = Array.from(
+              new Set(photos.map(a => a.label)),
+            ).map((label) => {
+              return photos.find(a => a.label === label);
+            });
+
+            setAreaPics(animalArray);
+          }
         }
-      } catch (e) {
-        console.log({ title: "Error", message: e.message });
+        catch (e) {
+          console.log({ title: 'Error', message: e.message });
+        }
       }
-    } else {
-      try {
-        const photos = await getPhotosforMapArea({
-          minLat: boundaries[1],
-          maxLat: boundaries[3],
-          minLng: boundaries[0],
-          maxLng: boundaries[2],
-        });
-        if (photos) {
-          const animalArray = Array.from(
-            new Set(photos.map((a) => a.label))
-          ).map((label) => {
-            return photos.find((a) => a.label === label);
+      else {
+        try {
+          const photos = await getPhotosforMapArea({
+            minLat: boundaries[1],
+            maxLat: boundaries[3],
+            minLng: boundaries[0],
+            maxLng: boundaries[2],
           });
+          if (photos) {
+            const animalArray = Array.from(
+              new Set(photos.map(a => a.label)),
+            ).map((label) => {
+              return photos.find(a => a.label === label);
+            });
 
-          setAreaPics(animalArray);
+            setAreaPics(animalArray);
+          }
         }
-      } catch (e) {
-        console.log({ title: "Error", message: e.message });
+        catch (e) {
+          console.log({ title: 'Error', message: e.message });
+        }
       }
     }
-  }
   };
 
   const filterHeatPointsForMapArea = async () => {
-
-    if(boundaries){
+    if (boundaries) {
       try {
         const localHeatPoints = await multiHeatPoints(
           {
@@ -83,16 +84,16 @@ const PhotoMenu = () => {
             minLng: boundaries[0],
             maxLng: boundaries[2],
           },
-          animalVal
+          animalVal,
         );
         if (localHeatPoints) {
           setHeatPts(formatHeatVals(localHeatPoints));
         }
-      } catch (e) {
-        console.log({ title: "Error", message: e.message });
+      }
+      catch (e) {
+        console.log({ title: 'Error', message: e.message });
       }
     }
-  
   };
 
   useEffect(() => {
@@ -113,10 +114,10 @@ const PhotoMenu = () => {
         <AliceCarousel
           controlsStrategy="alternate"
           responsive={{
-            0: { items: 1 },
-            500: { items: 2 },
-            700: { items: 3 },
-            900: { items: 4 },
+            0:    { items: 1 },
+            500:  { items: 2 },
+            700:  { items: 3 },
+            900:  { items: 4 },
             1100: { items: 5 },
             1300: { items: 6 },
             1500: { items: 7 },
@@ -126,8 +127,8 @@ const PhotoMenu = () => {
           }}
           mouseTracking
           items={
-            areaPics &&
-            areaPics.map((pic) => {
+            areaPics
+            && areaPics.map((pic) => {
               return (
                 <PhotoMenuListItem
                   key={pic.id}

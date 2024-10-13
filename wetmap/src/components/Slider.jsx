@@ -1,52 +1,52 @@
-import * as React from "react";
-import { useContext, useEffect } from "react";
-import Box from "@mui/material/Box";
-import Slider from "@mui/material/Slider";
-import { SliderContext } from "./contexts/sliderContext";
-import { useState } from "react";
-import "./slider.css";
+import * as React from 'react';
+import { useContext, useEffect } from 'react';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+import { SliderContext } from './contexts/sliderContext';
+import { useState } from 'react';
+import './slider.css';
 
 export default function MonthSlider() {
   const { sliderVal, setSliderVal } = useContext(SliderContext);
-  const [monthVal, setMonthVal] = useState("");
+  const [monthVal, setMonthVal] = useState('');
 
   useEffect(() => {
     switch (sliderVal) {
       case 1:
-        setMonthVal("Jan");
+        setMonthVal('Jan');
         break;
       case 2:
-        setMonthVal("Feb");
+        setMonthVal('Feb');
         break;
       case 3:
-        setMonthVal("Mar");
+        setMonthVal('Mar');
         break;
       case 4:
-        setMonthVal("Apr");
+        setMonthVal('Apr');
         break;
       case 5:
-        setMonthVal("May");
+        setMonthVal('May');
         break;
       case 6:
-        setMonthVal("Jun");
+        setMonthVal('Jun');
         break;
       case 7:
-        setMonthVal("Jul");
+        setMonthVal('Jul');
         break;
       case 8:
-        setMonthVal("Aug");
+        setMonthVal('Aug');
         break;
       case 9:
-        setMonthVal("Sep");
+        setMonthVal('Sep');
         break;
       case 10:
-        setMonthVal("Oct");
+        setMonthVal('Oct');
         break;
       case 11:
-        setMonthVal("Nov");
+        setMonthVal('Nov');
         break;
       case 12:
-        setMonthVal("Dec");
+        setMonthVal('Dec');
         break;
     }
   }, [sliderVal]);
@@ -58,8 +58,8 @@ export default function MonthSlider() {
   return (
     <Box
       sx={{
-        width: "50vw",
-        mx: "auto",
+        width: '50vw',
+        mx:    'auto',
       }}
     >
       <div className="monthbox">
@@ -67,8 +67,8 @@ export default function MonthSlider() {
       </div>
       <Slider
         sx={{
-          color: "white",
-          marginBottom: "-5px",
+          color:        'white',
+          marginBottom: '-5px',
         }}
         aria-label="Custom marks"
         value={sliderVal}
