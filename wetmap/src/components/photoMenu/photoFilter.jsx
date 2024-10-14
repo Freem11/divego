@@ -1,9 +1,9 @@
-import React from "react";
-import { useContext } from "react";
-import { FormGroup } from "reactstrap";
-import InputBase from "@mui/material/InputBase";
-import { SearchTextContext } from "../contexts/searchTextContext";
-import "./photoFilter.css";
+import React from 'react';
+import { useContext } from 'react';
+import { FormGroup } from 'reactstrap';
+import InputBase from '@mui/material/InputBase';
+import { SearchTextContext } from '../contexts/searchTextContext';
+import './photoFilter.css';
 
 export default function PhotoFilterer() {
   const { textvalue, setTextValue } = useContext(SearchTextContext);
@@ -26,13 +26,13 @@ export default function PhotoFilterer() {
             className="suggestInput"
             inputProps={{
               style: {
-                fontSize: "1vw",
-                width: "20vw",
-                textAlign: "center",
-                height: "5vh",
-                backgroundColor: "white",
-                borderRadius: "1vw",
-                pointerEvents: "auto",
+                fontSize:        '1vw',
+                width:           '20vw',
+                textAlign:       'center',
+                height:          '5vh',
+                backgroundColor: 'white',
+                borderRadius:    '1vw',
+                pointerEvents:   'auto',
               },
             }}
           />

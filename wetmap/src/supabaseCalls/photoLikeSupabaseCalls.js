@@ -1,19 +1,18 @@
-import { supabase } from "../supabase";
+import { supabase } from '../supabase';
 
 export const insertPhotoLike = async (userId, photoId) => {
+  console.log('photo waits gets ', userId, photoId);
 
-  console.log("photo waits gets ", userId, photoId)
-
-  const { data, error } = await supabase.from("photoLikes").insert([
+  const { data, error } = await supabase.from('photoLikes').insert([
     {
-      userId: userId,
-      photoId: photoId
-    }
-    
+      userId:  userId,
+      photoId: photoId,
+    },
+
   ]).select('*');
 
   if (error) {
-    console.log("couldn't do it 40,", error);
+    console.log('couldn\'t do it 40,', error);
   }
 
   if (data) {
@@ -23,12 +22,12 @@ export const insertPhotoLike = async (userId, photoId) => {
 
 export const deletePhotoLike = async (id) => {
   const { data, error } = await supabase
-    .from("photoLikes")
+    .from('photoLikes')
     .delete()
-    .eq("id", id);
+    .eq('id', id);
 
   if (error) {
-    console.log("couldn't do it 41,", error);
+    console.log('couldn\'t do it 41,', error);
     return [];
   }
 
@@ -39,13 +38,13 @@ export const deletePhotoLike = async (id) => {
 
 export const grabPhotoLikeById = async (userId, picId) => {
   const { data, error } = await supabase
-    .from("photoLikes")
+    .from('photoLikes')
     .select()
-    .eq("userId", userId)
-    .eq("photoId", picId)
+    .eq('userId', userId)
+    .eq('photoId', picId);
 
   if (error) {
-    console.log("couldn't do it 42,", error);
+    console.log('couldn\'t do it 42,', error);
     return [];
   }
 
@@ -56,12 +55,12 @@ export const grabPhotoLikeById = async (userId, picId) => {
 
 export const countPhotoLikeById = async (picId) => {
   const { error, count } = await supabase
-    .from("photoLikes")
-    .select("*", {count: "exact"})
-    .eq("photoId", picId)
+    .from('photoLikes')
+    .select('*', { count: 'exact' })
+    .eq('photoId', picId);
 
   if (error) {
-    console.log("couldn't do it 43,", error);
+    console.log('couldn\'t do it 43,', error);
     return [];
   }
 

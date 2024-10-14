@@ -1,11 +1,11 @@
-import React, { useState, useContext, useEffect } from "react";
-import { AnimalMultiSelectContext } from "../contexts/animalMultiSelectContext";
-import { AnimalContext } from "../contexts/animalContext";
-import { MapBoundsContext } from "../contexts/mapBoundariesContext";
-import { getHistoData } from "../../supabaseCalls/photoSupabaseCalls";
-import AxisBar from "./histogramAxis";
-import DataBar from "./histogramBar";
-import "./histogram.css";
+import React, { useState, useContext, useEffect } from 'react';
+import { AnimalMultiSelectContext } from '../contexts/animalMultiSelectContext';
+import { AnimalContext } from '../contexts/animalContext';
+import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import { getHistoData } from '../../supabaseCalls/photoSupabaseCalls';
+import AxisBar from './histogramAxis';
+import DataBar from './histogramBar';
+import './histogram.css';
 
 export default function Histogram() {
   const { animalMultiSelection } = useContext(AnimalMultiSelectContext);
@@ -22,23 +22,22 @@ export default function Histogram() {
   }, [animalVal, boundaries]);
 
   const getHistogramData = async () => {
-
-    if (boundaries){
+    if (boundaries) {
       try {
         const historgramData = await getHistoData({
           animals: animalVal,
-          minLat: boundaries[1],
-          maxLat: boundaries[3],
-          minLng: boundaries[0],
-          maxLng: boundaries[2],
+          minLat:  boundaries[1],
+          maxLat:  boundaries[3],
+          minLng:  boundaries[0],
+          maxLng:  boundaries[2],
         });
-  
+
         let i = 1;
         let dataArray = [];
         let maxVal;
         let percentArr;
-  
-        if (historgramData){
+
+        if (historgramData) {
           for (i = 1; i < 13; i++) {
             historgramData.forEach((dataPoint) => {
               if (dataPoint.month === i) {
@@ -52,27 +51,27 @@ export default function Histogram() {
           maxVal = dataArray.reduce((a, b) => Math.max(a, b), -Infinity);
           if (maxVal === 0) {
             percentArr = dataArray;
-          } else {
-            percentArr = dataArray.map((val) => (val / maxVal) * 100);
           }
-    
+          else {
+            percentArr = dataArray.map(val => (val / maxVal) * 100);
+          }
+
           setHistoData(percentArr);
         }
-       
-      } catch (e) {
-        console.log({ title: "Error", message: e.message });
+      }
+      catch (e) {
+        console.log({ title: 'Error', message: e.message });
       }
     }
-    
   };
 
   return (
-    <div className="mainContainer" pointerEvents={'none'}>
-      <div className="barBox" pointerEvents={'none'}>
-        {histoData.length > 0 &&
-          histoData.map((moddedVal, index) => {
-            return <DataBar key={index} moddedVal={moddedVal} />;
-          })}
+    <div className="mainContainer" pointerEvents="none">
+      <div className="barBox" pointerEvents="none">
+        {histoData.length > 0
+        && histoData.map((moddedVal, index) => {
+          return <DataBar key={index} moddedVal={moddedVal} />;
+        })}
       </div>
       <AxisBar />
     </div>

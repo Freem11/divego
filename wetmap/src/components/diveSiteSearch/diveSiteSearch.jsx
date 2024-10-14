@@ -1,21 +1,21 @@
-import { useState, useContext } from "react";
-import { useEffect } from "react";
-import AutoSuggest from "../autoSuggest/autoSuggest";
-import { getSiteNamesThatFit, getSingleDiveSiteByNameAndRegion} from "../../supabaseCalls/diveSiteSupabaseCalls";
-import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
-import { MapBoundsContext } from "../contexts/mapBoundariesContext";
-import { Iterrator2Context } from "../contexts/iterrator2Context";
-import { TutorialContext } from "../contexts/tutorialContext";
-import { JumpContext } from "../contexts/jumpContext";
+import { useState, useContext } from 'react';
+import { useEffect } from 'react';
+import AutoSuggest from '../autoSuggest/autoSuggest';
+import { getSiteNamesThatFit, getSingleDiveSiteByNameAndRegion } from '../../supabaseCalls/diveSiteSupabaseCalls';
+import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
+import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import { Iterrator2Context } from '../contexts/iterrator2Context';
+import { TutorialContext } from '../contexts/tutorialContext';
+import { JumpContext } from '../contexts/jumpContext';
 
 export default function DiveSiteAutoComplete(props) {
   const { jump, setJump } = useContext(JumpContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
-    SelectedDiveSiteContext
+    SelectedDiveSiteContext,
   );
   const { boundaries } = useContext(MapBoundsContext);
   const [list, setList] = useState([]);
-  const [searchText, setSearchText] = useState("");
+  const [searchText, setSearchText] = useState('');
 
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { tutorialRunning } = useContext(TutorialContext);
@@ -26,7 +26,6 @@ export default function DiveSiteAutoComplete(props) {
     let diveSiteArray = [];
 
     if (boundaries && boundaries.length > 0) {
-
       diveSiteNames = null;
       diveSiteArray = [];
 
@@ -36,12 +35,13 @@ export default function DiveSiteAutoComplete(props) {
     if (diveSiteNames) {
       diveSiteNames.forEach((diveSite) => {
         let fullDSName;
-          if (diveSite.region) {
-            fullDSName = `${diveSite.name} ~ ${diveSite.region}`;
-          } else {
-            fullDSName = diveSite.name;
-          }
-          diveSiteArray.push(fullDSName);
+        if (diveSite.region) {
+          fullDSName = `${diveSite.name} ~ ${diveSite.region}`;
+        }
+        else {
+          fullDSName = diveSite.name;
+        }
+        diveSiteArray.push(fullDSName);
       });
     }
 
@@ -63,14 +63,13 @@ export default function DiveSiteAutoComplete(props) {
   const handleSelect = async (value) => {
     setSearchText(value);
     if (value !== null) {
-      let nameOnly = value.split(" ~ ");
+      let nameOnly = value.split(' ~ ');
       let diveSiteSet = await getSingleDiveSiteByNameAndRegion({ name: nameOnly[0], region: nameOnly[1] });
-  
+
       if (diveSiteSet) {
-    
         setSelectedDiveSite({
-          SiteName: diveSiteSet[0].name,
-          Latitude: diveSiteSet[0].lat,
+          SiteName:  diveSiteSet[0].name,
+          Latitude:  diveSiteSet[0].lat,
           Longitude: diveSiteSet[0].lng,
         });
 
@@ -80,55 +79,55 @@ export default function DiveSiteAutoComplete(props) {
           }
         }
       }
-      if(props.onSelect && typeof props.onSelect === "function") {
+      if (props.onSelect && typeof props.onSelect === 'function') {
         props.onSelect();
       }
       setJump(!jump);
-      setSearchText("");
+      setSearchText('');
     }
   };
 
   return (
-    <div className='column col-12 flex-column'>
+    <div className="column col-12 flex-column">
       <AutoSuggest
-        placeholder={"Search Dive Sites..."}
+        placeholder="Search Dive Sites..."
         value={searchText}
         list={list}
-        clear={() => setSearchText("")}
+        clear={() => setSearchText('')}
         handleChange={handleChange}
         handleSelect={handleSelect}
         style={{
-          height: "3vh",
-          marginLeft: "1vw",
-          marginBottom: "1vw",
-          fontSize: "2vw",
-          fontFamily: "Itim, cursive",
+          height:       '3vh',
+          marginLeft:   '1vw',
+          marginBottom: '1vw',
+          fontSize:     '2vw',
+          fontFamily:   'Itim, cursive',
         }}
         style1={{
-          marginTop: "0vh",
-          marginLeft: "-1.5vw",
+          marginTop:  '0vh',
+          marginLeft: '-1.5vw',
         }}
         style2={{
-          display: "flex",
-          height: "2.5vh",
-          width: "20vw",
-          paddingTop: "0.5vh",
-          paddingBottom: "0.5vh",
-          paddingLeft: "1vw",
-          paddingRight: "1vw",
-          listStyle: "none",
-          backgroundColor: "white",
-          marginBottom: "0.1vh",
-          borderRadius: "5px",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
+          display:         'flex',
+          height:          '2.5vh',
+          width:           '20vw',
+          paddingTop:      '0.5vh',
+          paddingBottom:   '0.5vh',
+          paddingLeft:     '1vw',
+          paddingRight:    '1vw',
+          listStyle:       'none',
+          backgroundColor: 'white',
+          marginBottom:    '0.1vh',
+          borderRadius:    '5px',
+          alignItems:      'center',
+          justifyContent:  'center',
+          cursor:          'pointer',
         }}
         style3={{
-          color: "black",
-          fontSize: "1vw",
-          fontFamily: "Itim, cursive",
-          fontWeight: "normal",
+          color:      'black',
+          fontSize:   '1vw',
+          fontFamily: 'Itim, cursive',
+          fontWeight: 'normal',
         }}
       />
     </div>

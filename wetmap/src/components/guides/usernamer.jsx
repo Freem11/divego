@@ -1,13 +1,13 @@
-import React, { useState, useContext, useEffect } from "react";
-import { Container, Form, FormGroup, Label, Input, Button } from "reactstrap";
-import { IterratorContext } from "../contexts/iterratorContext";
-import { SessionContext } from "../contexts/sessionContext";
-import { PinContext } from "../contexts/staticPinContext";
-import { DiveSpotContext } from "../contexts/diveSpotContext";
-import { UserProfileContext } from "../contexts/userProfileContext";
-import { updateProfile, grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
-import InputField from "../reusables/inputField";
-import "./usernamer.css";
+import React, { useState, useContext, useEffect } from 'react';
+import { Container, Form, FormGroup, Label, Input, Button } from 'reactstrap';
+import { IterratorContext } from '../contexts/iterratorContext';
+import { SessionContext } from '../contexts/sessionContext';
+import { PinContext } from '../contexts/staticPinContext';
+import { DiveSpotContext } from '../contexts/diveSpotContext';
+import { UserProfileContext } from '../contexts/userProfileContext';
+import { updateProfile, grabProfileById } from '../../supabaseCalls/accountSupabaseCalls';
+import InputField from '../reusables/inputField';
+import './usernamer.css';
 
 let userVar = false;
 
@@ -23,17 +23,18 @@ export default function UserNamer() {
   const [subButState, setSubButState] = useState(false);
 
   const [formVal, setFormVal] = useState({
-    userName: "",
+    userName: '',
   });
 
   const [formValidation, SetFormValidation] = useState({
-    userName: "",
+    userName: '',
   });
 
   const handleSubmit = async () => {
-    if (formVal.userName === "" || formVal.userName === null) {
+    if (formVal.userName === '' || formVal.userName === null) {
       userVar = true;
-    } else {
+    }
+    else {
       userVar = false;
     }
 
@@ -42,45 +43,48 @@ export default function UserNamer() {
       userName: userVar,
     });
 
-    if (formVal.userName === "") {
-      setUserFail("Your Username cannot be blank!");
-    } else {
+    if (formVal.userName === '') {
+      setUserFail('Your Username cannot be blank!');
+    }
+    else {
       let sessionUserId = activeSession.user.id;
       // let sessionUserId = 'acdc4fb2-17e4-4b0b-b4a3-2a60fdfd97dd';
       // console.log(sessionUserId, formVal.userName);
       try {
         await updateProfile({
-          id: sessionUserId,
+          id:       sessionUserId,
           username: formVal.userName,
         });
-        let success = await grabProfileById(sessionUserId)
+        let success = await grabProfileById(sessionUserId);
 
         if (success.length > 0) {
           setItterator(itterator + 1);
-          setFormVal({ userName: "" });
+          setFormVal({ userName: '' });
           setProfile([{ ...profile, UserName: formVal.userName }]);
           setPinValues({
             ...pinValues,
-            UserId: success[0].UserID,
+            UserId:   success[0].UserID,
             UserName: success[0].UserName,
           });
           setAddSiteVals({
             ...addSiteVals,
-            UserID: success[0].UserID,
+            UserID:   success[0].UserID,
             UserName: success[0].UserName,
           });
-        } else {
-          setUserFail("Sorry that username has already been taken");
         }
-      } catch (e) {
-        setUserFail("Sorry that username has already been taken");
-        console.log({ title: "Error", message: e.message });
+        else {
+          setUserFail('Sorry that username has already been taken');
+        }
+      }
+      catch (e) {
+        setUserFail('Sorry that username has already been taken');
+        console.log({ title: 'Error', message: e.message });
       }
     }
   };
 
   const handleChange = (e) => {
-    console.log(e.target.name)
+    console.log(e.target.name);
     setFormVal({ ...formVal, [e.target.name]: e.target.value });
     setUserFail(null);
   };
@@ -94,7 +98,7 @@ export default function UserNamer() {
         placeholder="User Name"
         placeholdertextcolor="darkgrey"
         color="#F0EEEB"
-        onChange={(e) => handleChange(e)}
+        onChange={e => handleChange(e)}
       />
 
       {userFail && <p className="erroMsgU">{userFail}</p>}

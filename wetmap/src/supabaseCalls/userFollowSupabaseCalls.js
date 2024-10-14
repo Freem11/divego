@@ -1,18 +1,17 @@
-import { supabase } from "../supabase";
+import { supabase } from '../supabase';
 
 export const insertUserFollow = async (userId, followUserId) => {
-
   const { data, error } = await supabase
-  .from("followUsers")
-  .insert([
-    {
-      user: userId,
-      follows: followUserId,
-    },
-  ]).select('*');
+    .from('followUsers')
+    .insert([
+      {
+        user:    userId,
+        follows: followUserId,
+      },
+    ]).select('*');
 
   if (error) {
-    console.log("couldn't do it 40,", error);
+    console.log('couldn\'t do it 40,', error);
   }
 
   if (data) {
@@ -22,12 +21,12 @@ export const insertUserFollow = async (userId, followUserId) => {
 
 export const deleteUserFollow = async (id) => {
   const { data, error } = await supabase
-    .from("followUsers")
+    .from('followUsers')
     .delete()
-    .eq("id", id);
+    .eq('id', id);
 
   if (error) {
-    console.log("couldn't do it 41,", error);
+    console.log('couldn\'t do it 41,', error);
     return [];
   }
 
@@ -37,15 +36,14 @@ export const deleteUserFollow = async (id) => {
 };
 
 export const checkIfUserFollows = async (userId, followUserId) => {
-
   const { data, error } = await supabase
-  .from("followUsers")
-  .select()
-  .eq("user", userId)
-  .eq("follows", followUserId);
+    .from('followUsers')
+    .select()
+    .eq('user', userId)
+    .eq('follows', followUserId);
 
   if (error) {
-    console.log("couldn't do it 40,", error);
+    console.log('couldn\'t do it 40,', error);
   }
 
   if (data) {

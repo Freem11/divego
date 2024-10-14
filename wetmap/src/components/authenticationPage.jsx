@@ -1,11 +1,11 @@
-import * as React from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import SignInRoute from "./signIn";
-import SignUpRoute from "./signUp";
+import * as React from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import SignInRoute from './signIn';
+import SignUpRoute from './signUp';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -29,14 +29,14 @@ function TabPanel(props) {
 
 TabPanel.propTypes = {
   children: PropTypes.node,
-  index: PropTypes.number.isRequired,
-  value: PropTypes.number.isRequired,
+  index:    PropTypes.number.isRequired,
+  value:    PropTypes.number.isRequired,
 };
 
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    'id':            `simple-tab-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
@@ -48,27 +48,27 @@ export default function AuthenticationPage() {
   };
 
   return (
-    <Box sx={{ width: "100vw", height: "100vh"}}>
-      <Box sx={{ borderBottom: 1, borderColor: "lightgrey", width: "100vw"}}>
+    <Box sx={{ width: '100vw', height: '100vh' }}>
+      <Box sx={{ borderBottom: 1, borderColor: 'lightgrey', width: '100vw' }}>
         <Tabs
           value={value}
           onChange={handleChange}
-          TabIndicatorProps={{sx:{backgroundColor: 'lightgray', height: 2}}}
+          TabIndicatorProps={{ sx: { backgroundColor: 'lightgray', height: 2 } }}
           sx={{
-            "& button.Mui-selected": { color: "lightgray", width: "50%"},
-            backgroundColor: "#538dbd",
-            fontFamily: "Patrick Hand",
+            '& button.Mui-selected': { color: 'lightgray', width: '50%' },
+            'backgroundColor':       '#538dbd',
+            'fontFamily':            'Patrick Hand',
           }}
         >
-          <Tab label="Sign In" {...a11yProps(0)} sx={{fontFamily: "Patrick Hand", color: "darkgray", width: "50%", fontSize: "2.5vw"}}/>
-          <Tab label="Sign Up" {...a11yProps(1)} sx={{fontFamily: "Patrick Hand", color: "darkgray", width: "50%", fontSize: "2.5vw"}}/>
+          <Tab label="Sign In" {...a11yProps(0)} sx={{ fontFamily: 'Patrick Hand', color: 'darkgray', width: '50%', fontSize: '2.5vw' }} />
+          <Tab label="Sign Up" {...a11yProps(1)} sx={{ fontFamily: 'Patrick Hand', color: 'darkgray', width: '50%', fontSize: '2.5vw' }} />
         </Tabs>
       </Box>
-      <TabPanel value={value} index={0} style={{backgroundColor: '#538dbd', height: "100%"}}>
-       <SignInRoute setValue={setValue}/>
+      <TabPanel value={value} index={0} style={{ backgroundColor: '#538dbd', height: '100%' }}>
+        <SignInRoute setValue={setValue} />
       </TabPanel>
-      <TabPanel value={value} index={1} style={{backgroundColor: '#538dbd', height: "100%"}}>
-      <SignUpRoute/>
+      <TabPanel value={value} index={1} style={{ backgroundColor: '#538dbd', height: '100%' }}>
+        <SignUpRoute />
       </TabPanel>
     </Box>
   );
