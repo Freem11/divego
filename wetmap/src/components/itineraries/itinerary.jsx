@@ -1,14 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
-import { animated, useSpring } from "react-spring";
-import { SitesArrayContext } from "../contexts/sitesArrayContext";
-import { CoordsContext } from "../contexts/mapCoordsContext";
-import { ZoomHelperContext } from "../contexts/zoomHelperContext";
-import { MinorContext } from "../contexts/minorContext";
-import { MasterContext } from "../contexts/masterContext";
-import "./itinerary.css";
-import { getDiveSitesByIDs } from "../../supabaseCalls/diveSiteSupabaseCalls";
-import gold from "../../images/mapIcons/AnchorGold.png";
-import diveFlag from "../../images/diveflag.png";
+import React, { useState, useContext, useEffect } from 'react';
+import { animated, useSpring } from 'react-spring';
+import { SitesArrayContext } from '../contexts/sitesArrayContext';
+import { CoordsContext } from '../contexts/mapCoordsContext';
+import { ZoomHelperContext } from '../contexts/zoomHelperContext';
+import { MinorContext } from '../contexts/minorContext';
+import { MasterContext } from '../contexts/masterContext';
+import './itinerary.css';
+import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
+import gold from '../../images/mapIcons/AnchorGold.png';
+import diveFlag from '../../images/diveflag.png';
 
 export default function Itinerary(props) {
   const { itinerary, selectedID, setSelectedID, setShopModal } = props;
@@ -22,7 +22,7 @@ export default function Itinerary(props) {
 
   const heightChange = useSpring({
     from: { height: 0 },
-    to: { height: hiddenHeigth },
+    to:   { height: hiddenHeigth },
   });
 
   const startMoreInfoAnimation = (id) => {
@@ -30,7 +30,8 @@ export default function Itinerary(props) {
 
     if (hiddenHeigth === 0) {
       setHiddenHeigth(150);
-    } else {
+    }
+    else {
       setHiddenHeigth(0);
     }
   };
@@ -80,17 +81,20 @@ export default function Itinerary(props) {
             className="sitesButton"
             onClick={() => flipMap(itinerary.siteList)}
           >
-            <img src={gold} style={{ height: "30px", width: "30px" }} />
+            <img src={gold} style={{ height: '30px', width: '30px' }} />
           </div>
           <div className="bookButton">
-            <img src={diveFlag} style={{ height: "30px", width: "30px" }} />
+            <img src={diveFlag} style={{ height: '30px', width: '30px' }} />
           </div>
         </div>
       </div>
       <animated.div className="extraBox" style={heightChange}>
         <div className="topRail">
           <p className="dateText">
-            {itinerary.startDate} to {itinerary.endDate}
+            {itinerary.startDate}
+            {' '}
+            to
+            {itinerary.endDate}
           </p>
           <p className="priceText">{itinerary.price}</p>
         </div>

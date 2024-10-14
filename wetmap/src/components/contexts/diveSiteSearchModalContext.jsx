@@ -2,14 +2,14 @@ import { createContext, useState } from 'react';
 
 export const DiveSiteSearchModalContext = createContext('');
 
-const DiveSiteSearchModalContextProvider = ({children}) => {
-    const [diveSiteSearchModal, setDiveSiteSearchModal] = useState(false);
+const DiveSiteSearchModalContextProvider = ({ children }) => {
+  const [diveSiteSearchModal, setDiveSiteSearchModal] = useState(false);
 
-    return (
-        <DiveSiteSearchModalContext.Provider value={{ diveSiteSearchModal, setDiveSiteSearchModal }}>
-            {children}
-        </DiveSiteSearchModalContext.Provider>
-    )
-}
+  return (
+    <DiveSiteSearchModalContext.Provider value={{ diveSiteSearchModal, setDiveSiteSearchModal }}>
+      {children}
+    </DiveSiteSearchModalContext.Provider>
+  );
+};
 
 export default DiveSiteSearchModalContextProvider;

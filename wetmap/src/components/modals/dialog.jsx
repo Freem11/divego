@@ -1,44 +1,44 @@
-import { useContext } from "react";
+import { useContext } from 'react';
 import {
   Button,
   Dialog,
   DialogTitle,
   DialogContent,
   DialogActions,
-} from "@mui/material";
-import { SessionContext } from "../contexts/sessionContext";
-import { addDeletedAccountInfo, deleteProfile } from "../../supabaseCalls/accountSupabaseCalls";
-import { userDelete, signOut } from "../../supabaseCalls/authenticateSupabaseCalls";
-import "./dialog.css";
+} from '@mui/material';
+import { SessionContext } from '../contexts/sessionContext';
+import { addDeletedAccountInfo, deleteProfile } from '../../supabaseCalls/accountSupabaseCalls';
+import { userDelete, signOut } from '../../supabaseCalls/authenticateSupabaseCalls';
+import './dialog.css';
 
 const ActDelDialog = (props) => {
   const { openDialog, setOpenDialog } = props;
   const { activeSession, setActiveSession } = useContext(SessionContext);
-  let first = "";
-  let last = "";
+  let first = '';
+  let last = '';
 
   if (activeSession.user.user_metadata.firstName) {
     first = activeSession.user.user_metadata.firstName;
-  } 
+  }
 
   if (activeSession.user.user_metadata.lastName) {
     last = activeSession.user.user_metadata.lastName;
-  } 
+  }
 
   let blurb = `:${activeSession.user.id}`;
 
   const handleAccountDelete = async () => {
     await addDeletedAccountInfo({
       firstName: first,
-      lastName: last,
-      email: activeSession.user.email,
-      UserID: activeSession.user.id,
+      lastName:  last,
+      email:     activeSession.user.email,
+      UserID:    activeSession.user.id,
     });
 
-    await deleteProfile(activeSession.user.id)
+    await deleteProfile(activeSession.user.id);
     await userDelete(activeSession.user.id);
     await setActiveSession(null);
-    await localStorage.removeItem("token");
+    await localStorage.removeItem('token');
     await signOut();
     await setOpenDialog(false);
   };
@@ -47,8 +47,12 @@ const ActDelDialog = (props) => {
     <Dialog open={openDialog}>
       <DialogTitle>You Are About To Delete Your Scuba SEAsons Account</DialogTitle>
       <DialogContent>
-        Are you sure you want to delete your account? <br></br>
-        <br></br> Please note that deleting your account will not delete your
+        Are you sure you want to delete your account?
+        {' '}
+        <br></br>
+        <br></br>
+        {' '}
+        Please note that deleting your account will not delete your
         previous dive site or photo submissions, please contact us if you wish
         to have those removed from the community
       </DialogContent>
