@@ -12,6 +12,13 @@ export default defineConfig({
       cert: '../../cert.pem',
     },
   },
+    test: /\.(ttf)$/,
+    use: [{
+        loader: 'file-loader',
+        options: {
+            name: './fonts/[name].[ext]'
+        },
+    },],
   build: {
     chunkSizeWarningLimit: 1500,
   },

@@ -3,7 +3,7 @@ import { animated, useSpring } from 'react-spring';
 import Logo from './logo/logo';
 import Home from './googleMap';
 import AdminPortal from './adminPortal';
-import PicUploader from './modals/picUploader';
+import PicUploader from './newModals/PicUploader';
 import SiteSubmitter from './modals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';

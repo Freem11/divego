@@ -44,6 +44,7 @@
     "react-router-dom": "^6.3.0",
     "react-social-login-buttons": "^3.6.1",
     "react-spring": "^9.7.2",
+    "react-web-vector-icons": "^1.0.2",
     "reactjs-social-login": "^2.6.2",
     "reactstrap": "^9.1.1",
     "spectre.css": "^0.5.9",
