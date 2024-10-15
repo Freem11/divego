@@ -8,7 +8,8 @@ import Button from "./button";
 // import { TouchableWithoutFeedback as Toucher } from "react-native-gesture-handler";
 // import moment from "moment";
 import WavyHeaderUploader from "./wavyHeaderUploader";
-import TextInputField from "./textInput";
+import TextInputField from '../newModals/textInput';
+import AutoSuggest from '../autoSuggest/autoSuggest';
 // import AnimalAutoSuggest from "../autoSuggest/autoSuggest";
 // import {
 //   activeFonts,
@@ -160,7 +161,7 @@ export default function PicUploader(props) {
             onClick={() => handleImageUpload()}
           />
         </div>
-        {pin.PicFile ? (
+        {pin && pin.PicFile ? (
           <div style={{ marginTop: "40%" }}>
             <MaterialIcons
               name="add-a-photo"
@@ -185,15 +186,14 @@ export default function PicUploader(props) {
             <p className={style.inputLabels}>
               {screenData.PicUploader.whatLabel}
             </p>
-            {/* <AnimalAutoSuggest
+            <AutoSuggest
               pin={pin}
               setPin={setPin}
               inputValue={pin.Animal}
               icon={"shark"}
               placeHolderText={screenData.PicUploader.whatPlaceholder}
-              secure={false}
               vectorIcon={"MaterialCommunityIcons"}
-            /> */}
+            />
           </div>
           <div style={null}>
             <p className={style.inputLabels}>

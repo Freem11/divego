@@ -6,17 +6,20 @@
     justify-content: center;
     background-color: $primaryBlue;
     border: $primaryBlue solid 1px;
-    width: 24vw;
+    width: 22vw;
     height: 5vh;
     text-align: center;
     border-radius: 30px;
     padding: 2px;
+    font-size: $fontSizeSubHeading;
+    font-family: $base-font-family;
+    font-weight: 400;
   }
 
   .defaultStyleText {
     font-family: $base-font-family;
     font-weight: 400;
-    font-size: $fontSizeStandardText;
+    font-size: $fontSizeSubHeading;
     color: $themeWhite;
   }
   
@@ -34,17 +37,20 @@
     background-color: $themeWhite;
     color: $primaryBlue;
     border: $primaryBlue solid 1px;
-    width: 24vw;
+    width: 22vw;
     height: 5vh;
     text-align: center;
     border-radius: 30px;
     padding: 2px;
+    font-size: $fontSizeSubHeading;
+    font-family: $base-font-family;
+    font-weight: 400;
   }
   
   .invertedStyleText {
-    font-family: $second-font-family;
+    font-family: $base-font-family;
     font-weight: 400;
-    font-size: $fontSizeStandardText;
+    font-size: $fontSizeSubHeading;
     color: $primaryBlue;
   }
   .invertedStyle:hover {
