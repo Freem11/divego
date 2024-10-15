@@ -8,7 +8,7 @@ import {
   Fontisto,
 } from "react-web-vector-icons";
 import { InputBase } from "@mui/material";
-// import { activeFonts, colors } from "../styles";
+import style from "./textInput.module.scss";
 
 export default function TextInputField(props) {
   const {
@@ -24,7 +24,7 @@ export default function TextInputField(props) {
   } = props;
 
   return (
-    <div style={null}>
+    <div className={style.inputContainer}>
       {!vectorIcon ? (
         <MaterialIcons name={icon} size={30} color="darkgrey" />
       ) : null}
@@ -39,6 +39,7 @@ export default function TextInputField(props) {
       ) : null}
 
       <InputBase
+        className={style.inputText}
         value={inputValue}
         placeholder={placeHolderText}
         onChange={onChangeText}

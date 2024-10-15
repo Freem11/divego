@@ -1,9 +1,13 @@
 import React, { useState, useContext, useEffect } from "react";
 import screenData from "./screenData.json";
+import style from "./modalContent.module.scss";
+import LargeButton from "./largeButton";
+import Button from "./button";
+
 // import DateTimePickerModal from "react-native-modal-datetime-picker";
 // import { TouchableWithoutFeedback as Toucher } from "react-native-gesture-handler";
 // import moment from "moment";
-// import WavyHeaderUploader from "./wavyHeaderUploader";
+import WavyHeaderUploader from "./wavyHeaderUploader";
 import TextInputField from "./textInput";
 // import AnimalAutoSuggest from "../autoSuggest/autoSuggest";
 // import {
@@ -20,7 +24,7 @@ import { insertPhotoWaits } from "../../supabaseCalls/photoWaitSupabaseCalls";
 import {
   uploadphoto,
   removePhoto,
-} from '../../cloudflareBucketCalls/cloudflareAWSCalls';
+} from "../../cloudflareBucketCalls/cloudflareAWSCalls";
 // import { chooseImageHandler } from "./imageUploadHelpers";
 // import { ActiveConfirmationIDContext } from "../contexts/activeConfirmationIDContext";
 // import { ConfirmationTypeContext } from "../contexts/confirmationTypeContext";
@@ -90,11 +94,7 @@ export default function PicUploader(props) {
   // };
 
   const onSubmit = async () => {
-    if (
-      pin.PicFile &&
-      pin.PicDate.length > 0 &&
-      pin.Animal.length > 0
-    ) {
+    if (pin.PicFile && pin.PicDate.length > 0 && pin.Animal.length > 0) {
       insertPhotoWaits(pin);
       setPin({
         ...pin,
@@ -134,37 +134,57 @@ export default function PicUploader(props) {
   };
 
   return (
-    <div style={{ width: "100%", height: "100%", backgroundColor: "pink"}}>
-      <MaterialIcons
-        name="chevron-left"
-        size={30}
-        color={"$themeWhite"}
-        onPress={() => onClose()}
-      />
-      {pin.PicFile ? (
-        <div style={null}>
-          <MaterialIcons
-            name="add-a-photo"
-            size={30}
-            color={"$themeWhite"}
-            onPress={() => handleImageUpload()}
+    <div
+      className="$themeWhite"
+      style={{
+        width: "100%",
+        height: "100%",
+        backgroundColor: "$themeWhite",
+        marginBottom: "100%",
+      }}
+    >
+      <div className={style.backButton} style={{ position: "absolute" }}>
+        <MaterialIcons
+          name="chevron-left"
+          size={30}
+          color={"$themeWhite"}
+          onClick={() => onClose()}
+        />
+      </div>
+
+      <div className={style.picZone}>
+        <div style={{ paddingTop: "25%" }}>
+          <LargeButton
+            altStyle={true}
+            btnText={screenData.PicUploader.uploadButton}
+            onClick={() => handleImageUpload()}
           />
         </div>
-      ) : null}
-      
-      <div style={null}>
-
-        <p style={null}>{screenData.PicUploader.header}</p>
+        {pin.PicFile ? (
+          <div style={{ marginTop: "40%" }}>
+            <MaterialIcons
+              name="add-a-photo"
+              size={30}
+              color={"green"}
+              onClick={() => handleImageUpload()}
+            />
+          </div>
+        ) : null}
+      </div>
+      <div style={{ marginTop: "0%" }}>
+        <p className={style.headerText}>{screenData.PicUploader.header}</p>
 
         <div
           style={{
-            marginBottom: '70%',
-            width: '75%',
+            marginBottom: "20%",
+            width: "75%",
             alignItems: "center",
           }}
         >
           <div style={null}>
-            <p style={null}>{screenData.PicUploader.whatLabel}</p>
+            <p className={style.inputLabels}>
+              {screenData.PicUploader.whatLabel}
+            </p>
             {/* <AnimalAutoSuggest
               pin={pin}
               setPin={setPin}
@@ -176,19 +196,23 @@ export default function PicUploader(props) {
             /> */}
           </div>
           <div style={null}>
-            <p style={null}>{screenData.PicUploader.whenLabel}</p>
-              <div pointerEvents="none">
-                <TextInputField
-                  icon={"calendar-month-outline"}
-                  inputValue={pin.PicDate}
-                  placeHolderText={screenData.PicUploader.whenPlaceholder}
-                  secure={false}
-                  vectorIcon={"MaterialCommunityIcons"}
-                />
-              </div>
+            <p className={style.inputLabels}>
+              {screenData.PicUploader.whenLabel}
+            </p>
+            <div pointerEvents="none">
+              <TextInputField
+                icon={"calendar-month-outline"}
+                inputValue={pin.PicDate}
+                placeHolderText={screenData.PicUploader.whenPlaceholder}
+                secure={false}
+                vectorIcon={"MaterialCommunityIcons"}
+              />
+            </div>
           </div>
           <div style={null}>
-            <p style={null}>{screenData.PicUploader.whereLabel}</p>
+            <p className={style.inputLabels}>
+              {screenData.PicUploader.whereLabel}
+            </p>
             <TextInputField
               icon={"anchor"}
               inputValue={pin.siteName}
@@ -198,32 +222,28 @@ export default function PicUploader(props) {
           </div>
         </div>
 
-        <div style={null}>
-          <div style={null} onClick={() => onSubmit()}>
-            <p style={null}>{screenData.PicUploader.submitButton}</p>
-            <MaterialIcons
-                name="chevron-right"
-                size={30}
-                color={"$themeWhite"}
-              />
-          </div>
+        <div className={style.submitZone}>
+          <Button
+            onClick={() => onSubmit()}
+            btnText={screenData.PicUploader.submitButton}
+            icon={true}
+          />
         </div>
-
       </div>
 
-      {/* <WavyHeaderUploader
-        customStyles={styles.svgCurve}
+      <WavyHeaderUploader
+        customStyles={{ position: "absolute", bottom: 500, width: "100%" }}
         image={pin.PicFile}
         setPin={setPin}
         pin={pin}
       ></WavyHeaderUploader>
 
-      <DateTimePickerModal
+      {/* <DateTimePickerModal
         isVisible={datePickerVisible}
         mode="date"
         onConfirm={handleDatePickerConfirm}
         onCancel={hideDatePicker}
-      /> */}
+      />  */}
     </div>
   );
 }
