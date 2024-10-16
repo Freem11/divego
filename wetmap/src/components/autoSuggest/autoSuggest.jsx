@@ -55,7 +55,7 @@ export default function AutoSuggest(props) {
   };
 
   return (
-    <div className="column col-11">
+    <div>
       <TextInputField
         icon={icon}
         inputValue={inputValue}

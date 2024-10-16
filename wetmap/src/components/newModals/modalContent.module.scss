@@ -23,7 +23,7 @@
   font-weight: 100;
   color: darkgrey;
   text-align: left;
-  margin-left: 5%;
+  margin-left: -20%;
 }
 
 .inputLabels {
@@ -32,7 +32,7 @@
   font-weight: 300;
   color: $themeBlack;
   text-align: left;
-  margin-left: 10%;
+  margin-left: 5%;
   margin-bottom: 0;
   margin-top: 2vh;
 }
@@ -43,4 +43,5 @@
 	border-width: 0;
     align-items: center;
 	justify-content: flex-end;
+	margin-top: -10%;
   }

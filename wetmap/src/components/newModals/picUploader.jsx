@@ -8,8 +8,8 @@ import Button from "./button";
 // import { TouchableWithoutFeedback as Toucher } from "react-native-gesture-handler";
 // import moment from "moment";
 import WavyHeaderUploader from "./wavyHeaderUploader";
-import TextInputField from '../newModals/textInput';
-import AutoSuggest from '../autoSuggest/autoSuggest';
+import TextInputField from "../newModals/textInput";
+import AutoSuggest from "../autoSuggest/autoSuggest";
 // import AnimalAutoSuggest from "../autoSuggest/autoSuggest";
 // import {
 //   activeFonts,
@@ -172,7 +172,17 @@ export default function PicUploader(props) {
           </div>
         ) : null}
       </div>
-      <div style={{ marginTop: "0%" }}>
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          flexDirection: "column",
+          marginLeft: "5%",
+          marginRight: "5%",
+          height: "50%"
+        }}
+      >
         <p className={style.headerText}>{screenData.PicUploader.header}</p>
 
         <div

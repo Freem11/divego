@@ -23,8 +23,6 @@ export default function TextInputField(props) {
     animal,
   } = props;
 
-  console.log("hey", animal, inputValue)
-
   return (
     <div className={style.inputContainer}>
       {!vectorIcon ? (
