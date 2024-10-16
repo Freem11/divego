@@ -36,6 +36,7 @@ const PlacesAutoComplete = (props) => {
     setMapCoords([lat, lng]);
     setValue('');
     setJump(!jump);
+    props?.handleSelect?.();
   };
 
   return (

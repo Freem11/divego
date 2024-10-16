@@ -21,6 +21,15 @@ export default function Modal(props) {
         return;
       }
 
+      if (!document.body.contains(e.target)) {
+        // In some cases we have dynamic conatent in the modal (e.g. dropdown lists)
+        // Some elements might be removed by some other onClick handlers (when we select item from the dropdown list - dropdown closes)
+        // Current onClick handler will close the modal because of the previous condition - e.target does not belong modal wrapper anymore
+        // So current condition will not let us close the modal if we clicked on the element that was removed by some other onClick handler
+
+        return;
+      }
+
       if (tutorialRunning) {
         return;
       }
