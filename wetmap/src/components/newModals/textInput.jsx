@@ -12,6 +12,7 @@ import style from "./textInput.module.scss";
 
 export default function TextInputField(props) {
   const {
+    dataType,
     icon,
     placeHolderText,
     secure,
@@ -39,6 +40,7 @@ export default function TextInputField(props) {
       ) : null}
 
       <InputBase
+        type={dataType}
         className={style.inputText}
         value={inputValue}
         placeholder={placeHolderText}

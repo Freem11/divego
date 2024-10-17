@@ -211,6 +211,7 @@ export default function PicUploader(props) {
             </p>
             <div pointerEvents="none">
               <TextInputField
+              dataType="date"
                 icon={"calendar-month-outline"}
                 inputValue={pin.PicDate}
                 placeHolderText={screenData.PicUploader.whenPlaceholder}
@@ -224,6 +225,7 @@ export default function PicUploader(props) {
               {screenData.PicUploader.whereLabel}
             </p>
             <TextInputField
+              dataType="text"
               icon={"anchor"}
               inputValue={pin.siteName}
               placeHolderText={screenData.PicUploader.wherePlaceholder}
