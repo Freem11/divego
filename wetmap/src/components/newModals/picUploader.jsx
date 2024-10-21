@@ -3,21 +3,13 @@ import screenData from "./screenData.json";
 import style from "./modalContent.module.scss";
 import LargeButton from "./largeButton";
 import Button from "./button";
-
+import { Container, Form, FormGroup, Label, Input } from "reactstrap";
 // import DateTimePickerModal from "react-native-modal-datetime-picker";
 // import { TouchableWithoutFeedback as Toucher } from "react-native-gesture-handler";
 // import moment from "moment";
 import WavyHeaderUploader from "./wavyHeaderUploader";
 import TextInputField from "../newModals/textInput";
 import AutoSuggest from "../autoSuggest/autoSuggest";
-// import AnimalAutoSuggest from "../autoSuggest/autoSuggest";
-// import {
-//   activeFonts,
-//   colors,
-//   fontSizes,
-//   authenicationButton,
-//   buttonText,
-// } from "../styles";
 import { PinContext } from "../contexts/staticPinContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { MaterialIcons } from "react-web-vector-icons";
@@ -26,7 +18,7 @@ import {
   uploadphoto,
   removePhoto,
 } from "../../cloudflareBucketCalls/cloudflareAWSCalls";
-// import { chooseImageHandler } from "./imageUploadHelpers";
+import { handleImageUpload, clearPreviousImage } from "./imageUploadHelpers";
 // import { ActiveConfirmationIDContext } from "../contexts/activeConfirmationIDContext";
 // import { ConfirmationTypeContext } from "../contexts/confirmationTypeContext";
 // import { ConfirmationModalContext } from "../contexts/confirmationModalContext";
@@ -38,6 +30,8 @@ export default function PicUploader(props) {
   const {} = props;
   const { profile } = useContext(UserProfileContext);
   const { pin, setPin } = useContext(PinContext);
+  const [picUrl, setPicUrl] = useState(null);
+
   // const { levelTwoScreen, setLevelTwoScreen } = useContext(
   //   LevelTwoScreenContext
   // );
@@ -45,54 +39,32 @@ export default function PicUploader(props) {
   // const { setConfirmationModal } = useContext(ConfirmationModalContext);
   // const { setConfirmationType } = useContext(ConfirmationTypeContext);
 
-  const [datePickerVisible, setDatePickerVisible] = useState(false);
-  const [date, setDate] = useState(new Date());
+  function handleClick() {
+    document.getElementById("file").click();
+  }
 
-  // const showDatePicker = () => {
-  //   Keyboard.dismiss();
-  //   setDatePickerVisible(true);
-  // };
+  const handleImageSelection = async (e) => {
+    if (e.target && e.target.name === "PicFile") {
+      if (pin.PicFile !== null) {
+        clearPreviousImage(pin.PicFile);
+      }
 
-  // const hideDatePicker = () => {
-  //   setDatePickerVisible(false);
-  // };
-
-  const handleDatePickerConfirm = (passedDate) => {
-    let formattedDate = moment(passedDate).format("YYYY-MM-DD");
-    if (passedDate > date) return;
-
-    setPin({ ...pin, PicDate: formattedDate });
-    hideDatePicker();
+      const createFileName = await handleImageUpload(e);
+      setPin({
+        ...pin,
+        PicFile: `animalphotos/public/${createFileName}`,
+      });
+    }
   };
 
-  // const handleImageUpload = async () => {
-  //   try {
-  //     const image = await chooseImageHandler();
-  //     if (image) {
-  //       let uri = image.assets[0].uri;
-  //       let extension = image.assets[0].uri.split(".").pop();
-  //       const fileName = Date.now() + "." + extension;
-
-  //       //create new photo file and upload
-  //       let picture = await fetch(uri);
-  //       picture = await picture.blob();
-  //       await uploadphoto(picture, fileName);
-  //       if (pin.PicFile !== null || pin.PicFile === "") {
-  //         await removePhoto({
-  //           filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-  //           fileName: pin.PicFile.split("/").pop(),
-  //         });
-  //       }
-
-  //       setPin({
-  //         ...pin,
-  //         PicFile: `animalphotos/public/${fileName}`,
-  //       });
-  //     }
-  //   } catch (e) {
-  //     console.log("error: Photo Selection Cancelled", e.message);
-  //   }
-  // };
+  useEffect(() => {
+    if (pin.PicFile) {
+      let photoName = pin.PicFile.split("/").pop();
+      setPicUrl(
+        import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${photoName}`
+      );
+    }
+  }, [pin.PicFile]);
 
   const onSubmit = async () => {
     if (pin.PicFile && pin.PicDate.length > 0 && pin.Animal.length > 0) {
@@ -154,20 +126,46 @@ export default function PicUploader(props) {
       </div>
 
       <div className={style.picZone}>
-        <div style={{ paddingTop: "25%" }}>
-          <LargeButton
-            altStyle={true}
-            btnText={screenData.PicUploader.uploadButton}
-            onClick={() => handleImageUpload()}
-          />
-        </div>
-        {pin && pin.PicFile ? (
-          <div style={{ marginTop: "40%" }}>
+        {picUrl ? (
+          <img
+            src={picUrl}
+            width={"100%"}
+            className={style.picStyles}
+          ></img>
+        ) : (
+          <div style={{ paddingTop: "25%" }}>
+            <LargeButton
+              altStyle={true}
+              btnText={screenData.PicUploader.uploadButton}
+              onClick={() => handleClick()}
+            />
+          </div>
+        )}
+
+        <FormGroup>
+          <Input
+            placeholder="Upload"
+            className="modalInputs2"
+            style={{
+              textAlign: "center",
+              display: "none",
+            }}
+            id="file"
+            type="file"
+            name="PicFile"
+            bsSize="lg"
+            onChange={handleImageSelection}
+            // onClick={e => handleNoGPSClose(e)}
+          ></Input>
+        </FormGroup>
+
+        {picUrl ? (
+          <div style={{ position: 'absolute', right: '5%',  marginTop: "40%" }}>
             <MaterialIcons
               name="add-a-photo"
               size={30}
-              color={"green"}
-              onClick={() => handleImageUpload()}
+              color={"white"}
+              onClick={() => handleClick()}
             />
           </div>
         ) : null}
@@ -180,7 +178,7 @@ export default function PicUploader(props) {
           flexDirection: "column",
           marginLeft: "5%",
           marginRight: "5%",
-          height: "50%"
+          height: "50%",
         }}
       >
         <p className={style.headerText}>{screenData.PicUploader.header}</p>
@@ -211,7 +209,7 @@ export default function PicUploader(props) {
             </p>
             <div pointerEvents="none">
               <TextInputField
-              dataType="date"
+                dataType="date"
                 icon={"calendar-month-outline"}
                 inputValue={pin.PicDate}
                 placeHolderText={screenData.PicUploader.whenPlaceholder}
