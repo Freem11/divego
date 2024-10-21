@@ -1,11 +1,9 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext, useEffect, useRef } from "react";
 import screenData from "./screenData.json";
 import style from "./modalContent.module.scss";
 import LargeButton from "./largeButton";
 import Button from "./button";
 import { Container, Form, FormGroup, Label, Input } from "reactstrap";
-// import DateTimePickerModal from "react-native-modal-datetime-picker";
-// import { TouchableWithoutFeedback as Toucher } from "react-native-gesture-handler";
 // import moment from "moment";
 import WavyHeaderUploader from "./wavyHeaderUploader";
 import TextInputField from "../newModals/textInput";
@@ -19,12 +17,16 @@ import {
   removePhoto,
 } from "../../cloudflareBucketCalls/cloudflareAWSCalls";
 import { handleImageUpload, clearPreviousImage } from "./imageUploadHelpers";
+import ConfirmationModal from '../modals/confirmationModal';
+import { animated, useSpring } from 'react-spring';
+import { ModalContext } from '../contexts/modalContext.jsx';
 // import { ActiveConfirmationIDContext } from "../contexts/activeConfirmationIDContext";
 // import { ConfirmationTypeContext } from "../contexts/confirmationTypeContext";
 // import { ConfirmationModalContext } from "../contexts/confirmationModalContext";
 
-// const windowWidth = Dimensions.get("window").width;
-// const windowHeight = Dimensions.get("window").height;
+const screenWidthInital = window.innerWidth;
+const screenHeitghInital = window.innerHeight;
+
 
 export default function PicUploader(props) {
   const {} = props;
@@ -32,12 +34,41 @@ export default function PicUploader(props) {
   const { pin, setPin } = useContext(PinContext);
   const [picUrl, setPicUrl] = useState(null);
 
-  // const { levelTwoScreen, setLevelTwoScreen } = useContext(
-  //   LevelTwoScreenContext
-  // );
-  // const { setActiveConfirmationID } = useContext(ActiveConfirmationIDContext);
-  // const { setConfirmationModal } = useContext(ConfirmationModalContext);
-  // const { setConfirmationType } = useContext(ConfirmationTypeContext);
+  const successModalRef = useRef(null);
+  const cautionModalRef = useRef(null);
+  const [successModalYCoord, setSuccessModalYCoord] = useState(0);
+  const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
+  const { modalPause } = useContext(ModalContext);
+
+  const sucessModalSlide = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to:   { transform: `translate3d(0,${successModalYCoord}px,0)` },
+  });
+
+  const cautionModalSlide = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to:   { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
+  });
+
+  const animateSuccessModal = () => {
+    if (successModalYCoord === 0) {
+      setSuccessModalYCoord(-windowHeight);
+    }
+    else {
+      setSuccessModalYCoord(0);
+    }
+  };
+
+  const animateCautionModal = () => {
+    if (cautionModalYCoord === 0) {
+      setCautionModalYCoord(-windowHeight);
+    }
+    else {
+      setCautionModalYCoord(0);
+    }
+  };
+
+
 
   function handleClick() {
     document.getElementById("file").click();
@@ -63,6 +94,8 @@ export default function PicUploader(props) {
       setPicUrl(
         import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${photoName}`
       );
+    } else {
+      setPicUrl(null)
     }
   }, [pin.PicFile]);
 
@@ -73,26 +106,18 @@ export default function PicUploader(props) {
         ...pin,
         PicFile: null,
         Animal: "",
-        PicDate: "",
-        Latitude: "",
-        Longitude: "",
-        DDVal: "0",
+        PicDate: ""
       });
-      setConfirmationType("Sea Creature Submission");
-      setActiveConfirmationID("ConfirmationSuccess");
-      setConfirmationModal(true);
+      setPicUrl(null)
+      animateSuccessModal();
     } else {
-      setActiveConfirmationID("ConfirmationCaution");
-      setConfirmationModal(true);
+      animateCautionModal();
     }
   };
 
   const onClose = async () => {
     if (pin.PicFile !== null || pin.PicFile === "") {
-      await removePhoto({
-        filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
-        fileName: pin.PicFile.split("/").pop(),
-      });
+      await clearPreviousImage(pin.PicFile);
     }
     // setLevelTwoScreen(false);
     setPin({
@@ -102,9 +127,20 @@ export default function PicUploader(props) {
       PicDate: "",
       Latitude: "",
       Longitude: "",
-      DDVal: "0",
+      siteName: "",
     });
   };
+
+
+  window.addEventListener('resize', trackDimensions);
+
+  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
+  const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
+
+  function trackDimensions() {
+    setWindowWidth(window.innerWidth);
+    setWindowHeigth(window.innerHeight);
+  }
 
   return (
     <div
@@ -155,7 +191,6 @@ export default function PicUploader(props) {
             name="PicFile"
             bsSize="lg"
             onChange={handleImageSelection}
-            // onClick={e => handleNoGPSClose(e)}
           ></Input>
         </FormGroup>
 
@@ -248,12 +283,30 @@ export default function PicUploader(props) {
         pin={pin}
       ></WavyHeaderUploader>
 
-      {/* <DateTimePickerModal
-        isVisible={datePickerVisible}
-        mode="date"
-        onConfirm={handleDatePickerConfirm}
-        onCancel={hideDatePicker}
-      />  */}
+<animated.div
+        className="successModal modalBase"
+        style={sucessModalSlide}
+        ref={successModalRef}
+      >
+        <ConfirmationModal
+          submissionItem="sea creature submission"
+          animateModal={animateSuccessModal}
+          // handleClose={handleModalClose}
+          isSuccess={true}
+        />
+      </animated.div>
+
+      <animated.div
+        className="cautionModal modalBase"
+        style={cautionModalSlide}
+        ref={cautionModalRef}
+      >
+        <ConfirmationModal
+          submissionItem="sea creature submission"
+          animateModal={animateCautionModal}
+          isSuccess={false}
+        />
+      </animated.div>
     </div>
   );
 }
