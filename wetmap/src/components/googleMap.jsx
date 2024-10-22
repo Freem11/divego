@@ -6,7 +6,7 @@ import {
 } from "@react-google-maps/api";
 import "./googleMap.css";
 import useSupercluster from "use-supercluster";
-import "@reach/combobox/styles.css";
+// import "@reach/combobox/styles.css";
 import Collapse from "@mui/material/Collapse";
 import anchorIcon from "../images/mapIcons/AnchorBlue1.png";
 import anchorClust from "../images/mapIcons/AnchorCluster.png";
