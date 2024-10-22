@@ -30,8 +30,9 @@
       margin: 3vh auto;
     }
     &.large {
-      height: 80vh;
+      height: 100vh;
       margin: 0vh auto;
+      max-width: 1200px;
     }
     &.full {
       width: auto;
