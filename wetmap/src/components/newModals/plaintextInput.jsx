@@ -1,6 +1,14 @@
 import React from "react";
-import { FontAwesome6 } from "react-web-vector-icons";
+import {
+  MaterialCommunityIcons,
+  MaterialIcons,
+  Entypo,
+  Ionicons,
+  FontAwesome6,
+  Fontisto,
+} from "react-web-vector-icons";
 import { InputBase } from "@mui/material";
+import style from "./textInput.module.scss";
 
 export default function PlainTextInput(props) {
   const {
@@ -16,38 +24,36 @@ export default function PlainTextInput(props) {
   } = props;
 
   let checkPasser = false;
-  if (isPartnerAccount) {
-    checkPasser = isPartnerAccount;
-  } else if (isMyShop) {
-    checkPasser = isMyShop;
-  } else if (isNotVisitor) {
-    checkPasser = isNotVisitor;
-  }
+  // if (isPartnerAccount) {
+  //   checkPasser = isPartnerAccount;
+  // } else if (isMyShop) {
+  //   checkPasser = isMyShop;
+  // } else if (isNotVisitor) {
+  //   checkPasser = isNotVisitor;
+  // }
 
   return (
-    <div style={styles.container}>
+    <div className={style.inputContainerPlain}>
       <InputBase
         placeholder={placeHolder}
         value={content}
-        contentEditable={isEditModeOn ? true : false}
         onChange={onChangeText}
-      />
-      {(placeHolder && placeHolder.length > 100) ||
-      !checkPasser ? null : isEditModeOn ? (
+      ></InputBase>
+      {/* {!checkPasser ? (
         <FontAwesome6
         name="check"
         size={30}
         color="green"
         onPress={() => setIsEditModeOn(false)}
       />
-      ) : (
-        <FontAwesome6
+      ) : ( */}
+        {/* <FontAwesome6
         name="pencil"
         size={30}
         color="darkgrey"
-        onPress={() => setIsEditModeOn(true)}
-      />
-      )}
+        onCLick={() => setIsEditModeOn(true)}
+      /> */}
+       {/* )} */}
     </div>
   );
 }

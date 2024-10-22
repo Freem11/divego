@@ -6,6 +6,7 @@ import Button from "./button";
 import { FormGroup, Input } from "reactstrap";
 import WavyHeader from "./wavyHeader";
 import TextInputField from "../newModals/textInput";
+import PlainTextInput from '../newModals/plaintextInput';
 import { PinContext } from "../contexts/staticPinContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { MaterialIcons } from "react-web-vector-icons";
@@ -178,16 +179,13 @@ export default function DiveSite(props) {
                 <p className={style.inputLabels}>
                   {screenData.PicUploader.whenLabel}
                 </p>
-                <div pointerEvents="none">
-                  <TextInputField
-                    dataType="date"
-                    icon={"calendar-month-outline"}
-                    inputValue={null}
-                    placeHolderText={screenData.PicUploader.whenPlaceholder}
-                    secure={false}
-                    vectorIcon={"MaterialCommunityIcons"}
+                  <PlainTextInput
+                    placeHolder={`A little about ${site.name}`}
+                    content={site.divesitebio}
+                    onChangeText={(bioText) =>
+                      setSite({ ...site, divesitebio: bioText })
+                    }
                   />
-                </div>
               </div>
               <div style={null}>
                 <p className={style.inputLabels}>

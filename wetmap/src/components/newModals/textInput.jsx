@@ -54,14 +54,14 @@ export default function TextInputField(props) {
             name="eye-slash"
             size={30}
             color="darkgrey"
-            onPress={() => setSecureTextEntry(false)}
+            onClick={() => setSecureTextEntry(false)}
           />
         ) : (
           <FontAwesome6
             name="eye"
             size={30}
             color="darkgrey"
-            onPress={() => setSecureTextEntry(true)}
+            onClick={() => setSecureTextEntry(true)}
           />
         )
       ) : null}
@@ -72,7 +72,7 @@ export default function TextInputField(props) {
           name="highlight-remove"
           size={30}
           color="darkgrey"
-          onPress={() => handleClear()}
+          onClick={() => handleClear()}
         />
       ) : (
         <div style={{ width: "30px", height: "30px" }}></div>
@@ -83,7 +83,7 @@ export default function TextInputField(props) {
           name="snorkel"
           size={30}
           color="darkgrey"
-          onPress={() => handleClear()}
+          onClick={() => handleClear()}
         />
       ) : (
         <div style={{ width: "30px", height: "30px" }}></div>
