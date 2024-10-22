@@ -1,5 +1,5 @@
 import { Button } from 'reactstrap';
-import CloseIcon from '@mui/icons-material/Close';
+import Icon from '../../icons/Icon';
 
 const CloseButton = ({ onClick, className, btnStyle }) => {
   return (
@@ -21,16 +21,8 @@ const CloseButton = ({ onClick, className, btnStyle }) => {
           paddingTop:      '0px',
         }}
       >
-        <CloseIcon
-          sx={{
-            color:       '#F0EEEB',
-            width:       '2vw',
-            height:      '5vh',
-            cursor:      'pointer',
-            marginRight: '-3px',
-          }}
-        >
-        </CloseIcon>
+        <Icon fill="#F0EEEB" width="3vw" height="5vh" name="close" />
+
       </Button>
     </div>
   );
