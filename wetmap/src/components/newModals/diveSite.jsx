@@ -7,9 +7,13 @@ import { FormGroup, Input } from "reactstrap";
 import WavyHeader from "./wavyHeader";
 import TextInputField from "../newModals/textInput";
 import PlainTextInput from '../newModals/plaintextInput';
-import { PinContext } from "../contexts/staticPinContext";
+import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { MaterialIcons } from "react-web-vector-icons";
+import {
+  getDiveSiteWithUserName,
+  updateDiveSite,
+} from "../../supabaseCalls/diveSiteSupabaseCalls";
 import {
   getPhotosWithUser,
   getPhotosWithUserEmpty,
@@ -25,6 +29,8 @@ export default function DiveSite(props) {
   const {} = props;
   const { profile } = useContext(UserProfileContext);
   const [site, setSite] = useState("");
+  const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
+  const [diveSitePics, setDiveSitePics] = useState([]);
   const [picUrl, setPicUrl] = useState(defaultImage);
 
   function handleClick() {
@@ -55,6 +61,41 @@ export default function DiveSite(props) {
       setPicUrl(null);
     }
   }, [site.photo]);
+
+  const getPhotos = async () => {
+    const success = await getPhotosByDiveSiteWithExtra({
+      lat: selectedDiveSite.Latitude,
+      lng: selectedDiveSite.Longitude,
+      userId: profile[0].UserID,
+    });
+    setDiveSitePics(success);
+  };
+
+  const getDiveSite = async (chosenSite) => {
+    console.log('???', chosenSite)
+    try {
+      const selectedSite = await getDiveSiteWithUserName({
+        siteName: chosenSite.SiteName,
+      });
+      if (selectedSite.length > 0) {
+        setSite(selectedSite[0]);
+      }
+    } catch (e) {
+      console.log({ title: "Error98", message: e.message });
+    }
+  };
+
+  useEffect(() => {
+    getPhotos();
+    getDiveSite(selectedDiveSite);
+  }, []);
+
+  useEffect(() => {
+    getPhotos();
+    getDiveSite(selectedDiveSite);
+  }, [selectedDiveSite]);
+
+  console.log("recieved", diveSitePics, site)
 
   const onClose = async () => {
     if (site.photo !== null || site.photo === "") {
@@ -165,40 +206,23 @@ export default function DiveSite(props) {
               // zIndex: 2
             }}
           >
-            <p className={style.headerText}>{screenData.PicUploader.header}</p>
+            <p className={style.headerText}>{site.name}</p>
 
             <div
               style={{
                 marginBottom: "20%",
-                width: "75%",
+                width: "100%",
                 alignItems: "center",
-                // zIndex: 2
+                // backgroundColor: 'pink'
               }}
             >
-              <div style={null}>
-                <p className={style.inputLabels}>
-                  {screenData.PicUploader.whenLabel}
-                </p>
                   <PlainTextInput
                     placeHolder={`A little about ${site.name}`}
                     content={site.divesitebio}
                     onChangeText={(bioText) =>
                       setSite({ ...site, divesitebio: bioText })
                     }
-                  />
-              </div>
-              <div style={null}>
-                <p className={style.inputLabels}>
-                  {screenData.PicUploader.whereLabel}
-                </p>
-                <TextInputField
-                  dataType="text"
-                  icon={"anchor"}
-                  inputValue={null}
-                  placeHolderText={screenData.PicUploader.wherePlaceholder}
-                  secure={false}
-                />
-              </div>
+                  /> 
             </div>
           </div>
         </div>

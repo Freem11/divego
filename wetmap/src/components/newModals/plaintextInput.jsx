@@ -38,6 +38,7 @@ export default function PlainTextInput(props) {
         placeholder={placeHolder}
         value={content}
         onChange={onChangeText}
+        style={{width: '100%'}}
       ></InputBase>
       {/* {!checkPasser ? (
         <FontAwesome6
