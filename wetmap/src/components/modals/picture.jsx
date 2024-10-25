@@ -25,7 +25,9 @@ function Picture(props) {
   const { setSelectedPicture } = useContext(SelectedPictureContext);
 
   const { modalShow } = useContext(ModalContext);
-  let photoName = pic.photofile.split('/').pop();
+
+  console.log("piv", pic)
+  let photoName = pic.photoFile.split('/').pop();
 
   const [imgHeigth, setImgHeigth] = useState(0);
   const [imgWidth, setImgWidth] = useState(0);
@@ -107,17 +109,17 @@ function Picture(props) {
   }, [pic]);
 
   return (
-    <div>
+    <div style={{width: '100%'}}>
       <div
         key={pic.id}
         className="pictureBoxQ"
         onClick={() => handleModalOpen()}
         style={{
           backgroundImage:  `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName})`,
-          backgroundRepeat: 'no-repeat',
+          // backgroundRepeat: 'no-repeat',
           backgroundSize:   'cover',
-          width:            imgWidth,
-          height:           imgHeigth,
+          aspectRatio: 1,
+          width:            '100%',
         }}
       >
         <div className="helper">
@@ -135,7 +137,7 @@ function Picture(props) {
         >
           Added by:
           {' '}
-          {pic.newusername}
+          {pic.UserName}
         </h4>
         {countOfLikes > 0
           ? (

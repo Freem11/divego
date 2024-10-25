@@ -4,9 +4,10 @@ import style from "./modalContent.module.scss";
 import LargeButton from "./largeButton";
 import Button from "./button";
 import { FormGroup, Input } from "reactstrap";
+import Picture from "../modals/picture";
 import WavyHeader from "./wavyHeader";
 import TextInputField from "../newModals/textInput";
-import PlainTextInput from '../newModals/plaintextInput';
+import PlainTextInput from "../newModals/plaintextInput";
 import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
 import { UserProfileContext } from "../contexts/userProfileContext";
 import { MaterialIcons } from "react-web-vector-icons";
@@ -72,7 +73,7 @@ export default function DiveSite(props) {
   };
 
   const getDiveSite = async (chosenSite) => {
-    console.log('???', chosenSite)
+    console.log("???", chosenSite);
     try {
       const selectedSite = await getDiveSiteWithUserName({
         siteName: chosenSite.SiteName,
@@ -95,7 +96,7 @@ export default function DiveSite(props) {
     getDiveSite(selectedDiveSite);
   }, [selectedDiveSite]);
 
-  console.log("recieved", diveSitePics, site)
+  console.log("recieved", diveSitePics);
 
   const onClose = async () => {
     if (site.photo !== null || site.photo === "") {
@@ -122,7 +123,7 @@ export default function DiveSite(props) {
     <div
       className="$themeWhite"
       style={{
-        display: 'flex',
+        display: "flex",
         width: "100%",
         height: "100%",
         backgroundColor: "$themeWhite",
@@ -144,15 +145,15 @@ export default function DiveSite(props) {
           />
         </div>
 
-        <div className={style.picZoneHalf} 
-        // style={{backgroundImage: `url(${defaultImage})`}}
+        <div
+          className={style.picZoneHalf}
+          // style={{backgroundImage: `url(${defaultImage})`}}
         >
           {/* {picUrl ? 
             <img src={picUrl} width={"100%"} className={style.picStylesHalf}></img>
             :
             <img src={defaultImage} width={"100%"} className={style.picStylesHalf}></img>
           } */}
-          
 
           <FormGroup>
             <Input
@@ -207,28 +208,30 @@ export default function DiveSite(props) {
             }}
           >
             <p className={style.headerText}>{site.name}</p>
-
+            <p className={style.creditLabel}>
+              {`Added By: ${site.newusername}`}
+            </p>
             <div
               style={{
-                marginBottom: "20%",
+                // marginBottom: "20%",
                 width: "100%",
                 alignItems: "center",
                 // backgroundColor: 'pink'
               }}
             >
-                  <PlainTextInput
-                    placeHolder={`A little about ${site.name}`}
-                    content={site.divesitebio}
-                    onChangeText={(bioText) =>
-                      setSite({ ...site, divesitebio: bioText })
-                    }
-                  /> 
+              <PlainTextInput
+                placeHolder={`A little about ${site.name}`}
+                content={site.divesitebio}
+                onChangeText={(bioText) =>
+                  setSite({ ...site, divesitebio: bioText })
+                }
+              />
             </div>
           </div>
         </div>
 
         <WavyHeader
-          customStyles={'50%'}
+          customStyles={"50%"}
           image={site.photo}
           setPin={setSite}
           pin={site}
@@ -238,11 +241,18 @@ export default function DiveSite(props) {
         style={{
           width: "50%",
           height: "100%",
+          // backgroundColor: "pink",
+          display: "flex",
+          flexDirection: "column",
+          overflowY: 'auto',
+          overflowX: 'hidden'
         }}
       >
-
-        <p>HI</p>
-        </div>
+        {diveSitePics[0] &&
+          diveSitePics[0].photos.map((pic) => {
+            return <Picture key={pic.id} pic={pic}></Picture>;
+          })}
+      </div>
     </div>
   );
 }

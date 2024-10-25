@@ -47,6 +47,19 @@
   color: darkgrey;
   text-align: left;
   margin-left: 0%;
+  // background-color: pink;
+}
+
+.creditLabel {
+  font-size: $fontSizeStandardText;
+  font-family: $base-font-family;
+  font-weight: 300;
+  color: $themeBlack;
+  text-align: left;
+  margin-left: 2%;
+  margin-bottom: 5%;
+  margin-top: -7%;
+  // background-color: pink;
 }
 
 .inputLabels {
