@@ -13,7 +13,6 @@
     width: 70vw;
     max-width: 600px;
     height: 65vh;
-    margin: 10vh auto;
     z-index: 6;
     position: fixed;
     left: 0;
@@ -24,12 +23,16 @@
 
     &.small {
       height: 30vh;
+      margin: 10vh auto;
     }
     &.medium {
-      height: 73vh;
+      height: 94vh;
+      margin: 3vh auto;
     }
     &.large {
-      height: 80vh;
+      height: 100vh;
+      margin: 0vh auto;
+      max-width: 1200px;
     }
     &.full {
       width: auto;

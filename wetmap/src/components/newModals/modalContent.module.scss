@@ -8,13 +8,36 @@
   border-top-left-radius: 2vw;
   border-top-right-radius: 2vw;
   border-width: 0;
-//   align-items: center;
   justify-content: center;
 }
 
+.picZoneHalf {
+  display: flex;
+  height: 44.9%;
+  background-image: url('../../images/blackManta.png');
+  background-size: cover;
+  background-color: $primaryBlue;
+  border-top-left-radius: 2vw;
+  border-top-right-radius: 0;
+  border-width: 0;
+  justify-content: center;
+  margin-top: '-30%';
+}
+
+.picStyles {
+  border-top-left-radius: 2vw;
+  border-top-right-radius: 2vw;
+}
+
+.picStylesHalf {
+  border-top-left-radius: 2vw;
+  border-top-right-radius: 0;
+}
+
 .backButton {
+  z-index: 2;
 	top: 3%;
-	left: 5%
+	left: 5%;
   }
 
 .headerText {
@@ -23,7 +46,20 @@
   font-weight: 100;
   color: darkgrey;
   text-align: left;
-  margin-left: -20%;
+  margin-left: 0%;
+  // background-color: pink;
+}
+
+.creditLabel {
+  font-size: $fontSizeStandardText;
+  font-family: $base-font-family;
+  font-weight: 300;
+  color: $themeBlack;
+  text-align: left;
+  margin-left: 2%;
+  margin-bottom: 5%;
+  margin-top: -7%;
+  // background-color: pink;
 }
 
 .inputLabels {

@@ -58,7 +58,8 @@ import {
 } from '../supabaseCalls/heatPointSupabaseCalls';
 import { shops, getShopByName } from '../supabaseCalls/shopsSupabaseCalls';
 import { ModalContext } from './contexts/modalContext';
-import AnchorPics from './modals/anchorPics';
+import { ModalWindowSize } from './reusables/modal/constants';
+import DiveSite from './newModals/diveSite';
 
 const LIB = ['visualization', 'places'];
 
@@ -467,7 +468,9 @@ function Map() {
       Latitude:  lat,
       Longitude: lng,
     });
-    modalShow(AnchorPics);
+    modalShow(DiveSite, {
+      size: ModalWindowSize.L,
+    });
     setJump(!jump);
   };
 

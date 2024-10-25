@@ -17,3 +17,12 @@
   padding-left: 2%;
   // background-color: pink;
 }
+
+.inputContainerPlain {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 5%;
+  // background-color: darkgrey;
+  background-color: $themeWhite;
+}

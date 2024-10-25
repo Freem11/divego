@@ -157,7 +157,7 @@ const PicUploader = React.memo(function PicUploader(props) {
       setPhotoFile(null);
       if (pin.PicFile !== null) {
         removePhoto({
-          filePath: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/`,
+          filePath: import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH,
           fileName: `${pin.PicFile}`,
         });
       }
@@ -178,6 +178,7 @@ const PicUploader = React.memo(function PicUploader(props) {
       const data = new FormData();
       data.append('image', imageFile);
       const newFilePath = await uploadphoto(imageFile, fileName);
+
       setPhotoFile(fileName);
       console.log('create file', photoFile);
       // scrape off photo info
@@ -218,14 +219,14 @@ const PicUploader = React.memo(function PicUploader(props) {
         Longitude: newLongitude,
       });
 
-      // fetch("http://localhost:5000/api/upload", {
-      //   method: "POST",
-      //   body: data,
-      // })
-      //   .then((response) => response.json())
-      //   .then((data) => {
-      //     setPhotoFile(data.fileName);
-      //   });
+      fetch("http://localhost:5000/api/upload", {
+        method: "POST",
+        body: data,
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          setPhotoFile(data.fileName);
+        });
 
       if (tutorialRunning) {
         if (itterator3 === 8) {

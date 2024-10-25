@@ -264,3 +264,42 @@ export const getMostRecentPhoto = async () => {
     return data;
   }
 };
+
+export const getPhotosByDiveSiteWithExtra = async (values) => {
+  const {
+    data,
+    error,
+  } = await supabase.rpc("get_photos_for_divesite_lat_and_lng_groupby_date", {
+    lat: values.lat,
+    lng: values.lng,
+    connecteduserid: values.userId
+  });
+
+  if (error) {
+    console.error("couldn't do it 30,", error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
+
+export const getPhotosByUserWithExtra = async (userId, connectedUserId) => {
+  const {
+    data,
+    error,
+  } = await supabase.rpc("get_photos_by_userid_groupby_divesite_date", {
+    userid: userId,
+    connecteduserid: connectedUserId
+  });
+
+  if (error) {
+    console.error("couldn't do it 31,", error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
