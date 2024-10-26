@@ -25,7 +25,8 @@ export default [
       },
     },
     rules: {
-      'no-unused-vars': ['error', {
+      'no-useless-escape': ['off'],
+      'no-unused-vars':    ['error', {
         'destructuredArrayIgnorePattern': '^_',
       }],
 
@@ -35,6 +36,7 @@ export default [
       '@stylistic/semi':                    ['error', 'always'],
       '@stylistic/key-spacing':             ['error', { align: 'value', mode: 'minimum' }],
       '@stylistic/quote-props':             ['error', 'consistent'],
+      '@stylistic/brace-style':             ['error', '1tbs', { allowSingleLine: true }],
       '@stylistic/no-multi-spaces':         ['off'],
       '@stylistic/no-multiple-empty-lines': ['error', { max: 2, maxEOF: 0 }],
     },
