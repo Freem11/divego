@@ -8,9 +8,30 @@ const getSvgAttribute = (attribute, content) => {
   return match[1];
 };
 
-const getSvgFigure = (content) => {
+const getSvgXml = (content) => {
   const regex = new RegExp(`<svg.*?>(.*)<\/svg>`, 'ms');
   const match = regex.exec(content);
+  if (!match || match[1] === undefined) {
+    return null;
+  }
+
+  let result = match[1];
+  result = result.replaceAll('\n', '');
+  result = result.replaceAll(/\s+/g, ' ');
+  result = result.replaceAll(/>\s+</g, '><');
+  result = result.replaceAll(/,\s+/g, ',');
+
+  return result;
+};
+
+/**
+ * If SVG consisists of only one path element, returns its path data
+ * @param {*} xml
+ * @returns string
+ */
+const getOptimizedPathData = (xml) => {
+  const regex = new RegExp('^<path.*?d="(.*?)"/>$', 'ms');
+  const match = regex.exec(xml);
   if (!match || match[1] === undefined) {
     return null;
   }
@@ -18,22 +39,34 @@ const getSvgFigure = (content) => {
   return match[1];
 };
 
-const parseSvgContent = (content) => {
-  let viewBox = getSvgAttribute('viewBox', content);
-  let figure = getSvgFigure(content);
-
-  if (viewBox) {
-    viewBox = viewBox.split(' ').map(coord => parseInt(coord)).join(' ');
-  } else {
-    viewBox = '';
+const getSvgViewBox = (content) => {
+  let viewBoxStr = getSvgAttribute('viewBox', content);
+  if (!viewBoxStr) {
+    return null;
   }
 
-  if (figure) {
-    figure = figure.replaceAll('\n', '');
-    figure = figure.replaceAll(/\s+/g, ' ');
-    figure = figure.replaceAll(/>\s+</g, '><');
-    figure = figure.replaceAll(/,\s+/g, ',');
-    return [viewBox, figure];
+  let result = viewBoxStr.split(' ').map(coord => parseInt(coord));
+  if (Array.isArray(result) && result.length === 4) {
+    if (result[0] === 0 && result[1] === 0) {
+      if (result[2] === result[3]) {
+        return result[2];
+      }
+
+      return [result[2], result[3]];
+    }
+
+    return result;
+  }
+};
+
+const parseSvgContent = (content) => {
+  let viewBox = getSvgViewBox(content);
+  let xml = getSvgXml(content);
+
+
+  if (xml) {
+    const pathData = getOptimizedPathData(xml);
+    return [viewBox, (pathData || xml)];
   }
 };
 
