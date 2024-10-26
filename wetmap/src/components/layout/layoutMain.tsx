@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from '../googleMap';
-import DynamicSelect  from '../reusables/dynamicSelect';
+import DynamicSelect from '../reusables/dynamicSelect';
 
 export default function LayoutMain() {
   return (
