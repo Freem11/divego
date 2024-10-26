@@ -36,7 +36,7 @@
         "latPlaceholder": "Latitude",
         "lngPlaceholder": "Longitude",
         "myLocationButton" : "Use my location",
-        "myLocationexplainer" : "This can take up to 30 seconds",
+        "myLocationExplainer" : "This can take up to 30 seconds",
         "pinButton" : "Drop a pin",
         "submitButton" : "Submit"
       },
