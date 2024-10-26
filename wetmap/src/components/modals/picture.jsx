@@ -1,20 +1,20 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { UserProfileContext } from '../contexts/userProfileContext';
-import { SelectedPictureContext } from '../contexts/selectedPictureContext';
+import React, { useState, useContext, useEffect } from "react";
+import { UserProfileContext } from "../contexts/userProfileContext";
+import { SelectedPictureContext } from "../contexts/selectedPictureContext";
 import {
   insertPhotoLike,
   deletePhotoLike,
-} from '../../supabaseCalls/photoLikeSupabaseCalls';
-import { grabProfileByUserName } from '../../supabaseCalls/accountSupabaseCalls';
-import FlagIcon from '@mui/icons-material/Flag';
-import notLiked from '../../images/Hand-Hollow-Blue.png';
-import liked from '../../images/Hand-Filled-Blue.png';
-import './picture.css';
-import UserProfileModal from './userProfileModal';
-import { ModalContext } from '../contexts/modalContext';
-import CommentsModal from './commentsModal';
-import FullScreenModal from './fullScreenModal';
-import { ModalWindowSize } from '../reusables/modal/constants';
+} from "../../supabaseCalls/photoLikeSupabaseCalls";
+import { grabProfileByUserName } from "../../supabaseCalls/accountSupabaseCalls";
+import FlagIcon from "@mui/icons-material/Flag";
+import notLiked from "../../images/Hand-Hollow-Blue.png";
+import liked from "../../images/Hand-Filled-Blue.png";
+import "./picture.css";
+import UserProfileModal from "./userProfileModal";
+import { ModalContext } from "../contexts/modalContext";
+import CommentsModal from "./commentsModal";
+import FullScreenModal from "./fullScreenModal";
+import { ModalWindowSize } from "../reusables/modal/constants";
 
 function Picture(props) {
   const { pic } = props;
@@ -26,8 +26,7 @@ function Picture(props) {
 
   const { modalShow } = useContext(ModalContext);
 
-  console.log("piv", pic)
-  let photoName = pic.photoFile.split('/').pop();
+  let photoName = pic.photoFile.split("/").pop();
 
   const [imgHeigth, setImgHeigth] = useState(0);
   const [imgWidth, setImgWidth] = useState(0);
@@ -43,7 +42,7 @@ function Picture(props) {
 
     modalShow(UserProfileModal, {
       keepPreviousModal: true,
-      selectedProfile:   picOwnerAccount[0].UserID,
+      selectedProfile: picOwnerAccount[0].UserID,
     });
   };
 
@@ -61,8 +60,7 @@ function Picture(props) {
       deletePhotoLike(likeData);
       setPicLiked(false);
       setCountOfLikes(countOfLikes - 1);
-    }
-    else {
+    } else {
       const newRecord = await insertPhotoLike(profile[0].UserID, pic.id);
       setPicLiked(true);
       setLikeData(newRecord[0].id);
@@ -73,53 +71,23 @@ function Picture(props) {
   const handleModalOpen = () => {
     modalShow(FullScreenModal, {
       keepPreviousModal: true,
-      size:              ModalWindowSize.FULL,
-      src:               `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`,
+      size: ModalWindowSize.FULL,
+      src: `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`,
     });
   };
 
-  const getImageDimensions = async () => {
-    let containerWidth = document.getElementsByClassName('picScollA')[0]
-      .clientWidth;
-
-    const loadImage = async src =>
-      new Promise((resolve, reject) => {
-        const img = new Image();
-        img.onload = () => resolve(img);
-        img.onerror = reject;
-        img.src = src;
-      });
-
-    try {
-      const imgZ = await loadImage(
-        `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`,
-      );
-      let imageBitmap = await createImageBitmap(imgZ);
-      let ratio = imageBitmap.height / imageBitmap.width;
-      setImgWidth(containerWidth);
-      setImgHeigth(containerWidth * ratio);
-    }
-    catch (e) {
-      console.log('ERROR', e);
-    }
-  };
-
-  useEffect(() => {
-    getImageDimensions();
-  }, [pic]);
-
   return (
-    <div style={{width: '100%'}}>
+    <div style={{ width: "100%" }}>
       <div
         key={pic.id}
         className="pictureBoxQ"
         onClick={() => handleModalOpen()}
         style={{
-          backgroundImage:  `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName})`,
+          backgroundImage: `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName})`,
           // backgroundRepeat: 'no-repeat',
-          backgroundSize:   'cover',
+          backgroundSize: "cover",
           aspectRatio: 1,
-          width:            '100%',
+          width: "100%",
         }}
       >
         <div className="helper">
@@ -128,48 +96,43 @@ function Picture(props) {
             className="atagp"
             href={`mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20picture:%20"${pic.label}"%20${pic.photofile}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Animal%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20animal%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Copy%20write%20image%20claim%0D%0A%0D%0A(Please%20provide%20proof%20that%20you%20own%20the%20submitted%20photo%20and%20we%20will%20remove%20it%20as%20you%20have%20requested)`}
           >
-            <FlagIcon sx={{ color: 'red', height: '3vh', width: '3vw' }} />
+            <FlagIcon sx={{ color: "red", height: "3vh", width: "3vw" }} />
           </a>
         </div>
         <h4
           className="userLabel"
-          onClick={e => handleFollow(e, pic.newusername)}
+          onClick={(e) => handleFollow(e, pic.newusername)}
         >
-          Added by:
-          {' '}
-          {pic.UserName}
+          Added by: {pic.UserName}
         </h4>
-        {countOfLikes > 0
-          ? (
-              <div className="countIndicator">
-                <p className="countDisplay">{countOfLikes}</p>
-              </div>
-            )
-          : null}
+        {countOfLikes > 0 ? (
+          <div className="countIndicator">
+            <p className="countDisplay">{countOfLikes}</p>
+          </div>
+        ) : null}
         <img
           src={picLiked ? liked : notLiked}
           className="likeIcon"
-          onClick={e => handleLike(e, pic.id)}
+          onClick={(e) => handleLike(e, pic.id)}
           style={{
             height: 30,
-            width:  30,
+            width: 30,
           }}
         />
       </div>
 
       <div
         style={{
-          display:       'flex',
-          flexDirection: 'row',
-          marginLeft:    20,
-          zIndex:        4,
+          display: "flex",
+          flexDirection: "row",
+          marginLeft: 20,
+          zIndex: 4,
         }}
       >
         <p className="commentPrompt" onClick={() => handleCommentModal(pic)}>
           {pic.commentcount < 1
-            ? 'Be first to Comment'
-            : `Comment / View all ${pic.commentcount} Comments`}
-          {' '}
+            ? "Be first to Comment"
+            : `Comment / View all ${pic.commentcount} Comments`}{" "}
         </p>
       </div>
     </div>

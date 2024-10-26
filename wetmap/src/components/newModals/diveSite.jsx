@@ -240,18 +240,27 @@ export default function DiveSite(props) {
       <div
         style={{
           width: "50%",
-          height: "100%",
+          height: "97%",
           // backgroundColor: "pink",
           display: "flex",
           flexDirection: "column",
-          overflowY: 'auto',
-          overflowX: 'hidden'
         }}
       >
-        {diveSitePics[0] &&
-          diveSitePics[0].photos.map((pic) => {
-            return <Picture key={pic.id} pic={pic}></Picture>;
+        <p className={style.drawerheader}>{screenData.DiveSite.drawerHeader}</p>
+        <div className={style.drawerBody}>
+          {diveSitePics.map((packet) => {
+            return (
+              <div>
+              <div className={style.dateAndSiteLabels}>{packet.dateTaken}</div>
+              {packet.photos &&
+                packet.photos.map((pic) => {
+                  return <Picture key={pic.id} pic={pic}></Picture>;
+                })}
+                </div>
+              );
           })}
+        
+        </div>
       </div>
     </div>
   );

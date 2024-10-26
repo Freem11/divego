@@ -14,14 +14,14 @@
 .picZoneHalf {
   display: flex;
   height: 44.9%;
-  background-image: url('../../images/blackManta.png');
+  background-image: url("../../images/blackManta.png");
   background-size: cover;
   background-color: $primaryBlue;
   border-top-left-radius: 2vw;
   border-top-right-radius: 0;
   border-width: 0;
   justify-content: center;
-  margin-top: '-30%';
+  margin-top: "-30%";
 }
 
 .picStyles {
@@ -36,9 +36,9 @@
 
 .backButton {
   z-index: 2;
-	top: 3%;
-	left: 5%;
-  }
+  top: 3%;
+  left: 5%;
+}
 
 .headerText {
   font-size: $fontSizeHeader;
@@ -58,7 +58,7 @@
   text-align: left;
   margin-left: 2%;
   margin-bottom: 5%;
-  margin-top: -7%;
+  margin-top: -5%;
   // background-color: pink;
 }
 
@@ -74,10 +74,43 @@
 }
 
 .submitZone {
-	display: flex;
-	width: 90%;
-	border-width: 0;
-    align-items: center;
-	justify-content: flex-end;
-	margin-top: -10%;
-  }
+  display: flex;
+  width: 90%;
+  border-width: 0;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: -10%;
+}
+
+.drawerheader {
+  font-size: $fontSizeHeader;
+  font-family: $base-font-family;
+  font-weight: 300;
+  color: $themeBlack;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  border-top: 2px solid $themeBlack;
+  border-bottom: 2px solid $themeBlack;
+}
+
+.drawerBody {
+    width: 100%;
+    height: 100%;
+    // backgroundColor: pink;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.dateAndSiteLabels {
+  font-size: $fontSizeSubHeading;
+  font-family: $base-font-family;
+  font-weight: 500;
+  color: $themeBlack;
+  background-color: lightgray;
+  margin-top: 0%;
+  margin-bottom: 2%;
+  border-top: 2px solid $themeBlack;
+  border-bottom: 2px solid $themeBlack;
+}
