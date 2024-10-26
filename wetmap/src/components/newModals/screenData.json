@@ -87,7 +87,8 @@
       {
         "drawerHeader" : "Sea Creature Sightings",
         "emptyDrawer": "No sightings at this site yet.",
-        "addSightingButton" : "Submit"
+        "addSightingButton" : "Add Sighting",
+        "submitButton": "Submit"
       },
       "DiveShop" :
       {

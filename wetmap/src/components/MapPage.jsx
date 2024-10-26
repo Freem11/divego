@@ -135,8 +135,7 @@ const MapPage = React.memo(function MapPage(props) {
     counter++;
     if (counter % 2 == 0) {
       setSearButState(false);
-    }
-    else {
+    } else {
       setSearButState(true);
     }
   }
@@ -145,8 +144,7 @@ const MapPage = React.memo(function MapPage(props) {
     counter1++;
     if (counter1 % 2 == 0) {
       setSiteButState(false);
-    }
-    else {
+    } else {
       setSiteButState(true);
     }
   }
@@ -155,8 +153,7 @@ const MapPage = React.memo(function MapPage(props) {
     counter2++;
     if (counter2 % 2 == 0) {
       setPhotButState(false);
-    }
-    else {
+    } else {
       setPhotButState(true);
     }
   }
@@ -172,8 +169,7 @@ const MapPage = React.memo(function MapPage(props) {
     if (tutorialRunning) {
       if (itterator2 === 3) {
         blinker = setInterval(diveSiteSearch, 1500);
-      }
-      else if (itterator2 === 9) {
+      } else if (itterator2 === 9) {
         blinker = setInterval(diveSiteAdd, 1500);
       }
     }
@@ -203,8 +199,7 @@ const MapPage = React.memo(function MapPage(props) {
           animateSecondGuideModal();
         }
       }
-    }
-    else if (chosenModal === 'Photos') {
+    } else if (chosenModal === 'Photos') {
       if (tutorialRunning) {
         if (itterator3 === 19) {
           setItterator3(itterator3 + 1);
@@ -235,8 +230,7 @@ const MapPage = React.memo(function MapPage(props) {
             setIntroGuideModalYCoord(-window.innerHeight);
             setTutorialRunning(true);
             setItterator(0);
-          }
-          else {
+          } else {
             setProfile(success);
             setPin({
               ...pin,
@@ -250,8 +244,7 @@ const MapPage = React.memo(function MapPage(props) {
             });
           }
         }
-      }
-      catch (e) {
+      } catch (e) {
         console.log({ title: 'Error', message: e.message });
       }
     };
@@ -593,12 +586,10 @@ const MapPage = React.memo(function MapPage(props) {
     if (fabsYCoord === 0) {
       if (window.innerHeight < 400) {
         setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
-      }
-      else {
+      } else {
         setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
       }
-    }
-    else {
+    } else {
       setfabsYCoord(0);
     }
   };
@@ -666,8 +657,7 @@ const MapPage = React.memo(function MapPage(props) {
   const animateIntroGuideModal = () => {
     if (introGuideModalYCoord === 0) {
       setIntroGuideModalYCoord(-window.innerHeight);
-    }
-    else {
+    } else {
       setIntroGuideModalYCoord(0);
     }
   };
@@ -675,8 +665,7 @@ const MapPage = React.memo(function MapPage(props) {
   const animateSecondGuideModal = () => {
     if (secondGuideModalYCoord === 0) {
       setSecondGuideModalYCoord(-window.innerHeight);
-    }
-    else {
+    } else {
       setSecondGuideModalYCoord(0);
     }
   };
@@ -684,8 +673,7 @@ const MapPage = React.memo(function MapPage(props) {
   const animateThirdGuideModal = () => {
     if (thirdGuideModalYCoord === 0) {
       setThirdGuideModalYCoord(-window.innerHeight);
-    }
-    else {
+    } else {
       setThirdGuideModalYCoord(0);
     }
   };
@@ -719,8 +707,7 @@ const MapPage = React.memo(function MapPage(props) {
   useEffect(() => {
     if (!showFilterer) {
       setIsOpen(false);
-    }
-    else {
+    } else {
       setIsOpen(true);
     }
   }, [showFilterer]);

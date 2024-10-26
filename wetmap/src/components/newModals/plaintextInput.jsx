@@ -1,19 +1,11 @@
-import React from "react";
-import {
-  MaterialCommunityIcons,
-  MaterialIcons,
-  Entypo,
-  Ionicons,
-  FontAwesome6,
-  Fontisto,
-} from "react-web-vector-icons";
-import { InputBase } from "@mui/material";
-import style from "./textInput.module.scss";
+import React from 'react';
+import { InputBase } from '@mui/material';
+import style from './textInput.module.scss';
+import Icon from '../../icons/Icon';
 
 export default function PlainTextInput(props) {
   const {
     content,
-    fontSz,
     isEditModeOn,
     setIsEditModeOn,
     isPartnerAccount,
@@ -24,13 +16,13 @@ export default function PlainTextInput(props) {
   } = props;
 
   let checkPasser = false;
-  // if (isPartnerAccount) {
-  //   checkPasser = isPartnerAccount;
-  // } else if (isMyShop) {
-  //   checkPasser = isMyShop;
-  // } else if (isNotVisitor) {
-  //   checkPasser = isNotVisitor;
-  // }
+  if (isPartnerAccount) {
+    checkPasser = isPartnerAccount;
+  } else if (isMyShop) {
+    checkPasser = isMyShop;
+  } else if (isNotVisitor) {
+    checkPasser = isNotVisitor;
+  }
 
   return (
     <div className={style.inputContainerPlain}>
@@ -38,23 +30,29 @@ export default function PlainTextInput(props) {
         placeholder={placeHolder}
         value={content}
         onChange={onChangeText}
-        style={{width: '100%'}}
-      ></InputBase>
-      {/* {!checkPasser ? (
-        <FontAwesome6
-        name="check"
-        size={30}
-        color="green"
-        onPress={() => setIsEditModeOn(false)}
-      />
-      ) : ( */}
-        {/* <FontAwesome6
-        name="pencil"
-        size={30}
-        color="darkgrey"
-        onCLick={() => setIsEditModeOn(true)}
-      /> */}
-       {/* )} */}
+        style={{ width: '100%' }}
+      >
+      </InputBase>
+      {(placeHolder && (placeHolder.length > 100))  || !checkPasser
+        ? null
+        : isEditModeOn
+          ? (
+              <Icon
+                name="check-bold"
+                fill="green"
+                width="30px"
+                onClick={() => setIsEditModeOn(false)}
+              />
+
+            )
+          : (
+              <Icon
+                name="pencil"
+                fill="darkgrey"
+                width="30px"
+                onClick={() => setIsEditModeOn(true)}
+              />
+            )}
     </div>
   );
 }

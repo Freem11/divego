@@ -8,7 +8,7 @@
   align-items: flex-start;
 }
 .inputText {
-  width: 700%;
+  width: fit-content;
   font-size: $fontSizeStandardText;
   font-family: $base-font-family;
   font-weight: 100;
@@ -23,6 +23,6 @@
   flex-direction: row;
   align-items: center;
   margin-left: 5%;
-  // background-color: darkgrey;
-  background-color: $themeWhite;
+  // background-color: pink;
+  // background-color: $themeWhite;
 }

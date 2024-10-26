@@ -1,45 +1,69 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import screenData from "./screenData.json";
-import style from "./modalContent.module.scss";
-import LargeButton from "./largeButton";
-import Button from "./button";
-import { FormGroup, Input } from "reactstrap";
-import Picture from "../modals/picture";
-import WavyHeader from "./wavyHeader";
-import TextInputField from "../newModals/textInput";
-import PlainTextInput from "../newModals/plaintextInput";
-import { SelectedDiveSiteContext } from "../contexts/selectedDiveSiteContext";
-import { UserProfileContext } from "../contexts/userProfileContext";
-import { MaterialIcons } from "react-web-vector-icons";
+import React, { useState, useContext, useEffect } from 'react';
+import screenData from './screenData.json';
+import style from './modalContent.module.scss';
+import { FormGroup, Input } from 'reactstrap';
+import Picture from '../modals/picture';
+import Button from './button';
+import WavyHeader from './wavyHeader';
+import PlainTextInput from '../newModals/plaintextInput';
+import { PinContext } from '../contexts/staticPinContext';
+import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
+import { UserProfileContext } from '../contexts/userProfileContext';
 import {
   getDiveSiteWithUserName,
   updateDiveSite,
-} from "../../supabaseCalls/diveSiteSupabaseCalls";
+} from '../../supabaseCalls/diveSiteSupabaseCalls';
 import {
   getPhotosWithUser,
   getPhotosWithUserEmpty,
   getPhotosByDiveSiteWithExtra,
-} from "../../supabaseCalls/photoSupabaseCalls";
-import { handleImageUpload, clearPreviousImage } from "./imageUploadHelpers";
-import defaultImage from "../../images/blackManta.png";
+} from '../../supabaseCalls/photoSupabaseCalls';
+import { handleImageUpload, clearPreviousImage } from './imageUploadHelpers';
+import defaultImage from '../../images/blackManta.png';
+import Icon from '../../icons/Icon';
+import { ModalContext } from '../contexts/modalContext';
+import PicUploader from '../newModals/picUploader';
+import { cleanupPinPicture } from '../../helpers/picUploaderHelpers';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 export default function DiveSite(props) {
-  const {} = props;
+  const { onModalCancel } = props;
+  const { modalShow } = useContext(ModalContext);
   const { profile } = useContext(UserProfileContext);
-  const [site, setSite] = useState("");
+  const { pin, setPin } = useContext(PinContext);
+  const [site, setSite] = useState('');
   const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const [diveSitePics, setDiveSitePics] = useState([]);
   const [picUrl, setPicUrl] = useState(defaultImage);
+  const [isEditModeOn, setIsEditModeOn] = useState(false);
+  const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+
+  useEffect(() => {
+    if (!isEditModeOn && site) {
+      diveSiteUpdateUpdate();
+    }
+  }, [isEditModeOn]);
+
+  const diveSiteUpdateUpdate = async () => {
+    try {
+      const success = await updateDiveSite({
+        id:    site.id,
+        bio:   site.divesitebio,
+        photo: site.divesiteprofilephoto,
+      });
+    } catch (e) {
+      console.log({ title: 'Error19', message: e.message });
+    }
+  };
 
   function handleClick() {
-    document.getElementById("file").click();
+    document.getElementById('file').click();
   }
 
   const handleImageSelection = async (e) => {
-    if (e.target && e.target.name === "picFile") {
+    if (e.target && e.target.name === 'picFile') {
       if (site.photo !== null) {
         clearPreviousImage(site.photo);
       }
@@ -54,9 +78,9 @@ export default function DiveSite(props) {
 
   useEffect(() => {
     if (site.photo) {
-      let photoName = site.photo.split("/").pop();
+      let photoName = site.photo.split('/').pop();
       setPicUrl(
-        import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${photoName}`
+        import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${photoName}`,
       );
     } else {
       setPicUrl(null);
@@ -65,15 +89,14 @@ export default function DiveSite(props) {
 
   const getPhotos = async () => {
     const success = await getPhotosByDiveSiteWithExtra({
-      lat: selectedDiveSite.Latitude,
-      lng: selectedDiveSite.Longitude,
+      lat:    selectedDiveSite.Latitude,
+      lng:    selectedDiveSite.Longitude,
       userId: profile[0].UserID,
     });
     setDiveSitePics(success);
   };
 
   const getDiveSite = async (chosenSite) => {
-    console.log("???", chosenSite);
     try {
       const selectedSite = await getDiveSiteWithUserName({
         siteName: chosenSite.SiteName,
@@ -82,7 +105,7 @@ export default function DiveSite(props) {
         setSite(selectedSite[0]);
       }
     } catch (e) {
-      console.log({ title: "Error98", message: e.message });
+      console.log({ title: 'Error98', message: e.message });
     }
   };
 
@@ -92,14 +115,15 @@ export default function DiveSite(props) {
   }, []);
 
   useEffect(() => {
+    if (profile[0].partnerAccount) {
+      setIsPartnerAccount(true);
+    }
     getPhotos();
     getDiveSite(selectedDiveSite);
   }, [selectedDiveSite]);
 
-  console.log("recieved", diveSitePics);
-
   const onClose = async () => {
-    if (site.photo !== null || site.photo === "") {
+    if (site.photo !== null || site.photo === '') {
       await clearPreviousImage(site.photo);
     }
     // setLevelTwoScreen(false);
@@ -109,7 +133,7 @@ export default function DiveSite(props) {
     });
   };
 
-  window.addEventListener("resize", trackDimensions);
+  window.addEventListener('resize', trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
   const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
@@ -119,29 +143,52 @@ export default function DiveSite(props) {
     setWindowHeigth(window.innerHeight);
   }
 
+  const openPicUploader = () => {
+    setPin({
+      ...pin,
+      Latitude:  String(selectedDiveSite.Latitude),
+      Longitude: String(selectedDiveSite.Longitude),
+      siteName:  selectedDiveSite.SiteName,
+    });
+
+    modalShow(PicUploader, {
+      onCancelCallback: () => cleanupPinPicture(pin),
+    });
+  };
+
   return (
     <div
       className="$themeWhite"
       style={{
-        display: "flex",
-        width: "100%",
-        height: "100%",
-        backgroundColor: "$themeWhite",
-        marginBottom: "100%",
+        display:         'flex',
+        width:           '100%',
+        height:          '100%',
+        backgroundColor: '$themeWhite',
+        marginBottom:    '100%',
       }}
     >
       <div
         style={{
-          width: "50%",
-          height: "100%",
+          width:  '50%',
+          height: '100%',
         }}
       >
-        <div className={style.backButton} style={{ position: "absolute" }}>
-          <MaterialIcons
+        <div className={style.backButton} style={{ position: 'absolute' }}>
+          <Icon
             name="chevron-left"
-            size={30}
-            color={"$themeWhite"}
-            onClick={() => onClose()}
+            fill="white"
+            width="60px"
+            onClick={() => onModalCancel()}
+          />
+        </div>
+
+
+        <div style={{ position: 'absolute', top: '4%', left: '28%' }}>
+          <Button
+            onClick={() => openPicUploader()}
+            btnText={screenData.DiveSite.addSightingButton}
+            altStyle={true}
+            icon={false}
           />
         </div>
 
@@ -149,7 +196,7 @@ export default function DiveSite(props) {
           className={style.picZoneHalf}
           // style={{backgroundImage: `url(${defaultImage})`}}
         >
-          {/* {picUrl ? 
+          {/* {picUrl ?
             <img src={picUrl} width={"100%"} className={style.picStylesHalf}></img>
             :
             <img src={defaultImage} width={"100%"} className={style.picStylesHalf}></img>
@@ -160,50 +207,50 @@ export default function DiveSite(props) {
               placeholder="Upload"
               className="modalInputs2"
               style={{
-                textAlign: "center",
-                display: "none",
+                textAlign: 'center',
+                display:   'none',
               }}
               id="file"
               type="file"
               name="picFile"
               bsSize="lg"
               onChange={handleImageSelection}
-            ></Input>
+            >
+            </Input>
           </FormGroup>
 
-          {picUrl ? (
-            <div
-              style={{ position: "absolute", right: "5%", marginTop: "40%" }}
-            >
-              <MaterialIcons
-                name="add-a-photo"
-                size={30}
-                color={"white"}
-                onClick={() => handleClick()}
-              />
-            </div>
-          ) : null}
+
+          <div
+            style={{ position: 'absolute', right: '53%', top: '37%' }}
+          >
+            <Icon
+              name="camera-plus"
+              fill="white"
+              width="40px"
+              onClick={() => handleClick()}
+            />
+          </div>
         </div>
         <div
           style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            flexDirection: "column",
-            marginLeft: "5%",
-            marginRight: "5%",
-            height: "50%",
-            zIndex: 22,
+            display:        'flex',
+            alignItems:     'center',
+            justifyContent: 'center',
+            flexDirection:  'column',
+            marginLeft:     '5%',
+            marginRight:    '5%',
+            height:         '50%',
+            zIndex:         22,
             // marginTop: '-10%'
           }}
         >
           <div
             style={{
-              height: 400,
-              width: "100%",
-              marginLeft: "5%",
-              marginBottom: "5%",
-              overflowY: "auto",
+              height:       400,
+              width:        '100%',
+              marginLeft:   '5%',
+              marginBottom: '5%',
+              overflowY:    'auto',
               // zIndex: 2
             }}
           >
@@ -214,52 +261,55 @@ export default function DiveSite(props) {
             <div
               style={{
                 // marginBottom: "20%",
-                width: "100%",
-                alignItems: "center",
+                width:      '100%',
+                alignItems: 'center',
                 // backgroundColor: 'pink'
               }}
             >
               <PlainTextInput
                 placeHolder={`A little about ${site.name}`}
                 content={site.divesitebio}
-                onChangeText={(bioText) =>
-                  setSite({ ...site, divesitebio: bioText })
-                }
+                isPartnerAccount={isPartnerAccount}
+                isEditModeOn={isEditModeOn}
+                setIsEditModeOn={setIsEditModeOn}
+                onChangeText={bioText => setSite({ ...site, divesitebio: bioText.target.value })}
               />
             </div>
           </div>
         </div>
 
         <WavyHeader
-          customStyles={"50%"}
+          customStyles="50%"
           image={site.photo}
           setPin={setSite}
           pin={site}
-        ></WavyHeader>
+        >
+        </WavyHeader>
       </div>
       <div
         style={{
-          width: "50%",
-          height: "97%",
-          // backgroundColor: "pink",
-          display: "flex",
-          flexDirection: "column",
+          // marginTop:       '1%',
+          width:           '50%',
+          height:          '97%',
+          // backgroundColor: 'pink',
+          display:         'flex',
+          flexDirection:   'column',
         }}
       >
-        <p className={style.drawerheader}>{screenData.DiveSite.drawerHeader}</p>
+        <div className="text-normal1 text-large1">{screenData.DiveSite.drawerHeader}</div>
         <div className={style.drawerBody}>
           {diveSitePics.map((packet) => {
             return (
-              <div>
-              <div className={style.dateAndSiteLabels}>{packet.dateTaken}</div>
-              {packet.photos &&
-                packet.photos.map((pic) => {
+              <div key={packet.dateTaken}>
+                <div className={style.dateAndSiteLabels}>{packet.dateTaken}</div>
+                {packet.photos
+                && packet.photos.map((pic) => {
                   return <Picture key={pic.id} pic={pic}></Picture>;
                 })}
-                </div>
-              );
+              </div>
+            );
           })}
-        
+
         </div>
       </div>
     </div>
