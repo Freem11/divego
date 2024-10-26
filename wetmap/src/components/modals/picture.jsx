@@ -9,7 +9,7 @@ import { grabProfileByUserName } from "../../supabaseCalls/accountSupabaseCalls"
 import FlagIcon from "@mui/icons-material/Flag";
 import notLiked from "../../images/Hand-Hollow-Blue.png";
 import liked from "../../images/Hand-Filled-Blue.png";
-import "./picture.css";
+import style from './picture.module.scss';
 import UserProfileModal from "./userProfileModal";
 import { ModalContext } from "../contexts/modalContext";
 import CommentsModal from "./commentsModal";
@@ -77,49 +77,48 @@ function Picture(props) {
   };
 
   return (
-    <div style={{ width: "100%" }}>
-      <div
-        key={pic.id}
-        className="pictureBoxQ"
-        onClick={() => handleModalOpen()}
-        style={{
-          backgroundImage: `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName})`,
-          // backgroundRepeat: 'no-repeat',
-          backgroundSize: "cover",
-          aspectRatio: 1,
-          width: "100%",
-        }}
-      >
-        <div className="helper">
-          <h4 className="animalLabelP">{pic.label}</h4>
+    <div key={pic.id}>
+        <div className={style.helper} style={{ marginBottom: '-8%' }}>
+          <h4 className={style.animalLabelP}>{pic.label}</h4>
           <a
-            className="atagp"
+            className={style.atagp}
             href={`mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20picture:%20"${pic.label}"%20${pic.photofile}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Animal%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20animal%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Copy%20write%20image%20claim%0D%0A%0D%0A(Please%20provide%20proof%20that%20you%20own%20the%20submitted%20photo%20and%20we%20will%20remove%20it%20as%20you%20have%20requested)`}
           >
-            <FlagIcon sx={{ color: "red", height: "3vh", width: "3vw" }} />
+            <FlagIcon sx={{ color: "red", height: '30px', width: "30px" }} />
           </a>
         </div>
+      <img
+      src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
+      style={{width: '100%', borderRadius: '3%'}}
+      onClick={() => handleModalOpen()}
+      ></img>
+ 
+ <div className={style.helper2} style={{ marginTop: '-8%' }}>
         <h4
-          className="userLabel"
+          className={style.userLabel}
           onClick={(e) => handleFollow(e, pic.newusername)}
         >
           Added by: {pic.UserName}
         </h4>
+
+        <div className={style.helper3}>
         {countOfLikes > 0 ? (
-          <div className="countIndicator">
+          <div className={style.countIndicator}>
             <p className="countDisplay">{countOfLikes}</p>
           </div>
-        ) : null}
+        ) : <div style={{width: '40px',  marginRight: '-10%'}}></div>}
         <img
           src={picLiked ? liked : notLiked}
-          className="likeIcon"
+          className={style.likeIcon}
           onClick={(e) => handleLike(e, pic.id)}
           style={{
             height: 30,
             width: 30,
           }}
         />
-      </div>
+        </div>
+            </div>
+      {/* </div> */}
 
       <div
         style={{
@@ -129,7 +128,7 @@ function Picture(props) {
           zIndex: 4,
         }}
       >
-        <p className="commentPrompt" onClick={() => handleCommentModal(pic)}>
+        <p className={style.commentPrompt} onClick={() => handleCommentModal(pic)}>
           {pic.commentcount < 1
             ? "Be first to Comment"
             : `Comment / View all ${pic.commentcount} Comments`}{" "}
