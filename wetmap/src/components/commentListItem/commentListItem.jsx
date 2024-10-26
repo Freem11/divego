@@ -1,5 +1,5 @@
-import React from "react";
-import "./commentListItem.css";
+import React from 'react';
+import './commentListItem.css';
 
 export default function CommentListItem(props) {
   const {
@@ -33,19 +33,20 @@ export default function CommentListItem(props) {
       >
         Reply
       </p>
-      {nbReplies > 0 ? (
-        <p
-          className="replyTxt"
-          onClick={() => toggleShowReplies(commentDetails)}
-        >
-          {selectedReplyId.includes(commentDetails.id)
-            ? `Hide replies`
-            : `View ${nbReplies} Replies`}
-        </p>
-      ) : (
-        ""
-      )}
+      {nbReplies > 0
+        ? (
+            <p
+              className="replyTxt"
+              onClick={() => toggleShowReplies(commentDetails)}
+            >
+              {selectedReplyId.includes(commentDetails.id)
+                ? `Hide replies`
+                : `View ${nbReplies} Replies`}
+            </p>
+          )
+        : (
+            ''
+          )}
     </div>
   );
 }
-

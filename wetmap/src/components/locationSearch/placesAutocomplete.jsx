@@ -1,11 +1,11 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from 'react';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
-} from "use-places-autocomplete";
-import { JumpContext } from "../contexts/jumpContext";
-import { GeoCoderContext } from "../contexts/geoCoderContext";
-import { CoordsContext } from "../contexts/mapCoordsContext";
+} from 'use-places-autocomplete';
+import { JumpContext } from '../contexts/jumpContext';
+import { GeoCoderContext } from '../contexts/geoCoderContext';
+import { CoordsContext } from '../contexts/mapCoordsContext';
 
 const PlacesAutoComplete = (props) => {
   const { jump, setJump } = useContext(JumpContext);
@@ -23,7 +23,7 @@ const PlacesAutoComplete = (props) => {
 
 
   useEffect(() => {
-      init();
+    init();
   }, []);
 
   const handleSelect = async (address) => {
@@ -34,7 +34,7 @@ const PlacesAutoComplete = (props) => {
 
     const { lat, lng } = await getLatLng(results[0]);
     setMapCoords([lat, lng]);
-    setValue("");
+    setValue('');
     setJump(!jump);
   };
 
@@ -42,63 +42,63 @@ const PlacesAutoComplete = (props) => {
     <div>
       <input
         value={value}
-        onChange={(e) => setValue(e.target.value)}
+        onChange={e => setValue(e.target.value)}
         placeholder="  Search Places..."
         style={{
-          marginTop: "5px",
-          marginLeft: "2px",
-          width: "18vw",
-          height: "3.5vh",
-          borderRadius: "10px",
-          fontSize: "1.5vw",
-          zIndex: 209,
+          marginTop:    '5px',
+          marginLeft:   '2px',
+          width:        '18vw',
+          height:       '3.5vh',
+          borderRadius: '10px',
+          fontSize:     '1.5vw',
+          zIndex:       209,
         }}
       />
       <div
         className="popover"
         style={{
-          marginTop: "2vh",
-          marginLeft: "-1.5vw",
-          height: "auto",
+          marginTop:  '2vh',
+          marginLeft: '-1.5vw',
+          height:     'auto',
           // zIndex: "100",
-          position: "absolute",
+          position:   'absolute',
         }}
       >
-        {status === "OK" &&
-          data.map(({ place_id, description }) => (
-            <li
+        {status === 'OK'
+        && data.map(({ place_id, description }) => (
+          <li
+            style={{
+              display:         'flex',
+              width:           '20vw',
+              paddingTop:      '0.5vh',
+              paddingBottom:   '0.5vh',
+              paddingLeft:     '1vw',
+              paddingRight:    '1vw',
+              listStyle:       'none',
+              backgroundColor: 'white',
+              marginBottom:    '0.1vh',
+              borderRadius:    '5px',
+              alignItems:      'center',
+              justifyContent:  'center',
+              cursor:          'pointer',
+            }}
+            key={place_id}
+            value={description}
+            className="popopt"
+            onClick={() => handleSelect(description)}
+          >
+            <div
               style={{
-                display: "flex",
-                width: "20vw",
-                paddingTop: "0.5vh",
-                paddingBottom: "0.5vh",
-                paddingLeft: "1vw",
-                paddingRight: "1vw",
-                listStyle: "none",
-                backgroundColor: "white",
-                marginBottom: "0.1vh",
-                borderRadius: "5px",
-                alignItems: "center",
-                justifyContent: "center",
-                cursor: "pointer",
+                color:      'black',
+                fontSize:   '1vw',
+                fontFamily: 'Itim, cursive',
+                fontWeight: 'normal',
               }}
-              key={place_id}
-              value={description}
-              className="popopt"
-              onClick={() => handleSelect(description)}
             >
-              <div
-                style={{
-                  color: "black",
-                  fontSize: "1vw",
-                  fontFamily: "Itim, cursive",
-                  fontWeight: "normal",
-                }}
-              >
-                {description}
-              </div>
-            </li>
-          ))}
+              {description}
+            </div>
+          </li>
+        ))}
       </div>
     </div>
   );

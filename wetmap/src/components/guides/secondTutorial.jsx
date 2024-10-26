@@ -1,32 +1,32 @@
-import React, { useState, useContext, useEffect, useRef } from "react";
-import { animated, useSpring } from "react-spring";
-import "./secondTutorial.css";
-import mantaIOS from "../../images/Manta32.png";
-import seaLionGuy from "../../images/EmilioNeutral.png";
-import { SecondTutorialModalContext } from "../contexts/secondTutorialModalContext";
-import { ThirdTutorialModalContext } from "../contexts/thirdTutorialModalContext";
-import { SessionContext } from "../contexts/sessionContext";
-import { grabProfileById } from "../../supabaseCalls/accountSupabaseCalls";
-import { UserProfileContext } from "../contexts/userProfileContext";
+import React, { useState, useContext, useEffect, useRef } from 'react';
+import { animated, useSpring } from 'react-spring';
+import './secondTutorial.css';
+import mantaIOS from '../../images/Manta32.png';
+import seaLionGuy from '../../images/EmilioNeutral.png';
+import { SecondTutorialModalContext } from '../contexts/secondTutorialModalContext';
+import { ThirdTutorialModalContext } from '../contexts/thirdTutorialModalContext';
+import { SessionContext } from '../contexts/sessionContext';
+import { grabProfileById } from '../../supabaseCalls/accountSupabaseCalls';
+import { UserProfileContext } from '../contexts/userProfileContext';
 // import { MapRegionContext } from "../contexts/mapRegionContext";
 // import { MapCenterContext } from "../contexts/mapCenterContext";
-import { Iterrator2Context } from "../contexts/iterrator2Context";
-import { Iterrator3Context } from "../contexts/iterrator3Context";
-import { TutorialContext } from "../contexts/tutorialContext";
-import { TutorialResetContext } from "../contexts/tutorialResetContext";
+import { Iterrator2Context } from '../contexts/iterrator2Context';
+import { Iterrator3Context } from '../contexts/iterrator3Context';
+import { TutorialContext } from '../contexts/tutorialContext';
+import { TutorialResetContext } from '../contexts/tutorialResetContext';
 // import { DSAdderContext } from "../contexts/DSModalContext";
-import { DiveSpotContext } from "../contexts/diveSpotContext";
-import { ChapterContext } from "../contexts/chapterContext";
-import { JumpContext } from "../contexts/jumpContext";
-import { CoordsContext } from "../contexts/mapCoordsContext";
-import { ZoomContext } from "../contexts/mapZoomContext";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import MyLocationIcon from "@mui/icons-material/MyLocation";
-import TravelExploreIcon from "@mui/icons-material/TravelExplore";
-import AddLocationAltIcon from "@mui/icons-material/AddLocationAlt";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import SiteSubmitter from "../modals/siteSubmitter";
-import { ModalContext } from "../contexts/modalContext";
+import { DiveSpotContext } from '../contexts/diveSpotContext';
+import { ChapterContext } from '../contexts/chapterContext';
+import { JumpContext } from '../contexts/jumpContext';
+import { CoordsContext } from '../contexts/mapCoordsContext';
+import { ZoomContext } from '../contexts/mapZoomContext';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import MyLocationIcon from '@mui/icons-material/MyLocation';
+import TravelExploreIcon from '@mui/icons-material/TravelExplore';
+import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import SiteSubmitter from '../modals/siteSubmitter';
+import { ModalContext } from '../contexts/modalContext';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -39,7 +39,7 @@ export default function SecondTutorial(props) {
     animateThirdGuideModal,
   } = props;
 
-  window.addEventListener("resize", trackDimensions);
+  window.addEventListener('resize', trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
   const [windowHeigth, setWindowHeigth] = useState(screenHeitghInital);
@@ -59,10 +59,10 @@ export default function SecondTutorial(props) {
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
 
   const { secondGuideModal, setSecondGuideModal } = useContext(
-    SecondTutorialModalContext
+    SecondTutorialModalContext,
   );
   const { thirdGuideModal, setThirdGuideModal } = useContext(
-    ThirdTutorialModalContext
+    ThirdTutorialModalContext,
   );
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
   const { itterator3, setItterator3 } = useContext(Iterrator3Context);
@@ -96,14 +96,14 @@ export default function SecondTutorial(props) {
   let modalHeigth = 700;
 
   useEffect(() => {
-    let characterWidth = document.getElementsByClassName("character2")[0]
+    let characterWidth = document.getElementsByClassName('character2')[0]
       .clientWidth;
 
-    let textBoxHeight = document.getElementsByClassName("talkbox2")[0]
+    let textBoxHeight = document.getElementsByClassName('talkbox2')[0]
       .clientHeight;
 
     switch (chapter) {
-      case "Checking for a dive site":
+      case 'Checking for a dive site':
         resetTutorial();
         setItterator2(1);
         setSecondGuideModalYCoord(-windowHeigth);
@@ -117,7 +117,7 @@ export default function SecondTutorial(props) {
         setDsSearchY(2 * windowHeigth + (windowHeigth - 100) / 3);
         break;
 
-      case "Adding your dive sites":
+      case 'Adding your dive sites':
         resetTutorial();
         setItterator2(8);
         setSecondGuideModalYCoord(-windowHeigth);
@@ -130,13 +130,13 @@ export default function SecondTutorial(props) {
         setDiveSiteY(2 * windowHeigth + (windowHeigth - 100) / 3);
         break;
 
-      case "DS Help":
+      case 'DS Help':
         resetTutorial();
         setItterator2(10);
         setTutorialRunning(true);
         setDsAddermodal(true);
         setSecondGuideModalYCoord(-windowHeigth);
-        modalShow(SiteSubmitter)
+        modalShow(SiteSubmitter);
         setTimeout(() => {
           setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
@@ -145,12 +145,12 @@ export default function SecondTutorial(props) {
         }, 300);
         break;
 
-      case "Placing the pin":
+      case 'Placing the pin':
         resetTutorial();
         setItterator2(15);
         setDsAddermodal(true);
         setSecondGuideModalYCoord(-windowHeigth);
-        modalShow(SiteSubmitter)
+        modalShow(SiteSubmitter);
         setTimeout(() => {
           setCharacterX(-windowWidth + characterWidth * 1.2);
         }, 100);
@@ -160,7 +160,7 @@ export default function SecondTutorial(props) {
         setLocationY(2 * windowHeigth + (windowHeigth - 100) / 3);
         break;
 
-      case "Exit Guide":
+      case 'Exit Guide':
         setDsAddermodal(false);
         setSecondGuideModalYCoord(0);
         handleClearTutorial();
@@ -177,13 +177,15 @@ export default function SecondTutorial(props) {
 
     if (profile) {
       bully = profile[0].UserName;
-    } else {
-      bully = "";
+    }
+    else {
+      bully = '';
     }
 
-    if (bully == null || bully === "") {
+    if (bully == null || bully === '') {
       return;
-    } else {
+    }
+    else {
       setTutorialReset(true);
     }
   };
@@ -199,9 +201,9 @@ export default function SecondTutorial(props) {
     setNextTutY(0);
     setAddSiteVals({
       ...addSiteVals,
-      Site: "",
-      Latitude: "",
-      Longitude: "",
+      Site:      '',
+      Latitude:  '',
+      Longitude: '',
     });
   };
 
@@ -213,8 +215,9 @@ export default function SecondTutorial(props) {
       if (success) {
         setProfile(success);
       }
-    } catch (e) {
-      console.log({ title: "Error", message: e.message });
+    }
+    catch (e) {
+      console.log({ title: 'Error', message: e.message });
     }
   };
 
@@ -245,54 +248,54 @@ export default function SecondTutorial(props) {
   const [mantaY, setMantaY] = useState(0);
   const [nextTutY, setNextTutY] = useState(0);
 
-  const text0 =
-    "Hey welcome back! Now that you have a Diver Name, I can show you how you can contribute to Scuba SEAsons!";
-  const text1 =
-    "First, let's look at working with Dive sites, let's move to a spot with known dive sites";
-  const text2 =
-    "Now that the map is positioned, let's check for a dive site by clicking on the dive site search tool option, it looks like this";
-  const text3 = "";
-  const text4 =
-    "Now that the options are open, it will show you a list of dive sites in the area, try searching for 'Copper Cliffs' and select it, once you have found it";
-  const text5 = "";
-  const text6 =
-    "Nice! As you can see when you selected the dive site, the map zoomed to it and put that yellow indicator over it to highlight it, this means the site is in the app and ready for you to add your sightings to it later!";
-  const text7 =
-    "Next, let's say the site you were looking for was NOT in the app, no problem adding them is very easy!";
-  const text8 =
-    "To add a dive site we need to click on the dive site adding button, it's under this option, pop it open and I'll walk you through how it works";
-  const text9 = "";
-  const text10 =
-    "This is the dive site adding form, here, you can see 3 fields and a couple of buttons. First is the site name, add the dive site name in this spot";
-  const text11 =
-    "Next are the GPS lat and lng fields, there are 3 ways you can add them. The first is manually if you have the decimal format GPS coordinates simply add them to the fields and your good to go!";
-  const text12 =
-    "The second way is using the location button, it’s this one. Clicking it will take your device’s current location and use that to create GPS coordinates for the dive site. Try it out now!";
-  const text13 = "";
-  const text14 =
-    "Nice! As you can see clicking the location button has produced GPS coordinates for your current location!";
-  const text15 =
-    "Next, assuming neither of these options will fit your situation there is one more, using this Pin Dropper button to open up the map so we can drop a pin, let’s try it";
-  const text16 = "";
-  const text17 =
-    "As you can see we are now back on the map and there is a new icon that looks like a manta ray, this is our draggable pin";
-  const text18 =
-    "Simply press on and drag the manta pin to to place it where you dive site is meant to be and then click the 'set pin' button at the top of the page";
-  const text19 = "";
-  const text20 =
-    "As you can see Scuba SEAsons has taken the location of the pin you set and has given us its GPS coordinates!";
-  const text21 =
-    "Now that you have your GPS fields filled out add the site name in the top field and then click the 'Submit Dive Site' button at the bottom and your site will be submitted for review";
-  const text22 =
-    "Please note your new site won't automatically be added to the map, the Scuba SEAsons team will verify your submission before committing to the map, but after that your site will go in and be credited to you with your diver name that we setup earlier!";
-  const text23 = "";
-  const text24 =
-    "Nice Job, That's how you add a new dive site to Scuba SEAsons! In this case, since this is a guide, the entry was not submitted, but you can add from now on, in the same way";
-  const text25 =
-    "That's it for adding dive sites to the app! In the next guide we will look at adding sea creature sighting photos! Click on this button to go to that guide next, otherwise click anywhere else to close, and thanks for joining me again!";
-  const text26 = "";
+  const text0
+    = 'Hey welcome back! Now that you have a Diver Name, I can show you how you can contribute to Scuba SEAsons!';
+  const text1
+    = 'First, let\'s look at working with Dive sites, let\'s move to a spot with known dive sites';
+  const text2
+    = 'Now that the map is positioned, let\'s check for a dive site by clicking on the dive site search tool option, it looks like this';
+  const text3 = '';
+  const text4
+    = 'Now that the options are open, it will show you a list of dive sites in the area, try searching for \'Copper Cliffs\' and select it, once you have found it';
+  const text5 = '';
+  const text6
+    = 'Nice! As you can see when you selected the dive site, the map zoomed to it and put that yellow indicator over it to highlight it, this means the site is in the app and ready for you to add your sightings to it later!';
+  const text7
+    = 'Next, let\'s say the site you were looking for was NOT in the app, no problem adding them is very easy!';
+  const text8
+    = 'To add a dive site we need to click on the dive site adding button, it\'s under this option, pop it open and I\'ll walk you through how it works';
+  const text9 = '';
+  const text10
+    = 'This is the dive site adding form, here, you can see 3 fields and a couple of buttons. First is the site name, add the dive site name in this spot';
+  const text11
+    = 'Next are the GPS lat and lng fields, there are 3 ways you can add them. The first is manually if you have the decimal format GPS coordinates simply add them to the fields and your good to go!';
+  const text12
+    = 'The second way is using the location button, it’s this one. Clicking it will take your device’s current location and use that to create GPS coordinates for the dive site. Try it out now!';
+  const text13 = '';
+  const text14
+    = 'Nice! As you can see clicking the location button has produced GPS coordinates for your current location!';
+  const text15
+    = 'Next, assuming neither of these options will fit your situation there is one more, using this Pin Dropper button to open up the map so we can drop a pin, let’s try it';
+  const text16 = '';
+  const text17
+    = 'As you can see we are now back on the map and there is a new icon that looks like a manta ray, this is our draggable pin';
+  const text18
+    = 'Simply press on and drag the manta pin to to place it where you dive site is meant to be and then click the \'set pin\' button at the top of the page';
+  const text19 = '';
+  const text20
+    = 'As you can see Scuba SEAsons has taken the location of the pin you set and has given us its GPS coordinates!';
+  const text21
+    = 'Now that you have your GPS fields filled out add the site name in the top field and then click the \'Submit Dive Site\' button at the bottom and your site will be submitted for review';
+  const text22
+    = 'Please note your new site won\'t automatically be added to the map, the Scuba SEAsons team will verify your submission before committing to the map, but after that your site will go in and be credited to you with your diver name that we setup earlier!';
+  const text23 = '';
+  const text24
+    = 'Nice Job, That\'s how you add a new dive site to Scuba SEAsons! In this case, since this is a guide, the entry was not submitted, but you can add from now on, in the same way';
+  const text25
+    = 'That\'s it for adding dive sites to the app! In the next guide we will look at adding sea creature sighting photos! Click on this button to go to that guide next, otherwise click anywhere else to close, and thanks for joining me again!';
+  const text26 = '';
 
-  const [textRead, setTextRead] = useState("");
+  const [textRead, setTextRead] = useState('');
   const [textPrinting, setTextPrinting] = useState(true);
 
   const feederArray = [
@@ -329,24 +332,26 @@ export default function SecondTutorial(props) {
 
   const setupText = (pushVal) => {
     if (
-      itterator2 === 3 ||
-      itterator2 === 5 ||
-      itterator2 === 9 ||
-      itterator2 === 13 ||
-      itterator2 === 16 ||
-      itterator2 === 23 ||
-      itterator2 >= 26
+      itterator2 === 3
+      || itterator2 === 5
+      || itterator2 === 9
+      || itterator2 === 13
+      || itterator2 === 16
+      || itterator2 === 23
+      || itterator2 >= 26
     ) {
       return;
-    } else {
+    }
+    else {
       if (pushVal === 1 && itterator2 < feederArray.length - 1) {
         if (textPrinting) {
           setTextPrinting(false);
-          textArray = "";
-          setTextRead("");
+          textArray = '';
+          setTextRead('');
           setTextRead(feederArray[itterator2]);
-        } else {
-          setItterator2((prev) => prev + pushVal);
+        }
+        else {
+          setItterator2(prev => prev + pushVal);
           setTextPrinting(true);
         }
       }
@@ -362,9 +367,10 @@ export default function SecondTutorial(props) {
   function printOutText() {
     if (textArray.length > 0) {
       const charToConcat = textArray[0];
-      setTextRead((prev) => prev + charToConcat);
+      setTextRead(prev => prev + charToConcat);
       textArray = textArray.slice(1);
-    } else {
+    }
+    else {
       setTextPrinting(false);
     }
   }
@@ -375,14 +381,15 @@ export default function SecondTutorial(props) {
 
   let textPrinter;
   useEffect(() => {
-    setTextRead("");
+    setTextRead('');
 
     let textVal = feederArray[itterator2];
     if (textVal) {
-      textArray = textVal.split("");
+      textArray = textVal.split('');
       if (textPrinting) {
         textPrinter = setInterval(printOutText, 80);
-      } else {
+      }
+      else {
         setTextRead(textVal);
       }
     }
@@ -391,10 +398,10 @@ export default function SecondTutorial(props) {
   }, [itterator2, textPrinting]);
 
   useEffect(() => {
-    let characterWidth = document.getElementsByClassName("character2")[0]
+    let characterWidth = document.getElementsByClassName('character2')[0]
       .clientWidth;
 
-    let textBoxHeight = document.getElementsByClassName("talkbox2")[0]
+    let textBoxHeight = document.getElementsByClassName('talkbox2')[0]
       .clientHeight;
 
     if (itterator2 === 0) {
@@ -461,7 +468,7 @@ export default function SecondTutorial(props) {
     if (itterator2 === 13) {
       setPinY(0);
       // modalShow(SiteSubmitter)
-      setSecondGuideModalYCoord(0)
+      setSecondGuideModalYCoord(0);
     }
 
     if (itterator2 === 14) {
@@ -478,7 +485,7 @@ export default function SecondTutorial(props) {
       moveMap({ lat: 50.03312256836453, lng: -125.27333546429873 });
       setLocationY(0);
       // modalShow(SiteSubmitter)
-      setSecondGuideModalYCoord(0)
+      setSecondGuideModalYCoord(0);
     }
 
     if (itterator2 === 17) {
@@ -512,7 +519,7 @@ export default function SecondTutorial(props) {
     }
 
     if (itterator2 === 25) {
-      let nextTutHeight = document.getElementsByClassName("nextTutButton")[0]
+      let nextTutHeight = document.getElementsByClassName('nextTutButton')[0]
         .clientHeight;
 
       setNextTutY(2 * windowHeigth + (windowHeigth - nextTutHeight) / 2);
@@ -521,9 +528,9 @@ export default function SecondTutorial(props) {
     if (itterator2 === 26) {
       setAddSiteVals({
         ...addSiteVals,
-        Site: "",
-        Latitude: "",
-        Longitude: "",
+        Site:      '',
+        Latitude:  '',
+        Longitude: '',
       });
       setNextTutY(0);
       setTutorialRunning(false);
@@ -540,42 +547,42 @@ export default function SecondTutorial(props) {
 
   const characterSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(${characterX}px,0,0)` },
+    to:   { transform: `translate3d(${characterX}px,0,0)` },
   });
 
   const textBoxSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${textBoxY}px,0)` },
+    to:   { transform: `translate3d(0,${textBoxY}px,0)` },
   });
 
   const DsSearchButtonSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${dsSearchY}px,0)` },
+    to:   { transform: `translate3d(0,${dsSearchY}px,0)` },
   });
 
   const diveSiteSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${diveSiteY}px,0)` },
+    to:   { transform: `translate3d(0,${diveSiteY}px,0)` },
   });
 
   const locationSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${locationY}px,0)` },
+    to:   { transform: `translate3d(0,${locationY}px,0)` },
   });
 
   const pinSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${pinY}px,0)` },
+    to:   { transform: `translate3d(0,${pinY}px,0)` },
   });
 
   const mantaSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${mantaY}px,0)` },
+    to:   { transform: `translate3d(0,${mantaY}px,0)` },
   });
 
   const nextTutSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${nextTutY}px,0)` },
+    to:   { transform: `translate3d(0,${nextTutY}px,0)` },
   });
 
   useEffect(() => {
@@ -597,13 +604,13 @@ export default function SecondTutorial(props) {
         ref={characterRef}
         className="character2"
         style={characterSlide}
-        pointerEvents={"box-none"}
+        pointerEvents="box-none"
       >
         <img
           src={seaLionGuy}
           style={{
-            height: "100%",
-            width: "100%",
+            height: '100%',
+            width:  '100%',
           }}
         />
       </animated.div>
@@ -619,9 +626,9 @@ export default function SecondTutorial(props) {
       >
         <TravelExploreIcon
           sx={{
-            height: "100%",
-            width: "100%",
-            color: "#538dbd",
+            height: '100%',
+            width:  '100%',
+            color:  '#538dbd',
           }}
         />
       </animated.div>
@@ -633,10 +640,10 @@ export default function SecondTutorial(props) {
       >
         <AddLocationAltIcon
           sx={{
-            height: "90%",
-            width: "90%",
-            color: "#538dbd",
-            marginTop: "10%",
+            height:    '90%',
+            width:     '90%',
+            color:     '#538dbd',
+            marginTop: '10%',
           }}
         />
       </animated.div>
@@ -648,9 +655,9 @@ export default function SecondTutorial(props) {
       >
         <LocationOnIcon
           sx={{
-            height: "100%",
-            width: "100%",
-            color: "#538dbd",
+            height: '100%',
+            width:  '100%',
+            color:  '#538dbd',
           }}
         />
       </animated.div>
@@ -658,9 +665,9 @@ export default function SecondTutorial(props) {
       <animated.div ref={pinRef} className="pinbuttonwrapper" style={pinSlide}>
         <MyLocationIcon
           sx={{
-            height: "100%",
-            width: "100%",
-            color: "#538dbd",
+            height: '100%',
+            width:  '100%',
+            color:  '#538dbd',
           }}
         />
       </animated.div>
@@ -669,8 +676,8 @@ export default function SecondTutorial(props) {
         <img
           src={mantaIOS}
           style={{
-            height: "100%",
-            width: "80%",
+            height: '100%',
+            width:  '80%',
           }}
         />
       </animated.div>
@@ -686,11 +693,11 @@ export default function SecondTutorial(props) {
         </p>
         <KeyboardArrowRightIcon
           sx={{
-            height: "6vw",
-            width: "6vw",
-            color: "white",
-            cursor: "pointer",
-            marginTop: "1vh",
+            height:    '6vw',
+            width:     '6vw',
+            color:     'white',
+            cursor:    'pointer',
+            marginTop: '1vh',
           }}
           onClick={handleThirdTutorialStartup}
         />

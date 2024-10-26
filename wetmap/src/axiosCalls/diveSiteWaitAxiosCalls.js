@@ -1,9 +1,8 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const diveSiteWaits = () => {
-
   return axios
-    .post("api/diveSiteWait")
+    .post('api/diveSiteWait')
     .then((response) => {
       return response.data;
     })
@@ -13,12 +12,11 @@ export const diveSiteWaits = () => {
 };
 
 export const insertDiveSiteWaits = (values) => {
-
   return axios
-    .post("api/diveSiteWaitAdd", {
+    .post('api/diveSiteWaitAdd', {
       Name: values.Site,
-      Lat: values.Latitude,
-      Lng: values.Longitude,
+      Lat:  values.Latitude,
+      Lng:  values.Longitude,
     })
     .then((response) => {
       return response.data;
@@ -29,7 +27,6 @@ export const insertDiveSiteWaits = (values) => {
 };
 
 export const grabDiveSiteWaitById = (id) => {
-
   return axios
     .get(`api/diveSiteWait/${id}`)
     .then((response) => {
@@ -41,12 +38,11 @@ export const grabDiveSiteWaitById = (id) => {
 };
 
 export const deleteDiveSiteWait = (id) => {
-
   return axios
-    .delete(`/api/diveSiteWait/delete/${id}`, {id})
+    .delete(`/api/diveSiteWait/delete/${id}`, { id })
     .then((response) => {
     })
     .catch((err) => {
       return err;
     });
-  }
+};

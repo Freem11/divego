@@ -1,88 +1,94 @@
-import { Form, Label } from "reactstrap";
-import React, { useState, useContext } from "react";
-import { SessionContext } from "./contexts/sessionContext";
+import { Form, Label } from 'reactstrap';
+import React, { useState, useContext } from 'react';
+import { SessionContext } from './contexts/sessionContext';
 import {
   register,
   sessionCheck,
-} from "../supabaseCalls/authenticateSupabaseCalls";
-import "./authenication.css";
-import { createProfile } from "../supabaseCalls/accountSupabaseCalls";
+} from '../supabaseCalls/authenticateSupabaseCalls';
+import './authenication.css';
+import { createProfile } from '../supabaseCalls/accountSupabaseCalls';
 
 let emailVar = false;
 let passwordVar = false;
 let firstVar = false;
 let lastVar = false;
-import manta from "../images/Matt_Manta_White.png"
-import InputField from "./reusables/inputField";
+import manta from '../images/Matt_Manta_White.png';
+import InputField from './reusables/inputField';
 
 export default function SignUpRoute() {
   const { setActiveSession } = useContext(SessionContext);
 
   const [formVals, setFormVals] = useState({
-    email: "",
-    password: "",
-    firstName: "",
-    lastName: "",
+    email:     '',
+    password:  '',
+    firstName: '',
+    lastName:  '',
   });
 
   const [regFail, setRegFail] = useState(null);
 
   const [formValidation, SetFormValidation] = useState({
-    emailVal: false,
+    emailVal:    false,
     passwordVal: false,
   });
 
   const handleSignUpSubmit = async () => {
-    if (formVals.email === "" || formVals.email === null) {
+    if (formVals.email === '' || formVals.email === null) {
       emailVar = true;
-    } else {
+    }
+    else {
       emailVar = false;
     }
 
-    if (formVals.password === "" || formVals.password === null) {
+    if (formVals.password === '' || formVals.password === null) {
       passwordVar = true;
-    } else {
+    }
+    else {
       passwordVar = false;
     }
 
-    if (formVals.firstName === "" || formVals.firstName === null) {
+    if (formVals.firstName === '' || formVals.firstName === null) {
       firstVar = true;
-    } else {
+    }
+    else {
       firstVar = false;
     }
 
-    if (formVals.lastName === "" || formVals.lastName === null) {
+    if (formVals.lastName === '' || formVals.lastName === null) {
       lastVar = true;
-    } else {
+    }
+    else {
       lastVar = false;
     }
 
     SetFormValidation({
       ...formValidation,
-      emailVal: emailVar,
-      passwordVal: passwordVar,
+      emailVal:     emailVar,
+      passwordVal:  passwordVar,
       firstNameVal: firstVar,
-      lastNameVal: lastVar,
+      lastNameVal:  lastVar,
     });
 
     if (
-      formVals.email === "" ||
-      formVals.password == "" ||
-      formVals.firstName == "" ||
-      formVals.lastName == ""
+      formVals.email === ''
+      || formVals.password == ''
+      || formVals.firstName == ''
+      || formVals.lastName == ''
     ) {
-      setRegFail("Please fill out all fields");
+      setRegFail('Please fill out all fields');
       return;
-    } else {
+    }
+    else {
       let registrationToken = await register(formVals);
       if (registrationToken.data.session !== null) {
-        await createProfile({id: registrationToken.data.session.user.id , email: formVals.email})
+        await createProfile({ id: registrationToken.data.session.user.id, email: formVals.email });
         await localStorage.setItem(
-          "token",
-          JSON.stringify(registrationToken.data.session.refresh_token)
+          'token',
+          JSON.stringify(registrationToken.data.session.refresh_token),
         );
         setActiveSession(registrationToken.data);
-      } else {
+      }
+      else {
         setRegFail(`You have already registered this account, please sign in`);
       }
       let checker = await sessionCheck();
@@ -99,10 +105,10 @@ export default function SignUpRoute() {
         <div className="headlinerdiv">
           <img
             style={{
-              height: "20vh",
-              marginTop: "5vh",
-              marginBottom: "0%",
-              backgroundColor: "#538dbd",
+              height:          '20vh',
+              marginTop:       '5vh',
+              marginBottom:    '0%',
+              backgroundColor: '#538dbd',
             }}
             src={manta}
           />

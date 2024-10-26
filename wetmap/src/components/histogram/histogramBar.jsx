@@ -1,15 +1,13 @@
-import React from "react";
-import "./histogram.css";
+import React from 'react';
+import './histogram.css';
 
-let heightVal
+let heightVal;
 export default function DataBar(props) {
-
   const { moddedVal } = props;
 
-  heightVal = moddedVal
+  heightVal = moddedVal;
   return (
-    <div className="barContainer" style={{height: moddedVal + "%"}} pointerEvents={'none'}>
+    <div className="barContainer" style={{ height: moddedVal + '%' }} pointerEvents="none">
     </div>
   );
 }
-

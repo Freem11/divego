@@ -1,5 +1,5 @@
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import "./animalTag.css";
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import './animalTag.css';
 
 const AnimalTag = (props) => {
   const { animalMultiSelection, setAnimalMultiSelection, animalName } = props;
@@ -7,31 +7,32 @@ const AnimalTag = (props) => {
   const handleClearTag = async (text) => {
     if (animalMultiSelection && animalMultiSelection.includes(text)) {
       setAnimalMultiSelection(
-        animalMultiSelection.filter((item) => item !== text)
+        animalMultiSelection.filter(item => item !== text),
       );
     }
   };
 
   return (
     <div className="tagBody" onClick={() => handleClearTag(animalName)}>
-        <p
-          style={{
-            color: "#355D71",
-            fontFamily: "Itim",
-            fontSize: "0.8rem",
-            marginRight: "0.5rem",
-            marginLeft: 2,
-            marginTop: 0,
-            marginBottom: 0,
-          }}
+      <p
+        style={{
+          color:        '#355D71',
+          fontFamily:   'Itim',
+          fontSize:     '0.8rem',
+          marginRight:  '0.5rem',
+          marginLeft:   2,
+          marginTop:    0,
+          marginBottom: 0,
+        }}
+      >
+        {animalName}
+      </p>
+      <div className="xButton">
+        <HighlightOffIcon
+          sx={{ color: 'gray', width: '1rem' }}
         >
-          {animalName}
-        </p>
-        <div className="xButton">
-          <HighlightOffIcon
-            sx={{ color: "gray", width: "1rem" }}
-          ></HighlightOffIcon>
-        </div>
+        </HighlightOffIcon>
+      </div>
     </div>
   );
 };
