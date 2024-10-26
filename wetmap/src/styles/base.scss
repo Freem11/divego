@@ -47,7 +47,11 @@
 
 // Utility classes
 // @import "node_modules/spectre.css/src/animations";
-@import "node_modules/spectre.css/src/utilities";
+@import "node_modules/spectre.css/src/utilities/display";
+@import "node_modules/spectre.css/src/utilities/loading";
+@import "node_modules/spectre.css/src/utilities/position";
+@import "node_modules/spectre.css/src/utilities/shapes";
+@import "node_modules/spectre.css/src/utilities/text";
 @import "./mixins/justify.scss";
 @import "./fonts.scss";
 
@@ -60,6 +64,8 @@
 @include justify-variant("center");
 
 @include bg-color-variant(".bg-white", $white);
+@include bg-color-variant(".bg-gray", $bg-color);
+@include text-color-variant(".text-primary", #142800);
 
 .extra-shadow{
      box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
