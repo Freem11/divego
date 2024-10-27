@@ -19,10 +19,9 @@
 }
 
 .inputContainerPlain {
+  width: fit-content;
   display: flex;
   flex-direction: row;
   align-items: center;
   margin-left: 5%;
-  // background-color: pink;
-  // background-color: $themeWhite;
 }

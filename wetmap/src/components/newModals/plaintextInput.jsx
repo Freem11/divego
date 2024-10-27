@@ -30,7 +30,7 @@ export default function PlainTextInput(props) {
         placeholder={placeHolder}
         value={content}
         onChange={onChangeText}
-        style={{ width: '100%' }}
+        style={{ width: '120%', paddingLeft: 5, paddingRight: 5 }}
       >
       </InputBase>
       {(placeHolder && (placeHolder.length > 100))  || !checkPasser
@@ -42,6 +42,7 @@ export default function PlainTextInput(props) {
                 fill="green"
                 width="30px"
                 onClick={() => setIsEditModeOn(false)}
+                style={{ marginLeft: 10, marginBottom: 5 }}
               />
 
             )
@@ -51,6 +52,7 @@ export default function PlainTextInput(props) {
                 fill="darkgrey"
                 width="30px"
                 onClick={() => setIsEditModeOn(true)}
+                style={{ marginLeft: 10, marginBottom: 5 }}
               />
             )}
     </div>
