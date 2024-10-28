@@ -1,7 +1,7 @@
-import React from "react";
-import { Label } from "reactstrap";
-import style from "./button.module.scss";
-import { MaterialIcons } from "react-web-vector-icons";
+import React from 'react';
+import { Label } from 'reactstrap';
+import style from './button.module.scss';
+import Icon from '../../icons/Icon';
 
 export default function Button(props) {
   const { onClick, btnText, altStyle, icon } = props;
@@ -13,15 +13,21 @@ export default function Button(props) {
     >
       <Label
         style={{
-          color: altStyle ? style.invertedStyleText : style.defaultStyleText,
-          cursor: "pointer",
+          color:  altStyle ? style.invertedStyleText : style.defaultStyleText,
+          cursor: 'pointer',
         }}
       >
         {btnText}
       </Label>
-      {icon ? (
-        <MaterialIcons name="chevron-right" size={30} color={"$themeWhite"} />
-      ) : null}
+      {icon
+        ? (
+            <Icon
+              name="chevron-right"
+              fill="white"
+              width="60px"
+            />
+          )
+        : null}
     </div>
   );
 }

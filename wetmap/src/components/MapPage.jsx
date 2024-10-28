@@ -1,16 +1,10 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
-import Logo from './logo/logo';
 import Home from './googleMap';
-import AdminPortal from './adminPortal';
-import PicUploader from './newModals/picUploader';
 import SiteSubmitter from './modals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';
-import AnchorPics from './modals/anchorPics';
-import ShopModal from './modals/shopModal';
 import Settings from './modals/setting';
-// import PartnerAccountRequestModal from "./modals/partnerAccountRequestModal";
 import PhotoMenu from './photoMenu/photoMenu2';
 import PhotoFilterer from './photoMenu/photoFilter';
 import { useState, useContext, useEffect, useRef } from 'react';
@@ -20,7 +14,6 @@ import ToggleButton from '@mui/material/ToggleButton';
 import Collapse from '@mui/material/Collapse';
 import ExploreIcon from '@mui/icons-material/Explore';
 import AnchorIcon from '@mui/icons-material/Anchor';
-import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import TravelExploreIcon from '@mui/icons-material/TravelExplore';
@@ -31,17 +24,12 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DiveSitesContext } from './contexts/diveSitesContext';
-import { AnimalContext } from './contexts/animalContext';
-import { PicModalContext } from './contexts/picModalContext';
-import { PictureContext } from './contexts/pictureContext';
 import { GeoCoderContext } from './contexts/geoCoderContext';
 import { AnimalRevealContext } from './contexts/animalRevealContext';
 import { MasterContext } from './contexts/masterContext';
 import { MinorContext } from './contexts/minorContext';
-import { LightBoxContext } from './contexts/lightBoxContext';
 import { CoordsContext } from './contexts/mapCoordsContext';
 import { SelectedShopContext } from './contexts/selectedShopContext';
-import { SelectedPicContext } from './contexts/selectPicContext';
 import { ZoomContext } from './contexts/mapZoomContext';
 import { UserProfileContext } from './contexts/userProfileContext';
 import { SessionContext } from './contexts/sessionContext';
@@ -54,7 +42,6 @@ import { SitesArrayContext } from './contexts/sitesArrayContext';
 import { ZoomHelperContext } from './contexts/zoomHelperContext';
 import { DiveSiteAdderModalContext } from './contexts/diveSiteAdderModalContext';
 import { PullTabContext } from './contexts/pullTabContext';
-import { CarrouselTilesContext } from './contexts/carrouselTilesContext';
 import { TutorialContext } from './contexts/tutorialContext';
 import { IterratorContext } from './contexts/iterratorContext';
 import { Iterrator2Context } from './contexts/iterrator2Context';
@@ -72,35 +59,22 @@ import TutorialBar from './guideBar/tutorialBarContainer';
 import { ModalContext } from './contexts/modalContext';
 import Modal from './reusables/modal/modal';
 import { ModalWindowSize } from './reusables/modal/constants';
-import { cleanupPinPicture } from '../helpers/picUploaderHelpers';
 
-// const adminPortalZone = (
-//   <div style={{ marginLeft: "10px", marginBottom: "40px" }}>
-//     <AdminPortal></AdminPortal>
-//   </div>
-// );
-
-const MapPage = React.memo(function MapPage(props) {
-  const { screenHeigthInital } = props;
+const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
-  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
+  const { setZoomHelper } = useContext(ZoomHelperContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
-  // const [showAdminPortal, setShowAdminPortal] = useState(false);
   const { showGeoCoder } = useContext(GeoCoderContext);
   const { showAnimalSearch } = useContext(AnimalRevealContext);
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
-  const { setPhotoFile } = useContext(PictureContext);
-  const { lightbox, setLightbox } = useContext(LightBoxContext);
-  const { selectedPic } = useContext(SelectedPicContext);
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  const { selectedShop } = useContext(SelectedShopContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
-  const { mapCoords, setMapCoords } = useContext(CoordsContext);
-  const { picModal } = useContext(PicModalContext);
-  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+  const { setMapCoords } = useContext(CoordsContext);
+  const { chosenModal } = useContext(ModalSelectContext);
 
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { itterator, setItterator } = useContext(IterratorContext);
@@ -110,88 +84,15 @@ const MapPage = React.memo(function MapPage(props) {
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
 
-  const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
-  const { shopModal, setShopModal } = useContext(ShopModalContext);
+  const { setSitesArray } = useContext(SitesArrayContext);
+  const { setSiteModal } = useContext(AnchorModalContext);
+  const { setShopModal } = useContext(ShopModalContext);
 
-  const { dsAdderModal, setDsAddermodal } = useContext(
+  const { setDsAddermodal } = useContext(
     DiveSiteAdderModalContext,
   );
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
-  const { setTiles } = useContext(CarrouselTilesContext);
-
-  const [searButState, setSearButState] = useState(false);
-  const [siteButState, setSiteButState] = useState(false);
-  const [photButState, setPhotButState] = useState(false);
-
   const { modalShow, modalResume } = useContext(ModalContext);
-
-  let blinker;
-  let counter = 0;
-  let counter1 = 0;
-  let counter2 = 0;
-
-  function diveSiteSearch() {
-    counter++;
-    if (counter % 2 == 0) {
-      setSearButState(false);
-    }
-    else {
-      setSearButState(true);
-    }
-  }
-
-  function diveSiteAdd() {
-    counter1++;
-    if (counter1 % 2 == 0) {
-      setSiteButState(false);
-    }
-    else {
-      setSiteButState(true);
-    }
-  }
-
-  function photoAdd() {
-    counter2++;
-    if (counter2 % 2 == 0) {
-      setPhotButState(false);
-    }
-    else {
-      setPhotButState(true);
-    }
-  }
-
-  function cleanUp() {
-    clearInterval(blinker);
-    setSearButState(false);
-    setSiteButState(false);
-    setPhotButState(false);
-  }
-
-  useEffect(() => {
-    if (tutorialRunning) {
-      if (itterator2 === 3) {
-        blinker = setInterval(diveSiteSearch, 1500);
-      }
-      else if (itterator2 === 9) {
-        blinker = setInterval(diveSiteAdd, 1500);
-      }
-    }
-    return () => {
-      cleanUp();
-    };
-  }, [itterator2]);
-
-  useEffect(() => {
-    if (tutorialRunning) {
-      if (itterator3 === 5) {
-        blinker = setInterval(photoAdd, 1500);
-      }
-    }
-    return () => {
-      cleanUp();
-    };
-  }, [itterator3]);
 
   const returnToPicModal = () => {
     modalResume();
@@ -203,8 +104,7 @@ const MapPage = React.memo(function MapPage(props) {
           animateSecondGuideModal();
         }
       }
-    }
-    else if (chosenModal === 'Photos') {
+    } else if (chosenModal === 'Photos') {
       if (tutorialRunning) {
         if (itterator3 === 19) {
           setItterator3(itterator3 + 1);
@@ -235,8 +135,7 @@ const MapPage = React.memo(function MapPage(props) {
             setIntroGuideModalYCoord(-window.innerHeight);
             setTutorialRunning(true);
             setItterator(0);
-          }
-          else {
+          } else {
             setProfile(success);
             setPin({
               ...pin,
@@ -250,8 +149,7 @@ const MapPage = React.memo(function MapPage(props) {
             });
           }
         }
-      }
-      catch (e) {
+      } catch (e) {
         console.log({ title: 'Error', message: e.message });
       }
     };
@@ -279,24 +177,6 @@ const MapPage = React.memo(function MapPage(props) {
     'borderRadius':    '100%',
   };
 
-  const toggleButtonStyleAlt = {
-    '&.Mui-selected': {
-      backgroundColor: '#538bdb',
-      width:           sideLength,
-      height:          sideLength,
-    },
-    '&.Mui-selected:hover': { backgroundColor: '#538bdb', color: 'white' },
-    '&:hover':              {
-      color:           'white',
-      backgroundColor: 'gold',
-    },
-    'backgroundColor': '#538dbd',
-    'width':           sideLength,
-    'height':          sideLength,
-    'color':           'gold',
-    'boxShadow':       '-2px 4px 4px #00000064',
-    'borderRadius':    '100%',
-  };
 
   const handleProfileButton = () => {
     if (
@@ -453,40 +333,6 @@ const MapPage = React.memo(function MapPage(props) {
     }
   };
 
-  const handlePhotoModalButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
-    ) {
-      return;
-    }
-    clearPicModal();
-
-    if (tutorialRunning) {
-      if (itterator3 === 5) {
-        setItterator3(itterator3 + 1);
-      }
-    }
-  };
-
   const handleDiveSiteModalButton = () => {
     if (
       itterator === 11
@@ -593,39 +439,17 @@ const MapPage = React.memo(function MapPage(props) {
     if (fabsYCoord === 0) {
       if (window.innerHeight < 400) {
         setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
-      }
-      else {
+      } else {
         setfabsYCoord(-containerHeight + buttonSectionHeight / 3);
       }
-    }
-    else {
+    } else {
       setfabsYCoord(0);
     }
   };
 
-  const animateMenu = (e) => {
+  const animateMenu = () => {
     animateFabs();
     setMenuUp(!menuUp);
-  };
-
-  const animatePicModal = () => {
-    modalShow(PicUploader, {
-      name:             'PictureUploader',
-      onCancelCallback: () => cleanupPinPicture(pin),
-    });
-  };
-
-  const clearPicModal = () => {
-    animatePicModal();
-    setPin({
-      ...pin,
-      PicFile:   '',
-      PicDate:   '',
-      Animal:    '',
-      Latitude:  '',
-      Longitude: '',
-    });
-    setPhotoFile(null);
   };
 
   const animateSiteModal = () => {
@@ -666,8 +490,7 @@ const MapPage = React.memo(function MapPage(props) {
   const animateIntroGuideModal = () => {
     if (introGuideModalYCoord === 0) {
       setIntroGuideModalYCoord(-window.innerHeight);
-    }
-    else {
+    } else {
       setIntroGuideModalYCoord(0);
     }
   };
@@ -675,8 +498,7 @@ const MapPage = React.memo(function MapPage(props) {
   const animateSecondGuideModal = () => {
     if (secondGuideModalYCoord === 0) {
       setSecondGuideModalYCoord(-window.innerHeight);
-    }
-    else {
+    } else {
       setSecondGuideModalYCoord(0);
     }
   };
@@ -684,8 +506,7 @@ const MapPage = React.memo(function MapPage(props) {
   const animateThirdGuideModal = () => {
     if (thirdGuideModalYCoord === 0) {
       setThirdGuideModalYCoord(-window.innerHeight);
-    }
-    else {
+    } else {
       setThirdGuideModalYCoord(0);
     }
   };
@@ -694,16 +515,6 @@ const MapPage = React.memo(function MapPage(props) {
     modalShow(SiteSearchModal, {
       size: ModalWindowSize.S,
     });
-  };
-
-  const animatePartnerModal = () => {
-    // todo: use modalShow
-    // if (partnerModalYCoord === 0) {
-    //   setPartnerModalYCoord(-windowHeight);
-    // }
-    // else {
-    //   setPartnerModalYCoord(0);
-    // }
   };
 
   const animateMapSearchModal = () => {
@@ -719,8 +530,7 @@ const MapPage = React.memo(function MapPage(props) {
   useEffect(() => {
     if (!showFilterer) {
       setIsOpen(false);
-    }
-    else {
+    } else {
       setIsOpen(true);
     }
   }, [showFilterer]);
@@ -830,7 +640,7 @@ const MapPage = React.memo(function MapPage(props) {
             {masterSwitch && (
               <div className="gearBox">
                 <ToggleButton
-                  sx={searButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                  sx={toggleButtonStyle}
                   value="check"
                   selected={showAnimalSearch}
                   onChange={() => {
@@ -846,23 +656,7 @@ const MapPage = React.memo(function MapPage(props) {
             {masterSwitch && (
               <div className="gearBox">
                 <ToggleButton
-                  sx={photButState ? toggleButtonStyleAlt : toggleButtonStyle}
-                  value="check"
-                  selected={picModal}
-                  onChange={() => {
-                    handlePhotoModalButton();
-                  }}
-                >
-                  <PhotoCameraIcon sx={{ width: '3vw', height: '1.5vw' }} />
-                </ToggleButton>
-                <p className="buttonFont">Photo Add</p>
-              </div>
-            )}
-
-            {masterSwitch && (
-              <div className="gearBox">
-                <ToggleButton
-                  sx={siteButState ? toggleButtonStyleAlt : toggleButtonStyle}
+                  sx={toggleButtonStyle}
                   value="check"
                   onChange={() => {
                     handleDiveSiteModalButton();
@@ -925,17 +719,6 @@ const MapPage = React.memo(function MapPage(props) {
       )}
 
       <div className="col1rowB">
-        {/* <Collapse
-          in={showAdminPortal}
-          orientation="horizontal"
-          collapsedSize="0px"
-        >
-          {adminPortalZone}
-        </Collapse> */}
-        {/* <Logo
-          setShowAdminPortal={setShowAdminPortal}
-          showAdminPortal={showAdminPortal}
-        /> */}
       </div>
 
       <div>
@@ -1105,26 +888,6 @@ const MapPage = React.memo(function MapPage(props) {
           setThirdGuideModalYCoord={setThirdGuideModalYCoord}
         />
       </animated.div>
-
-
-      {/* <animated.div
-        className="picModalDiv"
-        style={moveShopModal}
-        ref={shopModalRef}
-      >
-        <ShopModal
-          animateShopModal={animateShopModal}
-          setShopModalYCoord={setShopModalYCoord}
-        />
-      </animated.div> */}
-
-      {/* <animated.div
-        className="picModalDiv"
-        style={movePartnerModal}
-        ref={partnerModalRef}
-      >
-        <PartnerAccountRequestModal animatePartnerModal={animatePartnerModal} />
-      </animated.div> */}
     </div>
   );
 });
