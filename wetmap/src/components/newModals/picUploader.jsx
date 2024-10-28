@@ -128,8 +128,6 @@ export default function PicUploader(props) {
     setWindowHeigth(window.innerHeight);
   }
 
-  console.log('check', pin, picUrl);
-
   return (
     <div
       className="$themeWhite"
@@ -284,7 +282,6 @@ export default function PicUploader(props) {
         <ConfirmationModal
           submissionItem="sea creature submission"
           animateModal={animateSuccessModal}
-          // handleClose={handleModalClose}
           isSuccess={true}
         />
       </animated.div>
