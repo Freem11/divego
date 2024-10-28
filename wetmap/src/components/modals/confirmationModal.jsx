@@ -17,19 +17,16 @@ const ConfirmationModal = (props) => {
   const tidyUp = () => {
     if (isSuccess) {
       if (submissionItem === 'dive site') {
-        handleClose();
-        if (itterator2 > 0) {
-          setItterator2(itterator2 + 1);
-        }
+        animateModal();
+        // handleClose();
       }
       else if (submissionItem === 'sea creature submission') {
-        handleClose();
-        if (itterator3 > 0) {
-          setItterator3(itterator3 + 1);
-        }
+        animateModal();
+        // handleClose();
       }
       else if (submissionItem === 'partner account creation request') {
-        handleClose();
+        animateModal();
+        // handleClose();
       }
     }
     animateModal();

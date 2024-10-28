@@ -128,7 +128,7 @@ export default function PicUploader(props) {
     setWindowHeigth(window.innerHeight);
   }
 
-  console.log('check', pin);
+  console.log('check', pin, picUrl);
 
   return (
     <div
@@ -238,6 +238,7 @@ export default function PicUploader(props) {
                   icon="calendar-month"
                   inputValue={pin.PicDate}
                   placeHolderText={screenData.PicUploader.whenPlaceholder}
+                  onChangeText={dateText => setPin({ ...pin, PicDate: dateText.target.value })}
                   secure={false}
                   vectorIcon="MaterialCommunityIcons"
                 />
