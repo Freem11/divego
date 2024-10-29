@@ -121,7 +121,7 @@ const SiteSubmitter = (props) => {
     }
   };
 
-  const handleDiveSiteGPS = () => {
+  const getDeviceLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         function (position) {
@@ -147,7 +147,7 @@ const SiteSubmitter = (props) => {
     return;
   };
 
-  const handleNoGPSCloseOnMapChange = () => {
+  const onNavigate = () => {
     setChosenModal('DiveSite');
     setShowNoGPS(false);
     setMasterSwitch(false);
@@ -224,6 +224,7 @@ const SiteSubmitter = (props) => {
               <TextInputField
                 dataType="text"
                 icon={"diving-scuba-flag"}
+                inputValue={addSiteVals.Site}
                 placeHolderText={screenData.DiveSiteAdd.siteNamePlaceholder}
                 secure={false}
                 onChangeText={handleChange}
@@ -233,6 +234,7 @@ const SiteSubmitter = (props) => {
               <TextInputField
                 dataType="text"
                 icon={"latitude"}
+                inputValue={addSiteVals.Latitude}
                 placeHolderText={screenData.DiveSiteAdd.latPlaceholder}
                 secure={false}
                 onChangeText={handleChange}
@@ -242,6 +244,7 @@ const SiteSubmitter = (props) => {
               <TextInputField
                 dataType="text"
                 icon={"longitude"}
+                inputValue={addSiteVals.Longitude}
                 placeHolderText={screenData.DiveSiteAdd.lngPlaceholder}
                 secure={false}
                 onChangeText={handleChange}
@@ -253,13 +256,13 @@ const SiteSubmitter = (props) => {
         <div className={style.horizontalButtonContainer}>
           {/* FIXME: button size is wrong with wide window size */}
           <Button
-            onClick={handleDiveSiteGPS}
+            onClick={getDeviceLocation}
             btnText={screenData.DiveSiteAdd.myLocationButton}
             helperText={screenData.DiveSiteAdd.myLocationExplainer}
             altStyle={true}
           />
           <Button
-            // onClick={} TODO: implement drop pin
+            onClick={onNavigate}
             btnText={screenData.DiveSiteAdd.pinButton}
             altStyle={true}
           />
