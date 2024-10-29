@@ -10,13 +10,12 @@ import { DiveSpotContext } from '../contexts/diveSpotContext';
 import { MasterContext } from '../contexts/masterContext';
 import { ModalSelectContext } from '../contexts/modalSelectContext';
 import { ModalContext } from '../contexts/modalContext';
-
+import Icon  from '../../icons/Icon';
 import WavyHeader from '../newModals/wavyHeader';
 import style from '../newModals/modalContent.module.scss';
 import screenData from '../newModals/screenData.json';
 import TextInputField from '../newModals/textInput';
 import Button from '../newModals/button';
-import { MaterialIcons } from "react-web-vector-icons";
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -180,7 +179,7 @@ const SiteSubmitter = (props) => {
     }
   };
 
-  const handleModalClose = () => {
+  const onClose = () => {
     setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
     props?.onModalCancel?.();
   };
@@ -188,11 +187,11 @@ const SiteSubmitter = (props) => {
   return (
     <>
       <div className={style.backButton} style={{ position: 'absolute' }}>
-        <MaterialIcons
+      <Icon
           name="chevron-left"
-          size={30}
-          color="$themeWhite"
-          onClick={handleModalClose}
+          fill="white"
+          width="60px"
+          onClick={() => onClose()}
         />
       </div>
 
@@ -224,7 +223,7 @@ const SiteSubmitter = (props) => {
             <div className={"hero-body"}>
               <TextInputField
                 dataType="text"
-                // icon={"anchor"} TODO: update icon
+                icon={"diving-scuba-flag"}
                 placeHolderText={screenData.DiveSiteAdd.siteNamePlaceholder}
                 secure={false}
                 onChangeText={handleChange}
@@ -233,7 +232,7 @@ const SiteSubmitter = (props) => {
             <div className={"hero-body"}>
               <TextInputField
                 dataType="text"
-                // icon={"anchor"} TODO: update icon
+                icon={"latitude"}
                 placeHolderText={screenData.DiveSiteAdd.latPlaceholder}
                 secure={false}
                 onChangeText={handleChange}
@@ -242,7 +241,7 @@ const SiteSubmitter = (props) => {
             <div className={"hero-body"}>
               <TextInputField
                 dataType="text"
-                // icon={"anchor"} TODO: update icon
+                icon={"longitude"}
                 placeHolderText={screenData.DiveSiteAdd.lngPlaceholder}
                 secure={false}
                 onChangeText={handleChange}
@@ -254,7 +253,7 @@ const SiteSubmitter = (props) => {
         <div className={style.horizontalButtonContainer}>
           {/* FIXME: button size is wrong with wide window size */}
           <Button
-            // onClick={} TODO: implement location finder
+            onClick={handleDiveSiteGPS}
             btnText={screenData.DiveSiteAdd.myLocationButton}
             helperText={screenData.DiveSiteAdd.myLocationExplainer}
             altStyle={true}
@@ -288,7 +287,7 @@ const SiteSubmitter = (props) => {
         <ConfirmationModal
           submissionItem="dive site"
           animateModal={animateSuccessModal}
-          handleClose={handleModalClose}
+          handleClose={onClose}
           isSuccess={true}
         />
       </animated.div>
