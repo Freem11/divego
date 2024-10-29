@@ -195,7 +195,7 @@ const SiteSubmitter = (props) => {
         />
       </div>
 
-      <div className={style.picZoneHalf2} />
+      <div className={style.picZone2} />
 
       <div
         style={{

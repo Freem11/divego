@@ -221,7 +221,7 @@ export default function DiveSite(props) {
 
 
           <div
-            style={{ position: 'absolute', right: '53%', top: '37%' }}
+            style={{ position: 'absolute', right: '53%', top: '35vh' }}
           >
             <Icon
               name="camera-plus"

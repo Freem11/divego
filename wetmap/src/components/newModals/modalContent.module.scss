@@ -11,6 +11,18 @@
   justify-content: center;
 }
 
+.picZone2 {
+  display: flex;
+  height: 44.9%;
+  // background-image: url("../../images/boat.png");
+  background-size: cover;
+  background-color: $primaryBlue;
+  border-top-left-radius: 2vw;
+  border-top-right-radius: 2vw;
+  border-width: 0;
+  justify-content: center;
+}
+
 .picZoneHalf {
   display: flex;
   height: 44.9%;
@@ -38,6 +50,8 @@
 }
 
 .picStyles {
+  height: 44.9%;
+  background-size: cover;
   border-top-left-radius: 2vw;
   border-top-right-radius: 2vw;
 }
