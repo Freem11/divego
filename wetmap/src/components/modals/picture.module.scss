@@ -48,7 +48,6 @@
   padding: 0.1vw;
   margin-left: 2%;
   margin-top: 0%;
-  opacity: 0.8;
   border-radius: 1vw;
 }
 
@@ -89,8 +88,7 @@
   padding-left: 2%;
   padding-right: 2%;
   color: #f0eeeb;
-  background-color: black;
-  opacity: 0.6;
+  background-color: $primaryBlue;
   cursor: pointer;
   pointer-events: all;
 }

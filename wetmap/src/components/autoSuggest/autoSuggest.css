@@ -21,15 +21,15 @@
   background-color: lightgrey;
 }
 .suggestItem {
-  width: 12vw;
+  width: 300px;
   height: auto;
-  background-color: #538bdb;
+  background-color: white;
   border: transparent;
   border-radius: 5px;
   list-style: none;
   transform: translateX(11px);
   box-shadow: 3px 3px rgba(0, 0, 0, 0.5);
-  color: #f0eeeb;
+  color: black;
   margin: 0.5%;
 }
 
