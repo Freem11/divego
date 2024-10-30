@@ -90,7 +90,7 @@ export default function UserNamer() {
   };
 
   return (
-    <div className="container">
+    <div className="usernamer-container">
       <p className="titleText">What is your diver name?</p>
       <InputField
         value={formVal.userName}

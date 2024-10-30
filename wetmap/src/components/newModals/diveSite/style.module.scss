@@ -1,0 +1,27 @@
+@import "../../../styles/variables.scss";
+
+.buttonOpenPictureUpload {
+    position: absolute;
+    top: 4%;
+    left: 28%;
+}
+
+.buttonImageUpload {
+    position: absolute;
+    right: 53%;
+    top: 37%;
+    z-index: 11;
+}
+
+.buttonBack {
+    z-index: 2;
+    position: absolute;
+    top: 3%;
+    left: 3%;
+}
+
+.pictureZone {
+    height: 44.9%;
+    background-color: $primaryBlue;
+    overflow: hidden;
+}

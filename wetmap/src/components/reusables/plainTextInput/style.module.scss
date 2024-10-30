@@ -1,0 +1,25 @@
+@import "../../../styles/variables.scss";
+
+.plainTextInput {
+  position: relative;
+
+  & textarea {
+    display: block;
+    width: calc(100% - 30px);
+    resize: none;
+    border: none;
+    overflow: auto;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+  }
+
+  & .icon {
+    cursor: pointer;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+  }
+}

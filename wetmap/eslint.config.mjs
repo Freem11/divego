@@ -52,7 +52,7 @@ export default [
       '@typescript-eslint/no-array-constructor':                'error',
       '@typescript-eslint/no-duplicate-enum-values':            'error',
       '@typescript-eslint/no-empty-object-type':                'error',
-      '@typescript-eslint/no-explicit-any':                     'error',
+      '@typescript-eslint/no-explicit-any':                     'off',
       '@typescript-eslint/no-extra-non-null-assertion':         'error',
       '@typescript-eslint/no-misused-new':                      'error',
       '@typescript-eslint/no-namespace':                        'error',

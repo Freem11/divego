@@ -15,7 +15,7 @@ export default function CommentListItem(props) {
 
   return (
     <div>
-      <div className="container" key={commentDetails.id}>
+      <div className="commentListItem-container" key={commentDetails.id}>
         <div className="topBox">
           <p className="userTxt">{commentDetails.username}</p>
           <p className="dateTxt">{finalDate}</p>
