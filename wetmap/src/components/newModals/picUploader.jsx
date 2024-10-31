@@ -166,8 +166,7 @@ export default function PicUploader(props) {
       <div className={style.picZone} >
         {picUrl
           ? (
-            <div style={backgroundStyle}>
-          </div>
+            <div style={backgroundStyle}/>
               // <img src={picUrl} width="100%" className={style.picStyles}></img>
             )
           : (
