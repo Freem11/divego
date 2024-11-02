@@ -41,6 +41,7 @@
     "react-drag-drop-files": "^2.3.10",
     "react-fs": "^0.0.0",
     "react-geocode": "^0.2.3",
+    "react-hook-form": "^7.53.1",
     "react-router-dom": "^6.3.0",
     "react-social-login-buttons": "^3.6.1",
     "react-spring": "^9.7.2",
