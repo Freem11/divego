@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React,  { useState, useContext, useEffect, useRef } from 'react';
 import screenData from './screenData.json';
 import Icon  from '../../icons/Icon';
 import style from './modalContent.module.scss';
@@ -128,6 +128,22 @@ export default function PicUploader(props) {
     setWindowHeigth(window.innerHeight);
   }
 
+  const backgroundStyle = {
+    paddingTop: '25%',
+    backgroundImage: `url(${picUrl})`,
+    display: 'flex',
+    aspectRatio: 1,
+    width: '100%',
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center',
+    borderTopLeftRadius: '2vw',
+    borderTopRightRadius: '2vw',
+    borderWidth: 0,
+    alignItems: "center",
+    justifyContent: 'center',
+ };
+
   return (
     <div
       className="$themeWhite"
@@ -147,10 +163,11 @@ export default function PicUploader(props) {
         />
       </div>
 
-      <div className={style.picZone}>
+      <div className={style.picZone} >
         {picUrl
           ? (
-              <img src={picUrl} width="100%" className={style.picStyles}></img>
+            <div style={backgroundStyle}/>
+              // <img src={picUrl} width="100%" className={style.picStyles}></img>
             )
           : (
               <div style={{ paddingTop: '25%' }}>
@@ -181,7 +198,7 @@ export default function PicUploader(props) {
 
         {picUrl
           ? (
-              <div style={{ position: 'absolute', right: '5%', marginTop: '40%' }}>
+              <div style={{ position: 'absolute', right: '5%', marginTop: '30vh'}}>
                 <Icon
                   name="camera-plus"
                   fill="white"

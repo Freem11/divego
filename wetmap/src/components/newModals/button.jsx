@@ -4,7 +4,7 @@ import style from './button.module.scss';
 import Icon from '../../icons/Icon';
 
 export default function Button(props) {
-  const { onClick, btnText, altStyle, icon } = props;
+  const { onClick, btnText, altStyle, icon, helperText } = props;
 
   return (
     <div
