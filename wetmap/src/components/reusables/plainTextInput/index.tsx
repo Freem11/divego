@@ -59,7 +59,10 @@ export default function PlainTextInput(props: PlainTextInputProps) {
             name="pencil"
             fill="darkgrey"
             width="30px"
-            onClick={() => setIsEditModeOn(true)}
+            onClick={() => {
+              setIsEditModeOn(true);
+              textRef.current?.focus();
+            }}
           />
         </div>
       )}

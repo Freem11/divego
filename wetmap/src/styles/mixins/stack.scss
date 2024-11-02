@@ -1,0 +1,7 @@
+@mixin stack($name, $size) {
+  .#{$name} {
+    &>:not(:last-child) {
+      margin-bottom: $size;
+    }
+  }
+}
