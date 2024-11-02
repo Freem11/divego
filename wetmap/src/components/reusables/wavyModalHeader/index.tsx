@@ -7,7 +7,7 @@ import ButtonIcon from '../buttonIcon';
 export type WavyModalHeaderProps = {
   onClose?:  (event?: React.MouseEvent) => void
   children?: React.ReactNode
-  image:     string
+  image?:    string
 };
 
 export default function WavyModalHeader(props: WavyModalHeaderProps) {

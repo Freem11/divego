@@ -19,7 +19,8 @@ const getFigure = (content: string): ReactElement | null => {
 
   if (content.startsWith('<')) {
     return <g dangerouslySetInnerHTML={{ __html: content }}></g>;
-  } else {
+  }
+  else {
     return <path d={content}></path>;
   }
 };

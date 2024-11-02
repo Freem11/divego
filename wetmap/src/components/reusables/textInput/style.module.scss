@@ -1,0 +1,19 @@
+@import "../../../styles/variables.scss";
+
+.textInput {
+  height: $control-size;
+  border: 1px solid green;
+  display: flex;
+  input {
+    border: 1px solid red;
+  }
+  .iconLeft,
+  .iconLeft {
+    display: block;
+    height: 100%;
+
+    svg {
+      height: 100%;
+    }
+  }
+}

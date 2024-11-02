@@ -51,3 +51,4 @@ src/helpers/VisionTest.js/
 .env.local
 node_modules
 wetmap/node_modules
+*storybook.log
