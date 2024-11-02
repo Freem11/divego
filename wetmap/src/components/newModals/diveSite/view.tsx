@@ -12,6 +12,7 @@ import WavyModalHeader from '../../reusables/wavyModalHeader';
 import ButtonIcon from '../../reusables/buttonIcon';
 
 type DiveSiteViewProps = {
+  onClose:              () => void
   openPicUploader:      () => void
   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
   onDiveSiteBioChange:  (newValue: string) => void
@@ -34,7 +35,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
 
       <div className="col-6">
 
-        <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture}>
+        <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
           <div className={style.buttonOpenPictureUpload}>
             <Button
               className="btn-lg"

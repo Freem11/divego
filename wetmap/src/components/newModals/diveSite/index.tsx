@@ -95,6 +95,7 @@ export default function DiveSite(props) {
 
   return (
     <DiveSiteView
+      onClose={props.onModalCancel}
       openPicUploader={openPicUploader}
       handleImageSelection={handleImageSelection}
       diveSite={diveSite}
