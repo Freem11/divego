@@ -4,9 +4,10 @@ import config from './_config.json';
 type IconName = keyof typeof config;
 
 type Props = {
-  name: IconName
+  name:       IconName
+  className?: string
 };
-type viewBoxEncoded = string | number | Array<number>;
+type viewBoxEncoded = string | number | null | Array<number>;
 type Config = {
   [k in IconName]: [viewBoxEncoded, string]
 };
@@ -56,32 +57,35 @@ const getViewBox = (data: viewBoxEncoded): string => {
 const Icon = (props: Props) => {
   if (!config) {
     console.error(`_config.json not found. Run "_build-svg.js" generate config.`);
-    return;
+    return <></>;
   }
 
+  const { className, ...restProps } = props;
   const iconName = props.name;
   if (!iconName) {
     console.error(`icon name is required.`);
-    return;
+    return <></>;
   }
 
   if (!(iconName in config)) {
     console.error(`icon "${iconName}" not found in _config.json. Run "_build-svg.js" to add new icons to the config.`);
-    return;
+    return <></>;
   }
 
   const viewBox = getViewBox(config[iconName][0]);
   const figure = getFigure(config[iconName][1]);
   if (!figure) {
     console.error(`icon "${iconName}" is empty in _config.json. Config might be corrupted or svg file is invalid.`);
-    return;
+    return <></>;
   }
 
   return (
     <svg
-      {...props}
       {...(viewBox ? { viewBox } : {})}
       xmlns="http://www.w3.org/2000/svg"
+      fill="currentColor"
+      className={`icon ${className || ''}`}
+      {...restProps}
     >
       {figure}
     </svg>
