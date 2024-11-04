@@ -425,9 +425,9 @@ function Map() {
   const sitePoints = setupClusters(newSites, sitesArray);
   const points = sitePoints;
 
-  // shopPoints.forEach((entity) => {
-  //   points.push(entity);
-  // });
+  shopPoints.forEach((entity) => {
+    points.push(entity);
+  });
 
   // console.log(points, shopPoints)
   const { clusters, supercluster } = useSupercluster({
