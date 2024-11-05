@@ -20,6 +20,7 @@ import Icon from '../../../icons/Icon';
 
 type ShopModelViewProps = {
   shopModelName: string | null
+  shopDescription: string | null
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
@@ -115,6 +116,9 @@ export default function ShopModalView(props: ShopModelViewProps) {
               </div> */}
             </div>
           </div>
+        </div>
+        <div className="ml-6">
+          <h3 class="text-left">{props?.shopDescription}</h3>
         </div>
       </div>
       <div className="col-6">

@@ -98,7 +98,7 @@ export default function ShopModal(props) {
   return (
     <>
     {selectedShop[0] && (
-      <ShopModalView shopModelName={selectedShop[0].orgName} />
+      <ShopModalView shopModelName={selectedShop[0].orgName} shopDescription="test"/>
     )}
     </>
   );
