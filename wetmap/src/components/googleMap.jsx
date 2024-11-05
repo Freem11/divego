@@ -480,7 +480,7 @@ function Map() {
     modalShow(ShopModal)
     let chosenShop = await getShopByName(shopName);
     setSelectedShop(chosenShop);
-    // setShopModal(true);
+    setShopModal(true);
   };
 
   const cleanupModals = () => {
