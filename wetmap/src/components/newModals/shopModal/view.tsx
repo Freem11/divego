@@ -1,5 +1,7 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
 import Itinerary from '../../itineraries/itinerary';
+import WavyModalHeader from '../../reusables/wavyModalHeader';
+import Button from '../../reusables/button';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ShopModalContext } from '../../contexts/shopModalContext';
@@ -10,7 +12,10 @@ import './shopModal.css';
 import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
 import CloseButton from '../../closeButton/closeButton';
 import shopModalView from './view';
-
+import style from './style.module.scss';
+import defaultHeaderPicture from '../../../images/blackManta.png';
+import ButtonIcon from '../../reusables/buttonIcon';
+import Icon from '../../../icons/Icon';
 
 export default function ShopModalView(props) {
   // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
@@ -53,7 +58,7 @@ export default function ShopModalView(props) {
     setItineraryList('');
     setShopModal(false);
   };
-
+  const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     // <div
     //   style={{
@@ -97,11 +102,36 @@ export default function ShopModalView(props) {
     // </div>
 
     <div className="cols mx-0 full-height">
+      
+      <input
+        ref={fileUploaderRef}
+        className="d-hide"
+        type="file"
+        onChange={props.handleImageSelection}
+      />
       <div className="col-6">
-        Test 1
+        {/* Test 1 */}
+        <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
+          <div className={style.buttonOpenPictureUpload}>
+            <Button
+              className="btn-lg"
+              onClick={props.openPicUploader}
+            >
+              {/* <span className="hide-sm">{screenData.DiveSite.addSightingButton}</span> */}
+            </Button>
+          </div>
+
+          <div className={style.buttonImageUpload}>
+            <ButtonIcon
+              icon={<Icon name="camera-plus" />}
+              className="btn-lg"
+              onClick={() => fileUploaderRef?.current?.click?.()}
+            />
+          </div>
+        </WavyModalHeader>
       </div>
       <div className="col-6">
-        Test 2
+        {/* Test 2 */}
       </div>
     </div>
   );
