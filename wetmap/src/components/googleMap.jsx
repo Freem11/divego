@@ -11,7 +11,7 @@ import anchorIcon from '../images/mapIcons/AnchorBlue1.png';
 import anchorClust from '../images/mapIcons/AnchorCluster.png';
 import Manta from '../images/Manta32.png';
 import gold from '../images/mapIcons/AnchorGold.png';
-// import shopIOS from "../images/face-mask.png";
+import shopIOS from "../images/face-mask.png";
 import shopClustIOS from '../images/face-mask.png';
 import {
   useMemo,
@@ -59,7 +59,8 @@ import {
 import { shops, getShopByName } from '../supabaseCalls/shopsSupabaseCalls';
 import { ModalContext } from './contexts/modalContext';
 import { ModalWindowSize } from './reusables/modal/constants';
-import DiveSite from './newModals/diveSite';
+import DiveSite from './newModals/diveSite/index';
+import ShopModal from './modals/shopModal';
 
 const LIB = ['visualization', 'places'];
 
@@ -475,9 +476,10 @@ function Map() {
   };
 
   const setupShopModal = async (shopName) => {
+    modalShow(ShopModal)
     let chosenShop = await getShopByName(shopName);
     setSelectedShop(chosenShop);
-    setShopModal(true);
+    // setShopModal(true);
   };
 
   const cleanupModals = () => {
@@ -603,7 +605,7 @@ function Map() {
         }
       })}
 
-      {/* {shopPoints &&
+      {shopPoints &&
         shopPoints.map((cluster) => {
           const [longitude, latitude] = cluster.geometry.coordinates;
           const {
@@ -655,7 +657,7 @@ function Map() {
               }
             ></Marker>
           );
-        })} */}
+        })}
 
       {masterSwitch && heatpts.length > 0 && (
         <HeatmapLayer
