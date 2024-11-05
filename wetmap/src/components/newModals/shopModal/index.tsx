@@ -96,6 +96,6 @@ export default function ShopModal(props) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
 
   return (
-    <ShopModalView shopModelName={"test"}/>
+    <ShopModalView shopModelName={selectedShop[0].orgName}/>
   );
 }
