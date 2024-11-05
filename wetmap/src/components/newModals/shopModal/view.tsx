@@ -102,6 +102,7 @@ export default function ShopModalView(props) {
       </div>
       <div className="col-6">
         Test 2
+        test commit
       </div>
     </div>
   );
