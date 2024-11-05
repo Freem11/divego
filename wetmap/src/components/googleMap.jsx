@@ -477,7 +477,9 @@ function Map() {
   };
 
   const setupShopModal = async (shopName) => {
-    modalShow(ShopModal)
+    modalShow(ShopModal, {
+      size: ModalWindowSize.L,
+    });
     let chosenShop = await getShopByName(shopName);
     setSelectedShop(chosenShop);
     setShopModal(true);
