@@ -60,7 +60,8 @@ import { shops, getShopByName } from '../supabaseCalls/shopsSupabaseCalls';
 import { ModalContext } from './contexts/modalContext';
 import { ModalWindowSize } from './reusables/modal/constants';
 import DiveSite from './newModals/diveSite/index';
-import ShopModal from './modals/shopModal';
+// import ShopModal from './modals/shopModal';
+import ShopModal from './newModals/shopModal/index';
 
 const LIB = ['visualization', 'places'];
 

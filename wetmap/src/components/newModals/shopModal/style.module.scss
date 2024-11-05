@@ -1,0 +1,25 @@
+@import "../../../styles/variables.scss";
+
+.buttonOpenPictureUpload {
+    position: absolute; 
+    // left: 0; 
+    right: 4%;
+
+    top: 6%;
+    margin-inline: auto; 
+    width: fit-content;
+    z-index: 1;
+}
+
+.buttonImageUpload {
+    position: absolute;
+    right: 3%;
+    bottom: 15%;
+    z-index: 1;
+}
+
+.pictureZone {
+    height: 44.9%;
+    background-color: $primaryBlue;
+    overflow: hidden;
+}
