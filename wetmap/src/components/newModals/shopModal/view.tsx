@@ -55,44 +55,53 @@ export default function ShopModalView(props) {
   };
 
   return (
-    <div
-      style={{
-        height:   '98%',
-        // backgroundColor: "orange",
-        overflow: 'hidden',
-      }}
-    >
-      <div className="titleAlt">
-        <div>
-          <h3 className="headerAlt">
-            {selectedShop[0] && selectedShop[0].orgName}
-          </h3>
-        </div>
-        <CloseButton onClick={handleShopModalClose} />
-      </div>
+    // <div
+    //   style={{
+    //     height:   '98%',
+    //     // backgroundColor: "orange",
+    //     overflow: 'hidden',
+    //   }}
+    // >
+    //   <div className="titleAlt">
+    //     <div>
+    //       <h3 className="headerAlt">
+    //         {selectedShop[0] && selectedShop[0].orgName}
+    //       </h3>
+    //     </div>
+    //     <CloseButton onClick={handleShopModalClose} />
+    //   </div>
 
-      <div style={{ marginTop: '3%', width: '100%', borderRadius: 15 }}>
-        <div className="container5">
-          {itineraryList
-          && itineraryList.map((itinerary) => {
-            return (
-              <Itinerary
-                key={itinerary.id}
-                itinerary={itinerary}
-                setSelectedID={setSelectedID}
-                selectedID={selectedID}
-                setShopModal={setShopModal}
-              />
-            );
-          })}
-          {itineraryList.length === 0 && (
-            <div>
-              <p className="noSightings">
-                No Trips are currently being offered.
-              </p>
-            </div>
-          )}
-        </div>
+    //   <div style={{ marginTop: '3%', width: '100%', borderRadius: 15 }}>
+    //     <div className="container5">
+    //       {itineraryList
+    //       && itineraryList.map((itinerary) => {
+    //         return (
+    //           <Itinerary
+    //             key={itinerary.id}
+    //             itinerary={itinerary}
+    //             setSelectedID={setSelectedID}
+    //             selectedID={selectedID}
+    //             setShopModal={setShopModal}
+    //           />
+    //         );
+    //       })}
+    //       {itineraryList.length === 0 && (
+    //         <div>
+    //           <p className="noSightings">
+    //             No Trips are currently being offered.
+    //           </p>
+    //         </div>
+    //       )}
+    //     </div>
+    //   </div>
+    // </div>
+
+    <div className="cols mx-0 full-height">
+      <div className="col-6">
+        Test 1
+      </div>
+      <div className="col-6">
+        Test 2
       </div>
     </div>
   );
