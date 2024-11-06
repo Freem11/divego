@@ -9,7 +9,7 @@ import { UserProfileContext } from '../../contexts/userProfileContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { PinContext } from '../../contexts/staticPinContext';
 import { ModalContext } from '../../contexts/modalContext';
-import PicUploader from '../picUploader';
+import PicUploader from '../picUploader/index';
 
 
 export default function DiveSite(props) {

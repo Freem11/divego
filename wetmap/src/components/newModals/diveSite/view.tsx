@@ -13,7 +13,7 @@ import ButtonIcon from '../../reusables/buttonIcon';
 
 type DiveSiteViewProps = {
   onClose:              () => void
-  openPicUploader:      () => void
+  openPicUploader:      (event: React.MouseEvent) => void
   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
   onDiveSiteBioChange:  (newValue: string) => void
   diveSite:             DiveSiteWithUserName | null

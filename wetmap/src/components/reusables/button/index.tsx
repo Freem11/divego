@@ -1,22 +1,37 @@
-import React from 'react';
+import React, { ButtonHTMLAttributes, DetailedHTMLProps } from 'react';
 import style from './style.module.scss';
 
+
+type StandardButtonProps = DetailedHTMLProps<ButtonHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 export type ButtonProps = {
-  onClick:    () => void
+  onClick?:   () => void
   iconLeft?:  React.ReactNode
   iconRight?: React.ReactNode
   className?: string
   children?:  React.ReactNode
 };
 
-export default function Button(props: ButtonProps) {
+export default function Button(props: ButtonProps & StandardButtonProps) {
+  const { iconLeft, iconRight, className, children, ...rest } = props;
   return (
-    <button onClick={props.onClick} className={`btn ${style.button} ${props.className ?? ''}`}>
-      {props.iconLeft && <i className={style.iconLeft}>{props.iconLeft}</i>}
+    <button {...rest} className={`btn ${style.button} ${className ?? ''}`}>
+      {iconLeft && (
+        <i className={style.iconLeft}>
+          {iconLeft}
+        </i>
+      )}
 
-      {props.children && <span className={style.label}>{props.children}</span>}
+      {children && (
+        <span className={style.label}>
+          {children}
+        </span>
+      )}
 
-      {props.iconRight && <i className={style.iconRight}>{props.iconRight}</i>}
+      {iconRight && (
+        <i className={style.iconRight}>
+          {iconRight}
+        </i>
+      )}
     </button>
   );
 }
