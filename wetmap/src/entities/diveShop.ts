@@ -1,4 +1,7 @@
 export interface DiveShop {
-    orgName: string;
+    id:      number
+    orgName: string
+    lat:     number
+    lng:     number
   };
   
