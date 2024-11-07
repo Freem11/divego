@@ -23,36 +23,6 @@ export default function ShopModal(props) {
   // const { mapCoords, setMapCoords } = useContext(CoordsContext);
   // const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
-  // useEffect(() => {
-  //   if (selectedShop[0]) {
-  //     getItineraries(selectedShop[0].id);
-  //     setMasterSwitch(true);
-  //   }
-  // }, [selectedShop]);
-
-  // useEffect(() => {
-  //   if (shopModal && zoomHelper) {
-  //     setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
-  //   }
-  // }, [shopModal]);
-
-  // const getItineraries = async (IdNum) => {
-  //   try {
-  //     const itins = await itineraries(IdNum);
-  //     if (itins.length > 0) {
-  //       setItineraryList(itins);
-  //     }
-  //   }
-  //   catch (e) {
-  //     console.log({ title: 'Error', message: e.message });
-  //   }
-  // };
-
-  // const handleShopModalClose = () => {
-  //   setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
-  //   setItineraryList('');
-  //   setShopModal(false);
-  // };
 
   const { shopModal, setShopModal } = useContext(ShopModalContext);
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
@@ -98,7 +68,10 @@ export default function ShopModal(props) {
   return (
     <>
     {selectedShop[0] && (
-      <ShopModalView shopModelName={selectedShop[0].orgName} shopDescription="test"/>
+      <ShopModalView 
+        onClose={props.onModalCancel} 
+        shopModelName={selectedShop[0].orgName} 
+        shopDescription="test"/>
     )}
     </>
   );

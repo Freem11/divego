@@ -477,13 +477,13 @@ function Map() {
   };
 
   const setupShopModal = async (shopName) => {
-    modalShow(ShopModal, {
-      size: ModalWindowSize.L,
-    });
     setSelectedShop({ id: 0, orgName: 'hello' });
     let chosenShop = await getShopByName(shopName);
     setSelectedShop(chosenShop);
-    setShopModal(true);
+    modalShow(ShopModal, {
+      size: ModalWindowSize.L,
+    });
+    // setShopModal(true);
   };
 
   const cleanupModals = () => {

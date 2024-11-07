@@ -22,6 +22,7 @@ import Icon from '../../../icons/Icon';
 type ShopModelViewProps = {
   shopModelName: string | null
   shopDescription: string | null
+  onClose: () => void
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
@@ -125,18 +126,18 @@ export default function ShopModalView(props: ShopModelViewProps) {
         <h3>Offered Diving Trips</h3>
         <div style={{ marginTop: '3%', width: '100%', borderRadius: 15 }}>
           <div className="container5">
-            {itineraryList
-            && itineraryList.map((itinerary) => {
-              return (
-                <Itinerary
-                  key={itinerary.id}
-                  itinerary={itinerary}
-                  setSelectedID={setSelectedID}
-                  selectedID={selectedID}
-                  setShopModal={setShopModal}
-                />
-              );
-            })}
+            {itineraryList// in the future, if itineraryList is not empty, render a loading spinner
+              && itineraryList.map((itinerary) => {
+                return (
+                  <Itinerary
+                    key={itinerary.id}
+                    itinerary={itinerary}
+                    setSelectedID={setSelectedID}
+                    selectedID={selectedID}
+                    setShopModal={setShopModal}
+                  />
+                );
+              })}
             {itineraryList.length === 0 && (
               <div>
                 <p className="noSightings">
