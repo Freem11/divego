@@ -64,15 +64,17 @@ export default function ShopModal(props) {
     setItineraryList('');
     // setShopModal(false);
   };
-  const fileUploaderRef = useRef<HTMLInputElement>(null);
+  // const fileUploaderRef = useRef<HTMLInputElement>(null);
 
   return (
     <>
     {selectedShop[0] && (
       <ShopModalView 
         onClose={handleShopModalClose} 
-        shopModelName={selectedShop[0].orgName} 
-        shopDescription="test"/>
+        diveShop={selectedShop[0]}
+        // shopModelName={selectedShop[0].orgName} 
+        // shopDescription="test"/>
+      />
     )}
     </>
   );

@@ -17,11 +17,13 @@ import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
+import { DiveShop } from '../../../entities/diveShop';
 
 
 type ShopModelViewProps = {
-  shopModelName: string | null
-  shopDescription: string | null
+  diveShop: DiveShop | null
+  // shopModelName: string | null
+  // shopDescription: string | null
   onClose: () => void
 };
 
@@ -100,7 +102,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           <div className="stack-4">
             <div>
               <div className="d-flex">
-                <h1 className="mb-0">{props?.shopModelName}</h1>
+                <h1 className="mb-0">{props?.diveShop.orgName}</h1>
                 <div>
                   <Icon
                     name="flag"
