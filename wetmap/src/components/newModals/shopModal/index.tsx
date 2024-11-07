@@ -59,9 +59,10 @@ export default function ShopModal(props) {
   };
 
   const handleShopModalClose = () => {
+    props.onModalCancel();
     setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
     setItineraryList('');
-    setShopModal(false);
+    // setShopModal(false);
   };
   const fileUploaderRef = useRef<HTMLInputElement>(null);
 
@@ -69,7 +70,7 @@ export default function ShopModal(props) {
     <>
     {selectedShop[0] && (
       <ShopModalView 
-        onClose={props.onModalCancel} 
+        onClose={handleShopModalClose} 
         shopModelName={selectedShop[0].orgName} 
         shopDescription="test"/>
     )}

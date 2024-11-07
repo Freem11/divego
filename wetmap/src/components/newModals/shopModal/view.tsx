@@ -81,7 +81,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           <div className={style.buttonOpenPictureUpload}>
             <Button
               className="btn-lg"
-              onClick={props.openPicUploader}
+              // onClick={} // add diving events functionality here
             >
               add diving events here
               {/* <span className="hide-sm">{screenData.DiveSite.addSightingButton}</span> */}
