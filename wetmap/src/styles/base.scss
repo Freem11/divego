@@ -64,6 +64,12 @@
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
 }
 
+.flex-column-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .border-none{
   border: none;
 }

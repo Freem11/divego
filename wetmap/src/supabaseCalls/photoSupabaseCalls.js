@@ -42,7 +42,7 @@ export const getAnimalNamesThatFit = async (value) => {
 
   const { data, error } = await supabase
     .from('photos')
-    .select('label')
+    .select('label, id')
     .ilike('label', '%' + value + '%');
 
   if (error) {
