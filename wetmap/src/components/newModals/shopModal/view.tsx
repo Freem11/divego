@@ -80,15 +80,13 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6">
         {/* Test 1 */}
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
- 
-
-          <div className={style.buttonImageUpload}>
+          {/* <div className={style.buttonImageUpload}>
             <ButtonIcon
               icon={<Icon name="camera-plus" />}
               className="btn-lg"
               onClick={() => fileUploaderRef?.current?.click?.()}
             />
-          </div>
+          </div> */}
         </WavyModalHeader>
         <div className="ml-6">
           <div className="stack-4">
