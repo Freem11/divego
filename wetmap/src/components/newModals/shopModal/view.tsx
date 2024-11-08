@@ -8,7 +8,7 @@ import { ShopModalContext } from '../../contexts/shopModalContext';
 import { MasterContext } from '../../contexts/masterContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
-import './shopModal.css';
+// import './shopModal.css';
 import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
 import CloseButton from '../../closeButton/closeButton';
 import shopModalView from './view';
@@ -80,15 +80,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6">
         {/* Test 1 */}
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
-          <div className={style.buttonOpenPictureUpload}>
-            <Button
-              className="btn-lg"
-              // onClick={} // add diving events functionality here
-            >
-              add diving events here
-              {/* <span className="hide-sm">{screenData.DiveSite.addSightingButton}</span> */}
-            </Button>
-          </div>
+ 
 
           <div className={style.buttonImageUpload}>
             <ButtonIcon
@@ -125,28 +117,39 @@ export default function ShopModalView(props: ShopModelViewProps) {
         </div>
       </div>
       <div className="col-6">
-        <h3>Offered Diving Trips</h3>
+        <h3 className="mt-6">Offered Diving Trips</h3>
         <div style={{ marginTop: '3%', width: '100%', borderRadius: 15 }}>
           <div className="container5">
-            {itineraryList// in the future, if itineraryList is not empty, render a loading spinner
-              && itineraryList.map((itinerary) => {
-                return (
-                  <Itinerary
-                    key={itinerary.id}
-                    itinerary={itinerary}
-                    setSelectedID={setSelectedID}
-                    selectedID={selectedID}
-                    setShopModal={setShopModal}
-                  />
-                );
-              })}
-            {itineraryList.length === 0 && (
-              <div>
-                <p className="noSightings">
-                  No Trips are currently being offered.
-                </p>
-              </div>
-            )}
+            <div className={style.buttonAddDivingEvents}>
+              <Button
+                className="mt-2"
+                // onClick={} // add diving events functionality here
+              >
+                Add diving event
+                {/* <span className="hide-sm">{screenData.DiveSite.addSightingButton}</span> */}
+              </Button>
+            </div>
+            <div className="mt-4">
+              {itineraryList// in the future, if itineraryList is not empty, render a loading spinner
+                && itineraryList.map((itinerary) => {
+                  return (
+                    <Itinerary
+                      key={itinerary.id}
+                      itinerary={itinerary}
+                      setSelectedID={setSelectedID}
+                      selectedID={selectedID}
+                      setShopModal={setShopModal}
+                    />
+                  );
+                })}
+              {itineraryList.length === 0 && (
+                <div>
+                  <p className="noSightings">
+                    No Trips are currently being offered.
+                  </p>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
