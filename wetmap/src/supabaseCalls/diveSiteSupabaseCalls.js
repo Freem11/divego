@@ -177,3 +177,22 @@ export const updateDiveSite = async (values) => {
     return data;
   }
 };
+
+export const getDiveSitesforMapArea = async (value) => {
+  const { data, error } = await supabase
+    .from('diveSites')
+    .select()
+    .gte('lat', value.minLat)
+    .gte('lng', value.minLng)
+    .lte('lat', value.maxLat)
+    .lte('lng', value.maxLng);
+
+  if (error) {
+    console.log('couldn\'t do it,', error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
