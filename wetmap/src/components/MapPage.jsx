@@ -1,6 +1,7 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import Home from './googleMap';
+import SearchTool from './searchTool/index';
 import SiteSubmitter from './modals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';
@@ -50,7 +51,6 @@ import { AreaPicsContext } from './contexts/areaPicsContext';
 import IntroTutorial from './guides/introTutorial';
 import SecondTutorial from './guides/secondTutorial';
 import ThirdTutorial from './guides/thirdTutorial';
-import SiteSearchModal from './modals/siteSearchModal';
 import MapSearchModal from './modals/mapSearchModal';
 import './mapPage.css';
 import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
@@ -512,7 +512,7 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateSiteSearchModal = () => {
-    modalShow(SiteSearchModal, {
+    modalShow(SearchTool, {
       size: ModalWindowSize.S,
     });
   };

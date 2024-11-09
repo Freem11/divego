@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import SearchView from './view';
 import { getSiteNamesThatFit } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
-import { ModalContext } from '../../contexts/modalContext';
+import { ModalContext } from '../contexts/modalContext';
 import { addIconType, addIndexNumber } from '../../helpers/optionHelpers';
 
 const GoogleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
