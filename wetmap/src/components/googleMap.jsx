@@ -19,7 +19,6 @@ import {
   useEffect,
   useLayoutEffect,
 } from 'react';
-import PlacesAutoComplete from './locationSearch/placesAutocomplete';
 import { CoordsContext } from './contexts/mapCoordsContext';
 import { ZoomContext } from './contexts/mapZoomContext';
 import { JumpContext } from './contexts/jumpContext';
@@ -522,19 +521,6 @@ function Map() {
       disableDefaultUI={true}
       onClick={cleanupModals}
     >
-      {masterSwitch && (
-        <div className="aligner">
-          <Collapse
-            in={showGeoCoder}
-            orientation="horizontal"
-            collapsedSize="0px"
-          >
-            <div className="places-container">
-              <PlacesAutoComplete setSelected={setSelected} />
-            </div>
-          </Collapse>
-        </div>
-      )}
 
       {clusters
       && clusters.map((cluster) => {
