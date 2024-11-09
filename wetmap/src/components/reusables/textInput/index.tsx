@@ -5,12 +5,13 @@ type TextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, H
 type CustomInputProps = {
   iconLeft?:  React.ReactNode
   iconRight?: React.ReactNode
+  error?:     any
 };
 
 const TextInput = React.forwardRef(function TextInput(props: TextInputProps & CustomInputProps, ref) {
-  const { iconLeft, iconRight, className, ...rest } = props;
+  const { iconLeft, iconRight, className, error, ...rest } = props;
   return (
-    <div className={`${className ?? ''} ${style.textInput}`}>
+    <div className={`${className ?? ''} ${style.textInput} ${error ? style.error : ''}`}>
       {iconLeft && <i className={style.iconLeft}>{iconLeft}</i>}
       <input ref={ref} {...rest} />
       {iconRight && <i className={style.iconRight}>{iconRight}</i>}

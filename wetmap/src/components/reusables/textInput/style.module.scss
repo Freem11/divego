@@ -2,12 +2,23 @@
 
 .textInput {
   height: $control-size;
-  border: 1px solid green;
   display: flex;
+  border-bottom: 1px solid $gray-color;
+  color: $gray-color;
+
+  &.error {
+    border-bottom: 1px solid red;
+  }
+
   input {
-    border: 1px solid red;
+    border: none;
     width: 100%;
   }
+
+  input:focus {
+    outline: none;
+  }
+
   .iconLeft,
   .iconRight {
     display: block;
