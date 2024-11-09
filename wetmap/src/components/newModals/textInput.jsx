@@ -69,6 +69,7 @@ export default function TextInputField(props) {
               fill="darkgrey"
               width="30"
               onClick={() => handleClear()}
+              style={{ marginTop: 5 }}
             />
           )
         : (

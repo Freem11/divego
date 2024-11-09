@@ -1,8 +1,9 @@
 import React, { useState, useContext, useEffect } from 'react';
 import SearchView from './view';
-import { getSiteNamesThatFit } from '../../supabaseCalls/diveSiteSupabaseCalls';
+import { getSingleDiveSiteByNameAndRegion, getSiteNamesThatFit } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import { ModalContext } from '../contexts/modalContext';
+import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { addIconType, addIndexNumber } from '../../helpers/optionHelpers';
 
 const GoogleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
@@ -10,6 +11,7 @@ const GoogleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 export default function SearchTool() {
   const { boundaries } = useContext(MapBoundsContext);
   const { modalShow }        = useContext(ModalContext);
+  const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
 
   const [textSource, setTextSource] = useState(false);
   const [list, setList] = useState<any>([]);
@@ -61,7 +63,7 @@ export default function SearchTool() {
     const diveSiteArray: string[] = [];
     const placesArray: string[] = [];
 
-    let placesData: PlacesData[] | undefined = undefined;
+    // let placesData: PlacesData[] | undefined = undefined;
     let diveSiteData: { [x: string]: any }[] | undefined = undefined;
 
     if (boundaries.length > 0) {
@@ -70,13 +72,13 @@ export default function SearchTool() {
       diveSiteData = undefined;
     }
 
-    placesData = await getPlaces(value);
+    // placesData = await getPlaces(value);
 
-    if (placesData) {
-      placesData.forEach((place) => {
-        placesArray.push(place.description);
-      });
-    }
+    // if (placesData) {
+    //   placesData.forEach((place) => {
+    //     placesArray.push(place.description);
+    //   });
+    // }
 
     if (diveSiteData) {
       diveSiteData.forEach((diveSite) => {
@@ -120,13 +122,35 @@ export default function SearchTool() {
     }
   }, [searchValue]);
 
+  const handleSelect = async (value: string) => {
+    setSearchValue(value);
+    if (value !== null) {
+      const nameOnly = value.split(' ~ ');
+      const diveSiteSet = await getSingleDiveSiteByNameAndRegion({ name: nameOnly[0], region: nameOnly[1] });
+
+      if (diveSiteSet) {
+        setSelectedDiveSite({
+          SiteName:  diveSiteSet[0].name,
+          Latitude:  diveSiteSet[0].lat,
+          Longitude: diveSiteSet[0].lng,
+        });
+      }
+      // if (props.onSelect && typeof props.onSelect === 'function') {
+      //   props.onSelect();
+      // }
+      // setJump(!jump);
+      setSearchValue('');
+    }
+  };
 
   return (
     <SearchView
       handleClear={handleClear}
       handleChange={handleChange}
+      handleSelect={handleSelect}
       inputText={searchValue}
       options={list}
+      setSearchValue={searchValue}
     />
   );
 }
