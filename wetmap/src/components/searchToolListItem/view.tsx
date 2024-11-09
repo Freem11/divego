@@ -14,7 +14,6 @@ type ListItemProps = {
 };
 
 export default function ListItemView(props: ListItemProps) {
-  console.log('optins', props);
   return (
     <div onClick={() => props.handleSelect(props.value)} style={{ cursor: 'pointer', paddingLeft: 5,  height: 50,  display: 'flex', alignItems: 'center', flexDirection: 'row', width: '80%', marginLeft: '10%', marginTop: 5, border: ' 1px solid lightgray', borderRadius: 8 }}>
       <Icon

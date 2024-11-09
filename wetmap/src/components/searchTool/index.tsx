@@ -4,66 +4,36 @@ import { getSingleDiveSiteByNameAndRegion, getSiteNamesThatFit } from '../../sup
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import { ModalContext } from '../contexts/modalContext';
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
-import { addIconType, addIndexNumber } from '../../helpers/optionHelpers';
+import { CoordsContext } from '../contexts/mapCoordsContext';
+import { addIconTypeDiveSite, addIconTypePlaces, addIndexNumber } from '../../helpers/optionHelpers';
+import usePlacesAutocomplete, {
+  getGeocode,
+  getLatLng,
+} from 'use-places-autocomplete';
 
-const GoogleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-
-export default function SearchTool() {
+export default function SearchTool(props) {
   const { boundaries } = useContext(MapBoundsContext);
   const { modalShow }        = useContext(ModalContext);
   const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
+  const { setMapCoords } = useContext(CoordsContext);
 
-  const [textSource, setTextSource] = useState(false);
   const [list, setList] = useState<any>([]);
   const [searchValue, setSearchValue] = useState('');
   const [isClearOn, setIsClearOn] = useState(false);
 
-  const getPlaces = async (text: string) => {
-    try {
-      const res = await fetch(
-        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&key=${GoogleMapsApiKey}`,
-      );
-      const placeInfo = await res.json();
-      if (placeInfo) {
-        return placeInfo.predictions;
-      }
-    } catch (err) {
-      console.log('error', err);
-    }
-  };
+  const {
+    init,
+    setValue,
+    suggestions: { data },
+  } = usePlacesAutocomplete({ initOnMount: false });
 
-  // interface DiveSiteData {
-  //   UserID:               string
-  //   created_at:           string
-  //   diveSiteBio:          string | null
-  //   diveSiteProfilePhoto: string | null
-  //   id:                   number
-  //   lat:                  number
-  //   lng:                  number
-  //   name:                 string
-  //   region:               string | null
-  //   userName:             string
-  // }
-
-  interface PlacesData {
-    description:           string
-    matched_substrings:    []
-    place_id:              string
-    reference:             string
-    structured_formatting: {
-      main_text:                    string
-      main_text_matched_substrings: []
-      secondary_text:               string
-    }
-    terms: []
-    types: []
-  }
+  useEffect(() => {
+    init();
+  }, []);
 
   const handleDataList = async (value: string) => {
+    setValue(value);
     const diveSiteArray: string[] = [];
-    const placesArray: string[] = [];
-
-    // let placesData: PlacesData[] | undefined = undefined;
     let diveSiteData: { [x: string]: any }[] | undefined = undefined;
 
     if (boundaries.length > 0) {
@@ -71,14 +41,6 @@ export default function SearchTool() {
     } else {
       diveSiteData = undefined;
     }
-
-    // placesData = await getPlaces(value);
-
-    // if (placesData) {
-    //   placesData.forEach((place) => {
-    //     placesArray.push(place.description);
-    //   });
-    // }
 
     if (diveSiteData) {
       diveSiteData.forEach((diveSite) => {
@@ -93,9 +55,10 @@ export default function SearchTool() {
         }
       });
     }
+
     const megaArray = [
-      ...addIconType(placesArray, 'compass'),
-      ...addIconType(diveSiteArray, 'anchor'),
+      ...addIconTypePlaces(data, 'compass-outline'),
+      ...addIconTypeDiveSite(diveSiteArray, 'anchor'),
     ];
     setList(addIndexNumber(megaArray));
   };
@@ -112,7 +75,6 @@ export default function SearchTool() {
   const handleClear = () => {
     setIsClearOn(true);
     setList([]);
-    setTextSource(false);
     setSearchValue('');
   };
 
@@ -128,19 +90,23 @@ export default function SearchTool() {
       const nameOnly = value.split(' ~ ');
       const diveSiteSet = await getSingleDiveSiteByNameAndRegion({ name: nameOnly[0], region: nameOnly[1] });
 
-      if (diveSiteSet) {
+      if (diveSiteSet && diveSiteSet?.length > 0) {
         setSelectedDiveSite({
           SiteName:  diveSiteSet[0].name,
           Latitude:  diveSiteSet[0].lat,
           Longitude: diveSiteSet[0].lng,
         });
-      }
-      // if (props.onSelect && typeof props.onSelect === 'function') {
-      //   props.onSelect();
-      // }
-      // setJump(!jump);
-      setSearchValue('');
+      } else {
+        const address = value;
+        const results = await getGeocode({ address });
+
+        const { lat, lng } = await getLatLng(results[0]);
+        setMapCoords([lat, lng]);
+        setValue('');
+      };
     }
+    setSearchValue('');
+    // close Modal here
   };
 
   return (
@@ -153,4 +119,4 @@ export default function SearchTool() {
       setSearchValue={searchValue}
     />
   );
-}
+};

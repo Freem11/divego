@@ -24,7 +24,6 @@ type SearchViewProps = {
 };
 
 export default function SearchView(props: SearchViewProps) {
-  console.log('optins', props.options);
   return (
     <div className="mt-6 mr-4 pr-4 full-height" style={{ overflow: 'scroll' }}>
       <TextInputField
