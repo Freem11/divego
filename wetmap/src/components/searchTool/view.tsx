@@ -1,7 +1,7 @@
 import React from 'react';
 import screenData from '../newModals/screenData.json';
 // import style from './style.module.scss';
-import TextInput from '../reusables/textInput';
+import TextInputField from '../newModals/textInput';
 import Icon from '../../icons/Icon';
 
 type SearchViewProps = {
@@ -13,11 +13,17 @@ type SearchViewProps = {
 
 export default function SearchView(props: SearchViewProps) {
   return (
-    <div className="mt-6 ml-4 mr-4 full-height">
-      <TextInput
-        iconLeft={<Icon name="navigation-variant-outline" />}
-        placeholder={screenData.SearchPage.placeholder}
+    <div className="mt-6 mr-4 pr-4 full-height">
+      <TextInputField
+        dataType="text"
+        icon="navigation-variant-outline"
+        inputValue={props.inputText}
+        placeHolderText={screenData.SearchPage.placeholder}
+        onChangeText={props.handleChange}
+        handleClear={props.handleClear}
+        secure={false}
       />
+
     </div>
   );
 }
