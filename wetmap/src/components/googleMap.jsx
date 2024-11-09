@@ -612,7 +612,7 @@ function Map() {
             <Marker
               key={cluster.properties.siteID}
               position={{ lat: latitude, lng: longitude }}
-              icon={shopClustIOS}
+              icon={anchorClust}
               title={cluster.properties.siteID}
               onClick={() =>
                 setupShopModal(cluster.properties.siteID, latitude, longitude)}
@@ -636,7 +636,7 @@ function Map() {
               key={cluster.id}
               position={{ lat: latitude, lng: longitude }}
               title={pointCount.toString() + ' sites'}
-              icon={shopClustIOS}
+              icon={anchorClust}
               onClick={() => {
                 const expansionZoom = Math.min(
                   supercluster.getClusterExpansionZoom(cluster.id),
