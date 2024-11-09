@@ -11,7 +11,7 @@ import anchorIcon from '../images/mapIcons/AnchorBlue1.png';
 import anchorClust from '../images/mapIcons/AnchorCluster.png';
 import Manta from '../images/Manta32.png';
 import gold from '../images/mapIcons/AnchorGold.png';
-import shopIOS from "../images/face-mask.png";
+import shopIOS from '../images/mapIcons/DiveCentre24x24.png';
 import shopClustIOS from '../images/face-mask.png';
 import {
   useMemo,
@@ -64,7 +64,7 @@ import DiveSite from './newModals/diveSite/index';
 import ShopModal from './newModals/shopModal/index';
 
 
-import { getSiteNamesThatFit } from "../supabaseCalls/diveSiteSupabaseCalls";
+import { getSiteNamesThatFit } from '../supabaseCalls/diveSiteSupabaseCalls';
 
 const LIB = ['visualization', 'places'];
 
@@ -138,27 +138,27 @@ function Map() {
     opacity: 1,
     radius:  16,
   }));
-  
-  let GoogleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY
+
+  let GoogleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
 
   useEffect(() => {
     let yo = getPlaces('van');
-    console.log(yo)
-  }, [])
+    console.log(yo);
+  }, []);
 
-    const getPlaces = async (text) => {
-      try {
-        const res = await fetch(
-          `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&key=${GoogleMapsApiKey}`
-        );
-        const placeInfo = await res.json();
-        if (placeInfo) {
-          return placeInfo.predictions;
-        }
-      } catch (err) {
-        console.log("error", err);
+  const getPlaces = async (text) => {
+    try {
+      const res = await fetch(
+        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&key=${GoogleMapsApiKey}`,
+      );
+      const placeInfo = await res.json();
+      if (placeInfo) {
+        return placeInfo.predictions;
       }
-    };
+    } catch (err) {
+      console.log('error', err);
+    }
+  };
 
 
   const handleMapUpdates = async () => {
@@ -203,8 +203,7 @@ function Map() {
 
             let diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
             !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
-          }
-          catch (e) {
+          } catch (e) {
             console.log({ title: 'Error', message: e.message });
           }
 
@@ -226,8 +225,7 @@ function Map() {
                 minLng:      lngs.lo,
                 maxLng:      180,
               });
-            }
-            else {
+            } else {
               AmericanHeatPoints = await getHeatPointsWithUser({
                 myCreatures:          '',
                 minLat:               lats.lo,
@@ -266,12 +264,10 @@ function Map() {
 
             let heatPointList = [...AsianHeatPoints, ...AmericanHeatPoints];
             setHeatPts(formatHeatVals(heatPointList));
-          }
-          catch (e) {
+          } catch (e) {
             console.log({ title: 'Error', message: e.message });
           }
-        }
-        else {
+        } else {
           try {
             const diveSiteList = await getDiveSitesWithUser({
               myDiveSites: '',
@@ -288,8 +284,7 @@ function Map() {
             // });
 
             !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
-          }
-          catch (e) {
+          } catch (e) {
             console.log({ title: 'Error', message: e.message });
           }
 
@@ -304,8 +299,7 @@ function Map() {
                 minLng:      lngs.lo,
                 maxLng:      lngs.hi,
               });
-            }
-            else {
+            } else {
               heatPointList = await getHeatPointsWithUser({
                 animalMultiSelection: animalVal,
                 myCreatures:          '',
@@ -330,8 +324,7 @@ function Map() {
             let filteredShops = await shops(boundaries);
             // console.log("ME", filteredShops)
             !divesTog ? setnewShops([]) : setnewShops(filteredShops);
-          }
-          catch (e) {
+          } catch (e) {
             console.log({ title: 'Error', message: e.message });
           }
         }
@@ -433,8 +426,7 @@ function Map() {
       if (shopModal) {
         setMapZoom(16);
         setMinorSwitch(true);
-      }
-      else if (!shopModal) {
+      } else if (!shopModal) {
         setMapZoom(12);
         setMinorSwitch(false);
       }
@@ -475,8 +467,7 @@ function Map() {
         Latitude:  pinRef.getPosition().lat(),
         Longitude: pinRef.getPosition().lng(),
       });
-    }
-    else if (chosenModal === 'Photos') {
+    } else if (chosenModal === 'Photos') {
       if (pinRef) {
         setPin({
           ...pin,
@@ -601,8 +592,7 @@ function Map() {
             >
             </Marker>
           );
-        }
-        else if (cluster.properties.category === 'Dive Site Selected') {
+        } else if (cluster.properties.category === 'Dive Site Selected') {
           return (
             <Marker
               key={cluster.properties.siteID}
@@ -618,8 +608,7 @@ function Map() {
             >
             </Marker>
           );
-        }
-        else {
+        } else {
           return (
             <Marker
               key={cluster.properties.siteID}
@@ -634,59 +623,59 @@ function Map() {
         }
       })}
 
-      {shopPoints &&
-        shopPoints.map((cluster) => {
-          const [longitude, latitude] = cluster.geometry.coordinates;
-          const {
-            cluster: isCluster,
-            point_count: pointCount,
-          } = cluster.properties;
+      {shopPoints
+      && shopPoints.map((cluster) => {
+        const [longitude, latitude] = cluster.geometry.coordinates;
+        const {
+          cluster: isCluster,
+          point_count: pointCount,
+        } = cluster.properties;
 
-          if (isCluster) {
-            return (
-              <Marker
-                key={cluster.id}
-                position={{ lat: latitude, lng: longitude }}
-                title={pointCount.toString() + " sites"}
-                icon={shopClustIOS}
-                onClick={() => {
-                  const expansionZoom = Math.min(
-                    supercluster.getClusterExpansionZoom(cluster.id),
-                    14
-                  );
-                  mapRef.setZoom(expansionZoom);
-                  mapRef.panTo({ lat: latitude, lng: longitude });
-                  setMapCoords([
-                    mapRef.getCenter().lat(),
-                    mapRef.getCenter().lng(),
-                  ]);
-                  handleMapUpdates();
-                }}
-              >
-                <div
-                  style={{
-                    width: `${10 + (pointCount / points.length) * 10}px`,
-                    height: `${10 + (pointCount / points.length) * 10}px`,
-                    backgroundColor: "lightblue",
-                  }}
-                >
-                  {pointCount}
-                </div>
-              </Marker>
-            );
-          }
+        if (isCluster) {
           return (
             <Marker
-              key={cluster.properties.siteID}
+              key={cluster.id}
               position={{ lat: latitude, lng: longitude }}
-              icon={shopIOS}
-              title={cluster.properties.siteID}
-              onClick={() =>
-                setupShopModal(cluster.properties.siteID, latitude, longitude)
-              }
-            ></Marker>
+              title={pointCount.toString() + ' sites'}
+              icon={shopClustIOS}
+              onClick={() => {
+                const expansionZoom = Math.min(
+                  supercluster.getClusterExpansionZoom(cluster.id),
+                  14,
+                );
+                mapRef.setZoom(expansionZoom);
+                mapRef.panTo({ lat: latitude, lng: longitude });
+                setMapCoords([
+                  mapRef.getCenter().lat(),
+                  mapRef.getCenter().lng(),
+                ]);
+                handleMapUpdates();
+              }}
+            >
+              <div
+                style={{
+                  width:           `${10 + (pointCount / points.length) * 10}px`,
+                  height:          `${10 + (pointCount / points.length) * 10}px`,
+                  backgroundColor: 'lightblue',
+                }}
+              >
+                {pointCount}
+              </div>
+            </Marker>
           );
-        })}
+        }
+        return (
+          <Marker
+            key={cluster.properties.siteID}
+            position={{ lat: latitude, lng: longitude }}
+            icon={shopIOS}
+            title={cluster.properties.siteID}
+            onClick={() =>
+              setupShopModal(cluster.properties.siteID, latitude, longitude)}
+          >
+          </Marker>
+        );
+      })}
 
       {masterSwitch && heatpts.length > 0 && (
         <HeatmapLayer

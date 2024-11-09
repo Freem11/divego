@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import SearchView from './view';
 import { getSingleDiveSiteByNameAndRegion, getSiteNamesThatFit } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
-import { ModalContext } from '../contexts/modalContext';
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { CoordsContext } from '../contexts/mapCoordsContext';
 import { addIconTypeDiveSite, addIconTypePlaces, addIndexNumber } from '../../helpers/optionHelpers';
@@ -12,8 +11,8 @@ import usePlacesAutocomplete, {
 } from 'use-places-autocomplete';
 
 export default function SearchTool(props) {
+  const { onModalCancel } = props;
   const { boundaries } = useContext(MapBoundsContext);
-  const { modalShow }        = useContext(ModalContext);
   const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { setMapCoords } = useContext(CoordsContext);
 
@@ -106,7 +105,7 @@ export default function SearchTool(props) {
       };
     }
     setSearchValue('');
-    // close Modal here
+    onModalCancel();
   };
 
   return (
