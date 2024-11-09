@@ -2,7 +2,7 @@ import React from 'react';
 import screenData from '../newModals/screenData.json';
 // import style from './style.module.scss';
 import TextInputField from '../newModals/textInput';
-import ListItemView from '../searchToolListItem/view';
+import ListItemView from './searchToolListItem/view';
 
 import config from '../../icons/_config.json';
 

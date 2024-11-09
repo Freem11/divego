@@ -612,7 +612,7 @@ function Map() {
             <Marker
               key={cluster.properties.siteID}
               position={{ lat: latitude, lng: longitude }}
-              icon={anchorClust}
+              icon={shopIOS}
               title={cluster.properties.siteID}
               onClick={() =>
                 setupShopModal(cluster.properties.siteID, latitude, longitude)}

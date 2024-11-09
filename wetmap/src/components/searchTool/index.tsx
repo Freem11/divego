@@ -10,7 +10,7 @@ import usePlacesAutocomplete, {
   getLatLng,
 } from 'use-places-autocomplete';
 
-export default function SearchTool(props) {
+export default function SearchTool(props: any) {
   const { onModalCancel } = props;
   const { boundaries } = useContext(MapBoundsContext);
   const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);

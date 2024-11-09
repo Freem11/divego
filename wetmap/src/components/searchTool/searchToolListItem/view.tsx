@@ -1,7 +1,7 @@
 import React from 'react';
 // import style from './style.module.scss';
-import Icon from '../../icons/Icon';
-import config from '../../icons/_config.json';
+import Icon from '../../../icons/Icon';
+import config from '../../../icons/_config.json';
 
 type IconName = keyof typeof config;
 
