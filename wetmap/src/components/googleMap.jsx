@@ -137,28 +137,6 @@ function Map() {
     radius:  16,
   }));
 
-  let GoogleMapsApiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
-
-  useEffect(() => {
-    let yo = getPlaces('van');
-    console.log(yo);
-  }, []);
-
-  const getPlaces = async (text) => {
-    try {
-      const res = await fetch(
-        `https://maps.googleapis.com/maps/api/place/autocomplete/json?input=${text}&key=${GoogleMapsApiKey}`,
-      );
-      const placeInfo = await res.json();
-      if (placeInfo) {
-        return placeInfo.predictions;
-      }
-    } catch (err) {
-      console.log('error', err);
-    }
-  };
-
-
   const handleMapUpdates = async () => {
     if (mapRef) {
       let boundaries = mapRef.getBounds();
