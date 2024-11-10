@@ -18,7 +18,7 @@ export default function ListItemView(props: ListItemProps) {
     <div onClick={() => props.handleSelect(props.value)} style={{ cursor: 'pointer', paddingLeft: 5,  height: 50,  display: 'flex', alignItems: 'center', flexDirection: 'row', width: '80%', marginLeft: '10%', marginTop: 5, border: ' 1px solid lightgray', borderRadius: 8 }}>
       <Icon
         name={props.icontype}
-        fill="lightblue"
+        fill={props.icontype === 'anchor' ? 'lightblue' : 'gold'}
         width="25"
       />
       <div style={{ marginLeft: 5 }}>{props.value}</div>
