@@ -1,6 +1,7 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import Home from './googleMap';
+import SearchTool from './searchTool/index';
 import SiteSubmitter from './modals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';
@@ -16,7 +17,6 @@ import ExploreIcon from '@mui/icons-material/Explore';
 import AnchorIcon from '@mui/icons-material/Anchor';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
-import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import PersonIcon from '@mui/icons-material/Person';
 import SettingsIcon from '@mui/icons-material/Settings';
 import AddIcon from '@mui/icons-material/Add';
@@ -24,7 +24,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DiveSitesContext } from './contexts/diveSitesContext';
-import { GeoCoderContext } from './contexts/geoCoderContext';
 import { AnimalRevealContext } from './contexts/animalRevealContext';
 import { MasterContext } from './contexts/masterContext';
 import { MinorContext } from './contexts/minorContext';
@@ -49,9 +48,7 @@ import { Iterrator3Context } from './contexts/iterrator3Context';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import IntroTutorial from './guides/introTutorial';
 import SecondTutorial from './guides/secondTutorial';
-import ThirdTutorial from './guides/thirdTutorial';
-import SiteSearchModal from './modals/siteSearchModal';
-import MapSearchModal from './modals/mapSearchModal';
+import ThirdTutorial from './guides/thirdTutorial'; ;
 import './mapPage.css';
 import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
 import Histogram from './histogram/histogramBody';
@@ -67,7 +64,6 @@ const MapPage = React.memo(function MapPage() {
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
   const { setZoomHelper } = useContext(ZoomHelperContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
-  const { showGeoCoder } = useContext(GeoCoderContext);
   const { showAnimalSearch } = useContext(AnimalRevealContext);
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
@@ -266,36 +262,6 @@ const MapPage = React.memo(function MapPage() {
     }
 
     animateLaunchModal();
-  };
-
-  const handleGeocodingSearchButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
-    ) {
-      return;
-    }
-
-    animateMapSearchModal();
   };
 
   const handleDiveSiteSearchButton = () => {
@@ -512,13 +478,7 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateSiteSearchModal = () => {
-    modalShow(SiteSearchModal, {
-      size: ModalWindowSize.S,
-    });
-  };
-
-  const animateMapSearchModal = () => {
-    modalShow(MapSearchModal, {
+    modalShow(SearchTool, {
       size: ModalWindowSize.S,
     });
   };
@@ -626,30 +586,14 @@ const MapPage = React.memo(function MapPage() {
                 <ToggleButton
                   sx={toggleButtonStyle}
                   value="check"
-                  selected={showGeoCoder}
-                  onChange={() => {
-                    handleGeocodingSearchButton();
-                  }}
-                >
-                  <ExploreIcon sx={{ width: '3vw', height: '1.5vw' }} />
-                </ToggleButton>
-                <p className="buttonFont">Map Search</p>
-              </div>
-            )}
-
-            {masterSwitch && (
-              <div className="gearBox">
-                <ToggleButton
-                  sx={toggleButtonStyle}
-                  value="check"
                   selected={showAnimalSearch}
                   onChange={() => {
                     handleDiveSiteSearchButton();
                   }}
                 >
-                  <TravelExploreIcon sx={{ width: '3vw', height: '1.5vw' }} />
+                  <ExploreIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
-                <p className="buttonFont">Site Search</p>
+                <p className="buttonFont">Search Map</p>
               </div>
             )}
 
