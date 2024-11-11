@@ -6,7 +6,6 @@ import {
 } from '@react-google-maps/api';
 import './googleMap.css';
 import useSupercluster from 'use-supercluster';
-import Collapse from '@mui/material/Collapse';
 import anchorIcon from '../images/mapIcons/AnchorBlue1.png';
 import anchorClust from '../images/mapIcons/AnchorCluster.png';
 import Manta from '../images/Manta32.png';
@@ -25,7 +24,6 @@ import { JumpContext } from './contexts/jumpContext';
 import { DiveSitesContext } from './contexts/diveSitesContext';
 import { SliderContext } from './contexts/sliderContext';
 import { AnimalContext } from './contexts/animalContext';
-import { GeoCoderContext } from './contexts/geoCoderContext';
 import { PinContext } from './contexts/staticPinContext';
 import { MasterContext } from './contexts/masterContext';
 import { MinorContext } from './contexts/minorContext';
@@ -46,11 +44,9 @@ import { TutorialContext } from './contexts/tutorialContext';
 import { formatHeatVals } from '../helpers/heatPointHelpers';
 import { setupClusters, setupShopClusters } from '../helpers/clusterHelpers';
 import {
-  diveSites,
   getDiveSitesWithUser,
 } from '../supabaseCalls/diveSiteSupabaseCalls';
 import {
-  multiHeatPoints,
   getHeatPointsWithUser,
   getHeatPointsWithUserEmpty,
 } from '../supabaseCalls/heatPointSupabaseCalls';
@@ -58,11 +54,7 @@ import { shops, getShopByName } from '../supabaseCalls/shopsSupabaseCalls';
 import { ModalContext } from './contexts/modalContext';
 import { ModalWindowSize } from './reusables/modal/constants';
 import DiveSite from './newModals/diveSite/index';
-// import ShopModal from './modals/shopModal';
 import ShopModal from './newModals/shopModal/index';
-
-
-import { getSiteNamesThatFit } from '../supabaseCalls/diveSiteSupabaseCalls';
 
 const LIB = ['visualization', 'places'];
 
@@ -90,11 +82,10 @@ function Map() {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
   const { animalVal } = useContext(AnimalContext);
   const { sliderVal } = useContext(SliderContext);
-  const { showGeoCoder } = useContext(GeoCoderContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext,
   );
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  const { setSelectedShop } = useContext(SelectedShopContext);
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
   const { itterator } = useContext(IterratorContext);
@@ -105,13 +96,12 @@ function Map() {
 
   const { setTiles } = useContext(CarrouselTilesContext);
 
-  const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
+  const { sitesArray } = useContext(SitesArrayContext);
   const [newSites, setnewSites] = useState([]);
   const [newShops, setnewShops] = useState([]);
   const { chosenModal } = useContext(ModalSelectContext);
   const [mapRef, setMapRef] = useState(null);
 
-  const [selected, setSelected] = useState(null);
   const { dragPin, setDragPin } = useContext(PinSpotContext);
   const [tempMarker, setTempMarker] = useState(false);
   const { modalShow } = useContext(ModalContext);
@@ -398,7 +388,6 @@ function Map() {
     }
 
     if (zoomHelper) {
-      let zoomHelp;
       if (shopModal) {
         setMapZoom(16);
         setMinorSwitch(true);
@@ -424,7 +413,6 @@ function Map() {
     points.push(entity);
   });
 
-  // console.log(points, shopPoints)
   const { clusters, supercluster } = useSupercluster({
     points,
     bounds:  boundaries,
