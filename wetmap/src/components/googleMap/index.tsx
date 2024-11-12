@@ -12,7 +12,7 @@ import { ModalContext } from '../../contexts/modalContext';
 import PicUploader from '../picUploader/index';
 
 
-export default function DiveSite(props) {
+export default function GooglelMap(props) {
   const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { profile }          = useContext(UserProfileContext);
   const { modalShow }        = useContext(ModalContext);

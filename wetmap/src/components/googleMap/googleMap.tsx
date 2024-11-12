@@ -1,9 +1,10 @@
 import React from 'react';
 import {
   GoogleMap,
-  useLoadScript,
+  useJsApiLoader,
   Marker,
   HeatmapLayer,
+  Libraries,
 } from '@react-google-maps/api';
 import './googleMap.css';
 import useSupercluster from 'use-supercluster';
@@ -59,12 +60,13 @@ import { ModalWindowSize } from '../reusables/modal/constants';
 import DiveSite from '../newModals/diveSite/index';
 import ShopModal from '../newModals/shopModal/index';
 
-const LIB: any[] = ['visualization', 'places'];
+const libraries: Libraries = ['visualization', 'places'];
 
 export default function Home() {
-  const { isLoaded } = useLoadScript({
+  const { isLoaded } = useJsApiLoader({
+    id:               'google-map-script',
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-    libraries:        LIB,
+    libraries,
   });
 
   if (!isLoaded) return <div>Loading...</div>;
@@ -73,7 +75,7 @@ export default function Home() {
 
 function Map() {
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
-  const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
+  const [pinRef, setPinRef] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
 
   const { masterSwitch } = useContext(MasterContext);
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
@@ -425,14 +427,15 @@ function Map() {
     options: { radius: 75, maxZoom: 16 },
   });
 
-  const handlePinLoad = (marker: Marker) => {
+  const handlePinLoad = (marker: google.maps.marker.AdvancedMarkerElement) => {
     setPinRef(marker);
   };
 
   const handleDragEnd = () => {
     if (pinRef) {
-      const position = pinRef.getPosition();
-      if (position) {
+      const position = pinRef.position;
+      if (position instanceof google.maps.LatLng) {
+        console.log('huh', position instanceof google.maps.LatLng);
         if (chosenModal === 'DiveSite') {
           setAddSiteVals({
             ...addSiteVals,
