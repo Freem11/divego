@@ -6,7 +6,6 @@ import { ShopModalContext } from '../../contexts/shopModalContext';
 import { MasterContext } from '../../contexts/masterContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
-import './shopModal.css';
 import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
 import CloseButton from '../../closeButton/closeButton';
 import shopModalView from './view';

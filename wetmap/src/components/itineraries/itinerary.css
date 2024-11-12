@@ -9,8 +9,9 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  box-shadow:  1px 3px 5px #00000080;
-  background-color: #538dbd;
+  outline: 0.125em solid #afafaf;
+  box-shadow:  1px 3px 5px #87878780;
+  background-color: white;
   border-radius: 10px;
   margin-bottom: 3px;
   width: 90%;
@@ -20,25 +21,21 @@
 .moreBox {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 60%;
   height: 100%;
 }
 
 .tripName {
-  font-family: 'Itim', cursive;
-  color: #F0EEEB;
-  font-size: 15;
-  margin-left: 10;
-  margin-top: 5;
-  height: 60%;
+  color: #0d0d0d;
+  margin-top: 0.em;
 }
 
 .opener {
-  font-family: 'Itim', cursive;
-  color: #F0EEEB;
-  font-size: 12;
-  margin-left: 70;
-  margin-top: 0;
+
+  color: #0d0d0d;
+  font-weight: 500;
+  margin-bottom: 0.2em;
 }
 
 .buttonBox {
@@ -81,29 +78,29 @@
   margin-left: 5%;
   width: 93%;
   /* margin-top: -2%; */
-  background-color: #F0EEEB;
+  background-color: #fbfaf9;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;
-  box-shadow:  1px 3px 5px #00000080;
+  box-shadow:  1px 3px 5px #87878780;
 }
 
 .topRail {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  margin-top: -2%;
+  margin-top: 1em;
   margin-left: 4%;
   margin-right: 4%;
 }
 
 .dateText {
-  font-family: 'Itim', cursive;
+  /* font-family: 'Itim', cursive; */
   font-size: 1.1em;
   color: #000000;
 }
 
 .priceText {
-  font-family: 'Itim', cursive;
+  /* font-family: 'Itim', cursive; */
   font-size: 1.1em;
   color: #000000;
 }
@@ -115,7 +112,7 @@
   justify-content: flex-start;
   margin-top: 1%;
   margin-left: 4%;
-  font-family: 'Itim', cursive;
+  margin-right: 4%;
   font-size: 1em;
   color: #000000;
 }
