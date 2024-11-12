@@ -1,76 +1,37 @@
+import React, { useState, ReactNode, useRef, Dispatch, SetStateAction, useEffect, useMemo } from 'react';
+import Select, { SelectProps } from '../select';
 
-import React, { useEffect, useMemo, useRef, useState } from 'react';
-// import Icon from '../../../icons/Icon';
-import Select from 'rc-select';
-import type { SelectProps } from 'rc-select';
 
-import 'rc-select/assets/index.css';
-import './style.scss';
+const defaultProps = {
+  searchLimit: 10,
+};
 
-export interface DynamicSelectProps {
-  getMoreOptions?:     (search: string, limit: number, skip: number) => Promise<any>
+type DynamicSelectProps = SelectProps & Partial<typeof defaultProps> & {
+  getMoreOptions:      (search: string, limit: number, skip: number) => Promise<any>
   getSelectedOptions?: (values: any) => Promise<any>
-  timeout:             number
-  value?:              any
-  reset?:              boolean
-  searchLimit?:        number
-  disabled?:           boolean
-  placeholder?:        string
-}
+};
 
 
-const DynamicSelect = (props: SelectProps & DynamicSelectProps) => {
-  const [fetching, setFetching] = useState(false);
-  const [fetchingData, setFetchingData] = useState(true);
+const DynamicSelect = React.forwardRef<HTMLInputElement, DynamicSelectProps>(function DynamicSelect(_props: DynamicSelectProps, ref) {
+  console.log('Render DynamicSelect');
+
+  const props = { ...defaultProps, ..._props };
+  const { getSelectedOptions, getMoreOptions, searchLimit, ...rest } = props;
   const [options, setOptions] = useState([]);
-  const [searchText, setSearchText] = useState('');
-  const [selectedTotalCount, setSelectedTotalCount] = useState(null);
-  const [searchTotalCount, setSearchTotalCount] = useState(null);
+  const [isFetching, setIsFetching] = useState(false);
   const [searchOffset, setSearchOffset] = useState(0);
-  const [searchTerm, setSearchTerm] = useState(null);
-  const [internalValue, setInternalValue] = useState([]);
-  const [defaultOptions, setDefaultOptions] = useState([]);
-  const [extraAmount, setExtraAmount] = useState(null);
-  const [loadMore, setLoadMore] = useState(null);
-  const [notFoundContent, setNotFoundContent] = useState(null);
-  const timeoutRef = useRef(null);
-  const { getMoreOptions, getSelectedOptions, timeout, value, reset, searchLimit, disabled, ...restProps } = props;
+  const [selectedTotalCount, setSelectedTotalCount] = useState(null);
 
   useEffect(() => {
-    setExtraAmount(calculateExtraAmount());
-  }, [internalValue, selectedTotalCount]);
-
-  useEffect(() => {
-    if (options.length) {
-      setLoadMore(calculateLoadMore());
-    }
-    if (!defaultOptions.length) {
-      setDefaultOptions(options);
-    }
-  }, [searchTotalCount, searchOffset, options]);
-
-  useEffect(() => {
-    if (searchTerm !== null) {
-      loadOptions(searchTerm);
-    }
-  }, [searchOffset]);
-
-  useEffect(() => {
-    fetchData();
+    init();
   }, []);
 
-  useEffect(() => {
-    // this is the way to clear selected options from outside
-    if (reset?.length) {
-      setInternalValue([]);
-    }
-  }, [reset]);
 
-  const fetchData = async () => {
+  const init = async () => {
     try {
       if (getSelectedOptions) {
-        const data = await getSelectedOptions(value);
-        setFetchingData(false);
+        const data = await getSelectedOptions(props.value);
+        setIsFetching(false);
         if (!data) {
           return;
         }
@@ -78,45 +39,37 @@ const DynamicSelect = (props: SelectProps & DynamicSelectProps) => {
         if (data?.options?.length) {
           // there are pre-selected options
           setOptions(data.options);
-          setDefaultOptions(data.options);
-          setInternalValue(data.options.map(option => option.value));
-          setSelectedTotalCount(data.totalCount);
         }
       }
 
-      if (!disabled) {
+      if (!props.disabled) {
         // add other possible options
         loadOptions('');
-        setSearchTerm('');
       }
-    } catch (_) { setFetchingData(false); }
-  };
-
-  const calculateLoadMore = () => {
-    const more = searchTotalCount - options.length;
-    return more > 0 ? more : null;
-  };
-
-  const calculateExtraAmount = () => {
-    if (selectedTotalCount === null) {
-      // user manually selects values
-      return internalValue.length - props.maxTagCount;
-    } else {
-      // values have been pre-selected before
-      return selectedTotalCount - props.maxTagCount;
+    } catch (e) {
+      setIsFetching(false);
+      console.log(e);
     }
   };
 
-  const loadOptions = async (search, replaceExistingOptions = false) => {
+
+  const onSearch = (search: string) => {
+    loadOptions(search, true);
+  };
+
+  const loadOptions = async (search: string, replaceExistingOptions = false) => {
+    console.log(`load options for "${search}"...`);
     if (!getMoreOptions) {
       return;
     }
-    setFetching(true);
+    setIsFetching(true);
     const [data] = await Promise.all([
-      getMoreOptions(search, searchLimit, searchOffset),
+      props.getMoreOptions(search, searchLimit, searchOffset),
       new Promise(resolve => setTimeout(resolve, 300)), // atrificial deplay to avoid flickering
     ]);
-    setFetchingData(false);
+
+    console.log(`data loaded options for "${search}" : `, data);
+    setIsFetching(false);
     if (!data?.options) {
       setOptions([]);
       return;
@@ -136,89 +89,22 @@ const DynamicSelect = (props: SelectProps & DynamicSelectProps) => {
       }
       return [...options];
     });
-    setSearchTotalCount(data.totalCount);
-    setFetching(false);
+    // setSearchTotalCount(data.totalCount);
+    // setIsFetching(false);
 
-    if (!getSelectedOptions && value) {
-      setInternalValue(Array.isArray(value) ? value : [value]);
-      setSelectedTotalCount(Array.isArray(value) ? value.length : 1);
-    }
+    // if (!getSelectedOptions && value) {
+    //   setInternalValue(Array.isArray(value) ? value : [value]);
+    //   setSelectedTotalCount(Array.isArray(value) ? value.length : 1);
+    // }
   };
 
-  const onSearch = useMemo(() => {
-    if (disabled) return null;
-    return (search) => {
-      if (!search) {
-        // return
-      }
-      setSearchText(search);
-      setFetching(true);
-      clearTimeout(timeoutRef.current);
-      timeoutRef.current = setTimeout(() => {
-        setSearchOffset(0);
-        setSearchTerm(search);
-        if (search) {
-          loadOptions(search, true);
-        }
-      }, timeout);
-    };
-  }, [getMoreOptions, timeout]);
-
-  if (!props.filterOption) {
-    restProps.filterOption = false;
-    restProps.onSearch = onSearch;
-    restProps.searchValue = searchText;
-  }
-
   return (
-    <div>
-      <Select
-        className="rc-select-customize-input"
-        defaultOpen={true}
-        labelInValue={true}
-        getPopupContainer={trigger => trigger.parentElement}
-        disabled={fetchingData}
-        // notFoundContent={fetching ? <></> : 'Empty'}
-        dropdownRender={menu => (
-          <>
-            {menu}
-            {((options.length > 0 && loadMore > 0) || fetching)
-            && (
-              <>
-                <hr />
-                {fetching
-                  ? <>Moment...</>
-                  :                (
-                      <button
-                        style={{ width: '100%' }}
-                        onClick={() => {
-                          setSearchOffset(prev => prev + searchLimit);
-                        }}
-                      >
-                        Show more
-                      </button>
-                    )}
-              </>
-            )}
-          </>
-        )}
-        options={options || []}
-        value={internalValue}
-        onSelect={(value) => {
-          !disabled && setInternalValue(prev => (props.mode != 'multiple') ? [value] : [...prev, value]);
-        }}
-        onDeselect={(value) => {
-          !disabled && setInternalValue(prev => prev.filter(i => i !== value));
-        }}
-        maxTagPlaceholder={() => {
-          return `+${extraAmount}...`;
-        }}
-        placeholder=""
-        {...restProps}
-      />
-      {fetchingData && <>Fetching...</>}
-    </div>
+    <Select
+      options={options}
+      onSearch={onSearch}
+      {...rest}
+    />
   );
-};
+});
 
 export default DynamicSelect;
