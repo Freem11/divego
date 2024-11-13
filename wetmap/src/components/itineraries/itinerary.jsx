@@ -92,9 +92,7 @@ export default function Itinerary(props) {
         <div className="topRail">
           <p className="dateText">
             {itinerary.startDate}
-            {' '}
-            to
-            {' '}
+            {' to '}
             {itinerary.endDate}
           </p>
           <p className="priceText">{itinerary.price}</p>
