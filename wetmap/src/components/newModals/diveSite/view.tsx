@@ -95,7 +95,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         <div className="panel-header">
           <h3>{screenData.DiveSite.drawerHeader}</h3>
         </div>
-        <DiveSiteImage></DiveSiteImage>
+        {/* <DiveSiteImage></DiveSiteImage> */}
         <div className="panel-body">
           {props?.diveSitePics?.map((packet) => {
             return (
@@ -103,18 +103,14 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                 <div className="">{packet.dateTaken}</div>
                 {packet.photos
                 && packet.photos.map((pic) => {
-                  return <Picture key={pic.id} pic={pic}></Picture>;
+                  return <DiveSiteImage key={pic.id} pic={pic}></DiveSiteImage>;
                 })}
               </div>
             );
           })}
-          
         </div>
         <div className="panel-footer"></div>
       </div>
-      
-      
     </div>
-    
   );
 }
