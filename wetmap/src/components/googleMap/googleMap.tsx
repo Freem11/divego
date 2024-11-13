@@ -27,7 +27,6 @@ import { JumpContext } from '../contexts/jumpContext';
 import { DiveSitesContext } from '../contexts/diveSitesContext';
 import { SliderContext } from '../contexts/sliderContext';
 import { AnimalContext } from '../contexts/animalContext';
-import { GeoCoderContext } from '../contexts/geoCoderContext';
 import { PinContext } from '../contexts/staticPinContext';
 import { MasterContext } from '../contexts/masterContext';
 import { MinorContext } from '../contexts/minorContext';
@@ -75,7 +74,7 @@ export default function Home() {
 
 function Map() {
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
-  const [pinRef, setPinRef] = useState<google.maps.marker.AdvancedMarkerElement | null>(null);
+  const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
 
   const { masterSwitch } = useContext(MasterContext);
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
@@ -89,11 +88,10 @@ function Map() {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
   const { animalVal } = useContext(AnimalContext);
   const { sliderVal } = useContext(SliderContext);
-  const { showGeoCoder } = useContext(GeoCoderContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext,
   );
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  const { setSelectedShop } = useContext(SelectedShopContext);
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
   const { itterator } = useContext(IterratorContext);
@@ -104,9 +102,9 @@ function Map() {
 
   const { setTiles } = useContext(CarrouselTilesContext);
 
-  const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
-  const [newSites, setnewSites] = useState([]);
-  const [newShops, setnewShops] = useState([]);
+  const { sitesArray } = useContext(SitesArrayContext);
+  const [newSites, setnewSites] = useState<any>([]);
+  const [newShops, setnewShops] = useState<any>([]);
   const { chosenModal } = useContext(ModalSelectContext);
 
   const { dragPin, setDragPin } = useContext(PinSpotContext);
@@ -124,7 +122,7 @@ function Map() {
   const zoom = useMemo(() => mapZoom, []);
 
   let mapCenterTimoutHandler: number | undefined;
-  let mapBoundariesTimoutHandler;
+  let mapBoundariesTimoutHandler: number;
 
   const options = useMemo(() => ({
     mapTypeId:         'hybrid',
@@ -143,33 +141,39 @@ function Map() {
 
   const handleMapUpdates = async () => {
     if (mapRef) {
-      const boundaries = mapRef.getBounds();
+      const boundaries: google.maps.LatLngBounds | undefined = mapRef.getBounds();
 
       if (boundaries) {
-        const lats = boundaries[Object.keys(boundaries)[0]];
-        const lngs = boundaries[Object.keys(boundaries)[1]];
+        const latHi = boundaries.getNorthEast().lat();
+        const latLo = boundaries.getSouthWest().lat();
+        const lngE = boundaries.getNorthEast().lng();
+        const lngW = boundaries.getSouthWest().lng();
 
-        if (lngs.lo > lngs.hi) {
+        if (lngW > lngE) {
           try {
             const AmericanDiveSites = await getDiveSitesWithUser({
               myDiveSites: '',
-              minLat:      lats.lo,
-              maxLat:      lats.hi,
+              minLat:      latLo,
+              maxLat:      latHi,
               minLng:      -180,
-              maxLng:      lngs.hi,
+              maxLng:      lngE,
             });
             const AsianDiveSites = await getDiveSitesWithUser({
               myDiveSites: '',
-              minLat:      lats.lo,
-              maxLat:      lats.hi,
-              minLng:      lngs.lo,
+              minLat:      latLo,
+              maxLat:      latHi,
+              minLng:      lngW,
               maxLng:      180,
             });
 
             const diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
-            !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
+            setnewSites(!divesTog ? [] : diveSiteList);
           } catch (e) {
-            console.log({ title: 'Error', message: e.message });
+            if (e instanceof Error) {
+              console.error('Error message:', e.message);
+            } else {
+              console.error('Unknown error', e);
+            }
           }
 
           try {
@@ -178,108 +182,95 @@ function Map() {
             if (animalVal.length === 0) {
               AmericanHeatPoints = await getHeatPointsWithUserEmpty({
                 myCreatures: '',
-                minLat:      lats.lo,
-                maxLat:      lats.hi,
+                minLat:      latLo,
+                maxLat:      latHi,
                 minLng:      -180,
-                maxLng:      lngs.hi,
+                maxLng:      lngE,
               });
               AsianHeatPoints = await getHeatPointsWithUserEmpty({
                 myCreatures: '',
-                minLat:      lats.lo,
-                maxLat:      lats.hi,
-                minLng:      lngs.lo,
+                minLat:      latLo,
+                maxLat:      latHi,
+                minLng:      lngW,
                 maxLng:      180,
               });
             } else {
               AmericanHeatPoints = await getHeatPointsWithUser({
                 myCreatures:          '',
-                minLat:               lats.lo,
-                maxLat:               lats.hi,
+                minLat:               latLo,
+                maxLat:               latHi,
                 minLng:               -180,
-                maxLng:               lngs.hi,
+                maxLng:               lngE,
                 animalMultiSelection: animalVal,
               });
               AsianHeatPoints = await getHeatPointsWithUser({
                 myCreatures:          '',
-                minLat:               lats.lo,
-                maxLat:               lats.hi,
-                minLng:               lngs.lo,
+                minLat:               latLo,
+                maxLat:               latHi,
+                minLng:               lngW,
                 maxLng:               180,
                 animalMultiSelection: animalVal,
               });
             }
-            // const AmericanHeatPoints = await multiHeatPoints(
-            //   {
-            //     minLat: lats.lo,
-            //     maxLat: lats.hi,
-            //     minLng: -180,
-            //     maxLng: lngs.hi,
-            //   },
-            //   animalVal
-            // );
-            // const AsianHeatPoints = await multiHeatPoints(
-            //   {
-            //     minLat: lats.lo,
-            //     maxLat: lats.hi,
-            //     minLng: lngs.lo,
-            //     maxLng: 180,
-            //   },
-            //   animalVal
-            // );
 
             const heatPointList = [...AsianHeatPoints, ...AmericanHeatPoints];
             setHeatPts(formatHeatVals(heatPointList));
           } catch (e) {
-            console.log({ title: 'Error', message: e.message });
+            if (e instanceof Error) {
+              console.error('Error message:', e.message);
+            } else {
+              console.error('Unknown error', e);
+            }
           }
         } else {
           try {
             const diveSiteList = await getDiveSitesWithUser({
               myDiveSites: '',
-              minLat:      lats.lo,
-              maxLat:      lats.hi,
-              minLng:      lngs.lo,
-              maxLng:      lngs.hi,
+              minLat:               latLo,
+              maxLat:               latHi,
+              minLng:               lngW,
+              maxLng:               lngE,
             });
-            // const diveSiteList = await diveSites({
-            //   minLat: lats.lo,
-            //   maxLat: lats.hi,
-            //   minLng: lngs.lo,
-            //   maxLng: lngs.hi,
-            // });
 
-            !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
+            setnewSites(!divesTog ? [] : diveSiteList);
           } catch (e) {
-            console.log({ title: 'Error', message: e.message });
+            if (e instanceof Error) {
+              console.error('Error message:', e.message);
+            } else {
+              console.error('Unknown error', e);
+            }
           }
 
-          // console.log("here", lats, lngs)
           try {
             let heatPointList;
             if (animalVal.length === 0) {
               heatPointList = await getHeatPointsWithUserEmpty({
                 myCreatures: '',
-                minLat:      lats.lo,
-                maxLat:      lats.hi,
-                minLng:      lngs.lo,
-                maxLng:      lngs.hi,
+                minLat:               latLo,
+                maxLat:               latHi,
+                minLng:               lngW,
+                maxLng:               lngE,
               });
             } else {
               heatPointList = await getHeatPointsWithUser({
                 animalMultiSelection: animalVal,
                 myCreatures:          '',
-                minLat:               lats.lo,
-                maxLat:               lats.hi,
-                minLng:               lngs.lo,
-                maxLng:               lngs.hi,
+                minLat:               latLo,
+                maxLat:               latHi,
+                minLng:               lngW,
+                maxLng:               lngE,
               });
             }
             setHeatPts(formatHeatVals(heatPointList));
 
             const filteredShops = await shops(boundaries);
-            !divesTog ? setnewShops([]) : setnewShops(filteredShops);
+            setnewShops(!divesTog ? [] : filteredShops);
           } catch (e) {
-            console.log({ title: 'Error', message: e.message });
+            if (e instanceof Error) {
+              console.error('Error message:', e.message);
+            } else {
+              console.error('Unknown error', e);
+            }
           }
         }
       }
@@ -332,11 +323,13 @@ function Map() {
     if (mapRef) {
       window.clearTimeout(mapBoundariesTimoutHandler);
       mapBoundariesTimoutHandler = window.setTimeout(function () {
-        const boundaries = mapRef.getBounds();
+        const boundaries: google.maps.LatLngBounds | undefined = mapRef.getBounds();
         if (boundaries) {
-          const lats = boundaries[Object.keys(boundaries)[0]];
-          const lngs = boundaries[Object.keys(boundaries)[1]];
-          setBoundaries([lngs.lo, lats.lo, lngs.hi, lats.hi]);
+          const latHi = boundaries.getNorthEast().lat();
+          const latLo = boundaries.getSouthWest().lat();
+          const lngE = boundaries.getNorthEast().lng();
+          const lngW = boundaries.getSouthWest().lng();
+          setBoundaries([lngW, latLo, lngE, latHi]);
         }
         handleMapUpdates();
       }, 50);
@@ -403,11 +396,13 @@ function Map() {
   const points = sitePoints;
 
   type Cluster = {
+    id:         number
     type:       string
     properties: {
-      category: string
-      cluster:  boolean
-      siteID:   string
+      category:    string
+      cluster:     boolean
+      siteID:      string
+      point_count: number
     }
     geometry: {
       coordinates: number[]
@@ -419,7 +414,6 @@ function Map() {
     points.push(shop);
   });
 
-
   const { clusters, supercluster } = useSupercluster({
     points,
     bounds:  boundaries,
@@ -427,15 +421,14 @@ function Map() {
     options: { radius: 75, maxZoom: 16 },
   });
 
-  const handlePinLoad = (marker: google.maps.marker.AdvancedMarkerElement) => {
+  const handlePinLoad = (marker: google.maps.Marker) => {
     setPinRef(marker);
   };
 
   const handleDragEnd = () => {
     if (pinRef) {
-      const position = pinRef.position;
+      const position = pinRef;
       if (position instanceof google.maps.LatLng) {
-        console.log('huh', position instanceof google.maps.LatLng);
         if (chosenModal === 'DiveSite') {
           setAddSiteVals({
             ...addSiteVals,
@@ -523,8 +516,8 @@ function Map() {
                     mapRef.setZoom(expansionZoom);
                     mapRef.panTo({ lat: latitude, lng: longitude });
                     setMapCoords([
-                      position.lat(),
-                      position.lng(),
+                      latitude,
+                      longitude,
                     ]);
                   }
                 };
@@ -591,7 +584,7 @@ function Map() {
       })}
 
       {shopPoints
-      && shopPoints.map((cluster) => {
+      && shopPoints.map((cluster: Cluster) => {
         const [longitude, latitude] = cluster.geometry.coordinates;
         const {
           cluster: isCluster,
@@ -603,7 +596,7 @@ function Map() {
             <Marker
               key={cluster.id}
               position={{ lat: latitude, lng: longitude }}
-              title={pointCount.toString() + ' sites'}
+              title={pointCount.toString() + ' shops'}
               icon={shopClustIOS}
               onClick={() => {
                 const expansionZoom = Math.min(
@@ -616,8 +609,8 @@ function Map() {
                     mapRef.setZoom(expansionZoom);
                     mapRef.panTo({ lat: latitude, lng: longitude });
                     setMapCoords([
-                      position.lat(),
-                      position.lng(),
+                      longitude,
+                      longitude,
                     ]);
                   }
                 }
@@ -653,8 +646,6 @@ function Map() {
         <HeatmapLayer
           data={heatpts}
           options={heatOpts}
-          opacity={1}
-          radius={9}
         >
         </HeatmapLayer>
       )}
@@ -663,8 +654,6 @@ function Map() {
         <HeatmapLayer
           data={heatpts}
           options={heatOpts}
-          opacity={1}
-          radius={9}
         >
         </HeatmapLayer>
       )}

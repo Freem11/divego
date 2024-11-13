@@ -2,6 +2,7 @@ function setupClusters(diveSiteData, sitesArray) {
   let points
     = diveSiteData
     && diveSiteData.map(site => ({
+      id:         site.id,
       type:       'Feature',
       properties: {
         cluster:  false,
@@ -19,6 +20,7 @@ function setupClusters(diveSiteData, sitesArray) {
 
 function setupShopClusters(shopData) {
   let points = shopData.map(shop => ({
+    id:         shop.id,
     type:       'Feature',
     properties: {
       cluster:  false,
