@@ -71,6 +71,10 @@ function Picture(props) {
       size:              ModalWindowSize.FULL,
       src:               `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`,
     });
+
+    const imgTest = new Image();
+    imgTest.src = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
+    console.log(`Width: ${imgTest.width}px, Height: ${imgTest.height}px`);
   };
 
   return (
