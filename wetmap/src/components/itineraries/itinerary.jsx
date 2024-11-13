@@ -7,6 +7,8 @@ import { MinorContext } from '../contexts/minorContext';
 import { MasterContext } from '../contexts/masterContext';
 import './itinerary.css';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
+import ButtonIcon from '../reusables/buttonIcon';
+import Icon from '../../icons/Icon';
 import gold from '../../images/mapIcons/AnchorGold.png';
 import diveFlag from '../../images/diveflag.png';
 
@@ -77,7 +79,18 @@ export default function Itinerary(props) {
           </p>
         </div>
         <div className="buttonBox">
-          <div
+          <ButtonIcon 
+            icon={<Icon name="anchor" />}
+            className="btn-lg buttonStyling"
+            onClick={() => flipMap(itinerary.siteList)}
+          />
+          <ButtonIcon 
+            icon={<Icon name="diving-scuba-flag" />}
+            className="btn-lg buttonStyling"
+            // onClick={}
+          />
+
+          {/* <div
             className="sitesButton"
             onClick={() => flipMap(itinerary.siteList)}
           >
@@ -85,7 +98,7 @@ export default function Itinerary(props) {
           </div>
           <div className="bookButton">
             <img src={diveFlag} style={{ height: '30px', width: '30px' }} />
-          </div>
+          </div> */}
         </div>
       </div>
       <animated.div className="extraBox" style={heightChange}>
