@@ -75,6 +75,7 @@ function Picture(props) {
 
   return (
     <div key={pic.id}>
+      {/* <h1>test</h1> */}
       <div className={style.helper} style={{ marginBottom: '-8%' }}>
         <h4 className={style.animalLabelP}>{pic.label}</h4>
         <a

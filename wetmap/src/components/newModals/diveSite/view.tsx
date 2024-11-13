@@ -10,6 +10,7 @@ import { PhotosGroupedByDate } from '../../../entities/photos';
 import PlainTextInput from '../../reusables/plainTextInput';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import ButtonIcon from '../../reusables/buttonIcon';
+import DiveSiteImage from '../diveSiteImage/index';
 
 type DiveSiteViewProps = {
   onClose:              () => void
@@ -26,6 +27,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
+      
       <input
         ref={fileUploaderRef}
         className="d-hide"
@@ -34,7 +36,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
       />
 
       <div className="col-6">
-
+      
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
           <div className={style.buttonOpenPictureUpload}>
             <Button
@@ -93,6 +95,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         <div className="panel-header">
           <h3>{screenData.DiveSite.drawerHeader}</h3>
         </div>
+        <DiveSiteImage></DiveSiteImage>
         <div className="panel-body">
           {props?.diveSitePics?.map((packet) => {
             return (
@@ -105,9 +108,13 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
               </div>
             );
           })}
+          
         </div>
         <div className="panel-footer"></div>
       </div>
+      
+      
     </div>
+    
   );
 }
