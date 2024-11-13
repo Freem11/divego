@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  outline: 0.125em solid #afafaf;
+  outline: 0.1em solid #afafaf;
   box-shadow:  1px 3px 5px #87878780;
   background-color: white;
   border-radius: 10px;

@@ -94,6 +94,7 @@ export default function Itinerary(props) {
             {itinerary.startDate}
             {' '}
             to
+            {' '}
             {itinerary.endDate}
           </p>
           <p className="priceText">{itinerary.price}</p>
