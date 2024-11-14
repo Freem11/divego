@@ -39,9 +39,6 @@ import { ShopModalContext } from '../../contexts/shopModalContext';
 import { SitesArrayContext } from '../../contexts/sitesArrayContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
 import { CarrouselTilesContext } from '../../contexts/carrouselTilesContext';
-import { IterratorContext } from '../../contexts/iterratorContext';
-import { Iterrator2Context } from '../../contexts/iterrator2Context';
-import { TutorialContext } from '../../contexts/tutorialContext';
 import { formatHeatVals } from '../../../helpers/heatPointHelpers';
 import { setupClusters, setupShopClusters } from '../../../helpers/clusterHelpers';
 import {
@@ -57,7 +54,7 @@ import { ModalWindowSize } from '../../reusables/modal/constants';
 import DiveSite from '../../newModals/diveSite/index';
 import ShopModal from '../../newModals/shopModal/index';
 
-export default function Map() {
+export default function MapView() {
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
   const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
 
@@ -78,10 +75,6 @@ export default function Map() {
   );
   const { setSelectedShop } = useContext(SelectedShopContext);
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
-
-  const { itterator } = useContext(IterratorContext);
-  const { itterator2 } = useContext(Iterrator2Context);
-  const { tutorialRunning } = useContext(TutorialContext);
 
   const { shopModal, setShopModal } = useContext(ShopModalContext);
 
@@ -304,7 +297,6 @@ export default function Map() {
   }, [mapZoom]);
 
   const handleBoundsChange = async () => {
-    cleanupModalsNoAnchor();
     if (mapRef) {
       window.clearTimeout(mapBoundariesTimoutHandler);
       mapBoundariesTimoutHandler = window.setTimeout(function () {
@@ -351,13 +343,6 @@ export default function Map() {
   }, [selectedDiveSite]);
 
   useEffect(() => {
-    if (tutorialRunning && itterator === 7) {
-      setMapZoom(8);
-    }
-    if (tutorialRunning && (itterator2 === 2 || itterator2 === 16)) {
-      setMapZoom(8);
-    }
-
     if (zoomHelper) {
       if (shopModal) {
         setMapZoom(16);
@@ -457,10 +442,6 @@ export default function Map() {
 
   const cleanupModals = () => {
     setTiles(true);
-  };
-
-  const cleanupModalsNoAnchor = () => {
-    // setTiles(true);
   };
 
   return (

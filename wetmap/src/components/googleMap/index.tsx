@@ -3,8 +3,9 @@ import {
   useJsApiLoader,
   Libraries,
 } from '@react-google-maps/api';
+import MapView from './map/map';
+
 const libraries: Libraries = ['places', 'visualization'];
-import Map from './map/map';
 
 export default function MapLoader() {
   const { isLoaded } = useJsApiLoader({
@@ -14,5 +15,5 @@ export default function MapLoader() {
   });
 
   if (!isLoaded) return <div>Loading...</div>;
-  return <Map></Map>;
+  return <MapView></MapView>;
 }
