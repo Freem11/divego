@@ -3,7 +3,7 @@ import {
   useJsApiLoader,
   Libraries,
 } from '@react-google-maps/api';
-import MapView from './map/map';
+import MapView from './view';
 
 const libraries: Libraries = ['places', 'visualization'];
 
