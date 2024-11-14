@@ -89,16 +89,6 @@ export default function Itinerary(props) {
             className="btn-lg buttonStyling"
             // onClick={}
           />
-
-          {/* <div
-            className="sitesButton"
-            onClick={() => flipMap(itinerary.siteList)}
-          >
-            <img src={gold} style={{ height: '30px', width: '30px' }} />
-          </div>
-          <div className="bookButton">
-            <img src={diveFlag} style={{ height: '30px', width: '30px' }} />
-          </div> */}
         </div>
       </div>
       <animated.div className="extraBox" style={heightChange}>
