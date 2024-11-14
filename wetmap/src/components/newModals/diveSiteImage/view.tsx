@@ -20,9 +20,9 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
   let photoName = props.pic.photoFile.split('/').pop();
   return (
     // <h1>test2</h1>
-    <div key={props.pic.id}>
+    <div key={props.pic.id} style={{position: 'relative'}}>
       {/* <h1>test</h1> */}
-      <div className={style.helper} style={{ marginBottom: '-8%' }}>
+      <div className={style.helper} style={{ position: 'absolute', top: 10}}>
         <h4 className={style.animalLabelP}>{props.pic.label}</h4>
         {/* this component is the name of the label */}
         <a
@@ -32,6 +32,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
           <FlagIcon sx={{ color: 'red' }} />
         </a>
       </div>
+      {/* <div className={style.wavyModalHeader} style={{ backgroundImage: `url(https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName})`, backgroundSize: 'contain', width: '100%', height: 200, backgroundRepeat: 'no-repeat'}}></div> */}
       <img
         src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
         style={{ width: '100%', borderRadius: '3%' }}
