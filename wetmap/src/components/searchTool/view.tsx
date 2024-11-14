@@ -25,7 +25,7 @@ type SearchViewProps = {
 
 export default function SearchView(props: SearchViewProps) {
   return (
-    <div className="mt-6 mr-4 pr-4 full-height" style={{ overflow: 'scroll' }}>
+    <div className="mt-6 mb-6 mb-6 mr-4 pr-4 pb-6 full-height" style={{ overflow: 'scroll'}}>
       <TextInputField
         dataType="text"
         icon="navigation-variant-outline"
