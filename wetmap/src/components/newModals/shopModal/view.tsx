@@ -113,42 +113,37 @@ export default function ShopModalView(props: ShopModelViewProps) {
           <h3 class="text-left">{props?.shopDescription}</h3>
         </div>
       </div>
-      <div className="col-6">
-        <h3 className="mt-6">Offered Diving Trips</h3>
-        <div style={{ marginTop: '3%', width: '100%', borderRadius: 15 }}>
-          <div className="container5">
-            <div className={style.buttonAddDivingEvents}>
-              <Button
-                className="mt-2"
-                // onClick={} // add diving events functionality here
-              >
+      <div className="col-6 panel border-none full-height">
+        <div className="panel-header">
+          <h3>Offered Diving Trips</h3>
+          <Button className="mt-2">
+          
                 Add diving event
                 {/* <span className="hide-sm">{screenData.DiveSite.addSightingButton}</span> */}
-              </Button>
-            </div>
-            <div className="mt-4">
-              {itineraryList// in the future, if itineraryList is not empty, render a loading spinner
-                && itineraryList.map((itinerary) => {
-                  return (
-                    <Itinerary
-                      key={itinerary.id}
-                      itinerary={itinerary}
-                      setSelectedID={setSelectedID}
-                      selectedID={selectedID}
-                      setShopModal={setShopModal}
-                    />
-                  );
-                })}
-              {itineraryList.length === 0 && (
-                <div>
-                  <p className="noSightings">
-                    No Trips are currently being offered.
-                  </p>
-                </div>
-              )}
-            </div>
-          </div>
+          </Button>
         </div>
+        <div className={`${style.itineraryList}`}>
+          {itineraryList// in the future, if itineraryList is not empty, render a loading spinner
+            && itineraryList.map((itinerary) => {
+              return (
+                <Itinerary
+                  key={itinerary.id}
+                  itinerary={itinerary}
+                  setSelectedID={setSelectedID}
+                  selectedID={selectedID}
+                  setShopModal={setShopModal}
+                />
+              );
+            })}
+          {itineraryList.length === 0 && (
+            <div>
+              <p className="noSightings">
+                No Trips are currently being offered.
+              </p>
+            </div>
+          )}
+        </div>
+        <div className="panel-footer"></div>
       </div>
     </div>
   );
