@@ -62,7 +62,7 @@
 
 .extraBox {
   z-index: -1;
-  overflow: hidden;
+  overflow-y: auto;
   margin-left: 5%;
   width: 93%;
   /* margin-top: -2%; */
