@@ -6,13 +6,11 @@ import {
 } from '@react-google-maps/api';
 import './googleMap.css';
 import useSupercluster from 'use-supercluster';
-import Collapse from '@mui/material/Collapse';
 import anchorIcon from '../images/mapIcons/AnchorBlue1.png';
 import anchorClust from '../images/mapIcons/AnchorCluster.png';
 import Manta from '../images/Manta32.png';
 import gold from '../images/mapIcons/AnchorGold.png';
-import shopIOS from "../images/face-mask.png";
-import shopClustIOS from '../images/face-mask.png';
+import shopIOS from '../images/mapIcons/DiveCentre24x24.png';
 import {
   useMemo,
   useState,
@@ -20,14 +18,12 @@ import {
   useEffect,
   useLayoutEffect,
 } from 'react';
-import PlacesAutoComplete from './locationSearch/placesAutocomplete';
 import { CoordsContext } from './contexts/mapCoordsContext';
 import { ZoomContext } from './contexts/mapZoomContext';
 import { JumpContext } from './contexts/jumpContext';
 import { DiveSitesContext } from './contexts/diveSitesContext';
 import { SliderContext } from './contexts/sliderContext';
 import { AnimalContext } from './contexts/animalContext';
-import { GeoCoderContext } from './contexts/geoCoderContext';
 import { PinContext } from './contexts/staticPinContext';
 import { MasterContext } from './contexts/masterContext';
 import { MinorContext } from './contexts/minorContext';
@@ -48,11 +44,9 @@ import { TutorialContext } from './contexts/tutorialContext';
 import { formatHeatVals } from '../helpers/heatPointHelpers';
 import { setupClusters, setupShopClusters } from '../helpers/clusterHelpers';
 import {
-  diveSites,
   getDiveSitesWithUser,
 } from '../supabaseCalls/diveSiteSupabaseCalls';
 import {
-  multiHeatPoints,
   getHeatPointsWithUser,
   getHeatPointsWithUserEmpty,
 } from '../supabaseCalls/heatPointSupabaseCalls';
@@ -60,7 +54,6 @@ import { shops, getShopByName } from '../supabaseCalls/shopsSupabaseCalls';
 import { ModalContext } from './contexts/modalContext';
 import { ModalWindowSize } from './reusables/modal/constants';
 import DiveSite from './newModals/diveSite/index';
-// import ShopModal from './modals/shopModal';
 import ShopModal from './newModals/shopModal/index';
 
 const LIB = ['visualization', 'places'];
@@ -89,11 +82,10 @@ function Map() {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
   const { animalVal } = useContext(AnimalContext);
   const { sliderVal } = useContext(SliderContext);
-  const { showGeoCoder } = useContext(GeoCoderContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
     SelectedDiveSiteContext,
   );
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  const { setSelectedShop } = useContext(SelectedShopContext);
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
   const { itterator } = useContext(IterratorContext);
@@ -104,13 +96,12 @@ function Map() {
 
   const { setTiles } = useContext(CarrouselTilesContext);
 
-  const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
+  const { sitesArray } = useContext(SitesArrayContext);
   const [newSites, setnewSites] = useState([]);
   const [newShops, setnewShops] = useState([]);
   const { chosenModal } = useContext(ModalSelectContext);
   const [mapRef, setMapRef] = useState(null);
 
-  const [selected, setSelected] = useState(null);
   const { dragPin, setDragPin } = useContext(PinSpotContext);
   const [tempMarker, setTempMarker] = useState(false);
   const { modalShow } = useContext(ModalContext);
@@ -178,8 +169,7 @@ function Map() {
 
             let diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
             !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
-          }
-          catch (e) {
+          } catch (e) {
             console.log({ title: 'Error', message: e.message });
           }
 
@@ -201,8 +191,7 @@ function Map() {
                 minLng:      lngs.lo,
                 maxLng:      180,
               });
-            }
-            else {
+            } else {
               AmericanHeatPoints = await getHeatPointsWithUser({
                 myCreatures:          '',
                 minLat:               lats.lo,
@@ -241,12 +230,10 @@ function Map() {
 
             let heatPointList = [...AsianHeatPoints, ...AmericanHeatPoints];
             setHeatPts(formatHeatVals(heatPointList));
-          }
-          catch (e) {
+          } catch (e) {
             console.log({ title: 'Error', message: e.message });
           }
-        }
-        else {
+        } else {
           try {
             const diveSiteList = await getDiveSitesWithUser({
               myDiveSites: '',
@@ -263,8 +250,7 @@ function Map() {
             // });
 
             !divesTog ? setnewSites([]) : setnewSites(diveSiteList);
-          }
-          catch (e) {
+          } catch (e) {
             console.log({ title: 'Error', message: e.message });
           }
 
@@ -279,8 +265,7 @@ function Map() {
                 minLng:      lngs.lo,
                 maxLng:      lngs.hi,
               });
-            }
-            else {
+            } else {
               heatPointList = await getHeatPointsWithUser({
                 animalMultiSelection: animalVal,
                 myCreatures:          '',
@@ -305,8 +290,7 @@ function Map() {
             let filteredShops = await shops(boundaries);
             // console.log("ME", filteredShops)
             !divesTog ? setnewShops([]) : setnewShops(filteredShops);
-          }
-          catch (e) {
+          } catch (e) {
             console.log({ title: 'Error', message: e.message });
           }
         }
@@ -404,12 +388,10 @@ function Map() {
     }
 
     if (zoomHelper) {
-      let zoomHelp;
       if (shopModal) {
         setMapZoom(16);
         setMinorSwitch(true);
-      }
-      else if (!shopModal) {
+      } else if (!shopModal) {
         setMapZoom(12);
         setMinorSwitch(false);
       }
@@ -431,7 +413,6 @@ function Map() {
     points.push(entity);
   });
 
-  // console.log(points, shopPoints)
   const { clusters, supercluster } = useSupercluster({
     points,
     bounds:  boundaries,
@@ -450,8 +431,7 @@ function Map() {
         Latitude:  pinRef.getPosition().lat(),
         Longitude: pinRef.getPosition().lng(),
       });
-    }
-    else if (chosenModal === 'Photos') {
+    } else if (chosenModal === 'Photos') {
       if (pinRef) {
         setPin({
           ...pin,
@@ -507,19 +487,6 @@ function Map() {
       disableDefaultUI={true}
       onClick={cleanupModals}
     >
-      {masterSwitch && (
-        <div className="aligner">
-          <Collapse
-            in={showGeoCoder}
-            orientation="horizontal"
-            collapsedSize="0px"
-          >
-            <div className="places-container">
-              <PlacesAutoComplete setSelected={setSelected} />
-            </div>
-          </Collapse>
-        </div>
-      )}
 
       {clusters
       && clusters.map((cluster) => {
@@ -576,8 +543,7 @@ function Map() {
             >
             </Marker>
           );
-        }
-        else if (cluster.properties.category === 'Dive Site Selected') {
+        } else if (cluster.properties.category === 'Dive Site Selected') {
           return (
             <Marker
               key={cluster.properties.siteID}
@@ -593,13 +559,12 @@ function Map() {
             >
             </Marker>
           );
-        }
-        else {
+        } else {
           return (
             <Marker
               key={cluster.properties.siteID}
               position={{ lat: latitude, lng: longitude }}
-              icon={shopClustIOS}
+              icon={shopIOS}
               title={cluster.properties.siteID}
               onClick={() =>
                 setupShopModal(cluster.properties.siteID, latitude, longitude)}
@@ -609,59 +574,59 @@ function Map() {
         }
       })}
 
-      {shopPoints &&
-        shopPoints.map((cluster) => {
-          const [longitude, latitude] = cluster.geometry.coordinates;
-          const {
-            cluster: isCluster,
-            point_count: pointCount,
-          } = cluster.properties;
+      {shopPoints
+      && shopPoints.map((cluster) => {
+        const [longitude, latitude] = cluster.geometry.coordinates;
+        const {
+          cluster: isCluster,
+          point_count: pointCount,
+        } = cluster.properties;
 
-          if (isCluster) {
-            return (
-              <Marker
-                key={cluster.id}
-                position={{ lat: latitude, lng: longitude }}
-                title={pointCount.toString() + " sites"}
-                icon={shopClustIOS}
-                onClick={() => {
-                  const expansionZoom = Math.min(
-                    supercluster.getClusterExpansionZoom(cluster.id),
-                    14
-                  );
-                  mapRef.setZoom(expansionZoom);
-                  mapRef.panTo({ lat: latitude, lng: longitude });
-                  setMapCoords([
-                    mapRef.getCenter().lat(),
-                    mapRef.getCenter().lng(),
-                  ]);
-                  handleMapUpdates();
-                }}
-              >
-                <div
-                  style={{
-                    width: `${10 + (pointCount / points.length) * 10}px`,
-                    height: `${10 + (pointCount / points.length) * 10}px`,
-                    backgroundColor: "lightblue",
-                  }}
-                >
-                  {pointCount}
-                </div>
-              </Marker>
-            );
-          }
+        if (isCluster) {
           return (
             <Marker
-              key={cluster.properties.siteID}
+              key={cluster.id}
               position={{ lat: latitude, lng: longitude }}
-              icon={shopIOS}
-              title={cluster.properties.siteID}
-              onClick={() =>
-                setupShopModal(cluster.properties.siteID, latitude, longitude)
-              }
-            ></Marker>
+              title={pointCount.toString() + ' sites'}
+              icon={anchorClust}
+              onClick={() => {
+                const expansionZoom = Math.min(
+                  supercluster.getClusterExpansionZoom(cluster.id),
+                  14,
+                );
+                mapRef.setZoom(expansionZoom);
+                mapRef.panTo({ lat: latitude, lng: longitude });
+                setMapCoords([
+                  mapRef.getCenter().lat(),
+                  mapRef.getCenter().lng(),
+                ]);
+                handleMapUpdates();
+              }}
+            >
+              <div
+                style={{
+                  width:           `${10 + (pointCount / points.length) * 10}px`,
+                  height:          `${10 + (pointCount / points.length) * 10}px`,
+                  backgroundColor: 'lightblue',
+                }}
+              >
+                {pointCount}
+              </div>
+            </Marker>
           );
-        })}
+        }
+        return (
+          <Marker
+            key={cluster.properties.siteID}
+            position={{ lat: latitude, lng: longitude }}
+            icon={shopIOS}
+            title={cluster.properties.siteID}
+            onClick={() =>
+              setupShopModal(cluster.properties.siteID, latitude, longitude)}
+          >
+          </Marker>
+        );
+      })}
 
       {masterSwitch && heatpts.length > 0 && (
         <HeatmapLayer

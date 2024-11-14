@@ -26,6 +26,7 @@ export default function TextInputField(props) {
         name={icon}
         fill="darkgrey"
         width="30"
+        style={{ marginTop: 5 }}
       />
 
       <InputBase
@@ -68,6 +69,7 @@ export default function TextInputField(props) {
               fill="darkgrey"
               width="30"
               onClick={() => handleClear()}
+              style={{ marginTop: 5 }}
             />
           )
         : (
