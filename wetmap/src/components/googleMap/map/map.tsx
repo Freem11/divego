@@ -10,8 +10,8 @@ import anchorIcon from '../../../images/mapIcons/AnchorBlue1.png';
 import anchorClust from '../../../images/mapIcons/AnchorCluster.png';
 import Manta from '../../../images/Manta32.png';
 import gold from '../../../images/mapIcons/AnchorGold.png';
-import shopIOS from '../../../images/face-mask.png';
-import shopClustIOS from '../../../images/face-mask.png';
+import shopIOS from '../../../images/mapIcons/DiveCentre24x24.png';
+import shopClustIOS from '../../../images/mapIcons/AnchorCluster.png';
 import {
   useMemo,
   useState,
