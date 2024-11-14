@@ -1,6 +1,6 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
-import Home from './googleMap/googleMap';
+import MapLoader from './googleMap';
 import SiteSubmitter from './modals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';
@@ -722,13 +722,13 @@ const MapPage = React.memo(function MapPage() {
       </div>
 
       <div>
-        <Home
+        <MapLoader
           style={{
             zIndex: '1',
             height: '100%',
           }}
         >
-        </Home>
+        </MapLoader>
       </div>
 
       <div className="just-testing2">

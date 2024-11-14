@@ -1,19 +1,17 @@
 import React from 'react';
 import {
   GoogleMap,
-  useJsApiLoader,
   Marker,
   HeatmapLayer,
-  Libraries,
 } from '@react-google-maps/api';
-import './googleMap.css';
+import style from './style.module.scss';
 import useSupercluster from 'use-supercluster';
-import anchorIcon from '../../images/mapIcons/AnchorBlue1.png';
-import anchorClust from '../../images/mapIcons/AnchorCluster.png';
-import Manta from '../../images/Manta32.png';
-import gold from '../../images/mapIcons/AnchorGold.png';
-import shopIOS from '../../images/face-mask.png';
-import shopClustIOS from '../../images/face-mask.png';
+import anchorIcon from '../../../images/mapIcons/AnchorBlue1.png';
+import anchorClust from '../../../images/mapIcons/AnchorCluster.png';
+import Manta from '../../../images/Manta32.png';
+import gold from '../../../images/mapIcons/AnchorGold.png';
+import shopIOS from '../../../images/face-mask.png';
+import shopClustIOS from '../../../images/face-mask.png';
 import {
   useMemo,
   useState,
@@ -21,58 +19,45 @@ import {
   useEffect,
   useLayoutEffect,
 } from 'react';
-import { CoordsContext } from '../contexts/mapCoordsContext';
-import { ZoomContext } from '../contexts/mapZoomContext';
-import { JumpContext } from '../contexts/jumpContext';
-import { DiveSitesContext } from '../contexts/diveSitesContext';
-import { SliderContext } from '../contexts/sliderContext';
-import { AnimalContext } from '../contexts/animalContext';
-import { PinContext } from '../contexts/staticPinContext';
-import { MasterContext } from '../contexts/masterContext';
-import { MinorContext } from '../contexts/minorContext';
-import { PinSpotContext } from '../contexts/pinSpotContext';
-import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
-import { SelectedShopContext } from '../contexts/selectedShopContext';
-import { HeatPointsContext } from '../contexts/heatPointsContext';
-import { MapBoundsContext } from '../contexts/mapBoundariesContext';
-import { ModalSelectContext } from '../contexts/modalSelectContext';
-import { DiveSpotContext } from '../contexts/diveSpotContext';
-import { ShopModalContext } from '../contexts/shopModalContext';
-import { SitesArrayContext } from '../contexts/sitesArrayContext';
-import { ZoomHelperContext } from '../contexts/zoomHelperContext';
-import { CarrouselTilesContext } from '../contexts/carrouselTilesContext';
-import { IterratorContext } from '../contexts/iterratorContext';
-import { Iterrator2Context } from '../contexts/iterrator2Context';
-import { TutorialContext } from '../contexts/tutorialContext';
-import { formatHeatVals } from '../../helpers/heatPointHelpers';
-import { setupClusters, setupShopClusters } from '../../helpers/clusterHelpers';
+import { CoordsContext } from '../../contexts/mapCoordsContext';
+import { ZoomContext } from '../../contexts/mapZoomContext';
+import { JumpContext } from '../../contexts/jumpContext';
+import { DiveSitesContext } from '../../contexts/diveSitesContext';
+import { SliderContext } from '../../contexts/sliderContext';
+import { AnimalContext } from '../../contexts/animalContext';
+import { PinContext } from '../../contexts/staticPinContext';
+import { MasterContext } from '../../contexts/masterContext';
+import { MinorContext } from '../../contexts/minorContext';
+import { PinSpotContext } from '../../contexts/pinSpotContext';
+import { SelectedDiveSiteContext } from '../../contexts/selectedDiveSiteContext';
+import { SelectedShopContext } from '../../contexts/selectedShopContext';
+import { HeatPointsContext } from '../../contexts/heatPointsContext';
+import { MapBoundsContext } from '../../contexts/mapBoundariesContext';
+import { ModalSelectContext } from '../../contexts/modalSelectContext';
+import { DiveSpotContext } from '../../contexts/diveSpotContext';
+import { ShopModalContext } from '../../contexts/shopModalContext';
+import { SitesArrayContext } from '../../contexts/sitesArrayContext';
+import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
+import { CarrouselTilesContext } from '../../contexts/carrouselTilesContext';
+import { IterratorContext } from '../../contexts/iterratorContext';
+import { Iterrator2Context } from '../../contexts/iterrator2Context';
+import { TutorialContext } from '../../contexts/tutorialContext';
+import { formatHeatVals } from '../../../helpers/heatPointHelpers';
+import { setupClusters, setupShopClusters } from '../../../helpers/clusterHelpers';
 import {
   getDiveSitesWithUser,
-} from '../../supabaseCalls/diveSiteSupabaseCalls';
+} from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import {
   getHeatPointsWithUser,
   getHeatPointsWithUserEmpty,
-} from '../../supabaseCalls/heatPointSupabaseCalls';
-import { shops, getShopByName } from '../../supabaseCalls/shopsSupabaseCalls';
-import { ModalContext } from '../contexts/modalContext';
-import { ModalWindowSize } from '../reusables/modal/constants';
-import DiveSite from '../newModals/diveSite/index';
-import ShopModal from '../newModals/shopModal/index';
+} from '../../../supabaseCalls/heatPointSupabaseCalls';
+import { shops, getShopByName } from '../../../supabaseCalls/shopsSupabaseCalls';
+import { ModalContext } from '../../contexts/modalContext';
+import { ModalWindowSize } from '../../reusables/modal/constants';
+import DiveSite from '../../newModals/diveSite/index';
+import ShopModal from '../../newModals/shopModal/index';
 
-const libraries: Libraries = ['visualization', 'places'];
-
-export default function Home() {
-  const { isLoaded } = useJsApiLoader({
-    id:               'google-map-script',
-    googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-    libraries,
-  });
-
-  if (!isLoaded) return <div>Loading...</div>;
-  return <Map></Map>;
-}
-
-function Map() {
+export default function Map() {
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
   const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
 
@@ -482,13 +467,12 @@ function Map() {
     <GoogleMap
       zoom={zoom}
       center={center}
-      mapContainerClassName="map-container"
+      mapContainerClassName={style.mapContainer}
       options={options}
       onLoad={handleOnLoad}
       onCenterChanged={handleMapCenterChange}
       onZoomChanged={handleMapZoomChange}
       onBoundsChanged={handleBoundsChange}
-      // disableDefaultUI={true}
       onClick={cleanupModals}
     >
 
