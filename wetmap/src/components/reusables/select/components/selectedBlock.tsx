@@ -7,12 +7,15 @@ type SelectedBlockProps = {
 
 export default function SelectedBlock(props: SelectedBlockProps) {
   return (
-    <div>
-      <span className="rsz__selected-text">{props.label}</span>
+    <div className="selected-block">
+      <span>{props.label}</span>
       <button
         aria-label={`remove ${props.label}`}
-        className="rsz__selected-action"
-        onClick={props.deselctItem}
+        className="action"
+        onClick={(e) => {
+          e.stopPropagation();
+          props.deselctItem();
+        }}
         type="button"
       >
         ✕
