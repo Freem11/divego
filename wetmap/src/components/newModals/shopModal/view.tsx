@@ -20,55 +20,19 @@ import { DiveShop } from '../../../entities/diveShop';
 
 
 type ShopModelViewProps = {
-  diveShop: DiveShop | null
-  isPartnerAccount:     boolean
-  // shopModelName: string | null
-  // shopDescription: string | null
+  setSelectedID: (id: number | null) => void;
+  setShopModal: (value: boolean) => void;
   onClose: () => void
   onDiveShopBioChange:  (newValue: string) => void
+
+  diveShop: DiveShop | null
+  isPartnerAccount:     boolean
+  itineraryList: string | null
+  selectedID: number | null;
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
-  // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
-  const { shopModal, setShopModal } = useContext(ShopModalContext);
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
-  // const [siteCloseState, setSiteCloseState] = useState(false);
-  const [itineraryList, setItineraryList] = useState('');
-  const [selectedID, setSelectedID] = useState(null);
-  const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
-  const { mapCoords, setMapCoords } = useContext(CoordsContext);
-  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
-  useEffect(() => {
-    if (selectedShop[0]) {
-      getItineraries(selectedShop[0].id);
-      setMasterSwitch(true);
-    }
-  }, [selectedShop]);
-
-  useEffect(() => {
-    if (shopModal && zoomHelper) {
-      setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
-    }
-  }, [shopModal]);
-
-  const getItineraries = async (IdNum) => {
-    try {
-      const itins = await itineraries(IdNum);
-      if (itins.length > 0) {
-        setItineraryList(itins);
-      }
-    }
-    catch (e) {
-      console.log({ title: 'Error', message: e.message });
-    }
-  };
-
-  // const handleShopModalClose = () => {
-  //   setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
-  //   setItineraryList('');
-  //   setShopModal(false);
-  // };
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
@@ -122,19 +86,19 @@ export default function ShopModalView(props: ShopModelViewProps) {
           )}     
         </div>
         <div className={`${style.itineraryList}`}>
-          {itineraryList// in the future, if itineraryList is not empty, render a loading spinner
-            && itineraryList.map((itinerary) => {
+          {props?.itineraryList// in the future, if itineraryList is not empty, render a loading spinner
+            && props?.itineraryList.map((itinerary) => {
               return (
                 <Itinerary
                   key={itinerary.id}
                   itinerary={itinerary}
-                  setSelectedID={setSelectedID}
-                  selectedID={selectedID}
-                  setShopModal={setShopModal}
+                  setSelectedID={props?.setSelectedID}
+                  selectedID={props?.selectedID}
+                  setShopModal={props?.setShopModal}
                 />
               );
             })}
-          {itineraryList.length === 0 && (
+          {props?.itineraryList.length === 0 && (
             <div>
               <p className="noSightings">
                 No Trips are currently being offered.
