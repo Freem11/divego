@@ -79,7 +79,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
         onChange={props.handleImageSelection}
       />
       <div className="col-6">
-        {/* Test 1 */}
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
           <div className={style.buttonImageUpload}>
             <ButtonIcon
@@ -88,13 +87,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
               onClick={() => fileUploaderRef?.current?.click?.()}
             />
           </div>
-          {/* <div className={style.buttonImageUpload}>
-            <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className="btn-lg"
-              onClick={() => fileUploaderRef?.current?.click?.()}
-            />
-          </div> */}
         </WavyModalHeader>
         <div className="ml-6">
           <div className="stack-4">
@@ -102,11 +94,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
               <div className="d-flex">
                 <h1 className="mb-0">{props?.diveShop.orgName}</h1>
               </div>
-
-              {/* <div className="d-flex">
-                {'Added by: '}
-                <a href="#">{props?.diveSite?.newusername}</a>
-              </div> */}
             </div>
 
             <div className="panel border-none">
@@ -128,10 +115,11 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
           <h3>Offered Diving Trips</h3>
-          <Button className="mt-2 btn-lg">
+          {props?.isPartnerAccount && (
+            <Button className="mt-2 btn-lg">
                 Add diving event
-                {/* <span className="hide-sm">{screenData.DiveSite.addSightingButton}</span> */}
-          </Button>
+            </Button> 
+          )}     
         </div>
         <div className={`${style.itineraryList}`}>
           {itineraryList// in the future, if itineraryList is not empty, render a loading spinner
