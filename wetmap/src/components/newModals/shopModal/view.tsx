@@ -21,9 +21,11 @@ import { DiveShop } from '../../../entities/diveShop';
 
 type ShopModelViewProps = {
   diveShop: DiveShop | null
+  isPartnerAccount:     boolean
   // shopModelName: string | null
   // shopDescription: string | null
   onClose: () => void
+  onDiveShopBioChange:  (newValue: string) => void
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
@@ -79,6 +81,13 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6">
         {/* Test 1 */}
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
+          <div className={style.buttonImageUpload}>
+            <ButtonIcon
+              icon={<Icon name="camera-plus" />}
+              className="btn-lg"
+              onClick={() => fileUploaderRef?.current?.click?.()}
+            />
+          </div>
           {/* <div className={style.buttonImageUpload}>
             <ButtonIcon
               icon={<Icon name="camera-plus" />}
@@ -92,20 +101,23 @@ export default function ShopModalView(props: ShopModelViewProps) {
             <div>
               <div className="d-flex">
                 <h1 className="mb-0">{props?.diveShop.orgName}</h1>
-                {/* <div>
-                  <Icon
-                    name="flag"
-                    fill="maroon"
-                    width="30px"
-                    onClick={() => window.location = `mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20Dive%20Site:%20"${selectedDiveSite.SiteName}"%20at%20Latitude:%20${selectedDiveSite.Latitude}%20Longitude:%20${selectedDiveSite.Longitude}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Dive%20site%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20dive%20site%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Dive%20site%20GPS%20coordinates%20are%20not%20correct%0D%0A%0D%0A(Please%20provide%20a%20correct%20latitude%20and%20longitude%20and%20we%20will%20update%20the%20record)`}
-                  />
-                </div> */}
               </div>
 
               {/* <div className="d-flex">
                 {'Added by: '}
                 <a href="#">{props?.diveSite?.newusername}</a>
               </div> */}
+            </div>
+
+            <div className="panel border-none">
+              <div className="panel-body">
+                <PlainTextInput
+                  placeHolder={`A little about ${props?.diveShop?.orgName}`}
+                  content={props?.diveShop?.diveShopBio || ''} // diveShopBio doesn't exist yet.
+                  readOnly={!props?.isPartnerAccount}
+                  onSubmit={props?.onDiveShopBioChange}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -116,8 +128,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
           <h3>Offered Diving Trips</h3>
-          <Button className="mt-2">
-          
+          <Button className="mt-2 btn-lg">
                 Add diving event
                 {/* <span className="hide-sm">{screenData.DiveSite.addSightingButton}</span> */}
           </Button>

@@ -6,6 +6,7 @@ import { ShopModalContext } from '../../contexts/shopModalContext';
 import { MasterContext } from '../../contexts/masterContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
+import { UserProfileContext } from '../../contexts/userProfileContext';
 import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
 import CloseButton from '../../closeButton/closeButton';
 import shopModalView from './view';
@@ -25,12 +26,15 @@ export default function ShopModal(props) {
 
   const { shopModal, setShopModal } = useContext(ShopModalContext);
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
-  const [siteCloseState, setSiteCloseState] = useState(false);
-  const [itineraryList, setItineraryList] = useState('');
-  const [selectedID, setSelectedID] = useState(null);
+  const { profile } = useContext(UserProfileContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
+
+  const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+  const [siteCloseState, setSiteCloseState] = useState(false);
+  const [itineraryList, setItineraryList] = useState('');
+  const [selectedID, setSelectedID] = useState(null);
 
   useEffect(() => {
     if (selectedShop[0]) {
@@ -38,6 +42,12 @@ export default function ShopModal(props) {
       setMasterSwitch(true);
     }
   }, [selectedShop]);
+
+  useEffect(() => {
+    if (profile[0].partnerAccount) {
+      setIsPartnerAccount(true);
+    }
+  }, []);
 
   useEffect(() => {
     if (shopModal && zoomHelper) {
@@ -71,6 +81,8 @@ export default function ShopModal(props) {
       <ShopModalView 
         onClose={handleShopModalClose} 
         diveShop={selectedShop[0]}
+        isPartnerAccount={isPartnerAccount}
+        onDiveShopBioChange={(newValue: string) => console.log("This is a placeholder for future logic. " + newValue)}
         // shopModelName={selectedShop[0].orgName} 
         // shopDescription="test"/>
       />
