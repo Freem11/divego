@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
+import { updateDiveShop } from "../../supabaseCalls/shopsSupabaseCalls";
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ShopModalContext } from '../../contexts/shopModalContext';
 import { MasterContext } from '../../contexts/masterContext';
