@@ -5,9 +5,12 @@ import DiveSite from '../newModals/diveSite/index';
 import ShopModal from '../newModals/shopModal/index';
 import { ModalWindowSize } from '../reusables/modal/constants';
 import { getShopByName } from '../../supabaseCalls/shopsSupabaseCalls';
+import { ClusterCoordinates, ClusterPropertyExtra } from './types';
+import { DiveSiteWithUserName } from '../../entities/diveSite';
+import { DiveShop } from '../../entities/diveShop';
 
-function setupClusters(diveSiteData, sitesArray) {
-  let points
+function setupClusters(diveSiteData: DiveSiteWithUserName[], sitesArray: number[]) {
+  const points
     = diveSiteData
     && diveSiteData.map(site => ({
       id:         site.id,
@@ -26,8 +29,8 @@ function setupClusters(diveSiteData, sitesArray) {
   return points;
 }
 
-function setupShopClusters(shopData) {
-  let points = shopData.map(shop => ({
+function setupShopClusters(shopData: DiveShop[]) {
+  const points = shopData.map(shop => ({
     id:         shop.id,
     type:       'Feature',
     properties: {
@@ -42,7 +45,7 @@ function setupShopClusters(shopData) {
 }
 
 
-const setupDiveShopModal = async (shopName, modalShow, setSelectedShop) => {
+const setupDiveShopModal = async (shopName: string, modalShow, setSelectedShop) => {
   modalShow(ShopModal, {
     size: ModalWindowSize.L,
   });
@@ -50,7 +53,7 @@ const setupDiveShopModal = async (shopName, modalShow, setSelectedShop) => {
   setSelectedShop(chosenShop);
 };
 
-const setupDiveSiteModal = async (diveSiteName, lat, lng, modalShow, selectedDiveSite, setSelectedDiveSite) => {
+const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, selectedDiveSite, setSelectedDiveSite) => {
   modalShow(DiveSite, {
     size: ModalWindowSize.L,
   });
@@ -62,7 +65,7 @@ const setupDiveSiteModal = async (diveSiteName, lat, lng, modalShow, selectedDiv
   });
 };
 
-function setupPinConfigs(info, coordinates, modalShow, selectedDiveSite, setSelectedDiveSite, setSelectedShop) {
+function setupPinConfigs(info: ClusterPropertyExtra, coordinates: ClusterCoordinates, modalShow, selectedDiveSite, setSelectedDiveSite, setSelectedShop) {
   const [longitude, latitude] = coordinates;
   const iconType = info.category === 'Dive Site' ? anchorIcon : info.category === 'Dive Site Selected' ? anchorIconGold : shopIcon;
   const modalSetup = info.category === 'Shop'

@@ -37,7 +37,6 @@ async function getDiveSiteData(northValue: number, southValue: number, eastValue
   }
 }
 
-
 async function getHeatPointData(northValue: number, southValue: number, eastValue: number, westValue: number, selectedCreatures: string[]) {
   if (westValue > eastValue) {
     if (selectedCreatures.length === 0) {

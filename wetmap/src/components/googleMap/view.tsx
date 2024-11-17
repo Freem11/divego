@@ -226,13 +226,9 @@ export default function MapView() {
     handleMapUpdates();
   }, [mapCoords, divesTog, animalVal]);
 
-  const shopPoints = setupShopClusters(newShops);
-  const sitePoints = setupClusters(newSites, sitesArray);
-  const points = sitePoints;
-
-  shopPoints.forEach((shop: Cluster) => {
-    points.push(shop);
-  });
+  const shopPoints: Cluster[]  = setupShopClusters(newShops);
+  const sitePoints: Cluster[]  = setupClusters(newSites, sitesArray);
+  const points: Cluster[] = [...sitePoints, ...shopPoints];
 
   const { clusters, supercluster } = useSupercluster({
     points,
