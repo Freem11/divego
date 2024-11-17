@@ -5,7 +5,9 @@ import {
   getHeatPointsWithUser,
   getHeatPointsWithUserEmpty,
 } from '../../supabaseCalls/heatPointSupabaseCalls';
+import { shops } from '../../supabaseCalls/shopsSupabaseCalls';
 import { HeatPoint, HeatData } from './types';
+import { DiveShop } from '../../entities/diveShop';
 
 async function getDiveSiteData(northValue: number, southValue: number, eastValue: number, westValue: number) {
   if (westValue > eastValue) {
@@ -115,4 +117,14 @@ function formatHeatVals(heatValues: HeatData[]) {
   return newArr;
 }
 
-export { getDiveSiteData, getHeatPointData, formatHeatVals };
+async function getShopData(northValue: number, southValue: number, eastValue: number, westValue: number) {
+  const list: any = await shops({
+    minLat: southValue,
+    maxLat: northValue,
+    minLng: westValue,
+    maxLng: eastValue,
+  });
+  const shopList: DiveShop[] = list;
+  return shopList;
+}
+export { getDiveSiteData, getHeatPointData, formatHeatVals, getShopData };

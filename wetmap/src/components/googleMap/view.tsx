@@ -33,10 +33,11 @@ import { ShopModalContext } from '../contexts/shopModalContext';
 import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { ZoomHelperContext } from '../contexts/zoomHelperContext';
 import { CarrouselTilesContext } from '../contexts/carrouselTilesContext';
-import { getDiveSiteData, getHeatPointData } from './mapDataHelpers';
+import { getDiveSiteData, getHeatPointData, getShopData } from './mapDataHelpers';
 import { setupClusters, setupShopClusters, setupPinConfigs } from './mapPinHelpers';
-import { shops } from '../../supabaseCalls/shopsSupabaseCalls';
 import { ModalContext } from '../contexts/modalContext';
+import { DiveSiteWithUserName } from '../../entities/diveSite';
+import { DiveShop } from '../../entities/diveShop';
 
 export default function MapView() {
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
@@ -65,8 +66,8 @@ export default function MapView() {
   const { setTiles } = useContext(CarrouselTilesContext);
 
   const { sitesArray } = useContext(SitesArrayContext);
-  const [newSites, setnewSites] = useState<any>([]);
-  const [newShops, setnewShops] = useState<any>([]);
+  const [newSites, setnewSites] = useState<DiveSiteWithUserName[]>([]);
+  const [newShops, setnewShops] = useState<DiveShop[]>([]);
 
   const { modalShow } = useContext(ModalContext);
 
@@ -106,8 +107,8 @@ export default function MapView() {
         const heatPointList = await getHeatPointData(latHi, latLo, lngE, lngW, animalVal);
         setHeatPts(heatPointList);
 
-        const filteredShops = await shops(boundaries);
-        setnewShops(!divesTog ? [] : filteredShops);
+        const shoplist = await getShopData(latHi, latLo, lngE, lngW);
+        setnewShops(!divesTog ? [] : shoplist);
       }
     }
   };
@@ -122,7 +123,7 @@ export default function MapView() {
     setDragPin({ lat: mapCoords[0], lng: mapCoords[1] });
   }, [masterSwitch]);
 
-  const handleOnLoad = (map: any) => {
+  const handleOnLoad = (map: google.maps.Map) => {
     setMapRef(map);
   };
 
