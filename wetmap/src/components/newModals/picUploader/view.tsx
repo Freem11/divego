@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import backGroundPic from '../../../images/boat.png';
+import backGroundPic from '../../../images/blackManta.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import screenData from '../screenData.json';
 import { Controller, useForm } from 'react-hook-form';

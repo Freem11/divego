@@ -1,10 +1,10 @@
-import anchorIcon from '../images/mapIcons/AnchorBlue1.png';
-import anchorIconGold from '../images/mapIcons/AnchorGold.png';
-import shopIcon from '../images/mapIcons/DiveCentre24x24.png';
-import DiveSite from '../components/newModals/diveSite/index';
-import ShopModal from '../components/newModals/shopModal/index';
-import { ModalWindowSize } from '../components/reusables/modal/constants';
-import { getShopByName } from '../supabaseCalls/shopsSupabaseCalls';
+import anchorIcon from '../../images/mapIcons/AnchorBlue1.png';
+import anchorIconGold from '../../images/mapIcons/AnchorGold.png';
+import shopIcon from '../../images/mapIcons/DiveCentre24x24.png';
+import DiveSite from '../newModals/diveSite/index';
+import ShopModal from '../newModals/shopModal/index';
+import { ModalWindowSize } from '../reusables/modal/constants';
+import { getShopByName } from '../../supabaseCalls/shopsSupabaseCalls';
 
 function setupClusters(diveSiteData, sitesArray) {
   let points
@@ -63,14 +63,15 @@ const setupDiveSiteModal = async (diveSiteName, lat, lng, modalShow, selectedDiv
 };
 
 function setupPinConfigs(info, coordinates, modalShow, selectedDiveSite, setSelectedDiveSite, setSelectedShop) {
+  const [longitude, latitude] = coordinates;
   const iconType = info.category === 'Dive Site' ? anchorIcon : info.category === 'Dive Site Selected' ? anchorIconGold : shopIcon;
   const modalSetup = info.category === 'Shop'
     ? () => { setupDiveShopModal(info.siteID, modalShow, setSelectedShop); }
     : () => {
         setupDiveSiteModal(
           info.siteName,
-          coordinates[1],
-          coordinates[0],
+          latitude,
+          longitude,
           modalShow,
           selectedDiveSite,
           setSelectedDiveSite,
