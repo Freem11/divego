@@ -5,8 +5,9 @@ import {
   getHeatPointsWithUser,
   getHeatPointsWithUserEmpty,
 } from '../../supabaseCalls/heatPointSupabaseCalls';
-import { shops } from '../../supabaseCalls/shopsSupabaseCalls';
+import { getDiveShops } from '../../supabaseCalls/shopsSupabaseCalls';
 import { HeatPoint, HeatData } from './types';
+import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
 
 async function getDiveSiteData(northValue: number, southValue: number, eastValue: number, westValue: number) {
@@ -25,10 +26,10 @@ async function getDiveSiteData(northValue: number, southValue: number, eastValue
       minLng:      westValue,
       maxLng:      180,
     });
-    const diveSiteList = [...AsianDiveSites, ...AmericanDiveSites];
+    const diveSiteList: DiveSiteWithUserName[] = [...AsianDiveSites, ...AmericanDiveSites];
     return diveSiteList;
   } else {
-    const diveSiteList = await getDiveSitesWithUser({
+    const diveSiteList: DiveSiteWithUserName[] = await getDiveSitesWithUser({
       myDiveSites: '',
       minLat:               southValue,
       maxLat:               northValue,
@@ -118,13 +119,12 @@ function formatHeatVals(heatValues: HeatData[]) {
 }
 
 async function getShopData(northValue: number, southValue: number, eastValue: number, westValue: number) {
-  const list: any = await shops({
+  const shopList: DiveShop[] = await getDiveShops({
     minLat: southValue,
     maxLat: northValue,
     minLng: westValue,
     maxLng: eastValue,
   });
-  const shopList: DiveShop[] = list;
   return shopList;
 }
 export { getDiveSiteData, getHeatPointData, formatHeatVals, getShopData };

@@ -1,24 +1,23 @@
 import { supabase } from '../supabase';
 
-// export const getDiveSitesWithUser = async (values) => {
-//   const { data, error } = await supabase.rpc('get_divesites_with_username', {
-//     max_lat: values.maxLat,
-//     min_lat: values.minLat,
-//     max_lng: values.maxLng,
-//     min_lng: values.minLng,
-//     userid:  values.myDiveSites,
-//   });
+export const getDiveShops = async (values) => {
+  const { data, error } = await supabase.rpc('get_diveshops', {
+    max_lat: values.maxLat,
+    min_lat: values.minLat,
+    max_lng: values.maxLng,
+    min_lng: values.minLng,
+  });
 
-//   if (error) {
-//     console.log('couldn\'t do it 27,', error);
-//     return [];
-//   }
+  if (error) {
+    console.log('couldn\'t do it 27,', error);
+    return [];
+  }
 
-//   if (data) {
-//     // console.log(data)
-//     return data;
-//   }
-// };
+  if (data) {
+    // console.log(data);
+    return data;
+  }
+};
 
 export const shops = async (GPSBubble) => {
   const { data, error } = await supabase
