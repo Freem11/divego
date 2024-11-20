@@ -1,4 +1,21 @@
 
+
+export type MapConfiguration = {
+  mapTypeId:         string
+  clickableIcons:    boolean
+  maxZoom:           number
+  minZoom:           number
+  mapTypeControl:    boolean
+  fullscreenControl: boolean
+  disableDefaultUI:  boolean
+};
+
+export type HeatPointConfiguration = {
+  opacity: number
+  radius:  number
+};
+
+
 export type TempMarker = {
   lat: number
   lng: number

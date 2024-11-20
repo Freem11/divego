@@ -11,8 +11,11 @@ import { ZoomContext } from '../contexts/mapZoomContext';
 import { AnimalContext } from '../contexts/animalContext';
 import { HeatPointsContext } from '../contexts/heatPointsContext';
 import { DiveSitesContext } from '../contexts/diveSitesContext';
+import { SelectedShopContext } from '../contexts/selectedShopContext';
+import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
+import { TempMarker } from './types';
 
 const libraries: Libraries = ['places', 'visualization'];
 
@@ -26,8 +29,30 @@ export default function MapLoader() {
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
 
+  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  const { selectedDiveSite, setSelectedDiveSite } = useContext(
+    SelectedDiveSiteContext,
+  );
+
+  const [tempMarker, setTempMarker] = useState<TempMarker | null>(null);
   const { animalVal } = useContext(AnimalContext);
   const { divesTog } = useContext(DiveSitesContext);
+
+  const mapConfigs = useMemo(() => ({
+    mapTypeId:         'hybrid',
+    clickableIcons:    false,
+    maxZoom:           18,
+    minZoom:           3,
+    mapTypeControl:    false,
+    fullscreenControl: false,
+    disableDefaultUI:  true,
+  }), []);
+
+  const heatpointConfigs = useMemo(() => ({
+    opacity: 1,
+    radius:  16,
+  }), []);
+
   const handleOnLoad = (map: google.maps.Map) => {
     setMapRef(map);
   };
@@ -111,6 +136,44 @@ export default function MapLoader() {
   }, [mapZoom]);
 
 
+  useEffect(() => {
+    if (mapRef) {
+      const position = mapRef.getCenter();
+      if (position) {
+        if (selectedShop.orgName !== '') {
+          const latlng = new google.maps.LatLng(selectedShop[0].lat, selectedShop[0].lng);
+          mapRef.panTo(latlng);
+          setMapZoom(16);
+        }
+      }
+    }
+  }, [selectedShop]);
+
+
+  useEffect(() => {
+    if (mapRef) {
+      const position = mapRef.getCenter();
+      if (position) {
+        if (selectedDiveSite.SiteName !== '') {
+          const latlng = new google.maps.LatLng(selectedDiveSite.Latitude, selectedDiveSite.Longitude);
+          mapRef.panTo(latlng);
+          setMapZoom(16);
+        }
+      }
+      if (selectedDiveSite.Latitude !== '') {
+        setTempMarker({
+          lat: selectedDiveSite.Latitude,
+          lng: selectedDiveSite.Longitude,
+        });
+      }
+    }
+
+    setTimeout(() => {
+      setTempMarker(null);
+    }, 2000);
+  }, [selectedDiveSite]);
+
+
   const { isLoaded } = useJsApiLoader({
     id:               'google-map-script',
     googleMapsApiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
@@ -121,8 +184,11 @@ export default function MapLoader() {
   return (
     <MapView
       mapRef={mapRef}
+      mapConfigs={mapConfigs}
+      heatpointConfigs={heatpointConfigs}
       zoom={zoom}
       center={center}
+      tempMarker={tempMarker}
       animalVal={animalVal}
       newSites={newSites}
       newShops={newShops}
@@ -133,6 +199,9 @@ export default function MapLoader() {
       setMapCoords={setMapCoords}
       mapZoom={mapZoom}
       setMapZoom={setMapZoom}
+      selectedDiveSite={selectedDiveSite}
+      setSelectedDiveSite={setSelectedDiveSite}
+      setSelectedShop={setSelectedShop}
       onLoad={handleOnLoad}
       handleMapUpdates={handleMapUpdates}
       handleBoundsChange={handleBoundsChange}

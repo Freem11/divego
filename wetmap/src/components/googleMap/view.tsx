@@ -5,25 +5,20 @@ import {
   HeatmapLayer,
 } from '@react-google-maps/api';
 import style from './style.module.scss';
-import { Cluster, TempMarker } from './types';
+import { Cluster, HeatPoint, HeatPointConfiguration, MapConfiguration } from './types';
 import useSupercluster from 'use-supercluster';
 import anchorClusterIcon from '../../images/mapIcons/AnchorCluster.png';
 import anchorIconGold from '../../images/mapIcons/AnchorGold.png';
 import mantaIcon from '../../images/Manta32.png';
 import {
-  useMemo,
   useState,
   useContext,
   useEffect,
-  useLayoutEffect,
 } from 'react';
-
 
 import { MasterContext } from '../contexts/masterContext';
 import { MinorContext } from '../contexts/minorContext';
 import { PinSpotContext } from '../contexts/pinSpotContext';
-import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
-import { SelectedShopContext } from '../contexts/selectedShopContext';
 
 import { DiveSpotContext } from '../contexts/diveSpotContext';
 import { ShopModalContext } from '../contexts/shopModalContext';
@@ -35,19 +30,26 @@ import { ModalContext } from '../contexts/modalContext';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
 
+
 type MapViewProps = {
   mapRef:                google.maps.Map | null
+  mapConfigs:            MapConfiguration
+  heatpointConfigs:      HeatPointConfiguration
   zoom:                  number
   center:                { lat: number, lng: number }
+  tempMarker:            { lat: number, lng: number } | null
   animalVal:             string[]
   divesTog:              boolean
   newSites:              DiveSiteWithUserName[]
   newShops:              DiveShop[]
-  heatpts:               []
+  heatpts:               HeatPoint[]
   boundaries:            google.maps.LatLngBounds
   mapCoords:             number[]
   setMapCoords:          (coords: number[]) => void
   mapZoom:               number
+  selectedDiveSite:      DiveSiteWithUserName
+  setSelectedDiveSite:   (site: DiveSiteWithUserName) => void
+  setSelectedShop:       (shop: DiveShop) => void
   setMapZoom:            (zoomLev: number) => void
   onLoad:                (map: google.maps.Map) => void
   handleMapUpdates:      () => void
@@ -58,20 +60,15 @@ type MapViewProps = {
 
 export default function MapView(props: MapViewProps) {
   const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
-  const [tempMarker, setTempMarker] = useState<TempMarker | null>(null);
 
   const { dragPin, setDragPin } = useContext(PinSpotContext);
 
   const { masterSwitch } = useContext(MasterContext);
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
+
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
 
-
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
-  const { selectedDiveSite, setSelectedDiveSite } = useContext(
-    SelectedDiveSiteContext,
-  );
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
 
   const { shopModal } = useContext(ShopModalContext);
 
@@ -82,63 +79,10 @@ export default function MapView(props: MapViewProps) {
   const { modalShow } = useContext(ModalContext);
 
 
-  const mapConfigs = useMemo(() => ({
-    mapTypeId:         'hybrid',
-    clickableIcons:    false,
-    maxZoom:           18,
-    minZoom:           3,
-    mapTypeControl:    false,
-    fullscreenControl: false,
-    disableDefaultUI:  true,
-  }), []);
-
-  const heatpointConfigs = useMemo(() => ({
-    opacity: 1,
-    radius:  16,
-  }), []);
-
-
   useEffect(() => {
     setDragPin({ lat: props.mapCoords[0], lng: props.mapCoords[1] });
   }, [masterSwitch]);
 
-
-  useEffect(() => {
-    if (props.mapRef) {
-      const position = props.mapRef.getCenter();
-      if (position) {
-        if (selectedDiveSite.SiteName !== '') {
-          const latlng = new google.maps.LatLng(selectedDiveSite.Latitude, selectedDiveSite.Longitude);
-          props.mapRef.panTo(latlng);
-          props.setMapZoom(16);
-        }
-      }
-      if (selectedDiveSite.Latitude !== '') {
-        setTempMarker({
-          lat: selectedDiveSite.Latitude,
-          lng: selectedDiveSite.Longitude,
-        });
-      }
-    }
-
-    setTimeout(() => {
-      setTempMarker(null);
-    }, 2000);
-  }, [selectedDiveSite]);
-
-
-  useEffect(() => {
-    if (props.mapRef) {
-      const position = props.mapRef.getCenter();
-      if (position) {
-        if (selectedShop.orgName !== '') {
-          const latlng = new google.maps.LatLng(selectedShop[0].lat, selectedShop[0].lng);
-          props.mapRef.panTo(latlng);
-          props.setMapZoom(16);
-        }
-      }
-    }
-  }, [selectedShop]);
 
   useEffect(() => {
     if (zoomHelper) {
@@ -196,7 +140,7 @@ export default function MapView(props: MapViewProps) {
       zoom={props.zoom}
       center={props.center}
       mapContainerClassName={style.mapContainer}
-      options={mapConfigs}
+      options={props.mapConfigs}
       onLoad={props.onLoad}
       onCenterChanged={props.handleMapCenterChange}
       onZoomChanged={props.handleMapZoomChange}
@@ -214,9 +158,9 @@ export default function MapView(props: MapViewProps) {
               cluster.properties,
               cluster.geometry.coordinates,
               modalShow,
-              selectedDiveSite,
-              setSelectedDiveSite,
-              setSelectedShop);
+              props.selectedDiveSite,
+              props.setSelectedDiveSite,
+              props.setSelectedShop);
 
         if (isCluster) {
           return (
@@ -261,7 +205,7 @@ export default function MapView(props: MapViewProps) {
       {masterSwitch && props.heatpts.length > 0 && (
         <HeatmapLayer
           data={props.heatpts}
-          options={heatpointConfigs}
+          options={props.heatpointConfigs}
         >
         </HeatmapLayer>
       )}
@@ -269,12 +213,12 @@ export default function MapView(props: MapViewProps) {
       {!masterSwitch && !minorSwitch && props.heatpts.length > 0 && (
         <HeatmapLayer
           data={props.heatpts}
-          options={heatpointConfigs}
+          options={props.heatpointConfigs}
         >
         </HeatmapLayer>
       )}
 
-      {tempMarker && <Marker position={tempMarker} icon={anchorIconGold}></Marker>}
+      {props.tempMarker && <Marker position={props.tempMarker} icon={anchorIconGold}></Marker>}
 
       {!masterSwitch && minorSwitch && (
         <Marker
