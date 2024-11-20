@@ -4,8 +4,10 @@ import {
   Libraries,
 } from '@react-google-maps/api';
 import MapView from './view';
+import { setupClusters, setupShopClusters } from './mapPinHelpers';
 import { getDiveSiteData, getHeatPointData, getShopData } from './mapDataHelpers';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { CoordsContext } from '../contexts/mapCoordsContext';
 import { ZoomContext } from '../contexts/mapZoomContext';
 import { AnimalContext } from '../contexts/animalContext';
@@ -15,7 +17,8 @@ import { SelectedShopContext } from '../contexts/selectedShopContext';
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
-import { TempMarker } from './types';
+import { Cluster, TempMarker } from './types';
+import useSupercluster from 'use-supercluster';
 
 const libraries: Libraries = ['places', 'visualization'];
 
@@ -24,6 +27,7 @@ export default function MapLoader() {
   const [newSites, setnewSites] = useState<DiveSiteWithUserName[]>([]);
   const [newShops, setnewShops] = useState<DiveShop[]>([]);
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
+  const { sitesArray } = useContext(SitesArrayContext);
 
   const { boundaries, setBoundaries } = useContext(MapBoundsContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
@@ -173,6 +177,17 @@ export default function MapLoader() {
     }, 2000);
   }, [selectedDiveSite]);
 
+  const shopPoints: Cluster[]  = setupShopClusters(newShops);
+  const sitePoints: Cluster[]  = setupClusters(newSites, sitesArray);
+  const points: Cluster[] = [...sitePoints, ...shopPoints];
+
+
+  const { clusters, supercluster } = useSupercluster({
+    points:  points,
+    bounds:  boundaries,
+    zoom:    mapZoom,
+    options: { radius: 75, maxZoom: 16 },
+  });
 
   const { isLoaded } = useJsApiLoader({
     id:               'google-map-script',
@@ -190,14 +205,12 @@ export default function MapLoader() {
       center={center}
       tempMarker={tempMarker}
       animalVal={animalVal}
-      newSites={newSites}
-      newShops={newShops}
+      clusters={clusters}
+      supercluster={supercluster}
       heatpts={heatpts}
       divesTog={divesTog}
-      boundaries={boundaries}
       mapCoords={mapCoords}
       setMapCoords={setMapCoords}
-      mapZoom={mapZoom}
       setMapZoom={setMapZoom}
       selectedDiveSite={selectedDiveSite}
       setSelectedDiveSite={setSelectedDiveSite}

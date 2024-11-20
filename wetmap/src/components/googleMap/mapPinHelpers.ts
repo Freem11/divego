@@ -5,7 +5,7 @@ import DiveSite from '../newModals/diveSite/index';
 import ShopModal from '../newModals/shopModal/index';
 import { ModalWindowSize } from '../reusables/modal/constants';
 import { getShopByName } from '../../supabaseCalls/shopsSupabaseCalls';
-import { ClusterCoordinates, ClusterPropertyExtra } from './types';
+import { ClusterCoordinates, ClusterProperty } from './types';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
 
@@ -65,21 +65,23 @@ const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number
   });
 };
 
-function setupPinConfigs(info: ClusterPropertyExtra, coordinates: ClusterCoordinates, modalShow, selectedDiveSite, setSelectedDiveSite, setSelectedShop) {
+function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow, selectedDiveSite, setSelectedDiveSite, setSelectedShop) {
   const [longitude, latitude] = coordinates;
   const iconType = info.category === 'Dive Site' ? anchorIcon : info.category === 'Dive Site Selected' ? anchorIconGold : shopIcon;
 
   const modalSetup = info.category === 'Shop'
     ? () => { setupDiveShopModal(info.siteID, modalShow, setSelectedShop); }
     : () => {
-        setupDiveSiteModal(
-          info.siteName,
-          latitude,
-          longitude,
-          modalShow,
-          selectedDiveSite,
-          setSelectedDiveSite,
-        );
+        if (info.siteName) {
+          setupDiveSiteModal(
+            info.siteName,
+            latitude,
+            longitude,
+            modalShow,
+            selectedDiveSite,
+            setSelectedDiveSite,
+          );
+        }
       };
 
   return { iconType,  modalSetup };

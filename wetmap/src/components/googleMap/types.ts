@@ -21,17 +21,30 @@ export type TempMarker = {
   lng: number
 };
 
+export type SuperclusterInstance = {
+  getClusterExpansionZoom(clusterId: number): number
+};
+
+export type ClusterInstance = {
+  points:  []
+  bounds:  google.maps.LatLngBounds
+  zoom:    number
+  options: { radius: number, maxZoom: number }
+};
+
 export type Cluster = {
   id:         number
   type:       string
-  properties: ClusterProperty | ClusterPropertyExtra
+  properties: ClusterProperty
   geometry:   ClusterGeometry
 };
 
 export type ClusterProperty = {
-  category: string
-  cluster:  boolean
-  siteID:   string
+  siteName?:    string
+  category:     string
+  cluster:      boolean
+  siteID:       string
+  point_count?: number
 };
 
 export type ClusterPropertyExtra = {

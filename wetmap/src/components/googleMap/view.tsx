@@ -5,8 +5,7 @@ import {
   HeatmapLayer,
 } from '@react-google-maps/api';
 import style from './style.module.scss';
-import { Cluster, HeatPoint, HeatPointConfiguration, MapConfiguration } from './types';
-import useSupercluster from 'use-supercluster';
+import { Cluster, HeatPoint, HeatPointConfiguration, MapConfiguration, SuperclusterInstance } from './types';
 import anchorClusterIcon from '../../images/mapIcons/AnchorCluster.png';
 import anchorIconGold from '../../images/mapIcons/AnchorGold.png';
 import mantaIcon from '../../images/Manta32.png';
@@ -19,17 +18,14 @@ import {
 import { MasterContext } from '../contexts/masterContext';
 import { MinorContext } from '../contexts/minorContext';
 import { PinSpotContext } from '../contexts/pinSpotContext';
-
 import { DiveSpotContext } from '../contexts/diveSpotContext';
 import { ShopModalContext } from '../contexts/shopModalContext';
-import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { ZoomHelperContext } from '../contexts/zoomHelperContext';
 import { CarrouselTilesContext } from '../contexts/carrouselTilesContext';
-import { setupClusters, setupShopClusters, setupPinConfigs } from './mapPinHelpers';
+import { setupPinConfigs } from './mapPinHelpers';
 import { ModalContext } from '../contexts/modalContext';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
-
 
 type MapViewProps = {
   mapRef:                google.maps.Map | null
@@ -39,14 +35,12 @@ type MapViewProps = {
   center:                { lat: number, lng: number }
   tempMarker:            { lat: number, lng: number } | null
   animalVal:             string[]
+  clusters:              Cluster[]
+  supercluster:          SuperclusterInstance
   divesTog:              boolean
-  newSites:              DiveSiteWithUserName[]
-  newShops:              DiveShop[]
   heatpts:               HeatPoint[]
-  boundaries:            google.maps.LatLngBounds
   mapCoords:             number[]
   setMapCoords:          (coords: number[]) => void
-  mapZoom:               number
   selectedDiveSite:      DiveSiteWithUserName
   setSelectedDiveSite:   (site: DiveSiteWithUserName) => void
   setSelectedShop:       (shop: DiveShop) => void
@@ -74,8 +68,6 @@ export default function MapView(props: MapViewProps) {
 
   const { setTiles } = useContext(CarrouselTilesContext);
 
-  const { sitesArray } = useContext(SitesArrayContext);
-
   const { modalShow } = useContext(ModalContext);
 
 
@@ -102,17 +94,6 @@ export default function MapView(props: MapViewProps) {
 
     props.handleMapUpdates();
   }, [props.mapCoords, props.divesTog, props.animalVal]);
-
-  const shopPoints: Cluster[]  = setupShopClusters(props.newShops);
-  const sitePoints: Cluster[]  = setupClusters(props.newSites, sitesArray);
-  const points: Cluster[] = [...sitePoints, ...shopPoints];
-
-  const { clusters, supercluster } = useSupercluster({
-    points,
-    bounds:  props.boundaries,
-    zoom:    props.mapZoom,
-    options: { radius: 75, maxZoom: 16 },
-  });
 
   const handlePinLoad = (marker: google.maps.Marker) => {
     setPinRef(marker);
@@ -148,8 +129,8 @@ export default function MapView(props: MapViewProps) {
       onClick={cleanupModals}
     >
 
-      {clusters
-      && clusters.map((cluster) => {
+      {props.clusters
+      && props.clusters.map((cluster) => {
         const [longitude, latitude] = cluster.geometry.coordinates;
         const { cluster: isCluster, point_count: pointCount }
             = cluster.properties;
@@ -162,7 +143,7 @@ export default function MapView(props: MapViewProps) {
               props.setSelectedDiveSite,
               props.setSelectedShop);
 
-        if (isCluster) {
+        if (isCluster && pointCount) {
           return (
             <Marker
               key={cluster.id}
@@ -171,7 +152,7 @@ export default function MapView(props: MapViewProps) {
               icon={anchorClusterIcon}
               onClick={() => {
                 const expansionZoom = Math.min(
-                  supercluster.getClusterExpansionZoom(cluster.id),
+                  props.supercluster.getClusterExpansionZoom(cluster.id),
                   14,
                 );
                 if (props.mapRef) {
