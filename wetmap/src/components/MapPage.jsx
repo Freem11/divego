@@ -57,6 +57,9 @@ import { ModalContext } from './contexts/modalContext';
 import Modal from './reusables/modal/modal';
 import { ModalWindowSize } from './reusables/modal/constants';
 
+import { MapConfigContext } from './contexts/mapConfigContext';
+
+
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
@@ -90,8 +93,11 @@ const MapPage = React.memo(function MapPage() {
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { modalShow, modalResume } = useContext(ModalContext);
 
+  const { setMapConfig } = useContext(MapConfigContext);
+
   const returnToPicModal = () => {
     modalResume();
+    setMapConfig(0);
     setMasterSwitch(true);
     if (chosenModal === 'DiveSite') {
       if (tutorialRunning) {

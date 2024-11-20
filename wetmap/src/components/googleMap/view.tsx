@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import {
   GoogleMap,
   Marker,
@@ -55,6 +55,7 @@ type MapViewProps = {
 
 export default function MapView(props: MapViewProps) {
   const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
+  const [heatRef, setHeatRef] = useState<google.maps.visualization.HeatmapLayer | null>(null);
 
   const { dragPin, setDragPin } = useContext(PinSpotContext);
 
@@ -73,18 +74,20 @@ export default function MapView(props: MapViewProps) {
 
 
   useEffect(() => {
-    setDragPin({ lat: props.mapCoords[0], lng: props.mapCoords[1] });
-  }, [masterSwitch]);
+    if (props.mapConfig === 1) {
+      setDragPin({ lat: props.mapCoords[0], lng: props.mapCoords[1] });
+    }
+  }, [props.mapConfig]);
 
 
   useEffect(() => {
     if (zoomHelper) {
       if (shopModal) {
         props.setMapZoom(16);
-        setMinorSwitch(true);
+        // setMinorSwitch(true);
       } else if (!shopModal) {
         props.setMapZoom(12);
-        setMinorSwitch(false);
+        // setMinorSwitch(false);
       }
       setZoomHelper(false);
     }
@@ -95,6 +98,56 @@ export default function MapView(props: MapViewProps) {
 
     props.handleMapUpdates();
   }, [props.mapCoords, props.divesTog, props.animalVal]);
+
+  type MapWithHeatmapProps = {
+    map:              google.maps.Map | null
+    heatpts:          google.maps.LatLng[] | { location: google.maps.LatLng, weight: number }[]
+    mapConfig:        number
+    heatpointConfigs: google.maps.visualization.HeatmapLayerOptions
+  };
+
+  const MapWithHeatmap: React.FC<MapWithHeatmapProps> = ({
+    map,
+    heatpts,
+    mapConfig,
+    heatpointConfigs,
+  }) => {
+    const heatmapRef = useRef<google.maps.visualization.HeatmapLayer | null>(null);
+
+    useEffect(() => {
+      if (!map) return;
+
+      // If HeatmapLayer doesn't exist, create it
+      if (!heatmapRef.current) {
+        heatmapRef.current = new google.maps.visualization.HeatmapLayer({
+          data: heatpts,
+          map:  map,
+          ...heatpointConfigs,
+        });
+      } else {
+      // Update the HeatmapLayer data
+        heatmapRef.current.setData(heatpts);
+      }
+
+      // Update any additional options dynamically if needed
+      heatmapRef.current.setOptions(heatpointConfigs);
+
+      // Handle visibility based on mapConfig
+      if ([0, 2].includes(mapConfig)) {
+        heatmapRef.current.setMap(map);
+      } else {
+        heatmapRef.current.setMap(null);
+      }
+
+      return () => {
+        if (heatmapRef.current) {
+          heatmapRef.current.setMap(null); // Clean up on unmount
+        }
+      };
+    }, [map, heatpts, mapConfig, heatpointConfigs]); // Dependencies to re-run this effect
+
+    return null; // No UI component here
+  };
 
   const handlePinLoad = (marker: google.maps.Marker) => {
     setPinRef(marker);
@@ -184,12 +237,14 @@ export default function MapView(props: MapViewProps) {
         );
       })}
 
-      {props.mapConfig in [0, , 2] && props.heatpts.length > 0 && (
-        <HeatmapLayer
-          data={props.heatpts}
-          options={props.heatpointConfigs}
-        >
-        </HeatmapLayer>
+
+      {([0, 2].includes(props.mapConfig)) && (props.heatpts.length > 0) && (
+        <MapWithHeatmap
+          mapConfig={props.mapConfig}
+          map={props.mapRef}
+          heatpts={props.heatpts}
+          heatpointConfigs={props.heatpointConfigs}
+        />
       )}
 
       {props.tempMarker && <Marker position={props.tempMarker} icon={anchorIconGold}></Marker>}

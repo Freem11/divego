@@ -85,7 +85,7 @@ export default function MapLoader() {
         setnewSites(!divesTog ? [] : diveSiteList);
 
         const heatPointList = await getHeatPointData(latHi, latLo, lngE, lngW, animalVal);
-        setHeatPts(heatPointList);
+        setHeatPts([0, 2].includes(mapConfig) ? heatPointList : []);
 
         const shoplist = await getShopData(latHi, latLo, lngE, lngW);
         setnewShops(!divesTog ? [] : shoplist);
@@ -180,6 +180,12 @@ export default function MapLoader() {
       setTempMarker(null);
     }, 2000);
   }, [selectedDiveSite]);
+
+  useEffect(() => {
+    if (mapConfig === 1 || mapConfig === 3) {
+      setHeatPts([]);
+    }
+  }, [mapConfig]);
 
   const shopPoints = mapConfig === 0 ? setupShopClusters(newShops) : [];
   const sitePoints = setupClusters(newSites, sitesArray);

@@ -1,37 +1,41 @@
-import { useState, useEffect, useContext, useRef } from "react";
-import { animated, useSpring } from "react-spring";
-import ConfirmationModal from "./confirmationModal";
-import "./confirmationModal.css";
-import "./siteSubmitter.css";
-import exifr from "exifr";
-import { exifGPSHelper } from "../../helpers/exifGPSHelpers";
-import { insertDiveSiteWaits } from "../../supabaseCalls/diveSiteWaitSupabaseCalls";
-import { DiveSpotContext } from "../contexts/diveSpotContext";
-import { MasterContext } from "../contexts/masterContext";
-import { ModalSelectContext } from "../contexts/modalSelectContext";
-import { ModalContext } from "../contexts/modalContext";
-import Icon from "../../icons/Icon";
-import WavyHeader from "../newModals/wavyHeader";
-import style from "../newModals/modalContent.module.scss";
-import screenData from "../newModals/screenData.json";
-import TextInputField from "../newModals/textInput";
-import Button from "../newModals/button";
-import backGroundPic from '../../images/boat.png'
+import { useState, useEffect, useContext, useRef } from 'react';
+import { animated, useSpring } from 'react-spring';
+import ConfirmationModal from './confirmationModal';
+import './confirmationModal.css';
+import './siteSubmitter.css';
+import exifr from 'exifr';
+import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
+import { insertDiveSiteWaits } from '../../supabaseCalls/diveSiteWaitSupabaseCalls';
+import { DiveSpotContext } from '../contexts/diveSpotContext';
+import { MasterContext } from '../contexts/masterContext';
+import { ModalSelectContext } from '../contexts/modalSelectContext';
+import { ModalContext } from '../contexts/modalContext';
+import Icon from '../../icons/Icon';
+import WavyHeader from '../newModals/wavyHeader';
+import style from '../newModals/modalContent.module.scss';
+import screenData from '../newModals/screenData.json';
+import TextInputField from '../newModals/textInput';
+import Button from '../newModals/button';
+import backGroundPic from '../../images/boat.png';
+
+import { MapConfigContext } from '../contexts/mapConfigContext';
+
+
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 const noGPSZone = (
   <div
     style={{
-      marginLeft: "2%",
-      backgroundColor: "pink",
-      height: "40px",
-      width: "95%",
-      color: "red",
-      borderRadius: "15px",
+      marginLeft:      '2%',
+      backgroundColor: 'pink',
+      height:          '40px',
+      width:           '95%',
+      color:           'red',
+      borderRadius:    '15px',
     }}
   >
-    <h4 style={{ marginLeft: "35px", paddingTop: "10px" }}>
+    <h4 style={{ marginLeft: '35px', paddingTop: '10px' }}>
       No GPS Coordinates Found!
     </h4>
   </div>
@@ -43,6 +47,9 @@ const SiteSubmitter = (props) => {
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { setMasterSwitch } = useContext(MasterContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+
+  const { setMapConfig } = useContext(MapConfigContext);
+
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -56,12 +63,12 @@ const SiteSubmitter = (props) => {
 
   const sucessModalSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${successModalYCoord}px,0)` },
+    to:   { transform: `translate3d(0,${successModalYCoord}px,0)` },
   });
 
   const cautionModalSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
+    to:   { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
   });
 
   const animateSuccessModal = () => {
@@ -80,7 +87,7 @@ const SiteSubmitter = (props) => {
     }
   };
 
-  window.addEventListener("resize", trackDimensions);
+  window.addEventListener('resize', trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
   const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
@@ -93,7 +100,7 @@ const SiteSubmitter = (props) => {
   const handleChange = (e) => {
     setAddSiteVals({ ...addSiteVals, [e.target.name]: e.target.value });
 
-    if (e.target.name === "PicFile") {
+    if (e.target.name === 'PicFile') {
       setUploadedFile({ ...uploadedFile, selectedFile: e.target.files[0] });
 
       exifr.parse(e.target.files[0]).then((output) => {
@@ -101,13 +108,13 @@ const SiteSubmitter = (props) => {
           output.GPSLatitude,
           output.GPSLongitude,
           output.GPSLatitudeRef,
-          output.GPSLongitudeRef
+          output.GPSLongitudeRef,
         );
 
         if (EXIFData) {
           setAddSiteVals({
             ...addSiteVals,
-            Latitude: EXIFData[0],
+            Latitude:  EXIFData[0],
             Longitude: EXIFData[1],
           });
         } else {
@@ -124,17 +131,17 @@ const SiteSubmitter = (props) => {
         function (position) {
           setAddSiteVals({
             ...addSiteVals,
-            Latitude: position.coords.latitude,
+            Latitude:  position.coords.latitude,
             Longitude: position.coords.longitude,
           });
         },
         function (error) {
-          console.log("location permissions denied", error.message);
+          console.log('location permissions denied', error.message);
         },
-        { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 },
       );
     } else {
-      console.log("unsupported");
+      console.log('unsupported');
     }
   };
 
@@ -144,7 +151,9 @@ const SiteSubmitter = (props) => {
   };
 
   const onNavigate = () => {
-    setChosenModal("DiveSite");
+    console.log('Hi');
+    setChosenModal('DiveSite');
+    setMapConfig(1);
     setShowNoGPS(false);
     setMasterSwitch(false);
     modalPause();
@@ -158,15 +167,15 @@ const SiteSubmitter = (props) => {
     let LngV = parseFloat(addSiteVals.Longitude);
 
     if (
-      SiteV &&
-      typeof SiteV === "string" &&
-      LatV &&
-      typeof LatV === "number" &&
-      LngV &&
-      typeof LngV === "number"
+      SiteV
+      && typeof SiteV === 'string'
+      && LatV
+      && typeof LatV === 'number'
+      && LngV
+      && typeof LngV === 'number'
     ) {
       insertDiveSiteWaits(addSiteVals);
-      setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
+      setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
       animateSuccessModal();
       return;
     } else {
@@ -175,29 +184,29 @@ const SiteSubmitter = (props) => {
   };
 
   const onClose = () => {
-    setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
+    setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
     props?.onModalCancel?.();
   };
 
   const backgroundStyle = {
-    paddingTop: "25%",
-    backgroundImage: `url(${backGroundPic})`,
-    display: "flex",
-    aspectRatio: 1,
-    width: "100%",
-    backgroundSize: "cover",
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: "center",
-    borderTopLeftRadius: "2vw",
-    borderTopRightRadius: "2vw",
-    borderWidth: 0,
-    alignItems: "center",
-    justifyContent: "center",
+    paddingTop:           '25%',
+    backgroundImage:      `url(${backGroundPic})`,
+    display:              'flex',
+    aspectRatio:          1,
+    width:                '100%',
+    backgroundSize:       'cover',
+    backgroundRepeat:     'no-repeat',
+    backgroundPosition:   'center',
+    borderTopLeftRadius:  '2vw',
+    borderTopRightRadius: '2vw',
+    borderWidth:          0,
+    alignItems:           'center',
+    justifyContent:       'center',
   };
 
   return (
     <>
-      <div className={style.backButton} style={{ position: "absolute" }}>
+      <div className={style.backButton} style={{ position: 'absolute' }}>
         <Icon
           name="chevron-left"
           fill="white"
@@ -211,58 +220,58 @@ const SiteSubmitter = (props) => {
       </div>
       <div
         style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          marginLeft: "5%",
-          marginRight: "5%",
-          height: "50%",
+          display:        'flex',
+          alignItems:     'center',
+          justifyContent: 'center',
+          flexDirection:  'column',
+          marginLeft:     '5%',
+          marginRight:    '5%',
+          height:         '50%',
         }}
       >
         <div
           style={{
-            width: "100%",
-            marginLeft: "5%",
-            marginBottom: "5%",
-            overflowY: "auto",
+            width:        '100%',
+            marginLeft:   '5%',
+            marginBottom: '5%',
+            overflowY:    'auto',
           }}
         >
           <p className={style.headerText}>{screenData.DiveSiteAdd.header}</p>
 
           <div
-            className={"hero"}
+            className="hero"
             style={{
-              marginBottom: "20%",
-              width: "75%",
-              alignItems: "center",
-              padding: 0,
+              marginBottom: '20%',
+              width:        '75%',
+              alignItems:   'center',
+              padding:      0,
             }}
           >
-            <div className={"hero-body"}>
+            <div className="hero-body">
               <TextInputField
                 dataType="text"
-                icon={"diving-scuba-flag"}
+                icon="diving-scuba-flag"
                 inputValue={addSiteVals.Site}
                 placeHolderText={screenData.DiveSiteAdd.siteNamePlaceholder}
                 secure={false}
                 onChangeText={handleChange}
               />
             </div>
-            <div className={"hero-body"}>
+            <div className="hero-body">
               <TextInputField
                 dataType="text"
-                icon={"latitude"}
+                icon="latitude"
                 inputValue={addSiteVals.Latitude}
                 placeHolderText={screenData.DiveSiteAdd.latPlaceholder}
                 secure={false}
                 onChangeText={handleChange}
               />
             </div>
-            <div className={"hero-body"}>
+            <div className="hero-body">
               <TextInputField
                 dataType="text"
-                icon={"longitude"}
+                icon="longitude"
                 inputValue={addSiteVals.Longitude}
                 placeHolderText={screenData.DiveSiteAdd.lngPlaceholder}
                 secure={false}
