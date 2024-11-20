@@ -120,6 +120,7 @@ const MapPage = React.memo(function MapPage() {
     setSiteModal(false);
     setShopModal(true);
     setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
+    setMapConfig(0);
     setMasterSwitch(true);
     setMinorSwitch(true);
     setZoomHelper(true);

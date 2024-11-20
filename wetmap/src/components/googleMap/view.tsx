@@ -2,10 +2,9 @@ import React, { useRef } from 'react';
 import {
   GoogleMap,
   Marker,
-  HeatmapLayer,
 } from '@react-google-maps/api';
 import style from './style.module.scss';
-import { Cluster, HeatPoint, HeatPointConfiguration, MapConfiguration, SuperclusterInstance } from './types';
+import { Cluster, HeatPoint, HeatPointConfiguration, MapConfiguration, SuperclusterInstance, MapWithHeatmapProps } from './types';
 import anchorClusterIcon from '../../images/mapIcons/AnchorCluster.png';
 import anchorIconGold from '../../images/mapIcons/AnchorGold.png';
 import mantaIcon from '../../images/Manta32.png';
@@ -55,7 +54,6 @@ type MapViewProps = {
 
 export default function MapView(props: MapViewProps) {
   const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
-  const [heatRef, setHeatRef] = useState<google.maps.visualization.HeatmapLayer | null>(null);
 
   const { dragPin, setDragPin } = useContext(PinSpotContext);
 
@@ -99,12 +97,6 @@ export default function MapView(props: MapViewProps) {
     props.handleMapUpdates();
   }, [props.mapCoords, props.divesTog, props.animalVal]);
 
-  type MapWithHeatmapProps = {
-    map:              google.maps.Map | null
-    heatpts:          google.maps.LatLng[] | { location: google.maps.LatLng, weight: number }[]
-    mapConfig:        number
-    heatpointConfigs: google.maps.visualization.HeatmapLayerOptions
-  };
 
   const MapWithHeatmap: React.FC<MapWithHeatmapProps> = ({
     map,
@@ -117,7 +109,6 @@ export default function MapView(props: MapViewProps) {
     useEffect(() => {
       if (!map) return;
 
-      // If HeatmapLayer doesn't exist, create it
       if (!heatmapRef.current) {
         heatmapRef.current = new google.maps.visualization.HeatmapLayer({
           data: heatpts,
@@ -125,14 +116,11 @@ export default function MapView(props: MapViewProps) {
           ...heatpointConfigs,
         });
       } else {
-      // Update the HeatmapLayer data
         heatmapRef.current.setData(heatpts);
       }
 
-      // Update any additional options dynamically if needed
       heatmapRef.current.setOptions(heatpointConfigs);
 
-      // Handle visibility based on mapConfig
       if ([0, 2].includes(mapConfig)) {
         heatmapRef.current.setMap(map);
       } else {
@@ -141,12 +129,12 @@ export default function MapView(props: MapViewProps) {
 
       return () => {
         if (heatmapRef.current) {
-          heatmapRef.current.setMap(null); // Clean up on unmount
+          heatmapRef.current.setMap(null);
         }
       };
-    }, [map, heatpts, mapConfig, heatpointConfigs]); // Dependencies to re-run this effect
+    }, [map, heatpts, mapConfig, heatpointConfigs]);
 
-    return null; // No UI component here
+    return null;
   };
 
   const handlePinLoad = (marker: google.maps.Marker) => {

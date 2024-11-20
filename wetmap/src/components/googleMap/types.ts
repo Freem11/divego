@@ -15,6 +15,12 @@ export type HeatPointConfiguration = {
   radius:  number
 };
 
+export type MapWithHeatmapProps = {
+  map:              google.maps.Map | null
+  heatpts:          google.maps.LatLng[] | { location: google.maps.LatLng, weight: number }[]
+  mapConfig:        number
+  heatpointConfigs: google.maps.visualization.HeatmapLayerOptions
+};
 
 export type TempMarker = {
   lat: number
