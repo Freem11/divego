@@ -40,7 +40,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
       >
       </img>
 
-      <div className={style.helper2} style={{ marginTop: '-8%' }}>
+      <div className={style.helper2} style={{ marginTop: '-10%' }}>
         <h4
           className={style.userLabel}
           onClick={e => props.handleFollow(e, props.pic.newusername)}
