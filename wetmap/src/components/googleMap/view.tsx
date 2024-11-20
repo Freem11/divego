@@ -31,6 +31,7 @@ type MapViewProps = {
   mapRef:                google.maps.Map | null
   mapConfigs:            MapConfiguration
   heatpointConfigs:      HeatPointConfiguration
+  mapConfig:             number
   zoom:                  number
   center:                { lat: number, lng: number }
   tempMarker:            { lat: number, lng: number } | null
@@ -183,15 +184,7 @@ export default function MapView(props: MapViewProps) {
         );
       })}
 
-      {masterSwitch && props.heatpts.length > 0 && (
-        <HeatmapLayer
-          data={props.heatpts}
-          options={props.heatpointConfigs}
-        >
-        </HeatmapLayer>
-      )}
-
-      {!masterSwitch && !minorSwitch && props.heatpts.length > 0 && (
+      {props.mapConfig in [0, , 2] && props.heatpts.length > 0 && (
         <HeatmapLayer
           data={props.heatpts}
           options={props.heatpointConfigs}
@@ -201,16 +194,18 @@ export default function MapView(props: MapViewProps) {
 
       {props.tempMarker && <Marker position={props.tempMarker} icon={anchorIconGold}></Marker>}
 
-      {!masterSwitch && minorSwitch && (
-        <Marker
-          position={dragPin}
-          draggable={true}
-          icon={mantaIcon}
-          onLoad={handlePinLoad}
-          onDragEnd={handleDragEnd}
-        >
-        </Marker>
-      )}
+      {props.mapConfig === 1
+        ? (
+            <Marker
+              position={dragPin}
+              draggable={true}
+              icon={mantaIcon}
+              onLoad={handlePinLoad}
+              onDragEnd={handleDragEnd}
+            >
+            </Marker>
+          )
+        : null}
     </GoogleMap>
   );
 }

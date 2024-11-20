@@ -19,6 +19,7 @@ import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
 import { Cluster, TempMarker } from './types';
 import useSupercluster from 'use-supercluster';
+import { MapConfigContext } from '../contexts/mapConfigContext';
 
 const libraries: Libraries = ['places', 'visualization'];
 
@@ -26,6 +27,9 @@ export default function MapLoader() {
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
   const [newSites, setnewSites] = useState<DiveSiteWithUserName[]>([]);
   const [newShops, setnewShops] = useState<DiveShop[]>([]);
+
+  const { mapConfig } = useContext(MapConfigContext);
+
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
   const { sitesArray } = useContext(SitesArrayContext);
 
@@ -177,8 +181,8 @@ export default function MapLoader() {
     }, 2000);
   }, [selectedDiveSite]);
 
-  const shopPoints: Cluster[]  = setupShopClusters(newShops);
-  const sitePoints: Cluster[]  = setupClusters(newSites, sitesArray);
+  const shopPoints = mapConfig === 0 ? setupShopClusters(newShops) : [];
+  const sitePoints = setupClusters(newSites, sitesArray);
   const points: Cluster[] = [...sitePoints, ...shopPoints];
 
 
@@ -201,6 +205,7 @@ export default function MapLoader() {
       mapRef={mapRef}
       mapConfigs={mapConfigs}
       heatpointConfigs={heatpointConfigs}
+      mapConfig={mapConfig}
       zoom={zoom}
       center={center}
       tempMarker={tempMarker}
