@@ -33,7 +33,7 @@ export const SingleSelect: Story = {
   },
 };
 
-export const MultiSelectWithMaxThreeOptionsAllowed: Story = {
+export const MultiSelectWithoutLimit: Story = {
   args: {
     maxSelectedOptions: Infinity,
   },
@@ -42,12 +42,44 @@ export const MultiSelectWithMaxThreeOptionsAllowed: Story = {
 
 export const SelectWithoutSelectArrow: Story = {
   args: {
-    selectArrowIcon: false,
+    iconSelectArrow: false,
   },
 };
 
 export const SelectWithCustomSelectArrow: Story = {
   args: {
-    selectArrowIcon: <Icon name="anchor" />,
+    iconSelectArrow: <Icon name="anchor" />,
+  },
+};
+
+export const SelectWithCustomDropdown: Story = {
+  args: {
+    dropdownComponent: props => (
+      <div className="dropdown" style={{ border: '1px solid red' }}>
+        Custom dropdown has red border
+        <ul className="option-list">
+          {props.children}
+        </ul>
+      </div>
+    ),
+  },
+};
+
+export const SelectWithCustomDropdownItem: Story = {
+  args: {
+    dropdownItemComponent: props => (
+      <li>
+        Some text before each option
+        {' '}
+        {props.option.label}
+      </li>
+    ),
+  },
+};
+export const SelectWithManySelectedItems: Story = {
+  args: {
+    value:              options,
+    maxSelectedOptions: Infinity,
+    iconLeft:           <Icon name="anchor" />,
   },
 };

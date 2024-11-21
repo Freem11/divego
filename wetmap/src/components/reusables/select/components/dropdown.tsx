@@ -6,11 +6,10 @@ export type DropdownProps = {
   children:            React.ReactNode
   searchText:          string
   shouldDisplayCreate: boolean
-  createItem:          (label: string) => void
+  createItem:          (value: string) => void
 };
 
 export default function Dropdown(props: DropdownProps) {
-  console.log('Render dropdown');
   return (
     <div className="dropdown">
 
@@ -18,17 +17,11 @@ export default function Dropdown(props: DropdownProps) {
 
         {props.children}
 
-        {props.options.size > 0 && (
-          <span className="no-results">
-            {`No results for "${props.searchText}"`}
-          </span>
-        )}
-
         {props.shouldDisplayCreate && (
-          <li className="rsz__option">
+          <li>
             <button
               className="create"
-              onClick={() => props.createItem(props.searchText || '')}
+              onClick={() => props.createItem(props.searchText)}
               type="button"
             >
               Create

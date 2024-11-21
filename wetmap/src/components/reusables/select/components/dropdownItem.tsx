@@ -8,7 +8,6 @@ export type DropdownItemProps = {
 };
 
 export default function DropdownItem(props: DropdownItemProps) {
-  console.log('Render dropdown item');
   return (
     <li>
       <button

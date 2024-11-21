@@ -1,32 +1,69 @@
-import React, { useState, ReactNode, useRef, Dispatch, SetStateAction, useEffect, useMemo, useImperativeHandle, useCallback } from 'react';
+import React, { useState, ReactNode, useRef, useEffect, useMemo, useCallback } from 'react';
 
 import './style.scss';
-import SelectedBlock from './components/selectedBlock';
-import SelectView from './view';
-import DropdownItem from './components/dropdownItem';
 import Dropdown from './components/dropdown';
+import SelectedTag from './components/selectedTag';
+import DropdownItem from './components/dropdownItem';
+import getInitialValue from './utils/getInitialValue';
+import getResultValue from './utils/getResultValue';
 
 export type Option = {
-  key:   string
-  label: string
+  key:          string
+  label:        string
+  userCreated?: boolean
 };
+
+export type InitialValue = Option | Option[] | string | string[] | undefined;
+
 export type SelectProps = Partial<typeof defaultProps> & {
-  name: string
+  name:     string
+  onChange: (value: any) => void
 };
 
 export type Values = Map<string, Option>;
-
 
 const defaultProps = {
   maxSelectedOptions: 1 as number,
   allowCreate:        false as boolean,
   placeholder:        'Select' as string,
-  value:              [] as string[] | string,
-  options:            [] as Option[],
-  labelInValue:       false as boolean,
-  debounceTimeout:    400 as number,
   disabled:           false as boolean,
+
+  /**
+   * If true, the select is open and progress indicator is shown
+   */
+  isFetching:         false as boolean,
+
+  /**
+   * The value of the select
+   */
+  value:              [] as InitialValue,
+
+  /**
+   * The options of the select
+   */
+  options:            [] as Option[],
+
+  /**
+   * If true, the value passed to onChange is an object consisting of the key and label.
+   * If false, the value passed to onChange is the key.
+   */
+  labelInValue:       false as boolean,
+
+  /**
+   * Debounce timeout for search
+   */
+  debounceTimeout:    400 as number,
+
+  /**
+   * Css class for the select container
+   */
   className:          'ssrc-select' as string,
+
+  /**
+   * Component to render on the left side of the trigger.
+   * Typically an icon representing what this select is for
+   */
+  iconLeft:           null as React.ReactNode,
 
   /**
    * Render function for each item in the dropdown
@@ -41,15 +78,15 @@ const defaultProps = {
   /**
    * Small arrow at the right side of the trigger indicing that this is select, not a regular input
    */
-  selectArrowIcon:    true as ReactNode | boolean,
+  iconSelectArrow:    true as ReactNode | boolean,
 
   /**
-   * Selected block is a visual block in the trigger area representing selected item(s).
+   * Selected tag is a visual block in the trigger area representing selected item(s).
    * In case of multiselect it is a list of selected blocks.
-   * - on: selected items appear as blocks in trigger
+   * - on: selected items appear as tags in the trigger
    * - off: selected items appear as labels in search input
    */
-  modeSelectedBlocks: 'off' as 'on' | 'off',
+  modeSelectedTags: 'off' as 'on' | 'off',
 
   /**
    * When to open dropdown
@@ -57,57 +94,33 @@ const defaultProps = {
    * - onChange: dropdown opens when user starts typing in search input
    */
   modeDropdownOpen: 'onChange' as 'onClick' | 'onChange',
-  onChange:           (value) => {},
-  onSearch:           (search: string, options: Option[]) => {
 
-
-    /// /////TODODODODODOD fieldToSearch: label
-
-
+  onSearch:           (search: string) => {
+    // TODO: implement search by static options
   },
 };
 
-
-// const Select = React.forwardRef(function Select(_props: SelectProps, forwardedRef) {
-//   // console.log('Render Select');
-//   return <div>AAA</div>;
-// });
-const Select = React.forwardRef(function Select(_props: SelectProps, forwardedRef) {
-  console.log('Render Select');
-
-
+const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_props: SelectProps, forwardedRef) {
   const props = { ...defaultProps, ..._props };
 
-  // const options = props.options;
-  const isMulti     = props.maxSelectedOptions > 1;
   const initRef     = useRef(false);
-  const valueRef    = useRef<HTMLInputElement>(null);
   const searchRef   = useRef<HTMLInputElement>(null);
   const wrapperRef  = useRef<HTMLDivElement>(null);
   const timeoutRef  = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
 
-
-  // const [activeDescendantIndex, setActiveDescendantIndex] = useState(0); // Active descendant. Numbers are easier to manipulate than element IDs.
-  const [searchText, setSearchText] = useState('');
   const [isOpen, setIsOpen] = useState(false);
 
-
-  const [value, setValue] = useState<Values | null>(null);
   const options: Values = useMemo(() => {
     return new Map(props.options.map(option => [option.key, option]));
   }, [props.options]);
 
-  // console.log(options.values().map(option => option.key));
+  const [value, setValue] = useState<Values>(getInitialValue(props.value, options));
 
+  const isMulti = props.maxSelectedOptions > 1;
 
-  const isMaxed = isMulti && (value?.size === props.maxSelectedOptions);
+  const showSelectedTags = props.modeSelectedTags === 'on' || isMulti;
 
-  const showSelectedBlocks = props.modeSelectedBlocks === 'on' || isMulti;
-
-  const shouldDisplayCreate
-  = props.allowCreate
-  && searchRef?.current?.value;
-  // && options.findIndex(option => option === searchText) === -1;
+  const shouldDisplayCreate = Boolean(props.allowCreate && searchRef?.current?.value);
 
 
   // effect: maintain focus
@@ -117,15 +130,16 @@ const Select = React.forwardRef(function Select(_props: SelectProps, forwardedRe
     }
   });
 
+
   // effect: close dropdown if click outside
   useEffect(() => {
-    const handleWrapperClick = (e) => {
+    const handleWrapperClick = (e: MouseEvent) => {
       setIsOpen((prev) => {
         if (!prev) {
           // not need to close if none is open
           return prev;
         }
-        if (wrapperRef?.current?.contains(e.target)) {
+        if (e.target instanceof Node && wrapperRef?.current?.contains(e.target)) {
           // no need to close dropdown if click inside modal wrapper
           return prev;
         }
@@ -140,32 +154,40 @@ const Select = React.forwardRef(function Select(_props: SelectProps, forwardedRe
     };
   }, []);
 
+
   // effect: prepare data to be passed to onChange
   useEffect(() => {
     // show the label of the selected option in search input
-    if (props.modeSelectedBlocks === 'off' && !isMulti && value && searchRef.current) {
+    if (props.modeSelectedTags === 'off' && !isMulti && value && searchRef.current) {
       const selectedOption = value.values().next().value;
       if (selectedOption) {
         searchRef.current.value = selectedOption.label;
       }
     }
 
-    if (value === null) {
-      setValue(new Map());
+    // prepare data to be passed to onChange(except first render)
+    const result = getResultValue(value, props.labelInValue, isMulti);
+    if (initRef.current && typeof props.onChange === 'function') {
+      props.onChange({ target: { name: props.name, value: result } });
     }
 
-    // prepare data to be passed to onChange(except first render)
-    if (initRef.current && typeof props.onChange === 'function') {
-      props.onChange({ target: { name: props.name, value: getFormattedValue() } });
+    if (forwardedRef && 'current' in forwardedRef && forwardedRef.current) {
+      forwardedRef.current.value = JSON.stringify(result);
     }
+
     initRef.current = true;
   }, [value]);
 
+
   const onTriggerClick = () => {
-    if (props.modeDropdownOpen === 'onClick' || options.size) {
+    if (!options.size) {
+      searchRef.current?.focus();
+    }
+    if (props.modeDropdownOpen === 'onClick' || options.size || shouldDisplayCreate) {
       setIsOpen(!isOpen);
     }
   };
+
 
   const onSearch = (search: string) => {
     if (props.modeDropdownOpen === 'onChange' && !isOpen) {
@@ -174,32 +196,18 @@ const Select = React.forwardRef(function Select(_props: SelectProps, forwardedRe
 
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
-      console.log(search);
       if (search) {
-        props.onSearch(search, options);
+        props.onSearch(search);
       }
     }, props.debounceTimeout);
   };
 
-  // Methods
-  const getFormattedValue = () => {
-    const result: (string | Option)[] = [];
-    if (!value) {
-      return null;
-    }
-    value.forEach((option) => {
-      if (props.labelInValue) {
-        result.push(option);
-      } else {
-        result.push(option.key);
-      }
-    });
-
-    return isMulti ? result : result[0];
-  };
 
   const selectItem = useCallback((key: string) => {
-    setValue((prev): Values | null => {
+    if (showSelectedTags && searchRef?.current) {
+      searchRef.current.value = '';
+    }
+    setValue((prev): Values => {
       if (prev === null) {
         // value should already be initialized
         console.error('value should already be initialized');
@@ -256,12 +264,25 @@ const Select = React.forwardRef(function Select(_props: SelectProps, forwardedRe
     });
   }
 
-  function onKeyDown(e: React.KeyboardEvent<HTMLInputElement>) {
+  const createItem = useCallback((value) => {
+    if (showSelectedTags && searchRef?.current) {
+      searchRef.current.value = '';
+    }
+    setValue((prev) => {
+      if (!prev || !value) {
+        return prev;
+      }
+      if (prev.has(value)) {
+        return prev;
+      }
+      const result = new Map(prev);
+      if (prev.size >= props.maxSelectedOptions) {
+        result.clear();
+      }
 
-  }
-
-  const createItem = useCallback((value: string) => {
-
+      result.set(value, { key: value, label: value, userCreated: true });
+      return result;
+    });
   }, []);
 
   return (
@@ -272,16 +293,21 @@ const Select = React.forwardRef(function Select(_props: SelectProps, forwardedRe
       className={props.className}
       role="listbox"
     >
-      <input type="hidden" name={props.name} ref={valueRef} />
+      <input type="hidden" name={props.name} ref={forwardedRef} />
 
       <div className="trigger" onClick={onTriggerClick}>
 
-        {showSelectedBlocks && Array.from(value?.values() || []).map(option => (
-          <SelectedBlock key={option.key} label={option.label} deselctItem={() => deselctItem(option.key)} />
-        ))}
+        {props.iconLeft && <i className="icon-left">{props.iconLeft}</i>}
+
+        {showSelectedTags && value.size > 0 && (
+          <div className="selected-tags">
+            {Array.from(value?.values() || []).map(option => (
+              <SelectedTag key={option.key} label={option.label} deselctItem={() => deselctItem(option.key)} />
+            ))}
+          </div>
+        )}
 
         <input
-          onKeyDown={onKeyDown}
           onChange={e => onSearch(e.target.value)}
           ref={searchRef}
           type="search"
@@ -289,22 +315,20 @@ const Select = React.forwardRef(function Select(_props: SelectProps, forwardedRe
         />
 
         <button className="trigger-button">
-          {isMulti ? `Select options for ${props.name}` : `Select an option for ${props.name}`}
-
-          {props.selectArrowIcon && (
+          {props.iconSelectArrow && (
             <span className="arrow">
-              {props.selectArrowIcon === true ? '↓' : props.selectArrowIcon}
+              {props.iconSelectArrow === true ? '↓' : props.iconSelectArrow}
             </span>
           )}
         </button>
       </div>
 
       <menu className="dropdown-wrapper">
-        {isOpen && (
+        {(isOpen || shouldDisplayCreate) && (
           <props.dropdownComponent
             options={options}
             searchText={searchRef.current?.value || ''}
-            shouldDisplayCreate={!!shouldDisplayCreate}
+            shouldDisplayCreate={shouldDisplayCreate}
             createItem={createItem}
           >
             {Array.from(options.values()).map((option: Option) => {

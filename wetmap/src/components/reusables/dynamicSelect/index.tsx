@@ -1,9 +1,9 @@
-import React, { useState, ReactNode, useRef, Dispatch, SetStateAction, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import Select, { SelectProps } from '../select';
 
 
 const defaultProps = {
-  searchLimit: 10,
+  searchLimit: 100,
 };
 
 type DynamicSelectProps = SelectProps & Partial<typeof defaultProps> & {
@@ -12,15 +12,12 @@ type DynamicSelectProps = SelectProps & Partial<typeof defaultProps> & {
 };
 
 
-const DynamicSelect = React.forwardRef<HTMLInputElement, DynamicSelectProps>(function DynamicSelect(_props: DynamicSelectProps, ref) {
-  console.log('Render DynamicSelect');
-
+const DynamicSelect = React.forwardRef<HTMLInputElement, DynamicSelectProps>(function DynamicSelect(_props: DynamicSelectProps, forwardedRef) {
   const props = { ...defaultProps, ..._props };
   const { getSelectedOptions, getMoreOptions, searchLimit, ...rest } = props;
   const [options, setOptions] = useState([]);
   const [isFetching, setIsFetching] = useState(false);
   const [searchOffset, setSearchOffset] = useState(0);
-  const [selectedTotalCount, setSelectedTotalCount] = useState(null);
 
   useEffect(() => {
     init();
@@ -58,7 +55,6 @@ const DynamicSelect = React.forwardRef<HTMLInputElement, DynamicSelectProps>(fun
   };
 
   const loadOptions = async (search: string, replaceExistingOptions = false) => {
-    console.log(`load options for "${search}"...`);
     if (!getMoreOptions) {
       return;
     }
@@ -68,7 +64,6 @@ const DynamicSelect = React.forwardRef<HTMLInputElement, DynamicSelectProps>(fun
       new Promise(resolve => setTimeout(resolve, 300)), // atrificial deplay to avoid flickering
     ]);
 
-    console.log(`data loaded options for "${search}" : `, data);
     setIsFetching(false);
     if (!data?.options) {
       setOptions([]);
@@ -80,26 +75,14 @@ const DynamicSelect = React.forwardRef<HTMLInputElement, DynamicSelectProps>(fun
         return data.options;
       }
 
-      // prevent duplicating values
-      const existingValues = options.reduce((acc, curr) => (acc[curr.value] = true, acc), {});
-      for (const newOption of data.options) {
-        if (!existingValues[newOption.value]) {
-          options.push(newOption);
-        }
-      }
       return [...options];
     });
-    // setSearchTotalCount(data.totalCount);
-    // setIsFetching(false);
-
-    // if (!getSelectedOptions && value) {
-    //   setInternalValue(Array.isArray(value) ? value : [value]);
-    //   setSelectedTotalCount(Array.isArray(value) ? value.length : 1);
-    // }
   };
 
   return (
     <Select
+      ref={forwardedRef}
+      isFetching={isFetching}
       options={options}
       onSearch={onSearch}
       {...rest}

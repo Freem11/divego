@@ -1,13 +1,13 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-type SelectedBlockProps = {
+type SelectedTagProps = {
   deselctItem: () => void
   label:       string
 };
 
-export default function SelectedBlock(props: SelectedBlockProps) {
+export default function SelectedTag(props: SelectedTagProps) {
   return (
-    <div className="selected-block">
+    <div className="selected-tag">
       <span>{props.label}</span>
       <button
         aria-label={`remove ${props.label}`}
