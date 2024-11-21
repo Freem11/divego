@@ -175,7 +175,6 @@ export default function MapLoader() {
     if (mapRef) {
       const position = mapRef.getCenter();
       if (position) {
-        console.log(selectedDiveSite);
         if (selectedDiveSite.name !== '') {
           const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
           mapRef.panTo(latlng);

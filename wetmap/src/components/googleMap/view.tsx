@@ -34,7 +34,7 @@ type MapViewProps = {
   handleBoundsChange:    () => void
   handleMapCenterChange: () => void
   handleMapZoomChange:   () => void
-  dragPin:               google.maps.LatLng
+  dragPin:               LatLngObject
   handlePinLoad:         (marker: google.maps.Marker) => void
   handleDragEnd:         () => void
   modalShow:             boolean
