@@ -93,7 +93,7 @@ const MapPage = React.memo(function MapPage() {
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { modalShow, modalResume } = useContext(ModalContext);
 
-  const { setMapConfig } = useContext(MapConfigContext);
+  const { mapConfig, setMapConfig } = useContext(MapConfigContext);
 
   const returnToPicModal = () => {
     modalResume();
@@ -513,7 +513,7 @@ const MapPage = React.memo(function MapPage() {
         )}
       </div>
 
-      {masterSwitch && (
+      {mapConfig === 0 && (
         <animated.div className="fabContainer" style={moveFabModal}>
           <div className="animateBox" onClick={e => animateMenu(e)}>
             <p className="animateFont">{menuUp ? 'Hide Menu' : 'Show Menu'}</p>
@@ -543,7 +543,7 @@ const MapPage = React.memo(function MapPage() {
           </div>
 
           <div className="fabButtons">
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -558,7 +558,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -573,7 +573,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -588,7 +588,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -604,7 +604,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -619,7 +619,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 {' '}
                 <ToggleButton
@@ -639,7 +639,7 @@ const MapPage = React.memo(function MapPage() {
         </animated.div>
       )}
 
-      {masterSwitch && (
+      {[0, 2].includes(mapConfig) && (
         <div className="col1row8" pointerEvents="box-none">
           <PhotoMenu />
           <div className="filterer">
@@ -663,7 +663,7 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-      {masterSwitch && (
+      {mapConfig === 0 && (
         <div className="histoBox" style={{ pointerEvents: 'none' }}>
           <Histogram pointerEvents="none" />
         </div>
@@ -714,7 +714,7 @@ const MapPage = React.memo(function MapPage() {
         </div>
       </div>
 
-      {!masterSwitch && minorSwitch && (
+      {mapConfig === 1 && (
         <div
           style={{
             display:       'flex',
@@ -756,7 +756,7 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-      {!masterSwitch && !minorSwitch && (
+      {mapConfig === 2 && (
         <div
           style={{
             display:       'flex',
