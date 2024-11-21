@@ -1,4 +1,4 @@
-export interface DiveShop {
+export type DiveShop = {
   id:                   number
   orgname:              string
   lat:                  number

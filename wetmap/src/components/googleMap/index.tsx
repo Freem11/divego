@@ -136,8 +136,11 @@ export default function MapLoader() {
 
   const handleMapZoomChange = async () => {
     if (mapRef) {
-      setMapZoom(mapRef.getZoom());
-      handleMapUpdates();
+      const zoomLev = mapRef.getZoom();
+      if (zoomLev) {
+        setMapZoom(zoomLev);
+        handleMapUpdates();
+      }
     }
   };
 
