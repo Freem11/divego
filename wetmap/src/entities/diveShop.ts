@@ -1,6 +1,6 @@
 export type DiveShop = {
   id:                   number
-  orgName:              string
+  orgname:              string
   lat:                  number
   lng:                  number
   userId:               string

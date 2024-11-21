@@ -39,10 +39,9 @@ export const shops = async (GPSBubble) => {
 };
 
 export const getShopByName = async (value) => {
-  const { data, error } = await supabase
-    .from('shops')
-    .select()
-    .eq('orgName', value);
+  const { data, error } = await supabase.rpc('get_diveshops_byname', {
+    orgname: value,
+  });
 
   if (error) {
     console.log('couldn\'t do it 32,', error);
@@ -50,6 +49,7 @@ export const getShopByName = async (value) => {
   }
 
   if (data) {
+    // console.log(data);
     return data;
   }
 };

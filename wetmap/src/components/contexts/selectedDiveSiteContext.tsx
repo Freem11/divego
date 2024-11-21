@@ -1,7 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 
-type SelectedDiveSiteContextType = {
+type SelectedShopContextType = {
   selectedDiveSite:    DiveSiteWithUserName
   setSelectedDiveSite: React.Dispatch<React.SetStateAction<DiveSiteWithUserName>>
 };
@@ -25,7 +25,7 @@ const SelectedDiveSiteContextState = {
   setSelectedDiveSite: () => {},
 };
 
-export const SelectedDiveSiteContext = createContext<SelectedDiveSiteContextType>(
+export const SelectedDiveSiteContext = createContext<SelectedShopContextType>(
   SelectedDiveSiteContextState,
 );
 

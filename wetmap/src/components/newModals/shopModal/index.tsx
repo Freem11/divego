@@ -88,7 +88,7 @@ export default function ShopModal(props) {
   };
 
   const handleShopModalClose = () => {
-    setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
+    setSelectedShop({ ...selectedShop, id: 0, orgname: '' });
     setItineraryList('');
     setShopModal(false);
   };
@@ -97,7 +97,7 @@ export default function ShopModal(props) {
   return (
     <>
       {selectedShop && (
-        <ShopModalView shopModelName={selectedShop.orgName} shopDescription="test" />
+        <ShopModalView shopModelName={selectedShop.orgname} shopDescription="test" />
       )}
     </>
   );

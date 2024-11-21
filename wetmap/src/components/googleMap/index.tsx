@@ -161,7 +161,7 @@ export default function MapLoader() {
     if (mapRef) {
       const position = mapRef.getCenter();
       if (position) {
-        if (selectedShop.orgName !== '') {
+        if (selectedShop.orgname !== '') {
           const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
           mapRef.panTo(latlng);
           setMapZoom(16);

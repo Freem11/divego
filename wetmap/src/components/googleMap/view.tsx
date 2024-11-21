@@ -7,8 +7,8 @@ import anchorIconGold from '../../images/mapIcons/AnchorGold.png';
 import mantaIcon from '../../images/Manta32.png';
 import { setupPinConfigs } from './mapPinHelpers';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
-import { DiveShop } from '../../entities/diveShop';
 import { MapWithHeatmap } from './heatmap';
+import { DiveShop } from '../../entities/diveShop';
 
 type MapViewProps = {
   mapRef:                google.maps.Map | null

@@ -20,7 +20,7 @@ import Icon from '../../../icons/Icon';
 
 
 type ShopModelViewProps = {
-  shopModelName: string | null
+  shopModelName:   string | null
   shopDescription: string | null
 };
 
@@ -36,15 +36,15 @@ export default function ShopModalView(props: ShopModelViewProps) {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   useEffect(() => {
-    if (selectedShop[0]) {
-      getItineraries(selectedShop[0].id);
+    if (selectedShop) {
+      getItineraries(selectedShop.id);
       setMasterSwitch(true);
     }
   }, [selectedShop]);
 
   useEffect(() => {
     if (shopModal && zoomHelper) {
-      setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
+      setMapCoords([selectedShop.lat, selectedShop.lng]);
     }
   }, [shopModal]);
 
@@ -54,8 +54,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
       if (itins.length > 0) {
         setItineraryList(itins);
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.log({ title: 'Error', message: e.message });
     }
   };
@@ -118,7 +117,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           </div>
         </div>
         <div className="ml-6">
-          <h3 class="text-left">{props?.shopDescription}</h3>
+          <h3 className="text-left">{props?.shopDescription}</h3>
         </div>
       </div>
       <div className="col-6">
