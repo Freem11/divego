@@ -29,7 +29,7 @@ type ShopModelViewProps = {
   diveShop: DiveShop | null
   isPartnerAccount: boolean
   itineraryList: ItineraryItem[] | null
-  selectedID: number | null;
+  selectedID: number;
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
