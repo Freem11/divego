@@ -22,7 +22,7 @@ export type MapWithHeatmapProps = {
   heatpointConfigs: google.maps.visualization.HeatmapLayerOptions
 };
 
-export type TempMarker = {
+export type LatLngObject = {
   lat: number
   lng: number
 };

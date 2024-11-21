@@ -17,14 +17,19 @@ import { SelectedShopContext } from '../contexts/selectedShopContext';
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
-import { Cluster, TempMarker } from './types';
+import { Cluster, LatLngObject } from './types';
 import useSupercluster from 'use-supercluster';
 import { MapConfigContext } from '../contexts/mapConfigContext';
+import { DiveSpotContext } from '../contexts/diveSpotContext';
+import { PinSpotContext } from '../contexts/pinSpotContext';
+import { ModalContext } from '../contexts/modalContext';
 
 const libraries: Libraries = ['places', 'visualization'];
 
 export default function MapLoader() {
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
+  const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
+  const [tempMarker, setTempMarker] = useState<LatLngObject | null>(null);
   const [newSites, setnewSites] = useState<DiveSiteWithUserName[]>([]);
   const [newShops, setnewShops] = useState<DiveShop[]>([]);
 
@@ -42,9 +47,15 @@ export default function MapLoader() {
     SelectedDiveSiteContext,
   );
 
-  const [tempMarker, setTempMarker] = useState<TempMarker | null>(null);
+  const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
+
+
+  const { dragPin, setDragPin } = useContext(PinSpotContext);
+
   const { animalVal } = useContext(AnimalContext);
   const { divesTog } = useContext(DiveSitesContext);
+
+  const { modalShow } = useContext(ModalContext);
 
   const mapConfigs = useMemo(() => ({
     mapTypeId:         'hybrid',
@@ -187,6 +198,21 @@ export default function MapLoader() {
     }
   }, [mapConfig]);
 
+  useEffect(() => {
+    if (mapConfig === 1) {
+      setDragPin({ lat: mapCoords[0], lng: mapCoords[1] });
+    }
+  }, [mapConfig]);
+
+  useEffect(() => {
+    if (mapRef) {
+      mapRef.panTo({ lat: mapCoords[0], lng: mapCoords[1] });
+    }
+
+    handleMapUpdates();
+  }, [mapCoords, divesTog, animalVal]);
+
+
   const shopPoints = mapConfig === 0 ? setupShopClusters(newShops) : [];
   const sitePoints = setupClusters(newSites, sitesArray);
   const points: Cluster[] = [...sitePoints, ...shopPoints];
@@ -198,6 +224,23 @@ export default function MapLoader() {
     zoom:    mapZoom,
     options: { radius: 75, maxZoom: 16 },
   });
+
+  const handlePinLoad = (marker: google.maps.Marker) => {
+    setPinRef(marker);
+  };
+
+  const handleDragEnd = () => {
+    if (pinRef) {
+      const position = pinRef;
+      if (position instanceof google.maps.LatLng) {
+        setAddSiteVals({
+          ...addSiteVals,
+          Latitude:  position.lat(),
+          Longitude: position.lng(),
+        });
+      }
+    }
+  };
 
   const { isLoaded } = useJsApiLoader({
     id:               'google-map-script',
@@ -231,6 +274,10 @@ export default function MapLoader() {
       handleBoundsChange={handleBoundsChange}
       handleMapCenterChange={handleMapCenterChange}
       handleMapZoomChange={handleMapZoomChange}
+      dragPin={dragPin}
+      handlePinLoad={handlePinLoad}
+      handleDragEnd={handleDragEnd}
+      modalShow={modalShow}
     >
     </MapView>
   );

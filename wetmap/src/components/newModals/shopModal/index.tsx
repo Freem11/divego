@@ -6,7 +6,6 @@ import { ShopModalContext } from '../../contexts/shopModalContext';
 import { MasterContext } from '../../contexts/masterContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
-import { MapConfigContext } from '../../contexts/mapConfigContext';
 import './shopModal.css';
 import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
 import CloseButton from '../../closeButton/closeButton';
@@ -64,13 +63,9 @@ export default function ShopModal(props) {
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
-  const { setMapConfig } = useContext(MapConfigContext);
-
-
   useEffect(() => {
     if (selectedShop[0]) {
       getItineraries(selectedShop[0].id);
-      setMapConfig(2);
       setMasterSwitch(true);
     }
   }, [selectedShop]);

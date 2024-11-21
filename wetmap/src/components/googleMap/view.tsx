@@ -1,30 +1,14 @@
-import React, { useRef } from 'react';
-import {
-  GoogleMap,
-  Marker,
-} from '@react-google-maps/api';
+import React from 'react';
+import { GoogleMap, Marker } from '@react-google-maps/api';
 import style from './style.module.scss';
-import { Cluster, HeatPoint, HeatPointConfiguration, MapConfiguration, SuperclusterInstance, MapWithHeatmapProps } from './types';
+import { Cluster, HeatPoint, HeatPointConfiguration, LatLngObject, MapConfiguration, SuperclusterInstance } from './types';
 import anchorClusterIcon from '../../images/mapIcons/AnchorCluster.png';
 import anchorIconGold from '../../images/mapIcons/AnchorGold.png';
 import mantaIcon from '../../images/Manta32.png';
-import {
-  useState,
-  useContext,
-  useEffect,
-} from 'react';
-
-import { MasterContext } from '../contexts/masterContext';
-import { MinorContext } from '../contexts/minorContext';
-import { PinSpotContext } from '../contexts/pinSpotContext';
-import { DiveSpotContext } from '../contexts/diveSpotContext';
-import { ShopModalContext } from '../contexts/shopModalContext';
-import { ZoomHelperContext } from '../contexts/zoomHelperContext';
-import { CarrouselTilesContext } from '../contexts/carrouselTilesContext';
 import { setupPinConfigs } from './mapPinHelpers';
-import { ModalContext } from '../contexts/modalContext';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
+import { MapWithHeatmap } from './heatmap';
 
 type MapViewProps = {
   mapRef:                google.maps.Map | null
@@ -32,8 +16,8 @@ type MapViewProps = {
   heatpointConfigs:      HeatPointConfiguration
   mapConfig:             number
   zoom:                  number
-  center:                { lat: number, lng: number }
-  tempMarker:            { lat: number, lng: number } | null
+  center:                LatLngObject
+  tempMarker:            LatLngObject | null
   animalVal:             string[]
   clusters:              Cluster[]
   supercluster:          SuperclusterInstance
@@ -50,114 +34,13 @@ type MapViewProps = {
   handleBoundsChange:    () => void
   handleMapCenterChange: () => void
   handleMapZoomChange:   () => void
+  dragPin:               google.maps.LatLng
+  handlePinLoad:         (marker: google.maps.Marker) => void
+  handleDragEnd:         () => void
+  modalShow:             boolean
 };
 
 export default function MapView(props: MapViewProps) {
-  const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
-
-  const { dragPin, setDragPin } = useContext(PinSpotContext);
-
-  const { masterSwitch } = useContext(MasterContext);
-  const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
-
-  const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
-
-  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
-
-  const { shopModal } = useContext(ShopModalContext);
-
-  const { setTiles } = useContext(CarrouselTilesContext);
-
-  const { modalShow } = useContext(ModalContext);
-
-
-  useEffect(() => {
-    if (props.mapConfig === 1) {
-      setDragPin({ lat: props.mapCoords[0], lng: props.mapCoords[1] });
-    }
-  }, [props.mapConfig]);
-
-
-  useEffect(() => {
-    if (zoomHelper) {
-      if (shopModal) {
-        props.setMapZoom(16);
-        // setMinorSwitch(true);
-      } else if (!shopModal) {
-        props.setMapZoom(12);
-        // setMinorSwitch(false);
-      }
-      setZoomHelper(false);
-    }
-
-    if (props.mapRef) {
-      props.mapRef.panTo({ lat: props.mapCoords[0], lng: props.mapCoords[1] });
-    }
-
-    props.handleMapUpdates();
-  }, [props.mapCoords, props.divesTog, props.animalVal]);
-
-
-  const MapWithHeatmap: React.FC<MapWithHeatmapProps> = ({
-    map,
-    heatpts,
-    mapConfig,
-    heatpointConfigs,
-  }) => {
-    const heatmapRef = useRef<google.maps.visualization.HeatmapLayer | null>(null);
-
-    useEffect(() => {
-      if (!map) return;
-
-      if (!heatmapRef.current) {
-        heatmapRef.current = new google.maps.visualization.HeatmapLayer({
-          data: heatpts,
-          map:  map,
-          ...heatpointConfigs,
-        });
-      } else {
-        heatmapRef.current.setData(heatpts);
-      }
-
-      heatmapRef.current.setOptions(heatpointConfigs);
-
-      if ([0, 2].includes(mapConfig)) {
-        heatmapRef.current.setMap(map);
-      } else {
-        heatmapRef.current.setMap(null);
-      }
-
-      return () => {
-        if (heatmapRef.current) {
-          heatmapRef.current.setMap(null);
-        }
-      };
-    }, [map, heatpts, mapConfig, heatpointConfigs]);
-
-    return null;
-  };
-
-  const handlePinLoad = (marker: google.maps.Marker) => {
-    setPinRef(marker);
-  };
-
-  const handleDragEnd = () => {
-    if (pinRef) {
-      const position = pinRef;
-      if (position instanceof google.maps.LatLng) {
-        setAddSiteVals({
-          ...addSiteVals,
-          Latitude:  position.lat(),
-          Longitude: position.lng(),
-        });
-      }
-    }
-  };
-
-  const cleanupModals = () => {
-    setTiles(true);
-  };
-
   return (
     <GoogleMap
       zoom={props.zoom}
@@ -168,7 +51,6 @@ export default function MapView(props: MapViewProps) {
       onCenterChanged={props.handleMapCenterChange}
       onZoomChanged={props.handleMapZoomChange}
       onBoundsChanged={props.handleBoundsChange}
-      onClick={cleanupModals}
     >
 
       {props.clusters
@@ -180,7 +62,7 @@ export default function MapView(props: MapViewProps) {
             = setupPinConfigs(
               cluster.properties,
               cluster.geometry.coordinates,
-              modalShow,
+              props.modalShow,
               props.selectedDiveSite,
               props.setSelectedDiveSite,
               props.setSelectedShop);
@@ -225,7 +107,6 @@ export default function MapView(props: MapViewProps) {
         );
       })}
 
-
       {([0, 2].includes(props.mapConfig)) && (props.heatpts.length > 0) && (
         <MapWithHeatmap
           mapConfig={props.mapConfig}
@@ -240,11 +121,11 @@ export default function MapView(props: MapViewProps) {
       {props.mapConfig === 1
         ? (
             <Marker
-              position={dragPin}
+              position={props.dragPin}
               draggable={true}
               icon={mantaIcon}
-              onLoad={handlePinLoad}
-              onDragEnd={handleDragEnd}
+              onLoad={props.handlePinLoad}
+              onDragEnd={props.handleDragEnd}
             >
             </Marker>
           )
