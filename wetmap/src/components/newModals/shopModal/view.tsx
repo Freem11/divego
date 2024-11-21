@@ -16,18 +16,19 @@ import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
-import { DiveShop } from '../../../entities/diveShop';
+import { DiveShop, ItineraryItem } from './types';
+// import { ItineraryList } from '../../../entities/itineraryList'; 
 
 
 type ShopModelViewProps = {
-  setSelectedID: (id: number | null) => void;
+  setSelectedID: (id: number) => void;
   setShopModal: (value: boolean) => void;
   onClose: () => void
   onDiveShopBioChange:  (newValue: string) => void
 
   diveShop: DiveShop | null
-  isPartnerAccount:     boolean
-  itineraryList: string | null
+  isPartnerAccount: boolean
+  itineraryList: ItineraryItem[] | null
   selectedID: number | null;
 };
 
@@ -58,7 +59,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           <div className="stack-4">
             <div>
               <div className="d-flex">
-                <h1 className="mb-0">{props?.diveShop.orgName}</h1>
+                <h1 className="mb-0">{props?.diveShop?.orgName}</h1>
               </div>
             </div>
 
@@ -66,7 +67,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
               <div className="panel-body">
                 <PlainTextInput
                   placeHolder={`A little about ${props?.diveShop?.orgName}`}
-                  content={props?.diveShop?.diveShopBio || ''} // diveShopBio doesn't exist yet.
+                  content={props?.diveShop?.diveShopBio || ''} 
                   readOnly={!props?.isPartnerAccount}
                   onSubmit={props?.onDiveShopBioChange}
                 />
@@ -74,17 +75,16 @@ export default function ShopModalView(props: ShopModelViewProps) {
             </div>
           </div>
         </div>
-        <div className="ml-6">
-          <h3 class="text-left">{props?.shopDescription}</h3>
-        </div>
       </div>
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
           <h3>Offered Diving Trips</h3>
           {props?.isPartnerAccount && (
-            <Button className="mt-2 btn-lg">
+            <div className={`${style.buttonAddDivingEvents}`}>
+              <Button className="mt-2 btn-lg">
                 Add diving event
-            </Button> 
+              </Button> 
+            </div>
           )}     
         </div>
         <div className={`${style.itineraryList}`}>
@@ -100,7 +100,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
                 />
               );
             })}
-          {props?.itineraryList.length === 0 && (
+          {props?.itineraryList?.length === 0 && (
             <div>
               <p className="noSightings">
                 No Trips are currently being offered.

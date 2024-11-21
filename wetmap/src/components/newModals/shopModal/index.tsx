@@ -7,6 +7,7 @@ import { MasterContext } from '../../contexts/masterContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
+import { ItineraryItem } from './types';
 import ShopModalView from './view';
 
 export default function ShopModal(props) {
@@ -20,8 +21,8 @@ export default function ShopModal(props) {
 
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [siteCloseState, setSiteCloseState] = useState(false);
-  const [itineraryList, setItineraryList] = useState('');
-  const [selectedID, setSelectedID] = useState(null);
+  const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
+  const [selectedID, setSelectedID] = useState<number>(0);
 
   useEffect(() => {
     if (selectedShop[0]) {
@@ -57,8 +58,10 @@ export default function ShopModal(props) {
   const handleShopModalClose = () => {
     props.onModalCancel();
     setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
-    setItineraryList('');
+    setItineraryList([]);
   };
+
+  // console.log(itineraryList); // Just to get the datatype of itins
 
   return (
     <>
