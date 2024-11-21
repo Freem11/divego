@@ -58,9 +58,9 @@ const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number
   });
   setSelectedDiveSite({
     ...selectedDiveSite,
-    SiteName:  diveSiteName,
-    Latitude:  lat,
-    Longitude: lng,
+    name:      diveSiteName,
+    lat:  lat,
+    lng:  lng,
   });
 };
 
