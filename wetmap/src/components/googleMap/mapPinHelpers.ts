@@ -35,7 +35,7 @@ function setupShopClusters(shopData: DiveShop[]) {
     type:       'Feature',
     properties: {
       cluster:  false,
-      siteID:   shop.orgname,
+      siteID:   shop.orgName,
       category: 'Shop',
     },
     geometry: { type: 'Point', coordinates: [shop.lng, shop.lat] },
@@ -44,7 +44,7 @@ function setupShopClusters(shopData: DiveShop[]) {
   return points;
 }
 
-const setupDiveShopModal = async (shopName: string, modalShow, setSelectedShop) => {
+const setupDiveShopModal = async (shopName: string, modalShow, setSelectedShop: (shop: { [x: string]: any } | undefined) => void) => {
   modalShow(ShopModal, {
     size: ModalWindowSize.L,
   });
@@ -52,7 +52,7 @@ const setupDiveShopModal = async (shopName: string, modalShow, setSelectedShop) 
   setSelectedShop(chosenShop && chosenShop[0]);
 };
 
-const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, selectedDiveSite, setSelectedDiveSite) => {
+const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, selectedDiveSite: DiveSiteWithUserName, setSelectedDiveSite: (info: DiveSiteWithUserName) => void) => {
   modalShow(DiveSite, {
     size: ModalWindowSize.L,
   });
@@ -64,7 +64,7 @@ const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number
   });
 };
 
-function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow, selectedDiveSite, setSelectedDiveSite, setSelectedShop) {
+function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow, selectedDiveSite: DiveSiteWithUserName, setSelectedDiveSite: (info: DiveSiteWithUserName) => void, setSelectedShop: (shop: { [x: string]: any } | undefined) => void) {
   const [longitude, latitude] = coordinates;
   const iconType = info.category === 'Dive Site' ? anchorIcon : info.category === 'Dive Site Selected' ? anchorIconGold : shopIcon;
 
