@@ -118,8 +118,6 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
             />
           </div> */}
         </div>
-        {/* <DiveSiteImage></DiveSiteImage> */}
-        {/* style={{ backgroundColor: 'lightBlue' }} */}
         <div className="panel-body">
           {props?.diveSitePics?.map((packet) => {
             return (
