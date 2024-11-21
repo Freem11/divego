@@ -23,3 +23,10 @@
     background-color: $primaryBlue;
     overflow: hidden;
 }
+
+.panelBodyDiveSite {
+    flex: 1 1 auto;
+    overflow-y: auto;
+    padding: 0 $layout-spacing-lg;
+    background-color: antiquewhite;
+  }

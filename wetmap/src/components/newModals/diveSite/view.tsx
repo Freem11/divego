@@ -120,7 +120,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         </div>
         {/* <DiveSiteImage></DiveSiteImage> */}
         {/* style={{ backgroundColor: 'lightBlue' }} */}
-        <div className="panel-body">
+        <div className={style.panelBodyDiveSite}>
           {props?.diveSitePics?.map((packet) => {
             return (
               <div key={packet.dateTaken}>
