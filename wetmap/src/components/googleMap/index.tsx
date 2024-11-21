@@ -49,7 +49,6 @@ export default function MapLoader() {
 
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
 
-
   const { dragPin, setDragPin } = useContext(PinSpotContext);
 
   const { animalVal } = useContext(AnimalContext);
@@ -162,8 +161,8 @@ export default function MapLoader() {
     if (mapRef) {
       const position = mapRef.getCenter();
       if (position) {
-        if (selectedShop.orgName !== '') {
-          const latlng = new google.maps.LatLng(selectedShop[0].lat, selectedShop[0].lng);
+        if (selectedShop.orgname !== '') {
+          const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
           mapRef.panTo(latlng);
           setMapZoom(16);
         }
@@ -176,16 +175,16 @@ export default function MapLoader() {
     if (mapRef) {
       const position = mapRef.getCenter();
       if (position) {
-        if (selectedDiveSite.SiteName !== '') {
-          const latlng = new google.maps.LatLng(selectedDiveSite.Latitude, selectedDiveSite.Longitude);
+        if (selectedDiveSite.name !== '') {
+          const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
           mapRef.panTo(latlng);
           setMapZoom(16);
         }
       }
-      if (selectedDiveSite.Latitude !== '') {
+      if (!selectedDiveSite.lat) {
         setTempMarker({
-          lat: selectedDiveSite.Latitude,
-          lng: selectedDiveSite.Longitude,
+          lat: selectedDiveSite.lat,
+          lng: selectedDiveSite.lng,
         });
       }
     }

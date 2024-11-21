@@ -44,13 +44,12 @@ function setupShopClusters(shopData: DiveShop[]) {
   return points;
 }
 
-
 const setupDiveShopModal = async (shopName: string, modalShow, setSelectedShop) => {
   modalShow(ShopModal, {
     size: ModalWindowSize.L,
   });
   const chosenShop = await getShopByName(shopName);
-  setSelectedShop(chosenShop);
+  setSelectedShop(chosenShop && chosenShop[0]);
 };
 
 const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, selectedDiveSite, setSelectedDiveSite) => {

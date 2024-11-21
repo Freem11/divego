@@ -64,15 +64,15 @@ export default function ShopModal(props) {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   useEffect(() => {
-    if (selectedShop[0]) {
-      getItineraries(selectedShop[0].id);
+    if (selectedShop) {
+      getItineraries(selectedShop.id);
       setMasterSwitch(true);
     }
   }, [selectedShop]);
 
   useEffect(() => {
     if (shopModal && zoomHelper) {
-      setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
+      setMapCoords([selectedShop.lat, selectedShop.lng]);
     }
   }, [shopModal]);
 
@@ -96,8 +96,8 @@ export default function ShopModal(props) {
 
   return (
     <>
-      {selectedShop[0] && (
-        <ShopModalView shopModelName={selectedShop[0].orgName} shopDescription="test" />
+      {selectedShop && (
+        <ShopModalView shopModelName={selectedShop.orgName} shopDescription="test" />
       )}
     </>
   );

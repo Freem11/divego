@@ -1,10 +1,10 @@
 export type DiveShop = {
   id:                   number
-  orgname:              string
+  orgName:              string
   lat:                  number
   lng:                  number
-  userid:               string
+  userId:               string
   created_at:           string
-  diveshopbio:          string
-  diveshopprofilephoto: string
+  diveShopBio:          string
+  diveShopProfilePhoto: string
 };

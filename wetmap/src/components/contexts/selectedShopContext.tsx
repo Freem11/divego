@@ -9,13 +9,13 @@ type SelectedShopContextType = {
 const SelectedShopContextState = {
   selectedShop:      {
     id:                   0,
-    orgname:              '',
+    orgName:              '',
     lat:                  0,
     lng:                  0,
-    userid:               '',
+    userId:               '',
     created_at:           '',
-    diveshopbio:          '',
-    diveshopprofilephoto: '',
+    diveShopBio:          '',
+    diveShopProfilePhoto: '',
 
   },
   setSelectedShop: () => {},
@@ -28,13 +28,13 @@ export const SelectedShopContext = createContext<SelectedShopContextType>(
 const SelectedShopContextProvider = ({ children }: any) => {
   const [selectedShop, setSelectedShop] = useState<DiveShop>({
     id:                   0,
-    orgname:              '',
+    orgName:              '',
     lat:                  0,
     lng:                  0,
-    userid:               '',
+    userId:               '',
     created_at:           '',
-    diveshopbio:          '',
-    diveshopprofilephoto: '',
+    diveShopBio:          '',
+    diveShopProfilePhoto: '',
   });
 
   return (
