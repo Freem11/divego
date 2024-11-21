@@ -34,8 +34,8 @@ export default function MapLoader() {
   const [newShops, setnewShops] = useState<DiveShop[]>([]);
 
   const { mapConfig } = useContext(MapConfigContext);
-
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
+
   const { sitesArray } = useContext(SitesArrayContext);
 
   const { boundaries, setBoundaries } = useContext(MapBoundsContext);
