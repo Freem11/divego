@@ -76,6 +76,7 @@ export default function ShopModal(props) {
         isPartnerAccount={isPartnerAccount}
         itineraryList={itineraryList}
         selectedID={selectedID}
+        headerPictureUrl={selectedShop[0].headerPictureUrl}
       />
     )}
     </>

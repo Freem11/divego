@@ -8,7 +8,6 @@ import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import { DiveShop, ItineraryItem } from './types';
-// import { ItineraryList } from '../../../entities/itineraryList'; 
 
 
 type ShopModelViewProps = {
