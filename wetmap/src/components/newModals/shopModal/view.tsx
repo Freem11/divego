@@ -2,15 +2,6 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
-import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { ShopModalContext } from '../../contexts/shopModalContext';
-import { MasterContext } from '../../contexts/masterContext';
-import { CoordsContext } from '../../contexts/mapCoordsContext';
-import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
-import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
-import CloseButton from '../../closeButton/closeButton';
-import shopModalView from './view';
 import PlainTextInput from '../../reusables/plainTextInput';
 import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
@@ -30,6 +21,7 @@ type ShopModelViewProps = {
   isPartnerAccount: boolean
   itineraryList: ItineraryItem[] | null
   selectedID: number;
+  headerPictureUrl: string | null;
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
