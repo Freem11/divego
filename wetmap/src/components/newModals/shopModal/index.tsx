@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { updateDiveShop } from '../../supabaseCalls/shopsSupabaseCalls';
+import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ShopModalContext } from '../../contexts/shopModalContext';
 import { MasterContext } from '../../contexts/masterContext';
@@ -62,7 +62,7 @@ export default function ShopModal(props) {
         })));
       }
     } catch (e) {
-      console.log({ title: 'Error', message: e.message });
+      console.log({ title: 'Error', message: (e as Error).message });
     }
   };
 
@@ -72,7 +72,11 @@ export default function ShopModal(props) {
     setItineraryList([]);
   };
 
-  // console.log(itineraryList); // Just to get the datatype of itins
+  const handleDiveShopBioChange = async (newValue: string) => {
+    if (selectedShop[0]) {
+      await updateDiveShop({ id: selectedShop[0].id, bio: newValue });
+    }
+  };
 
   return (
     <>
@@ -81,7 +85,7 @@ export default function ShopModal(props) {
           setSelectedID={setSelectedID}
           setShopModal={setShopModal}
           onClose={handleShopModalClose}
-          onDiveShopBioChange={(newValue: string) => console.log('This is a placeholder for future logic. ' + newValue)}
+          handleDiveShopBioChange={handleDiveShopBioChange}
 
           diveShop={selectedShop[0]}
           isPartnerAccount={isPartnerAccount}

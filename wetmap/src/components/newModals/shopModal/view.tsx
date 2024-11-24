@@ -11,20 +11,19 @@ import { DiveShop, ItineraryItem } from './types';
 
 
 type ShopModelViewProps = {
-  setSelectedID: (id: number) => void;
-  setShopModal: (value: boolean) => void;
-  onClose: () => void
-  onDiveShopBioChange:  (newValue: string) => void
+  setSelectedID:           (id: number) => void
+  setShopModal:            (value: boolean) => void
+  onClose:                 () => void
+  handleDiveShopBioChange: (newValue: string) => void
 
-  diveShop: DiveShop | null
+  diveShop:         DiveShop | null
   isPartnerAccount: boolean
-  itineraryList: ItineraryItem[] | null
-  selectedID: number;
-  headerPictureUrl: string | null;
+  itineraryList:    ItineraryItem[] | null
+  selectedID:       number
+  headerPictureUrl: string | null
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
-
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
@@ -39,11 +38,11 @@ export default function ShopModalView(props: ShopModelViewProps) {
           <div className={style.buttonImageUpload}>
             {props?.isPartnerAccount && (
               <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className="btn-lg"
-              onClick={() => {}}
+                icon={<Icon name="camera-plus" />}
+                className="btn-lg"
+                onClick={() => {}}
               />
-            )}  
+            )}
           </div>
         </WavyModalHeader>
         <div className="ml-6">
@@ -58,9 +57,9 @@ export default function ShopModalView(props: ShopModelViewProps) {
               <div className="panel-body">
                 <PlainTextInput
                   placeHolder={`A little about ${props?.diveShop?.orgName}`}
-                  content={props?.diveShop?.diveShopBio || ''} 
+                  content={props?.diveShop?.diveShopBio || ''}
                   readOnly={!props?.isPartnerAccount}
-                  onSubmit={props?.onDiveShopBioChange}
+                  onSubmit={props?.handleDiveShopBioChange}
                 />
               </div>
             </div>
@@ -74,23 +73,23 @@ export default function ShopModalView(props: ShopModelViewProps) {
             <div className={`${style.buttonAddDivingEvents}`}>
               <Button className="mt-2 btn-lg">
                 Add diving event
-              </Button> 
+              </Button>
             </div>
-          )}     
+          )}
         </div>
         <div className={`${style.itineraryList}`}>
           {props?.itineraryList// in the future, if itineraryList is not empty, render a loading spinner
-            && props?.itineraryList.map((itinerary) => {
-              return (
-                <Itinerary
-                  key={itinerary.id}
-                  itinerary={itinerary}
-                  setSelectedID={props?.setSelectedID}
-                  selectedID={props?.selectedID}
-                  setShopModal={props?.setShopModal}
-                />
-              );
-            })}
+          && props?.itineraryList.map((itinerary) => {
+            return (
+              <Itinerary
+                key={itinerary.id}
+                itinerary={itinerary}
+                setSelectedID={props?.setSelectedID}
+                selectedID={props?.selectedID}
+                setShopModal={props?.setShopModal}
+              />
+            );
+          })}
           {props?.itineraryList?.length === 0 && (
             <div>
               <p className="noSightings">
