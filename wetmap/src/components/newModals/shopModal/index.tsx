@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { updateDiveShop } from "../../supabaseCalls/shopsSupabaseCalls";
+import { updateDiveShop } from '../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ShopModalContext } from '../../contexts/shopModalContext';
 import { MasterContext } from '../../contexts/masterContext';
@@ -11,7 +11,6 @@ import { ItineraryItem } from './types';
 import ShopModalView from './view';
 
 export default function ShopModal(props) {
-  
   const { shopModal, setShopModal } = useContext(ShopModalContext);
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
@@ -20,7 +19,6 @@ export default function ShopModal(props) {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
-  const [siteCloseState, setSiteCloseState] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
 
@@ -43,14 +41,27 @@ export default function ShopModal(props) {
     }
   }, [shopModal]);
 
-  const getItineraries = async (IdNum) => {
+  const getItineraries = async (IdNum: number) => {
     try {
       const itins = await itineraries(IdNum);
-      if (itins.length > 0) {
-        setItineraryList(itins);
+      if (itins && itins.length > 0) {
+        setItineraryList(itins.map(itin => ({
+          BookingPage: itin.BookingPage,
+          created_at:  itin.created_at,
+          description: itin.description,
+          id:          itin.id,
+          name:        itin.name,
+          shop_id:     itin.shop_id,
+          updated_at:  itin.updated_at,
+          user_id:     itin.user_id,
+          price:       itin.price,
+          shopID:      itin.shopID,
+          siteList:    itin.siteList,
+          startDate:   itin.startDate,
+          tripName:    itin.tripName,
+        })));
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.log({ title: 'Error', message: e.message });
     }
   };
@@ -65,20 +76,20 @@ export default function ShopModal(props) {
 
   return (
     <>
-    {selectedShop[0] && (
-      <ShopModalView 
-        setSelectedID={setSelectedID}
-        setShopModal={setShopModal}
-        onClose={handleShopModalClose} 
-        onDiveShopBioChange={(newValue: string) => console.log("This is a placeholder for future logic. " + newValue)}
+      {selectedShop[0] && (
+        <ShopModalView
+          setSelectedID={setSelectedID}
+          setShopModal={setShopModal}
+          onClose={handleShopModalClose}
+          onDiveShopBioChange={(newValue: string) => console.log('This is a placeholder for future logic. ' + newValue)}
 
-        diveShop={selectedShop[0]}
-        isPartnerAccount={isPartnerAccount}
-        itineraryList={itineraryList}
-        selectedID={selectedID}
-        headerPictureUrl={selectedShop[0].headerPictureUrl}
-      />
-    )}
+          diveShop={selectedShop[0]}
+          isPartnerAccount={isPartnerAccount}
+          itineraryList={itineraryList}
+          selectedID={selectedID}
+          headerPictureUrl={selectedShop[0].headerPictureUrl}
+        />
+      )}
     </>
   );
 }
