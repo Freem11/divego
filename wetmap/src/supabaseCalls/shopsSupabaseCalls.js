@@ -11,8 +11,7 @@ export const shops = async (GPSBubble) => {
     maxLat = GPSBubble.maxLat;
     minLng = GPSBubble.minLng;
     maxLng = GPSBubble.maxLng;
-  }
-  else {
+  } else {
     minLat = lats.lo;
     maxLat = lats.hi;
     minLng = lngs.lo;
@@ -55,14 +54,14 @@ export const getShopByName = async (value) => {
 };
 
 export const updateDiveShop = async (values) => {
-  console.log("updating...", values)
+  console.log('updating...', values);
   const { data, error } = await supabase
-    .from("shops")
+    .from('shops')
     .update({ diveShopBio: values.bio, diveShopProfilePhoto: values.photo  })
-    .eq("id", values.id);
+    .eq('id', values.id);
 
   if (error) {
-    console.log("couldn't do it 2,", error);
+    console.log('couldn\'t do it 2,', error);
     return [];
   }
 
@@ -73,18 +72,17 @@ export const updateDiveShop = async (values) => {
 
 
 export const getShopByUserID = async (value) => {
-
   const { data, error } = await supabase
-  .from("shops")
-  .select()
-  .eq("userId", value)
+    .from('shops')
+    .select()
+    .eq('userId', value);
 
-if (error) {
-  console.log("couldn't do it 39,", error);
-  return [];
-}
+  if (error) {
+    console.log('couldn\'t do it 39,', error);
+    return [];
+  }
 
-if (data) {
-  return data;
-}
+  if (data) {
+    return data;
+  }
 };
