@@ -78,6 +78,8 @@ export default function ShopModal(props) {
     }
   };
 
+  console.log('selectedShop:', selectedShop[0]);
+
   return (
     <>
       {selectedShop[0] && (
