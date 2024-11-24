@@ -1,1 +1,11 @@
 @import "../../../styles/variables.scss";
+
+.horizontalButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 3;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+  }
