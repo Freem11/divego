@@ -40,11 +40,11 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
           onClose={props.onClose}
         >
           <div className={style.buttonOpenPictureUpload}>
-            <Button className="btn-lg" onClick={props.openPicUploader}>
+            {/* <Button className="btn-lg" onClick={props.openPicUploader}>
               <span className="hide-sm">
                 {screenData.DiveSite.addSightingButton}
               </span>
-            </Button>
+            </Button> */}
           </div>
 
           <div className={style.buttonImageUpload}>
@@ -95,7 +95,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
           <h3>{screenData.DiveSite.drawerHeader}</h3>
-          <div>
+          <div className={style.addPictureButton}>
             <Button className="btn-lg" onClick={props.openPicUploader}>
               <span className="hide-sm">
                 {screenData.DiveSite.addSightingButton}
