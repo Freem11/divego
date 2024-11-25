@@ -16,6 +16,9 @@ type SiteSubmitterProps = {
   onSubmit: (data: any) => void
   values?:  Form
   onClose: () => void
+  getDeviceLocation: () => void
+  onNavigate: () => void
+  handleSubmit: () => void
 };
 
 export default function SiteSubmitterView(props: SiteSubmitterProps) {
@@ -60,44 +63,33 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           
           <div className = 'col-3'>
             <Button
+              onClick={props.getDeviceLocation}
               disabled={isSubmitting}
-              className="btn-md"
+              className="btn-md btnWhite"
               type="submit"
             >
-              {screenData.DiveSiteAdd.myLocationButton}
+              <text>{screenData.DiveSiteAdd.myLocationButton}</text>
             </Button>
           </div>
 
           <div className = "col-3 ">
             <Button
+              onClick={props.onNavigate}
               disabled={isSubmitting}
-              className="btn-md"
+              className={'btn-md btnWhite'}
               type="submit"
             >
               {screenData.DiveSiteAdd.pinButton}
             </Button>
           </div>
         </div>
-        {/*
-          <Button
-            onClick={getDeviceLocation}
-            btnText={screenData.DiveSiteAdd.myLocationButton}
-            helperText={screenData.DiveSiteAdd.myLocationExplainer}
-            altStyle={true}
-          />
-          <Button
-            onClick={onNavigate}
-            btnText={screenData.DiveSiteAdd.pinButton}
-            altStyle={true}
-          />
-          */}
-
       
         <div className={style.horizontalButtonContainer}>
           <div className= 'col-3' ></div>
 
           <div className='col-3'>
             <Button
+              onClick={props.handleSubmit}
               disabled={isSubmitting}
               className="btn-md bg-primary"
               type="submit"
@@ -106,16 +98,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
               {screenData.DiveSiteAdd.submitButton}
             </Button>
           </div>
-          {/*
-          <Button
-            onClick={handleSubmit}
-            btnText={screenData.DiveSiteAdd.submitButton}
-            icon={true}
-          />
-          */}
         </div>
-        
-
       </form>
     </div>
   );
