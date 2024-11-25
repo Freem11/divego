@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
@@ -74,7 +74,7 @@ export default function ShopModal(props) {
 
   const handleDiveShopBioChange = async (newValue: string) => {
     if (selectedShop[0]) {
-      await updateDiveShop({ id: selectedShop[0].id, bio: newValue });
+      await updateDiveShop({ id: selectedShop[0].id, bio: newValue, photo: selectedShop[0].diveShopProfilePhoto });
     }
   };
 

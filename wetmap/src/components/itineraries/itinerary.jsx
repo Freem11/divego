@@ -32,8 +32,7 @@ export default function Itinerary(props) {
 
     if (hiddenHeigth === 0) {
       setHiddenHeigth(150);
-    }
-    else {
+    } else {
       setHiddenHeigth(0);
     }
   };
@@ -79,12 +78,12 @@ export default function Itinerary(props) {
           </p>
         </div>
         <div className="buttonBox">
-          <ButtonIcon 
+          <ButtonIcon
             icon={<Icon name="anchor" />}
             className="btn-lg buttonStyling"
             onClick={() => flipMap(itinerary.siteList)}
           />
-          <ButtonIcon 
+          <ButtonIcon
             icon={<Icon name="diving-scuba-flag" />}
             className="btn-lg buttonStyling"
             // onClick={}
