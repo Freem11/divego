@@ -27,6 +27,7 @@ const defaultProps = {
   allowCreate:        false as boolean,
   placeholder:        'Select' as string,
   disabled:           false as boolean,
+  error:              null as any,
 
   /**
    * If true, the select is open and progress indicator is shown
@@ -171,10 +172,6 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
       props.onChange({ target: { name: props.name, value: result } });
     }
 
-    if (forwardedRef && 'current' in forwardedRef && forwardedRef.current) {
-      forwardedRef.current.value = JSON.stringify(result);
-    }
-
     initRef.current = true;
   }, [value]);
 
@@ -289,11 +286,12 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
     <div
       ref={wrapperRef}
       aria-expanded={isOpen === true}
+      aria-invalid={!!props.error}
       aria-multiselectable={isMulti || undefined}
       className={props.className}
       role="listbox"
     >
-      <input type="hidden" name={props.name} ref={forwardedRef} />
+      <input type="hidden" name={props.name} ref={forwardedRef} value={JSON.stringify(getResultValue(value, props.labelInValue, isMulti)) ?? ''} />
 
       <div className="trigger" onClick={onTriggerClick}>
 

@@ -25,7 +25,6 @@
   border-bottom: 1px solid var(--ssrc-select-border-color);
   color: var(--ssrc-select-text-color);
 
-
   /* Component: Trigger */
   & .trigger {
     height: var(--ssrc-select-control-height);
@@ -274,6 +273,11 @@
     &::after {
       content: '”';
     }
+  }
+
+  /* State: error */
+  &[aria-invalid="true"] {
+    border-color: red;
   }
 
   /* State: expanded */
