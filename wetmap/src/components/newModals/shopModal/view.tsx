@@ -11,10 +11,11 @@ import { DiveShop, ItineraryItem } from './types';
 
 
 type ShopModelViewProps = {
-  setSelectedID:           (id: number) => void
-  setShopModal:            (value: boolean) => void
-  onClose:                 () => void
-  handleDiveShopBioChange: (newValue: string) => void
+  setSelectedID:                (id: number) => void
+  setShopModal:                 (value: boolean) => void
+  onClose:                      () => void
+  handleDiveShopBioChange:      (newValue: string) => void
+  handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
 
   diveShop:         DiveShop | null
   isPartnerAccount: boolean
@@ -31,7 +32,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
         ref={fileUploaderRef}
         className="d-hide"
         type="file"
-        onChange={props.handleImageSelection}
+        onChange={props.handleDiveShopImageSelection}
       />
       <div className="col-6">
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>

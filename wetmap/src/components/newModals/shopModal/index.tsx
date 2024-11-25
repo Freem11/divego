@@ -88,6 +88,7 @@ export default function ShopModal(props) {
           setShopModal={setShopModal}
           onClose={handleShopModalClose}
           handleDiveShopBioChange={handleDiveShopBioChange}
+          handleDiveShopImageSelection={() => {}}
 
           diveShop={selectedShop[0]}
           isPartnerAccount={isPartnerAccount}
