@@ -1,3 +1,4 @@
+import { PhotoWaits } from '../entities/photoWaits';
 import { supabase } from '../supabase';
 
 export const photoWaits = async () => {
@@ -15,20 +16,10 @@ export const photoWaits = async () => {
   }
 };
 
-export const insertPhotoWaits = async (values) => {
-  console.log('supa gets', values);
+export const insertPhotoWaits = async (values: Omit<PhotoWaits, 'id' | 'created_at' | 'userName'>) => {
   const { data, error } = await supabase
     .from('photoWait')
-    .insert([
-      {
-        photoFile: values.PicFile,
-        label:     values.Animal,
-        dateTaken: values.PicDate,
-        latitude:  values.Latitude,
-        longitude: values.Longitude,
-        UserID:    values.UserID,
-      },
-    ]);
+    .insert([values]);
 
   if (error) {
     console.log('couldn\'t do it,', error);
