@@ -122,7 +122,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
           {props?.diveSitePics?.map((packet) => {
             return (
               <div key={packet.dateTaken} className={style.panelBodyDiveSite}>
-                <div className="">{packet.dateTaken}</div>
+                <div className={style.panelDate}>{packet.dateTaken}</div>
                 {packet.photos
                 && packet.photos.map((pic) => {
                   return (
