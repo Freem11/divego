@@ -64,15 +64,15 @@ export default function ShopModal(props) {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   useEffect(() => {
-    if (selectedShop[0]) {
-      getItineraries(selectedShop[0].id);
+    if (selectedShop) {
+      getItineraries(selectedShop.id);
       setMasterSwitch(true);
     }
   }, [selectedShop]);
 
   useEffect(() => {
     if (shopModal && zoomHelper) {
-      setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
+      setMapCoords([selectedShop.lat, selectedShop.lng]);
     }
   }, [shopModal]);
 
@@ -82,14 +82,13 @@ export default function ShopModal(props) {
       if (itins.length > 0) {
         setItineraryList(itins);
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.log({ title: 'Error', message: e.message });
     }
   };
 
   const handleShopModalClose = () => {
-    setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
+    setSelectedShop({ ...selectedShop, id: 0, orgname: '' });
     setItineraryList('');
     setShopModal(false);
   };
@@ -97,9 +96,9 @@ export default function ShopModal(props) {
 
   return (
     <>
-    {selectedShop[0] && (
-      <ShopModalView shopModelName={selectedShop[0].orgName} shopDescription="test"/>
-    )}
+      {selectedShop && (
+        <ShopModalView shopModelName={selectedShop.orgname} shopDescription="test" />
+      )}
     </>
   );
 }

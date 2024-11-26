@@ -4,7 +4,7 @@ import { multiHeatPoints } from '../../supabaseCalls/heatPointSupabaseCalls';
 import { getPhotosforMapArea } from '../../supabaseCalls/photoSupabaseCalls';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import { HeatPointsContext } from '../contexts/heatPointsContext';
-import { formatHeatVals } from '../../helpers/heatPointHelpers';
+import { formatHeatVals } from '../googleMap/mapDataHelpers';
 import './photoMenu.css';
 import PhotoMenuListItem from './photoMenuListItem';
 import AliceCarousel from 'react-alice-carousel';
@@ -44,12 +44,10 @@ const PhotoMenu = () => {
 
             setAreaPics(animalArray);
           }
-        }
-        catch (e) {
+        } catch (e) {
           console.log({ title: 'Error', message: e.message });
         }
-      }
-      else {
+      } else {
         try {
           const photos = await getPhotosforMapArea({
             minLat: boundaries[1],
@@ -66,8 +64,7 @@ const PhotoMenu = () => {
 
             setAreaPics(animalArray);
           }
-        }
-        catch (e) {
+        } catch (e) {
           console.log({ title: 'Error', message: e.message });
         }
       }
@@ -89,8 +86,7 @@ const PhotoMenu = () => {
         if (localHeatPoints) {
           setHeatPts(formatHeatVals(localHeatPoints));
         }
-      }
-      catch (e) {
+      } catch (e) {
         console.log({ title: 'Error', message: e.message });
       }
     }

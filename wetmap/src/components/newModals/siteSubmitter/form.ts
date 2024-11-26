@@ -2,14 +2,14 @@
 import { FormValidationRules } from '../../../forms/form';
 
 export interface Form {
-  name:      string
-  latitude:  number
-  longitude: number
+  Site:      string
+  Latitude:  number
+  Longitude: number
 }
 
 
 export const FormRules: FormValidationRules<Form> = {
-  name: {
+  Site: {
     required: 'Dive site name cannot be empty',
   },
   // longitude: {

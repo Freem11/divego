@@ -7,7 +7,7 @@ import TextInput from '../../reusables/textInput';
 import ButtonIcon from '../../reusables/buttonIcon';
 import screenData from '../screenData.json';
 import DynamicSelect from '../../reusables/dynamicSelect';
-import backGroundPic from '../../../images/boat.png';
+import backGroundPic from '../../../images/blackManta.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 
 import style from './style.module.scss';
