@@ -26,8 +26,8 @@ export default function DiveSite(props) {
 
   const getPhotos = async () => {
     const success = await getPhotosByDiveSiteWithExtra({
-      lat:    selectedDiveSite.Latitude,
-      lng:    selectedDiveSite.Longitude,
+      lat:    selectedDiveSite.lat,
+      lng:    selectedDiveSite.lng,
       userId: profile[0].UserID,
     });
     setDiveSitePics(success);
@@ -36,7 +36,7 @@ export default function DiveSite(props) {
   const getDiveSite = async () => {
     try {
       const selectedSite = await getDiveSiteWithUserName({
-        siteName: selectedDiveSite.SiteName,
+        siteName: selectedDiveSite.name,
       });
       if (selectedSite.length > 0) {
         setDiveSite(selectedSite[0]);
@@ -64,9 +64,9 @@ export default function DiveSite(props) {
   const openPicUploader = () => {
     setPin({
       ...pin,
-      Latitude:  String(selectedDiveSite.Latitude),
-      Longitude: String(selectedDiveSite.Longitude),
-      siteName:  selectedDiveSite.SiteName,
+      Latitude:  String(selectedDiveSite.lat),
+      Longitude: String(selectedDiveSite.lng),
+      siteName:  selectedDiveSite.name,
     });
 
     modalShow(PicUploader, {

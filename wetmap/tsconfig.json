@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
       "target": "es5", // Specify ECMAScript target version
+      "types": ["vite/client"],
       "lib": [
         "dom",
         "dom.iterable",

@@ -52,6 +52,7 @@
 @import "node_modules/spectre.css/src/utilities";
 @import "./fonts.scss";
 @import "./mixins/stack.scss";
+@import "./mixins/blinking.scss";
 
 @include padding-variant(4, $unit-4);
 @include padding-variant(6, $unit-6);
@@ -60,7 +61,7 @@
 
 @include stack('stack-4', $unit-4);
 
-.extra-shadow{
+.extra-shadow {
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
 }
 
@@ -70,21 +71,27 @@
   justify-content: space-between;
 }
 
-.border-none{
+.border-none {
   border: none;
 }
 
-.full-height{
+.full-height {
   height: 100%;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-weight: 100;
   color: $gray-color;
 }
 
-.layout-group {
-  &>:not(:last-child) {
-    margin-bottom: $layout-spacing-lg;
-  }
+.ssrc-select {
+  --ssrc-select-border-color: #{$gray-color};
+  --ssrc-select-text-color: #{$gray-color};
+  --ssrc-select-control-height: #{$control-size};
+  --ssrc-select-trigger-text-color: #{$body-font-color};
 }

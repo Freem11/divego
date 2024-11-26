@@ -5,6 +5,7 @@
   display: flex;
   border-bottom: 1px solid $gray-color;
   color: $gray-color;
+  position: relative;
 
   &.error {
     border-bottom: 1px solid red;
@@ -17,6 +18,24 @@
 
   input:focus {
     outline: none;
+  }
+
+  input:disabled {
+    background-color: transparent;
+  }
+
+  // to open calendar onClick on the whole input, not only small picker icon
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
   }
 
   .iconLeft,

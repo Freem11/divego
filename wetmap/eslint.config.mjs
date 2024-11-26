@@ -22,11 +22,13 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
+        'google': 'readonly',
       },
     },
     rules: {
-      'no-useless-escape': ['off'],
-      'no-unused-vars':    ['error', {
+      'no-prototype-builtins': ['off'],
+      'no-useless-escape':     ['off'],
+      'no-unused-vars':        ['error', {
         'destructuredArrayIgnorePattern': '^_',
       }],
 
