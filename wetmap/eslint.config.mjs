@@ -26,8 +26,9 @@ export default [
       },
     },
     rules: {
-      'no-useless-escape': ['off'],
-      'no-unused-vars':    ['error', {
+      'no-prototype-builtins': ['off'],
+      'no-useless-escape':     ['off'],
+      'no-unused-vars':        ['error', {
         'destructuredArrayIgnorePattern': '^_',
       }],
 

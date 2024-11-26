@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 
 import Icon from '../../../icons/Icon';
@@ -11,24 +11,38 @@ import backGroundPic from '../../../images/blackManta.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 
 import style from './style.module.scss';
+import { Form, FormRules } from './form';
+import FileInput from '../../reusables/fileInput';
 
 type PicUploaderViewProps = {
-  onSubmit:       (data: any) => void
-  getMoreAnimals: (search: string, limit: number, skip: number) => Promise<any>
+  values:               Form
+  onClose:              () => void
+  onSubmit:             (data: any) => void
+  getMoreAnimals:       (search: string, limit: number, skip: number) => Promise<any>
+  handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
+  headerPictureUrl:     string | null
 };
 
 export default function PicUploaderView(props: PicUploaderViewProps) {
-  const { register, handleSubmit } = useForm();
+  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
+    values:   props.values,
+  });
 
   return (
     <div className="flex-column-between full-height">
-      <WavyModalHeader image={backGroundPic}>
+
+      <WavyModalHeader image={props.headerPictureUrl || backGroundPic} onClose={props.onClose}>
         <div className={style.buttonImageUpload}>
-          <ButtonIcon
-            icon={<Icon name="camera-plus" />}
-            className="btn-lg"
-            onClick={() => fileUploaderRef?.current?.click?.()}
-          />
+          <FileInput
+            {...register('photo', FormRules.photo)}
+            onFileChange={props.handleImageSelection}
+            className="d-none"
+          >
+            <ButtonIcon
+              icon={<Icon name="camera-plus" />}
+              className={`btn-lg ${errors.photo ? 'blinking' : ''}`}
+            />
+          </FileInput>
         </div>
       </WavyModalHeader>
 
@@ -40,37 +54,47 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <h1 className="mb-0 text-clip">{screenData.PicUploader.header}</h1>
         </div>
 
-        <div className="stack-4">
+        <div className="stack-4 mb-2">
           <DynamicSelect
+            {...register('animal', FormRules.animal)}
             allowCreate={true}
             labelInValue={true}
             modeSelectedTags="on"
+            placeholder={screenData.PicUploader.whatPlaceholder}
             getMoreOptions={props.getMoreAnimals}
             iconLeft={<Icon name="shark" />}
-            {...register('animal')}
+            error={errors.animal}
           />
 
           <TextInput
+            {...register('date', FormRules.date)}
+            type="date"
             iconLeft={<Icon name="calendar-month" />}
             placeholder={screenData.PicUploader.whenPlaceholder}
-            {...register('date')}
+            error={errors.date}
           />
 
           <TextInput
-            iconLeft={<Icon name="anchor" />}
-            iconRight={<Icon name="anchor" />}
-            placeholder={screenData.PicUploader.wherePlaceholder}
             {...register('diveSiteName')}
+            iconLeft={<Icon name="anchor" />}
+            placeholder={screenData.PicUploader.wherePlaceholder}
+            disabled={true}
           />
         </div>
-        <div></div>
-        <Button
-          className="btn-lg bg-primary"
-          type="submit"
-          iconRight={<Icon name="chevron-right" />}
-        >
-          Submit
-        </Button>
+
+        <div className="cols">
+          <div className="col-9"></div>
+          <div className="col-3">
+            <Button
+              disabled={isSubmitting}
+              className="bg-primary col-3"
+              type="submit"
+              iconRight={<Icon name="chevron-right" />}
+            >
+              {screenData.PicUploader.submitButton}
+            </Button>
+          </div>
+        </div>
       </form>
     </div>
   );
