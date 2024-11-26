@@ -22,6 +22,7 @@ export default [
     languageOptions: {
       globals: {
         ...globals.browser,
+        'google': 'readonly',
       },
     },
     rules: {
