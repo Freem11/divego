@@ -1,23 +1,24 @@
-import React, { useRef } from 'react';
+import React from 'react';
+import { useForm } from 'react-hook-form';
+
+import Icon from '../../../icons/Icon';
+import Button from '../../reusables/button/index';
+import TextInput from '../../reusables/textInput';
+import ButtonIcon from '../../reusables/buttonIcon';
+import screenData from '../screenData.json';
+import DynamicSelect from '../../reusables/dynamicSelect';
 import backGroundPic from '../../../images/blackManta.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
-import screenData from '../screenData.json';
-import { Controller, useForm } from 'react-hook-form';
-import TextInput from '../../reusables/textInput';
-import Icon from '../../../icons/Icon';
-import style from './style.module.scss';
-import ButtonIcon from '../../reusables/buttonIcon';
-import Button from '../../reusables/button/index';
-import DynamicSelect from '../../reusables/dynamicSelect';
 
+import style from './style.module.scss';
 
 type PicUploaderViewProps = {
   onSubmit:       (data: any) => void
-  getMoreAnimals: () => void
+  getMoreAnimals: (search: string, limit: number, skip: number) => Promise<any>
 };
 
 export default function PicUploaderView(props: PicUploaderViewProps) {
-  const { register, control, handleSubmit } = useForm();
+  const { register, handleSubmit } = useForm();
 
   return (
     <div className="flex-column-between full-height">
@@ -31,38 +32,30 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
         </div>
       </WavyModalHeader>
 
-      <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
+      <form
+        className="flex-column-between full-height mx-6 mb-6"
+        onSubmit={handleSubmit(props.onSubmit)}
+      >
         <div className="d-flex">
           <h1 className="mb-0 text-clip">{screenData.PicUploader.header}</h1>
         </div>
 
-
         <div className="stack-4">
-
-
-          <Controller
-            name="animal"
-            defaultValue=""
-            control={control}
-            render={({ field }) => (
-              <DynamicSelect
-                {...field}
-                prefix={<Icon name="shark" />}
-                maxTagCount={5}
-                showSearch
-                style={{ width: '100%' }}
-                optionFilterProp="label"
-                getMoreOptions={props.getMoreAnimals}
-              />
-            )}
+          <DynamicSelect
+            allowCreate={true}
+            labelInValue={true}
+            modeSelectedTags="on"
+            getMoreOptions={props.getMoreAnimals}
+            iconLeft={<Icon name="shark" />}
+            {...register('animal')}
           />
-
 
           <TextInput
             iconLeft={<Icon name="calendar-month" />}
             placeholder={screenData.PicUploader.whenPlaceholder}
             {...register('date')}
           />
+
           <TextInput
             iconLeft={<Icon name="anchor" />}
             iconRight={<Icon name="anchor" />}

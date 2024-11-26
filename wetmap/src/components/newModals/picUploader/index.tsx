@@ -1,6 +1,6 @@
 import React from 'react';
 import PicUploaderView from './view';
-import { DynamicSelectOptionsAnimals } from '../../reusables/dynamicSelect/DynamicSelectOptionsAnimals';
+import { DynamicSelectOptionsAnimals } from '../../../entities/DynamicSelectOptionsAnimals';
 
 
 export default function PicUploader(props) {
