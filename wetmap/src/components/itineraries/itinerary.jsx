@@ -5,6 +5,7 @@ import { CoordsContext } from '../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../contexts/zoomHelperContext';
 import { MinorContext } from '../contexts/minorContext';
 import { MasterContext } from '../contexts/masterContext';
+import { MapConfigContext } from '../contexts/mapConfigContext';
 import './itinerary.css';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import gold from '../../images/mapIcons/AnchorGold.png';
@@ -18,6 +19,9 @@ export default function Itinerary(props) {
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
 
+  const { setMapConfig } = useContext(MapConfigContext);
+
+
   const [hiddenHeigth, setHiddenHeigth] = useState(0);
 
   const heightChange = useSpring({
@@ -30,8 +34,7 @@ export default function Itinerary(props) {
 
     if (hiddenHeigth === 0) {
       setHiddenHeigth(150);
-    }
-    else {
+    } else {
       setHiddenHeigth(0);
     }
   };
@@ -60,7 +63,7 @@ export default function Itinerary(props) {
     let moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
     setZoomHelper(true);
     setShopModal(false);
-    setMasterSwitch(false);
+    setMapConfig(2);
     setMapCoords([moveLat, moveLng]);
   };
 
