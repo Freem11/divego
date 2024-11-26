@@ -45,21 +45,7 @@ export default function ShopModal(props) {
     try {
       const itins = await itineraries(IdNum);
       if (itins && itins.length > 0) {
-        setItineraryList(itins.map(itin => ({
-          BookingPage: itin.BookingPage,
-          created_at:  itin.created_at,
-          description: itin.description,
-          id:          itin.id,
-          name:        itin.name,
-          shop_id:     itin.shop_id,
-          updated_at:  itin.updated_at,
-          user_id:     itin.user_id,
-          price:       itin.price,
-          shopID:      itin.shopID,
-          siteList:    itin.siteList,
-          startDate:   itin.startDate,
-          tripName:    itin.tripName,
-        })));
+        setItineraryList(itins);
       }
     } catch (e) {
       console.log({ title: 'Error', message: (e as Error).message });

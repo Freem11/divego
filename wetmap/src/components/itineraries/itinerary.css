@@ -81,18 +81,6 @@
   margin-right: 4%;
 }
 
-.dateText {
-  /* font-family: 'Itim', cursive; */
-  font-size: 1.1em;
-  color: #000000;
-}
-
-.priceText {
-  /* font-family: 'Itim', cursive; */
-  font-size: 1.1em;
-  color: #000000;
-}
-
 .lowerText {
   display: flex;
   flex-wrap: wrap;
