@@ -1,0 +1,96 @@
+@import "../../styles/variables.scss";
+
+.masterBox {
+  width: 96%;
+  margin-left: 2%;
+  height: fit-content;
+  margin-bottom: 3%;
+}
+
+.shadowbox {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  outline: 0.1em solid #afafaf;
+  box-shadow:  1px 3px 5px #87878780;
+  background-color: white;
+  border-radius: 10px;
+  margin-bottom: 3px;
+  width: 90%;
+  height: 80;
+}
+
+.moreBox {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+}
+
+.tripName {
+  color: #0d0d0d;
+  margin-top: 0.2em;
+  margin-bottom: 1em;
+}
+
+.opener {
+
+  color: #0d0d0d;
+  font-weight: 500;
+  margin-bottom: 0.2em;
+}
+
+.buttonBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 0.5em;
+  width: 40%;
+  height: 100%;
+  /* background-color: green; */
+}
+
+.buttonStyling {
+  color:#afafaf;
+}
+
+.buttonStyling:hover,
+.buttonStyling:focus {
+  color: #484848;
+  background-color: rgb(227, 227, 227);
+}
+
+.extraBox {
+  z-index: -1;
+  overflow-y: auto;
+  margin-left: 5%;
+  width: 93%;
+  /* margin-top: -2%; */
+  background-color: #fbfaf9;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+  box-shadow:  1px 3px 5px #87878780;
+}
+
+.topRail {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 0.5em;
+  margin-left: 4%;
+  margin-right: 4%;
+}
+
+.lowerText {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin-top: 1%;
+  margin-left: 4%;
+  margin-right: 4%;
+  font-size: 1em;
+  color: #000000;
+}
