@@ -112,10 +112,9 @@ export const getDiveSitesByIDs = async (valueArray) => {
   let Q1 = valueArray.substring(1, valueArray.length);
   let Q2 = Q1.substring(Q1.length - 1, 0);
 
-  const { data, error } = await supabase
-    .from('diveSites')
-    .select()
-    .or(`id.in.(${Q2})`);
+  const { data, error } = await supabase.rpc('get_divesites_by_idnumber_array', {
+    divesitesid: Q2
+  });
 
   if (error) {
     console.log('couldn\'t do it 7,', error);
@@ -123,8 +122,24 @@ export const getDiveSitesByIDs = async (valueArray) => {
   }
 
   if (data) {
+    // console.log(data)
     return data;
   }
+
+
+  // const { data, error } = await supabase
+  //   .from('diveSites')
+  //   .select()
+  //   .or(`id.in.(${Q2})`);
+
+  // if (error) {
+  //   console.log('couldn\'t do it 7,', error);
+  //   return [];
+  // }
+
+  // if (data) {
+  //   return data;
+  // }
 };
 
 export const getSingleDiveSiteByNameAndRegion = async (values) => {
