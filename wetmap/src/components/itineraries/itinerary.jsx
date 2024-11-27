@@ -5,6 +5,8 @@ import { CoordsContext } from '../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../contexts/zoomHelperContext';
 import { MinorContext } from '../contexts/minorContext';
 import { MasterContext } from '../contexts/masterContext';
+import { MapConfigContext } from '../contexts/mapConfigContext';
+// import './itinerary.css';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import style from './style.module.scss';
 import ButtonIcon from '../reusables/buttonIcon';
@@ -17,6 +19,9 @@ export default function Itinerary(props) {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
+
+  const { setMapConfig } = useContext(MapConfigContext);
+
 
   const [hiddenHeigth, setHiddenHeigth] = useState(0);
 
@@ -59,7 +64,7 @@ export default function Itinerary(props) {
     let moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
     setZoomHelper(true);
     setShopModal(false);
-    setMasterSwitch(false);
+    setMapConfig(2);
     setMapCoords([moveLat, moveLng]);
   };
 

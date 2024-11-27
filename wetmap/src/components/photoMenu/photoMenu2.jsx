@@ -2,8 +2,6 @@ import { AnimalContext } from '../contexts/animalContext';
 import { useState, useContext, useEffect, useRef } from 'react';
 import {
   multiHeatPoints,
-  getHeatPointsWithUser,
-  getHeatPointsWithUserEmpty,
 } from '../../supabaseCalls/heatPointSupabaseCalls';
 import { getPhotosforMapArea } from '../../supabaseCalls/photoSupabaseCalls';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
@@ -12,7 +10,7 @@ import { IterratorContext } from '../contexts/iterratorContext';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { AreaPicsContext } from '../contexts/areaPicsContext';
 import { SearchTextContext } from '../contexts/searchTextContext';
-import { formatHeatVals } from '../../helpers/heatPointHelpers';
+import { formatHeatVals } from '../googleMap/mapDataHelpers';
 import './photoMenu.css';
 import PhotoMenuListItem from './photoMenuListItem';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
@@ -66,12 +64,10 @@ const PhotoMenu = () => {
 
             setAreaPics(animalArray);
           }
-        }
-        catch (e) {
+        } catch (e) {
           console.log({ title: 'Error', message: e.message });
         }
-      }
-      else {
+      } else {
         try {
           const photos = await getPhotosforMapArea({
             animal: textvalue,
@@ -89,8 +85,7 @@ const PhotoMenu = () => {
 
             setAreaPics(animalArray);
           }
-        }
-        catch (e) {
+        } catch (e) {
           console.log({ title: 'Error', message: e.message });
         }
       }
@@ -112,8 +107,7 @@ const PhotoMenu = () => {
         if (localHeatPoints) {
           setHeatPts(formatHeatVals(localHeatPoints));
         }
-      }
-      catch (e) {
+      } catch (e) {
         console.log({ title: 'Error', message: e.message });
       }
     }
@@ -170,46 +164,39 @@ const PhotoMenu = () => {
 
     if (areaPics.length < tilesToMove) {
       setXCoord((tilesToMove * tileWidth - areaPics.length * tileWidth) / 2);
-    }
-    else {
+    } else {
       if (direction === 'shiftLeft') {
         // left shift aka left BUTTON clicked
         if (xCoord >= 0) {
           setXCoord(0);
-        }
-        else if (xCoord >= maxLength) {
+        } else if (xCoord >= maxLength) {
           setXCoord(maxLength);
           setTilesRemaining(tilesRemaining + 5);
           setTilesShifted(tilesShifted - 5);
-        }
-        else {
+        } else {
           if (xCoord + tilesToMove * tileWidth + tilesToMove * 1.5 < 0) {
             setXCoord(xCoord + tilesToMove * tileWidth + tilesToMove * 1.5);
             setTilesRemaining(tilesRemaining + 5);
             setTilesShifted(tilesShifted - 5);
-          }
-          else {
+          } else {
             const tilesRemainingTemp = tilesRemaining + 5;
             setTilesRemaining(tilesRemainingTemp);
             setXCoord(0);
             setTilesShifted(tilesShifted - 5);
           }
         }
-      }
-      else {
+      } else {
         // "shiftRight"  aka right BUTTON clicked
         if (xCoord > 0) {
           setXCoord(0);
-        }
-        else if (xCoord > -maxLength) {
+        } else if (xCoord > -maxLength) {
           if (
             xCoord - tilesToMove * (tileWidth + 1.5)
             < -(maxLength - tilesToMove * (tileWidth + 1.5))
           ) {
             if (tilesRemaining < -5) {
               //
-            }
-            else {
+            } else {
               setXCoord(
                 xCoord
                 - (tilesRemaining + 5) * tileWidth
@@ -218,14 +205,12 @@ const PhotoMenu = () => {
               setTilesRemaining(tilesRemaining - 5);
               setTilesShifted(tilesShifted + tilesRemaining + 5);
             }
-          }
-          else {
+          } else {
             setXCoord(xCoord - tilesToMove * tileWidth - tilesToMove * 1.5);
             setTilesRemaining(tilesRemaining - 5);
             setTilesShifted(tilesShifted + 5);
           }
-        }
-        else {
+        } else {
           setXCoord(-(maxLength - tilesToMove * tileWidth + tilesToMove * 1.5));
         }
 

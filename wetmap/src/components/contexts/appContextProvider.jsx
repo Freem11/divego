@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { combineComponents } from '../combineComponents';
 
 import AreaPicsContextProvider from './areaPicsContext';
@@ -48,6 +46,7 @@ import ShopModalContextProvider from './shopModalContext';
 import ZoomHelperContextProvider from './zoomHelperContext';
 import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from './modalContextProvider';
+import MapConfigContextProvider from './mapConfigContext';
 
 const providers = [
   AreaPicsContextProvider,
@@ -96,6 +95,7 @@ const providers = [
   ZoomHelperContextProvider,
   SitesArrayContextProvider,
   ModalContextProvider,
+  MapConfigContextProvider,
 ];
 
 export const AppContextProvider = combineComponents(...providers);

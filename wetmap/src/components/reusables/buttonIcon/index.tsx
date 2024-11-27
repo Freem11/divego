@@ -2,7 +2,7 @@ import React from 'react';
 import style from './style.module.scss';
 
 export type ButtonProps = {
-  onClick:    (event?: React.MouseEvent<HTMLButtonElement>) => void
+  onClick?:   (event?: React.MouseEvent<HTMLButtonElement>) => void
   icon?:      React.ReactNode
   className?: string
 };

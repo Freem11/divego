@@ -23,8 +23,8 @@ export default function ShopModal(props) {
   const [selectedID, setSelectedID] = useState<number>(0);
 
   useEffect(() => {
-    if (selectedShop[0]) {
-      getItineraries(selectedShop[0].id);
+    if (selectedShop) {
+      getItineraries(selectedShop.id);
       setMasterSwitch(true);
     }
   }, [selectedShop]);
@@ -37,7 +37,7 @@ export default function ShopModal(props) {
 
   useEffect(() => {
     if (shopModal && zoomHelper) {
-      setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
+      setMapCoords([selectedShop.lat, selectedShop.lng]);
     }
   }, [shopModal]);
 
@@ -53,22 +53,22 @@ export default function ShopModal(props) {
   };
 
   const handleShopModalClose = () => {
-    props.onModalCancel();
-    setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
+    setSelectedShop({ ...selectedShop, id: 0, orgname: '' });
     setItineraryList([]);
+    setShopModal(false);
   };
 
   const handleDiveShopBioChange = async (newValue: string) => {
-    if (selectedShop[0]) {
-      await updateDiveShop({ id: selectedShop[0].id, bio: newValue, photo: selectedShop[0].diveShopProfilePhoto });
+    if (selectedShop) {
+      await updateDiveShop({ id: selectedShop.id, bio: newValue, photo: selectedShop.diveShopProfilePhoto });
     }
   };
 
-  console.log('selectedShop:', selectedShop[0]);
+  // console.log('selectedShop:', selectedShop);
 
   return (
     <>
-      {selectedShop[0] && (
+      {selectedShop && (
         <ShopModalView
           setSelectedID={setSelectedID}
           setShopModal={setShopModal}
@@ -76,11 +76,11 @@ export default function ShopModal(props) {
           handleDiveShopBioChange={handleDiveShopBioChange}
           handleDiveShopImageSelection={() => {}}
 
-          diveShop={selectedShop[0]}
+          diveShop={selectedShop}
           isPartnerAccount={isPartnerAccount}
           itineraryList={itineraryList}
           selectedID={selectedID}
-          headerPictureUrl={selectedShop[0].headerPictureUrl}
+          headerPictureUrl={selectedShop.headerPictureUrl}
         />
       )}
     </>

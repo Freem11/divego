@@ -25,6 +25,45 @@ type ShopModelViewProps = {
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
+  // // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
+  // const { shopModal, setShopModal } = useContext(ShopModalContext);
+  // const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  // // const [siteCloseState, setSiteCloseState] = useState(false);
+  // const [itineraryList, setItineraryList] = useState('');
+  // const [selectedID, setSelectedID] = useState(null);
+  // const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
+  // const { mapCoords, setMapCoords } = useContext(CoordsContext);
+  // const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
+
+  // useEffect(() => {
+  //   if (selectedShop) {
+  //     getItineraries(selectedShop.id);
+  //     setMasterSwitch(true);
+  //   }
+  // }, [selectedShop]);
+
+  // useEffect(() => {
+  //   if (shopModal && zoomHelper) {
+  //     setMapCoords([selectedShop.lat, selectedShop.lng]);
+  //   }
+  // }, [shopModal]);
+
+  // const getItineraries = async (IdNum) => {
+  //   try {
+  //     const itins = await itineraries(IdNum);
+  //     if (itins.length > 0) {
+  //       setItineraryList(itins);
+  //     }
+  //   } catch (e) {
+  //     console.log({ title: 'Error', message: e.message });
+  //   }
+  // };
+
+  // const handleShopModalClose = () => {
+  //   setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
+  //   setItineraryList('');
+  //   setShopModal(false);
+  // };
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
@@ -65,6 +104,9 @@ export default function ShopModalView(props: ShopModelViewProps) {
               </div>
             </div>
           </div>
+        </div>
+        <div className="ml-6">
+          <h3 className="text-left">{props?.diveShop?.diveShopBio}</h3>
         </div>
       </div>
       <div className="col-6 panel border-none full-height">
