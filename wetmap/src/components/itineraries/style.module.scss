@@ -1,10 +1,14 @@
 @import "../../styles/variables.scss";
 
 .masterBox {
+  display: flex;
+  flex-direction: column;
   width: 96%;
   margin-left: 2%;
   height: fit-content;
   margin-bottom: 3%;
+  justify-content: center;
+  align-items: center;
 }
 
 .shadowbox {
@@ -16,7 +20,7 @@
   background-color: white;
   border-radius: 10px;
   margin-bottom: 3px;
-  width: 90%;
+  width: 94%;
   height: 80;
 }
 
@@ -65,9 +69,7 @@
 .extraBox {
   z-index: -1;
   overflow-y: auto;
-  margin-left: 5%;
   width: 93%;
-  /* margin-top: -2%; */
   background-color: #fbfaf9;
   border-bottom-right-radius: 10px;
   border-bottom-left-radius: 10px;

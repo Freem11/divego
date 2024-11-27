@@ -65,41 +65,41 @@ export default function Itinerary(props) {
   };
 
   return (
-    <div className="masterBox" key={itinerary.id}>
-      <div className="shadowbox">
-        <div className="moreBox">
-          <p className="tripName">{itinerary.tripName}</p>
+    <div className={style.masterBox} key={itinerary.id}>
+      <div className={style.shadowbox}>
+        <div className={style.moreBox}>
+          <p className={style.tripName}>{itinerary.tripName}</p>
           <p
-            className="opener"
+            className={style.opener}
             onClick={() => startMoreInfoAnimation(itinerary.id)}
           >
             More Info
           </p>
         </div>
-        <div className="buttonBox">
+        <div className={style.buttonBox}>
           <ButtonIcon
             icon={<Icon name="anchor" />}
-            className="btn-lg buttonStyling"
+            className={`btn-lg ${style.buttonStyling}`}
             onClick={() => flipMap(itinerary.siteList)}
           />
           <ButtonIcon
             icon={<Icon name="diving-scuba-flag" />}
-            className="btn-lg buttonStyling"
+            className={`btn-lg ${style.buttonStyling}`}
             // onClick={}
           />
         </div>
       </div>
-      <animated.div className="extraBox" style={heightChange}>
-        <div className="topRail">
-          <p className="dateText">
+      <animated.div className={style.extraBox} style={heightChange}>
+        <div className={style.topRail}>
+          <p className={style.dateText}>
             {itinerary.startDate}
             {' to '}
             {itinerary.endDate}
           </p>
-          <p className="priceText">{itinerary.price}</p>
+          <p className={style.priceText}>{itinerary.price}</p>
         </div>
 
-        <p className="lowerText">{itinerary.description}</p>
+        <p className={style.lowerText}>{itinerary.description}</p>
       </animated.div>
     </div>
   );
