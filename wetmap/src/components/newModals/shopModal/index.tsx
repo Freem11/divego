@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import Itinerary from '../../itineraries/itinerary';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { ShopModalContext } from '../../contexts/shopModalContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
 import './shopModal.css';
@@ -13,7 +12,6 @@ import ShopModalView from './view';
 
 export default function ShopModal(props) {
   // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
-  // const { shopModal, setShopModal } = useContext(ShopModalContext);
   // const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   // const [siteCloseState, setSiteCloseState] = useState(false);
   // const [itineraryList, setItineraryList] = useState('');
@@ -27,12 +25,6 @@ export default function ShopModal(props) {
   //     setMasterSwitch(true);
   //   }
   // }, [selectedShop]);
-
-  // useEffect(() => {
-  //   if (shopModal && zoomHelper) {
-  //     setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
-  //   }
-  // }, [shopModal]);
 
   // const getItineraries = async (IdNum) => {
   //   try {
@@ -49,10 +41,8 @@ export default function ShopModal(props) {
   // const handleShopModalClose = () => {
   //   setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
   //   setItineraryList('');
-  //   setShopModal(false);
   // };
 
-  const { shopModal, setShopModal } = useContext(ShopModalContext);
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   const [siteCloseState, setSiteCloseState] = useState(false);
   const [itineraryList, setItineraryList] = useState('');
@@ -65,12 +55,6 @@ export default function ShopModal(props) {
       getItineraries(selectedShop.id);
     }
   }, [selectedShop]);
-
-  useEffect(() => {
-    if (shopModal && zoomHelper) {
-      setMapCoords([selectedShop.lat, selectedShop.lng]);
-    }
-  }, [shopModal]);
 
   const getItineraries = async (IdNum) => {
     try {
@@ -86,7 +70,6 @@ export default function ShopModal(props) {
   const handleShopModalClose = () => {
     setSelectedShop({ ...selectedShop, id: 0, orgname: '' });
     setItineraryList('');
-    setShopModal(false);
   };
   const fileUploaderRef = useRef<HTMLInputElement>(null);
 

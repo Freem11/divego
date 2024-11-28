@@ -33,7 +33,6 @@ import { SessionContext } from './contexts/sessionContext';
 import { PinContext } from './contexts/staticPinContext';
 import { DiveSpotContext } from './contexts/diveSpotContext';
 import { ModalSelectContext } from './contexts/modalSelectContext';
-import { ShopModalContext } from './contexts/shopModalContext';
 import { SitesArrayContext } from './contexts/sitesArrayContext';
 import { ZoomHelperContext } from './contexts/zoomHelperContext';
 import { PullTabContext } from './contexts/pullTabContext';
@@ -64,7 +63,6 @@ const MapPage = React.memo(function MapPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   const { setSitesArray } = useContext(SitesArrayContext);
-  const { setShopModal } = useContext(ShopModalContext);
 
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { modalShow, modalResume } = useContext(ModalContext);
@@ -77,7 +75,6 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const onShopNavigate = () => {
-    setShopModal(true);
     setMapCoords([selectedShop.lat, selectedShop.lng]);
     setMapConfig(0);
     setZoomHelper(true);

@@ -23,7 +23,6 @@ import JumpContextProvider from './jumpContext';
 import DiveSitesContextProvider from './diveSitesContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SelectedShopContextProvider from './selectedShopContext';
-import ShopModalContextProvider from './shopModalContext';
 import ZoomHelperContextProvider from './zoomHelperContext';
 import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from './modalContextProvider';
@@ -53,7 +52,6 @@ const providers = [
   DiveSitesContextProvider,
   SelectedPictureContextProvider,
   SelectedShopContextProvider,
-  ShopModalContextProvider,
   ZoomHelperContextProvider,
   SitesArrayContextProvider,
   ModalContextProvider,

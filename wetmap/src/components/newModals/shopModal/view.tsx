@@ -4,7 +4,6 @@ import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { ShopModalContext } from '../../contexts/shopModalContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
 import './shopModal.css';
@@ -25,7 +24,6 @@ type ShopModelViewProps = {
 
 export default function ShopModalView(props: ShopModelViewProps) {
   // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
-  const { shopModal, setShopModal } = useContext(ShopModalContext);
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   // const [siteCloseState, setSiteCloseState] = useState(false);
   const [itineraryList, setItineraryList] = useState('');
@@ -39,11 +37,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
     }
   }, [selectedShop]);
 
-  useEffect(() => {
-    if (shopModal && zoomHelper) {
-      setMapCoords([selectedShop.lat, selectedShop.lng]);
-    }
-  }, [shopModal]);
 
   const getItineraries = async (IdNum) => {
     try {
@@ -59,7 +52,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
   // const handleShopModalClose = () => {
   //   setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
   //   setItineraryList('');
-  //   setShopModal(false);
   // };
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
@@ -129,7 +121,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
                   itinerary={itinerary}
                   setSelectedID={setSelectedID}
                   selectedID={selectedID}
-                  setShopModal={setShopModal}
                 />
               );
             })}
