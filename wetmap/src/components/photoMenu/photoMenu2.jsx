@@ -17,14 +17,12 @@ import ToggleButton from '@mui/material/ToggleButton';
 import { animated, useSpring } from 'react-spring';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
-let waiter2;
-
 const PhotoMenu = () => {
   const { animalVal, setAnimalVal } = useContext(AnimalContext);
   const { boundaries } = useContext(MapBoundsContext);
   const { setHeatPts } = useContext(HeatPointsContext);
   const { areaPics, setAreaPics } = useContext(AreaPicsContext);
-  const { textvalue, setTextValue } = useContext(SearchTextContext);
+  const { textvalue } = useContext(SearchTextContext);
 
   const [selectedID, setSelectedID] = useState(null);
 
@@ -55,7 +53,7 @@ const PhotoMenu = () => {
             ).map((label) => {
               return photos.find(a => a.label === label);
             });
-
+            console.log('animalArray', animalArray);
             setAreaPics(animalArray);
           }
         } catch (e) {

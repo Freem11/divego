@@ -19,3 +19,16 @@ export interface PhotosGroupedByDate {
   dateTaken: string
   photos:    PhotoWithLikesAndComments[]
 };
+
+export interface Photo {
+  id:         number
+  created_at: string
+  photoFile:  string
+  label:      string
+  dateTaken:  string
+  latitude:   number
+  longitude:  number
+  month:      number
+  UserID:     string
+  UserName:   string
+};
