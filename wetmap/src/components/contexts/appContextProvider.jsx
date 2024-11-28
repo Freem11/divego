@@ -7,7 +7,6 @@ import CarrouselTilesContextProvider from './carrouselTilesContext';
 import ModalSelectContextProvider from './modalSelectContext';
 import UserProfileContextProvider from './userProfileContext';
 import HeatPointsContextProvider from './heatPointsContext';
-import AnimalMultiSelectContextProvider from './animalMultiSelectContext';
 import MapBoundsContextProvider from './mapBoundariesContext';
 import SelectedPicContextProvider from './selectPicContext';
 import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
@@ -36,7 +35,6 @@ const providers = [
   ModalSelectContextProvider,
   UserProfileContextProvider,
   HeatPointsContextProvider,
-  AnimalMultiSelectContextProvider,
   MapBoundsContextProvider,
   SelectedPicContextProvider,
   SelectedDiveSiteContextProvider,
