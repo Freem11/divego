@@ -3,8 +3,6 @@ import { animated, useSpring } from 'react-spring';
 import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { CoordsContext } from '../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../contexts/zoomHelperContext';
-import { MinorContext } from '../contexts/minorContext';
-import { MasterContext } from '../contexts/masterContext';
 import { MapConfigContext } from '../contexts/mapConfigContext';
 import './itinerary.css';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
@@ -16,8 +14,6 @@ export default function Itinerary(props) {
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
-  const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
-  const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
 
   const { setMapConfig } = useContext(MapConfigContext);
 

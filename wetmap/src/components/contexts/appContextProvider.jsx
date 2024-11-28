@@ -13,8 +13,6 @@ import AnimalMultiSelectContextProvider from './animalMultiSelectContext';
 import MapBoundsContextProvider from './mapBoundariesContext';
 import SelectedPicContextProvider from './selectPicContext';
 import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
-import MasterContextProvider from './masterContext';
-import MinorContextProvider from './minorContext';
 import DiveSpotContextProvider from './diveSpotContext';
 import PinSpotContextProvider from './pinSpotContext';
 import AnimalRevealContextProvider from './animalRevealContext';
@@ -49,8 +47,6 @@ const providers = [
   MapBoundsContextProvider,
   SelectedPicContextProvider,
   SelectedDiveSiteContextProvider,
-  MasterContextProvider,
-  MinorContextProvider,
   DiveSpotContextProvider,
   PinSpotContextProvider,
   AnimalRevealContextProvider,

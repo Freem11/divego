@@ -9,7 +9,6 @@ import exifr from 'exifr';
 import AutoSuggest from '../autoSuggest/autoSuggest';
 import { FileUploader } from 'react-drag-drop-files';
 import { useNavigate } from 'react-router-dom';
-import { MasterContext } from '../contexts/masterContext';
 import { PinContext } from '../contexts/staticPinContext';
 import { PictureContext } from '../contexts/pictureContext';
 import { SessionContext } from '../contexts/sessionContext';
@@ -64,7 +63,6 @@ const noGPSZone = (
 const PicUploader = React.memo(function PicUploader(props) {
   const { animatePicModal, setPicModalYCoord } = props;
   let navigate = useNavigate();
-  const { setMasterSwitch } = useContext(MasterContext);
   const { pin, setPin } = useContext(PinContext);
   const [showNoGPS, setShowNoGPS] = useState(false);
   const [list, setList] = useState([]);
@@ -234,7 +232,6 @@ const PicUploader = React.memo(function PicUploader(props) {
     modalPause();
     setChosenModal('Photos');
     setShowNoGPS(false);
-    setMasterSwitch(false);
     return;
   };
 

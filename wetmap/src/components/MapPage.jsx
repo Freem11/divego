@@ -25,8 +25,6 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DiveSitesContext } from './contexts/diveSitesContext';
 import { AnimalRevealContext } from './contexts/animalRevealContext';
-import { MasterContext } from './contexts/masterContext';
-import { MinorContext } from './contexts/minorContext';
 import { CoordsContext } from './contexts/mapCoordsContext';
 import { SelectedShopContext } from './contexts/selectedShopContext';
 import { ZoomContext } from './contexts/mapZoomContext';
@@ -53,8 +51,6 @@ import { MapConfigContext } from './contexts/mapConfigContext';
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
-  const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
-  const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
   const { setZoomHelper } = useContext(ZoomHelperContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
   const { showAnimalSearch } = useContext(AnimalRevealContext);
@@ -82,15 +78,12 @@ const MapPage = React.memo(function MapPage() {
   const returnToPicModal = () => {
     modalResume();
     setMapConfig(0);
-    setMasterSwitch(true);
   };
 
   const onShopNavigate = () => {
     setShopModal(true);
     setMapCoords([selectedShop.lat, selectedShop.lng]);
     setMapConfig(0);
-    setMasterSwitch(true);
-    setMinorSwitch(true);
     setZoomHelper(true);
     setSitesArray([]);
   };

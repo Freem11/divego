@@ -7,7 +7,6 @@ import exifr from 'exifr';
 import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
 import { insertDiveSiteWaits } from '../../supabaseCalls/diveSiteWaitSupabaseCalls';
 import { DiveSpotContext } from '../contexts/diveSpotContext';
-import { MasterContext } from '../contexts/masterContext';
 import { ModalSelectContext } from '../contexts/modalSelectContext';
 import { ModalContext } from '../contexts/modalContext';
 import Icon from '../../icons/Icon';
@@ -45,7 +44,6 @@ const SiteSubmitter = (props) => {
   const { animateSiteModal, setSiteModalYCoord } = props;
   const [showNoGPS, setShowNoGPS] = useState(false);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
-  const { setMasterSwitch } = useContext(MasterContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
 
   const { setMapConfig } = useContext(MapConfigContext);
@@ -155,7 +153,6 @@ const SiteSubmitter = (props) => {
     setChosenModal('DiveSite');
     setMapConfig(1);
     setShowNoGPS(false);
-    setMasterSwitch(false);
     modalPause();
   };
 

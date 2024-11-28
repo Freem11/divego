@@ -3,7 +3,6 @@ import Itinerary from '../../itineraries/itinerary';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ShopModalContext } from '../../contexts/shopModalContext';
-import { MasterContext } from '../../contexts/masterContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
 import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
 import './shopModal.css';
@@ -19,7 +18,6 @@ export default function ShopModal(props) {
   // const [siteCloseState, setSiteCloseState] = useState(false);
   // const [itineraryList, setItineraryList] = useState('');
   // const [selectedID, setSelectedID] = useState(null);
-  // const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
   // const { mapCoords, setMapCoords } = useContext(CoordsContext);
   // const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
@@ -59,14 +57,12 @@ export default function ShopModal(props) {
   const [siteCloseState, setSiteCloseState] = useState(false);
   const [itineraryList, setItineraryList] = useState('');
   const [selectedID, setSelectedID] = useState(null);
-  const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   useEffect(() => {
     if (selectedShop) {
       getItineraries(selectedShop.id);
-      setMasterSwitch(true);
     }
   }, [selectedShop]);
 
