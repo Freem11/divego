@@ -1,6 +1,5 @@
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { AnimalContext } from '../contexts/animalContext';
-import { TutorialContext } from '../contexts/tutorialContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import { PinContext } from '../contexts/staticPinContext';
 import { useState, useContext, useEffect } from 'react';
@@ -35,7 +34,6 @@ const AnchorPics = (props) => {
   const [anchorPics, setAnchorPics] = useState([]);
   const [site, setSite] = useState('');
 
-  const { tutorialRunning } = useContext(TutorialContext);
   const { modalShow } = useContext(ModalContext);
 
   const filterAnchorPhotos = async () => {

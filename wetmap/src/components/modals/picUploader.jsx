@@ -15,7 +15,6 @@ import { PictureContext } from '../contexts/pictureContext';
 import { SessionContext } from '../contexts/sessionContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import { ModalSelectContext } from '../contexts/modalSelectContext';
-import { TutorialContext } from '../contexts/tutorialContext';
 import { ChapterContext } from '../contexts/chapterContext';
 import PlaceIcon from '@mui/icons-material/Place';
 import PhotoIcon from '@mui/icons-material/Photo';
@@ -74,7 +73,6 @@ const PicUploader = React.memo(function PicUploader(props) {
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { chapter, setChapter } = useContext(ChapterContext);
 
   const fileTypes = ['JPG', 'JPEG', 'PNG'];

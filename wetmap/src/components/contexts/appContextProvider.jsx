@@ -11,7 +11,6 @@ import SecondTutorialModalContextProvider from './secondTutorialModalContext';
 import TutorialModalContextProvider from './tutorialModalContext';
 import ChapterContextProvider from './chapterContext';
 import ReverseContextProvider from './reverseContext';
-import TutorialContextProvider from './tutorialContext';
 import TutorialResetContextProvider from './tutorialResetContext';
 import ModalSelectContextProvider from './modalSelectContext';
 import UserProfileContextProvider from './userProfileContext';
@@ -55,7 +54,6 @@ const providers = [
   TutorialModalContextProvider,
   ChapterContextProvider,
   ReverseContextProvider,
-  TutorialContextProvider,
   TutorialResetContextProvider,
   ModalSelectContextProvider,
   UserProfileContextProvider,

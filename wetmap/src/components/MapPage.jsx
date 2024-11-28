@@ -40,7 +40,6 @@ import { SitesArrayContext } from './contexts/sitesArrayContext';
 import { ZoomHelperContext } from './contexts/zoomHelperContext';
 import { DiveSiteAdderModalContext } from './contexts/diveSiteAdderModalContext';
 import { PullTabContext } from './contexts/pullTabContext';
-import { TutorialContext } from './contexts/tutorialContext';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import IntroTutorial from './guides/introTutorial';
 import SecondTutorial from './guides/secondTutorial';
@@ -70,8 +69,6 @@ const MapPage = React.memo(function MapPage() {
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
   const { setMapCoords } = useContext(CoordsContext);
   const { chosenModal } = useContext(ModalSelectContext);
-
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -109,11 +106,6 @@ const MapPage = React.memo(function MapPage() {
       try {
         const success = await grabProfileById(sessionUserId);
         if (success) {
-          let bully = success[0] && success[0].UserName;
-          if (bully == null || bully === '') {
-            setIntroGuideModalYCoord(-window.innerHeight);
-            setTutorialRunning(true);
-          } else {
             setProfile(success);
             setPin({
               ...pin,
@@ -125,7 +117,6 @@ const MapPage = React.memo(function MapPage() {
               UserID:   success[0].UserID,
               UserName: success[0].UserName,
             });
-          }
         }
       } catch (e) {
         console.log({ title: 'Error', message: e.message });
@@ -315,14 +306,6 @@ const MapPage = React.memo(function MapPage() {
 
   return (
     <div className="mappagemaster">
-      <div className="tutbarContainer" pointerEvents="box-none">
-        {tutorialRunning && (
-          <div className="tutorialBar" pointerEvents="box-none">
-            <TutorialBar style={{ zIndex: 255 }} />
-          </div>
-        )}
-      </div>
-
       {mapConfig === 0 && (
         <animated.div className="fabContainer" style={moveFabModal}>
           <div className="animateBox" onClick={e => animateMenu(e)}>

@@ -6,7 +6,6 @@ import {
 import { getPhotosforMapArea } from '../../supabaseCalls/photoSupabaseCalls';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import { HeatPointsContext } from '../contexts/heatPointsContext';
-import { TutorialContext } from '../contexts/tutorialContext';
 import { AreaPicsContext } from '../contexts/areaPicsContext';
 import { SearchTextContext } from '../contexts/searchTextContext';
 import { formatHeatVals } from '../googleMap/mapDataHelpers';
@@ -28,9 +27,6 @@ const PhotoMenu = () => {
   const { textvalue, setTextValue } = useContext(SearchTextContext);
 
   const [selectedID, setSelectedID] = useState(null);
-
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-
 
   const filterPhotosForMapArea = async () => {
     if (boundaries) {
