@@ -89,7 +89,10 @@ h6 {
   color: $gray-color;
 }
 
-.ssrc-select {
+
+.App {
+  --ssrc-label-control-shift: 0.8em;
+
   --ssrc-select-border-color: #{$gray-color};
   --ssrc-select-text-color: #{$gray-color};
   --ssrc-select-control-height: #{$control-size};

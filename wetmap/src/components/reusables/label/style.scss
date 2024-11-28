@@ -1,0 +1,16 @@
+:root {
+  --ssrc-label-control-shift: 0;
+}
+
+// ssrc: scuba seasons reusable component
+.ssrc-label {
+  text-align: left;
+
+  & .label-text {
+    font-style: italic;
+  }
+
+  & .label-control {
+    margin-left: var(--ssrc-label-control-shift);
+  }
+}

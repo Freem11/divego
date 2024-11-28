@@ -13,6 +13,7 @@ import WavyModalHeader from '../../reusables/wavyModalHeader';
 import style from './style.module.scss';
 import { Form, FormRules } from './form';
 import FileInput from '../../reusables/fileInput';
+import Label from '../../reusables/label';
 
 type PicUploaderViewProps = {
   values:               Form
@@ -55,31 +56,37 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
         </div>
 
         <div className="stack-4 mb-2">
-          <DynamicSelect
-            {...register('animal', FormRules.animal)}
-            allowCreate={true}
-            labelInValue={true}
-            modeSelectedTags="on"
-            placeholder={screenData.PicUploader.whatPlaceholder}
-            getMoreOptions={props.getMoreAnimals}
-            iconLeft={<Icon name="shark" />}
-            error={errors.animal}
-          />
+          <Label label={screenData.PicUploader.whatLabel}>
+            <DynamicSelect
+              {...register('animal', FormRules.animal)}
+              allowCreate={true}
+              labelInValue={true}
+              modeSelectedTags="on"
+              placeholder={screenData.PicUploader.whatPlaceholder}
+              getMoreOptions={props.getMoreAnimals}
+              iconLeft={<Icon name="shark" />}
+              error={errors.animal}
+            />
+          </Label>
 
-          <TextInput
-            {...register('date', FormRules.date)}
-            type="date"
-            iconLeft={<Icon name="calendar-month" />}
-            placeholder={screenData.PicUploader.whenPlaceholder}
-            error={errors.date}
-          />
+          <Label label={screenData.PicUploader.whatLabel}>
+            <TextInput
+              {...register('date', FormRules.date)}
+              type="date"
+              iconLeft={<Icon name="calendar-month" />}
+              placeholder={screenData.PicUploader.whenPlaceholder}
+              error={errors.date}
+            />
+          </Label>
 
-          <TextInput
-            {...register('diveSiteName')}
-            iconLeft={<Icon name="anchor" />}
-            placeholder={screenData.PicUploader.wherePlaceholder}
-            disabled={true}
-          />
+          <Label label={screenData.PicUploader.whereLabel}>
+            <TextInput
+              {...register('diveSiteName')}
+              iconLeft={<Icon name="anchor" />}
+              placeholder={screenData.PicUploader.wherePlaceholder}
+              disabled={true}
+            />
+          </Label>
         </div>
 
         <div className="cols">
