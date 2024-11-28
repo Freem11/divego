@@ -8,7 +8,7 @@ import UserProfileModal from './modals/userProfileModal';
 import Settings from './modals/setting';
 import PhotoMenu from './photoMenu/photoMenu2';
 import PhotoFilterer from './photoMenu/photoFilter';
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { grabProfileById } from './../supabaseCalls/accountSupabaseCalls';
 import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
@@ -24,7 +24,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DiveSitesContext } from './contexts/diveSitesContext';
-import { AnimalRevealContext } from './contexts/animalRevealContext';
 import { CoordsContext } from './contexts/mapCoordsContext';
 import { SelectedShopContext } from './contexts/selectedShopContext';
 import { ZoomContext } from './contexts/mapZoomContext';
@@ -51,7 +50,6 @@ const MapPage = React.memo(function MapPage() {
   const { setProfile } = useContext(UserProfileContext);
   const { setZoomHelper } = useContext(ZoomHelperContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
-  const { showAnimalSearch } = useContext(AnimalRevealContext);
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { selectedShop } = useContext(SelectedShopContext);
@@ -316,7 +314,6 @@ const MapPage = React.memo(function MapPage() {
                 <ToggleButton
                   sx={toggleButtonStyle}
                   value="check"
-                  selected={showAnimalSearch}
                   onChange={() => {
                     handleDiveSiteSearchButton();
                   }}

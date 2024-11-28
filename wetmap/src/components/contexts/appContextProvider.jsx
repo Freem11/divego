@@ -12,7 +12,6 @@ import SelectedPicContextProvider from './selectPicContext';
 import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
 import DiveSpotContextProvider from './diveSpotContext';
 import PinSpotContextProvider from './pinSpotContext';
-import AnimalRevealContextProvider from './animalRevealContext';
 import PictureContextProvider from './pictureContext';
 import SliderContextProvider from './sliderContext';
 import AnimalContextProvider from './animalContext';
@@ -40,7 +39,6 @@ const providers = [
   SelectedDiveSiteContextProvider,
   DiveSpotContextProvider,
   PinSpotContextProvider,
-  AnimalRevealContextProvider,
   PictureContextProvider,
   SliderContextProvider,
   AnimalContextProvider,
