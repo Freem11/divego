@@ -7,7 +7,6 @@ import PartnerModalContextProvider from './partnerAccountRequestModalContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
 import ReverseContextProvider from './reverseContext';
-import TutorialResetContextProvider from './tutorialResetContext';
 import ModalSelectContextProvider from './modalSelectContext';
 import UserProfileContextProvider from './userProfileContext';
 import HeatPointsContextProvider from './heatPointsContext';
@@ -45,7 +44,6 @@ const providers = [
   PullTabContextProvider,
   CarrouselTilesContextProvider,
   ReverseContextProvider,
-  TutorialResetContextProvider,
   ModalSelectContextProvider,
   UserProfileContextProvider,
   HeatPointsContextProvider,
