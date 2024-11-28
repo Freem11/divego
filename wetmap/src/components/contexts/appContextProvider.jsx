@@ -2,7 +2,6 @@ import { combineComponents } from '../combineComponents';
 
 import AreaPicsContextProvider from './areaPicsContext';
 import SearchTextContextProvider from './searchTextContext';
-import DiveSiteAdderModalContextProvider from './diveSiteAdderModalContext';
 import PartnerModalContextProvider from './partnerAccountRequestModalContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
@@ -35,7 +34,6 @@ import MapConfigContextProvider from './mapConfigContext';
 const providers = [
   AreaPicsContextProvider,
   SearchTextContextProvider,
-  DiveSiteAdderModalContextProvider,
   PartnerModalContextProvider,
   PullTabContextProvider,
   CarrouselTilesContextProvider,

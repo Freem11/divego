@@ -36,7 +36,6 @@ import { ModalSelectContext } from './contexts/modalSelectContext';
 import { ShopModalContext } from './contexts/shopModalContext';
 import { SitesArrayContext } from './contexts/sitesArrayContext';
 import { ZoomHelperContext } from './contexts/zoomHelperContext';
-import { DiveSiteAdderModalContext } from './contexts/diveSiteAdderModalContext';
 import { PullTabContext } from './contexts/pullTabContext';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import './mapPage.css';
@@ -67,9 +66,6 @@ const MapPage = React.memo(function MapPage() {
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setShopModal } = useContext(ShopModalContext);
 
-  const { setDsAddermodal } = useContext(
-    DiveSiteAdderModalContext,
-  );
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { modalShow, modalResume } = useContext(ModalContext);
 
