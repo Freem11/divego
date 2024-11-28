@@ -6,9 +6,6 @@ import DiveSiteAdderModalContextProvider from './diveSiteAdderModalContext';
 import PartnerModalContextProvider from './partnerAccountRequestModalContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
-import ThirdTutorialModalContextProvider from './thirdTutorialModalContext';
-import SecondTutorialModalContextProvider from './secondTutorialModalContext';
-import TutorialModalContextProvider from './tutorialModalContext';
 import ReverseContextProvider from './reverseContext';
 import TutorialResetContextProvider from './tutorialResetContext';
 import ModalSelectContextProvider from './modalSelectContext';
@@ -47,9 +44,6 @@ const providers = [
   PartnerModalContextProvider,
   PullTabContextProvider,
   CarrouselTilesContextProvider,
-  ThirdTutorialModalContextProvider,
-  SecondTutorialModalContextProvider,
-  TutorialModalContextProvider,
   ReverseContextProvider,
   TutorialResetContextProvider,
   ModalSelectContextProvider,
