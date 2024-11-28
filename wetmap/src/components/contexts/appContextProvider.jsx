@@ -6,7 +6,6 @@ import DiveSiteAdderModalContextProvider from './diveSiteAdderModalContext';
 import PartnerModalContextProvider from './partnerAccountRequestModalContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
-import ReverseContextProvider from './reverseContext';
 import ModalSelectContextProvider from './modalSelectContext';
 import UserProfileContextProvider from './userProfileContext';
 import HeatPointsContextProvider from './heatPointsContext';
@@ -43,7 +42,6 @@ const providers = [
   PartnerModalContextProvider,
   PullTabContextProvider,
   CarrouselTilesContextProvider,
-  ReverseContextProvider,
   ModalSelectContextProvider,
   UserProfileContextProvider,
   HeatPointsContextProvider,
