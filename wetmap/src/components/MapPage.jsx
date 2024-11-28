@@ -43,7 +43,6 @@ import { PullTabContext } from './contexts/pullTabContext';
 import { TutorialContext } from './contexts/tutorialContext';
 import { IterratorContext } from './contexts/iterratorContext';
 import { Iterrator2Context } from './contexts/iterrator2Context';
-import { Iterrator3Context } from './contexts/iterrator3Context';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import IntroTutorial from './guides/introTutorial';
 import SecondTutorial from './guides/secondTutorial';
@@ -77,7 +76,6 @@ const MapPage = React.memo(function MapPage() {
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { itterator, setItterator } = useContext(IterratorContext);
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
-  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
 
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -102,13 +100,6 @@ const MapPage = React.memo(function MapPage() {
         if (itterator2 === 19) {
           setItterator2(itterator2 + 1);
           animateSecondGuideModal();
-        }
-      }
-    } else if (chosenModal === 'Photos') {
-      if (tutorialRunning) {
-        if (itterator3 === 19) {
-          setItterator3(itterator3 + 1);
-          animateThirdGuideModal();
         }
       }
     }
@@ -193,14 +184,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator2 === 19
       || itterator2 === 23
       || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
     ) {
       return;
     }
@@ -223,14 +206,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator2 === 19
       || itterator2 === 23
       || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
     ) {
       return;
     }
@@ -253,14 +228,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator2 === 19
       || itterator2 === 23
       || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
     ) {
       return;
     }
@@ -282,14 +249,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator2 === 19
       || itterator2 === 23
       || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
     ) {
       return;
     }
@@ -317,14 +276,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator2 === 19
       || itterator2 === 23
       || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
     ) {
       return;
     }
@@ -353,14 +304,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator2 === 19
       || itterator2 === 23
       || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
     ) {
       return;
     }

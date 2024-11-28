@@ -15,7 +15,6 @@ import { PictureContext } from '../contexts/pictureContext';
 import { SessionContext } from '../contexts/sessionContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import { ModalSelectContext } from '../contexts/modalSelectContext';
-import { Iterrator3Context } from '../contexts/iterrator3Context';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { ChapterContext } from '../contexts/chapterContext';
 import PlaceIcon from '@mui/icons-material/Place';
@@ -75,7 +74,6 @@ const PicUploader = React.memo(function PicUploader(props) {
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
-  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { chapter, setChapter } = useContext(ChapterContext);
 
@@ -137,14 +135,6 @@ const PicUploader = React.memo(function PicUploader(props) {
       });
     }
   }, []);
-
-  useEffect(() => {
-    if (tutorialRunning) {
-      if (itterator3 === 11) {
-        setItterator3(itterator3 + 1);
-      }
-    }
-  }, [pin.PicDate]);
 
   const handleChange = async (e) => {
     if (typeof e === 'object') {
@@ -227,12 +217,6 @@ const PicUploader = React.memo(function PicUploader(props) {
         .then((data) => {
           setPhotoFile(data.fileName);
         });
-
-      if (tutorialRunning) {
-        if (itterator3 === 8) {
-          setItterator3(itterator3 + 1);
-        }
-      }
     }
     else {
       setPin({ ...pin, [e.target.name]: e.target.value });
@@ -251,24 +235,10 @@ const PicUploader = React.memo(function PicUploader(props) {
   };
 
   const handleNoGPSCloseOnMapChange = () => {
-    if (
-      itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 22
-    ) {
-      return;
-    }
-
     modalPause();
     setChosenModal('Photos');
     setShowNoGPS(false);
     setMasterSwitch(false);
-    if (tutorialRunning) {
-      if (itterator3 === 16) {
-        setItterator3(itterator3 + 1);
-      }
-    }
     return;
   };
 
@@ -342,33 +312,6 @@ const PicUploader = React.memo(function PicUploader(props) {
 
   let modalHeigth = 700;
 
-  useEffect(() => {
-    if (tutorialRunning) {
-      if (itterator3 === 8) {
-        blinker = setInterval(imageBut, 1000);
-      }
-      else if (itterator3 === 11) {
-        blinker = setInterval(calendarBut, 1000);
-      }
-      else if (itterator3 === 14) {
-        blinker = setInterval(animalField, 1000);
-      }
-      else if (itterator3 === 3) {
-        setPicModalYCoord(0);
-      }
-      else if (itterator3 === 6 || itterator3 === 12 || itterator3 === 15) {
-        // setPicModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      }
-      else if (itterator3 === 16) {
-        blinker = setInterval(pinBut, 1000);
-      }
-      else if (itterator3 === 22) {
-        blinker = setInterval(subBut, 1000);
-      }
-    }
-    return () => cleanUp();
-  }, [itterator3]);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     let AnimalV = pin.Animal.toString();
@@ -388,14 +331,8 @@ const PicUploader = React.memo(function PicUploader(props) {
 
       let rightNow = getToday(Rnow);
 
-      // if (tutorialRunning) {
-      if (itterator3 === 22) {
-        setItterator3(itterator3 + 1);
-      }
-      else {
-        // insertPhotoWaits({ ...pin });
-        // insertPhotoWaits({ ...pin, PicFile: photoFile });
-      }
+        insertPhotoWaits({ ...pin });
+        insertPhotoWaits({ ...pin, PicFile: photoFile });
 
       setPin({
         ...pin,
@@ -420,16 +357,6 @@ const PicUploader = React.memo(function PicUploader(props) {
   };
 
   const handleModalClose = () => {
-    if (
-      itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 22
-    ) {
-      return;
-    }
-
     setPin({
       ...pin,
       PicFile:   '',
@@ -481,19 +408,6 @@ const PicUploader = React.memo(function PicUploader(props) {
     setPin({ ...pin, Animal: name });
     setList([]);
   };
-
-  let waiter;
-  useEffect(() => {
-    clearTimeout(waiter);
-
-    if (tutorialRunning) {
-      if (itterator3 === 14) {
-        waiter = setTimeout(() => {
-          setItterator3(itterator3 + 1);
-        }, 2000);
-      }
-    }
-  }, [pin.Animal]);
 
   return (
     <>

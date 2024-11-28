@@ -3,7 +3,6 @@ import './siteSubmitter.css';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { IterratorContext } from '../contexts/iterratorContext';
 import { Iterrator2Context } from '../contexts/iterrator2Context';
-import { Iterrator3Context } from '../contexts/iterrator3Context';
 import { TutorialModelContext } from '../contexts/tutorialModalContext';
 import { SecondTutorialModalContext } from '../contexts/secondTutorialModalContext';
 import { ThirdTutorialModalContext } from '../contexts/thirdTutorialModalContext';
@@ -15,7 +14,6 @@ import { ModalContext } from '../contexts/modalContext';
 const HowToGuide = (props) => {
   const { itterator, setItterator } = useContext(IterratorContext);
   const { itterator2, setItterator2 } = useContext(Iterrator2Context);
-  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
   const {
     animateLaunchModal,
     animateIntroGuideModal,
