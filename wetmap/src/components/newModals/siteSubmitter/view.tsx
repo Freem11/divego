@@ -65,7 +65,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
             <Button
               onClick={props.getDeviceLocation}
               disabled={isSubmitting}
-              className="btn-md btnWhite"
+              className="btn-md"
               type="submit"
             >
               <text>{screenData.DiveSiteAdd.myLocationButton}</text>
@@ -76,7 +76,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
             <Button
               onClick={props.onNavigate}
               disabled={isSubmitting}
-              className={'btn-md btnWhite'}
+              className={'btn-md'}
               type="submit"
             >
               {screenData.DiveSiteAdd.pinButton}

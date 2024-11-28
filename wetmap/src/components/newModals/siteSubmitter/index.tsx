@@ -9,7 +9,6 @@ import { DiveSpotContext } from "../../contexts/diveSpotContext";
 import { MasterContext } from "../../contexts/masterContext";
 import { ModalSelectContext } from "../../contexts/modalSelectContext";
 import { ModalContext } from "../../contexts/modalContext";
-import backGroundPic from '../../images/boat.png'
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
@@ -183,10 +182,10 @@ export default function SiteSubmitter(props) {
     <SiteSubmitterView
       handleChange = {handleChange}
       getDeviceLocation = {getDeviceLocation}
-      handleNoGPSClose = {handleNoGPSClose}
       onNavigate={onNavigate}
       handleSubmit={handleSubmit}
       onClose={onClose}
+      addSiteVals={addSiteVals}
       onSubmit={(data) => {
         console.log({ data });
       }}
