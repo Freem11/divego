@@ -19,7 +19,6 @@ export default function Itinerary(props) {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
-
   const { setMapConfig } = useContext(MapConfigContext);
 
 

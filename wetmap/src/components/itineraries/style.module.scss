@@ -3,23 +3,22 @@
 .masterBox {
   display: flex;
   flex-direction: column;
-  width: 96%;
-  margin-left: 2%;
+  width: 98%;
   height: fit-content;
-  margin-bottom: 3%;
+  margin: 0 auto 3%;
   justify-content: center;
   align-items: center;
 }
 
 .shadowbox {
   display: flex;
+  z-index: 2;
   flex-direction: row;
   align-items: center;
   outline: 0.1em solid #afafaf;
   box-shadow:  1px 3px 5px #87878780;
   background-color: white;
   border-radius: 10px;
-  margin-bottom: 3px;
   width: 96%;
   height: 80;
 }
@@ -65,6 +64,7 @@
 }
 
 .extraBox {
+  position: relative;
   z-index: 1;
   overflow-y: auto;
   width: 93%;
