@@ -1,4 +1,4 @@
-export interface DiveSiteWithUserName {
+export type DiveSiteWithUserName = {
   id:                   number
   name:                 string
   lat:                  number

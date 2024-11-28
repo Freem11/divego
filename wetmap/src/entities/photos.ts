@@ -1,4 +1,4 @@
-export interface PhotoWithLikesAndComments {
+export type PhotoWithLikesAndComments = {
   id:           number
   created_at:   string
   photoFile:    string
@@ -15,12 +15,12 @@ export interface PhotoWithLikesAndComments {
   commentcount: number
 };
 
-export interface PhotosGroupedByDate {
+export type PhotosGroupedByDate = {
   dateTaken: string
   photos:    PhotoWithLikesAndComments[]
 };
 
-export interface Photo {
+export type Photo = {
   id:         number
   created_at: string
   photoFile:  string
