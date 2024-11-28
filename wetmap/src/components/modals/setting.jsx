@@ -27,8 +27,6 @@ const Settings = (props) => {
 
   const handlePartnerButton = () => {
     modalShow(PartnerAccountRequestModal, { keepPreviousModal: true });
-    // setPartnerModal(true);
-    // setSettingsModal(false);
   };
   useEffect(() => {
     checkForRequest(activeSession.user.id);
