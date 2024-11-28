@@ -13,7 +13,6 @@ import ChapterContextProvider from './chapterContext';
 import ReverseContextProvider from './reverseContext';
 import TutorialContextProvider from './tutorialContext';
 import TutorialResetContextProvider from './tutorialResetContext';
-import IteratorContextProvider from './iterratorContext';
 import ModalSelectContextProvider from './modalSelectContext';
 import UserProfileContextProvider from './userProfileContext';
 import HeatPointsContextProvider from './heatPointsContext';
@@ -58,7 +57,6 @@ const providers = [
   ReverseContextProvider,
   TutorialContextProvider,
   TutorialResetContextProvider,
-  IteratorContextProvider,
   ModalSelectContextProvider,
   UserProfileContextProvider,
   HeatPointsContextProvider,

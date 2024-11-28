@@ -1,6 +1,5 @@
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { AnimalContext } from '../contexts/animalContext';
-import { IterratorContext } from '../contexts/iterratorContext';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import { PinContext } from '../contexts/staticPinContext';
@@ -36,7 +35,6 @@ const AnchorPics = (props) => {
   const [anchorPics, setAnchorPics] = useState([]);
   const [site, setSite] = useState('');
 
-  const { itterator, setItterator } = useContext(IterratorContext);
   const { tutorialRunning } = useContext(TutorialContext);
   const { modalShow } = useContext(ModalContext);
 
@@ -71,15 +69,6 @@ const AnchorPics = (props) => {
       }
       if (photos) {
         setAnchorPics(photos);
-
-        if (tutorialRunning && itterator === 11) {
-          if (photos.length === 0) {
-            setItterator(itterator + 1);
-          }
-          else {
-            setItterator(itterator + 3);
-          }
-        }
       }
     }
     catch (e) {
@@ -100,12 +89,6 @@ const AnchorPics = (props) => {
     }
   }, [selectedDiveSite]);
 
-  useEffect(() => {
-    if (itterator === 25) {
-      animateAnchorModal();
-    }
-  }, [itterator]);
-
   const getDiveSite = async () => {
     try {
       const selectedSite = await getDiveSiteWithUserName({
@@ -123,16 +106,10 @@ const AnchorPics = (props) => {
   };
 
   const handleClose = async () => {
-    if (tutorialRunning && itterator === 16) {
-      setItterator(itterator + 1);
-    }
     props?.onModalCancel?.();
   };
 
   const handleSwitch = () => {
-    if (itterator === 11 || itterator == 15) {
-      return;
-    }
     setPin({
       ...pin,
       Latitude:  selectedDiveSite.Latitude,

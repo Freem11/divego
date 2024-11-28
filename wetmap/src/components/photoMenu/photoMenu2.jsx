@@ -6,7 +6,6 @@ import {
 import { getPhotosforMapArea } from '../../supabaseCalls/photoSupabaseCalls';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import { HeatPointsContext } from '../contexts/heatPointsContext';
-import { IterratorContext } from '../contexts/iterratorContext';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { AreaPicsContext } from '../contexts/areaPicsContext';
 import { SearchTextContext } from '../contexts/searchTextContext';
@@ -30,7 +29,6 @@ const PhotoMenu = () => {
 
   const [selectedID, setSelectedID] = useState(null);
 
-  const { itterator, setItterator } = useContext(IterratorContext);
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
 
 
@@ -114,16 +112,6 @@ const PhotoMenu = () => {
   };
 
   useEffect(() => {
-    clearTimeout(waiter2);
-
-    if (tutorialRunning) {
-      if (itterator === 19) {
-        waiter2 = setTimeout(() => {
-          setItterator(itterator + 2);
-        }, 2000);
-      }
-    }
-
     filterHeatPointsForMapArea();
   }, [animalVal]);
 

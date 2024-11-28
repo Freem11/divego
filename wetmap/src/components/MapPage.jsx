@@ -41,7 +41,6 @@ import { ZoomHelperContext } from './contexts/zoomHelperContext';
 import { DiveSiteAdderModalContext } from './contexts/diveSiteAdderModalContext';
 import { PullTabContext } from './contexts/pullTabContext';
 import { TutorialContext } from './contexts/tutorialContext';
-import { IterratorContext } from './contexts/iterratorContext';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import IntroTutorial from './guides/introTutorial';
 import SecondTutorial from './guides/secondTutorial';
@@ -73,7 +72,6 @@ const MapPage = React.memo(function MapPage() {
   const { chosenModal } = useContext(ModalSelectContext);
 
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-  const { itterator, setItterator } = useContext(IterratorContext);
 
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -115,7 +113,6 @@ const MapPage = React.memo(function MapPage() {
           if (bully == null || bully === '') {
             setIntroGuideModalYCoord(-window.innerHeight);
             setTutorialRunning(true);
-            setItterator(0);
           } else {
             setProfile(success);
             setPin({
@@ -160,87 +157,27 @@ const MapPage = React.memo(function MapPage() {
 
 
   const handleProfileButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-    ) {
-      return;
-    }
-
     animateProfileModal();
   };
 
   const handleSettingsButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-    ) {
-      return;
-    }
-
     animateSettingsModal();
   };
 
   const handleTutorialButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-    ) {
-      return;
-    }
-
     animateLaunchModal();
   };
 
   const handleDiveSiteSearchButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-    ) {
-      return;
-    }
-
     animateSiteSearchModal();
 
   };
 
   const handleDiveSiteModalButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-    ) {
-      return;
-    }
-
     clearSiteModal();
   };
 
   const handleAnchorButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-    ) {
-      return;
-    }
-
     setDivesTog(!divesTog);
   };
 
