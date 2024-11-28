@@ -53,18 +53,17 @@ export default function ShopModal(props) {
   };
 
   const handleShopModalClose = () => {
-    setSelectedShop({ ...selectedShop, id: 0, orgname: '' });
+    setSelectedShop({ ...selectedShop, id:0, orgname: '' });
     setItineraryList([]);
     setShopModal(false);
   };
 
   const handleDiveShopBioChange = async (newValue: string) => {
     if (selectedShop) {
-      await updateDiveShop({ id: selectedShop.id, bio: newValue, photo: selectedShop.diveShopProfilePhoto });
+      await updateDiveShop({ id: selectedShop.id, bio: newValue, photo: selectedShop.diveshopprofilephoto });
     }
   };
 
-  // console.log('selectedShop:', selectedShop);
 
   return (
     <>
@@ -80,7 +79,7 @@ export default function ShopModal(props) {
           isPartnerAccount={isPartnerAccount}
           itineraryList={itineraryList}
           selectedID={selectedID}
-          headerPictureUrl={selectedShop.headerPictureUrl}
+          headerPictureUrl={null}
         />
       )}
     </>

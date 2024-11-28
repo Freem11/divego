@@ -39,7 +39,6 @@
 }
 
 .opener {
-
   color: #0d0d0d;
   font-weight: 500;
   margin-bottom: 0.2em;
@@ -53,17 +52,16 @@
   padding: 0.5em;
   width: 40%;
   height: 100%;
-  /* background-color: green; */
 }
 
 .buttonStyling {
-  color:#afafaf;
-}
+  color: #afafaf;
 
-.buttonStyling:hover,
-.buttonStyling:focus {
-  color: #484848;
-  background-color: rgb(227, 227, 227);
+  &:hover,
+  &:focus {
+    color: #484848;
+    background-color: rgb(227, 227, 227);
+  }
 }
 
 .extraBox {
