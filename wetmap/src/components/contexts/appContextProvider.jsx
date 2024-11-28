@@ -9,7 +9,6 @@ import CarrouselTilesContextProvider from './carrouselTilesContext';
 import ThirdTutorialModalContextProvider from './thirdTutorialModalContext';
 import SecondTutorialModalContextProvider from './secondTutorialModalContext';
 import TutorialModalContextProvider from './tutorialModalContext';
-import ChapterContextProvider from './chapterContext';
 import ReverseContextProvider from './reverseContext';
 import TutorialResetContextProvider from './tutorialResetContext';
 import ModalSelectContextProvider from './modalSelectContext';
@@ -52,7 +51,6 @@ const providers = [
   ThirdTutorialModalContextProvider,
   SecondTutorialModalContextProvider,
   TutorialModalContextProvider,
-  ChapterContextProvider,
   ReverseContextProvider,
   TutorialResetContextProvider,
   ModalSelectContextProvider,

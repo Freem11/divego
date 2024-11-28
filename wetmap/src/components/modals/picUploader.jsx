@@ -15,7 +15,6 @@ import { PictureContext } from '../contexts/pictureContext';
 import { SessionContext } from '../contexts/sessionContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import { ModalSelectContext } from '../contexts/modalSelectContext';
-import { ChapterContext } from '../contexts/chapterContext';
 import PlaceIcon from '@mui/icons-material/Place';
 import PhotoIcon from '@mui/icons-material/Photo';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
@@ -73,7 +72,6 @@ const PicUploader = React.memo(function PicUploader(props) {
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
-  const { chapter, setChapter } = useContext(ChapterContext);
 
   const fileTypes = ['JPG', 'JPEG', 'PNG'];
 
@@ -372,11 +370,6 @@ const PicUploader = React.memo(function PicUploader(props) {
     document.getElementById('file').click();
   }
 
-  const activateGuide = () => {
-    setChapter('Adding your photo');
-  };
-
-
   const customBtnStyle = {
     width:   '4.5vw',
     height:  '2.9vh',
@@ -409,14 +402,6 @@ const PicUploader = React.memo(function PicUploader(props) {
 
   return (
     <>
-      <div>
-        <ModalHeader
-          title="Submit Your Picture"
-          onClick={() => activateGuide()}
-          svg={<QuestionMarkIcon />}
-          onClose={handleModalClose}
-        />
-      </div>
       <div className="hero hero-sm p-0">
         <div className="flex-center-column">
           {photoFile !== null && (
