@@ -142,8 +142,7 @@ export const getSingleDiveSiteByNameAndRegion = async (values) => {
     if (data) {
       return data;
     }
-  }
-  else {
+  } else {
     const { data, error } = await supabase
       .from('diveSites')
       .select()
@@ -162,14 +161,14 @@ export const getSingleDiveSiteByNameAndRegion = async (values) => {
 };
 
 export const updateDiveSite = async (values) => {
-  console.log("updating...", values)
+  console.log('updating...', values);
   const { data, error } = await supabase
-    .from("diveSites")
+    .from('diveSites')
     .update({ diveSiteBio: values.bio, diveSiteProfilePhoto: values.photo  })
-    .eq("id", values.id);
+    .eq('id', values.id);
 
   if (error) {
-    console.log("couldn't do it 2,", error);
+    console.log('couldn\'t do it 2,', error);
     return [];
   }
 

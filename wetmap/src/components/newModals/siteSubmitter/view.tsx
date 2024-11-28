@@ -40,20 +40,20 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
             <TextInput
               iconLeft={<Icon name="diving-scuba-flag" />}
               placeholder={screenData.DiveSiteAdd.siteNamePlaceholder}
-              error={errors.name}
-              {...register('name', FormRules.name)}
+              error={errors.Site}
+              {...register('Site', FormRules.Site)}
             />
 
             <TextInput
               iconLeft={<Icon name="latitude" />}
               placeholder={screenData.DiveSiteAdd.latPlaceholder}
-              {...register('latitude')}
+              {...register('Latitude')}
             />
 
             <TextInput
               iconLeft={<Icon name="longitude" />}
               placeholder={screenData.DiveSiteAdd.lngPlaceholder}
-              {...register('longitude')}
+              {...register('Longitude')}
             />
           </div>
         </div>

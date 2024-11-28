@@ -82,6 +82,9 @@ export default function Modal(props) {
               onModalCancel={() => {
                 modalContext.modalCancel();
               }}
+              registerCancelCallback={(callback) => {
+                modalWindow.options.onCancelCallback = callback;
+              }}
             />
           </div>
         );

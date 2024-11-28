@@ -13,7 +13,7 @@ import usePlacesAutocomplete, {
 export default function SearchTool(props: any) {
   const { onModalCancel } = props;
   const { boundaries } = useContext(MapBoundsContext);
-  const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
+  const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { setMapCoords } = useContext(CoordsContext);
 
   const [list, setList] = useState<any>([]);
@@ -35,7 +35,7 @@ export default function SearchTool(props: any) {
     const diveSiteArray: string[] = [];
     let diveSiteData: { [x: string]: any }[] | undefined = undefined;
 
-    if (boundaries.length > 0) {
+    if (boundaries && boundaries.length > 0) {
       diveSiteData = await getSiteNamesThatFit(value);
     } else {
       diveSiteData = undefined;
@@ -91,9 +91,10 @@ export default function SearchTool(props: any) {
 
       if (diveSiteSet && diveSiteSet?.length > 0) {
         setSelectedDiveSite({
-          SiteName:  diveSiteSet[0].name,
-          Latitude:  diveSiteSet[0].lat,
-          Longitude: diveSiteSet[0].lng,
+          ...selectedDiveSite,
+          name:  diveSiteSet[0].name,
+          lat:  diveSiteSet[0].lat,
+          lng:  diveSiteSet[0].lng,
         });
       } else {
         const address = value;

@@ -1,6 +1,6 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
-import Home from './googleMap';
+import MapLoader from './googleMap';
 import SearchTool from './searchTool/index';
 import SiteSubmitter from './newModals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
@@ -57,6 +57,9 @@ import { ModalContext } from './contexts/modalContext';
 import Modal from './reusables/modal/modal';
 import { ModalWindowSize } from './reusables/modal/constants';
 
+import { MapConfigContext } from './contexts/mapConfigContext';
+
+
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
@@ -90,8 +93,11 @@ const MapPage = React.memo(function MapPage() {
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { modalShow, modalResume } = useContext(ModalContext);
 
+  const { mapConfig, setMapConfig } = useContext(MapConfigContext);
+
   const returnToPicModal = () => {
     modalResume();
+    setMapConfig(0);
     setMasterSwitch(true);
     if (chosenModal === 'DiveSite') {
       if (tutorialRunning) {
@@ -114,6 +120,7 @@ const MapPage = React.memo(function MapPage() {
     setSiteModal(false);
     setShopModal(true);
     setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
+    setMapConfig(0);
     setMasterSwitch(true);
     setMinorSwitch(true);
     setZoomHelper(true);
@@ -506,7 +513,7 @@ const MapPage = React.memo(function MapPage() {
         )}
       </div>
 
-      {masterSwitch && (
+      {mapConfig === 0 && (
         <animated.div className="fabContainer" style={moveFabModal}>
           <div className="animateBox" onClick={e => animateMenu(e)}>
             <p className="animateFont">{menuUp ? 'Hide Menu' : 'Show Menu'}</p>
@@ -536,7 +543,7 @@ const MapPage = React.memo(function MapPage() {
           </div>
 
           <div className="fabButtons">
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -551,7 +558,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -566,7 +573,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -581,7 +588,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -597,7 +604,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 <ToggleButton
                   sx={toggleButtonStyle}
@@ -612,7 +619,7 @@ const MapPage = React.memo(function MapPage() {
               </div>
             )}
 
-            {masterSwitch && (
+            {mapConfig === 0 && (
               <div className="gearBox">
                 {' '}
                 <ToggleButton
@@ -632,7 +639,7 @@ const MapPage = React.memo(function MapPage() {
         </animated.div>
       )}
 
-      {masterSwitch && (
+      {[0, 2].includes(mapConfig) && (
         <div className="col1row8" pointerEvents="box-none">
           <PhotoMenu />
           <div className="filterer">
@@ -656,7 +663,7 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-      {masterSwitch && (
+      {mapConfig === 0 && (
         <div className="histoBox" style={{ pointerEvents: 'none' }}>
           <Histogram pointerEvents="none" />
         </div>
@@ -666,13 +673,13 @@ const MapPage = React.memo(function MapPage() {
       </div>
 
       <div>
-        <Home
+        <MapLoader
           style={{
             zIndex: '1',
             height: '100%',
           }}
         >
-        </Home>
+        </MapLoader>
       </div>
 
       <div className="just-testing2">
@@ -707,7 +714,7 @@ const MapPage = React.memo(function MapPage() {
         </div>
       </div>
 
-      {!masterSwitch && minorSwitch && (
+      {mapConfig === 1 && (
         <div
           style={{
             display:       'flex',
@@ -749,7 +756,7 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-      {!masterSwitch && !minorSwitch && (
+      {mapConfig === 2 && (
         <div
           style={{
             display:       'flex',

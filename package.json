@@ -35,5 +35,8 @@
     "pg": "^8.7.1",
     "react-google-places-autocomplete": "^3.4.0",
     "use-places-autocomplete": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/google.maps": "^3.58.1"
   }
 }
