@@ -23,7 +23,6 @@ import { IterratorContext } from '../contexts/iterratorContext';
 import { Iterrator2Context } from '../contexts/iterrator2Context';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { TutorialResetContext } from '../contexts/tutorialResetContext';
-import { AnchorModalContext } from '../contexts/anchorModalContext';
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { AnimalContext } from '../contexts/animalContext';
 import { AnimalMultiSelectContext } from '../contexts/animalMultiSelectContext';
@@ -76,7 +75,6 @@ export default function IntroTutorial(props) {
   const { animalVal } = useContext(AnimalContext);
   const { animalMultiSelection } = useContext(AnimalMultiSelectContext);
 
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { guideModal, setGuideModal } = useContext(TutorialModelContext);
   const { secondGuideModal, setSecondGuideModal } = useContext(
     SecondTutorialModalContext,
@@ -105,7 +103,6 @@ export default function IntroTutorial(props) {
       setTutorialRunning(false);
       setGuideModal(false);
       setTutorialReset(false);
-      setSiteModal(false);
       resetTutorial();
       setChapter(null);
     }
@@ -131,7 +128,6 @@ export default function IntroTutorial(props) {
     switch (chapter) {
       case 'Getting around the map':
         resetTutorial();
-        setSiteModal(false);
         setItterator(6);
         setGuideModal(true);
         setTimeout(() => {
@@ -145,7 +141,6 @@ export default function IntroTutorial(props) {
 
       case 'Dive sites':
         resetTutorial();
-        setSiteModal(false);
         setItterator(9);
         setGuideModal(true);
         setTimeout(() => {
@@ -163,7 +158,6 @@ export default function IntroTutorial(props) {
 
       case 'Changed dive site':
         resetTutorial();
-        setSiteModal(false);
         setItterator(17);
         setGuideModal(true);
         setIntroGuideModalYCoord(-windowHeigth);
@@ -258,7 +252,6 @@ export default function IntroTutorial(props) {
   const handleSecondTutorialStartup = () => {
     setItterator(null);
     setItterator2(0);
-    setSiteModal(false);
     setTutorialRunning(true);
     animateIntroGuideModal();
     animateSecondGuideModal();
@@ -583,7 +576,6 @@ export default function IntroTutorial(props) {
     }
 
     if (itterator === 21) {
-      setSiteModal(true);
       setIntroGuideModalYCoord(-windowHeigth);
     }
 
@@ -664,10 +656,7 @@ export default function IntroTutorial(props) {
 
   useEffect(() => {
     filterAnchorPhotos();
-    if (itterator === 21) {
-      setSiteModal(true);
-    }
-  }, [selectedDiveSite, itterator]);
+  }, [selectedDiveSite]);
 
   const filterAnchorPhotos = async () => {
     let { minLat, maxLat, minLng, maxLng } = newGPSBoundaries(

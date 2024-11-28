@@ -35,7 +35,6 @@ import { SessionContext } from './contexts/sessionContext';
 import { PinContext } from './contexts/staticPinContext';
 import { DiveSpotContext } from './contexts/diveSpotContext';
 import { ModalSelectContext } from './contexts/modalSelectContext';
-import { AnchorModalContext } from './contexts/anchorModalContext';
 import { ShopModalContext } from './contexts/shopModalContext';
 import { SitesArrayContext } from './contexts/sitesArrayContext';
 import { ZoomHelperContext } from './contexts/zoomHelperContext';
@@ -84,7 +83,6 @@ const MapPage = React.memo(function MapPage() {
   const [isOpen, setIsOpen] = useState(false);
 
   const { setSitesArray } = useContext(SitesArrayContext);
-  const { setSiteModal } = useContext(AnchorModalContext);
   const { setShopModal } = useContext(ShopModalContext);
 
   const { setDsAddermodal } = useContext(
@@ -117,9 +115,8 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const onShopNavigate = () => {
-    setSiteModal(false);
     setShopModal(true);
-    setMapCoords([selectedShop[0].lat, selectedShop[0].lng]);
+    setMapCoords([selectedShop.lat, selectedShop.lng]);
     setMapConfig(0);
     setMasterSwitch(true);
     setMinorSwitch(true);

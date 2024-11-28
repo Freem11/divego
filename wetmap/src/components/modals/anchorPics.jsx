@@ -1,6 +1,5 @@
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { AnimalContext } from '../contexts/animalContext';
-import { AnchorModalContext } from '../contexts/anchorModalContext';
 import { IterratorContext } from '../contexts/iterratorContext';
 import { TutorialContext } from '../contexts/tutorialContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
@@ -30,7 +29,6 @@ const AnchorPics = (props) => {
     animateAnchorModal,
   } = props;
   const { profile } = useContext(UserProfileContext);
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { animalVal } = useContext(AnimalContext);
   const { pin, setPin } = useContext(PinContext);
@@ -94,12 +92,6 @@ const AnchorPics = (props) => {
       filterAnchorPhotos();
     }
   }, []);
-
-  useEffect(() => {
-    if (selectedDiveSite.SiteName !== '') {
-      filterAnchorPhotos();
-    }
-  }, [siteModal]);
 
   useEffect(() => {
     if (selectedDiveSite.SiteName !== '') {
