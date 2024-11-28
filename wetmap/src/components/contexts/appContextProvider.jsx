@@ -32,7 +32,6 @@ import PinSpotContextProvider from './pinSpotContext';
 import AnimalRevealContextProvider from './animalRevealContext';
 import GeoCoderContextProvider from './geoCoderContext';
 import PictureContextProvider from './pictureContext';
-import AdminContextProvider from './adminContext';
 import SliderContextProvider from './sliderContext';
 import AnimalContextProvider from './animalContext';
 import ZoomContextProvider from './mapZoomContext';
@@ -81,7 +80,6 @@ const providers = [
   AnimalRevealContextProvider,
   GeoCoderContextProvider,
   PictureContextProvider,
-  AdminContextProvider,
   SliderContextProvider,
   AnimalContextProvider,
   ZoomContextProvider,
