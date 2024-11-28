@@ -42,7 +42,6 @@ import { DiveSiteAdderModalContext } from './contexts/diveSiteAdderModalContext'
 import { PullTabContext } from './contexts/pullTabContext';
 import { TutorialContext } from './contexts/tutorialContext';
 import { IterratorContext } from './contexts/iterratorContext';
-import { Iterrator2Context } from './contexts/iterrator2Context';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import IntroTutorial from './guides/introTutorial';
 import SecondTutorial from './guides/secondTutorial';
@@ -75,7 +74,6 @@ const MapPage = React.memo(function MapPage() {
 
   const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
   const { itterator, setItterator } = useContext(IterratorContext);
-  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
 
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -95,14 +93,6 @@ const MapPage = React.memo(function MapPage() {
     modalResume();
     setMapConfig(0);
     setMasterSwitch(true);
-    if (chosenModal === 'DiveSite') {
-      if (tutorialRunning) {
-        if (itterator2 === 19) {
-          setItterator2(itterator2 + 1);
-          animateSecondGuideModal();
-        }
-      }
-    }
   };
 
   const onShopNavigate = () => {
@@ -176,14 +166,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator === 16
       || itterator === 19
       || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
     ) {
       return;
     }
@@ -198,14 +180,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator === 16
       || itterator === 19
       || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
     ) {
       return;
     }
@@ -220,14 +194,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator === 16
       || itterator === 19
       || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
     ) {
       return;
     }
@@ -242,24 +208,12 @@ const MapPage = React.memo(function MapPage() {
       || itterator === 16
       || itterator === 19
       || itterator === 25
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
     ) {
       return;
     }
 
     animateSiteSearchModal();
 
-    if (tutorialRunning) {
-      if (itterator2 === 3) {
-        setItterator2(itterator2 + 1);
-      }
-    }
   };
 
   const handleDiveSiteModalButton = () => {
@@ -269,24 +223,11 @@ const MapPage = React.memo(function MapPage() {
       || itterator === 16
       || itterator === 19
       || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
     ) {
       return;
     }
 
     clearSiteModal();
-
-    if (tutorialRunning) {
-      if (itterator2 === 9) {
-        setItterator2(itterator2 + 1);
-      }
-    }
   };
 
   const handleAnchorButton = () => {
@@ -296,14 +237,6 @@ const MapPage = React.memo(function MapPage() {
       || itterator === 16
       || itterator === 19
       || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
     ) {
       return;
     }
