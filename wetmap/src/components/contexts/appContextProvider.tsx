@@ -8,7 +8,6 @@ import ModalSelectContextProvider from './modalSelectContext';
 import UserProfileContextProvider from './userProfileContext';
 import HeatPointsContextProvider from './heatPointsContext';
 import MapBoundsContextProvider from './mapBoundariesContext';
-import SelectedPicContextProvider from './selectPicContext';
 import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
 import DiveSpotContextProvider from './diveSpotContext';
 import PinSpotContextProvider from './pinSpotContext';
@@ -34,7 +33,6 @@ const providers = [
   UserProfileContextProvider,
   HeatPointsContextProvider,
   MapBoundsContextProvider,
-  SelectedPicContextProvider,
   SelectedDiveSiteContextProvider,
   DiveSpotContextProvider,
   PinSpotContextProvider,
