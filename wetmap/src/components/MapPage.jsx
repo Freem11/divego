@@ -41,17 +41,12 @@ import { ZoomHelperContext } from './contexts/zoomHelperContext';
 import { DiveSiteAdderModalContext } from './contexts/diveSiteAdderModalContext';
 import { PullTabContext } from './contexts/pullTabContext';
 import { AreaPicsContext } from './contexts/areaPicsContext';
-import IntroTutorial from './guides/introTutorial';
-import SecondTutorial from './guides/secondTutorial';
-import ThirdTutorial from './guides/thirdTutorial'; ;
 import './mapPage.css';
 import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
 import Histogram from './histogram/histogramBody';
-import TutorialBar from './guideBar/tutorialBarContainer';
 import { ModalContext } from './contexts/modalContext';
 import Modal from './reusables/modal/modal';
 import { ModalWindowSize } from './reusables/modal/constants';
-
 import { MapConfigContext } from './contexts/mapConfigContext';
 
 
@@ -172,14 +167,6 @@ const MapPage = React.memo(function MapPage() {
     setDivesTog(!divesTog);
   };
 
-
-  const introGuideModalRef = useRef(null);
-  const secondGuideModalRef = useRef(null);
-  const thirdGuideModalRef = useRef(null);
-
-  const [introGuideModalYCoord, setIntroGuideModalYCoord] = useState(0);
-  const [secondGuideModalYCoord, setSecondGuideModalYCoord] = useState(0);
-  const [thirdGuideModalYCoord, setThirdGuideModalYCoord] = useState(0);
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
 
@@ -187,22 +174,6 @@ const MapPage = React.memo(function MapPage() {
     from: { transform: `translate3d(0,0,0)` },
     to:   { transform: `translate3d(0,${fabsYCoord}px,0)` },
   });
-
-  const moveIntroGuidModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${introGuideModalYCoord}px,0)` },
-  });
-
-  const moveSecondGuideModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${secondGuideModalYCoord}px,0)` },
-  });
-
-  const moveThirdGuideModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${thirdGuideModalYCoord}px,0)` },
-  });
-
 
   const animateFabs = () => {
     let containerHeight = document.getElementsByClassName('fabContainer')[0]
@@ -245,9 +216,6 @@ const MapPage = React.memo(function MapPage() {
       return (
         <HowToGuide
           animateLaunchModal={animateLaunchModal}
-          animateIntroGuideModal={animateIntroGuideModal}
-          animateSecondGuideModal={animateSecondGuideModal}
-          animateThirdGuideModal={animateThirdGuideModal}
         />
       );
     }, { name: 'HowToGuide' });
@@ -259,30 +227,6 @@ const MapPage = React.memo(function MapPage() {
 
   const animateProfileModal = () => {
     modalShow(UserProfileModal);
-  };
-
-  const animateIntroGuideModal = () => {
-    if (introGuideModalYCoord === 0) {
-      setIntroGuideModalYCoord(-window.innerHeight);
-    } else {
-      setIntroGuideModalYCoord(0);
-    }
-  };
-
-  const animateSecondGuideModal = () => {
-    if (secondGuideModalYCoord === 0) {
-      setSecondGuideModalYCoord(-window.innerHeight);
-    } else {
-      setSecondGuideModalYCoord(0);
-    }
-  };
-
-  const animateThirdGuideModal = () => {
-    if (thirdGuideModalYCoord === 0) {
-      setThirdGuideModalYCoord(-window.innerHeight);
-    } else {
-      setThirdGuideModalYCoord(0);
-    }
   };
 
   const animateSiteSearchModal = () => {
@@ -594,44 +538,6 @@ const MapPage = React.memo(function MapPage() {
 
       <Modal />
 
-
-      <animated.div
-        className="guideModalDiv"
-        style={moveIntroGuidModal}
-        ref={introGuideModalRef}
-      >
-        <IntroTutorial
-          animateIntroGuideModal={animateIntroGuideModal}
-          setIntroGuideModalYCoord={setIntroGuideModalYCoord}
-          animateSecondGuideModal={animateSecondGuideModal}
-          setSecondGuideModalYCoord={setSecondGuideModalYCoord}
-        />
-      </animated.div>
-
-      <animated.div
-        className="guideModalDiv2"
-        style={moveSecondGuideModal}
-        ref={secondGuideModalRef}
-      >
-        <SecondTutorial
-          animateSecondGuideModal={animateSecondGuideModal}
-          setSecondGuideModalYCoord={setSecondGuideModalYCoord}
-          setDsAddermodal={setDsAddermodal}
-          animateThirdGuideModal={animateThirdGuideModal}
-          setThirdGuideModalYCoord={setThirdGuideModalYCoord}
-        />
-      </animated.div>
-
-      <animated.div
-        className="guideModalDiv3"
-        style={moveThirdGuideModal}
-        ref={thirdGuideModalRef}
-      >
-        <ThirdTutorial
-          animateThirdGuideModal={animateThirdGuideModal}
-          setThirdGuideModalYCoord={setThirdGuideModalYCoord}
-        />
-      </animated.div>
     </div>
   );
 });

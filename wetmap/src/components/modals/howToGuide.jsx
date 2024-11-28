@@ -2,7 +2,6 @@ import { useState, useContext, useEffect, useRef } from 'react';
 import './siteSubmitter.css';
 import ModalHeader from '../reusables/modalHeader';
 import LargeButton from '../reusables/button/largeButton';
-import IntroTutorial from '../guides/introTutorial';
 import { ModalContext } from '../contexts/modalContext';
 
 const HowToGuide = (props) => {
