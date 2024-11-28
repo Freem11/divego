@@ -61,7 +61,7 @@ const noGPSZone = (
 );
 
 const PicUploader = React.memo(function PicUploader(props) {
-  const { animatePicModal, setPicModalYCoord } = props;
+  const { } = props;
   let navigate = useNavigate();
   const { pin, setPin } = useContext(PinContext);
   const [showNoGPS, setShowNoGPS] = useState(false);
