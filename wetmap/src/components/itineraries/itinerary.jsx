@@ -100,7 +100,7 @@ export default function Itinerary(props) {
             {' to '}
             {itinerary.endDate}
           </p>
-          <p className={style.priceText}>{itinerary.price}</p>
+          <p className={style.priceText}>{itinerary.price }</p>
         </div>
 
         <p className={style.lowerText}>{itinerary.description}</p>
