@@ -93,7 +93,7 @@ export default function ShopModal(props) {
     setShopModal(false);
   };
   const fileUploaderRef = useRef<HTMLInputElement>(null);
-
+  
   return (
     <>
       {selectedShop && (

@@ -67,11 +67,13 @@ export default function Itinerary(props) {
     setMapCoords([moveLat, moveLng]);
   };
 
+  console.log(itinerary)
+
   return (
     <div className="masterBox" key={itinerary.id}>
       <div className="shadowbox">
         <div className="moreBox">
-          <p className="tripName">{itinerary.tripName}</p>
+          <p className="tripName">{itinerary.tripname}</p>
           <p
             className="opener"
             onClick={() => startMoreInfoAnimation(itinerary.id)}
@@ -82,7 +84,7 @@ export default function Itinerary(props) {
         <div className="buttonBox">
           <div
             className="sitesButton"
-            onClick={() => flipMap(itinerary.siteList)}
+            onClick={() => flipMap(itinerary.sitelist)}
           >
             <img src={gold} style={{ height: '30px', width: '30px' }} />
           </div>
@@ -94,10 +96,10 @@ export default function Itinerary(props) {
       <animated.div className="extraBox" style={heightChange}>
         <div className="topRail">
           <p className="dateText">
-            {itinerary.startDate}
+            {itinerary.startdate}
             {' '}
             to
-            {itinerary.endDate}
+            {itinerary.enddate}
           </p>
           <p className="priceText">{itinerary.price}</p>
         </div>

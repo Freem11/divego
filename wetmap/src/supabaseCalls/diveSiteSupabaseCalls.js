@@ -125,21 +125,6 @@ export const getDiveSitesByIDs = async (valueArray) => {
     // console.log(data)
     return data;
   }
-
-
-  // const { data, error } = await supabase
-  //   .from('diveSites')
-  //   .select()
-  //   .or(`id.in.(${Q2})`);
-
-  // if (error) {
-  //   console.log('couldn\'t do it 7,', error);
-  //   return [];
-  // }
-
-  // if (data) {
-  //   return data;
-  // }
 };
 
 export const getSingleDiveSiteByNameAndRegion = async (values) => {
