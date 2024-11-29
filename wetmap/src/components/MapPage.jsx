@@ -82,7 +82,6 @@ const MapPage = React.memo(function MapPage() {
       try {
         const success = await grabProfileById(sessionUserId);
         if (success) {
-          console.log('success', success)
             setProfile(success);
             setPin({
               ...pin,

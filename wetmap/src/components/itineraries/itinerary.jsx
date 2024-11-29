@@ -9,7 +9,7 @@ import gold from '../../images/mapIcons/AnchorGold.png';
 import diveFlag from '../../images/diveflag.png';
 
 export default function Itinerary(props) {
-  const { itinerary, selectedID, setSelectedID, setShopModal } = props;
+  const { itinerary, selectedID, setSelectedID } = props;
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
 
