@@ -4,7 +4,6 @@ import AreaPicsContextProvider from './areaPicsContext';
 import SearchTextContextProvider from './searchTextContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
-import ModalSelectContextProvider from './modalSelectContext';
 import UserProfileContextProvider from './userProfileContext';
 import HeatPointsContextProvider from './heatPointsContext';
 import MapBoundsContextProvider from './mapBoundariesContext';
@@ -27,7 +26,6 @@ const providers = [
   SearchTextContextProvider,
   PullTabContextProvider,
   CarrouselTilesContextProvider,
-  ModalSelectContextProvider,
   UserProfileContextProvider,
   HeatPointsContextProvider,
   MapBoundsContextProvider,

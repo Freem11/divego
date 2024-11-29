@@ -31,7 +31,6 @@ import { UserProfileContext } from './contexts/userProfileContext';
 import { SessionContext } from './contexts/sessionContext';
 import { PinContext } from './contexts/staticPinContext';
 import { DiveSpotContext } from './contexts/diveSpotContext';
-import { ModalSelectContext } from './contexts/modalSelectContext';
 import { SitesArrayContext } from './contexts/sitesArrayContext';
 import { PullTabContext } from './contexts/pullTabContext';
 import { AreaPicsContext } from './contexts/areaPicsContext';
@@ -53,7 +52,6 @@ const MapPage = React.memo(function MapPage() {
   const { selectedShop } = useContext(SelectedShopContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
   const { setMapCoords } = useContext(CoordsContext);
-  const { chosenModal } = useContext(ModalSelectContext);
 
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);

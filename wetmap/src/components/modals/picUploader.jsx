@@ -11,9 +11,6 @@ import { FileUploader } from 'react-drag-drop-files';
 import { useNavigate } from 'react-router-dom';
 import { PinContext } from '../contexts/staticPinContext';
 import { PictureContext } from '../contexts/pictureContext';
-import { SessionContext } from '../contexts/sessionContext';
-import { UserProfileContext } from '../contexts/userProfileContext';
-import { ModalSelectContext } from '../contexts/modalSelectContext';
 import PlaceIcon from '@mui/icons-material/Place';
 import PhotoIcon from '@mui/icons-material/Photo';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
@@ -64,12 +61,8 @@ const PicUploader = React.memo(function PicUploader(props) {
   const { } = props;
   let navigate = useNavigate();
   const { pin, setPin } = useContext(PinContext);
-  const [showNoGPS, setShowNoGPS] = useState(false);
   const [list, setList] = useState([]);
   const { photoFile, setPhotoFile } = useContext(PictureContext);
-  const { activeSession, setActiveSession } = useContext(SessionContext);
-  const { profile, setProfile } = useContext(UserProfileContext);
-  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
 
   const fileTypes = ['JPG', 'JPEG', 'PNG'];
 
@@ -218,92 +211,20 @@ const PicUploader = React.memo(function PicUploader(props) {
   };
 
   const handleNoGPSClose = (e) => {
-    setShowNoGPS(false);
     handleChange(e);
-    return;
-  };
-
-  const handleSelect = (e) => {
-    setShowNoGPS(false);
     return;
   };
 
   const handleNoGPSCloseOnMapChange = () => {
     modalPause();
-    setChosenModal('Photos');
-    setShowNoGPS(false);
     return;
   };
-
-  let counter = 0;
-  let blinker;
 
   const [imgButState, setImgButState] = useState(false);
   const [datButState, setDatButState] = useState(false);
   const [autoButState, setAutoButState] = useState(false);
   const [pinButState, setPinButState] = useState(false);
   const [subButState, setSubButState] = useState(false);
-
-  function imageBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setImgButState(false);
-    }
-    else {
-      setImgButState(true);
-    }
-  }
-
-  function calendarBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setDatButState(false);
-    }
-    else {
-      setDatButState(true);
-    }
-  }
-
-  function animalField() {
-    counter++;
-    if (counter % 2 == 0) {
-      setAutoButState(false);
-    }
-    else {
-      setAutoButState(true);
-    }
-  }
-
-  function pinBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setPinButState(false);
-    }
-    else {
-      setPinButState(true);
-    }
-  }
-
-  function subBut() {
-    counter++;
-    if (counter % 2 == 0) {
-      setSubButState(false);
-    }
-    else {
-      setSubButState(true);
-    }
-  }
-
-  function cleanUp() {
-    clearInterval(blinker);
-    setImgButState(false);
-    setDatButState(false);
-    setAutoButState(false);
-    setPinButState(false);
-    setSubButState(false);
-  }
-
-  let modalHeigth = 700;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -324,8 +245,8 @@ const PicUploader = React.memo(function PicUploader(props) {
 
       let rightNow = getToday(Rnow);
 
-        insertPhotoWaits({ ...pin });
-        insertPhotoWaits({ ...pin, PicFile: photoFile });
+      insertPhotoWaits({ ...pin });
+      insertPhotoWaits({ ...pin, PicFile: photoFile });
 
       setPin({
         ...pin,
@@ -358,7 +279,6 @@ const PicUploader = React.memo(function PicUploader(props) {
       Latitude:  '',
       Longitude: '',
     });
-    setShowNoGPS(false);
     setPhotoFile(null);
     props?.onModalCancel?.();
   };
@@ -455,10 +375,6 @@ const PicUploader = React.memo(function PicUploader(props) {
           </div>
 
           <div className="lowerBoxPhoto mt-4">
-            {/* <Collapse in={showNoGPS} orientation="vertical" collapsedSize="0px">
-          {noGPSZone}
-        </Collapse> */}
-
             <div className="Tbox">
               <div className="coordDiv">
                 <div className="inputboxType1">
@@ -478,7 +394,6 @@ const PicUploader = React.memo(function PicUploader(props) {
                   className={
                     autoButState ? 'autosuggestboxPhotoAlt' : 'autosuggestboxPhoto'
                   }
-                  onClick={handleSelect}
                 >
                   <AutoSuggest
                     placeholder="Animal"
