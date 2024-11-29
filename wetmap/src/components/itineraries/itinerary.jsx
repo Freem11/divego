@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { CoordsContext } from '../contexts/mapCoordsContext';
-import { ZoomHelperContext } from '../contexts/zoomHelperContext';
 import { MapConfigContext } from '../contexts/mapConfigContext';
 import './itinerary.css';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
@@ -13,7 +12,6 @@ export default function Itinerary(props) {
   const { itinerary, selectedID, setSelectedID, setShopModal } = props;
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
-  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   const { setMapConfig } = useContext(MapConfigContext);
 
@@ -57,8 +55,6 @@ export default function Itinerary(props) {
     });
     let moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
     let moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
-    setZoomHelper(true);
-    setShopModal(false);
     setMapConfig(2);
     setMapCoords([moveLat, moveLng]);
   };

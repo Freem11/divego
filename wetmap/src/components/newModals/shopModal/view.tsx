@@ -5,7 +5,6 @@ import Button from '../../reusables/button';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { CoordsContext } from '../../contexts/mapCoordsContext';
-import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
 import './shopModal.css';
 import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
 import CloseButton from '../../closeButton/closeButton';
@@ -29,7 +28,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
   const [itineraryList, setItineraryList] = useState('');
   const [selectedID, setSelectedID] = useState(null);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
-  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   useEffect(() => {
     if (selectedShop) {

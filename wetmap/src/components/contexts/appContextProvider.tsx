@@ -18,7 +18,6 @@ import PinContextProvider from './staticPinContext';
 import DiveSitesContextProvider from './diveSitesContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SelectedShopContextProvider from './selectedShopContext';
-import ZoomHelperContextProvider from './zoomHelperContext';
 import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from './modalContextProvider';
 import MapConfigContextProvider from './mapConfigContext';
@@ -42,7 +41,6 @@ const providers = [
   DiveSitesContextProvider,
   SelectedPictureContextProvider,
   SelectedShopContextProvider,
-  ZoomHelperContextProvider,
   SitesArrayContextProvider,
   ModalContextProvider,
   MapConfigContextProvider,

@@ -33,7 +33,6 @@ import { PinContext } from './contexts/staticPinContext';
 import { DiveSpotContext } from './contexts/diveSpotContext';
 import { ModalSelectContext } from './contexts/modalSelectContext';
 import { SitesArrayContext } from './contexts/sitesArrayContext';
-import { ZoomHelperContext } from './contexts/zoomHelperContext';
 import { PullTabContext } from './contexts/pullTabContext';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import './mapPage.css';
@@ -48,7 +47,6 @@ import { MapConfigContext } from './contexts/mapConfigContext';
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
-  const { setZoomHelper } = useContext(ZoomHelperContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
@@ -75,7 +73,6 @@ const MapPage = React.memo(function MapPage() {
   const onShopNavigate = () => {
     setMapCoords([selectedShop.lat, selectedShop.lng]);
     setMapConfig(0);
-    setZoomHelper(true);
     setSitesArray([]);
   };
 
