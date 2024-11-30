@@ -1,0 +1,14 @@
+.slider {
+    height: 100%;
+    width: 100%;
+    background-color: azure;
+    z-index: 5;
+    position: relative;
+}
+
+.slider-center-container{
+    margin: 0 auto;
+    width: 30%;
+    height: 100%;
+    border: 2px solid red;
+}

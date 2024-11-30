@@ -1,4 +1,5 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, useRef } from "react";
+import React, { DetailedHTMLProps, InputHTMLAttributes, useRef, useState } from "react";
+import './style.scss';
 
 type TextInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -14,10 +15,13 @@ const Slider = React.forwardRef(function Slider(
   ref
 ) {
   const { children, onChange, onFileChange, ...rest } = props;
-
+  
+const [slideNum, setSlideNum] = useState<number>(1);
   return (
     <>
-      <div>{children}</div>
+      <div className="slider"><div className="slider-center-container">{children[slideNum]}</div>
+      
+      </div>
     </>
   );
 });
