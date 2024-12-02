@@ -48,7 +48,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
       </WavyModalHeader>
 
       <form
-        className="flex-column-between full-height mx-6 mb-6"
+        className="flex-column-between full-height mx-10 mb-6"
         onSubmit={handleSubmit(props.onSubmit)}
       >
         <div className="d-flex">
@@ -90,11 +90,11 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
         </div>
 
         <div className="cols">
-          <div className="col-9"></div>
-          <div className="col-3">
+          <div className="col-8"></div>
+          <div className="col-4">
             <Button
               disabled={isSubmitting}
-              className="bg-primary col-3"
+              className="btn-lg bg-primary col-3"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >
