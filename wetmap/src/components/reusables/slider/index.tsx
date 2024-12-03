@@ -17,12 +17,14 @@ const Slider = React.forwardRef(function Slider(
 ) {
   const { children, onChange, onFileChange, ...rest } = props;
 
+  const pageData = [1, 2, 3, 4];
+
   const [xCoordinate, setxCoordinate] = useState<number>(0);
   const [slideNum, setSlideNum] = useState<number>(1);
 
   const animationDuration = 500;
   const pageWidth = window.innerWidth / 3;
-  const numberOfPages = 4;
+  const numberOfPages = pageData.length;
   const pageMin = 0;
   const pageMax = numberOfPages * pageWidth;
 
@@ -60,10 +62,14 @@ const Slider = React.forwardRef(function Slider(
         </div>
 
         <div className="slider-center-container" style={pageChangeStyle}>
-          <div style={{ backgroundColor: 'pink', height: '100%', width: `100/${numberOfPages}%` }}>Page 1</div>
-          <div style={{ backgroundColor: 'orange', height: '100%', width: `100/${numberOfPages}%` }}>Page 2</div>
-          <div style={{ backgroundColor: 'limegreen', height: '100%', width: `100/${numberOfPages}%` }}>Page 3</div>
-          <div style={{ backgroundColor: 'lightblue', height: '100%', width: `100/${numberOfPages}%` }}>Page 4</div>
+          {pageData
+          && pageData.map((page) => {
+            return (
+              <div style={{ height: '100%', width: '100%' }} key={page}>
+                {`Page ${page}`}
+              </div>
+            );
+          })}
         </div>
         <div className="rightSide">
           <Button text="forward" onClick={() => slideForward(1)} />
