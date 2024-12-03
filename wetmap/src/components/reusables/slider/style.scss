@@ -14,7 +14,7 @@
     justify-content: center;
     position: fixed;
     left: 0%;
-    width: (100vw) /3;
+    width: 25%;
     height: 100%;
     z-index: 2;
     background-color: white;
@@ -26,8 +26,8 @@
     align-items: center;
     justify-content: center;
     position: fixed;
-    left: (100vw) / 3 * 2;
-    width: (100vw) /3;
+    left: 75%;
+    width: 25%;
     height: 100%;
     z-index: 2;
     background-color: white; 
@@ -36,7 +36,7 @@
 
 .slider-center-container{
     margin: 0 auto;
-    width: (100vw) /3;
+    width: 50%;
     height: 100%;
     // border: 2px solid red;
     display: flex;
