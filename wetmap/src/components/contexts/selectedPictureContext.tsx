@@ -2,23 +2,12 @@ import React, { createContext, useState } from 'react';
 import { Photo } from '../../entities/photos';
 
 type SelectedPictureContextType = {
-  selectedPicture:    Photo
-  setSelectedPicture: React.Dispatch<React.SetStateAction<Photo>>
+  selectedPicture:    Photo | null
+  setSelectedPicture: React.Dispatch<React.SetStateAction<Photo | null>>
 };
 
 const SelectedPictureContextState = {
-  selectedPicture: {
-    id:         0,
-    created_at: '',
-    photoFile:  '',
-    label:      '',
-    dateTaken:  '',
-    latitude:   0,
-    longitude:  0,
-    month:      0,
-    UserID:     '',
-    UserName:   '',
-  },
+  selectedPicture:    null,
   setSelectedPicture: () => {},
 };
 
@@ -27,18 +16,7 @@ export const SelectedPictureContext = createContext<SelectedPictureContextType>(
 );
 
 const SelectedPictureContextProvider = ({ children }: any) => {
-  const [selectedPicture, setSelectedPicture] = useState<Photo>({
-    id:         0,
-    created_at: '',
-    photoFile:  '',
-    label:      '',
-    dateTaken:  '',
-    latitude:   0,
-    longitude:  0,
-    month:      0,
-    UserID:     '',
-    UserName:   '',
-  });
+  const [selectedPicture, setSelectedPicture] = useState<Photo | null>(null);
 
   return (
     <SelectedPictureContext.Provider value={{ selectedPicture, setSelectedPicture }}>

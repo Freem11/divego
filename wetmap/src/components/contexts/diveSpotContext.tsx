@@ -2,18 +2,12 @@ import React, { createContext, useState } from 'react';
 import { DiveSiteSubmissionData } from '../../entities/diveSiteSubmission';
 
 type DiveSpotContextType = {
-  addSiteVals:    DiveSiteSubmissionData
-  setAddSiteVals: React.Dispatch<React.SetStateAction<DiveSiteSubmissionData>>
+  addSiteVals:    DiveSiteSubmissionData | null
+  setAddSiteVals: React.Dispatch<React.SetStateAction<DiveSiteSubmissionData | null>>
 };
 
 const DiveSpotContextState = {
-  addSiteVals:      {
-    Site:      '',
-    Latitude:  0,
-    Longitude: 0,
-    UserID:    '',
-
-  },
+  addSiteVals:    null,
   setAddSiteVals: () => {},
 };
 
@@ -22,12 +16,7 @@ export const DiveSpotContext = createContext<DiveSpotContextType>(
 );
 
 const DiveSpotContextProvider = ({ children }: any) => {
-  const [addSiteVals, setAddSiteVals] = useState({
-    Site:      '',
-    Latitude:  0,
-    Longitude: 0,
-    UserID:    '',
-  });
+  const [addSiteVals, setAddSiteVals] = useState<DiveSiteSubmissionData | null>(null);
 
   return (
     <DiveSpotContext.Provider value={{ addSiteVals, setAddSiteVals }}>

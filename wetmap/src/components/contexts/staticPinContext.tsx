@@ -2,37 +2,21 @@ import React, { createContext, useState } from 'react';
 import { PhotoSubmission } from '../../entities/photoSubmission';
 
 type PinContextType = {
-  pin:    PhotoSubmission
-  setPin: React.Dispatch<React.SetStateAction<PhotoSubmission>>
+  pin:    PhotoSubmission | null
+  setPin: React.Dispatch<React.SetStateAction<PhotoSubmission | null>>
 };
 
 const PinContextState = {
-  pin:      {
-    PicFile:   '',
-    Animal:    '',
-    PicDate:   '',
-    Latitude:  0,
-    Longitude: 0,
-    siteName:  '',
-    UserID:    '',
-  },
+  pin:     null,
   setPin: () => {},
 };
 
-export const PinContext = createContext<PinContextType>(
+export const PinContext = createContext<PinContextType | null>(
   PinContextState,
 );
 
 const PinContextProvider = ({ children }: any) => {
-  const [pin, setPin] = useState({
-    PicFile:   '',
-    Animal:    '',
-    PicDate:   '',
-    Latitude:  0,
-    Longitude: 0,
-    siteName:  '',
-    UserID:    '',
-  });
+  const [pin, setPin] = useState<PhotoSubmission | null>(null);
 
   return (
     <PinContext.Provider value={{ pin, setPin }}>
