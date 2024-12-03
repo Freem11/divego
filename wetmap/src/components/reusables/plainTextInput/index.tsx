@@ -27,10 +27,10 @@ const PlainTextInput = React.forwardRef<HTMLInputElement, TextInputProps & Custo
       <input type="hidden" name={props.name} value={value} onChange={props.onChange} ref={forwardedRef} />
 
       <div
+        ref={ref}
+        onKeyDown={onKeyDown}
         suppressContentEditableWarning={true}
         className="ssrc-plain-text-input__textarea"
-        onKeyDown={onKeyDown}
-        ref={ref}
         contentEditable={!props.readOnly && isEditModeOn}
         onInput={function (e) {
           setValue(e.currentTarget.innerHTML);
