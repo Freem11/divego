@@ -1,5 +1,6 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes, useRef, useState } from 'react';
 import './style.scss';
+import Button from '../button/button';
 
 type TextInputProps = DetailedHTMLProps<
   InputHTMLAttributes<HTMLInputElement>,
@@ -16,29 +17,40 @@ const Slider = React.forwardRef(function Slider(
 ) {
   const { children, onChange, onFileChange, ...rest } = props;
 
-  const [prevSlideNum, setPrevSlideNum] = useState<number>(0);
+  const [xCoordinate, setxCoordinate] = useState<number>(0);
   const [slideNum, setSlideNum] = useState<number>(1);
 
-  const animationDuration = 300;
-  const pageWidth = '33vw';
+  const animationDuration = 500;
+  const pageWidth = window.innerWidth / 3;
 
-  const slideLeftStyle = {
-    // aka page forward
-    transform:  `translateX(${slideNum - prevSlideNum}*${pageWidth})`,
-    transition: `transform ${animationDuration}ms ease-in-out`,
+  const slideForward = (moveBy: number) => {
+    const movement = moveBy * pageWidth;
+    setxCoordinate(xCoordinate + movement);
+    setSlideNum(slideNum + moveBy);
   };
 
-  const slideRightStyle = {
-    // aka page backward
-    transform:  `translateX(-${slideNum - prevSlideNum}*${pageWidth})`,
+  const slideBack = (moveBy: number) => {
+    const movement = moveBy * pageWidth;
+    setxCoordinate(xCoordinate - movement);
+    setSlideNum(slideNum - moveBy);
+  };
+
+  const pageChangeStyle = {
+    transform:  `translateX(${xCoordinate}px)`,
     transition: `transform ${animationDuration}ms ease-out`,
   };
 
   return (
     <>
       <div className="slider">
-        <div className="slider-center-container">{children[slideNum]}</div>
-
+        <Button text="back" onClick={() => slideBack(1)} />
+        <div className="slider-center-container" style={pageChangeStyle}>
+          <div style={{ backgroundColor: 'pink', height: '100%', width: '25%' }} />
+          <div style={{ backgroundColor: 'orange', height: '100%', width: '25%' }} />
+          <div style={{ backgroundColor: 'limegreen', height: '100%', width: '25%' }} />
+          <div style={{ backgroundColor: 'lightblue', height: '100%', width: '25%' }} />
+        </div>
+        <Button text="forward" onClick={() => slideForward(1)} />
       </div>
     </>
   );

@@ -4,11 +4,22 @@
     background-color: azure;
     z-index: 5;
     position: relative;
+    display: flex;
+    align-items: center;
 }
 
 .slider-center-container{
     margin: 0 auto;
-    width: 30%;
+    width: 33%;
     height: 100%;
     border: 2px solid red;
+    display: flex;
+    position: fixed;
+    left: 33%;
+    // transform: translateX(33vw);
+}
+
+.button {
+    color: #000;
+    font-size: 20px;
 }
