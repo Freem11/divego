@@ -1,0 +1,10 @@
+.ssrc-plain-text-input {
+  position: relative;
+  display: flex;
+  align-items: end;
+
+  .ssrc-plain-text-input__textarea {
+    outline: none;
+    padding-right: 25px;
+  }
+}
