@@ -8,14 +8,38 @@
     align-items: center;
 }
 
+.leftSide{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: 0%;
+    width: (100vw) /3;
+    height: 100%;
+    z-index: 2;
+    background-color: pink;
+}
+
+.rightSide{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    left: (100vw) / 3 * 2;
+    width: (100vw) /3;
+    height: 100%;
+    z-index: 2;
+    background-color: pink; 
+}
+
 .slider-center-container{
     margin: 0 auto;
-    width: 33%;
+    width: (100vw) /3;
     height: 100%;
     border: 2px solid red;
     display: flex;
     position: fixed;
-    left: 33%;
+    left: (100vw) /3;
     // transform: translateX(33vw);
 }
 

@@ -22,20 +22,32 @@ const Slider = React.forwardRef(function Slider(
 
   const animationDuration = 500;
   const pageWidth = window.innerWidth / 3;
-
-  const slideForward = (moveBy: number) => {
-    const movement = moveBy * pageWidth;
-    setxCoordinate(xCoordinate + movement);
-    setSlideNum(slideNum + moveBy);
-  };
+  const numberOfPages = 4;
+  const pageMin = 0;
+  const pageMax = numberOfPages * pageWidth;
 
   const slideBack = (moveBy: number) => {
     const movement = moveBy * pageWidth;
-    setxCoordinate(xCoordinate - movement);
-    setSlideNum(slideNum - moveBy);
+    if (xCoordinate + movement > pageMin) {
+      return;
+    } else {
+      setxCoordinate(xCoordinate + movement);
+      setSlideNum(slideNum + moveBy);
+    }
+  };
+
+  const slideForward = (moveBy: number) => {
+    const movement = moveBy * pageWidth;
+    if (xCoordinate - movement <= -pageMax) {
+      return;
+    } else {
+      setxCoordinate(xCoordinate - movement);
+      setSlideNum(slideNum - moveBy);
+    }
   };
 
   const pageChangeStyle = {
+    width:      pageWidth * numberOfPages,
     transform:  `translateX(${xCoordinate}px)`,
     transition: `transform ${animationDuration}ms ease-out`,
   };
@@ -43,14 +55,19 @@ const Slider = React.forwardRef(function Slider(
   return (
     <>
       <div className="slider">
-        <Button text="back" onClick={() => slideBack(1)} />
-        <div className="slider-center-container" style={pageChangeStyle}>
-          <div style={{ backgroundColor: 'pink', height: '100%', width: '25%' }} />
-          <div style={{ backgroundColor: 'orange', height: '100%', width: '25%' }} />
-          <div style={{ backgroundColor: 'limegreen', height: '100%', width: '25%' }} />
-          <div style={{ backgroundColor: 'lightblue', height: '100%', width: '25%' }} />
+        <div className="leftSide">
+          <Button text="back" onClick={() => slideBack(1)} />
         </div>
-        <Button text="forward" onClick={() => slideForward(1)} />
+
+        <div className="slider-center-container" style={pageChangeStyle}>
+          <div style={{ backgroundColor: 'purple', height: '100%', width: '25%' }}>Page 1</div>
+          <div style={{ backgroundColor: 'orange', height: '100%', width: '25%' }}>Page 2</div>
+          <div style={{ backgroundColor: 'limegreen', height: '100%', width: '25%' }}>Page 3</div>
+          <div style={{ backgroundColor: 'lightblue', height: '100%', width: '25%' }}>Page 4</div>
+        </div>
+        <div className="rightSide">
+          <Button text="forward" onClick={() => slideForward(1)} />
+        </div>
       </div>
     </>
   );
