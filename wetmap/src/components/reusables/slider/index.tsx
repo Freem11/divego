@@ -60,7 +60,7 @@ const Slider = React.forwardRef(function Slider(
         </div>
 
         <div className="slider-center-container" style={pageChangeStyle}>
-          <div style={{ backgroundColor: 'purple', height: '100%', width: '25%' }}>Page 1</div>
+          <div style={{ backgroundColor: 'pink', height: '100%', width: '25%' }}>Page 1</div>
           <div style={{ backgroundColor: 'orange', height: '100%', width: '25%' }}>Page 2</div>
           <div style={{ backgroundColor: 'limegreen', height: '100%', width: '25%' }}>Page 3</div>
           <div style={{ backgroundColor: 'lightblue', height: '100%', width: '25%' }}>Page 4</div>
