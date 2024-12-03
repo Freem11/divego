@@ -18,6 +18,7 @@
     height: 100%;
     z-index: 2;
     background-color: white;
+    border: 1px solid black;
 }
 
 .rightSide{
@@ -30,13 +31,14 @@
     height: 100%;
     z-index: 2;
     background-color: white; 
+    border: 1px solid black;
 }
 
 .slider-center-container{
     margin: 0 auto;
     width: (100vw) /3;
     height: 100%;
-    border: 2px solid red;
+    // border: 2px solid red;
     display: flex;
     position: fixed;
     left: (100vw) /3;
