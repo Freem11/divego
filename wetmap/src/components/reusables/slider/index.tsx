@@ -1,4 +1,4 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, useRef, useState } from 'react';
+import React, { DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from 'react';
 import './style.scss';
 import Button from '../button/button';
 
@@ -27,6 +27,11 @@ const Slider = React.forwardRef(function Slider(
   const numberOfPages = pageData.length;
   const pageMin = 0;
   const pageMax = numberOfPages * pageWidth;
+
+
+  useEffect(() => {
+    setxCoordinate((slideNum - 1) * -pageWidth);
+  }, []);
 
   const slideBack = (moveBy: number) => {
     const movement = moveBy * pageWidth;
