@@ -1,6 +1,7 @@
 import { supabase } from '../supabase';
+import { ItineraryItem } from '../components/newModals/shopModal/types';
 
-export const itineraries = async (IdNo) => {
+export const itineraries = async (IdNo: Number) => {
   const { data, error } = await supabase
     .from('itineraries')
     .select()
@@ -12,6 +13,6 @@ export const itineraries = async (IdNo) => {
   }
 
   if (data) {
-    return data;
+    return data as ItineraryItem[];
   }
 };

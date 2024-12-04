@@ -6,10 +6,11 @@ import { ZoomHelperContext } from '../contexts/zoomHelperContext';
 import { MinorContext } from '../contexts/minorContext';
 import { MasterContext } from '../contexts/masterContext';
 import { MapConfigContext } from '../contexts/mapConfigContext';
-import './itinerary.css';
+import { ModalContext } from '../contexts/modalContext';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
-import gold from '../../images/mapIcons/AnchorGold.png';
-import diveFlag from '../../images/diveflag.png';
+import style from './style.module.scss';
+import ButtonIcon from '../reusables/buttonIcon';
+import Icon from '../../icons/Icon';
 
 export default function Itinerary(props) {
   const { itinerary, selectedID, setSelectedID, setShopModal } = props;
@@ -18,8 +19,8 @@ export default function Itinerary(props) {
   const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
   const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
   const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
-
   const { setMapConfig } = useContext(MapConfigContext);
+  const modalContext = useContext(ModalContext);
 
 
   const [hiddenHeigth, setHiddenHeigth] = useState(0);
@@ -62,47 +63,47 @@ export default function Itinerary(props) {
     let moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
     let moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
     setZoomHelper(true);
-    setShopModal(false);
     setMapConfig(2);
     setMapCoords([moveLat, moveLng]);
+    modalContext.modalCancel();
   };
 
   return (
-    <div className="masterBox" key={itinerary.id}>
-      <div className="shadowbox">
-        <div className="moreBox">
-          <p className="tripName">{itinerary.tripName}</p>
+    <div className={style.masterBox} key={itinerary.id}>
+      <div className={style.shadowbox}>
+        <div className={style.moreBox}>
+          <p className={style.tripName}>{itinerary.tripName}</p>
           <p
-            className="opener"
+            className={style.opener}
             onClick={() => startMoreInfoAnimation(itinerary.id)}
           >
             More Info
           </p>
         </div>
-        <div className="buttonBox">
-          <div
-            className="sitesButton"
+        <div className={style.buttonBox}>
+          <ButtonIcon
+            icon={<Icon name="anchor" />}
+            className={`btn-lg ${style.buttonStyling}`}
             onClick={() => flipMap(itinerary.siteList)}
-          >
-            <img src={gold} style={{ height: '30px', width: '30px' }} />
-          </div>
-          <div className="bookButton">
-            <img src={diveFlag} style={{ height: '30px', width: '30px' }} />
-          </div>
+          />
+          <ButtonIcon
+            icon={<Icon name="diving-scuba-flag" />}
+            className={`btn-lg ${style.buttonStyling}`}
+            // onClick={}
+          />
         </div>
       </div>
-      <animated.div className="extraBox" style={heightChange}>
-        <div className="topRail">
-          <p className="dateText">
+      <animated.div className={style.extraBox} style={heightChange}>
+        <div className={style.topRail}>
+          <p className={style.dateText}>
             {itinerary.startDate}
-            {' '}
-            to
+            {' to '}
             {itinerary.endDate}
           </p>
-          <p className="priceText">{itinerary.price}</p>
+          <p className={style.priceText}>{itinerary.price }</p>
         </div>
 
-        <p className="lowerText">{itinerary.description}</p>
+        <p className={style.lowerText}>{itinerary.description}</p>
       </animated.div>
     </div>
   );
