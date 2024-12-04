@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';

@@ -6,7 +6,6 @@ import { ZoomHelperContext } from '../contexts/zoomHelperContext';
 import { MinorContext } from '../contexts/minorContext';
 import { MasterContext } from '../contexts/masterContext';
 import { MapConfigContext } from '../contexts/mapConfigContext';
-// import './itinerary.css';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import style from './style.module.scss';
 import ButtonIcon from '../reusables/buttonIcon';
