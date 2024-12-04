@@ -78,10 +78,10 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
-                  placeHolder={`A little about ${props?.diveSite?.name}`}
-                  content={props?.diveSite?.divesitebio || ''}
+                  placeholder={`A little about ${props?.diveSite?.name}`}
+                  value={props?.diveSite?.divesitebio || ''}
                   readOnly={!props?.isPartnerAccount}
-                  onSubmit={props?.onDiveSiteBioChange}
+                  onSave={props?.onDiveSiteBioChange}
                 />
               </div>
             </div>
