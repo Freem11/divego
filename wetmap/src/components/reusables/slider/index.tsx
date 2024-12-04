@@ -11,6 +11,13 @@ type CustomInputProps = {
   onFileChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 };
 
+type SliderProps = {
+  startPage:    number
+  pageForward:  (moveBy: number) => void
+  pageBackward: (moveBy: number) => void
+  pageData:     any[]
+};
+
 const Slider = React.forwardRef(function Slider(
   props: TextInputProps & CustomInputProps,
   ref,
