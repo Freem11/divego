@@ -52,12 +52,6 @@ export default function ShopModal(props) {
     }
   };
 
-  const handleShopModalClose = () => {
-    setSelectedShop({ ...selectedShop, id:0, orgname: '' });
-    setItineraryList([]);
-    setShopModal(false);
-  };
-
   const handleDiveShopBioChange = async (newValue: string) => {
     if (selectedShop) {
       await updateDiveShop({ id: selectedShop.id, bio: newValue, photo: selectedShop.diveshopprofilephoto });
@@ -71,7 +65,7 @@ export default function ShopModal(props) {
         <ShopModalView
           setSelectedID={setSelectedID}
           setShopModal={setShopModal}
-          onClose={handleShopModalClose}
+          onClose={props.onModalCancel}
           handleDiveShopBioChange={handleDiveShopBioChange}
           handleDiveShopImageSelection={() => {}}
 
