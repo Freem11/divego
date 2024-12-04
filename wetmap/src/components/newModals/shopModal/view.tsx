@@ -8,7 +8,7 @@ import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import { ItineraryItem } from './types';
-import { DiveShop } from '../../../entities/diveShop';  
+import { DiveShop } from '../../../entities/diveShop';
 
 
 type ShopModelViewProps = {
@@ -58,10 +58,10 @@ export default function ShopModalView(props: ShopModelViewProps) {
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
-                  placeHolder={`A little about ${props?.diveShop?.orgname}`}
-                  content={props?.diveShop?.diveshopbio || ''}
+                  placeholder={`A little about ${props?.diveShop?.orgname}`}
+                  value={props?.diveShop?.diveshopbio || ''}
                   readOnly={!props?.isPartnerAccount}
-                  onSubmit={props?.handleDiveShopBioChange}
+                  onSave={props?.handleDiveShopBioChange}
                 />
               </div>
             </div>
