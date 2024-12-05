@@ -92,68 +92,6 @@ export const getAnimalMultiSelect = async (text) => {
   }
 };
 
-// export const getPhotosforAnchorMulti = async (value) => {
-//   let creatureList;
-//   value.animalVal.forEach((creature) => {
-//     if (creatureList === undefined) {
-//       creatureList = creature + ",";
-//     } else {
-//       creatureList = creatureList + creature + ",";
-//     }
-//   });
-
-//   let creatureListFinal;
-//   if (creatureList !== undefined) {
-//     creatureListFinal = creatureList.slice(0, -1);
-//   }
-
-//   if (creatureListFinal === undefined) {
-//     creatureListFinal = "";
-//   }
-
-//   if (value.animalVal.length === 0 || value.animalVal === null) {
-//     const { data, error } = await supabase
-//       .from("photos")
-//       .select()
-//       // .ilike("userName", "%" + value.myCreatures + "%")
-//       .ilike("label", "%" + creatureListFinal + "%")
-//       .gte("latitude", value.minLat)
-//       .gte("longitude", value.minLng)
-//       .lte("latitude", value.maxLat)
-//       .lte("longitude", value.maxLng)
-//       .order("id", { ascending: false });
-
-//     if (error) {
-//       console.log("couldn't do it 24,", error);
-//       return [];
-//     }
-
-//     if (data) {
-//       return data;
-//     }
-//   } else {
-//     const { data, error } = await supabase
-//       .from("photos")
-//       .select()
-//       .filter("label", "in", "(" + creatureListFinal + ")")
-//       // .ilike("userName", "%" + value.myCreatures + "%")
-//       .gte("latitude", value.minLat)
-//       .gte("longitude", value.minLng)
-//       .lte("latitude", value.maxLat)
-//       .lte("longitude", value.maxLng)
-//       .order("id", { ascending: false });
-
-//     if (error) {
-//       console.log("couldn't do it 25,", error);
-//       return [];
-//     }
-
-//     if (data) {
-//       return data;
-//     }
-//   }
-// };
-
 export const getPhotosforMapArea = async (value) => {
   const { data, error } = await supabase
     .from('photos')
