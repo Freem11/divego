@@ -100,6 +100,7 @@ export default function DiveSite(props) {
 
   const getDiveSite = async (chosenSite) => {
     try {
+      console.log("chose", chosenSite)
       const selectedSite = await getDiveSiteWithUserName({
         siteName: chosenSite.SiteName,
       });

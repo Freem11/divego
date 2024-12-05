@@ -63,7 +63,6 @@ export default function MapView(props: MapViewProps) {
               cluster.properties,
               cluster.geometry.coordinates,
               props.modalShow,
-              props.selectedDiveSite,
               props.setSelectedDiveSite,
               props.setSelectedShop);
 

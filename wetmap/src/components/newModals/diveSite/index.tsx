@@ -36,16 +36,7 @@ export default function DiveSite(props) {
   };
 
   const getDiveSite = async () => {
-    try {
-      const selectedSite = await getDiveSiteWithUserName({
-        siteName: selectedDiveSite?.name,
-      });
-      if (selectedSite.length > 0) {
-        setDiveSite(selectedSite[0]);
-      }
-    } catch (e) {
-      console.log({ title: 'Error98', message: e.message });
-    }
+    setDiveSite(selectedDiveSite);
   };
 
   const handleImageSelection = async (event: React.ChangeEvent<HTMLInputElement>) => {

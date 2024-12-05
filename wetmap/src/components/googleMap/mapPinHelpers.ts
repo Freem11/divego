@@ -8,6 +8,7 @@ import { getShopByName } from '../../supabaseCalls/shopsSupabaseCalls';
 import { ClusterCoordinates, ClusterProperty } from './types';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
+import { getDiveSiteWithUserName } from '../../supabaseCalls/diveSiteSupabaseCalls';
 
 function setupClusters(diveSiteData: DiveSiteWithUserName[], sitesArray: number[]) {
   const points
@@ -52,21 +53,15 @@ const setupDiveShopModal = async (shopName: string, modalShow, setSelectedShop: 
   setSelectedShop(chosenShop[0]);
 };
 
-const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, selectedDiveSite: DiveSiteWithUserName | null, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
+const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
   modalShow(DiveSite, {
     size: ModalWindowSize.L,
   });
-  if (selectedDiveSite) {
-    setSelectedDiveSite({
-      ...selectedDiveSite,
-      name:      diveSiteName,
-      lat:  lat,
-      lng:  lng,
-    });
-  }
+  const chosenSite = await getDiveSiteWithUserName({ siteName: diveSiteName, lat, lng });
+  setSelectedDiveSite(chosenSite[0]);
 };
 
-function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow, selectedDiveSite: DiveSiteWithUserName | null, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {
+function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {
   const [longitude, latitude] = coordinates;
   const iconType = info.category === 'Dive Site' ? anchorIcon : info.category === 'Dive Site Selected' ? anchorIconGold : shopIcon;
   const modalSetup = info.category === 'Shop'
@@ -78,7 +73,6 @@ function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates,
             latitude,
             longitude,
             modalShow,
-            selectedDiveSite,
             setSelectedDiveSite,
           );
         }
