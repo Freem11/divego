@@ -1,29 +1,15 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './style.scss';
 import Button from '../button/button';
 
-type TextInputProps = DetailedHTMLProps<
-  InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
-type CustomInputProps = {
-  children:      React.ReactElement
-  onFileChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
-};
-
 type SliderProps = {
-  startPage:    number
-  pageForward:  (moveBy: number) => void
-  pageBackward: (moveBy: number) => void
-  pageData:     any[]
+  startPage: number
+  MoveBy:    number
+  Direction: string
+  pageData:  any[]
 };
 
-const Slider = React.forwardRef(function Slider(
-  props: TextInputProps & CustomInputProps,
-  ref,
-) {
-  const { children, onChange, onFileChange, ...rest } = props;
-
+export default function Slider(props: SliderProps) {
   const pageData = [1, 2, 3, 4];
 
   const [xCoordinate, setxCoordinate] = useState<number>(0);
@@ -89,6 +75,4 @@ const Slider = React.forwardRef(function Slider(
       </div>
     </>
   );
-});
-
-export default Slider;
+};
