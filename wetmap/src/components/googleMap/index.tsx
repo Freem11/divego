@@ -161,7 +161,7 @@ export default function MapLoader() {
     if (mapRef) {
       const position = mapRef.getCenter();
       if (position) {
-        if (selectedShop.orgname !== '') {
+        if (selectedShop && selectedShop.orgname !== '') {
           const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
           mapRef.panTo(latlng);
           setMapZoom(16);
@@ -175,13 +175,13 @@ export default function MapLoader() {
     if (mapRef) {
       const position = mapRef.getCenter();
       if (position) {
-        if (selectedDiveSite.name !== '') {
+        if (selectedDiveSite && selectedDiveSite.name !== '') {
           const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
           mapRef.panTo(latlng);
           setMapZoom(16);
         }
       }
-      if (!selectedDiveSite.lat) {
+      if (selectedDiveSite && !selectedDiveSite.lat) {
         setTempMarker({
           lat: selectedDiveSite.lat,
           lng: selectedDiveSite.lng,
@@ -234,7 +234,7 @@ export default function MapLoader() {
   const handleDragEnd = () => {
     if (pinRef) {
       const position = pinRef;
-      if (position instanceof google.maps.LatLng) {
+      if (position instanceof google.maps.LatLng && addSiteVals) {
         setAddSiteVals({
           ...addSiteVals,
           Latitude:  position.lat(),

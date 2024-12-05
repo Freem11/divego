@@ -25,7 +25,7 @@ type MapViewProps = {
   heatpts:               HeatPoint[]
   mapCoords:             number[]
   setMapCoords:          (coords: number[]) => void
-  selectedDiveSite:      DiveSiteWithUserName
+  selectedDiveSite:      DiveSiteWithUserName | null
   setSelectedDiveSite:   (site: DiveSiteWithUserName) => void
   setSelectedShop:       (shop: DiveShop) => void
   setMapZoom:            (zoomLev: number) => void

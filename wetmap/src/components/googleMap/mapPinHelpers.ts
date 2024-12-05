@@ -52,19 +52,21 @@ const setupDiveShopModal = async (shopName: string, modalShow, setSelectedShop: 
   setSelectedShop(chosenShop[0]);
 };
 
-const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, selectedDiveSite: DiveSiteWithUserName, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
+const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, selectedDiveSite: DiveSiteWithUserName | null, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
   modalShow(DiveSite, {
     size: ModalWindowSize.L,
   });
-  setSelectedDiveSite({
-    ...selectedDiveSite,
-    name:      diveSiteName,
-    lat:  lat,
-    lng:  lng,
-  });
+  if (selectedDiveSite) {
+    setSelectedDiveSite({
+      ...selectedDiveSite,
+      name:      diveSiteName,
+      lat:  lat,
+      lng:  lng,
+    });
+  }
 };
 
-function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow, selectedDiveSite: DiveSiteWithUserName, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {
+function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow, selectedDiveSite: DiveSiteWithUserName | null, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {
   const [longitude, latitude] = coordinates;
   const iconType = info.category === 'Dive Site' ? anchorIcon : info.category === 'Dive Site Selected' ? anchorIconGold : shopIcon;
   const modalSetup = info.category === 'Shop'

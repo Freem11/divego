@@ -40,6 +40,8 @@ export default function DiveSite(props) {
   const [isEditModeOn, setIsEditModeOn] = useState(false);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
+  console.log("erhem", profile)
+  
   useEffect(() => {
     if (!isEditModeOn && site) {
       diveSiteUpdateUpdate();

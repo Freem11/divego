@@ -25,18 +25,20 @@ export default function DiveSite(props) {
 
 
   const getPhotos = async () => {
-    const success = await getPhotosByDiveSiteWithExtra({
-      lat:    selectedDiveSite.lat,
-      lng:    selectedDiveSite.lng,
-      userId: profile[0].UserID,
-    });
-    setDiveSitePics(success);
+    if (selectedDiveSite && profile) {
+      const success = await getPhotosByDiveSiteWithExtra({
+        lat:    selectedDiveSite.lat,
+        lng:    selectedDiveSite.lng,
+        userId: profile.UserID,
+      });
+      setDiveSitePics(success);
+    }
   };
 
   const getDiveSite = async () => {
     try {
       const selectedSite = await getDiveSiteWithUserName({
-        siteName: selectedDiveSite.name,
+        siteName: selectedDiveSite?.name,
       });
       if (selectedSite.length > 0) {
         setDiveSite(selectedSite[0]);
@@ -62,12 +64,15 @@ export default function DiveSite(props) {
   };
 
   const openPicUploader = () => {
-    setPin({
-      ...pin,
-      Latitude:  String(selectedDiveSite.lat),
-      Longitude: String(selectedDiveSite.lng),
-      siteName:  selectedDiveSite.name,
-    });
+    if (selectedDiveSite) {
+      setPin({
+        ...pin,
+        Latitude:  String(selectedDiveSite.lat),
+        Longitude: String(selectedDiveSite.lng),
+        siteName:  selectedDiveSite.name,
+      });
+    }
+
 
     modalShow(PicUploader, {
       // onCancelCallback: () => cleanupPinPicture(pin),
@@ -75,7 +80,7 @@ export default function DiveSite(props) {
   };
 
   useEffect(() => {
-    if (profile[0].partnerAccount) {
+    if (profile && profile.partnerAccount) {
       setIsPartnerAccount(true);
     }
     getPhotos();

@@ -2,12 +2,12 @@ import React, { createContext, useState } from 'react';
 import { LatLngObject } from '../googleMap/types';
 
 type PinSpotContextType = {
-  dragPin:    LatLngObject | null
-  setDragPin: React.Dispatch<React.SetStateAction<LatLngObject | null>>
+  dragPin:    LatLngObject
+  setDragPin: React.Dispatch<React.SetStateAction<LatLngObject>>
 };
 
 const PinSpotContextState = {
-  dragPin:     null,
+  dragPin:     { lat: 0, lng: 0 },
   setDragPin: () => {},
 };
 
@@ -16,7 +16,7 @@ export const PinSpotContext = createContext<PinSpotContextType>(
 );
 
 const PinSpotContextProvider = ({ children }: any) => {
-  const [dragPin, setDragPin] = useState<LatLngObject | null>(null);
+  const [dragPin, setDragPin] = useState<LatLngObject>({ lat: 0, lng: 0 });
 
   return (
     <PinSpotContext.Provider value={{ dragPin, setDragPin }}>
