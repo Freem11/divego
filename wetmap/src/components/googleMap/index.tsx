@@ -37,7 +37,7 @@ export default function MapLoader() {
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
   const { sitesArray } = useContext(SitesArrayContext);
-
+  
   const { boundaries, setBoundaries } = useContext(MapBoundsContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);

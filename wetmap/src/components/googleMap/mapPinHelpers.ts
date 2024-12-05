@@ -53,11 +53,12 @@ const setupDiveShopModal = async (shopName: string, modalShow, setSelectedShop: 
   setSelectedShop(chosenShop[0]);
 };
 
-const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
+const setupDiveSiteModal = async (diveSiteName: string, latitude: number, longitude: number, modalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
+  const cleanedSiteName = diveSiteName.split('~');
   modalShow(DiveSite, {
     size: ModalWindowSize.L,
   });
-  const chosenSite = await getDiveSiteWithUserName({ siteName: diveSiteName, lat, lng });
+  const chosenSite = await getDiveSiteWithUserName({ siteName: cleanedSiteName[0], lat: latitude, lng: longitude });
   setSelectedDiveSite(chosenSite[0]);
 };
 
@@ -67,15 +68,14 @@ function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates,
   const modalSetup = info.category === 'Shop'
     ? () => { setupDiveShopModal(info.siteID, modalShow, setSelectedShop); }
     : () => {
-        if (info.siteName) {
           setupDiveSiteModal(
-            info.siteName,
+            info?.siteID,
             latitude,
             longitude,
             modalShow,
             setSelectedDiveSite,
           );
-        }
+    
       };
 
   return { iconType,  modalSetup };

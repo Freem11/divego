@@ -52,7 +52,6 @@ export default function ShopModal(props) {
           onClose={props.onModalCancel}
           handleDiveShopBioChange={handleDiveShopBioChange}
           handleDiveShopImageSelection={() => {}}
-
           diveShop={selectedShop}
           isPartnerAccount={isPartnerAccount}
           itineraryList={itineraryList}
