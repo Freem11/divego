@@ -69,7 +69,7 @@ function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates,
     ? () => { setupDiveShopModal(info.siteID, modalShow, setSelectedShop); }
     : () => {
           setupDiveSiteModal(
-            info?.siteID,
+            info.siteID,
             latitude,
             longitude,
             modalShow,
