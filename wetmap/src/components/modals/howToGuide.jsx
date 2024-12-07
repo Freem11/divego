@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import './siteSubmitter.css';
 import ModalHeader from '../reusables/modalHeader';
 import LargeButton from '../reusables/button/largeButton';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
 
 const HowToGuide = () => {
   const { modalCancel } = useContext(ModalContext);
