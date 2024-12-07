@@ -45,7 +45,7 @@ import SelectedShopContextProvider from './selectedShopContext';
 import ShopModalContextProvider from './shopModalContext';
 import ZoomHelperContextProvider from './zoomHelperContext';
 import SitesArrayContextProvider from './sitesArrayContext';
-import ModalContextProvider from './modalContextProvider';
+import ModalContextProvider from '../reusables/modal/contextProvider';
 import MapConfigContextProvider from './mapConfigContext';
 
 const providers = [

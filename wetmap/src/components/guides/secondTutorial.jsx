@@ -26,7 +26,7 @@ import TravelExploreIcon from '@mui/icons-material/TravelExplore';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import SiteSubmitter from '../modals/siteSubmitter';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -177,15 +177,13 @@ export default function SecondTutorial(props) {
 
     if (profile) {
       bully = profile[0].UserName;
-    }
-    else {
+    } else {
       bully = '';
     }
 
     if (bully == null || bully === '') {
       return;
-    }
-    else {
+    } else {
       setTutorialReset(true);
     }
   };
@@ -215,8 +213,7 @@ export default function SecondTutorial(props) {
       if (success) {
         setProfile(success);
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.log({ title: 'Error', message: e.message });
     }
   };
@@ -341,16 +338,14 @@ export default function SecondTutorial(props) {
       || itterator2 >= 26
     ) {
       return;
-    }
-    else {
+    } else {
       if (pushVal === 1 && itterator2 < feederArray.length - 1) {
         if (textPrinting) {
           setTextPrinting(false);
           textArray = '';
           setTextRead('');
           setTextRead(feederArray[itterator2]);
-        }
-        else {
+        } else {
           setItterator2(prev => prev + pushVal);
           setTextPrinting(true);
         }
@@ -369,8 +364,7 @@ export default function SecondTutorial(props) {
       const charToConcat = textArray[0];
       setTextRead(prev => prev + charToConcat);
       textArray = textArray.slice(1);
-    }
-    else {
+    } else {
       setTextPrinting(false);
     }
   }
@@ -388,8 +382,7 @@ export default function SecondTutorial(props) {
       textArray = textVal.split('');
       if (textPrinting) {
         textPrinter = setInterval(printOutText, 80);
-      }
-      else {
+      } else {
         setTextRead(textVal);
       }
     }

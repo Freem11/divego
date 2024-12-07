@@ -9,6 +9,7 @@ import { setupPinConfigs } from './mapPinHelpers';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { MapWithHeatmap } from './heatmap';
 import { DiveShop } from '../../entities/diveShop';
+import { ModalShow } from '../reusables/modal/types';
 
 type MapViewProps = {
   mapRef:                google.maps.Map | null
@@ -37,7 +38,7 @@ type MapViewProps = {
   dragPin:               LatLngObject
   handlePinLoad:         (marker: google.maps.Marker) => void
   handleDragEnd:         () => void
-  modalShow:             boolean
+  modalShow:             ModalShow
 };
 
 export default function MapView(props: MapViewProps) {

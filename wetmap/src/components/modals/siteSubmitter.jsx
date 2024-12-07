@@ -9,7 +9,7 @@ import { insertDiveSiteWaits } from '../../supabaseCalls/diveSiteWaitSupabaseCal
 import { DiveSpotContext } from '../contexts/diveSpotContext';
 import { MasterContext } from '../contexts/masterContext';
 import { ModalSelectContext } from '../contexts/modalSelectContext';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
 import Icon from '../../icons/Icon';
 import WavyHeader from '../newModals/wavyHeader';
 import style from '../newModals/modalContent.module.scss';

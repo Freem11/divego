@@ -8,11 +8,12 @@ import { getPhotosByDiveSiteWithExtra } from '../../../supabaseCalls/photoSupaba
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { PinContext } from '../../contexts/staticPinContext';
-import { ModalContext } from '../../contexts/modalContext';
+import { ModalContext } from '../../reusables/modal/context';
 import PicUploader from '../picUploader/index';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
-
-export default function DiveSite(props) {
+type DiveSiteProps = Partial<ModalHandleProps>;
+export default function DiveSite(props: DiveSiteProps) {
   const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { profile }          = useContext(UserProfileContext);
   const { modalShow }        = useContext(ModalContext);
@@ -69,9 +70,7 @@ export default function DiveSite(props) {
       siteName:  selectedDiveSite.name,
     });
 
-    modalShow(PicUploader, {
-      // onCancelCallback: () => cleanupPinPicture(pin),
-    });
+    modalShow(PicUploader);
   };
 
   useEffect(() => {
