@@ -1,18 +1,13 @@
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { AnimalContext } from '../contexts/animalContext';
-import { AnchorModalContext } from '../contexts/anchorModalContext';
-import { IterratorContext } from '../contexts/iterratorContext';
-import { TutorialContext } from '../contexts/tutorialContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import { PinContext } from '../contexts/staticPinContext';
 import { useState, useContext, useEffect } from 'react';
 import { siteGPSBoundaries } from '../../helpers/mapHelpers';
 import {
-  getDiveSiteByName,
   getDiveSiteWithUserName,
 } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import {
-  // getPhotosforAnchorMulti,
   getPhotosWithUser,
   getPhotosWithUserEmpty,
 } from '../../supabaseCalls/photoSupabaseCalls';
@@ -22,15 +17,10 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './anchorPics.css';
 import ModalHeader from '../reusables/modalHeader';
 import PicUploader from './picUploader';
-import { cleanupPinPicture } from '../../helpers/picUploaderHelpers';
 import { ModalContext } from '../reusables/modal/context';
 
 const AnchorPics = (props) => {
-  const {
-    animateAnchorModal,
-  } = props;
   const { profile } = useContext(UserProfileContext);
-  const { siteModal, setSiteModal } = useContext(AnchorModalContext);
   const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { animalVal } = useContext(AnimalContext);
   const { pin, setPin } = useContext(PinContext);
@@ -38,8 +28,6 @@ const AnchorPics = (props) => {
   const [anchorPics, setAnchorPics] = useState([]);
   const [site, setSite] = useState('');
 
-  const { itterator, setItterator } = useContext(IterratorContext);
-  const { tutorialRunning } = useContext(TutorialContext);
   const { modalShow } = useContext(ModalContext);
 
   const filterAnchorPhotos = async () => {
@@ -72,14 +60,6 @@ const AnchorPics = (props) => {
       }
       if (photos) {
         setAnchorPics(photos);
-
-        if (tutorialRunning && itterator === 11) {
-          if (photos.length === 0) {
-            setItterator(itterator + 1);
-          } else {
-            setItterator(itterator + 3);
-          }
-        }
       }
     } catch (e) {
       console.log({ title: 'Error', message: e.message });
@@ -95,21 +75,9 @@ const AnchorPics = (props) => {
   useEffect(() => {
     if (selectedDiveSite.SiteName !== '') {
       filterAnchorPhotos();
-    }
-  }, [siteModal]);
-
-  useEffect(() => {
-    if (selectedDiveSite.SiteName !== '') {
-      filterAnchorPhotos();
       getDiveSite(selectedDiveSite.SiteName);
     }
   }, [selectedDiveSite]);
-
-  useEffect(() => {
-    if (itterator === 25) {
-      animateAnchorModal();
-    }
-  }, [itterator]);
 
   const getDiveSite = async () => {
     try {
@@ -127,16 +95,10 @@ const AnchorPics = (props) => {
   };
 
   const handleClose = async () => {
-    if (tutorialRunning && itterator === 16) {
-      setItterator(itterator + 1);
-    }
     props?.onModalCancel?.();
   };
 
   const handleSwitch = () => {
-    if (itterator === 11 || itterator == 15) {
-      return;
-    }
     setPin({
       ...pin,
       Latitude:  selectedDiveSite.Latitude,

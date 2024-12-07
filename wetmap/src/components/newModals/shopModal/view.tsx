@@ -13,7 +13,6 @@ import { DiveShop } from '../../../entities/diveShop';
 
 type ShopModelViewProps = {
   setSelectedID:                (id: number) => void
-  setShopModal:                 (value: boolean) => void
   onClose?:                     () => void
   handleDiveShopBioChange:      (newValue: string) => void
   handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -88,7 +87,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
                 itinerary={itinerary}
                 setSelectedID={props?.setSelectedID}
                 selectedID={props?.selectedID}
-                setShopModal={props?.setShopModal}
               />
             );
           })}

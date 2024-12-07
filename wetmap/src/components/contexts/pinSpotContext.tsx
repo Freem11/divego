@@ -6,14 +6,7 @@ type PinSpotContextType = {
   setDragPin: React.Dispatch<React.SetStateAction<LatLngObject>>
 };
 
-const PinSpotContextState = {
-  dragPin:     { lat: 0, lng: 0 },
-  setDragPin: () => {},
-};
-
-export const PinSpotContext = createContext<PinSpotContextType>(
-  PinSpotContextState,
-);
+export const PinSpotContext = createContext<PinSpotContextType>({} as PinSpotContextType);
 
 const PinSpotContextProvider = ({ children }: any) => {
   const [dragPin, setDragPin] = useState<LatLngObject>({ lat: 0, lng: 0 });

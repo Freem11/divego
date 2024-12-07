@@ -6,14 +6,7 @@ type HeatPointsContextType = {
   setHeatPts: React.Dispatch<React.SetStateAction<HeatPoint[]>>
 };
 
-const HeatPointsContextState = {
-  heatpts:      [],
-  setHeatPts: () => {},
-};
-
-export const HeatPointsContext = createContext<HeatPointsContextType>(
-  HeatPointsContextState,
-);
+export const HeatPointsContext = createContext<HeatPointsContextType>({} as HeatPointsContextType);
 
 const HeatPointsContextProvider = ({ children }: any) => {
   const [heatpts, setHeatPts] = useState<HeatPoint[]>([]);

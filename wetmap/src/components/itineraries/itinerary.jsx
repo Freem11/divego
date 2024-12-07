@@ -2,9 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { CoordsContext } from '../contexts/mapCoordsContext';
-import { ZoomHelperContext } from '../contexts/zoomHelperContext';
-import { MinorContext } from '../contexts/minorContext';
-import { MasterContext } from '../contexts/masterContext';
 import { MapConfigContext } from '../contexts/mapConfigContext';
 import { ModalContext } from '../reusables/modal/context';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
@@ -13,12 +10,9 @@ import ButtonIcon from '../reusables/buttonIcon';
 import Icon from '../../icons/Icon';
 
 export default function Itinerary(props) {
-  const { itinerary, selectedID, setSelectedID, setShopModal } = props;
+  const { itinerary, selectedID, setSelectedID } = props;
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
-  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
-  const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
-  const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
   const { setMapConfig } = useContext(MapConfigContext);
   const modalContext = useContext(ModalContext);
 
@@ -62,7 +56,6 @@ export default function Itinerary(props) {
     });
     let moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
     let moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
-    setZoomHelper(true);
     setMapConfig(2);
     setMapCoords([moveLat, moveLng]);
     modalContext.modalCancel();

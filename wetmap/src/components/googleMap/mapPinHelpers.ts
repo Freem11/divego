@@ -7,6 +7,7 @@ import { getShopByName } from '../../supabaseCalls/shopsSupabaseCalls';
 import { ClusterCoordinates, ClusterProperty } from './types';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
+import { getDiveSiteWithUserName } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import { ModalShow } from '../reusables/modal/types';
 
 function setupClusters(diveSiteData: DiveSiteWithUserName[], sitesArray: number[]) {
@@ -52,34 +53,29 @@ const setupDiveShopModal = async (shopName: string, modalShow: ModalShow, setSel
   setSelectedShop(chosenShop[0]);
 };
 
-const setupDiveSiteModal = async (diveSiteName: string, lat: number, lng: number, modalShow: ModalShow, selectedDiveSite: DiveSiteWithUserName, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
+const setupDiveSiteModal = async (diveSiteName: string, latitude: number, longitude: number, modalShow: ModalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
+  const cleanedSiteName = diveSiteName.split('~');
   modalShow(DiveSite, {
     size: 'large',
   });
-  setSelectedDiveSite({
-    ...selectedDiveSite,
-    name:      diveSiteName,
-    lat:  lat,
-    lng:  lng,
-  });
+  const chosenSite = await getDiveSiteWithUserName({ siteName: cleanedSiteName[0], lat: latitude, lng: longitude });
+  setSelectedDiveSite(chosenSite[0]);
 };
 
-function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow: ModalShow, selectedDiveSite: DiveSiteWithUserName, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {
+function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow: ModalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {
   const [longitude, latitude] = coordinates;
   const iconType = info.category === 'Dive Site' ? anchorIcon : info.category === 'Dive Site Selected' ? anchorIconGold : shopIcon;
   const modalSetup = info.category === 'Shop'
     ? () => { setupDiveShopModal(info.siteID, modalShow, setSelectedShop); }
     : () => {
-        if (info.siteName) {
           setupDiveSiteModal(
-            info.siteName,
+            info.siteID,
             latitude,
             longitude,
             modalShow,
-            selectedDiveSite,
             setSelectedDiveSite,
           );
-        }
+    
       };
 
   return { iconType,  modalSetup };

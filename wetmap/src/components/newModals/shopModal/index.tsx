@@ -2,10 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { ShopModalContext } from '../../contexts/shopModalContext';
-import { MasterContext } from '../../contexts/masterContext';
-import { CoordsContext } from '../../contexts/mapCoordsContext';
-import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from './types';
 import ShopModalView from './view';
@@ -14,12 +10,8 @@ import { ModalHandleProps } from '../../reusables/modal/types';
 type ShopModalProps = Partial<ModalHandleProps>;
 
 export default function ShopModal(props: ShopModalProps) {
-  const { shopModal, setShopModal } = useContext(ShopModalContext);
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  const { selectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
-  const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
-  const { mapCoords, setMapCoords } = useContext(CoordsContext);
-  const { zoomHelper, setZoomHelper } = useContext(ZoomHelperContext);
 
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
@@ -28,21 +20,14 @@ export default function ShopModal(props: ShopModalProps) {
   useEffect(() => {
     if (selectedShop) {
       getItineraries(selectedShop.id);
-      setMasterSwitch(true);
     }
   }, [selectedShop]);
 
   useEffect(() => {
-    if (profile[0].partnerAccount) {
+    if (profile && profile.partnerAccount) {
       setIsPartnerAccount(true);
     }
   }, []);
-
-  useEffect(() => {
-    if (shopModal && zoomHelper) {
-      setMapCoords([selectedShop.lat, selectedShop.lng]);
-    }
-  }, [shopModal]);
 
   const getItineraries = async (IdNum: number) => {
     try {
@@ -67,11 +52,9 @@ export default function ShopModal(props: ShopModalProps) {
       {selectedShop && (
         <ShopModalView
           setSelectedID={setSelectedID}
-          setShopModal={setShopModal}
           onClose={props.onModalCancel}
           handleDiveShopBioChange={handleDiveShopBioChange}
           handleDiveShopImageSelection={() => {}}
-
           diveShop={selectedShop}
           isPartnerAccount={isPartnerAccount}
           itineraryList={itineraryList}

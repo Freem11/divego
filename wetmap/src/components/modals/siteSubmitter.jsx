@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { animated, useSpring } from 'react-spring';
 import ConfirmationModal from './confirmationModal';
 import './confirmationModal.css';
@@ -7,8 +7,6 @@ import exifr from 'exifr';
 import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
 import { insertDiveSiteWaits } from '../../supabaseCalls/diveSiteWaitSupabaseCalls';
 import { DiveSpotContext } from '../contexts/diveSpotContext';
-import { MasterContext } from '../contexts/masterContext';
-import { ModalSelectContext } from '../contexts/modalSelectContext';
 import { ModalContext } from '../reusables/modal/context';
 import Icon from '../../icons/Icon';
 import WavyHeader from '../newModals/wavyHeader';
@@ -24,29 +22,8 @@ import { MapConfigContext } from '../contexts/mapConfigContext';
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
-const noGPSZone = (
-  <div
-    style={{
-      marginLeft:      '2%',
-      backgroundColor: 'pink',
-      height:          '40px',
-      width:           '95%',
-      color:           'red',
-      borderRadius:    '15px',
-    }}
-  >
-    <h4 style={{ marginLeft: '35px', paddingTop: '10px' }}>
-      No GPS Coordinates Found!
-    </h4>
-  </div>
-);
-
 const SiteSubmitter = (props) => {
-  const { animateSiteModal, setSiteModalYCoord } = props;
-  const [showNoGPS, setShowNoGPS] = useState(false);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
-  const { setMasterSwitch } = useContext(MasterContext);
-  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
 
   const { setMapConfig } = useContext(MapConfigContext);
 
@@ -119,7 +96,6 @@ const SiteSubmitter = (props) => {
           });
         } else {
           setAddSiteVals({ ...addSiteVals });
-          setShowNoGPS(true);
         }
       });
     }
@@ -145,17 +121,8 @@ const SiteSubmitter = (props) => {
     }
   };
 
-  const handleNoGPSClose = () => {
-    setShowNoGPS(false);
-    return;
-  };
-
   const onNavigate = () => {
-    console.log('Hi');
-    setChosenModal('DiveSite');
     setMapConfig(1);
-    setShowNoGPS(false);
-    setMasterSwitch(false);
     modalPause();
   };
 
