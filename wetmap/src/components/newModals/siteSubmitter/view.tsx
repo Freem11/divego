@@ -1,8 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { animated, useSpring } from 'react-spring';
+//import { animated, useSpring } from 'react-spring';
 
-import ConfirmationModal from './../../confirmationModal';
+//import ConfirmationModal from './../../confirmationModal';
 import backGroundPic from '../../../images/boat.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import screenData from '../screenData.json';
