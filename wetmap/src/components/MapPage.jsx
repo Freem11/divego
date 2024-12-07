@@ -485,7 +485,7 @@ const MapPage = React.memo(function MapPage() {
 
   const animateSiteSearchModal = () => {
     modalShow(SearchTool, {
-      size: ModalWindowSize.S,
+      size: 'small',
     });
   };
 
