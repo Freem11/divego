@@ -9,8 +9,11 @@ import { ZoomHelperContext } from '../../contexts/zoomHelperContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from './types';
 import ShopModalView from './view';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
-export default function ShopModal(props) {
+type ShopModalProps = Partial<ModalHandleProps>;
+
+export default function ShopModal(props: ShopModalProps) {
   const { shopModal, setShopModal } = useContext(ShopModalContext);
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);

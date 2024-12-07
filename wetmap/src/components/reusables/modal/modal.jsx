@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { ModalContext } from '../../contexts/modalContext';
+import React, { useContext, useEffect, useRef } from 'react';
+import { ModalContext } from './context';
 import { TutorialContext } from '../../contexts/tutorialContext';
 
 import style from './modal.module.scss';
 
-export default function Modal(props) {
+export default function Modal() {
   const rootRef = useRef(null);
   const modalContext = useContext(ModalContext);
   const { tutorialRunning } = useContext(TutorialContext);
@@ -72,6 +72,7 @@ export default function Modal(props) {
           <div
             className={`${style.modalContainer} ${style[modalWindow.options.size]}`}
             style={modalWindow.name === modalContext.currentModalName ? openStyle : closeStyle}
+            data-modal-name={modalWindow.name}
             key={modalWindow.name}
           >
             <modalWindow.component
@@ -82,7 +83,7 @@ export default function Modal(props) {
               onModalCancel={() => {
                 modalContext.modalCancel();
               }}
-              registerCancelCallback={(callback) => {
+              registerModalCancelCallback={(callback) => {
                 modalWindow.options.onCancelCallback = callback;
               }}
             />

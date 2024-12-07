@@ -1,20 +1,17 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 
-import { ModalContext } from './modalContext';
-import ModalWindow from '../reusables/modal/modalWindow';
+import { ModalContext } from './context';
+import ModalWindow, { ModalCloseCallbackName, ModalShow } from './types';
 
 const modalAnimationDuration = 300;
 
+const ModalContextProvider = ({ children }: any) => {
+  const [currentModalName, setCurrentModalName] = useState<string | null>(null);
+  const [stack, setStack] = useState<ModalWindow[]>([]);
+  const [freeze, setFreeze] = useState<boolean>(false);
+  const [paused, setPause] = useState<boolean>(false);
 
-const ModalContextProvider = (props) => {
-  const { a, b, _d } = [];
-  let c = a + b;
-  const [stack, setStack] = useState([]);
-  const [currentModalName, setCurrentModalName] = useState(null);
-  const [freeze, setFreeze] = useState(false);
-  const [paused, setPause] = useState(false);
-
-  const modalShow = (component, options) => {
+  const modalShow: ModalShow = (component, options) => {
     const newModalWindow = new ModalWindow(component, options);
 
     if (newModalWindow.name === currentModalName) {
@@ -32,7 +29,7 @@ const ModalContextProvider = (props) => {
     setFreeze(true);
 
     setStack((prev) => {
-      for (let modalWindow of stack) {
+      for (const modalWindow of stack) {
         // we already have this modal window in the stack - no need to open it again
         if (modalWindow.name === newModalWindow.name) {
           return prev;
@@ -49,19 +46,22 @@ const ModalContextProvider = (props) => {
     });
   };
 
-  const modalSuccess = (a) => {
+  const modalSuccess = () => {
     _modalClose(false, 'onSuccessCallback');
   };
+
   const modalCancel = () => {
     if (paused) {
       return;
     }
     _modalClose(false, 'onCancelCallback');
   };
+
   const modalPause = () => {
     setPause(true);
     setCurrentModalName(null);
   };
+
   const modalResume = () => {
     setCurrentModalName(_getCurrentModalName());
     setTimeout(() => {
@@ -69,7 +69,7 @@ const ModalContextProvider = (props) => {
     });
   };
 
-  const _modalClose = (all = false, callback = null) => {
+  const _modalClose = (all = false, callback: ModalCloseCallbackName = null) => {
     if (!currentModalName) {
       return;
     }
@@ -85,15 +85,14 @@ const ModalContextProvider = (props) => {
       for (const modalWindow of stack) {
         namesToRemove.push(modalWindow.name);
       }
-    }
-    else {
+    } else {
       setCurrentModalName(_getPreviousModalName());
     }
     setTimeout(() => {
       setStack((prev) => {
         return prev.filter((modalWindow) => {
           const shouldBeRemoved = namesToRemove.includes(modalWindow.name);
-          if (shouldBeRemoved && modalWindow.options[callback] && typeof modalWindow.options[callback] === 'function') {
+          if (shouldBeRemoved && callback && modalWindow.options[callback] && typeof modalWindow.options[callback] === 'function') {
             modalWindow.options[callback].apply(modalWindow);
           }
           return !shouldBeRemoved;
@@ -111,6 +110,7 @@ const ModalContextProvider = (props) => {
     return stack[stack.length - 1] && stack[stack.length - 1].name;
   };
 
+
   return (
     <ModalContext.Provider value={{
       stack,
@@ -123,7 +123,7 @@ const ModalContextProvider = (props) => {
       modalAnimationDuration,
     }}
     >
-      {props.children}
+      {children}
     </ModalContext.Provider>
   );
 };

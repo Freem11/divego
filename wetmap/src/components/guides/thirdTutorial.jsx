@@ -22,7 +22,7 @@ import { ChapterContext } from '../contexts/chapterContext';
 import { MasterContext } from '../contexts/masterContext';
 import PicUploader from '../modals/picUploader';
 import { cleanupPinPicture } from '../../helpers/picUploaderHelpers';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
 import { PinContext } from '../contexts/staticPinContext';
 
 const screenWidthInital = window.innerWidth;

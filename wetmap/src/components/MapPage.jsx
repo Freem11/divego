@@ -53,9 +53,8 @@ import './mapPage.css';
 import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
 import Histogram from './histogram/histogramBody';
 import TutorialBar from './guideBar/tutorialBarContainer';
-import { ModalContext } from './contexts/modalContext';
+import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
-import { ModalWindowSize } from './reusables/modal/constants';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
 
@@ -440,7 +439,7 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateLaunchModal = () => {
-    modalShow(() => {
+    modalShow(function TutorialModal() {
       return (
         <HowToGuide
           animateLaunchModal={animateLaunchModal}
@@ -449,7 +448,7 @@ const MapPage = React.memo(function MapPage() {
           animateThirdGuideModal={animateThirdGuideModal}
         />
       );
-    }, { name: 'HowToGuide' });
+    });
   };
 
   const animateSettingsModal = () => {
@@ -486,7 +485,7 @@ const MapPage = React.memo(function MapPage() {
 
   const animateSiteSearchModal = () => {
     modalShow(SearchTool, {
-      size: ModalWindowSize.S,
+      size: 'small',
     });
   };
 
