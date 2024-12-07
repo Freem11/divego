@@ -106,7 +106,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
         </div>
       </form>
-
+    {/*
       <animated.div
         className="successModal modalBase"
         style={props.sucessModalSlide}
@@ -131,6 +131,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           isSuccess={false}
         />
       </animated.div>
+       */}
     </div>
   );
 }
