@@ -84,7 +84,7 @@ const MapPage = React.memo(function MapPage() {
           if (bully == null || bully === '') {
             return;
           } else {
-            setProfile(success);
+            setProfile(success[0]);
             setPin({
               ...pin,
               UserID:   success[0].UserID,
