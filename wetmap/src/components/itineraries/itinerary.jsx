@@ -3,17 +3,18 @@ import { animated, useSpring } from 'react-spring';
 import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { CoordsContext } from '../contexts/mapCoordsContext';
 import { MapConfigContext } from '../contexts/mapConfigContext';
-import './itinerary.css';
+import { ModalContext } from '../reusables/modal/context';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
-import gold from '../../images/mapIcons/AnchorGold.png';
-import diveFlag from '../../images/diveflag.png';
+import style from './style.module.scss';
+import ButtonIcon from '../reusables/buttonIcon';
+import Icon from '../../icons/Icon';
 
 export default function Itinerary(props) {
   const { itinerary, selectedID, setSelectedID } = props;
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
-
   const { setMapConfig } = useContext(MapConfigContext);
+  const modalContext = useContext(ModalContext);
 
 
   const [hiddenHeigth, setHiddenHeigth] = useState(0);
@@ -57,44 +58,45 @@ export default function Itinerary(props) {
     let moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
     setMapConfig(2);
     setMapCoords([moveLat, moveLng]);
+    modalContext.modalCancel();
   };
 
   return (
-    <div className="masterBox" key={itinerary.id}>
-      <div className="shadowbox">
-        <div className="moreBox">
-          <p className="tripName">{itinerary.tripName}</p>
+    <div className={style.masterBox} key={itinerary.id}>
+      <div className={style.shadowbox}>
+        <div className={style.moreBox}>
+          <p className={style.tripName}>{itinerary.tripName}</p>
           <p
-            className="opener"
+            className={style.opener}
             onClick={() => startMoreInfoAnimation(itinerary.id)}
           >
             More Info
           </p>
         </div>
-        <div className="buttonBox">
-          <div
-            className="sitesButton"
+        <div className={style.buttonBox}>
+          <ButtonIcon
+            icon={<Icon name="anchor" />}
+            className={`btn-lg ${style.buttonStyling}`}
             onClick={() => flipMap(itinerary.siteList)}
-          >
-            <img src={gold} style={{ height: '30px', width: '30px' }} />
-          </div>
-          <div className="bookButton">
-            <img src={diveFlag} style={{ height: '30px', width: '30px' }} />
-          </div>
+          />
+          <ButtonIcon
+            icon={<Icon name="diving-scuba-flag" />}
+            className={`btn-lg ${style.buttonStyling}`}
+            // onClick={}
+          />
         </div>
       </div>
-      <animated.div className="extraBox" style={heightChange}>
-        <div className="topRail">
-          <p className="dateText">
+      <animated.div className={style.extraBox} style={heightChange}>
+        <div className={style.topRail}>
+          <p className={style.dateText}>
             {itinerary.startDate}
-            {' '}
-            to
+            {' to '}
             {itinerary.endDate}
           </p>
-          <p className="priceText">{itinerary.price}</p>
+          <p className={style.priceText}>{itinerary.price }</p>
         </div>
 
-        <p className="lowerText">{itinerary.description}</p>
+        <p className={style.lowerText}>{itinerary.description}</p>
       </animated.div>
     </div>
   );

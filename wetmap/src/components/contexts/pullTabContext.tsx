@@ -5,14 +5,7 @@ type PullTabContextType = {
   setShowFilterer: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-const PullTabContextState = {
-  showFilterer:     false,
-  setShowFilterer: () => {},
-};
-
-export const PullTabContext = createContext<PullTabContextType>(
-  PullTabContextState,
-);
+export const PullTabContext = createContext<PullTabContextType>({} as PullTabContextType);
 
 const PullTabContextProvider = ({ children }: any) => {
   const [showFilterer, setShowFilterer] = useState<boolean>(false);

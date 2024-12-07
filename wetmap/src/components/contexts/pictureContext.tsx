@@ -5,14 +5,7 @@ type PictureContextType = {
   setPhotoFile: React.Dispatch<React.SetStateAction<string | null>>
 };
 
-const PictureContextState = {
-  photoFile:      null,
-  setPhotoFile: () => {},
-};
-
-export const PictureContext = createContext<PictureContextType>(
-  PictureContextState,
-);
+export const PictureContext = createContext<PictureContextType>({} as PictureContextType);
 
 
 const PictureContextProvider = ({ children }: any) => {

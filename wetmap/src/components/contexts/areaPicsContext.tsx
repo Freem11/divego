@@ -6,14 +6,7 @@ type AreaPicsContextType = {
   setAreaPics: React.Dispatch<React.SetStateAction<Photo[]>>
 };
 
-const AreaPicsContextState = {
-  areaPics:    [],
-  setAreaPics: () => {},
-};
-
-export const AreaPicsContext = createContext<AreaPicsContextType>(
-  AreaPicsContextState,
-);
+export const AreaPicsContext = createContext<AreaPicsContextType>({} as AreaPicsContextType);
 
 const AreaPicsContextProvider = ({ children }: any) => {
   const [areaPics, setAreaPics] = useState<Photo[]>([]);

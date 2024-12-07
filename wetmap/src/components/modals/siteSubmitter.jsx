@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext, useRef } from 'react';
+import { useState, useContext, useRef } from 'react';
 import { animated, useSpring } from 'react-spring';
 import ConfirmationModal from './confirmationModal';
 import './confirmationModal.css';
@@ -7,7 +7,7 @@ import exifr from 'exifr';
 import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
 import { insertDiveSiteWaits } from '../../supabaseCalls/diveSiteWaitSupabaseCalls';
 import { DiveSpotContext } from '../contexts/diveSpotContext';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
 import Icon from '../../icons/Icon';
 import WavyHeader from '../newModals/wavyHeader';
 import style from '../newModals/modalContent.module.scss';
@@ -23,7 +23,6 @@ const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 const SiteSubmitter = (props) => {
-  const { } = props;
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
 
   const { setMapConfig } = useContext(MapConfigContext);

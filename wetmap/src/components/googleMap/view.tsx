@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import style from './style.module.scss';
 import { Cluster, HeatPoint, HeatPointConfiguration, LatLngObject, MapConfiguration, SuperclusterInstance } from './types';
@@ -9,6 +9,7 @@ import { setupPinConfigs } from './mapPinHelpers';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { MapWithHeatmap } from './heatmap';
 import { DiveShop } from '../../entities/diveShop';
+import { ModalShow } from '../reusables/modal/types';
 
 type MapViewProps = {
   mapRef:                google.maps.Map | null
@@ -25,7 +26,7 @@ type MapViewProps = {
   heatpts:               HeatPoint[]
   mapCoords:             number[]
   setMapCoords:          (coords: number[]) => void
-  selectedDiveSite:      DiveSiteWithUserName
+  selectedDiveSite:      DiveSiteWithUserName | null
   setSelectedDiveSite:   (site: DiveSiteWithUserName) => void
   setSelectedShop:       (shop: DiveShop) => void
   setMapZoom:            (zoomLev: number) => void
@@ -37,10 +38,11 @@ type MapViewProps = {
   dragPin:               LatLngObject
   handlePinLoad:         (marker: google.maps.Marker) => void
   handleDragEnd:         () => void
-  modalShow:             boolean
+  modalShow:             ModalShow
 };
 
 export default function MapView(props: MapViewProps) {
+  
   return (
     <GoogleMap
       zoom={props.zoom}
@@ -63,7 +65,6 @@ export default function MapView(props: MapViewProps) {
               cluster.properties,
               cluster.geometry.coordinates,
               props.modalShow,
-              props.selectedDiveSite,
               props.setSelectedDiveSite,
               props.setSelectedShop);
 

@@ -37,9 +37,9 @@ import { AreaPicsContext } from './contexts/areaPicsContext';
 import './mapPage.css';
 import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
 import Histogram from './histogram/histogramBody';
-import { ModalContext } from './contexts/modalContext';
+import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
-import { ModalWindowSize } from './reusables/modal/constants';
+
 import { MapConfigContext } from './contexts/mapConfigContext';
 import Slider from './reusables/slider';
 import TestPage from './reusables/slider/testPage';
@@ -82,17 +82,22 @@ const MapPage = React.memo(function MapPage() {
       try {
         const success = await grabProfileById(sessionUserId);
         if (success) {
-          setProfile(success);
-          setPin({
-            ...pin,
-            UserID:   success[0].UserID,
-            UserName: success[0].UserName,
-          });
-          setAddSiteVals({
-            ...addSiteVals,
-            UserID:   success[0].UserID,
-            UserName: success[0].UserName,
-          });
+          let bully = success[0] && success[0].UserName;
+          if (bully == null || bully === '') {
+            return;
+          } else {
+            setProfile(success[0]);
+            setPin({
+              ...pin,
+              UserID:   success[0].UserID,
+              UserName: success[0].UserName,
+            });
+            setAddSiteVals({
+              ...addSiteVals,
+              UserID:   success[0].UserID,
+              UserName: success[0].UserName,
+            });
+          }
         }
       } catch (e) {
         console.log({ title: 'Error', message: e.message });
@@ -191,12 +196,13 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateLaunchModal = () => {
-    modalShow(
-      () => {
-        return <HowToGuide animateLaunchModal={animateLaunchModal} />;
-      },
-      { name: 'HowToGuide' },
-    );
+    modalShow(function TutorialModal() {
+      return (
+        <HowToGuide
+          animateLaunchModal={animateLaunchModal}
+        />
+      );
+    });
   };
 
   const animateSettingsModal = () => {
@@ -209,7 +215,7 @@ const MapPage = React.memo(function MapPage() {
 
   const animateSiteSearchModal = () => {
     modalShow(SearchTool, {
-      size: ModalWindowSize.S,
+      size: 'small',
     });
   };
 

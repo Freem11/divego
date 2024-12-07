@@ -18,7 +18,7 @@ import DiveSitesContextProvider from './diveSitesContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SelectedShopContextProvider from './selectedShopContext';
 import SitesArrayContextProvider from './sitesArrayContext';
-import ModalContextProvider from './modalContextProvider';
+import ModalContextProvider from '../reusables/modal//contextProvider';
 import MapConfigContextProvider from './mapConfigContext';
 import PageMaxContextProvider from '../reusables/slider/pageMaxContext';
 import SliderNumberContextProvider from '../reusables/slider/sliderNumberContext';
