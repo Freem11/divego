@@ -37,7 +37,6 @@ export default function DiveSite(props: DiveSiteProps) {
       setIsPartnerAccount(true);
     }
   }, []);
-console.log("profile", profile)
 
   const getPhotos = async (site: DiveSiteWithUserName, user: ActiveProfile| null) => {
     try {
