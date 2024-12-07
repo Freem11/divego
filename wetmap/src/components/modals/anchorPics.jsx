@@ -5,11 +5,9 @@ import { PinContext } from '../contexts/staticPinContext';
 import { useState, useContext, useEffect } from 'react';
 import { siteGPSBoundaries } from '../../helpers/mapHelpers';
 import {
-  getDiveSiteByName,
   getDiveSiteWithUserName,
 } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import {
-  // getPhotosforAnchorMulti,
   getPhotosWithUser,
   getPhotosWithUserEmpty,
 } from '../../supabaseCalls/photoSupabaseCalls';
@@ -19,13 +17,9 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import './anchorPics.css';
 import ModalHeader from '../reusables/modalHeader';
 import PicUploader from './picUploader';
-import { cleanupPinPicture } from '../../helpers/picUploaderHelpers';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
 
 const AnchorPics = (props) => {
-  const {
-    animateAnchorModal,
-  } = props;
   const { profile } = useContext(UserProfileContext);
   const { selectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { animalVal } = useContext(AnimalContext);
@@ -53,8 +47,7 @@ const AnchorPics = (props) => {
           minLng,
           maxLng,
         });
-      }
-      else {
+      } else {
         photos = await getPhotosWithUser({
           animalMultiSelection: animalVal,
           myCreatures:          '',
@@ -68,8 +61,7 @@ const AnchorPics = (props) => {
       if (photos) {
         setAnchorPics(photos);
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.log({ title: 'Error', message: e.message });
     }
   };
@@ -97,8 +89,7 @@ const AnchorPics = (props) => {
       if (selectedSite.length > 0) {
         setSite(selectedSite[0].newusername);
       }
-    }
-    catch (e) {
+    } catch (e) {
       console.log({ title: 'Error', message: e.message });
     }
   };
@@ -116,7 +107,6 @@ const AnchorPics = (props) => {
     modalShow(PicUploader, {
       name:              'PictureUploader',
       keepPreviousModal: true,
-      onCancelCallback:  () => cleanupPinPicture(pin),
     });
   };
 

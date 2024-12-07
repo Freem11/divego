@@ -13,7 +13,7 @@ import { DiveShop } from '../../../entities/diveShop';
 
 type ShopModelViewProps = {
   setSelectedID:                (id: number) => void
-  onClose:                      () => void
+  onClose?:                     () => void
   handleDiveShopBioChange:      (newValue: string) => void
   handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
 

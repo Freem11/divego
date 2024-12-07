@@ -17,7 +17,7 @@ import Label from '../../reusables/label';
 
 type PicUploaderViewProps = {
   values:               Form
-  onClose:              () => void
+  onClose?:             () => void
   onSubmit:             (data: any) => void
   getMoreAnimals:       (search: string, limit: number, skip: number) => Promise<any>
   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void

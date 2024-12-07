@@ -10,7 +10,7 @@ import { grabRequestById } from '../../supabaseCalls/partnerSupabaseCalls';
 import ModalHeader from '../reusables/modalHeader';
 import LargeButton from '../reusables/button/largeButton';
 import PartnerAccountRequestModal from './partnerAccountRequestModal';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
 
 const Settings = (props) => {
   const { activeSession, setActiveSession } = useContext(SessionContext);

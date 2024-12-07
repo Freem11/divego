@@ -5,8 +5,11 @@ import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from './types';
 import ShopModalView from './view';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
-export default function ShopModal(props) {
+type ShopModalProps = Partial<ModalHandleProps>;
+
+export default function ShopModal(props: ShopModalProps) {
   const { selectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
 

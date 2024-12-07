@@ -22,7 +22,7 @@ import useSupercluster from 'use-supercluster';
 import { MapConfigContext } from '../contexts/mapConfigContext';
 import { DiveSpotContext } from '../contexts/diveSpotContext';
 import { PinSpotContext } from '../contexts/pinSpotContext';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
 
 const libraries: Libraries = ['places', 'visualization'];
 
