@@ -6,14 +6,7 @@ type SelectedPictureContextType = {
   setSelectedPicture: React.Dispatch<React.SetStateAction<Photo | null>>
 };
 
-const SelectedPictureContextState = {
-  selectedPicture:    null,
-  setSelectedPicture: () => {},
-};
-
-export const SelectedPictureContext = createContext<SelectedPictureContextType>(
-  SelectedPictureContextState,
-);
+export const SelectedPictureContext = createContext<SelectedPictureContextType>({} as SelectedPictureContextType);
 
 const SelectedPictureContextProvider = ({ children }: any) => {
   const [selectedPicture, setSelectedPicture] = useState<Photo | null>(null);

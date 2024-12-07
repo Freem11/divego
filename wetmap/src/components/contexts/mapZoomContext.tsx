@@ -5,14 +5,7 @@ type ZoomContextType = {
   setMapZoom: React.Dispatch<React.SetStateAction<number>>
 };
 
-const ZoomContextState = {
-  mapZoom:      10,
-  setMapZoom: () => {},
-};
-
-export const ZoomContext = createContext<ZoomContextType>(
-  ZoomContextState,
-);
+export const ZoomContext = createContext<ZoomContextType>({} as ZoomContextType);
 
 const ZoomContextProvider = ({ children }: any) => {
   const [mapZoom, setMapZoom] = useState<number>(10);

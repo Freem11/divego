@@ -5,14 +5,7 @@ type MapBoundsContextType = {
   setBoundaries: React.Dispatch<React.SetStateAction<number[] | null>>
 };
 
-const MapBoundsContextState = {
-  boundaries:      null,
-  setBoundaries: () => {},
-};
-
-export const MapBoundsContext = createContext<MapBoundsContextType>(
-  MapBoundsContextState,
-);
+export const MapBoundsContext = createContext<MapBoundsContextType>({} as MapBoundsContextType);
 
 const MapBoundsContextProvider = ({ children }: any) => {
   const [boundaries, setBoundaries] = useState<number[] | null>(null);

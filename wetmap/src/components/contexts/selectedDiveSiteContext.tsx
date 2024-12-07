@@ -6,14 +6,7 @@ type SelectedShopContextType = {
   setSelectedDiveSite: React.Dispatch<React.SetStateAction<DiveSiteWithUserName | null>>
 };
 
-const SelectedDiveSiteContextState = {
-  selectedDiveSite:      null,
-  setSelectedDiveSite: () => {},
-};
-
-export const SelectedDiveSiteContext = createContext<SelectedShopContextType>(
-  SelectedDiveSiteContextState,
-);
+export const SelectedDiveSiteContext = createContext<SelectedShopContextType>({} as SelectedShopContextType);
 
 const SelectedDiveSiteContextProvider = ({ children }: any) => {
   const [selectedDiveSite, setSelectedDiveSite] = useState<DiveSiteWithUserName | null>(null);

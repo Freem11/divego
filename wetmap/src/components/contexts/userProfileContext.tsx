@@ -6,14 +6,7 @@ type UserProfileContextType = {
   setProfile: React.Dispatch<React.SetStateAction<ActiveProfile | null>>
 };
 
-const UserProfileContextState = {
-  profile:      null,
-  setProfile: () => {},
-};
-
-export const UserProfileContext = createContext<UserProfileContextType>(
-  UserProfileContextState,
-);
+export const UserProfileContext = createContext<UserProfileContextType>({} as UserProfileContextType);
 
 const UserProfileContextProvider = ({ children }: any) => {
   const [profile, setProfile] = useState<ActiveProfile | null>(null);

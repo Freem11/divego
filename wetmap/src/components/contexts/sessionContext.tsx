@@ -6,14 +6,7 @@ type SessionContextType = {
   setActiveSession: React.Dispatch<React.SetStateAction<ActiveSession | null>>
 };
 
-const SessionContextState = {
-  activeSession:      null,
-  setActiveSession: () => {},
-};
-
-export const SessionContext = createContext<SessionContextType>(
-  SessionContextState,
-);
+export const SessionContext = createContext<SessionContextType>({} as SessionContextType);
 
 const SessionContextProvider = ({ children }: any) => {
   const [activeSession, setActiveSession] = useState<ActiveSession | null>(null);

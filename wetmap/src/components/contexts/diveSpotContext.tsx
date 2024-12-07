@@ -6,14 +6,7 @@ type DiveSpotContextType = {
   setAddSiteVals: React.Dispatch<React.SetStateAction<DiveSiteSubmissionData | null>>
 };
 
-const DiveSpotContextState = {
-  addSiteVals:    null,
-  setAddSiteVals: () => {},
-};
-
-export const DiveSpotContext = createContext<DiveSpotContextType>(
-  DiveSpotContextState,
-);
+export const DiveSpotContext = createContext<DiveSpotContextType>({} as DiveSpotContextType);
 
 const DiveSpotContextProvider = ({ children }: any) => {
   const [addSiteVals, setAddSiteVals] = useState<DiveSiteSubmissionData | null>(null);

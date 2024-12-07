@@ -5,13 +5,7 @@ type SearchTextContextType = {
   setTextValue: React.Dispatch<React.SetStateAction<string>>
 };
 
-const SearchTextContextState = {
-  textvalue:     '',
-  setTextValue: () => {},
-};
-
-export const SearchTextContext = createContext<SearchTextContextType>(
-  SearchTextContextState,
+export const SearchTextContext = createContext<SearchTextContextType>({} as SearchTextContextType
 );
 
 const SearchTextContextProvider = ({ children }: any) => {
