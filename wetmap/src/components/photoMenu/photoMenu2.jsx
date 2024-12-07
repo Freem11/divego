@@ -53,7 +53,6 @@ const PhotoMenu = () => {
             ).map((label) => {
               return photos.find(a => a.label === label);
             });
-            console.log('animalArray', animalArray);
             setAreaPics(animalArray);
           }
         } catch (e) {

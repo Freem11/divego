@@ -1,51 +1,21 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
-import Itinerary from '../../itineraries/itinerary';
+import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
+import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { CoordsContext } from '../../contexts/mapCoordsContext';
-import './shopModal.css';
-import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
-import CloseButton from '../../closeButton/closeButton';
-import shopModalView from './view';
+import { UserProfileContext } from '../../contexts/userProfileContext';
+import { ItineraryItem } from './types';
 import ShopModalView from './view';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
-export default function ShopModal(props) {
-  // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
-  // const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
-  // const [siteCloseState, setSiteCloseState] = useState(false);
-  // const [itineraryList, setItineraryList] = useState('');
-  // const [selectedID, setSelectedID] = useState(null);
-  // const { mapCoords, setMapCoords } = useContext(CoordsContext);
+type ShopModalProps = Partial<ModalHandleProps>;
 
-  // useEffect(() => {
-  //   if (selectedShop[0]) {
-  //     getItineraries(selectedShop[0].id);
-  //     setMasterSwitch(true);
-  //   }
-  // }, [selectedShop]);
+export default function ShopModal(props: ShopModalProps) {
+  const { selectedShop } = useContext(SelectedShopContext);
+  const { profile } = useContext(UserProfileContext);
 
-  // const getItineraries = async (IdNum) => {
-  //   try {
-  //     const itins = await itineraries(IdNum);
-  //     if (itins.length > 0) {
-  //       setItineraryList(itins);
-  //     }
-  //   }
-  //   catch (e) {
-  //     console.log({ title: 'Error', message: e.message });
-  //   }
-  // };
-
-  // const handleShopModalClose = () => {
-  //   setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
-  //   setItineraryList('');
-  // };
-
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
-  const [siteCloseState, setSiteCloseState] = useState(false);
-  const [itineraryList, setItineraryList] = useState('');
-  const [selectedID, setSelectedID] = useState(null);
-  const { mapCoords, setMapCoords } = useContext(CoordsContext);
+  const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+  const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
+  const [selectedID, setSelectedID] = useState<number>(0);
 
   useEffect(() => {
     if (selectedShop) {
@@ -53,27 +23,44 @@ export default function ShopModal(props) {
     }
   }, [selectedShop]);
 
-  const getItineraries = async (IdNum) => {
+  useEffect(() => {
+    if (profile && profile.partnerAccount) {
+      setIsPartnerAccount(true);
+    }
+  }, []);
+
+  const getItineraries = async (IdNum: number) => {
     try {
       const itins = await itineraries(IdNum);
-      if (itins.length > 0) {
+      if (itins && itins.length > 0) {
         setItineraryList(itins);
       }
     } catch (e) {
-      console.log({ title: 'Error', message: e.message });
+      console.log({ title: 'Error', message: (e as Error).message });
     }
   };
 
-  const handleShopModalClose = () => {
-    setSelectedShop({ ...selectedShop, id: 0, orgname: '' });
-    setItineraryList('');
+  const handleDiveShopBioChange = async (newValue: string) => {
+    if (selectedShop) {
+      await updateDiveShop({ id: selectedShop.id, bio: newValue, photo: selectedShop.diveshopprofilephoto });
+    }
   };
-  const fileUploaderRef = useRef<HTMLInputElement>(null);
+
 
   return (
     <>
       {selectedShop && (
-        <ShopModalView shopModelName={selectedShop.orgname} shopDescription="test" />
+        <ShopModalView
+          setSelectedID={setSelectedID}
+          onClose={props.onModalCancel}
+          handleDiveShopBioChange={handleDiveShopBioChange}
+          handleDiveShopImageSelection={() => {}}
+          diveShop={selectedShop}
+          isPartnerAccount={isPartnerAccount}
+          itineraryList={itineraryList}
+          selectedID={selectedID}
+          headerPictureUrl={null}
+        />
       )}
     </>
   );

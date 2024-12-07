@@ -58,6 +58,8 @@
 @include padding-variant(6, $unit-6);
 @include margin-variant(4, $unit-4);
 @include margin-variant(6, $unit-6);
+@include margin-variant(8, $unit-8);
+@include margin-variant(10, $unit-10);
 
 @include stack('stack-4', $unit-4);
 
@@ -89,9 +91,13 @@ h6 {
   color: $gray-color;
 }
 
-.ssrc-select {
+
+.App {
+  --ssrc-label-control-shift: 0.8em;
+
   --ssrc-select-border-color: #{$gray-color};
   --ssrc-select-text-color: #{$gray-color};
   --ssrc-select-control-height: #{$control-size};
   --ssrc-select-trigger-text-color: #{$body-font-color};
+  --ssrc-select-create-button-text-color: #{$primary-color};
 }

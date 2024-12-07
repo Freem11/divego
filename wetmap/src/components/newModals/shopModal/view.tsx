@@ -1,56 +1,30 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
+import React, { useRef } from 'react';
 import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
-import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { CoordsContext } from '../../contexts/mapCoordsContext';
-import './shopModal.css';
-import { shops } from '../../../supabaseCalls/shopsSupabaseCalls';
-import CloseButton from '../../closeButton/closeButton';
-import shopModalView from './view';
 import PlainTextInput from '../../reusables/plainTextInput';
 import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
+import { ItineraryItem } from './types';
+import { DiveShop } from '../../../entities/diveShop';
 
 
 type ShopModelViewProps = {
-  shopModelName:   string | null
-  shopDescription: string | null
+  setSelectedID:                (id: number) => void
+  onClose?:                     () => void
+  handleDiveShopBioChange:      (newValue: string) => void
+  handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
+
+  diveShop:         DiveShop | null
+  isPartnerAccount: boolean
+  itineraryList:    ItineraryItem[] | null
+  selectedID:       number
+  headerPictureUrl: string | null
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
-  // const {lat, lng, setSelectedPhoto, setPhotoBoxModel } = props
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
-  // const [siteCloseState, setSiteCloseState] = useState(false);
-  const [itineraryList, setItineraryList] = useState('');
-  const [selectedID, setSelectedID] = useState(null);
-  const { mapCoords, setMapCoords } = useContext(CoordsContext);
-
-  useEffect(() => {
-    if (selectedShop) {
-      getItineraries(selectedShop.id);
-    }
-  }, [selectedShop]);
-
-
-  const getItineraries = async (IdNum) => {
-    try {
-      const itins = await itineraries(IdNum);
-      if (itins.length > 0) {
-        setItineraryList(itins);
-      }
-    } catch (e) {
-      console.log({ title: 'Error', message: e.message });
-    }
-  };
-
-  // const handleShopModalClose = () => {
-  //   setSelectedShop({ ...selectedShop, id: 0, orgName: '' });
-  //   setItineraryList('');
-  // };
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
@@ -58,79 +32,73 @@ export default function ShopModalView(props: ShopModelViewProps) {
         ref={fileUploaderRef}
         className="d-hide"
         type="file"
-        onChange={props.handleImageSelection}
+        onChange={props.handleDiveShopImageSelection}
       />
       <div className="col-6">
-        {/* Test 1 */}
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
-          <div className={style.buttonOpenPictureUpload}>
-            <Button
-              className="btn-lg"
-              onClick={props.openPicUploader}
-            >
-              add diving events here
-              {/* <span className="hide-sm">{screenData.DiveSite.addSightingButton}</span> */}
-            </Button>
-          </div>
-
           <div className={style.buttonImageUpload}>
-            <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className="btn-lg"
-              onClick={() => fileUploaderRef?.current?.click?.()}
-            />
+            {props?.isPartnerAccount && (
+              <ButtonIcon
+                icon={<Icon name="camera-plus" />}
+                className="btn-lg"
+                onClick={() => {}}
+              />
+            )}
           </div>
         </WavyModalHeader>
         <div className="ml-6">
           <div className="stack-4">
             <div>
               <div className="d-flex">
-                <h1 className="mb-0">{props?.shopModelName}</h1>
-                <div>
-                  <Icon
-                    name="flag"
-                    fill="maroon"
-                    width="30px"
-                    onClick={() => window.location = `mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20Dive%20Site:%20"${selectedDiveSite.SiteName}"%20at%20Latitude:%20${selectedDiveSite.Latitude}%20Longitude:%20${selectedDiveSite.Longitude}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Dive%20site%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20dive%20site%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Dive%20site%20GPS%20coordinates%20are%20not%20correct%0D%0A%0D%0A(Please%20provide%20a%20correct%20latitude%20and%20longitude%20and%20we%20will%20update%20the%20record)`}
-                  />
-                </div>
+                <h1 className="mb-0">{props?.diveShop?.orgname}</h1>
               </div>
+            </div>
 
-              {/* <div className="d-flex">
-                {'Added by: '}
-                <a href="#">{props?.diveSite?.newusername}</a>
-              </div> */}
+            <div className="panel border-none">
+              <div className="panel-body">
+                <PlainTextInput
+                  placeholder={`A little about ${props?.diveShop?.orgname}`}
+                  value={props?.diveShop?.diveshopbio || ''}
+                  readOnly={!props?.isPartnerAccount}
+                  onSave={props?.handleDiveShopBioChange}
+                />
+              </div>
             </div>
           </div>
         </div>
-        <div className="ml-6">
-          <h3 className="text-left">{props?.shopDescription}</h3>
-        </div>
       </div>
-      <div className="col-6">
-        <h3>Offered Diving Trips</h3>
-        <div style={{ marginTop: '3%', width: '100%', borderRadius: 15 }}>
-          <div className="container5">
-            {itineraryList
-            && itineraryList.map((itinerary) => {
-              return (
-                <Itinerary
-                  key={itinerary.id}
-                  itinerary={itinerary}
-                  setSelectedID={setSelectedID}
-                  selectedID={selectedID}
-                />
-              );
-            })}
-            {itineraryList.length === 0 && (
-              <div>
-                <p className="noSightings">
-                  No Trips are currently being offered.
-                </p>
-              </div>
-            )}
-          </div>
+      <div className="col-6 panel border-none full-height">
+        <div className="panel-header">
+          <h3>Offered Diving Trips</h3>
+          {props?.isPartnerAccount && (
+            <div className={`${style.buttonAddDivingEvents}`}>
+              <Button className="mt-2 btn-lg">
+                Add diving event
+              </Button>
+            </div>
+          )}
         </div>
+        <div className={`${style.itineraryList}`}>
+          {props?.itineraryList// in the future, if itineraryList is not empty, render a loading spinner
+          && props?.itineraryList.map((itinerary) => {
+            return (
+              <Itinerary
+                key={itinerary.id}
+                itinerary={itinerary}
+                setSelectedID={props?.setSelectedID}
+                selectedID={props?.selectedID}
+              />
+            );
+          })}
+          {props?.itineraryList?.length === 0 && (
+            <div>
+              <p className="noSightings">
+                No Trips are currently being offered.
+              </p>
+            </div>
+          )}
+        </div>
+        <div className="panel-footer"></div>
       </div>
     </div>
   );

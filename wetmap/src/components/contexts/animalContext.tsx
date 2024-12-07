@@ -5,14 +5,7 @@ type AnimalContextType = {
   setAnimalVal: React.Dispatch<React.SetStateAction<string[]>>
 };
 
-const AnimalContextState = {
-  animalVal:      [],
-  setAnimalVal: () => {},
-};
-
-export const AnimalContext = createContext<AnimalContextType>(
-  AnimalContextState,
-);
+export const AnimalContext = createContext<AnimalContextType>({} as AnimalContextType);
 
 
 const AnimalContextProvider = ({ children }: any) => {

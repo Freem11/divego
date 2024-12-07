@@ -92,68 +92,6 @@ export const getAnimalMultiSelect = async (text) => {
   }
 };
 
-// export const getPhotosforAnchorMulti = async (value) => {
-//   let creatureList;
-//   value.animalVal.forEach((creature) => {
-//     if (creatureList === undefined) {
-//       creatureList = creature + ",";
-//     } else {
-//       creatureList = creatureList + creature + ",";
-//     }
-//   });
-
-//   let creatureListFinal;
-//   if (creatureList !== undefined) {
-//     creatureListFinal = creatureList.slice(0, -1);
-//   }
-
-//   if (creatureListFinal === undefined) {
-//     creatureListFinal = "";
-//   }
-
-//   if (value.animalVal.length === 0 || value.animalVal === null) {
-//     const { data, error } = await supabase
-//       .from("photos")
-//       .select()
-//       // .ilike("userName", "%" + value.myCreatures + "%")
-//       .ilike("label", "%" + creatureListFinal + "%")
-//       .gte("latitude", value.minLat)
-//       .gte("longitude", value.minLng)
-//       .lte("latitude", value.maxLat)
-//       .lte("longitude", value.maxLng)
-//       .order("id", { ascending: false });
-
-//     if (error) {
-//       console.log("couldn't do it 24,", error);
-//       return [];
-//     }
-
-//     if (data) {
-//       return data;
-//     }
-//   } else {
-//     const { data, error } = await supabase
-//       .from("photos")
-//       .select()
-//       .filter("label", "in", "(" + creatureListFinal + ")")
-//       // .ilike("userName", "%" + value.myCreatures + "%")
-//       .gte("latitude", value.minLat)
-//       .gte("longitude", value.minLng)
-//       .lte("latitude", value.maxLat)
-//       .lte("longitude", value.maxLng)
-//       .order("id", { ascending: false });
-
-//     if (error) {
-//       console.log("couldn't do it 25,", error);
-//       return [];
-//     }
-
-//     if (data) {
-//       return data;
-//     }
-//   }
-// };
-
 export const getPhotosforMapArea = async (value) => {
   const { data, error } = await supabase
     .from('photos')
@@ -266,14 +204,14 @@ export const getPhotosByDiveSiteWithExtra = async (values) => {
   const {
     data,
     error,
-  } = await supabase.rpc("get_photos_for_divesite_lat_and_lng_groupby_date", {
-    lat: values.lat,
-    lng: values.lng,
-    connecteduserid: values.userId
+  } = await supabase.rpc('get_photos_for_divesite_with_socials_groupby_date', {
+    lat:             values.lat,
+    lng:             values.lng,
+    connecteduserid: values.userId,
   });
 
   if (error) {
-    console.error("couldn't do it 30,", error);
+    console.error('couldn\'t do it 30,', error);
     return [];
   }
 
@@ -286,13 +224,13 @@ export const getPhotosByUserWithExtra = async (userId, connectedUserId) => {
   const {
     data,
     error,
-  } = await supabase.rpc("get_photos_by_userid_groupby_divesite_date", {
-    userid: userId,
-    connecteduserid: connectedUserId
+  } = await supabase.rpc('get_photos_by_userid_groupby_divesite_date', {
+    userid:          userId,
+    connecteduserid: connectedUserId,
   });
 
   if (error) {
-    console.error("couldn't do it 31,", error);
+    console.error('couldn\'t do it 31,', error);
     return [];
   }
 

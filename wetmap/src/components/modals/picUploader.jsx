@@ -31,7 +31,7 @@ import InputField from '../reusables/inputField';
 import CustomButton from '../reusables/button/button.jsx';
 import SubmitButton from '../reusables/button/submitButton.jsx';
 import ModalHeader from '../reusables/modalHeader.jsx';
-import { ModalContext } from '../contexts/modalContext.jsx';
+import { ModalContext } from '../reusables/modal/context';
 
 let filePath1 = './wetmap/src/components/uploads/';
 let filePath = '/src/components/uploads/';
