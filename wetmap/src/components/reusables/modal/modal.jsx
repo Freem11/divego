@@ -1,11 +1,5 @@
-<<<<<<< HEAD
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { ModalContext } from '../../contexts/modalContext';
-=======
 import React, { useContext, useEffect, useRef } from 'react';
 import { ModalContext } from './context';
-import { TutorialContext } from '../../contexts/tutorialContext';
->>>>>>> restyle-phase-1.1
 
 import style from './modal.module.scss';
 
