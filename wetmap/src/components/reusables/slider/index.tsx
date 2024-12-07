@@ -1,50 +1,28 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import './style.scss';
-import Button from '../button/button';
+import { XcoordinateContext } from './xCoordinateContext';
+import { SliderNumberContext } from './sliderNumberContext';
+import { PageMaxContext } from './pageMaxContext';
 
 type SliderProps = {
-  startPage: number
-  MoveBy:    number
-  Direction: string
+  startPage: number | 1
   pageData:  any[]
 };
 
 export default function Slider(props: SliderProps) {
-  const pageData = [1, 2, 3, 4];
-
-  const [xCoordinate, setxCoordinate] = useState<number>(0);
-  const [slideNum, setSlideNum] = useState<number>(1);
-
+  const pageWidth = window.innerWidth / 2;
+  const numberOfPages = props.pageData.length;
   const animationDuration = 500;
-  const pageWidth = window.innerWidth / 3;
-  const numberOfPages = pageData.length;
-  const pageMin = 0;
-  const pageMax = numberOfPages * pageWidth;
-
+  
+  const {xCoordinate, setxCoordinate} = useContext(XcoordinateContext);
+  const {setSlideNum} = useContext(SliderNumberContext);
+  const {setPageMax} = useContext(PageMaxContext);
 
   useEffect(() => {
-    setxCoordinate((slideNum - 1) * -pageWidth);
+    setSlideNum(props.startPage)
+    setxCoordinate((props.startPage - 1) * -pageWidth);
+    setPageMax(numberOfPages * pageWidth)
   }, []);
-
-  const slideBack = (moveBy: number) => {
-    const movement = moveBy * pageWidth;
-    if (xCoordinate + movement > pageMin) {
-      return;
-    } else {
-      setxCoordinate(xCoordinate + movement);
-      setSlideNum(slideNum + moveBy);
-    }
-  };
-
-  const slideForward = (moveBy: number) => {
-    const movement = moveBy * pageWidth;
-    if (xCoordinate - movement <= -pageMax) {
-      return;
-    } else {
-      setxCoordinate(xCoordinate - movement);
-      setSlideNum(slideNum - moveBy);
-    }
-  };
 
   const pageChangeStyle = {
     width:      pageWidth * numberOfPages,
@@ -56,21 +34,19 @@ export default function Slider(props: SliderProps) {
     <>
       <div className="slider">
         <div className="leftSide">
-          <Button text="back" onClick={() => slideBack(1)} />
         </div>
 
         <div className="slider-center-container" style={pageChangeStyle}>
-          {pageData
-          && pageData.map((page) => {
+          {props.pageData
+          && props.pageData.map((page, index) => {
             return (
-              <div style={{ height: '100%', width: '100%' }} key={page}>
-                {`Page ${page}`}
+              <div style={{ display: 'flex', width: '100%'}} key={index}>
+                {page}
               </div>
             );
           })}
         </div>
         <div className="rightSide">
-          <Button text="forward" onClick={() => slideForward(1)} />
         </div>
       </div>
     </>

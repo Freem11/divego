@@ -20,6 +20,9 @@ import SelectedShopContextProvider from './selectedShopContext';
 import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from './modalContextProvider';
 import MapConfigContextProvider from './mapConfigContext';
+import PageMaxContextProvider from '../reusables/slider/pageMaxContext';
+import SliderNumberContextProvider from '../reusables/slider/sliderNumberContext';
+import XcoordinateContextProvider from '../reusables/slider/xCoordinateContext';
 
 const providers = [
   AreaPicsContextProvider,
@@ -42,6 +45,9 @@ const providers = [
   SitesArrayContextProvider,
   ModalContextProvider,
   MapConfigContextProvider,
+  PageMaxContextProvider,
+  SliderNumberContextProvider,
+  XcoordinateContextProvider,
 ];
 
 export const AppContextProvider = combineComponents(...providers);
