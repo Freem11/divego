@@ -1,6 +1,8 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { animated, useSpring } from 'react-spring';
 
+import ConfirmationModal from './../../confirmationModal';
 import backGroundPic from '../../../images/boat.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import screenData from '../screenData.json';
@@ -18,7 +20,12 @@ type SiteSubmitterProps = {
   onClose: () => void
   getDeviceLocation: () => void
   onNavigate: () => void
-  handleSubmit: () => void
+  sucessModalSlide: () => void
+  animateSuccessModal: () => void
+  cautionModalSlide: () => void
+  animateCautionModal: () => void
+  successModalRef: () => void
+  cautionModalRef: () => void
 };
 
 export default function SiteSubmitterView(props: SiteSubmitterProps) {
@@ -41,7 +48,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
               iconLeft={<Icon name="diving-scuba-flag" />}
               placeholder={screenData.DiveSiteAdd.siteNamePlaceholder}
               error={errors.Site}
-              {...register('Site', FormRules.Site)}
+              {...register('Site', FormRules.name)}
             />
 
             <TextInput
@@ -89,7 +96,6 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
           <div className='col-3'>
             <Button
-              onClick={props.handleSubmit}
               disabled={isSubmitting}
               className="btn-md bg-primary"
               type="submit"
@@ -100,6 +106,31 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
         </div>
       </form>
+
+      <animated.div
+        className="successModal modalBase"
+        style={props.sucessModalSlide}
+        ref={props.successModalRef}
+      >
+        <ConfirmationModal
+          submissionItem="dive site"
+          animateModal={props.animateSuccessModal}
+          handleClose={props.onClose}
+          isSuccess={true}
+        />
+      </animated.div>
+
+      <animated.div
+        className="cautionModal modalBase"
+        style={props.cautionModalSlide}
+        ref={props.cautionModalRef}
+      >
+        <ConfirmationModal
+          submissionItem="dive site"
+          animateModal={props.animateCautionModal}
+          isSuccess={false}
+        />
+      </animated.div>
     </div>
   );
 }

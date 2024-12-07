@@ -2,6 +2,9 @@ import React from 'react';
 import SiteSubmitterView from './view';
 import { useState, useEffect, useContext, useRef } from "react";
 import { animated, useSpring } from "react-spring";
+import ConfirmationModal from '../confirmationModal';
+import './confirmationModal.css';
+import './siteSubmitter.css';
 import exifr from "exifr";
 import { exifGPSHelper } from "../../../helpers/exifGPSHelpers";
 import { insertDiveSiteWaits } from "../../../supabaseCalls/diveSiteWaitSupabaseCalls";
@@ -185,7 +188,12 @@ export default function SiteSubmitter(props) {
       onNavigate={onNavigate}
       handleSubmit={handleSubmit}
       onClose={onClose}
-      addSiteVals={addSiteVals}
+      sucessModalSlide={sucessModalSlide}
+      animateSuccessModal={animateSuccessModal}
+      successModalRef={successModalRef}
+      cautionModalSlide={cautionModalSlide}
+      animateCautionModal={animateCautionModal}
+      cautionModalRef={cautionModalRef}
       onSubmit={(data) => {
         console.log({ data });
       }}
