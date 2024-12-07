@@ -1,19 +1,19 @@
-import { useState } from "react";
-import PropTypes from "prop-types";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
-import Typography from "@mui/material/Typography";
-import Box from "@mui/material/Box";
-import SignInRoute from "./signIn";
-import SignUpRoute from "./signUp";
-import WavyBlock from "./reusables/wavyBlock";
-import blackManta from "../images/blackManta.png";
-import carouselData from "./carousel-data.json";
-import Button from "./reusables/button";
-import ButtonIcon from "./reusables/buttonIcon";
-import googleIcon from "../images/google-color.png";
-import facebookIcon from "../images/facebook-color.png";
-import appleIcon from "../images/apple.png";
+import { useState } from 'react';
+import PropTypes from 'prop-types';
+import Tabs from '@mui/material/Tabs';
+import Tab from '@mui/material/Tab';
+import Typography from '@mui/material/Typography';
+import Box from '@mui/material/Box';
+import SignInRoute from './signIn';
+import SignUpRoute from './signUp';
+import WavyBlock from './reusables/wavyBlock';
+import blackManta from '../images/blackManta.png';
+import carouselData from './carousel-data.json';
+import Button from './reusables/button';
+import ButtonIcon from './reusables/buttonIcon';
+import googleIcon from '../images/google-color.png';
+import facebookIcon from '../images/facebook-color.png';
+import appleIcon from '../images/apple.png';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -44,7 +44,7 @@ TabPanel.propTypes = {
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    'aria-controls': `simple-tabpanel-${index}`,
   };
 }
 
@@ -70,12 +70,35 @@ export default function AuthenticationPage() {
       </div>
       {carouselData[1].content}
       <div className="socialSignUps">
-        <ButtonIcon icon={<img src={googleIcon} alt="Google" />} />
-        <ButtonIcon icon={<img src={facebookIcon} alt="Facebook" />} />
-        <ButtonIcon icon={<img src={appleIcon} alt="Apple" />} />
+        <ButtonIcon
+          icon={
+            <img
+              className="social-icon google-icon"
+              src={googleIcon}
+              alt="Google"
+            />
+          }
+        />
+        <ButtonIcon
+          icon={
+            <img
+              className="social-icon facebook-icon"
+              src={facebookIcon}
+              alt="Facebook"
+            />
+          }
+        />
+        <ButtonIcon
+          icon={
+            <img
+              className="social-icon apple-icon"
+              src={appleIcon}
+              alt="Apple"
+            />
+          }
+        />
       </div>
     </div>
-
     // <Box sx={{ width: '100vw', height: '100vh' }}>
     //   <Box sx={{ borderBottom: 1, borderColor: 'lightgrey', width: '100vw' }}>
     //     <Tabs
