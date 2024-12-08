@@ -3,16 +3,17 @@ import style from './style.module.scss';
 import FlagIcon from '@mui/icons-material/Flag';
 import notLiked from '../../../images/Hand-Hollow-Blue.png';
 import liked from '../../../images/Hand-Filled-Blue.png';
+import { PhotoWithLikesAndComments } from '../../../entities/photos';
 
 
 type DiveSiteImageViewProps = {
-  pic:                any
+  pic:                PhotoWithLikesAndComments
   handleModalOpen:    () => void
   handleLike:         (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => Promise<void>
   handleFollow:       (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, username: string) => Promise<void>
   handleCommentModal: () => void
-  countOfLikes:       any
-  picLiked:           any
+  countOfLikes:       number
+  picLiked:           boolean
 };
 // have to change type declarations asap
 
@@ -42,7 +43,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
       <div className={style.helper2} style={{ marginTop: '-10%' }}>
         <h4
           className={style.userLabel}
-          onClick={e => props.handleFollow(e, props.pic.newusername)}
+          onClick={e => props.handleFollow(e, props.pic.UserName)}
         >
           Added by:
           {' '}
