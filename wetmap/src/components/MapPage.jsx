@@ -44,6 +44,7 @@ import { MapConfigContext } from './contexts/mapConfigContext';
 import Slider from './reusables/slider';
 import TestPage from './reusables/slider/testPage';
 import TestPageEnd from './reusables/slider/testPageEnd';
+import TutorialPage from './pages/tutorial';
 
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
@@ -237,7 +238,11 @@ const MapPage = React.memo(function MapPage() {
 
   return (
     <div className="mappagemaster">
-      <Slider startPage={1} pageData={pageData} />
+
+      {/* <Slider startPage={1} pageData={pageData} /> */}
+
+      <TutorialPage />
+
       {mapConfig === 0 && (
         <animated.div className="fabContainer" style={moveFabModal}>
           <div className="animateBox" onClick={e => animateMenu(e)}>
