@@ -8,10 +8,10 @@ import {
 import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCalls';
 // import style from './picture.module.scss';
 import UserProfileModal from '../../modals/userProfileModal';
-import { ModalContext } from '../../contexts/modalContext';
+import { ModalContext } from '../../reusables/modal/context';
 import CommentsModal from '../../modals/commentsModal';
 import FullScreenModal from '../../modals/fullScreenModal';
-import { ModalWindowSize } from '../../reusables/modal/constants';
+// import ModalWindow, { ModalWindowSize } from '../../reusables/modal/types';
 import DiveSiteImageView from './view';
 
 export default function DiveSiteImage(props) {
@@ -66,12 +66,10 @@ export default function DiveSiteImage(props) {
   const handleModalOpen = () => {
     modalShow(FullScreenModal, {
       keepPreviousModal: true,
-      size:              ModalWindowSize.FULL,
+      size:              'full',
       src:               `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`,
     });
-    // const imgTest = new Image();
-    // imgTest.src = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
-    // console.log(`Width: ${imgTest.width}px, Height: ${imgTest.height}px`);
+    // can I get the image size from the modal instead of hard coding it?
   };
 
   return (
