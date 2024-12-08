@@ -19,8 +19,6 @@ export default function DiveSite(props: DiveSiteProps) {
   const { profile }          = useContext(UserProfileContext);
   const { modalShow }        = useContext(ModalContext);
   const { pin, setPin }      = useContext(PinContext);
-
-  // const [diveSite, setDiveSite] = useState<DiveSiteWithUserName | null>(null);
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);

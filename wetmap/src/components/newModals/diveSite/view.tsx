@@ -39,13 +39,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
           image={props.headerPictureUrl || defaultHeaderPicture}
           onClose={props.onClose}
         >
-          <div className={style.buttonOpenPictureUpload}>
-            {/* <Button className="btn-lg" onClick={props.openPicUploader}>
-              <span className="hide-sm">
-                {screenData.DiveSite.addSightingButton}
-              </span>
-            </Button> */}
-          </div>
+          <div className={style.buttonOpenPictureUpload}></div>
 
           <div className={style.buttonImageUpload}>
             <ButtonIcon
