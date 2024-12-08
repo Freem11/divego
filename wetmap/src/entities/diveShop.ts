@@ -5,6 +5,6 @@ export type DiveShop = {
   lng:                  number
   userId:               string
   created_at:           string
-  diveShopBio:          string
-  diveShopProfilePhoto: string
+  diveshopbio:          string
+  diveshopprofilephoto: string
 };

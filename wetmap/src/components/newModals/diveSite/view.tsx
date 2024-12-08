@@ -13,7 +13,7 @@ import ButtonIcon from '../../reusables/buttonIcon';
 import DiveSiteImage from '../diveSiteImage/index';
 
 type DiveSiteViewProps = {
-  onClose:              () => void
+  onClose?:             () => void
   openPicUploader:      (event: React.MouseEvent) => void
   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
   onDiveSiteBioChange:  (newValue: string) => void
@@ -81,10 +81,10 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
-                  placeHolder={`A little about ${props?.diveSite?.name}`}
-                  content={props?.diveSite?.divesitebio || ''}
+                  placeholder={`A little about ${props?.diveSite?.name}`}
+                  value={props?.diveSite?.divesitebio || ''}
                   readOnly={!props?.isPartnerAccount}
-                  onSubmit={props?.onDiveSiteBioChange}
+                  onSave={props?.onDiveSiteBioChange}
                 />
               </div>
             </div>

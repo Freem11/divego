@@ -5,12 +5,8 @@ type IconName = keyof typeof config;
 
 type Props = {
   name:       IconName
-  className?: string
 };
 type viewBoxEncoded = string | number | null | Array<number>;
-type Config = {
-  [k in IconName]: [viewBoxEncoded, string]
-};
 
 const getFigure = (content: string): ReactElement | null => {
   if (!content) {
@@ -19,8 +15,7 @@ const getFigure = (content: string): ReactElement | null => {
 
   if (content.startsWith('<')) {
     return <g dangerouslySetInnerHTML={{ __html: content }}></g>;
-  }
-  else {
+  } else {
     return <path d={content}></path>;
   }
 };
@@ -55,7 +50,7 @@ const getViewBox = (data: viewBoxEncoded): string => {
 };
 
 
-const Icon = (props: Props) => {
+const Icon = (props: Props & React.SVGAttributes<SVGElement>) => {
   if (!config) {
     console.error(`_config.json not found. Run "_build-svg.js" generate config.`);
     return <></>;
@@ -74,7 +69,7 @@ const Icon = (props: Props) => {
   }
 
   const viewBox = getViewBox(config[iconName][0]);
-  const figure = getFigure(config[iconName][1]);
+  const figure = getFigure(String(config[iconName][1]));
   if (!figure) {
     console.error(`icon "${iconName}" is empty in _config.json. Config might be corrupted or svg file is invalid.`);
     return <></>;

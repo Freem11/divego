@@ -6,8 +6,6 @@ import {
 import { getPhotosforMapArea } from '../../supabaseCalls/photoSupabaseCalls';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import { HeatPointsContext } from '../contexts/heatPointsContext';
-import { IterratorContext } from '../contexts/iterratorContext';
-import { TutorialContext } from '../contexts/tutorialContext';
 import { AreaPicsContext } from '../contexts/areaPicsContext';
 import { SearchTextContext } from '../contexts/searchTextContext';
 import { formatHeatVals } from '../googleMap/mapDataHelpers';
@@ -19,20 +17,14 @@ import ToggleButton from '@mui/material/ToggleButton';
 import { animated, useSpring } from 'react-spring';
 import 'react-alice-carousel/lib/alice-carousel.css';
 
-let waiter2;
-
 const PhotoMenu = () => {
   const { animalVal, setAnimalVal } = useContext(AnimalContext);
   const { boundaries } = useContext(MapBoundsContext);
   const { setHeatPts } = useContext(HeatPointsContext);
   const { areaPics, setAreaPics } = useContext(AreaPicsContext);
-  const { textvalue, setTextValue } = useContext(SearchTextContext);
+  const { textvalue } = useContext(SearchTextContext);
 
   const [selectedID, setSelectedID] = useState(null);
-
-  const { itterator, setItterator } = useContext(IterratorContext);
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-
 
   const filterPhotosForMapArea = async () => {
     if (boundaries) {
@@ -61,7 +53,6 @@ const PhotoMenu = () => {
             ).map((label) => {
               return photos.find(a => a.label === label);
             });
-
             setAreaPics(animalArray);
           }
         } catch (e) {
@@ -114,16 +105,6 @@ const PhotoMenu = () => {
   };
 
   useEffect(() => {
-    clearTimeout(waiter2);
-
-    if (tutorialRunning) {
-      if (itterator === 19) {
-        waiter2 = setTimeout(() => {
-          setItterator(itterator + 2);
-        }, 2000);
-      }
-    }
-
     filterHeatPointsForMapArea();
   }, [animalVal]);
 

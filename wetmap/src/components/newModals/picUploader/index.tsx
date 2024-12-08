@@ -5,13 +5,14 @@ import { PinContext } from '../../contexts/staticPinContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { insertPhotoWaits } from '../../../supabaseCalls/photoWaitSupabaseCalls';
 import { Form } from './form';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
-
-export default function PicUploader(props) {
+type PicUploaderProps = Partial<ModalHandleProps> & { pictureId?: number };
+export default function PicUploader(props: PicUploaderProps) {
   const { pin, setPin } = useContext(PinContext);
   const [picUrl, setPicUrl] = useState<string | null>(null);
 
-  props.registerCancelCallback(() => {
+  props?.registerModalCancelCallback?.(() => {
     if (pin.PicFile) {
       clearPreviousImage(pin.PicFile);
       setPin({ ...pin, PicFile: null });
@@ -41,7 +42,7 @@ export default function PicUploader(props) {
       longitude:  pin.Longitude,
     });
     setPin({ ...pin, PicFile: null });
-    props.onModalSuccess();
+    props?.onModalSuccess?.();
   };
 
   return (
