@@ -23,8 +23,8 @@ export default function DiveSiteImage(props) {
   const { setSelectedPicture } = useContext(SelectedPictureContext);
 
   const { modalShow } = useContext(ModalContext);
-
   const photoName = pic.photoFile.split('/').pop();
+  // console.log(pic);
 
   const handleFollow = async (e, userName) => {
     e.stopPropagation();
@@ -72,6 +72,7 @@ export default function DiveSiteImage(props) {
     // can I get the image size from the modal instead of hard coding it?
   };
 
+  // console.log({handleModalOpen});
   return (
     <DiveSiteImageView
       pic={pic}

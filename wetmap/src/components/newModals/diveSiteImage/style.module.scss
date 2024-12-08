@@ -122,4 +122,9 @@
   font-size: $fontSizeSubHeading;
   font-family: $base-font-family;
   cursor: pointer;
+  text-decoration: underline;
 }
+.commentPrompt:hover {
+  text-decoration: none;
+}
+
