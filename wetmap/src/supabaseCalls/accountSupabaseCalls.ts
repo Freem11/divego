@@ -1,3 +1,4 @@
+import { ActiveProfile } from '../entities/profile';
 import { supabase } from '../supabase';
 
 export const addDeletedAccountInfo = async (values) => {
@@ -93,7 +94,7 @@ export const grabProfileById = async (id) => {
   }
 };
 
-export const grabProfileByUserName = async (userName) => {
+export const grabProfileByUserName = async (userName: string) => {
   const { data, error } = await supabase
     .from('UserProfiles')
     .select()
@@ -105,7 +106,7 @@ export const grabProfileByUserName = async (userName) => {
   }
 
   if (data) {
-    return data;
+    return data as ActiveProfile[];
   }
 };
 

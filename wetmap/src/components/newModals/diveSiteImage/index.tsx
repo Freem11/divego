@@ -6,15 +6,14 @@ import {
   deletePhotoLike,
 } from '../../../supabaseCalls/photoLikeSupabaseCalls';
 import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCalls';
-// import style from './picture.module.scss';
 import UserProfileModal from '../../modals/userProfileModal';
 import { ModalContext } from '../../reusables/modal/context';
 import CommentsModal from '../../modals/commentsModal';
 import FullScreenModal from '../../modals/fullScreenModal';
-// import ModalWindow, { ModalWindowSize } from '../../reusables/modal/types';
 import DiveSiteImageView from './view';
+import { PhotoWithLikesAndComments } from '../../../entities/photos';
 
-export default function DiveSiteImage(props) {
+export default function DiveSiteImage(props: {pic: PhotoWithLikesAndComments}) {
   const { pic } = props;
   const { profile } = useContext(UserProfileContext);
   const [picLiked, setPicLiked] = useState(pic.likedbyuser);
@@ -24,20 +23,23 @@ export default function DiveSiteImage(props) {
 
   const { modalShow } = useContext(ModalContext);
   const photoName = pic.photoFile.split('/').pop();
-  // console.log(pic);
+  
 
-  const handleFollow = async (e, userName) => {
+  const handleFollow = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, userName: string) => {
     e.stopPropagation();
-
-    const picOwnerAccount = await grabProfileByUserName(userName);
-
-    if (profile[0].UserID === picOwnerAccount[0].UserID) {
-      return;
-    }
+    let picOwnerAccount;
+    const accounts = await grabProfileByUserName(userName);
+    if (accounts){
+      picOwnerAccount = accounts[0];
+    
+      if (profile?.UserID === picOwnerAccount.UserID) {
+        return;
+      }
+    } 
 
     modalShow(UserProfileModal, {
       keepPreviousModal: true,
-      selectedProfile:   picOwnerAccount[0].UserID,
+      selectedProfile:   picOwnerAccount && picOwnerAccount.UserID,
     });
   };
 
@@ -48,18 +50,19 @@ export default function DiveSiteImage(props) {
     setSelectedPicture(pic);
   };
 
-  const handleLike = async (e) => {
+  const handleLike = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => {
     e.stopPropagation();
-
     if (picLiked) {
       deletePhotoLike(likeData);
       setPicLiked(false);
       setCountOfLikes(countOfLikes - 1);
     } else {
-      const newRecord = await insertPhotoLike(profile[0].UserID, pic.id);
-      setPicLiked(true);
-      setLikeData(newRecord[0].id);
-      setCountOfLikes(countOfLikes + 1);
+      if(profile){
+        const newRecord = await insertPhotoLike(profile?.UserID, pic.id);
+        setPicLiked(true);
+        setLikeData(newRecord && newRecord[0].id);
+        setCountOfLikes(countOfLikes + 1);
+      }
     }
   };
 

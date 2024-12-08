@@ -72,8 +72,8 @@ export default function DiveSite(props: DiveSiteProps) {
     if (selectedDiveSite) {
       setPin({
         ...pin,
-        Latitude:  String(selectedDiveSite.lat),
-        Longitude: String(selectedDiveSite.lng),
+        Latitude:  selectedDiveSite.lat,
+        Longitude: selectedDiveSite.lng,
         siteName:  selectedDiveSite.name,
       });
     }
@@ -114,7 +114,7 @@ export default function DiveSite(props: DiveSiteProps) {
               photo: selectedDiveSite.divesiteprofilephoto,
             });
           } catch (e) {
-            console.log({ title: 'Error19', message: e.message });
+            console.log({ title: 'Error19', message: (e as Error).message });
           }
         }
       }}

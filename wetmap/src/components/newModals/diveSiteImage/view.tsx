@@ -7,10 +7,10 @@ import liked from '../../../images/Hand-Filled-Blue.png';
 
 type DiveSiteImageViewProps = {
   pic:                any
-  handleModalOpen:    () => {}
-  handleLike:         () => {}
-  handleFollow:       (e, userName) => {}
-  handleCommentModal: () => {}
+  handleModalOpen:    () => void
+  handleLike:         (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => Promise<void>
+  handleFollow:       (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, username: string) => Promise<void>
+  handleCommentModal: () => void
   countOfLikes:       any
   picLiked:           any
 };
@@ -19,7 +19,6 @@ type DiveSiteImageViewProps = {
 export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
   let photoName = props.pic.photoFile.split('/').pop();
   return (
-    // <h1>test2</h1>
     <div key={props.pic.id} style={{position: 'relative'}}>
       {/* <h1>test</h1> */}
       <div className={style.helper} style={{ position: 'absolute', top: 10}}>
@@ -61,7 +60,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
           <img
             src={props.picLiked ? liked : notLiked}
             className={style.likeIcon}
-            onClick={e => props.handleLike(e, props.pic.id)}
+            onClick={e => props.handleLike(e)}
             style={{
               height: 30,
               width:  30,
@@ -79,7 +78,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
           zIndex:        4,
         }}
       >
-        <p className={style.commentPrompt} onClick={() => props.handleCommentModal(props.pic)}>
+        <p className={style.commentPrompt} onClick={() => props.handleCommentModal()}>
           {props.pic.commentcount < 1
             ? 'Be first to Comment'
             : `Comment / View all ${props.pic.commentcount} Comments`}

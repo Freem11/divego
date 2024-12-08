@@ -6,7 +6,7 @@ type PinContextType = {
   setPin: React.Dispatch<React.SetStateAction<PhotoSubmission | null>>
 };
 
-export const PinContext = createContext<PinContextType | null>({} as PinContextType);
+export const PinContext = createContext<PinContextType>({} as PinContextType);
 
 const PinContextProvider = ({ children }: any) => {
   const [pin, setPin] = useState<PhotoSubmission | null>(null);
