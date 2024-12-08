@@ -1,10 +1,9 @@
 import React from 'react';
 import SiteSubmitterView from './view';
 import { useState, useEffect, useContext, useRef } from "react";
-import { animated, useSpring } from "react-spring";
-//import ConfirmationModal from '../confirmationModal';
-//import './confirmationModal.css';
-//import './siteSubmitter.css';
+import {useSpring } from "react-spring";
+import '../../modals/confirmationModal.css'; 
+import '../../modals/siteSubmitter.css';
 import exifr from "exifr";
 import { exifGPSHelper } from "../../../helpers/exifGPSHelpers";
 import { insertDiveSiteWaits } from "../../../supabaseCalls/diveSiteWaitSupabaseCalls";
@@ -12,33 +11,37 @@ import { DiveSpotContext } from "../../contexts/diveSpotContext";
 import { MasterContext } from "../../contexts/masterContext";
 import { ModalSelectContext } from "../../contexts/modalSelectContext";
 import { ModalContext } from "../../contexts/modalContext";
+import { MapConfigContext } from '../../contexts/mapConfigContext';
+
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 const noGPSZone = (
   <div
     style={{
-      marginLeft: "2%",
-      backgroundColor: "pink",
-      height: "40px",
-      width: "95%",
-      color: "red",
-      borderRadius: "15px",
+      marginLeft:      '2%',
+      backgroundColor: 'pink',
+      height:          '40px',
+      width:           '95%',
+      color:           'red',
+      borderRadius:    '15px',
     }}
   >
-    <h4 style={{ marginLeft: "35px", paddingTop: "10px" }}>
+    <h4 style={{ marginLeft: '35px', paddingTop: '10px' }}>
       No GPS Coordinates Found!
     </h4>
   </div>
 );
 
 export default function SiteSubmitter(props) {
-
   const { animateSiteModal, setSiteModalYCoord } = props;
   const [showNoGPS, setShowNoGPS] = useState(false);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { setMasterSwitch } = useContext(MasterContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+
+  const { setMapConfig } = useContext(MapConfigContext);
+
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -52,12 +55,12 @@ export default function SiteSubmitter(props) {
 
   const sucessModalSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${successModalYCoord}px,0)` },
+    to:   { transform: `translate3d(0,${successModalYCoord}px,0)` },
   });
 
   const cautionModalSlide = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to: { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
+    to:   { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
   });
 
   const animateSuccessModal = () => {
@@ -76,7 +79,7 @@ export default function SiteSubmitter(props) {
     }
   };
 
-  window.addEventListener("resize", trackDimensions);
+  window.addEventListener('resize', trackDimensions);
 
   const [windowWidth, setWindowWidth] = useState(screenWidthInital);
   const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
@@ -86,13 +89,10 @@ export default function SiteSubmitter(props) {
     setWindowHeigth(window.innerHeight);
   }
 
-
-
-
   const handleChange = (e) => {
     setAddSiteVals({ ...addSiteVals, [e.target.name]: e.target.value });
 
-    if (e.target.name === "PicFile") {
+    if (e.target.name === 'PicFile') {
       setUploadedFile({ ...uploadedFile, selectedFile: e.target.files[0] });
 
       exifr.parse(e.target.files[0]).then((output) => {
@@ -100,13 +100,13 @@ export default function SiteSubmitter(props) {
           output.GPSLatitude,
           output.GPSLongitude,
           output.GPSLatitudeRef,
-          output.GPSLongitudeRef
+          output.GPSLongitudeRef,
         );
 
         if (EXIFData) {
           setAddSiteVals({
             ...addSiteVals,
-            Latitude: EXIFData[0],
+            Latitude:  EXIFData[0],
             Longitude: EXIFData[1],
           });
         } else {
@@ -123,17 +123,17 @@ export default function SiteSubmitter(props) {
         function (position) {
           setAddSiteVals({
             ...addSiteVals,
-            Latitude: position.coords.latitude,
+            Latitude:  position.coords.latitude,
             Longitude: position.coords.longitude,
           });
         },
         function (error) {
-          console.log("location permissions denied", error.message);
+          console.log('location permissions denied', error.message);
         },
-        { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 }
+        { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 },
       );
     } else {
-      console.log("unsupported");
+      console.log('unsupported');
     }
   };
 
@@ -143,7 +143,9 @@ export default function SiteSubmitter(props) {
   };
 
   const onNavigate = () => {
-    setChosenModal("DiveSite");
+    console.log('Navigate jsx');
+    setChosenModal('DiveSite');
+    setMapConfig(1);
     setShowNoGPS(false);
     setMasterSwitch(false);
     modalPause();
@@ -157,15 +159,15 @@ export default function SiteSubmitter(props) {
     let LngV = parseFloat(addSiteVals.Longitude);
 
     if (
-      SiteV &&
-      typeof SiteV === "string" &&
-      LatV &&
-      typeof LatV === "number" &&
-      LngV &&
-      typeof LngV === "number"
+      SiteV
+      && typeof SiteV === 'string'
+      && LatV
+      && typeof LatV === 'number'
+      && LngV
+      && typeof LngV === 'number'
     ) {
       insertDiveSiteWaits(addSiteVals);
-      setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
+      setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
       animateSuccessModal();
       return;
     } else {
@@ -174,7 +176,7 @@ export default function SiteSubmitter(props) {
   };
 
   const onClose = () => {
-    setAddSiteVals({ ...addSiteVals, Site: "", Latitude: "", Longitude: "" });
+    setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
     props?.onModalCancel?.();
   };
 
@@ -197,6 +199,9 @@ export default function SiteSubmitter(props) {
       onSubmit={(data) => {
         console.log({ data });
       }}
+      successModalYCoord={successModalYCoord}
+      cautionModalYCoord={cautionModalYCoord}
+      
 
     />
   );
