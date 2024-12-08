@@ -151,7 +151,7 @@ export default function SiteSubmitter(props) {
     modalPause();
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmition = (e) => {
     e.preventDefault();
 
     let SiteV = addSiteVals.Site.toString();
@@ -180,15 +180,12 @@ export default function SiteSubmitter(props) {
     props?.onModalCancel?.();
   };
 
-
-
   
   return (
     <SiteSubmitterView
       handleChange = {handleChange}
       getDeviceLocation = {getDeviceLocation}
       onNavigate={onNavigate}
-      handleSubmit={handleSubmit}
       onClose={onClose}
       sucessModalSlide={sucessModalSlide}
       animateSuccessModal={animateSuccessModal}
@@ -196,9 +193,9 @@ export default function SiteSubmitter(props) {
       cautionModalSlide={cautionModalSlide}
       animateCautionModal={animateCautionModal}
       cautionModalRef={cautionModalRef}
-      onSubmit={(data) => {
-        console.log({ data });
-      }}
+      //onSubmit={(data) => {
+      //  console.log({ data });
+      //}}
       successModalYCoord={successModalYCoord}
       cautionModalYCoord={cautionModalYCoord}
       

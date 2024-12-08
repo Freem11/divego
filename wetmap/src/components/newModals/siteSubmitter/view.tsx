@@ -1,6 +1,6 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { useRef } from "react";
+import { useState, useRef } from "react";
 import { animated, useSpring } from 'react-spring';
 
 import ConfirmationModal from '../../modals/confirmationModal';
@@ -17,29 +17,37 @@ import style from "./style.module.scss";
 
 
 type SiteSubmitterProps = {
-  onSubmit: (data: any) => void
   values?:  Form
   onClose: () => void
   getDeviceLocation: () => void
   onNavigate: () => void
-  /*
-  //sucessModalSlide: { transform: SpringValue<string>; }
+  sucessModalSlide: { transform: SpringValue<string>; }
   animateSuccessModal: () => void
   //cautionModalSlide: { transform: SpringValue<string>; }
   animateCautionModal: () => void
-  //successModalRef: React.MutableRefObject<null>
-  //cautionModalRef: React.MutableRefObject<null>
-  sucessModalYCoord: number | null
+  successModalRef: React.MutableRefObject<null> | null
+  cautionModalRef: React.MutableRefObject<null> | null
+  successModalYCoord: number | null
   cautionModalYCoord: number | null
-  */
+  
+  
 };
 
 export default function SiteSubmitterView(props: SiteSubmitterProps) {
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
+  const { register, handleSubmit, formState: { errors } } = useForm<Form>({
     values:   props.values,
   });
 
-/*
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const onSubmit = (data) => {
+    console.log("Form data:", data);
+  
+    setIsModalOpen(true); // Open modal
+  };
+
+
+  /*
   const successModalRef = useRef(null);
   const cautionModalRef = useRef(null);
 
@@ -52,12 +60,14 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
     from: { transform: `translate3d(0,0,0)` },
     to: { transform: `translate3d(0,${props.cautionModalYCoord}px,0)` },
   });
-*/
+  */
+ 
+
   return (
     <div className="flex-column-between full-height">
       <WavyModalHeader image={backGroundPic}  onClose={props.onClose} />
 
-      <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
+      <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(onSubmit)}>
         <div>
           <div className="d-flex">
             <h1 className="text-clip">{screenData.PicUploader.header}</h1>
@@ -74,12 +84,14 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
             <TextInput
               iconLeft={<Icon name="latitude" />}
               placeholder={screenData.DiveSiteAdd.latPlaceholder}
+              error={errors.Latitude}
               {...register('Latitude', FormRules.Latitude)}
             />
 
             <TextInput
               iconLeft={<Icon name="longitude" />}
               placeholder={screenData.DiveSiteAdd.lngPlaceholder}
+              error={errors.Longitude}
               {...register('Longitude', FormRules.Longitude)}
             />
           </div>
@@ -91,7 +103,6 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           <div className = 'col-3'>
             <Button
               onClick={props.getDeviceLocation}
-              disabled={isSubmitting}
               className="btn-md"
               type="button"
             >
@@ -102,7 +113,6 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           <div className = "col-3 ">
             <Button
               onClick={props.onNavigate}
-              disabled={isSubmitting}
               className={'btn-md'}
               type="button"
             >
@@ -116,7 +126,6 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
           <div className='col-3'>
             <Button
-              disabled={isSubmitting}
               className="btn-md bg-primary"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
@@ -126,32 +135,36 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
         </div>
       </form>
-
-      {/*
-      <animated.div
-        className="successModal modalBase"
-        style={sucessModalSlide}
-        ref={successModalRef}
-      >
+    
+        {/*}
+        <animated.div
+          className="successModal modalBase"
+          //style={props.sucessModalSlide}
+          //ref={props.successModalRef}
+        > */}
+    {isModalOpen && (
         <ConfirmationModal
           submissionItem="dive site"
           animateModal={props.animateSuccessModal}
           handleClose={props.onClose}
-          isSuccess={true}
-        />
+          isSuccess={false}
+        /> )}
+        {/*
       </animated.div>
 
       <animated.div
         className="cautionModal modalBase"
-        style={cautionModalSlide}
-        ref={cautionModalRef}
-      >
+        style={props.cautionModalSlide}
+        ref={props.cautionModalRef}
+      > 
+      <div>
         <ConfirmationModal
           submissionItem="dive site"
           animateModal={props.animateCautionModal}
           isSuccess={false}
         />
-      </animated.div>
+      </div>
+      </div></animated.div>
       */}
 
     </div>
