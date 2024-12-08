@@ -10,7 +10,7 @@
   position: relative;
 }
 
-.helper {
+.nameBar {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -21,7 +21,7 @@
   border-radius: 1vw;
 }
 
-.helper2 {
+.footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -37,7 +37,7 @@
   border-radius: 1vw;
 }
 
-.helper3 {
+.likeButtonContainer {
   display: flex;
   align-items: center;
   flex-direction: row;
@@ -82,8 +82,6 @@
   font-family: $base-font-family;
   font-size: $fontSizeStandardText;
   text-align: left;
-  // padding-top: 1%;
-  // padding-bottom: 1%;
   padding-left: 2%;
   padding-right: 2%;
   color: #f0eeeb;
@@ -94,7 +92,6 @@
 
 .countIndicator {
   color: #f0eeeb;
-  font-family: $base-font-family;
   font-size: $fontSizeStandardText;
   background-color: black;
   align-items: center;

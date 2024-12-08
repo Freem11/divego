@@ -21,8 +21,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
   let photoName = props.pic.photoFile.split('/').pop();
   return (
     <div key={props.pic.id} style={{position: 'relative'}}>
-      {/* <h1>test</h1> */}
-      <div className={style.helper} style={{ position: 'absolute', top: 10}}>
+      <div className={style.nameBar} style={{ position: 'absolute', top: 10}}>
         <h4 className={style.animalLabelP}>{props.pic.label}</h4>
         {/* this component is the name of the label */}
         <a
@@ -40,7 +39,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
       >
       </img>
 
-      <div className={style.helper2} style={{ marginTop: '-10%' }}>
+      <div className={style.footer} style={{ marginTop: '-10%' }}>
         <h4
           className={style.userLabel}
           onClick={e => props.handleFollow(e, props.pic.UserName)}
@@ -50,7 +49,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
           {props.pic.UserName}
         </h4>
 
-        <div className={style.helper3}>
+        <div className={style.likeButtonContainer}>
           {props.countOfLikes > 0
             ? (
                 <div className={style.countIndicator}>
@@ -69,7 +68,6 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
           />
         </div>
       </div>
-      {/* </div> */}
 
       <div
         style={{
