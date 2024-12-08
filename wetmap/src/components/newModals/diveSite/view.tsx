@@ -102,21 +102,6 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
               </span>
             </Button>
           </div>
-
-          {/* <div className={style.buttonImageUpload}>
-            <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className="btn-lg"
-              onClick={() => fileUploaderRef?.current?.click?.()}
-            />
-          </div> */}
-          {/* <div className={style.buttonImageUpload}>
-            <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className="btn-lg"
-              onClick={() => fileUploaderRef?.current?.click?.()}
-            />
-          </div> */}
         </div>
         <div className="panel-body">
           {props?.diveSitePics?.map((packet) => {

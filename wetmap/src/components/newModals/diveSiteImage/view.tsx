@@ -7,10 +7,10 @@ import liked from '../../../images/Hand-Filled-Blue.png';
 
 type DiveSiteImageViewProps = {
   pic:                any
-  handleModalOpen:    any
-  handleLike:         any
-  handleFollow:       any
-  handleCommentModal: any
+  handleModalOpen:    () => {}
+  handleLike:         () => {}
+  handleFollow:       (e, userName) => {}
+  handleCommentModal: () => {}
   countOfLikes:       any
   picLiked:           any
 };
