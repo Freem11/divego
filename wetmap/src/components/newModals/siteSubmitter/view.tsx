@@ -1,8 +1,10 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-//import { animated, useSpring } from 'react-spring';
+import { useRef } from "react";
+import { animated, useSpring } from 'react-spring';
 
-//import ConfirmationModal from './../../confirmationModal';
+import ConfirmationModal from '../../modals/confirmationModal';
+import '../../modals/confirmationModal.css'; 
 import backGroundPic from '../../../images/boat.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import screenData from '../screenData.json';
@@ -20,12 +22,16 @@ type SiteSubmitterProps = {
   onClose: () => void
   getDeviceLocation: () => void
   onNavigate: () => void
-  sucessModalSlide: () => void
+  /*
+  //sucessModalSlide: { transform: SpringValue<string>; }
   animateSuccessModal: () => void
-  cautionModalSlide: () => void
+  //cautionModalSlide: { transform: SpringValue<string>; }
   animateCautionModal: () => void
-  successModalRef: () => void
-  cautionModalRef: () => void
+  //successModalRef: React.MutableRefObject<null>
+  //cautionModalRef: React.MutableRefObject<null>
+  sucessModalYCoord: number | null
+  cautionModalYCoord: number | null
+  */
 };
 
 export default function SiteSubmitterView(props: SiteSubmitterProps) {
@@ -33,6 +39,20 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
     values:   props.values,
   });
 
+/*
+  const successModalRef = useRef(null);
+  const cautionModalRef = useRef(null);
+
+  const sucessModalSlide = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${props.successModalYCoord}px,0)` },
+  });
+
+  const cautionModalSlide = useSpring({
+    from: { transform: `translate3d(0,0,0)` },
+    to: { transform: `translate3d(0,${props.cautionModalYCoord}px,0)` },
+  });
+*/
   return (
     <div className="flex-column-between full-height">
       <WavyModalHeader image={backGroundPic}  onClose={props.onClose} />
@@ -48,19 +68,19 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
               iconLeft={<Icon name="diving-scuba-flag" />}
               placeholder={screenData.DiveSiteAdd.siteNamePlaceholder}
               error={errors.Site}
-              {...register('Site', FormRules.name)}
+              {...register('Site', FormRules.Site)}
             />
 
             <TextInput
               iconLeft={<Icon name="latitude" />}
               placeholder={screenData.DiveSiteAdd.latPlaceholder}
-              {...register('Latitude')}
+              {...register('Latitude', FormRules.Latitude)}
             />
 
             <TextInput
               iconLeft={<Icon name="longitude" />}
               placeholder={screenData.DiveSiteAdd.lngPlaceholder}
-              {...register('Longitude')}
+              {...register('Longitude', FormRules.Longitude)}
             />
           </div>
         </div>
@@ -73,7 +93,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
               onClick={props.getDeviceLocation}
               disabled={isSubmitting}
               className="btn-md"
-              type="submit"
+              type="button"
             >
               <text>{screenData.DiveSiteAdd.myLocationButton}</text>
             </Button>
@@ -84,7 +104,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
               onClick={props.onNavigate}
               disabled={isSubmitting}
               className={'btn-md'}
-              type="submit"
+              type="button"
             >
               {screenData.DiveSiteAdd.pinButton}
             </Button>
@@ -106,11 +126,12 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
         </div>
       </form>
-    {/*
+
+      {/*
       <animated.div
         className="successModal modalBase"
-        style={props.sucessModalSlide}
-        ref={props.successModalRef}
+        style={sucessModalSlide}
+        ref={successModalRef}
       >
         <ConfirmationModal
           submissionItem="dive site"
@@ -122,8 +143,8 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
       <animated.div
         className="cautionModal modalBase"
-        style={props.cautionModalSlide}
-        ref={props.cautionModalRef}
+        style={cautionModalSlide}
+        ref={cautionModalRef}
       >
         <ConfirmationModal
           submissionItem="dive site"
@@ -131,7 +152,8 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           isSuccess={false}
         />
       </animated.div>
-       */}
+      */}
+
     </div>
   );
 }
