@@ -43,7 +43,7 @@ export default function CommentListItem(props) {
             >
               {selectedReplyId.includes(commentDetails.id)
                 ? `Hide replies`
-                : `View ${nbReplies} Replies`}
+                : nbReplies === 1 ? `View Reply` : `View ${nbReplies} Replies`}
             </p>
           )
         : (
