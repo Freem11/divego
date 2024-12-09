@@ -5,8 +5,7 @@ import notLiked from '../../../images/Hand-Hollow-Blue.png';
 import liked from '../../../images/Hand-Filled-Blue.png';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
 
-
-type DiveSiteImageViewProps = {
+type SeaLifeImageCardViewProps = {
   pic:                PhotoWithLikesAndComments
   handleModalOpen:    () => void
   handleLike:         (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => Promise<void>
@@ -16,7 +15,7 @@ type DiveSiteImageViewProps = {
   picLiked:           boolean
 };
 
-export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
+export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
   let photoName = props.pic.photoFile.split('/').pop();
   return (
     <div key={props.pic.id} style={{position: 'relative'}}>
@@ -41,7 +40,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
       >
       </img>
 
-      <div className={style.footer} style={{ marginTop: '-10%' }}>
+      <div className={style.footer} style={{ marginTop: '-6vh' }}>
         <h4
           className={style.userLabel}
           onClick={e => props.handleFollow(e, props.pic.UserName)}
@@ -58,7 +57,7 @@ export default function DiveSiteImageView(props: DiveSiteImageViewProps) {
                   <p className="countDisplay">{props.countOfLikes}</p>
                 </div>
               )
-            : <div style={{ width: '40px',  marginRight: '-10%' }}></div>}
+            : <div style={{ width: '40px'}}></div>}
           <img
             src={props.picLiked ? liked : notLiked}
             className={style.likeIcon}

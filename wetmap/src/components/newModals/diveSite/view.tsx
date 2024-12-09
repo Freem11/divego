@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import screenData from '../screenData.json';
 import style from './style.module.scss';
-import Picture from '../../modals/picture';
 import Button from '../../reusables/button';
 import Icon from '../../../icons/Icon';
 import defaultHeaderPicture from '../../../images/blackManta.png';
@@ -10,7 +9,7 @@ import { PhotosGroupedByDate } from '../../../entities/photos';
 import PlainTextInput from '../../reusables/plainTextInput';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import ButtonIcon from '../../reusables/buttonIcon';
-import DiveSiteImage from '../diveSiteImage/index';
+import SeaLifeImageCard from '../../reusables/seaLifeImageCard';
 
 type DiveSiteViewProps = {
   onClose?:             () => void
@@ -105,7 +104,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                 {packet.photos
                 && packet.photos.map((pic) => {
                   return (
-                    <DiveSiteImage key={pic.id} pic={pic}></DiveSiteImage>
+                    <SeaLifeImageCard key={pic.id} pic={pic}/>
                   );
                 })}
               </div>

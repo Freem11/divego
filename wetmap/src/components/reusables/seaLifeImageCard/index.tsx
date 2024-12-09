@@ -10,10 +10,10 @@ import UserProfileModal from '../../modals/userProfileModal';
 import { ModalContext } from '../../reusables/modal/context';
 import CommentsModal from '../../modals/commentsModal';
 import FullScreenModal from '../../modals/fullScreenModal';
-import DiveSiteImageView from './view';
+import SeaLifeImageCardView from './view';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
 
-export default function DiveSiteImage(props: {pic: PhotoWithLikesAndComments}) {
+export default function SeaLifeImageCard(props: {pic: PhotoWithLikesAndComments}) {
   const { pic } = props;
   const { profile } = useContext(UserProfileContext);
   const [picLiked, setPicLiked] = useState(pic.likedbyuser);
@@ -75,7 +75,7 @@ export default function DiveSiteImage(props: {pic: PhotoWithLikesAndComments}) {
   };
 
   return (
-    <DiveSiteImageView
+    <SeaLifeImageCardView
       pic={pic}
       handleModalOpen={handleModalOpen}
       handleLike={handleLike}
