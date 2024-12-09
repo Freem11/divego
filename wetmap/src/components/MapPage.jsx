@@ -42,6 +42,7 @@ import Modal from './reusables/modal/modal';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
 
+
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
@@ -124,6 +125,7 @@ const MapPage = React.memo(function MapPage() {
     'borderRadius':    '100%',
   };
 
+
   const handleProfileButton = () => {
     animateProfileModal();
   };
@@ -157,8 +159,10 @@ const MapPage = React.memo(function MapPage() {
   });
 
   const animateFabs = () => {
-    let containerHeight = document.getElementsByClassName('fabContainer')[0].clientHeight;
-    let buttonSectionHeight = document.getElementsByClassName('fabButtons')[0].clientHeight;
+    let containerHeight = document.getElementsByClassName('fabContainer')[0]
+      .clientHeight;
+    let buttonSectionHeight = document.getElementsByClassName('fabButtons')[0]
+      .clientHeight;
 
     if (fabsYCoord === 0) {
       if (window.innerHeight < 400) {
@@ -229,7 +233,6 @@ const MapPage = React.memo(function MapPage() {
 
   return (
     <div className="mappagemaster">
-
       {mapConfig === 0 && (
         <animated.div className="fabContainer" style={moveFabModal}>
           <div className="animateBox" onClick={e => animateMenu(e)}>
@@ -513,6 +516,7 @@ const MapPage = React.memo(function MapPage() {
           </div>
         </div>
       )}
+
 
       <Modal />
 
