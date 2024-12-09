@@ -8,12 +8,11 @@ import exifr from 'exifr';
 import { exifGPSHelper } from '../../../helpers/exifGPSHelpers';
 import { insertDiveSiteWaits } from '../../../supabaseCalls/diveSiteWaitSupabaseCalls';
 import { DiveSpotContext } from '../../contexts/diveSpotContext';
-import { MasterContext } from '../../contexts/masterContext';
-import { ModalSelectContext } from '../../contexts/modalSelectContext';
-import { ModalContext } from '../../contexts/modalContext';
+
 import { MapConfigContext } from '../../contexts/mapConfigContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { Form } from './form';
+import { ModalContext } from '../../reusables/modal/context';
 
 
 const screenWidthInital = window.innerWidth;
@@ -40,8 +39,6 @@ export default function SiteSubmitter(props) {
   const { animateSiteModal, setSiteModalYCoord } = props;
   const [showNoGPS, setShowNoGPS] = useState(false);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
-  const { setMasterSwitch } = useContext(MasterContext);
-  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
   const { profile } = useContext(UserProfileContext);
 
   const { setMapConfig } = useContext(MapConfigContext);
@@ -118,10 +115,8 @@ export default function SiteSubmitter(props) {
   };
 
   const onNavigate = () => {
-    setChosenModal('DiveSite');
     setMapConfig(1);
     setShowNoGPS(false);
-    setMasterSwitch(false);
     modalPause();
   };
 
@@ -130,7 +125,7 @@ export default function SiteSubmitter(props) {
       Site:      data.Site,
       Latitude:  data.Latitude,
       Longitude: data.Longitude,
-      UserID:    profile[0].UserID,
+      UserID:    profile && profile.UserID,
     });
     onClose();
   };

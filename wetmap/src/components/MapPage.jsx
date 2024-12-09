@@ -8,7 +8,7 @@ import UserProfileModal from './modals/userProfileModal';
 import Settings from './modals/setting';
 import PhotoMenu from './photoMenu/photoMenu2';
 import PhotoFilterer from './photoMenu/photoFilter';
-import { useState, useContext, useEffect, useRef } from 'react';
+import { useState, useContext, useEffect } from 'react';
 import { grabProfileById } from './../supabaseCalls/accountSupabaseCalls';
 import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
@@ -24,9 +24,6 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { DiveSitesContext } from './contexts/diveSitesContext';
-import { AnimalRevealContext } from './contexts/animalRevealContext';
-import { MasterContext } from './contexts/masterContext';
-import { MinorContext } from './contexts/minorContext';
 import { CoordsContext } from './contexts/mapCoordsContext';
 import { SelectedShopContext } from './contexts/selectedShopContext';
 import { ZoomContext } from './contexts/mapZoomContext';
@@ -34,28 +31,14 @@ import { UserProfileContext } from './contexts/userProfileContext';
 import { SessionContext } from './contexts/sessionContext';
 import { PinContext } from './contexts/staticPinContext';
 import { DiveSpotContext } from './contexts/diveSpotContext';
-import { ModalSelectContext } from './contexts/modalSelectContext';
-import { AnchorModalContext } from './contexts/anchorModalContext';
-import { ShopModalContext } from './contexts/shopModalContext';
 import { SitesArrayContext } from './contexts/sitesArrayContext';
-import { ZoomHelperContext } from './contexts/zoomHelperContext';
-import { DiveSiteAdderModalContext } from './contexts/diveSiteAdderModalContext';
 import { PullTabContext } from './contexts/pullTabContext';
-import { TutorialContext } from './contexts/tutorialContext';
-import { IterratorContext } from './contexts/iterratorContext';
-import { Iterrator2Context } from './contexts/iterrator2Context';
-import { Iterrator3Context } from './contexts/iterrator3Context';
 import { AreaPicsContext } from './contexts/areaPicsContext';
-import IntroTutorial from './guides/introTutorial';
-import SecondTutorial from './guides/secondTutorial';
-import ThirdTutorial from './guides/thirdTutorial'; ;
 import './mapPage.css';
 import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
 import Histogram from './histogram/histogramBody';
-import TutorialBar from './guideBar/tutorialBarContainer';
-import { ModalContext } from './contexts/modalContext';
+import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
-import { ModalWindowSize } from './reusables/modal/constants';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
 
@@ -63,33 +46,18 @@ import { MapConfigContext } from './contexts/mapConfigContext';
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
-  const { masterSwitch, setMasterSwitch } = useContext(MasterContext);
-  const { minorSwitch, setMinorSwitch } = useContext(MinorContext);
-  const { setZoomHelper } = useContext(ZoomHelperContext);
   const { divesTog, setDivesTog } = useContext(DiveSitesContext);
-  const { showAnimalSearch } = useContext(AnimalRevealContext);
   const { pin, setPin } = useContext(PinContext);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { selectedShop } = useContext(SelectedShopContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
   const { setMapCoords } = useContext(CoordsContext);
-  const { chosenModal } = useContext(ModalSelectContext);
-
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-  const { itterator, setItterator } = useContext(IterratorContext);
-  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
-  const { itterator3, setItterator3 } = useContext(Iterrator3Context);
 
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
 
   const { setSitesArray } = useContext(SitesArrayContext);
-  const { setSiteModal } = useContext(AnchorModalContext);
-  const { setShopModal } = useContext(ShopModalContext);
 
-  const { setDsAddermodal } = useContext(
-    DiveSiteAdderModalContext,
-  );
   const { showFilterer, setShowFilterer } = useContext(PullTabContext);
   const { modalShow, modalResume } = useContext(ModalContext);
 
@@ -98,32 +66,11 @@ const MapPage = React.memo(function MapPage() {
   const returnToPicModal = () => {
     modalResume();
     setMapConfig(0);
-    setMasterSwitch(true);
-    if (chosenModal === 'DiveSite') {
-      if (tutorialRunning) {
-        if (itterator2 === 19) {
-          setItterator2(itterator2 + 1);
-          animateSecondGuideModal();
-        }
-      }
-    } else if (chosenModal === 'Photos') {
-      if (tutorialRunning) {
-        if (itterator3 === 19) {
-          setItterator3(itterator3 + 1);
-          animateThirdGuideModal();
-        }
-      }
-    }
   };
 
   const onShopNavigate = () => {
-    setSiteModal(false);
-    setShopModal(true);
     setMapCoords([selectedShop.lat, selectedShop.lng]);
     setMapConfig(0);
-    setMasterSwitch(true);
-    setMinorSwitch(true);
-    setZoomHelper(true);
     setSitesArray([]);
   };
 
@@ -135,11 +82,9 @@ const MapPage = React.memo(function MapPage() {
         if (success) {
           let bully = success[0] && success[0].UserName;
           if (bully == null || bully === '') {
-            setIntroGuideModalYCoord(-window.innerHeight);
-            setTutorialRunning(true);
-            setItterator(0);
+            return;
           } else {
-            setProfile(success);
+            setProfile(success[0]);
             setPin({
               ...pin,
               UserID:   success[0].UserID,
@@ -182,203 +127,29 @@ const MapPage = React.memo(function MapPage() {
 
 
   const handleProfileButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
-    ) {
-      return;
-    }
-
     animateProfileModal();
   };
 
   const handleSettingsButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
-    ) {
-      return;
-    }
-
     animateSettingsModal();
   };
 
   const handleTutorialButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
-    ) {
-      return;
-    }
-
     animateLaunchModal();
   };
 
   const handleDiveSiteSearchButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
-    ) {
-      return;
-    }
-
     animateSiteSearchModal();
-
-    if (tutorialRunning) {
-      if (itterator2 === 3) {
-        setItterator2(itterator2 + 1);
-      }
-    }
   };
 
   const handleDiveSiteModalButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
-    ) {
-      return;
-    }
-
     clearSiteModal();
-
-    if (tutorialRunning) {
-      if (itterator2 === 9) {
-        setItterator2(itterator2 + 1);
-      }
-    }
   };
 
   const handleAnchorButton = () => {
-    if (
-      itterator === 11
-      || itterator === 13
-      || itterator === 16
-      || itterator === 19
-      || itterator === 25
-      || itterator2 === 3
-      || itterator2 === 5
-      || itterator2 === 9
-      || itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-      || itterator2 === 26
-      || itterator3 === 5
-      || itterator3 === 8
-      || itterator3 === 11
-      || itterator3 === 14
-      || itterator3 === 16
-      || itterator3 === 19
-      || itterator3 === 22
-      || itterator3 === 26
-    ) {
-      return;
-    }
-
     setDivesTog(!divesTog);
   };
 
-
-  const introGuideModalRef = useRef(null);
-  const secondGuideModalRef = useRef(null);
-  const thirdGuideModalRef = useRef(null);
-
-  const [introGuideModalYCoord, setIntroGuideModalYCoord] = useState(0);
-  const [secondGuideModalYCoord, setSecondGuideModalYCoord] = useState(0);
-  const [thirdGuideModalYCoord, setThirdGuideModalYCoord] = useState(0);
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
 
@@ -386,22 +157,6 @@ const MapPage = React.memo(function MapPage() {
     from: { transform: `translate3d(0,0,0)` },
     to:   { transform: `translate3d(0,${fabsYCoord}px,0)` },
   });
-
-  const moveIntroGuidModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${introGuideModalYCoord}px,0)` },
-  });
-
-  const moveSecondGuideModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${secondGuideModalYCoord}px,0)` },
-  });
-
-  const moveThirdGuideModal = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${thirdGuideModalYCoord}px,0)` },
-  });
-
 
   const animateFabs = () => {
     let containerHeight = document.getElementsByClassName('fabContainer')[0]
@@ -440,16 +195,13 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateLaunchModal = () => {
-    modalShow(() => {
+    modalShow(function TutorialModal() {
       return (
         <HowToGuide
           animateLaunchModal={animateLaunchModal}
-          animateIntroGuideModal={animateIntroGuideModal}
-          animateSecondGuideModal={animateSecondGuideModal}
-          animateThirdGuideModal={animateThirdGuideModal}
         />
       );
-    }, { name: 'HowToGuide' });
+    });
   };
 
   const animateSettingsModal = () => {
@@ -460,33 +212,9 @@ const MapPage = React.memo(function MapPage() {
     modalShow(UserProfileModal);
   };
 
-  const animateIntroGuideModal = () => {
-    if (introGuideModalYCoord === 0) {
-      setIntroGuideModalYCoord(-window.innerHeight);
-    } else {
-      setIntroGuideModalYCoord(0);
-    }
-  };
-
-  const animateSecondGuideModal = () => {
-    if (secondGuideModalYCoord === 0) {
-      setSecondGuideModalYCoord(-window.innerHeight);
-    } else {
-      setSecondGuideModalYCoord(0);
-    }
-  };
-
-  const animateThirdGuideModal = () => {
-    if (thirdGuideModalYCoord === 0) {
-      setThirdGuideModalYCoord(-window.innerHeight);
-    } else {
-      setThirdGuideModalYCoord(0);
-    }
-  };
-
   const animateSiteSearchModal = () => {
     modalShow(SearchTool, {
-      size: ModalWindowSize.S,
+      size: 'small',
     });
   };
 
@@ -505,14 +233,6 @@ const MapPage = React.memo(function MapPage() {
 
   return (
     <div className="mappagemaster">
-      <div className="tutbarContainer" pointerEvents="box-none">
-        {tutorialRunning && (
-          <div className="tutorialBar" pointerEvents="box-none">
-            <TutorialBar style={{ zIndex: 255 }} />
-          </div>
-        )}
-      </div>
-
       {mapConfig === 0 && (
         <animated.div className="fabContainer" style={moveFabModal}>
           <div className="animateBox" onClick={e => animateMenu(e)}>
@@ -593,7 +313,6 @@ const MapPage = React.memo(function MapPage() {
                 <ToggleButton
                   sx={toggleButtonStyle}
                   value="check"
-                  selected={showAnimalSearch}
                   onChange={() => {
                     handleDiveSiteSearchButton();
                   }}
@@ -801,44 +520,6 @@ const MapPage = React.memo(function MapPage() {
 
       <Modal />
 
-
-      <animated.div
-        className="guideModalDiv"
-        style={moveIntroGuidModal}
-        ref={introGuideModalRef}
-      >
-        <IntroTutorial
-          animateIntroGuideModal={animateIntroGuideModal}
-          setIntroGuideModalYCoord={setIntroGuideModalYCoord}
-          animateSecondGuideModal={animateSecondGuideModal}
-          setSecondGuideModalYCoord={setSecondGuideModalYCoord}
-        />
-      </animated.div>
-
-      <animated.div
-        className="guideModalDiv2"
-        style={moveSecondGuideModal}
-        ref={secondGuideModalRef}
-      >
-        <SecondTutorial
-          animateSecondGuideModal={animateSecondGuideModal}
-          setSecondGuideModalYCoord={setSecondGuideModalYCoord}
-          setDsAddermodal={setDsAddermodal}
-          animateThirdGuideModal={animateThirdGuideModal}
-          setThirdGuideModalYCoord={setThirdGuideModalYCoord}
-        />
-      </animated.div>
-
-      <animated.div
-        className="guideModalDiv3"
-        style={moveThirdGuideModal}
-        ref={thirdGuideModalRef}
-      >
-        <ThirdTutorial
-          animateThirdGuideModal={animateThirdGuideModal}
-          setThirdGuideModalYCoord={setThirdGuideModalYCoord}
-        />
-      </animated.div>
     </div>
   );
 });

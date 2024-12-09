@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { AnimalMultiSelectContext } from '../contexts/animalMultiSelectContext';
 import { AnimalContext } from '../contexts/animalContext';
 import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import { getHistoData } from '../../supabaseCalls/photoSupabaseCalls';
@@ -8,7 +7,6 @@ import DataBar from './histogramBar';
 import './histogram.css';
 
 export default function Histogram() {
-  const { animalMultiSelection } = useContext(AnimalMultiSelectContext);
   const { animalVal } = useContext(AnimalContext);
   const { boundaries } = useContext(MapBoundsContext);
   const [histoData, setHistoData] = useState([]);

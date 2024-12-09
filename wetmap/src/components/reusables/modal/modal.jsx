@@ -1,13 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import { ModalContext } from '../../contexts/modalContext';
-import { TutorialContext } from '../../contexts/tutorialContext';
+import React, { useContext, useEffect, useRef } from 'react';
+import { ModalContext } from './context';
 
 import style from './modal.module.scss';
 
-export default function Modal(props) {
+export default function Modal() {
   const rootRef = useRef(null);
   const modalContext = useContext(ModalContext);
-  const { tutorialRunning } = useContext(TutorialContext);
 
   useEffect(() => {
     const handleWrapperClick = (e) => {
@@ -27,10 +25,6 @@ export default function Modal(props) {
         // Current onClick handler will close the modal because of the previous condition - e.target does not belong modal wrapper anymore
         // So current condition will not let us close the modal if we clicked on the element that was removed by some other onClick handler
 
-        return;
-      }
-
-      if (tutorialRunning) {
         return;
       }
 
@@ -72,6 +66,7 @@ export default function Modal(props) {
           <div
             className={`${style.modalContainer} ${style[modalWindow.options.size]}`}
             style={modalWindow.name === modalContext.currentModalName ? openStyle : closeStyle}
+            data-modal-name={modalWindow.name}
             key={modalWindow.name}
           >
             <modalWindow.component
@@ -82,7 +77,7 @@ export default function Modal(props) {
               onModalCancel={() => {
                 modalContext.modalCancel();
               }}
-              registerCancelCallback={(callback) => {
+              registerModalCancelCallback={(callback) => {
                 modalWindow.options.onCancelCallback = callback;
               }}
             />

@@ -5,14 +5,7 @@ type DiveSitesContextType = {
   setDivesTog: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-const DiveSitesContextState = {
-  divesTog:      true,
-  setDivesTog: () => {},
-};
-
-export const DiveSitesContext = createContext<DiveSitesContextType>(
-  DiveSitesContextState,
-);
+export const DiveSitesContext = createContext<DiveSitesContextType>({} as DiveSitesContextType);
 
 const DiveSitesContextProvider = ({ children }: any) => {
   const [divesTog, setDivesTog] = useState<boolean>(true);

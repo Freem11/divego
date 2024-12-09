@@ -5,14 +5,7 @@ type MapConfigContextType = {
   setMapConfig: React.Dispatch<React.SetStateAction<number>>
 };
 
-const MapConfigContextState = {
-  mapConfig:      0,
-  setMapConfig: () => {},
-};
-
-export const MapConfigContext = createContext<MapConfigContextType>(
-  MapConfigContextState,
-);
+export const MapConfigContext = createContext<MapConfigContextType>({} as MapConfigContextType);
 
 const MapConfigContextProvider = ({ children }: any) => {
   const [mapConfig, setMapConfig] = useState<number>(0);

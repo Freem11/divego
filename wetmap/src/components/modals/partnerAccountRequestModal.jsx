@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { FormGroup, Label } from 'reactstrap';
 import { SessionContext } from '../contexts/sessionContext';
-import { PartnerModalContext } from '../contexts/partnerAccountRequestModalContext';
 import { UserProfileContext } from '../contexts/userProfileContext';
 import { createPartnerAccountRequest } from '../../supabaseCalls/partnerSupabaseCalls';
 import './partnerAccountRequestModal.css';
@@ -16,7 +15,6 @@ import ModalHeader from '../reusables/modalHeader';
 // const windowHeight = Dimensions.get("window").height;
 
 export default function PartnerAccountRequestModal(props) {
-  const { partnerModal, setPartnerModal } = useContext(PartnerModalContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { activeSession, setActiveSession } = useContext(SessionContext);
   const [closeButtonState, setCloseButtonState] = useState(false);

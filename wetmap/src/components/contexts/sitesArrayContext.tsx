@@ -5,14 +5,7 @@ type SitesArrayContextType = {
   setSitesArray: React.Dispatch<React.SetStateAction<number[]>>
 };
 
-const SitesArrayContextState = {
-  sitesArray:      [],
-  setSitesArray: () => {},
-};
-
-export const SitesArrayContext = createContext<SitesArrayContextType>(
-  SitesArrayContextState,
-);
+export const SitesArrayContext = createContext<SitesArrayContextType>({} as SitesArrayContextType);
 
 const SitesArrayContextProvider = ({ children }: any) => {
   const [sitesArray, setSitesArray] = useState<number[]>([]);

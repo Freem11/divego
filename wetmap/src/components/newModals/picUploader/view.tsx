@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 
 import Icon from '../../../icons/Icon';
@@ -13,10 +13,11 @@ import WavyModalHeader from '../../reusables/wavyModalHeader';
 import style from './style.module.scss';
 import { Form, FormRules } from './form';
 import FileInput from '../../reusables/fileInput';
+import Label from '../../reusables/label';
 
 type PicUploaderViewProps = {
   values:               Form
-  onClose:              () => void
+  onClose?:             () => void
   onSubmit:             (data: any) => void
   getMoreAnimals:       (search: string, limit: number, skip: number) => Promise<any>
   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -47,7 +48,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
       </WavyModalHeader>
 
       <form
-        className="flex-column-between full-height mx-6 mb-6"
+        className="flex-column-between full-height mx-10 mb-6"
         onSubmit={handleSubmit(props.onSubmit)}
       >
         <div className="d-flex">
@@ -55,39 +56,45 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
         </div>
 
         <div className="stack-4 mb-2">
-          <DynamicSelect
-            {...register('animal', FormRules.animal)}
-            allowCreate={true}
-            labelInValue={true}
-            modeSelectedTags="on"
-            placeholder={screenData.PicUploader.whatPlaceholder}
-            getMoreOptions={props.getMoreAnimals}
-            iconLeft={<Icon name="shark" />}
-            error={errors.animal}
-          />
+          <Label label={screenData.PicUploader.whatLabel}>
+            <DynamicSelect
+              {...register('animal', FormRules.animal)}
+              allowCreate={true}
+              labelInValue={true}
+              modeSelectedTags="on"
+              placeholder={screenData.PicUploader.whatPlaceholder}
+              getMoreOptions={props.getMoreAnimals}
+              iconLeft={<Icon name="shark" />}
+              error={errors.animal}
+            />
+          </Label>
 
-          <TextInput
-            {...register('date', FormRules.date)}
-            type="date"
-            iconLeft={<Icon name="calendar-month" />}
-            placeholder={screenData.PicUploader.whenPlaceholder}
-            error={errors.date}
-          />
+          <Label label={screenData.PicUploader.whatLabel}>
+            <TextInput
+              {...register('date', FormRules.date)}
+              type="date"
+              iconLeft={<Icon name="calendar-month" />}
+              placeholder={screenData.PicUploader.whenPlaceholder}
+              error={errors.date}
+            />
+          </Label>
 
-          <TextInput
-            {...register('diveSiteName')}
-            iconLeft={<Icon name="anchor" />}
-            placeholder={screenData.PicUploader.wherePlaceholder}
-            disabled={true}
-          />
+          <Label label={screenData.PicUploader.whereLabel}>
+            <TextInput
+              {...register('diveSiteName')}
+              iconLeft={<Icon name="anchor" />}
+              placeholder={screenData.PicUploader.wherePlaceholder}
+              disabled={true}
+            />
+          </Label>
         </div>
 
         <div className="cols">
-          <div className="col-9"></div>
-          <div className="col-3">
+          <div className="col-8"></div>
+          <div className="col-4">
             <Button
               disabled={isSubmitting}
-              className="bg-primary col-3"
+              className="btn-lg bg-primary col-3"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >
