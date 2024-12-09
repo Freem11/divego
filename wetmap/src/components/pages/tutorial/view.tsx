@@ -13,6 +13,7 @@ export default function TutorialPageView() {
       <div className={style.centerPage}>
         <Slider
           startIndex={1}
+          showArrows={false}
           slides={[
             <TutorialStep1 key="step1" />,
             <TutorialStep2 key="step2" />,

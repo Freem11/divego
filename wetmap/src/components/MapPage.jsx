@@ -41,10 +41,6 @@ import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
-import Slider from './reusables/slider';
-import TestPage from './reusables/slider/testPage';
-import TestPageEnd from './reusables/slider/testPageEnd';
-import TutorialPage from './pages/tutorial';
 
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
@@ -161,10 +157,8 @@ const MapPage = React.memo(function MapPage() {
   });
 
   const animateFabs = () => {
-    let containerHeight
-      = document.getElementsByClassName('fabContainer')[0].clientHeight;
-    let buttonSectionHeight
-      = document.getElementsByClassName('fabButtons')[0].clientHeight;
+    let containerHeight = document.getElementsByClassName('fabContainer')[0].clientHeight;
+    let buttonSectionHeight = document.getElementsByClassName('fabButtons')[0].clientHeight;
 
     if (fabsYCoord === 0) {
       if (window.innerHeight < 400) {
@@ -233,15 +227,8 @@ const MapPage = React.memo(function MapPage() {
   }, [showFilterer]);
 
 
-  // eslint-disable-next-line react/jsx-key
-  const pageData = [<TestPage />, <TestPage />, <TestPage />, <TestPageEnd />];
-
   return (
     <div className="mappagemaster">
-
-      {/* <Slider startPage={1} pageData={pageData} /> */}
-
-      <TutorialPage />
 
       {mapConfig === 0 && (
         <animated.div className="fabContainer" style={moveFabModal}>
@@ -398,7 +385,8 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-      <div className="col1rowB"></div>
+      <div className="col1rowB">
+      </div>
 
       <div>
         <MapLoader
@@ -527,6 +515,7 @@ const MapPage = React.memo(function MapPage() {
       )}
 
       <Modal />
+
     </div>
   );
 });
