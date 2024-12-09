@@ -25,6 +25,7 @@
   flex-direction: row;
   justify-content: space-between;
   width: 98%;
+  margin-top: 1%;
 }
 
 .userText {
@@ -33,6 +34,10 @@
 
 .dateText {
   font-weight: lighter;
+}
+
+.commentText{ 
+  text-align: left;
 }
 
 .replyBox {

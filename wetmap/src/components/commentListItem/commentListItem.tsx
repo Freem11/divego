@@ -21,7 +21,7 @@ export default function CommentListItem(props) {
           <p className={style.userText}>{commentDetails.username}</p>
           <p className={style.dateText}>{finalDate}</p>
         </div>
-        <p>{commentDetails.content}</p>
+        <p className={style.commentText}>{commentDetails.content}</p>
       </div>
 
       <div className={style.replyBox}>
