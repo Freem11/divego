@@ -1,0 +1,36 @@
+@import "../../styles/variables.scss";
+
+.masterBox {
+  width: 98%;
+  height: fit-content;
+  margin: 0 3% 3%;
+}
+
+.shadowbox {
+  display: flex;
+  z-index: 2;
+  flex-direction: column;
+  align-items: start;
+  outline: 0.1em solid #afafaf;
+  box-shadow:  1px 3px 5px #87878780;
+  background-color: white;
+  border-radius: 10px;
+  width: 96%;
+  height: 80;
+  padding-left: 2%;
+}
+
+.topBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 98%;
+}
+
+.userText {
+  font-weight: bolder;
+}
+
+.dateText {
+  font-weight: lighter;
+}
