@@ -92,34 +92,6 @@ export default function SiteSubmitter(props) {
     setWindowHeigth(window.innerHeight);
   }
 
-  const handleChange = (e) => {
-    setAddSiteVals({ ...addSiteVals, [e.target.name]: e.target.value });
-
-    if (e.target.name === 'PicFile') {
-      setUploadedFile({ ...uploadedFile, selectedFile: e.target.files[0] });
-
-      exifr.parse(e.target.files[0]).then((output) => {
-        const EXIFData = exifGPSHelper(
-          output.GPSLatitude,
-          output.GPSLongitude,
-          output.GPSLatitudeRef,
-          output.GPSLongitudeRef,
-        );
-
-        if (EXIFData) {
-          setAddSiteVals({
-            ...addSiteVals,
-            Latitude:  EXIFData[0],
-            Longitude: EXIFData[1],
-          });
-        } else {
-          setAddSiteVals({ ...addSiteVals });
-          setShowNoGPS(true);
-        }
-      });
-    }
-  };
-
   const getDeviceLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
@@ -171,7 +143,6 @@ export default function SiteSubmitter(props) {
 
   return (
     <SiteSubmitterView
-      handleChange={handleChange}
       getDeviceLocation={getDeviceLocation}
       onNavigate={onNavigate}
       onClose={onClose}
