@@ -3,7 +3,7 @@
 .masterBox {
   width: 98%;
   height: fit-content;
-  margin: 0 3% 3%;
+  margin: 1% 3% 3%;
 }
 
 .shadowbox {
@@ -33,4 +33,24 @@
 
 .dateText {
   font-weight: lighter;
+}
+
+.replyBox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-left: 2%;
+}
+
+.replyText {
+  font-weight: bold;
+  margin-top: 1vh;
+  margin-bottom: 0;
+  align-self: flex-start;
+}
+
+.viewRepliesText {
+  font-weight: bold;
+  align-self: flex-start;
+  margin-bottom: 0;
 }

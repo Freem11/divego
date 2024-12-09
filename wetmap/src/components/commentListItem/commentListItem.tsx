@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React from 'react';
 import style from './style.module.scss';
 
 export default function CommentListItem(props) {
@@ -23,6 +23,34 @@ export default function CommentListItem(props) {
         </div>
         <p>{commentDetails.content}</p>
       </div>
+
+      <div className={style.replyBox}>
+        <p
+          className={style.replyText}
+          onClick={() => {
+            replyTo && replyTo[0] === commentDetails.username
+              ? setReplyTo(null)
+              : setReplyTo([commentDetails.username, commentDetails.id]);
+          }}
+        >
+          Reply
+        </p>
+        {nbReplies > 0
+        ? (
+            <p
+              className={style.viewRepliesText}
+              onClick={() => toggleShowReplies(commentDetails)}
+            >
+              {selectedReplyId.includes(commentDetails.id)
+                ? `Hide replies`
+                : `View ${nbReplies} Replies`}
+            </p>
+          )
+        : (
+            ''
+          )}
+      </div>
+
     </div>
   );
 }
