@@ -1,17 +1,20 @@
 import React from 'react';
 import SiteSubmitterView from './view';
-import { useState, useEffect, useContext, useRef } from "react";
-import {useSpring } from "react-spring";
-import '../../modals/confirmationModal.css'; 
+import { useState, useContext, useRef } from 'react';
+import { useSpring } from 'react-spring';
+import '../../modals/confirmationModal.css';
 import '../../modals/siteSubmitter.css';
-import exifr from "exifr";
-import { exifGPSHelper } from "../../../helpers/exifGPSHelpers";
-import { insertDiveSiteWaits } from "../../../supabaseCalls/diveSiteWaitSupabaseCalls";
-import { DiveSpotContext } from "../../contexts/diveSpotContext";
-import { MasterContext } from "../../contexts/masterContext";
-import { ModalSelectContext } from "../../contexts/modalSelectContext";
-import { ModalContext } from "../../contexts/modalContext";
+import exifr from 'exifr';
+import { exifGPSHelper } from '../../../helpers/exifGPSHelpers';
+import { insertDiveSiteWaits } from '../../../supabaseCalls/diveSiteWaitSupabaseCalls';
+import { DiveSpotContext } from '../../contexts/diveSpotContext';
+import { MasterContext } from '../../contexts/masterContext';
+import { ModalSelectContext } from '../../contexts/modalSelectContext';
+import { ModalContext } from '../../contexts/modalContext';
 import { MapConfigContext } from '../../contexts/mapConfigContext';
+import { UserProfileContext } from '../../contexts/userProfileContext';
+import { Form } from './form';
+
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
@@ -39,9 +42,9 @@ export default function SiteSubmitter(props) {
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { setMasterSwitch } = useContext(MasterContext);
   const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
+  const { profile } = useContext(UserProfileContext);
 
   const { setMapConfig } = useContext(MapConfigContext);
-
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -96,7 +99,7 @@ export default function SiteSubmitter(props) {
       setUploadedFile({ ...uploadedFile, selectedFile: e.target.files[0] });
 
       exifr.parse(e.target.files[0]).then((output) => {
-        let EXIFData = exifGPSHelper(
+        const EXIFData = exifGPSHelper(
           output.GPSLatitude,
           output.GPSLongitude,
           output.GPSLatitudeRef,
@@ -143,7 +146,6 @@ export default function SiteSubmitter(props) {
   };
 
   const onNavigate = () => {
-    console.log('Navigate jsx');
     setChosenModal('DiveSite');
     setMapConfig(1);
     setShowNoGPS(false);
@@ -151,28 +153,14 @@ export default function SiteSubmitter(props) {
     modalPause();
   };
 
-  const handleSubmition = (e) => {
-    e.preventDefault();
-
-    let SiteV = addSiteVals.Site.toString();
-    let LatV = parseFloat(addSiteVals.Latitude);
-    let LngV = parseFloat(addSiteVals.Longitude);
-
-    if (
-      SiteV
-      && typeof SiteV === 'string'
-      && LatV
-      && typeof LatV === 'number'
-      && LngV
-      && typeof LngV === 'number'
-    ) {
-      insertDiveSiteWaits(addSiteVals);
-      setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
-      animateSuccessModal();
-      return;
-    } else {
-      animateCautionModal();
-    }
+  const onSubmit = (data: Form) => {
+    insertDiveSiteWaits({
+      Site:      data.Site,
+      Latitude:  data.Latitude,
+      Longitude: data.Longitude,
+      UserID:    profile[0].UserID,
+    });
+    onClose();
   };
 
   const onClose = () => {
@@ -180,27 +168,18 @@ export default function SiteSubmitter(props) {
     props?.onModalCancel?.();
   };
 
-  
+
   return (
     <SiteSubmitterView
-      handleChange = {handleChange}
-      getDeviceLocation = {getDeviceLocation}
+      handleChange={handleChange}
+      getDeviceLocation={getDeviceLocation}
       onNavigate={onNavigate}
       onClose={onClose}
-      sucessModalSlide={sucessModalSlide}
-      animateSuccessModal={animateSuccessModal}
-      successModalRef={successModalRef}
-      cautionModalSlide={cautionModalSlide}
-      animateCautionModal={animateCautionModal}
-      cautionModalRef={cautionModalRef}
-      //onSubmit={(data) => {
-      //  console.log({ data });
-      //}}
-      successModalYCoord={successModalYCoord}
-      cautionModalYCoord={cautionModalYCoord}
-      
-
+      onSubmit={onSubmit}
+      values={{
+        Latitude:  addSiteVals.Latitude,
+        Longitude: addSiteVals.Longitude,
+      }}
     />
   );
 }
-

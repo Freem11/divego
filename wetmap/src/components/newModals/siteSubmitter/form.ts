@@ -13,15 +13,15 @@ export const FormRules: FormValidationRules<Form> = {
     required: 'Dive site name cannot be empty',
   },
   Longitude: {
-     required: 'Longitude is required',
-     max:      {
-       value:   10,
-       message: 'Longitude must be less than 10',
-     } },
+    required: 'Longitude is required',
+    max:      {
+      value:   180,
+      message: 'Longitude must be less than 180',
+    } },
   Latitude: {
     required: 'Longitude is required',
     max:      {
-      value:   10,
+      value:   180,
       message: 'Longitude must be less than 10',
-    } }
+    } },
 };
