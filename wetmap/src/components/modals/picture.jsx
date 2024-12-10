@@ -12,7 +12,7 @@ import liked from '../../images/Hand-Filled-Blue.png';
 import style from './picture.module.scss';
 import UserProfileModal from './userProfileModal';
 import { ModalContext } from '../reusables/modal/context';
-import CommentsModal from './commentsModal';
+import CommentsModal from '../newModals/commentsModal/commentsModal';
 import FullScreenModal from './fullScreenModal';
 
 function Picture(props) {

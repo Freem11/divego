@@ -1,25 +1,37 @@
-import { useState, useContext, useEffect, useRef } from 'react';
-import { FormGroup } from 'reactstrap';
-import CommentListItem from '../commentListItem/commentListItem';
-import bubbles from '../../images/bubbles.png';
-import { UserProfileContext } from '../contexts/userProfileContext';
-import { SelectedPictureContext } from '../contexts/selectedPictureContext';
+import React, { useState, useContext, useEffect } from 'react';
+import CommentListItem from '../../commentListItem/commentListItem';
+import { UserProfileContext } from '../../contexts/userProfileContext';
+import { SelectedPictureContext } from '../../contexts/selectedPictureContext';
 import {
   insertPhotoComment,
   grabPhotoCommentsByPicId,
-} from '../../supabaseCalls/photoCommentSupabaseCalls';
+} from '../../../supabaseCalls/photoCommentSupabaseCalls';
 import './commentsModal.css';
-import CloseButton from '../closeButton/closeButton';
-import InputField from '../reusables/inputField';
-import ModalHeader from '../reusables/modalHeader';
+import TextInputField from '../textInput';
+import Icon from '../../../icons/Icon';
+import { ModalHandleProps } from '../../reusables/modal/types';
+import ButtonIcon from '../../reusables/buttonIcon';
+import style from './style.module.scss';
 
-const CommentsModal = (props) => {
+type Comment = {
+  content: string
+  created_at: string
+  id: number
+  photoid: number
+  replied_to: number
+  userid: string
+  username: string
+}
+
+type CommentModalProps = Partial<ModalHandleProps>;
+
+const CommentsModal = (props: CommentModalProps) => {
   const { profile } = useContext(UserProfileContext);
   const { selectedPicture } = useContext(SelectedPictureContext);
-  const [commentContent, setCommentContent] = useState('');
-  const [listOfComments, setListOfComments] = useState(null);
+  const [commentContent, setCommentContent] = useState<string>('');
+  const [listOfComments, setListOfComments] = useState<Comment[]>([]);
   const [replyTo, setReplyTo] = useState(null);
-  const [selectedReplyId, setSelectedReplyId] = useState([]);
+  const [selectedReplyId, setSelectedReplyId] = useState<number[]>([]);
 
   useEffect(() => {
     if (selectedPicture) {
@@ -35,33 +47,32 @@ const CommentsModal = (props) => {
     }
     if (commentContent === null || commentContent === '') {
       return;
-    }
-    else {
+    } else {
       let finalContent;
       if (replyTo) {
         finalContent = '@' + replyTo[0] + ' - ' + commentContent;
-      }
-      else {
+      } else {
         finalContent = commentContent;
       }
-      let newComment = await insertPhotoComment(
-        profile[0].UserID,
-        selectedPicture.id,
+      await insertPhotoComment(
+        profile?.UserID,
+        selectedPicture?.id,
         finalContent,
         userIdentity,
       );
       setCommentContent('');
       setReplyTo(null);
-      getAllPictureComments(selectedPicture.id);
+      getAllPictureComments(selectedPicture?.id);
     }
   };
 
-  const getAllPictureComments = async (picId) => {
+  const getAllPictureComments = async (picId: number | undefined) => {
     let picComments = await grabPhotoCommentsByPicId(picId);
     setListOfComments(picComments);
   };
 
-  const hideRepliesForChildren = (parentId, newSelectedReplyId) => {
+
+  const hideRepliesForChildren = (parentId: number, newSelectedReplyId: number[]) => {
     newSelectedReplyId = [
       ...newSelectedReplyId.filter(id => parentId !== id),
     ];
@@ -77,20 +88,19 @@ const CommentsModal = (props) => {
     return newSelectedReplyId;
   };
 
-  const toggleShowReplies = (comment) => {
-    if (selectedReplyId.includes(comment.id)) {
+  const toggleShowReplies = (commentID: number) => {
+    if (selectedReplyId.includes(commentID)) {
       let selectedReplyIdTemp = hideRepliesForChildren(
-        comment.id,
+        commentID,
         selectedReplyId,
       );
       setSelectedReplyId(selectedReplyIdTemp);
-    }
-    else {
-      setSelectedReplyId([...selectedReplyId, comment.id]);
+    } else {
+      setSelectedReplyId([...selectedReplyId, commentID]);
     }
   };
 
-  const getCommentListView = (commentId, level = 0) => {
+  const getCommentListView = (commentId: number | null, level = 0) => {
     let marginLeft = 5 * level;
     let width = 100 - marginLeft;
     const marginStyle = {
@@ -122,7 +132,7 @@ const CommentsModal = (props) => {
                       commentDetails={commentDeets}
                       setReplyTo={setReplyTo}
                       replyTo={replyTo}
-                      toggleShowReplies={toggleShowReplies}
+                      toggleShowReplies={() => toggleShowReplies(commentDeets.id)}
                       selectedReplyId={selectedReplyId}
                       nbReplies={nbReplies}
                     />
@@ -139,48 +149,55 @@ const CommentsModal = (props) => {
   return (
     <>
       <div>
-        <ModalHeader title="Comments" onClose={props.onModalCancel} />
+      <ButtonIcon
+          icon={<Icon name="chevron-left" />}
+          className="btn-lg mt-4"
+          // onClick={(e) => {
+          //   if (props.onClose) {
+          //     props.onClose(e);
+          //   }
+          // }}
+        />
+      <h1 className="mb-0 pb-4">{"Comments"}</h1>
       </div>
 
-      <div className="middleContainer">
+      <div className={style.middleContainer}>
         {' '}
         {getCommentListView(null)}
       </div>
 
-      <div className="commentEntryContainer">
+      <div className={style.commentEntryContainer}>
         {replyTo
           ? (
-              <div className="replyLine">
-                <p className="userTxt">
+              <div className={style.replyLine}>
+                <p className={style.userText}>
                   @
                   {replyTo[0]}
                 </p>
-                <CloseButton onClick={() => setReplyTo(null)} />
+                <Icon
+                name="close"
+                fill="darkgrey"
+                width="20"
+                onClick={() => setReplyTo(null)}
+                 />
               </div>
             )
           : null}
-        <div className="replyBox">
-          <div className="inputboxType2">
-            <InputField
-              id="standard-basic"
-              // label="Latitude"
-              placeholder="Blow some bubbles"
-              variant="standard"
-              type="text"
-              name="commentEntry"
-              value={commentContent}
-              onChange={e => setCommentContent(e.target.value)}
+        <div className={style.replyBox}>
+            <TextInputField
+              icon={' '}
+              dataType="text"
+              secure={false}
+              placeHolderText="Blow some bubbles"
+              inputValue={commentContent}
+              onChangeText={(e: { target: { value: React.SetStateAction<string>; }; }) => setCommentContent(e.target.value)}
             />
-          </div>
-          <img
+          <Icon
+            name="diving-snorkel"
+            fill="darkgrey"
+            width="30"
+            style={{ marginTop: 5 }}
             onClick={() => handleCommentInsert()}
-            src={bubbles}
-            style={{
-              height:     '4vw',
-              width:      '4vw',
-              paddingTop: '2vh',
-              cursor:     'pointer',
-            }}
           />
         </div>
       </div>
