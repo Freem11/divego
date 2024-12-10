@@ -29,13 +29,13 @@ export default function SeaLifeImageCard(props: {pic: PhotoWithLikesAndComments}
     e.stopPropagation();
     let picOwnerAccount;
     const accounts = await grabProfileByUserName(userName);
-    if (accounts){
-      picOwnerAccount = accounts[0];
-    
-      if (profile?.UserID === picOwnerAccount.UserID) {
-        return;
-      }
-    } 
+      if (accounts){
+        picOwnerAccount = accounts[0];
+      
+        if (profile?.UserID === picOwnerAccount.UserID) {
+          return;
+        }
+      } 
 
     modalShow(UserProfileModal, {
       keepPreviousModal: true,
@@ -57,12 +57,12 @@ export default function SeaLifeImageCard(props: {pic: PhotoWithLikesAndComments}
       setPicLiked(false);
       setCountOfLikes(countOfLikes - 1);
     } else {
-      if(profile){
-        const newRecord = await insertPhotoLike(profile?.UserID, pic.id);
-        setPicLiked(true);
-        setLikeData(newRecord && newRecord[0].id);
-        setCountOfLikes(countOfLikes + 1);
-      }
+        if(profile){
+          const newRecord = await insertPhotoLike(profile?.UserID, pic.id);
+          setPicLiked(true);
+          setLikeData(newRecord && newRecord[0].id);
+          setCountOfLikes(countOfLikes + 1);
+        }
     }
   };
 

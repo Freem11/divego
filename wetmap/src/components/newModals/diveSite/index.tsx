@@ -67,7 +67,6 @@ export default function DiveSite(props: DiveSiteProps) {
   };
 
   const openPicUploader = () => {
-    console.log("HEY!")
     if (selectedDiveSite) {
       setPin({
         ...pin,

@@ -40,14 +40,14 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         >
           <div className={style.buttonOpenPictureUpload}></div>
 
-{props.isPartnerAccount &&
-  <div className={style.buttonImageUpload}>
-  <ButtonIcon
-    icon={<Icon name="camera-plus" />}
-    className="btn-lg"
-    onClick={() => fileUploaderRef?.current?.click?.()}
-  />
-</div>}
+      {props.isPartnerAccount &&
+        <div className={style.buttonImageUpload}>
+          <ButtonIcon
+            icon={<Icon name="camera-plus" />}
+            className="btn-lg"
+            onClick={() => fileUploaderRef?.current?.click?.()}
+          />
+        </div>}
         
         </WavyModalHeader>
 
