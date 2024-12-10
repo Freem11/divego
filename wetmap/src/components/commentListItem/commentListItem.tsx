@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import screenData from '../newModals/screenData.json';
 import { CommentItem } from '../../entities/comment';
 
-type CommentistItemType = {
+type CommentListItemType = {
   commentDetails: CommentItem
   setReplyTo: (value: SetStateAction<(string|number)[] | null>) => void
   replyTo: (string|number)[] | null
@@ -12,7 +12,7 @@ type CommentistItemType = {
   nbReplies: number
 }
 
-export default function CommentListItem(props: CommentistItemType) {
+export default function CommentListItem(props: CommentListItemType) {
   const {
     commentDetails,
     setReplyTo,
