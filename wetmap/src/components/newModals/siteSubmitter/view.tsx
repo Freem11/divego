@@ -1,8 +1,5 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
-// import { useState, useRef } from 'react';
-// import { animated, useSpring } from 'react-spring';
-// import ConfirmationModal from '../../modals/confirmationModal';
 import '../../modals/confirmationModal.css';
 import backGroundPic from '../../../images/boat.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
@@ -19,7 +16,7 @@ type SiteSubmitterProps = {
   onClose:           () => void
   getDeviceLocation: () => void
   onNavigate:        () => void
-  onSubmit:          (data) => void
+  onSubmit:          (data: Form) => void
 
 };
 

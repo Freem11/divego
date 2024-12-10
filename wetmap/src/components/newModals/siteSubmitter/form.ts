@@ -2,9 +2,9 @@
 import { FormValidationRules } from '../../../forms/form';
 
 export interface Form {
-  Site:      string
-  Latitude:  number
-  Longitude: number
+  Site?:      string
+  Latitude?:  number
+  Longitude?: number
 }
 
 

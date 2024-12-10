@@ -1,93 +1,25 @@
 import React from 'react';
 import SiteSubmitterView from './view';
-import { useState, useContext, useRef } from 'react';
-import { useSpring } from 'react-spring';
+import { useContext } from 'react';
 import '../../modals/confirmationModal.css';
 import '../../modals/siteSubmitter.css';
-import exifr from 'exifr';
-import { exifGPSHelper } from '../../../helpers/exifGPSHelpers';
 import { insertDiveSiteWaits } from '../../../supabaseCalls/diveSiteWaitSupabaseCalls';
 import { DiveSpotContext } from '../../contexts/diveSpotContext';
-
 import { MapConfigContext } from '../../contexts/mapConfigContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { Form } from './form';
 import { ModalContext } from '../../reusables/modal/context';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
+type SiteSubmitterProps = Partial<ModalHandleProps>;
 
-const screenWidthInital = window.innerWidth;
-const screenHeitghInital = window.innerHeight;
-
-const noGPSZone = (
-  <div
-    style={{
-      marginLeft:      '2%',
-      backgroundColor: 'pink',
-      height:          '40px',
-      width:           '95%',
-      color:           'red',
-      borderRadius:    '15px',
-    }}
-  >
-    <h4 style={{ marginLeft: '35px', paddingTop: '10px' }}>
-      No GPS Coordinates Found!
-    </h4>
-  </div>
-);
-
-export default function SiteSubmitter(props) {
-  const { animateSiteModal, setSiteModalYCoord } = props;
-  const [showNoGPS, setShowNoGPS] = useState(false);
+export default function SiteSubmitter(props: SiteSubmitterProps) {
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { profile } = useContext(UserProfileContext);
 
   const { setMapConfig } = useContext(MapConfigContext);
 
-  const [uploadedFile, setUploadedFile] = useState({
-    selectedFile: null,
-  });
-
-  const successModalRef = useRef(null);
-  const cautionModalRef = useRef(null);
-  const [successModalYCoord, setSuccessModalYCoord] = useState(0);
-  const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
   const { modalPause } = useContext(ModalContext);
-
-  const sucessModalSlide = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${successModalYCoord}px,0)` },
-  });
-
-  const cautionModalSlide = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
-  });
-
-  const animateSuccessModal = () => {
-    if (successModalYCoord === 0) {
-      setSuccessModalYCoord(-windowHeight);
-    } else {
-      setSuccessModalYCoord(0);
-    }
-  };
-
-  const animateCautionModal = () => {
-    if (cautionModalYCoord === 0) {
-      setCautionModalYCoord(-windowHeight);
-    } else {
-      setCautionModalYCoord(0);
-    }
-  };
-
-  window.addEventListener('resize', trackDimensions);
-
-  const [windowWidth, setWindowWidth] = useState(screenWidthInital);
-  const [windowHeight, setWindowHeigth] = useState(screenHeitghInital);
-
-  function trackDimensions() {
-    setWindowWidth(window.innerWidth);
-    setWindowHeigth(window.innerHeight);
-  }
 
   const getDeviceLocation = () => {
     if (navigator.geolocation) {
@@ -109,14 +41,8 @@ export default function SiteSubmitter(props) {
     }
   };
 
-  const handleNoGPSClose = () => {
-    setShowNoGPS(false);
-    return;
-  };
-
   const onNavigate = () => {
     setMapConfig(1);
-    setShowNoGPS(false);
     modalPause();
   };
 
@@ -131,7 +57,7 @@ export default function SiteSubmitter(props) {
   };
 
   const onClose = () => {
-    setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
+    setAddSiteVals({ ...addSiteVals, Site: '', Latitude: 0, Longitude: 0 });
     props?.onModalCancel?.();
   };
 
@@ -143,8 +69,9 @@ export default function SiteSubmitter(props) {
       onClose={onClose}
       onSubmit={onSubmit}
       values={{
-        Latitude:  addSiteVals.Latitude,
-        Longitude: addSiteVals.Longitude,
+        Site: addSiteVals?.Site,
+        Latitude:  addSiteVals?.Latitude,
+        Longitude: addSiteVals?.Longitude,
       }}
     />
   );
