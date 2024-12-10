@@ -20,8 +20,8 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
     <>
       <div>
       <ButtonIcon
-          icon={<Icon name="chevron-left" />}
-          className="btn-lg mt-4"
+          icon={<Icon name="chevron-left" style={{ scale: '2' }} />}
+          className="btn-lg mt-4 text-gray"
           onClick={() => {
             if (props.onClose) {
               props.onClose();
