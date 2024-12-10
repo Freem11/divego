@@ -1,8 +1,18 @@
-import React from 'react';
+import React, { SetStateAction } from 'react';
 import style from './style.module.scss';
 import screenData from '../newModals/screenData.json';
+import { CommentItem } from '../../entities/comment';
 
-export default function CommentListItem(props) {
+type CommentistItemType = {
+  commentDetails: CommentItem
+  setReplyTo: (value: SetStateAction<(string|number)[] | null>) => void
+  replyTo: (string|number)[] | null
+  toggleShowReplies: (commentID: CommentItem) => void
+  selectedReplyId: number[]
+  nbReplies: number
+}
+
+export default function CommentListItem(props: CommentistItemType) {
   const {
     commentDetails,
     setReplyTo,

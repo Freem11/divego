@@ -8,16 +8,7 @@ import {
 } from '../../../supabaseCalls/photoCommentSupabaseCalls';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import CommentsModalView from './view';
-
-type Comment = {
-  content: string
-  created_at: string
-  id: number
-  photoid: number
-  replied_to: number
-  userid: string
-  username: string
-}
+import { CommentItem } from '../../../entities/comment';
 
 type CommentModalProps = Partial<ModalHandleProps>;
 
@@ -25,8 +16,8 @@ const CommentsModal = (props: CommentModalProps) => {
   const { profile } = useContext(UserProfileContext);
   const { selectedPicture } = useContext(SelectedPictureContext);
   const [commentContent, setCommentContent] = useState<string>('');
-  const [listOfComments, setListOfComments] = useState<Comment[]>([]);
-  const [replyTo, setReplyTo] = useState<number[]| null>(null);
+  const [listOfComments, setListOfComments] = useState<CommentItem[]>([]);
+  const [replyTo, setReplyTo] = useState<(string|number)[]| null>(null);
   const [selectedReplyId, setSelectedReplyId] = useState<number[]>([]);
 
   useEffect(() => {

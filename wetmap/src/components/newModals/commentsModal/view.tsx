@@ -8,9 +8,9 @@ import TextInputField from '../textInput';
 type CommentsModalViewProps = {
   handleCommentInsert:  () => void
   setCommentContent:    (value: SetStateAction<string>) => void
-  setReplyTo: (value: SetStateAction<number[] | null>) => void
+  setReplyTo: (value: SetStateAction<(number|string)[] | null>) => void
   commentContent: string
-  replyTo: number[] | null
+  replyTo: (number|string)[] | null
   getCommentListView: (commentId: number | null, level?: number) => React.JSX.Element
   onClose?:                     () => void
 };
