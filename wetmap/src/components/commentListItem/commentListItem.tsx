@@ -1,5 +1,6 @@
 import React from 'react';
 import style from './style.module.scss';
+import screenData from '../newModals/screenData.json';
 
 export default function CommentListItem(props) {
   const {
@@ -33,7 +34,7 @@ export default function CommentListItem(props) {
               : setReplyTo([commentDetails.username, commentDetails.id]);
           }}
         >
-          Reply
+          {screenData.CommentsModal.replyButton}
         </p>
         {nbReplies > 0
         ? (
@@ -42,8 +43,8 @@ export default function CommentListItem(props) {
               onClick={() => toggleShowReplies(commentDetails)}
             >
               {selectedReplyId.includes(commentDetails.id)
-                ? `Hide replies`
-                : nbReplies === 1 ? `View Reply` : `View ${nbReplies} Replies`}
+                ?  screenData.CommentsModal.replyHide
+                : nbReplies === 1 ? screenData.CommentsModal.replyViewSingle : `${screenData.CommentsModal.replyViewMultiplOne} ${nbReplies} ${screenData.CommentsModal.replyViewMultiplTwo}`}
             </p>
           )
         : (

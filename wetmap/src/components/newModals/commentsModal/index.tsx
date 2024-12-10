@@ -6,12 +6,8 @@ import {
   insertPhotoComment,
   grabPhotoCommentsByPicId,
 } from '../../../supabaseCalls/photoCommentSupabaseCalls';
-import './commentsModal.css';
-import TextInputField from '../textInput';
-import Icon from '../../../icons/Icon';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import ButtonIcon from '../../reusables/buttonIcon';
-import style from './style.module.scss';
+import CommentsModalView from './view';
 
 type Comment = {
   content: string
@@ -30,7 +26,7 @@ const CommentsModal = (props: CommentModalProps) => {
   const { selectedPicture } = useContext(SelectedPictureContext);
   const [commentContent, setCommentContent] = useState<string>('');
   const [listOfComments, setListOfComments] = useState<Comment[]>([]);
-  const [replyTo, setReplyTo] = useState(null);
+  const [replyTo, setReplyTo] = useState<number[]| null>(null);
   const [selectedReplyId, setSelectedReplyId] = useState<number[]>([]);
 
   useEffect(() => {
@@ -147,61 +143,16 @@ const CommentsModal = (props: CommentModalProps) => {
   };
 
   return (
-    <>
-      <div>
-      <ButtonIcon
-          icon={<Icon name="chevron-left" />}
-          className="btn-lg mt-4"
-          // onClick={(e) => {
-          //   if (props.onClose) {
-          //     props.onClose(e);
-          //   }
-          // }}
-        />
-      <h1 className="mb-0 pb-4">{"Comments"}</h1>
-      </div>
-
-      <div className={style.middleContainer}>
-        {' '}
-        {getCommentListView(null)}
-      </div>
-
-      <div className={style.commentEntryContainer}>
-        {replyTo
-          ? (
-              <div className={style.replyLine}>
-                <p className={style.userText}>
-                  @
-                  {replyTo[0]}
-                </p>
-                <Icon
-                name="close"
-                fill="darkgrey"
-                width="20"
-                onClick={() => setReplyTo(null)}
-                 />
-              </div>
-            )
-          : null}
-        <div className={style.replyBox}>
-            <TextInputField
-              icon={' '}
-              dataType="text"
-              secure={false}
-              placeHolderText="Blow some bubbles"
-              inputValue={commentContent}
-              onChangeText={(e: { target: { value: React.SetStateAction<string>; }; }) => setCommentContent(e.target.value)}
-            />
-          <Icon
-            name="diving-snorkel"
-            fill="darkgrey"
-            width="30"
-            style={{ marginTop: 5 }}
-            onClick={() => handleCommentInsert()}
-          />
-        </div>
-      </div>
-    </>
+    <CommentsModalView 
+    handleCommentInsert={handleCommentInsert}
+    setCommentContent={setCommentContent}
+    setReplyTo={setReplyTo}
+    commentContent={commentContent}
+    replyTo={replyTo}
+    getCommentListView={getCommentListView}
+    onClose={props.onModalCancel}
+    />
+   
   );
 };
 
