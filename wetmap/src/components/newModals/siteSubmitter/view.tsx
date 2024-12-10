@@ -68,7 +68,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
               className="btn-md"
               type="button"
             >
-              <text>{screenData.DiveSiteAdd.myLocationButton}</text>
+              {screenData.DiveSiteAdd.myLocationButton}
             </Button>
           </div>
 

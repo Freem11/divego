@@ -233,7 +233,7 @@ export default function MapLoader() {
 
   const handleDragEnd = () => {
     if (pinRef) {
-      const position = pinRef.position;
+      const position = pinRef.getPosition();
       if (position instanceof google.maps.LatLng && addSiteVals) {
         setAddSiteVals({
           ...addSiteVals,
