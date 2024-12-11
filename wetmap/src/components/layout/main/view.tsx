@@ -1,18 +1,15 @@
 import React from 'react';
-import Home from '../googleMap';
-import DynamicSelect from '../reusables/dynamicSelect';
+import Home from '../../googleMap';
+import DynamicSelect from '../../reusables/dynamicSelect';
+import { useThemeProps } from '@mui/material';
 
-export default function LayoutMain() {
+type LayoutMainViewProps = {
+  getMoreSearchItems: (search: string, limit: number, skip: number) => Promise<any>
+};
+
+export default function LayoutMainView(props: LayoutMainViewProps) {
   return (
-    <div className='bg-white'>
-      <svg xmlns="http://www.w3.org/2000/svg" style={{ display: 'none' }}>
-        <defs>
-          <symbol xmlns="http://www.w3.org/2000/svg" id="link" viewBox="0 0 24 24">
-            <path fill="currentColor" d="M12 19a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0-4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm-5 0a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm7-12h-1V2a1 1 0 0 0-2 0v1H8V2a1 1 0 0 0-2 0v1H5a3 3 0 0 0-3 3v14a3 3 0 0 0 3 3h14a3 3 0 0 0 3-3V6a3 3 0 0 0-3-3Zm1 17a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-9h16Zm0-11H4V6a1 1 0 0 1 1-1h1v1a1 1 0 0 0 2 0V5h8v1a1 1 0 0 0 2 0V5h1a1 1 0 0 1 1 1ZM7 15a1 1 0 1 0-1-1a1 1 0 0 0 1 1Zm0 4a1 1 0 1 0-1-1a1 1 0 0 0 1 1Z" />
-          </symbol>
-        </defs>
-      </svg>
-
+    <div className="bg-white">
       <header>
         <div className="container-fluid">
           <div className="columns py-2">
@@ -26,7 +23,9 @@ export default function LayoutMain() {
             </div>
 
             <div className="col-sm-12 col-md-0 col-6 offset-sm-2 offset-md-0 hide-md">
-                <DynamicSelect/>
+              <DynamicSelect
+                getMoreOptions={props.getMoreSearchItems}
+              />
             </div>
 
             <div className="col-sm-12 col-md-8 col-3 d-flex justify-content-sm-center justify-content-flex-end">
@@ -71,35 +70,7 @@ export default function LayoutMain() {
       </header>
 
       <section className="py-2">
-        <div className="container-fluid">
-          <div className="columns">
-            <div
-              className="col-md-12 col-4"
-              style={{
-                fontFamily: 'San Francisco',
-                fontWeight: 700,
-                fontStyle:  'italic' }}
-            >
-              <div className='hero'>
-                <div className='hero-body'>
-                  <div className='bg-gray'>AAA</div>
-                </div>
-                <div className='hero-body'>
-                  <div className='bg-gray'>AAA</div>
-                </div>
-                <div className='hero-body'>
-                  <div className='bg-gray'>AAA</div>
-                </div>
 
-              </div>
-            </div>
-
-            <div className="col-md-12 col-8">
-
-              <Home />
-            </div>
-          </div>
-        </div>
       </section>
 
       <footer className="py-6">

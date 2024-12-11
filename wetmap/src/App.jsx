@@ -15,7 +15,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AppContextProvider } from './components/contexts/appContextProvider';
 import { CoordsContext } from './components/contexts/mapCoordsContext';
 import { SessionContext } from './components/contexts/sessionContext';
-import LayoutMain from './components/layout/layoutMain';
+import LayoutMain from './components/layout/main';
 // DiveLocker
 
 let screenHeigthInital = window.innerHeight;

@@ -16,8 +16,8 @@ export type Option = {
 export type InitialValue = Option | Option[] | string | string[] | undefined;
 
 export type SelectProps = Partial<typeof defaultProps> & {
-  name:     string
-  onChange: (value: any) => void
+  name?:     string
+  onChange?: (value: any) => void
 };
 
 export type Values = Map<string, Option>;
