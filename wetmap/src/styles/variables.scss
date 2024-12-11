@@ -5,10 +5,12 @@ $light-color: #f0eeeb;
 $bg-color: #ecedec;
 $hover-color: #3e7dd7;
 $active-color: #538dbd;
+$gray-color: darkgray;
 $white: #ffffff;
 $base-font-family: 'San Francisco';
 $second-font-family: 'Itim', cursive;
 $border-radius: 1rem;
+$transparent-background-color: rgba(255, 255, 255, 0.2);
 
 // Define reusable style
 .flex-center-column {
@@ -61,10 +63,10 @@ $secondaryYellow: #fdc500;
 $themeWhite: #ffffff;
 $themeBlack: #00171f;
 
-$fontSizeHeader: 34;
-$fontSizeSubHeading: 24;
-$fontSizeStandardText: 18;
-$fontSizeSmallText: 14;
+$fontSizeHeader: 34px;
+$fontSizeSubHeading: 24px;
+$fontSizeStandardText: 18px;
+$fontSizeSmallText: 14px;
 
 
 // export const fonts = {

@@ -1,0 +1,74 @@
+@import './../../styles/variables.scss';
+
+.defaultStyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $primaryBlue; 
+    color: $themeWhite;
+    border: $primaryBlue solid 1px;
+    width: 25vw;
+    text-align: center;
+    border-radius: 30px;
+    padding: 2px;
+    font-size: $fontSizeSubHeading;
+    font-family: $base-font-family;
+    font-weight: 400;
+  }
+
+  .defaultStyleText {
+    font-family: $base-font-family;
+    font-weight: 400;
+    font-size: $fontSizeSubHeading;
+    color: $themeWhite;
+  }
+  
+  .defaultStyle:hover {
+    background-color: $hover-color;
+  }
+  .defaultStyle:active {
+    background-color: $active-color;
+  }
+
+  .invertedStyle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $themeWhite;
+    color: $primaryBlue;
+    border: $primaryBlue solid 1px;
+    width: 25vw;
+    text-align: center;
+    border-radius: 30px;
+    padding: 2px;
+    font-size: $fontSizeSubHeading;
+    font-family: $base-font-family;
+    font-weight: 400;
+  }
+  
+  .invertedStyleText {
+    font-family: $base-font-family;
+    font-weight: 400;
+    font-size: $fontSizeSubHeading;
+    color: $primaryBlue;
+  }
+  .invertedStyle:hover {
+    background-color: lightgrey;
+  }
+  .invertedStyle:active {
+    background-color: darkgrey;
+  }
+
+  .helperTextContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 25vw;
+    height: 7vh;
+    text-align: center;
+    padding: 2px;
+    font-size: $fontSizeSmallText;
+    font-family: $base-font-family;
+    font-weight: 400;
+  }

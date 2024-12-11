@@ -1,0 +1,22 @@
+@import '../../../styles/variables.scss';
+
+.wavyModalHeader {
+    position: relative;
+    max-height: 440px;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: $primaryBlue;
+    background-position: center center;
+}
+
+.buttonBack {
+    position: absolute;
+    top: 6%;
+    left: 3%;
+    z-index: 1;
+
+    svg {
+        scale: 2;
+    }
+}

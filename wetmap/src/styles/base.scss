@@ -1,3 +1,5 @@
+@import "./variables.scss";
+
 // Spectre.css v#{$version} | MIT License | github.com/picturepan2/spectre
 // Some sections are not required right now so they are disabled to minimize the bundle size
 // Enable ones that you need 
@@ -37,7 +39,7 @@
 //@import "../node_modules/spectre.css/src/modals";
 // @import "node_modules/spectre.css/src/navs";
 // @import "node_modules/spectre.css/src/pagination";
-// @import "node_modules/spectre.css/src/panels";
+@import "node_modules/spectre.css/src/panels";
 // @import "node_modules/spectre.css/src/popovers";
 // @import "node_modules/spectre.css/src/steps";
 // @import "node_modules/spectre.css/src/tabs";
@@ -54,11 +56,15 @@
 @import "node_modules/spectre.css/src/utilities/text";
 @import "./mixins/justify.scss";
 @import "./fonts.scss";
+@import "./mixins/stack.scss";
+@import "./mixins/blinking.scss";
 
 @include padding-variant(4, $unit-4);
 @include padding-variant(6, $unit-6);
 @include margin-variant(4, $unit-4);
 @include margin-variant(6, $unit-6);
+@include margin-variant(8, $unit-8);
+@include margin-variant(10, $unit-10);
 
 @include justify-variant("flex-end");
 @include justify-variant("center");
@@ -67,9 +73,7 @@
 @include bg-color-variant(".bg-gray", $bg-color);
 @include text-color-variant(".text-primary", #142800);
 
-.extra-shadow{
-     box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
-}
+@include stack('stack-4', $unit-4);
 
 .container-fluid {
   max-width: 1600px;
@@ -80,4 +84,43 @@
 
 [class*="col-"] {
   border: 1px solid red;
+}
+
+.extra-shadow {
+  box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+.flex-column-between {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.border-none {
+  border: none;
+}
+
+.full-height {
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: 100;
+  color: $gray-color;
+}
+
+
+.App {
+  --ssrc-label-control-shift: 0.8em;
+
+  --ssrc-select-border-color: #{$gray-color};
+  --ssrc-select-text-color: #{$gray-color};
+  --ssrc-select-control-height: #{$control-size};
+  --ssrc-select-trigger-text-color: #{$body-font-color};
+  --ssrc-select-create-button-text-color: #{$primary-color};
 }

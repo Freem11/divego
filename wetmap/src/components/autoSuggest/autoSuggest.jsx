@@ -1,80 +1,91 @@
-import React from 'react';
-import AutoSuggestListItem from './autoSuggestListItem';
-import HighlightOffIcon from '@mui/icons-material/HighlightOff';
-import SearchIcon from '@mui/icons-material/Search';
-import './autoSuggest.css';
-import InputField from '../reusables/inputField';
+import React, {useState} from "react";
+import AutoSuggestListItem from "./autoSuggestListItem";
+import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import SearchIcon from "@mui/icons-material/Search";
+import "./autoSuggest.css";
+import InputField from "../reusables/inputField";
+import TextInputField from '../newModals/textInput';
+import { getAnimalNamesThatFit } from "../../supabaseCalls/photoSupabaseCalls";
 
 export default function AutoSuggest(props) {
   const {
-    placeholder,
-    value,
-    list,
-    clear,
-    handleSelect,
-    handleChange,
-    style,
-    style1,
-    style2,
-    style3,
+    pin,
+    setPin,
+    placeHolderText,
+    inputValue,
+    icon,
+    vectorIcon,
   } = props;
 
+  const [list, setList] = useState([]);
+  const [textSource, setTextSource] = useState(false);
+
+  const handleList = async (values) => {
+    if (values.value === 1) {
+      setPin({ ...pin, Animal: values.animal });
+
+      if (values.animal.length > 0) {
+        let newfilteredList = await getAnimalNamesThatFit(values.animal);
+        let animalArray = [];
+        newfilteredList.forEach((animal) => {
+          if (!animalArray.includes(animal.label)) {
+            animalArray.push(animal.label);
+          }
+        });
+        setList(animalArray);
+      } else {
+        setList([]);
+      }
+    } else {
+      setPin({ ...pin, Animal: values.animal });
+      setList([]);
+    }
+  };
+
+  const handleClear = () => {
+    setTextSource(false);
+    setPin({ ...pin, Animal: "" });
+    setList([]);
+  };
+
+  const handleChange = async (e) => {
+    if (!textSource) {
+      handleList({ animal: e.target.value, value: 1 });
+    }
+  };
+
   return (
-    <div className="column col-11">
-      <InputField
-        className="suggestInput"
-        placeholder={placeholder}
-        name={placeholder}
-        value={value}
-        onChange={handleChange}
+    <div>
+      <TextInputField
+        icon={icon}
+        inputValue={inputValue}
+        placeHolderText={placeHolderText}
+        secure={false}
+        vectorIcon={"MaterialCommunityIcons"}
+        onChangeText={handleChange}
+        handleClear={handleClear}
+        animal={pin.Animal}
       />
-      {/* <div className="relative flex-row">
-        <div className="absolute z-10 left-3 top-1/2 transform -translate-y-1/2 text-gray-400">
-          <SearchIcon />
-        </div>
-
-        <input
-          type="search"
-          className="form-input pl-10" // Adjust padding to make space for the icon
-          value={value}
-          onChange={handleChange}
-          placeholder="Search Places..."
-        />
-      </div> */}
-      {value.length > 1 && (
-        <div variant="text" id="XButton" onClick={clear}>
-          <HighlightOffIcon
-            sx={{
-              color:    'white',
-              height:   '2vh',
-              width:    '2vw',
-              position: 'absolute',
-            }}
-          >
-          </HighlightOffIcon>
-        </div>
-      )}
-
       <div
-        style={{
-          ...style1,
-          height:   'auto',
-          zIndex:   '100',
-          position: 'absolute',
-        }}
+        // style={{
+        //   ...style1,
+        //   height: "auto",
+        //   zIndex: "100",
+        //   position: "absolute",
+        // }}
       >
-        {list.length > 0
-        && list.map((element) => {
-          return (
-            <AutoSuggestListItem
-              key={element}
-              value={element}
-              handleSelect={handleSelect}
-              style={style2}
-              style3={style3}
-            />
-          );
-        })}
+        {list.length > 0 &&
+          list.map((element) => {
+            return (
+              <AutoSuggestListItem
+                key={element}
+                value={element}
+                handleSelect={handleList}
+                // style={style2}
+                // style3={style3}
+              />
+            );
+          })}
       </div>
     </div>
   );

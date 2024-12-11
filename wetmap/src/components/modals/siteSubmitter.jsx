@@ -1,60 +1,32 @@
-import { useState, useEffect, useContext, useRef } from 'react';
-import { Container, Form, FormGroup, Label, Input } from 'reactstrap';
+import { useState, useContext, useRef } from 'react';
 import { animated, useSpring } from 'react-spring';
 import ConfirmationModal from './confirmationModal';
 import './confirmationModal.css';
 import './siteSubmitter.css';
 import exifr from 'exifr';
-import Button from '@mui/material/Button';
-import MyLocationIcon from '@mui/icons-material/MyLocation';
-import PlaceIcon from '@mui/icons-material/Place';
-import MapOutlinedIcon from '@mui/icons-material/MapOutlined';
-import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
 import { exifGPSHelper } from '../../helpers/exifGPSHelpers';
-import Collapse from '@mui/material/Collapse';
 import { insertDiveSiteWaits } from '../../supabaseCalls/diveSiteWaitSupabaseCalls';
-import { userCheck } from '../../supabaseCalls/authenticateSupabaseCalls';
 import { DiveSpotContext } from '../contexts/diveSpotContext';
-import { MasterContext } from '../contexts/masterContext';
-import { ModalSelectContext } from '../contexts/modalSelectContext';
-import { Iterrator2Context } from '../contexts/iterrator2Context';
-import { TutorialContext } from '../contexts/tutorialContext';
-import { ChapterContext } from '../contexts/chapterContext';
-import InputField from '../reusables/inputField';
-import CustomButton from '../reusables/button/button';
-import SubmitButton from '../reusables/button/submitButton';
-import ModalHeader from '../reusables/modalHeader';
-import { ModalContext } from '../contexts/modalContext';
+import { ModalContext } from '../reusables/modal/context';
+import Icon from '../../icons/Icon';
+import WavyHeader from '../newModals/wavyHeader';
+import style from '../newModals/modalContent.module.scss';
+import screenData from '../newModals/screenData.json';
+import TextInputField from '../newModals/textInput';
+import Button from '../newModals/button';
+import backGroundPic from '../../images/boat.png';
+
+import { MapConfigContext } from '../contexts/mapConfigContext';
+
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
-const noGPSZone = (
-  <div
-    style={{
-      marginLeft:      '2%',
-      backgroundColor: 'pink',
-      height:          '40px',
-      width:           '95%',
-      color:           'red',
-      borderRadius:    '15px',
-    }}
-  >
-    <h4 style={{ marginLeft: '35px', paddingTop: '10px' }}>
-      No GPS Coordinates Found!
-    </h4>
-  </div>
-);
-
 const SiteSubmitter = (props) => {
-  const { animateSiteModal, setSiteModalYCoord } = props;
-  const [showNoGPS, setShowNoGPS] = useState(false);
   const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
-  const { setMasterSwitch } = useContext(MasterContext);
-  const { chosenModal, setChosenModal } = useContext(ModalSelectContext);
-  const { itterator2, setItterator2 } = useContext(Iterrator2Context);
-  const { tutorialRunning, setTutorialRunning } = useContext(TutorialContext);
-  const { chapter, setChapter } = useContext(ChapterContext);
+
+  const { setMapConfig } = useContext(MapConfigContext);
+
 
   const [uploadedFile, setUploadedFile] = useState({
     selectedFile: null,
@@ -79,8 +51,7 @@ const SiteSubmitter = (props) => {
   const animateSuccessModal = () => {
     if (successModalYCoord === 0) {
       setSuccessModalYCoord(-windowHeight);
-    }
-    else {
+    } else {
       setSuccessModalYCoord(0);
     }
   };
@@ -88,8 +59,7 @@ const SiteSubmitter = (props) => {
   const animateCautionModal = () => {
     if (cautionModalYCoord === 0) {
       setCautionModalYCoord(-windowHeight);
-    }
-    else {
+    } else {
       setCautionModalYCoord(0);
     }
   };
@@ -124,16 +94,14 @@ const SiteSubmitter = (props) => {
             Latitude:  EXIFData[0],
             Longitude: EXIFData[1],
           });
-        }
-        else {
+        } else {
           setAddSiteVals({ ...addSiteVals });
-          setShowNoGPS(true);
         }
       });
     }
   };
 
-  const handleDiveSiteGPS = () => {
+  const getDeviceLocation = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         function (position) {
@@ -148,150 +116,14 @@ const SiteSubmitter = (props) => {
         },
         { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 },
       );
-      if (tutorialRunning) {
-        if (itterator2 === 13) {
-          setItterator2(itterator2 + 1);
-          setLocButState(false);
-        }
-      }
-    }
-    else {
+    } else {
       console.log('unsupported');
     }
   };
 
-  const handleNoGPSClose = () => {
-    setShowNoGPS(false);
-    return;
-  };
-
-  const handleNoGPSCloseOnMapChange = () => {
-    if (itterator2 === 13 || itterator2 === 23) {
-      return;
-    }
-
-    setChosenModal('DiveSite');
-    setShowNoGPS(false);
-    setMasterSwitch(false);
+  const onNavigate = () => {
+    setMapConfig(1);
     modalPause();
-
-    if (tutorialRunning) {
-      if (itterator2 === 16) {
-        setItterator2(itterator2 + 1);
-        setPinButState(false);
-      }
-    }
-  };
-
-  let counter1 = 0;
-  let counter2 = 0;
-  let blinker1;
-  let blinker2;
-  let timer2;
-
-  const [locButState, setLocButState] = useState(false);
-  const [pinButState, setPinButState] = useState(false);
-  const [siteNameState, setSiteNameState] = useState(false);
-  const [subButState, setSubButState] = useState(false);
-
-  function locationBut() {
-    counter1++;
-    if (counter1 % 2 == 0) {
-      setLocButState(false);
-    }
-    else {
-      setLocButState(true);
-    }
-  }
-
-  function pinBut() {
-    counter1++;
-    if (counter1 % 2 == 0) {
-      setPinButState(false);
-    }
-    else {
-      setPinButState(true);
-    }
-  }
-
-  function siteField() {
-    counter1++;
-    if (counter1 % 2 == 0) {
-      setSiteNameState(false);
-    }
-    else {
-      setSiteNameState(true);
-    }
-  }
-
-  function subButTimeout() {
-    blinker2 = setInterval(subBut, 1000);
-  }
-
-  function subBut() {
-    counter2++;
-    if (counter2 % 2 == 0) {
-      setSubButState(false);
-    }
-    else {
-      setSubButState(true);
-    }
-  }
-
-  function cleanUp() {
-    clearInterval(blinker1);
-    clearInterval(blinker2);
-    setLocButState(false);
-    setPinButState(false);
-    setSiteNameState(false);
-    setSubButState(false);
-  }
-
-  let modalHeigth = 700;
-
-  useEffect(() => {
-    if (tutorialRunning) {
-      if (itterator2 === 16) {
-        blinker1 = setInterval(pinBut, 600);
-      }
-      else if (itterator2 === 13) {
-        blinker1 = setInterval(locationBut, 1000);
-      }
-      else if (itterator2 === 15 || itterator2 == 10) {
-        // setSiteModalYCoord(-windowHeight + (windowHeight - modalHeigth) / 2);
-      }
-      else if (itterator2 === 8 || itterator2 === 1) {
-        props?.onModalCancel?.();
-      }
-      else if (itterator2 === 23) {
-        blinker1 = setInterval(siteField, 1000);
-        timer2 = setTimeout(subButTimeout, 300);
-      }
-      else if (itterator2 === 26) {
-        setAddSiteVals({
-          ...addSiteVals,
-          Site:      '',
-          Latitude:  '',
-          Longitude: '',
-        });
-        props?.onModalCancel?.();
-      }
-    }
-    return () => cleanUp();
-  }, [itterator2]);
-
-  const buttonColor = {
-    color:  'gold',
-    width:  '3.5vw',
-    height: '3.5vh',
-    cursor: 'pointer',
-  };
-
-  const buttonColorAlt = {
-    color:  '#538bdb',
-    width:  '3.5vw',
-    height: '3.5vh',
-    cursor: 'pointer',
   };
 
   const handleSubmit = (e) => {
@@ -301,12 +133,7 @@ const SiteSubmitter = (props) => {
     let LatV = parseFloat(addSiteVals.Latitude);
     let LngV = parseFloat(addSiteVals.Longitude);
 
-    if (tutorialRunning) {
-      if (itterator2 === 23) {
-        setItterator2(itterator2 + 1);
-      }
-    }
-    else if (
+    if (
       SiteV
       && typeof SiteV === 'string'
       && LatV
@@ -318,130 +145,159 @@ const SiteSubmitter = (props) => {
       setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
       animateSuccessModal();
       return;
-    }
-    else {
+    } else {
       animateCautionModal();
     }
   };
 
-  function handleClick() {
-    document.getElementById('file').click();
-  }
-
-  const handleModalClose = () => {
-    if (
-      itterator2 === 13
-      || itterator2 === 16
-      || itterator2 === 19
-      || itterator2 === 23
-    ) {
-      return;
-    }
+  const onClose = () => {
     setAddSiteVals({ ...addSiteVals, Site: '', Latitude: '', Longitude: '' });
     props?.onModalCancel?.();
   };
 
-  const activateGuide = () => {
-    if (tutorialRunning) {
-      //
-    }
-    else {
-      setChapter('DS Help');
-    }
+  const backgroundStyle = {
+    paddingTop:           '25%',
+    backgroundImage:      `url(${backGroundPic})`,
+    display:              'flex',
+    aspectRatio:          1,
+    width:                '100%',
+    backgroundSize:       'cover',
+    backgroundRepeat:     'no-repeat',
+    backgroundPosition:   'center',
+    borderTopLeftRadius:  '2vw',
+    borderTopRightRadius: '2vw',
+    borderWidth:          0,
+    alignItems:           'center',
+    justifyContent:       'center',
   };
 
   return (
     <>
-      <div>
-        <ModalHeader
-          title="Submit Your Dive Site"
-          onClick={() => activateGuide()}
-          svg={<QuestionMarkIcon />}
-          onClose={handleModalClose}
+      <div className={style.backButton} style={{ position: 'absolute' }}>
+        <Icon
+          name="chevron-left"
+          fill="white"
+          width="60px"
+          onClick={() => onClose()}
         />
       </div>
-      <div className="hero hero-sm mx-4 mt-6">
-        <div className="hero-body flex-center-column">
-          <InputField
-            className="column col-8 mb-4"
-            placeholder="Site Name"
-            type="text"
-            name="Site"
-            value={addSiteVals.Site}
-            onChange={handleChange}
-            onClick={handleNoGPSClose}
-            highlighted={siteNameState}
-          />
 
-          <InputField
-            className="column col-8 mb-4"
-            placeholder="Latitude"
-            type="decimal"
-            name="Latitude"
-            value={addSiteVals.Latitude}
-            onChange={handleChange}
-            onClick={handleNoGPSClose}
-          />
+      <div className={style.picZone2}>
+        <div style={backgroundStyle} />
+      </div>
+      <div
+        style={{
+          display:        'flex',
+          alignItems:     'center',
+          justifyContent: 'center',
+          flexDirection:  'column',
+          marginLeft:     '5%',
+          marginRight:    '5%',
+          height:         '50%',
+        }}
+      >
+        <div
+          style={{
+            width:        '100%',
+            marginLeft:   '5%',
+            marginBottom: '5%',
+            overflowY:    'auto',
+          }}
+        >
+          <p className={style.headerText}>{screenData.DiveSiteAdd.header}</p>
 
-          <InputField
-            className="column col-8 mb-4"
-            placeholder="Longitude"
-            type="decimal"
-            name="Longitude"
-            value={addSiteVals.Longitude}
-            onChange={handleChange}
-            onClick={handleNoGPSClose}
-          />
-
-          <div className="columns my-2">
-            <CustomButton
-              onClick={handleDiveSiteGPS}
-              svg={(
-                <MyLocationIcon
-                  sx={locButState ? buttonColorAlt : buttonColor}
-                />
-              )}
-              btnState={locButState}
-            />
-            <CustomButton
-              onClick={handleNoGPSCloseOnMapChange}
-              svg={
-                <PlaceIcon sx={pinButState ? buttonColorAlt : buttonColor} />
-              }
-              btnState={pinButState}
-            />
+          <div
+            className="hero"
+            style={{
+              marginBottom: '20%',
+              width:        '75%',
+              alignItems:   'center',
+              padding:      0,
+            }}
+          >
+            <div className="hero-body">
+              <TextInputField
+                dataType="text"
+                icon="diving-scuba-flag"
+                inputValue={addSiteVals.Site}
+                placeHolderText={screenData.DiveSiteAdd.siteNamePlaceholder}
+                secure={false}
+                onChangeText={handleChange}
+              />
+            </div>
+            <div className="hero-body">
+              <TextInputField
+                dataType="text"
+                icon="latitude"
+                inputValue={addSiteVals.Latitude}
+                placeHolderText={screenData.DiveSiteAdd.latPlaceholder}
+                secure={false}
+                onChangeText={handleChange}
+              />
+            </div>
+            <div className="hero-body">
+              <TextInputField
+                dataType="text"
+                icon="longitude"
+                inputValue={addSiteVals.Longitude}
+                placeHolderText={screenData.DiveSiteAdd.lngPlaceholder}
+                secure={false}
+                onChangeText={handleChange}
+              />
+            </div>
           </div>
         </div>
 
-        <SubmitButton active={!!subButState} onClick={handleSubmit}>
-          Submit Dive Site
-        </SubmitButton>
-
-        <animated.div
-          className="successModal modalBase"
-          style={sucessModalSlide}
-          ref={successModalRef}
-        >
-          <ConfirmationModal
-            submissionItem="dive site"
-            animateModal={animateSuccessModal}
-            handleClose={handleModalClose}
-            isSuccess={true}
+        <div className={style.horizontalButtonContainer}>
+          {/* FIXME: button size is wrong with wide window size */}
+          <Button
+            onClick={getDeviceLocation}
+            btnText={screenData.DiveSiteAdd.myLocationButton}
+            helperText={screenData.DiveSiteAdd.myLocationExplainer}
+            altStyle={true}
           />
-        </animated.div>
-
-        <animated.div
-          className="cautionModal modalBase"
-          style={cautionModalSlide}
-          ref={cautionModalRef}
-        >
-          <ConfirmationModal
-            submissionItem="dive site"
-            animateModal={animateCautionModal}
-            isSuccess={false}
+          <Button
+            onClick={onNavigate}
+            btnText={screenData.DiveSiteAdd.pinButton}
+            altStyle={true}
           />
-        </animated.div>
+        </div>
+
+        <div className={style.submitZone}>
+          <Button
+            onClick={handleSubmit}
+            btnText={screenData.DiveSiteAdd.submitButton}
+            icon={true}
+          />
+        </div>
       </div>
+
+      <WavyHeader customStyles="100%"></WavyHeader>
+
+      <animated.div
+        className="successModal modalBase"
+        style={sucessModalSlide}
+        ref={successModalRef}
+      >
+        <ConfirmationModal
+          submissionItem="dive site"
+          animateModal={animateSuccessModal}
+          handleClose={onClose}
+          isSuccess={true}
+        />
+      </animated.div>
+
+      <animated.div
+        className="cautionModal modalBase"
+        style={cautionModalSlide}
+        ref={cautionModalRef}
+      >
+        <ConfirmationModal
+          submissionItem="dive site"
+          animateModal={animateCautionModal}
+          isSuccess={false}
+        />
+      </animated.div>
     </>
   );
 };

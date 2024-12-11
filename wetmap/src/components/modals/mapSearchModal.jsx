@@ -7,7 +7,9 @@ const MapSearchModal = (props) => {
       <ModalHeader title="Map Search" onClose={props.onModalCancel} />
 
       <div className="flex-center-column" style={{ marginTop: '-10%' }}>
-        <PlacesAutoComplete />
+        <PlacesAutoComplete
+          handleSelect={props.onModalCancel}
+        />
       </div>
     </>
   );

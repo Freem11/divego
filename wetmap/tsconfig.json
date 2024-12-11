@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
       "target": "es5", // Specify ECMAScript target version
+      "types": ["vite/client"],
       "lib": [
         "dom",
         "dom.iterable",
@@ -32,8 +33,6 @@
     //     "@octopus/logger": ["libs/logger/src/index.ts"],
     //     },
     },
-    "include": [
-      "src/**/*" // *** The files TypeScript should type check ***
-    ],
+    "include": ["src/**/*", "declarations.d.ts"],
     "exclude": ["node_modules", "build"] // *** The files to not type check ***
   }

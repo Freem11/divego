@@ -9,27 +9,31 @@
 
   .modalContainer {
     transform: translateY(100vh);
-    background: $primary-color;
+    background: $themeWhite;
     width: 70vw;
     max-width: 600px;
     height: 65vh;
-    margin: 10vh auto;
     z-index: 6;
     position: fixed;
     left: 0;
     top: 0;
     right: 0;
     border-radius: 2vw;
-    border: 1px solid lightgrey;
+    overflow: hidden;
+    // border: 1px solid lightgrey;
 
     &.small {
       height: 30vh;
+      margin: 10vh auto;
     }
     &.medium {
-      height: 73vh;
+      height: 94vh;
+      margin: 3vh auto;
     }
     &.large {
-      height: 80vh;
+      height: 100vh;
+      margin: 0vh auto;
+      max-width: 1200px;
     }
     &.full {
       width: auto;

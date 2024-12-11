@@ -142,8 +142,7 @@ export const getSingleDiveSiteByNameAndRegion = async (values) => {
     if (data) {
       return data;
     }
-  }
-  else {
+  } else {
     const { data, error } = await supabase
       .from('diveSites')
       .select()
@@ -158,5 +157,41 @@ export const getSingleDiveSiteByNameAndRegion = async (values) => {
     if (data) {
       return data;
     }
+  }
+};
+
+export const updateDiveSite = async (values) => {
+  console.log('updating...', values);
+  const { data, error } = await supabase
+    .from('diveSites')
+    .update({ diveSiteBio: values.bio, diveSiteProfilePhoto: values.photo  })
+    .eq('id', values.id);
+
+  if (error) {
+    console.log('couldn\'t do it 2,', error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
+
+export const getDiveSitesforMapArea = async (value) => {
+  const { data, error } = await supabase
+    .from('diveSites')
+    .select()
+    .gte('lat', value.minLat)
+    .gte('lng', value.minLng)
+    .lte('lat', value.maxLat)
+    .lte('lng', value.maxLng);
+
+  if (error) {
+    console.log('couldn\'t do it,', error);
+    return [];
+  }
+
+  if (data) {
+    return data;
   }
 };

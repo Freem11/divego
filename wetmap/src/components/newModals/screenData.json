@@ -1,0 +1,101 @@
+    {
+      "SettingsPage": 
+      {
+       "header": "Settings",
+       "subHeading1": "Account Type",
+       "notPartnerAccount": "Request upgrade to Partner Account?",
+       "notResearcherAccount": "Request upgrade to Researcher Account?",
+       "logout": "Log Out",
+       "delAccount": "Delete Account",
+       "dangerZoneBar": "Danger Zone"
+      },
+      "PartnerRequestPage":
+      {
+        "header": "Partner Account Upgrade",
+        "explanation": "To qualify for a 'Partner Account' Your Account must represent a diving business that takes divers out diving. \n Examples include: Dive Shops, Dive Charters, Diver Centres and Liveaboards",
+        "businessPlaceholder": "Full business name",
+        "businessExplainer": "For display purposes",
+        "websitePlaceholder": "Website Url",
+        "websiteExplainer": "To evaluate and validate your business",
+        "latPlaceholder": "Latitude",
+        "lngPlaceholder": "Longitude",
+        "latLngExplainer": "To place your business on the map",
+        "submitButton" : "Submit"
+      },
+      "SearchPage" :
+      {
+        "header": "Map Navigation",
+        "placeholder": "Search by Dive Site name or Location",
+        "diveAddPrompt": "Can't find your dive site?",
+        "diveAddLink": "Tap here to add it!"
+      },
+      "DiveSiteAdd" :
+      {
+        "header": "Add a New Dive Site",
+        "siteNamePlaceholder": "Dive Site Name",
+        "latPlaceholder": "Latitude",
+        "lngPlaceholder": "Longitude",
+        "myLocationButton" : "Use my location",
+        "myLocationExplainer" : "This can take up to 30 seconds",
+        "pinButton" : "Drop a pin",
+        "submitButton" : "Submit"
+      },
+      "PicUploader" :
+      {
+        "header": "Your Sea Creature Sighting",
+        "uploadButton" : "Upload a Photo",
+        "whatLabel": "What you saw",
+        "whatPlaceholder": "Sea Life Encountered",
+        "whenLabel": "When you saw it",
+        "whenPlaceholder": "Date of Sighting",
+        "whereLabel": "Where you saw it",
+        "wherePlaceholder": "Location of Sighting",
+        "submitButton" : "Submit"
+      },
+      "TripList" :
+      {
+        "header": "Your Dive Trip Offerings",
+        "creatNewTripButton": "New Trip",
+        "expandTrip": "More Info",
+        "editButton": "Edit",
+        "deleteButton": "Delete"
+      },
+      "TripCreator" :
+      {
+        "header": "Create a New Dive Trip",
+        "headerEdit": "Submit Trip Edits",
+        "cloneButton": "Clone This Trip",
+        "tripNamePlaceholder": "Your Trip's Name",
+        "bookingLinkPlaceholder": "Link to your trip's booking page",
+        "pricePlaceholder": "Trip Price",
+        "startDatePlaceholder": "Start Date",
+        "endDatePlaceholder": "End Date",
+        "tripDescriptionPlaceholder" : "Please add any further details about your trip that you think would be helpful in promoting your trip to divers, right here",
+        "submitButton" : "Submit",
+        "selectSitesButton": "Select Dive Sites",
+        "drawerHeader" : "Possible Sites in this Trip   (Press to Remove)",
+        "emptyDrawer": "No Dive Sites have been added to this Trip yet."
+      },
+      "UserProfile" :
+      {
+        "drawerHeader" : "'s Sea Creature Encounters",
+        "emptyDrawer": " hasn't posted any sightings yet.",
+        "userDoesFollow": "Following",
+        "UserDoesNotFollow": "Follow"
+      },
+      "DiveSite" :
+      {
+        "drawerHeader" : "Sea Creature Sightings",
+        "emptyDrawer": "No sightings at this site yet.",
+        "addSightingButton" : "Add Sighting",
+        "submitButton": "Submit"
+      },
+      "DiveShop" :
+      {
+        "drawerHeader" : "Offered Dive Trips",
+        "emptyDrawer": " aren't currently offering any Dive Trips"
+      }
+    }
+
+  
+

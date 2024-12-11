@@ -1,0 +1,12 @@
+.wavyBlock {
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+
+    svg{
+        position: absolute;
+        bottom: -1px;
+        left: -1px;
+        right: -1px;
+    }
+}

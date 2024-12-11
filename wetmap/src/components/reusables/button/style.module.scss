@@ -1,0 +1,35 @@
+@import '../../../styles/variables.scss';
+
+.button {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+}
+
+.iconLeft,
+.iconRight {
+	display: contents;
+
+	svg {
+		height: 100%;
+	}
+}
+
+.label {
+	// different padding for the label depends on the position of the icon
+	// if label is last child it means there is no icon on the right
+	// if label is first child it means there is no icon on the left
+	&>* {
+		padding: 0 0.3rem;
+	}
+
+	&:last-child>* {
+		padding-right: 1rem;
+	}
+
+	&:first-child>* {
+		padding-left: 1rem;
+	}
+}

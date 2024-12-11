@@ -1,0 +1,27 @@
+@import "../../styles/variables.scss";
+
+.inputContainer {
+  display: flex;
+  height: 35px;
+  margin-left: 10%;
+  border-bottom: solid darkgrey 1px;
+  align-items: flex-start;
+}
+.inputText {
+  width: 100%;
+  font-size: $fontSizeStandardText;
+  font-family: $base-font-family;
+  font-weight: 100;
+  color: $themeBlack;
+  text-align: left;
+  padding-left: 2%;
+  // background-color: pink;
+}
+
+.inputContainerPlain {
+  width: fit-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-left: 5%;
+}
