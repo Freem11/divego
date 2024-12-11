@@ -6,11 +6,18 @@ import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from './types';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import TripCreatorListModal from '../tripCreatorListModal/index';
 
 type ShopModalProps = Partial<ModalHandleProps>;
 
-export default function ShopModal(props: ShopModalProps) {
+// const setupDiveShopModal = async (shopName: string, modalShow: ModalShow, setSelectedShop: (shop: DiveShop) => void) => {
+//   modalShow(ShopModal, {
+//     size: 'large',
+//   });
+//   const chosenShop = await getShopByName(shopName);
+//   setSelectedShop(chosenShop[0]);
+// };
+
+export default function TripCreatorListModal(props: ShopModalProps) {
   const { selectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
 
@@ -46,14 +53,6 @@ export default function ShopModal(props: ShopModalProps) {
       await updateDiveShop({ id: selectedShop.id, bio: newValue, photo: selectedShop.diveshopprofilephoto });
     }
   };
-
-
-  const openTripCreatorList = async () => {
-    modalShow(tripCreatorListModal, {
-      size: 'large',
-    });
-  };
-
 
   return (
     <>

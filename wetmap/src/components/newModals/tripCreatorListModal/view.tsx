@@ -72,7 +72,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           <h3>Offered Diving Trips</h3>
           {props?.isPartnerAccount && (
             <div className={`${style.buttonAddDivingEvents}`}>
-              <Button className="mt-2 btn-lg" onClick={}>
+              <Button className="mt-2 btn-lg">
                 Add diving event
               </Button>
             </div>
