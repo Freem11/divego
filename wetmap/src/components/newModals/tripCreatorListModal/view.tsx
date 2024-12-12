@@ -2,11 +2,8 @@ import React, { useRef } from 'react';
 import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
-import PlainTextInput from '../../reusables/plainTextInput';
 import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
-import ButtonIcon from '../../reusables/buttonIcon';
-import Icon from '../../../icons/Icon';
 import { ItineraryItem } from './types';
 import { DiveShop } from '../../../entities/diveShop';
 
@@ -22,13 +19,12 @@ type TripCreatorListViewProps = {
 };
 
 export default function TripCreatorListView(props: TripCreatorListViewProps) {
-  const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
      
       <div className="col-12 panel border-none full-height">
-        {/* <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.handleBackButton}>
-        </WavyModalHeader> */}
+        <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.handleBackButton}>
+        </WavyModalHeader>
         <div className="panel-header">
           <h3>Trip Creator</h3>
           <div className={`${style.buttonAddDivingEvents}`}>

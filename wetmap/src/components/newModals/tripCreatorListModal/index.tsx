@@ -11,21 +11,12 @@ import DiveShopModal from '../shopModal/index';
 
 type TripCreatorListProps = Partial<ModalHandleProps>;
 
-// const setupDiveShopModal = async (shopName: string, modalShow: ModalShow, setSelectedShop: (shop: DiveShop) => void) => {
-//   modalShow(ShopModal, {
-//     size: 'large',
-//   });
-//   const chosenShop = await getShopByName(shopName);
-//   setSelectedShop(chosenShop[0]);
-// };
-
 export default function TripCreatorListModal(props: TripCreatorListProps) {
   const { selectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
   const modalContext = useContext(ModalContext);
   const { modalShow } = useContext(ModalContext);
 
-  const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
 
@@ -34,12 +25,6 @@ export default function TripCreatorListModal(props: TripCreatorListProps) {
       getItineraries(selectedShop.id);
     }
   }, [selectedShop]);
-
-  useEffect(() => {
-    if (profile && profile.partnerAccount) {
-      setIsPartnerAccount(true);
-    }
-  }, []);
 
   const getItineraries = async (IdNum: number) => {
     try {
