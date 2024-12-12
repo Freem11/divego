@@ -61,7 +61,7 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
                 name="diving-snorkel"
                 fill="darkgrey"
                 width="30"
-                style={{ marginTop: 5, cursor: 'pointer' }}
+                style={{ cursor: 'pointer' }}
                 onClick={() => props.handleCommentInsert()}
               />
               }
