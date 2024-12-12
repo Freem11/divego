@@ -55,10 +55,12 @@ const setupDiveShopModal = async (shopName: string, modalShow: ModalShow, setSel
 
 const setupDiveSiteModal = async (diveSiteName: string, latitude: number, longitude: number, modalShow: ModalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
   const cleanedSiteName = diveSiteName.split('~');
+  const steName = cleanedSiteName[0]
+  const siteRegion = cleanedSiteName[1] === "null" ? null : cleanedSiteName[1]
   modalShow(DiveSite, {
     size: 'large',
   });
-  const chosenSite = await getDiveSiteWithUserName({ siteName: cleanedSiteName[0], lat: latitude, lng: longitude });
+  const chosenSite = await getDiveSiteWithUserName({ siteName: steName,region: siteRegion  });
   setSelectedDiveSite(chosenSite[0]);
 };
 
