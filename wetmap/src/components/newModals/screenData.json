@@ -98,7 +98,7 @@
       "CommentsModal" :
       {
         "header" : "Comments",
-        "commentsPlaceholder": "Blow some bubbles",
+        "commentsPlaceholder": "Blow some bubbles . . .",
         "replyButton": "Reply",
         "replyHide": "Hide replies",
         "replyViewSingle": "View Reply",

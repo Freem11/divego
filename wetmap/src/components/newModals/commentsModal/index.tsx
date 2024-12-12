@@ -47,10 +47,10 @@ const CommentsModal = (props: CommentModalProps) => {
         finalContent,
         userIdentity,
       );
-      setCommentContent('');
+      setCommentContent('')
       setReplyTo(null);
       getAllPictureComments(selectedPicture?.id);
-    }
+    };
   };
 
   const getAllPictureComments = async (picId: number | undefined) => {

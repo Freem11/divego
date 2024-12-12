@@ -4,6 +4,7 @@ import style from './style.module.scss';
 import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
 import TextInputField from '../textInput';
+import TextInput from '../../reusables/textInput';
 
 type CommentsModalViewProps = {
   handleCommentInsert:  () => void
@@ -54,21 +55,17 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
             )
           : null}
         <div className={style.replyBox}>
-            <TextInputField
-              icon={' '}
-              dataType="text"
-              secure={false}
-              placeHolderText={screenData.CommentsModal.commentsPlaceholder}
-              inputValue={props.commentContent}
-              onChangeText={(e: { target: { value: React.SetStateAction<string>; }; }) => props.setCommentContent(e.target.value)}
+           <TextInput
+              placeholder={screenData.CommentsModal.commentsPlaceholder}
+              onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => props.setCommentContent(e.target.value)}
             />
-          <Icon
-            name="diving-snorkel"
-            fill="darkgrey"
-            width="30"
-            style={{ marginTop: 5 }}
-            onClick={() => props.handleCommentInsert()}
-          />
+            <Icon
+              name="diving-snorkel"
+              fill="darkgrey"
+              width="30"
+              style={{ marginTop: 5, cursor: 'pointer' }}
+              onClick={() => props.handleCommentInsert()}
+            />
         </div>
       </div>
     </>
