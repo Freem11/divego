@@ -69,7 +69,6 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
       onClose={onClose}
       onSubmit={onSubmit}
       values={{
-        Site: addSiteVals?.Site,
         Latitude:  addSiteVals?.Latitude,
         Longitude: addSiteVals?.Longitude,
       }}
