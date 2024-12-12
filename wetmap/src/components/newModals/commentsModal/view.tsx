@@ -56,16 +56,19 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
           : null}
         <div className={style.replyBox}>
            <TextInput
+              iconRight={
+                <Icon
+                name="diving-snorkel"
+                fill="darkgrey"
+                width="30"
+                style={{ marginTop: 5, cursor: 'pointer' }}
+                onClick={() => props.handleCommentInsert()}
+              />
+              }
               placeholder={screenData.CommentsModal.commentsPlaceholder}
               onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => props.setCommentContent(e.target.value)}
             />
-            <Icon
-              name="diving-snorkel"
-              fill="darkgrey"
-              width="30"
-              style={{ marginTop: 5, cursor: 'pointer' }}
-              onClick={() => props.handleCommentInsert()}
-            />
+         
         </div>
       </div>
     </>
