@@ -1,6 +1,6 @@
 import { supabase } from '../supabase';
 
-export const insertPhotoLike = async (userId, photoId) => {
+export const insertPhotoLike = async (userId: string, photoId: number) => {
   console.log('photo waits gets ', userId, photoId);
 
   const { data, error } = await supabase.from('photoLikes').insert([
@@ -12,10 +12,11 @@ export const insertPhotoLike = async (userId, photoId) => {
   ]).select('*');
 
   if (error) {
-    console.log('couldn\'t do it 40,', error);
+    // console.log('couldn\'t do it 40,', error);
   }
 
   if (data) {
+    console.log(data);
     return (data);
   }
 };

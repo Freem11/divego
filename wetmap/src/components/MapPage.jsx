@@ -210,6 +210,7 @@ const MapPage = React.memo(function MapPage() {
 
   const animateProfileModal = () => {
     modalShow(UserProfileModal);
+    // create new userprofile here
   };
 
   const animateSiteSearchModal = () => {
