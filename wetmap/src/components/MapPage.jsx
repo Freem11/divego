@@ -70,6 +70,7 @@ const MapPage = React.memo(function MapPage() {
 
   const onShopNavigate = () => {
     setMapCoords([selectedShop.lat, selectedShop.lng]);
+    setMapZoom(16);
     setMapConfig(0);
     setSitesArray([]);
   };
