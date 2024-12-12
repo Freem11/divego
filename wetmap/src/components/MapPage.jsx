@@ -5,7 +5,7 @@ import SearchTool from './searchTool/index';
 import SiteSubmitter from './modals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';
-import Settings from './modals/setting';
+import Settings from './newModals/setting';
 import PhotoMenu from './photoMenu/photoMenu2';
 import PhotoFilterer from './photoMenu/photoFilter';
 import { useState, useContext, useEffect } from 'react';
@@ -205,7 +205,9 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateSettingsModal = () => {
-    modalShow(Settings);
+    modalShow(Settings, {
+      size: 'medium', // not really necessary as this is the defaul parameter
+    });
   };
 
   const animateProfileModal = () => {

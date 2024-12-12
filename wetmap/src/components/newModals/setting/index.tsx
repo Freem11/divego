@@ -72,17 +72,20 @@ export default function Settings(props) {
       </div>
     </div>
   );
-  */ }
 
   const handleLogout = async () => {
     await localStorage.removeItem('token');
     await signOut();
     setActiveSession(null);
+  };  */ }
+
+  const onClose = () => {
+    props?.onModalCancel?.();
   };
 
   return (
     <SettingsView
-      handleLogout={handleLogout}
+      onClose={onClose}
     />
   );
 }

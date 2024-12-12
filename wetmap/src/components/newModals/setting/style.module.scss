@@ -1,1 +1,23 @@
 @import "../../../styles/variables.scss";
+
+.buttonBack {
+    position: absolute;
+    top: 6%;
+    left: 3%;
+    z-index: 1;
+
+    svg {
+        scale: 2;
+    }
+}
+
+.twoRow {
+display: flex;
+flex-direction: column;
+}
+
+.twoRow div {
+padding-top: 20px;
+padding-left: 4px;
+}
+
