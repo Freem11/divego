@@ -2,7 +2,7 @@ import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import MapLoader from './googleMap';
 import SearchTool from './searchTool/index';
-import SiteSubmitter from './modals/siteSubmitter';
+import SiteSubmitter from './newModals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';
 import Settings from './modals/setting';
