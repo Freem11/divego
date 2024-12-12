@@ -4,7 +4,7 @@ import shopIcon from '../../images/mapIcons/DiveCentre24x24.png';
 import DiveSite from '../newModals/diveSite/index';
 import ShopModal from '../newModals/shopModal/index';
 import { getShopByName } from '../../supabaseCalls/shopsSupabaseCalls';
-import { ClusterCoordinates, ClusterProperty } from './types';
+import { ClusterProperty } from './types';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
 import { getDiveSiteWithUserName } from '../../supabaseCalls/diveSiteSupabaseCalls';
@@ -53,7 +53,7 @@ const setupDiveShopModal = async (shopName: string, modalShow: ModalShow, setSel
   setSelectedShop(chosenShop[0]);
 };
 
-const setupDiveSiteModal = async (diveSiteName: string, latitude: number, longitude: number, modalShow: ModalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
+const setupDiveSiteModal = async (diveSiteName: string, modalShow: ModalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void) => {
   const cleanedSiteName = diveSiteName.split('~');
   const steName = cleanedSiteName[0]
   const siteRegion = cleanedSiteName[1] === "null" ? null : cleanedSiteName[1]
@@ -64,16 +64,13 @@ const setupDiveSiteModal = async (diveSiteName: string, latitude: number, longit
   setSelectedDiveSite(chosenSite[0]);
 };
 
-function setupPinConfigs(info: ClusterProperty, coordinates: ClusterCoordinates, modalShow: ModalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {
-  const [longitude, latitude] = coordinates;
+function setupPinConfigs(info: ClusterProperty, modalShow: ModalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {
   const iconType = info.category === 'Dive Site' ? anchorIcon : info.category === 'Dive Site Selected' ? anchorIconGold : shopIcon;
   const modalSetup = info.category === 'Shop'
     ? () => { setupDiveShopModal(info.siteID, modalShow, setSelectedShop); }
     : () => {
           setupDiveSiteModal(
             info.siteID,
-            latitude,
-            longitude,
             modalShow,
             setSelectedDiveSite,
           );

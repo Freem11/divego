@@ -32,7 +32,7 @@ export default function ShopModal(props: ShopModalProps) {
   const getItineraries = async (IdNum: number) => {
     try {
       const itins = await itineraries(IdNum);
-      if (itins && itins.length > 0) {
+      if (itins) {
         setItineraryList(itins);
       }
     } catch (e) {

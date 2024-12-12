@@ -25,7 +25,6 @@ export default function DiveSite(props: DiveSiteProps) {
 
   useEffect(() => {
     if (selectedDiveSite) {
-      console.log("???", selectedDiveSite)
       getPhotos(selectedDiveSite, profile);
     }
   }, [selectedDiveSite, profile]);
