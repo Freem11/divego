@@ -19,8 +19,6 @@ export default function DiveSite(props: DiveSiteProps) {
   const { profile }          = useContext(UserProfileContext);
   const { modalShow }        = useContext(ModalContext);
   const { pin, setPin }      = useContext(PinContext);
-
-  // const [diveSite, setDiveSite] = useState<DiveSiteWithUserName | null>(null);
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
@@ -38,12 +36,12 @@ export default function DiveSite(props: DiveSiteProps) {
     }
   }, []);
 
-  const getPhotos = async (site: DiveSiteWithUserName, user: ActiveProfile| null) => {
+  const getPhotos = async (site: DiveSiteWithUserName, user: ActiveProfile | null) => {
     try {
       const photos = await getPhotosByDiveSiteWithExtra({
         lat:    site.lat,
         lng:    site.lng,
-        userId: profile?.UserID,
+        userId: user?.UserID,
       });
       if (photos && photos.length > 0) {
         setDiveSitePics(photos);
@@ -72,8 +70,8 @@ export default function DiveSite(props: DiveSiteProps) {
     if (selectedDiveSite) {
       setPin({
         ...pin,
-        Latitude:  String(selectedDiveSite.lat),
-        Longitude: String(selectedDiveSite.lng),
+        Latitude:  selectedDiveSite.lat,
+        Longitude: selectedDiveSite.lng,
         siteName:  selectedDiveSite.name,
       });
     }
@@ -81,7 +79,6 @@ export default function DiveSite(props: DiveSiteProps) {
 
     modalShow(PicUploader);
   };
-
 
 
   useEffect(() => {
@@ -114,7 +111,7 @@ export default function DiveSite(props: DiveSiteProps) {
               photo: selectedDiveSite.divesiteprofilephoto,
             });
           } catch (e) {
-            console.log({ title: 'Error19', message: e.message });
+            console.log({ title: 'Error19', message: (e as Error).message });
           }
         }
       }}
