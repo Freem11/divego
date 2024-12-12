@@ -11,35 +11,18 @@ type SettingsProps = {
 export default function SettingsView(props: SettingsProps) {
   return (
     <>
-      {/* <ModalHeader title="Settings" onClose={props.onClose} /> */}
-      <div className="flex-column-between full-height mx-6 mb-6">
-        <div className="flex-column-between full-height">
-          <div className={styles.buttonBack}>
-            <ButtonIcon
-              icon={<Icon name="chevron-left" fill="gray" />}
-              className="btn-lg"
-              onClick={(e) => {
-                if (props.onClose) {
-                  props.onClose(e);
-                }
-              }}
-            />
-          </div>
-          <div className={styles.twoRow}>
-            <div>
-              <div className="d-flex mx-3">
-                <h1 className="text-clip text-bold">{' '}</h1>
-              </div>
-            </div>
-            <div>
-              <div className="d-flex mx-3">
-                <h1 className="text-clip text-bold">{screenData.SettingsPage.header}</h1>
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className={styles.buttonBack}>
+        <ButtonIcon
+          icon={<Icon name="chevron-left" />}
+          className="btn-lg text-gray"
+          onClick={(e) => {
+            if (props.onClose) {
+              props.onClose(e);
+            }
+          }}
+        />
+        <h1 className="ml-4 mt-4 text-bold">{screenData.SettingsPage.header}</h1>
       </div>
-
     </>
   );
 }
