@@ -4,6 +4,7 @@ import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from './types';
+import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorListModal from '../tripCreatorListModal/index';
@@ -17,6 +18,8 @@ export default function ShopModal(props: ShopModalProps) {
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
+  const modalContext = useContext(ModalContext);
+  const { modalShow } = useContext(ModalContext);
 
   useEffect(() => {
     if (selectedShop) {
@@ -49,7 +52,8 @@ export default function ShopModal(props: ShopModalProps) {
 
 
   const openTripCreatorList = async () => {
-    modalShow(tripCreatorListModal, {
+    modalContext.modalCancel();
+    modalShow(TripCreatorListModal, {
       size: 'large',
     });
   };
@@ -68,6 +72,7 @@ export default function ShopModal(props: ShopModalProps) {
           itineraryList={itineraryList}
           selectedID={selectedID}
           headerPictureUrl={null}
+          openTripCreatorList={openTripCreatorList}
         />
       )}
     </>

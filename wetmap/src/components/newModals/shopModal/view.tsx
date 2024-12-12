@@ -16,6 +16,7 @@ type ShopModelViewProps = {
   onClose?:                     () => void
   handleDiveShopBioChange:      (newValue: string) => void
   handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
+  openTripCreatorList: () => void
 
   diveShop:         DiveShop | null
   isPartnerAccount: boolean
@@ -72,7 +73,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           <h3>Offered Diving Trips</h3>
           {props?.isPartnerAccount && (
             <div className={`${style.buttonAddDivingEvents}`}>
-              <Button className="mt-2 btn-lg" onClick={}>
+              <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
                 Add diving event
               </Button>
             </div>

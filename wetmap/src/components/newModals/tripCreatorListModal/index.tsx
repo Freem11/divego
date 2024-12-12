@@ -4,10 +4,10 @@ import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from './types';
-import ShopModalView from './view';
+import TripCreatorListView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
 
-type ShopModalProps = Partial<ModalHandleProps>;
+type TripCreatorListProps = Partial<ModalHandleProps>;
 
 // const setupDiveShopModal = async (shopName: string, modalShow: ModalShow, setSelectedShop: (shop: DiveShop) => void) => {
 //   modalShow(ShopModal, {
@@ -17,7 +17,7 @@ type ShopModalProps = Partial<ModalHandleProps>;
 //   setSelectedShop(chosenShop[0]);
 // };
 
-export default function TripCreatorListModal(props: ShopModalProps) {
+export default function TripCreatorListModal(props: TripCreatorListProps) {
   const { selectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
 
@@ -57,7 +57,7 @@ export default function TripCreatorListModal(props: ShopModalProps) {
   return (
     <>
       {selectedShop && (
-        <ShopModalView
+        <TripCreatorListView
           setSelectedID={setSelectedID}
           onClose={props.onModalCancel}
           handleDiveShopBioChange={handleDiveShopBioChange}

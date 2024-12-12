@@ -11,7 +11,7 @@ import { ItineraryItem } from './types';
 import { DiveShop } from '../../../entities/diveShop';
 
 
-type ShopModelViewProps = {
+type TripCreatorListViewProps = {
   setSelectedID:                (id: number) => void
   onClose?:                     () => void
   handleDiveShopBioChange:      (newValue: string) => void
@@ -24,7 +24,7 @@ type ShopModelViewProps = {
   headerPictureUrl: string | null
 };
 
-export default function ShopModalView(props: ShopModelViewProps) {
+export default function TripCreatorListView(props: TripCreatorListViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
@@ -34,39 +34,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
         type="file"
         onChange={props.handleDiveShopImageSelection}
       />
-      <div className="col-6">
-        <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
-          <div className={style.buttonImageUpload}>
-            {props?.isPartnerAccount && (
-              <ButtonIcon
-                icon={<Icon name="camera-plus" />}
-                className="btn-lg"
-                onClick={() => {}}
-              />
-            )}
-          </div>
-        </WavyModalHeader>
-        <div className="ml-6">
-          <div className="stack-4">
-            <div>
-              <div className="d-flex">
-                <h1 className="mb-0">{props?.diveShop?.orgname}</h1>
-              </div>
-            </div>
-
-            <div className="panel border-none">
-              <div className="panel-body">
-                <PlainTextInput
-                  placeholder={`A little about ${props?.diveShop?.orgname}`}
-                  value={props?.diveShop?.diveshopbio || ''}
-                  readOnly={!props?.isPartnerAccount}
-                  onSave={props?.handleDiveShopBioChange}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+     
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
           <h3>Offered Diving Trips</h3>
