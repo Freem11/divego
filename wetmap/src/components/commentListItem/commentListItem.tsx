@@ -53,7 +53,7 @@ export default function CommentListItem(props: CommentListItemType) {
               onClick={() => toggleShowReplies(commentDetails)}
             >
               {selectedReplyId.includes(commentDetails.id)
-                ?  screenData.CommentsModal.replyHide
+                ?  nbReplies === 1 ? screenData.CommentsModal.replyHideSingle : screenData.CommentsModal.replyHideMultiple 
                 : nbReplies === 1 ? screenData.CommentsModal.replyViewSingle : `${screenData.CommentsModal.replyViewMultiplOne} ${nbReplies} ${screenData.CommentsModal.replyViewMultiplTwo}`}
             </p>
           )

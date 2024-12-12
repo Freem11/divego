@@ -9,7 +9,7 @@
 
 .commentEntryContainer{
   position: fixed;
-  bottom: 3%;
+  bottom: 5%;
   left: 5%;
   // display: flex;
   width: 90%;
@@ -24,8 +24,8 @@
   align-items: center;
   justify-content: space-between;
   width: 85%;
-  height: 30px;
   padding-right: 8px;
+  margin-left: 4%;
   background-color: lightgray;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -39,7 +39,7 @@
 
 .replyBox {
   position: fixed;
-  width: 90%;
-  bottom: 3%;
-  left: 5%;
+  width: 86%;
+  bottom: 5%;
+  left: 7%;
 }

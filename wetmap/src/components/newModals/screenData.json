@@ -100,7 +100,8 @@
         "header" : "Comments",
         "commentsPlaceholder": "Blow some bubbles . . .",
         "replyButton": "Reply",
-        "replyHide": "Hide replies",
+        "replyHideSingle": "Hide reply",
+        "replyHideMultiple": "Hide replies",
         "replyViewSingle": "View Reply",
         "replyViewMultiplOne": "View ",
         "replyViewMultiplTwo":" Replies"

@@ -19,7 +19,7 @@ type CommentsModalViewProps = {
 export default function CommentsModalView(props: CommentsModalViewProps) {
   return (
     <>
-      <div>
+      <div style={{alignContent: 'flex-start'}}>
       <ButtonIcon
           icon={<Icon name="chevron-left" style={{ scale: '2' }} />}
           className="btn-lg mt-4 text-gray"
@@ -29,7 +29,7 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
             }
           }}
         />
-      <h1 className="mb-0 pb-4">{screenData.CommentsModal.header}</h1>
+      <h1 className="ml-10 pl-4 mb-0 pb-4" style={{textAlign: "left"}}>{screenData.CommentsModal.header}</h1>
       </div>
 
       <div className={style.middleContainer}>
