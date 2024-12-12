@@ -40,15 +40,17 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         >
           <div className={style.buttonOpenPictureUpload}></div>
 
-      {props.isPartnerAccount &&
-        <div className={style.buttonImageUpload}>
-          <ButtonIcon
-            icon={<Icon name="camera-plus" />}
-            className="btn-lg"
-            onClick={() => fileUploaderRef?.current?.click?.()}
-          />
-        </div>}
-        
+          {props.isPartnerAccount
+          && (
+            <div className={style.buttonImageUpload}>
+              <ButtonIcon
+                icon={<Icon name="camera-plus" />}
+                className="btn-lg"
+                onClick={() => fileUploaderRef?.current?.click?.()}
+              />
+            </div>
+          )}
+
         </WavyModalHeader>
 
         <div className="ml-6">
@@ -61,7 +63,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                     name="flag"
                     fill="maroon"
                     width="30px"
-                    style={{cursor: 'pointer'}}
+                    style={{ cursor: 'pointer' }}
                     onClick={() =>
                       (window.location.href = `mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20Dive%20Site:%20"${props.diveSite?.name}"%20at%20Latitude:%20${props.diveSite?.lat}%20Longitude:%20${props.diveSite?.lng}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Dive%20site%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20dive%20site%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Dive%20site%20GPS%20coordinates%20are%20not%20correct%0D%0A%0D%0A(Please%20provide%20a%20correct%20latitude%20and%20longitude%20and%20we%20will%20update%20the%20record)`)}
                   />
@@ -107,7 +109,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                 {packet.photos
                 && packet.photos.map((pic) => {
                   return (
-                    <SeaLifeImageCard key={pic.id} pic={pic}/>
+                    <SeaLifeImageCard key={pic.id} pic={pic} />
                   );
                 })}
               </div>

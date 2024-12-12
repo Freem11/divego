@@ -13,7 +13,7 @@ import FullScreenModal from '../../modals/fullScreenModal';
 import SeaLifeImageCardView from './view';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
 
-export default function SeaLifeImageCard(props: {pic: PhotoWithLikesAndComments}) {
+export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments }) {
   const { pic } = props;
   const { profile } = useContext(UserProfileContext);
   const [picLiked, setPicLiked] = useState(pic.likedbyuser);
@@ -23,19 +23,19 @@ export default function SeaLifeImageCard(props: {pic: PhotoWithLikesAndComments}
 
   const { modalShow } = useContext(ModalContext);
   const photoName = pic.photoFile.split('/').pop();
-  
+
 
   const handleFollow = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, userName: string) => {
     e.stopPropagation();
     let picOwnerAccount;
     const accounts = await grabProfileByUserName(userName);
-      if (accounts){
-        picOwnerAccount = accounts[0];
-      
-        if (profile?.UserID === picOwnerAccount.UserID) {
-          return;
-        }
-      } 
+    if (accounts) {
+      picOwnerAccount = accounts[0];
+
+      if (profile?.UserID === picOwnerAccount.UserID) {
+        return;
+      }
+    }
 
     modalShow(UserProfileModal, {
       keepPreviousModal: true,
@@ -57,12 +57,12 @@ export default function SeaLifeImageCard(props: {pic: PhotoWithLikesAndComments}
       setPicLiked(false);
       setCountOfLikes(countOfLikes - 1);
     } else {
-        if(profile){
-          const newRecord = await insertPhotoLike(profile?.UserID, pic.id);
-          setPicLiked(true);
-          setLikeData(newRecord && newRecord[0].id);
-          setCountOfLikes(countOfLikes + 1);
-        }
+      if (profile) {
+        const newRecord = await insertPhotoLike(profile?.UserID, pic.id);
+        setPicLiked(true);
+        setLikeData(newRecord && newRecord[0].id);
+        setCountOfLikes(countOfLikes + 1);
+      }
     }
   };
 

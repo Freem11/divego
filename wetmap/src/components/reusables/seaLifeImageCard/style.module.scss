@@ -27,7 +27,6 @@
   justify-content: space-between;
   flex-direction: row;
   pointer-events: none;
-  /* background-color: hotpink; */
   width: 96%;
   height: 40px;
   padding: 0.1vw;
@@ -42,7 +41,6 @@
   align-items: center;
   flex-direction: row;
   pointer-events: none;
-  /* background-color: hotpink; */
   height: 35px;
   padding: 0.1vw;
   margin-left: 2%;
@@ -61,7 +59,6 @@
   color: #f0eeeb;
   opacity: 0.7;
   overflow: hidden;
-  /* background-color: greenyellow; */
 }
 
 .atagp {
@@ -119,7 +116,7 @@
   cursor: pointer;
   text-decoration: underline;
 }
+
 .commentPrompt:hover {
   text-decoration: none;
 }
-

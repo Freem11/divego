@@ -36,12 +36,12 @@ export default function DiveSite(props: DiveSiteProps) {
     }
   }, []);
 
-  const getPhotos = async (site: DiveSiteWithUserName, user: ActiveProfile| null) => {
+  const getPhotos = async (site: DiveSiteWithUserName, user: ActiveProfile | null) => {
     try {
       const photos = await getPhotosByDiveSiteWithExtra({
         lat:    site.lat,
         lng:    site.lng,
-        userId: profile?.UserID,
+        userId: user?.UserID,
       });
       if (photos && photos.length > 0) {
         setDiveSitePics(photos);
@@ -79,7 +79,6 @@ export default function DiveSite(props: DiveSiteProps) {
 
     modalShow(PicUploader);
   };
-
 
 
   useEffect(() => {
