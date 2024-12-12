@@ -54,7 +54,7 @@ export default function ShopModal(props: ShopModalProps) {
   const openTripCreatorList = async () => {
     modalContext.modalCancel();
     modalShow(TripCreatorListModal, {
-      size: 'large',
+      size: 'medium',
     });
   };
 

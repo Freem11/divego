@@ -74,7 +74,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           {props?.isPartnerAccount && (
             <div className={`${style.buttonAddDivingEvents}`}>
               <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
-                Add diving event
+                Edit trips
               </Button>
             </div>
           )}

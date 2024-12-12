@@ -13,12 +13,9 @@ import { DiveShop } from '../../../entities/diveShop';
 
 type TripCreatorListViewProps = {
   setSelectedID:                (id: number) => void
-  onClose?:                     () => void
-  handleDiveShopBioChange:      (newValue: string) => void
-  handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleBackButton:             () => void
 
   diveShop:         DiveShop | null
-  isPartnerAccount: boolean
   itineraryList:    ItineraryItem[] | null
   selectedID:       number
   headerPictureUrl: string | null
@@ -28,23 +25,17 @@ export default function TripCreatorListView(props: TripCreatorListViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
-      <input
-        ref={fileUploaderRef}
-        className="d-hide"
-        type="file"
-        onChange={props.handleDiveShopImageSelection}
-      />
      
-      <div className="col-6 panel border-none full-height">
+      <div className="col-12 panel border-none full-height">
+        {/* <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.handleBackButton}>
+        </WavyModalHeader> */}
         <div className="panel-header">
-          <h3>Offered Diving Trips</h3>
-          {props?.isPartnerAccount && (
-            <div className={`${style.buttonAddDivingEvents}`}>
-              <Button className="mt-2 btn-lg">
-                Add diving event
-              </Button>
-            </div>
-          )}
+          <h3>Trip Creator</h3>
+          <div className={`${style.buttonAddDivingEvents}`}>
+            <Button className="mt-2 btn-lg">
+              Add new trip
+            </Button>
+          </div>
         </div>
         <div className={`${style.itineraryList}`}>
           {props?.itineraryList// in the future, if itineraryList is not empty, render a loading spinner
