@@ -132,11 +132,13 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
             : null}
 
           <TextAreaInput
+            className="text-large"
             placeholder={screenData.CommentsModal.commentsPlaceholder}
             onChange={(e: { target: { value: React.SetStateAction<string> } }) => props.setCommentContent(e.target.value)}
           />
         </div>
         <ButtonIcon
+          className="btn-lg"
           icon={<Icon name="diving-snorkel" fill="darkgrey" />}
           onClick={() => props.handleCommentInsert()}
         />
