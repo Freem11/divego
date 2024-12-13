@@ -1,21 +1,19 @@
 @import "../../../styles/variables.scss";
 
-.middleContainer{
-  width: 98%;
-  height: 74%;
+.middleContainer {
+  height: 100%;
   overflow: hidden;
   overflow-y: auto;
 }
 
-.commentEntryContainer{
-  position: fixed;
-  bottom: 5%;
-  left: 5%;
-  // display: flex;
-  width: 90%;
-  height: 66px;
-  // flex-direction: column;
-  // background-color: aqua;
+.commentEntryContainer {
+  display: flex;
+  padding: 0.8rem 0.8rem 2rem 0.8rem;
+  align-items: end;
+}
+
+.commentEntryInput {
+  width: 100%;
 }
 
 .replyLine {
@@ -23,23 +21,8 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  width: 85%;
   padding-right: 8px;
-  margin-left: 4%;
   background-color: lightgray;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-}
-
-.userText{
-  font-weight: lighter;
-  padding-left: 2%;
-  margin-bottom: 1px;
-}
-
-.replyBox {
-  position: fixed;
-  width: 86%;
-  bottom: 5%;
-  left: 7%;
 }

@@ -1,26 +1,102 @@
-import React, { SetStateAction } from 'react';
+import React, { SetStateAction, useState } from 'react';
 import screenData from '../screenData.json';
 import style from './style.module.scss';
 import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
-import TextInputField from '../textInput';
-import TextInput from '../../reusables/textInput';
+import CommentListItem from '../../commentListItem/commentListItem';
+import { CommentItem } from '../../../entities/comment';
+import TextAreaInput from '../../reusables/textAreaInput';
 
 type CommentsModalViewProps = {
-  handleCommentInsert:  () => void
-  setCommentContent:    (value: SetStateAction<string>) => void
-  setReplyTo: (value: SetStateAction<(number|string)[] | null>) => void
-  commentContent: string
-  replyTo: (number|string)[] | null
-  getCommentListView: (commentId: number | null, level?: number) => React.JSX.Element
-  onClose?:                     () => void
+  handleCommentInsert: () => void
+  setCommentContent:   (value: SetStateAction<string>) => void
+  setReplyTo:          (value: SetStateAction<(number | string)[] | null>) => void
+  replyTo:             (number | string)[] | null
+  listOfComments:      CommentItem[]
+  onClose?:            () => void
 };
 
 export default function CommentsModalView(props: CommentsModalViewProps) {
+  const [selectedReplyId, setSelectedReplyId] = useState<number[]>([]);
+
+  const hideRepliesForChildren = (parentId: number, newSelectedReplyId: number[]) => {
+    newSelectedReplyId = [
+      ...newSelectedReplyId.filter(id => parentId !== id),
+    ];
+    for (const comment of props.listOfComments) {
+      if (comment.replied_to === parentId) {
+        newSelectedReplyId = hideRepliesForChildren(
+          comment.id,
+          newSelectedReplyId,
+        );
+      }
+    }
+
+    return newSelectedReplyId;
+  };
+
+  const toggleShowReplies = (commentID: number) => {
+    if (selectedReplyId.includes(commentID)) {
+      const selectedReplyIdTemp = hideRepliesForChildren(
+        commentID,
+        selectedReplyId,
+      );
+      setSelectedReplyId(selectedReplyIdTemp);
+    } else {
+      setSelectedReplyId([...selectedReplyId, commentID]);
+    }
+  };
+
+  const getCommentListView = (commentId: number | null, level = 0) => {
+    const marginLeft = 5 * level;
+    const width = 100 - marginLeft;
+    const marginStyle = {
+      commentLevelShift: {
+        marginLeft: `${marginLeft}%`,
+        width:      `${width}%`,
+      },
+    };
+    return (
+      <div
+        key={`parent-${commentId ? commentId : 0}`}
+        className="commentListContainer"
+        style={marginStyle.commentLevelShift}
+      >
+        {props.listOfComments
+        && props.listOfComments.map((commentDeets) => {
+          if (commentDeets.replied_to === commentId) {
+            let nbReplies = 0;
+            for (const comment of props.listOfComments) {
+              if (comment.replied_to === commentDeets.id) {
+                nbReplies++;
+              }
+            }
+            return selectedReplyId.includes(commentDeets.replied_to)
+              || commentDeets.replied_to === null
+              ? (
+                  <div key={commentDeets.id}>
+                    <CommentListItem
+                      commentDetails={commentDeets}
+                      setReplyTo={props.setReplyTo}
+                      replyTo={props.replyTo}
+                      toggleShowReplies={() => toggleShowReplies(commentDeets.id)}
+                      selectedReplyId={selectedReplyId}
+                      nbReplies={nbReplies}
+                    />
+                    {getCommentListView(commentDeets.id, level + 1)}
+                  </div>
+                )
+              : null;
+          }
+        })}
+      </div>
+    );
+  };
+
   return (
-    <>
-      <div style={{alignContent: 'flex-start'}}>
-      <ButtonIcon
+    <div className="flex-column-between full-height">
+      <div>
+        <ButtonIcon
           icon={<Icon name="chevron-left" style={{ scale: '2' }} />}
           className="btn-lg mt-4 text-gray"
           onClick={() => {
@@ -29,48 +105,42 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
             }
           }}
         />
-      <h1 className="ml-10 pl-4 mb-0 pb-4" style={{textAlign: "left"}}>{screenData.CommentsModal.header}</h1>
+        <h1 className="ml-10 pl-4 mb-0 pb-4 text-left">{screenData.CommentsModal.header}</h1>
       </div>
 
       <div className={style.middleContainer}>
-        {' '}
-        {props.getCommentListView(null)}
+        {getCommentListView(null)}
       </div>
 
       <div className={style.commentEntryContainer}>
-        {props.replyTo
-          ? (
-              <div className={style.replyLine}>
-                <p className={style.userText}>
-                  @
-                  {props.replyTo[0]}
-                </p>
-                <Icon
-                name="close"
-                fill="darkgrey"
-                width="20"
-                onClick={() => props.setReplyTo(null)}
-                 />
-              </div>
-            )
-          : null}
-        <div className={style.replyBox}>
-           <TextInput
-              iconRight={
-                <Icon
-                name="diving-snorkel"
-                fill="darkgrey"
-                width="30"
-                style={{ cursor: 'pointer' }}
-                onClick={() => props.handleCommentInsert()}
-              />
-              }
-              placeholder={screenData.CommentsModal.commentsPlaceholder}
-              onChange={(e: { target: { value: React.SetStateAction<string>; }; }) => props.setCommentContent(e.target.value)}
-            />
-         
+        <div className={style.commentEntryInput}>
+          {props.replyTo
+            ? (
+                <div className={style.replyLine}>
+                  <span className="pl-2">
+                    @
+                    {props.replyTo[0]}
+                  </span>
+                  <Icon
+                    name="close"
+                    fill="darkgrey"
+                    width="20"
+                    onClick={() => props.setReplyTo(null)}
+                  />
+                </div>
+              )
+            : null}
+
+          <TextAreaInput
+            placeholder={screenData.CommentsModal.commentsPlaceholder}
+            onChange={(e: { target: { value: React.SetStateAction<string> } }) => props.setCommentContent(e.target.value)}
+          />
         </div>
+        <ButtonIcon
+          icon={<Icon name="diving-snorkel" fill="darkgrey" />}
+          onClick={() => props.handleCommentInsert()}
+        />
       </div>
-    </>
+    </div>
   );
 }
