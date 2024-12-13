@@ -71,8 +71,8 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
                 nbReplies++;
               }
             }
-            return selectedReplyId.includes(commentDeets.replied_to)
-              || commentDeets.replied_to === null
+            return commentDeets.replied_to === null || 
+            selectedReplyId.includes(commentDeets.replied_to)
               ? (
                   <div key={commentDeets.id}>
                     <CommentListItem
