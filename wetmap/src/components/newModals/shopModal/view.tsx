@@ -14,14 +14,13 @@ import { DiveShop } from '../../../entities/diveShop';
 type ShopModelViewProps = {
   setSelectedID:                (id: number) => void
   onClose?:                     () => void
+  handleImageSelection:         (event: React.ChangeEvent<HTMLInputElement>) => void
   handleDiveShopBioChange:      (newValue: string) => void
-  handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
-
-  diveShop:         DiveShop | null
-  isPartnerAccount: boolean
-  itineraryList:    ItineraryItem[] | null
-  selectedID:       number
-  headerPictureUrl: string | null
+  diveShop:                     DiveShop | null
+  isPartnerAccount:             boolean
+  itineraryList:                ItineraryItem[] | null
+  selectedID:                   number
+  headerPictureUrl:             string | null
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
@@ -32,7 +31,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
         ref={fileUploaderRef}
         className="d-hide"
         type="file"
-        onChange={props.handleDiveShopImageSelection}
+        onChange={props.handleImageSelection}
       />
       <div className="col-6">
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
@@ -41,7 +40,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
               <ButtonIcon
                 icon={<Icon name="camera-plus" />}
                 className="btn-lg"
-                onClick={() => {}}
+                onClick={() => fileUploaderRef?.current?.click?.()}
               />
             )}
           </div>
