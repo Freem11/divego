@@ -14,6 +14,7 @@ export default function ShopModal(props: ShopModalProps) {
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
 
+  const [isMyShop, setIsMyShop] = useState<boolean>(false);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
@@ -22,11 +23,27 @@ export default function ShopModal(props: ShopModalProps) {
     if (selectedShop) {
       getItineraries(selectedShop.id);
     }
+    if (
+      (profile?.partnerAccount) &&
+      (selectedShop?.userId === profile.UserID)
+    ) {
+      setIsMyShop(true);
+    } else {
+      setIsMyShop(false);
+    }
   }, [selectedShop]);
 
   useEffect(() => {
     if (profile && profile.partnerAccount) {
       setIsPartnerAccount(true);
+    }
+    if (
+      (profile?.partnerAccount) &&
+      (selectedShop?.userId === profile.UserID)
+    ) {
+      setIsMyShop(true);
+    } else {
+      setIsMyShop(false);
     }
   }, []);
 
@@ -75,6 +92,7 @@ export default function ShopModal(props: ShopModalProps) {
           itineraryList={itineraryList}
           selectedID={selectedID}
           headerPictureUrl={null}
+          isMyShop={isMyShop}
         />
       )}
     </>

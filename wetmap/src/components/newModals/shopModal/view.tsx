@@ -21,6 +21,7 @@ type ShopModelViewProps = {
   itineraryList:                ItineraryItem[] | null
   selectedID:                   number
   headerPictureUrl:             string | null
+  isMyShop:                     boolean
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
@@ -36,7 +37,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6">
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
           <div className={style.buttonImageUpload}>
-            {props?.isPartnerAccount && (
+            {(props?.isPartnerAccount && props.isMyShop) && (
               <ButtonIcon
                 icon={<Icon name="camera-plus" />}
                 className="btn-lg"
@@ -58,7 +59,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
                 <PlainTextInput
                   placeholder={`A little about ${props?.diveShop?.orgname}`}
                   value={props?.diveShop?.diveshopbio || ''}
-                  readOnly={!props?.isPartnerAccount}
+                  readOnly={!props?.isPartnerAccount || !props.isMyShop}
                   onSave={props?.handleDiveShopBioChange}
                 />
               </div>
@@ -69,7 +70,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
           <h3>Offered Diving Trips</h3>
-          {props?.isPartnerAccount && (
+          {(props?.isPartnerAccount && props.isMyShop) && (
             <div className={`${style.buttonAddDivingEvents}`}>
               <Button className="mt-2 btn-lg">
                 Add diving event
