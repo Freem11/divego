@@ -10,6 +10,7 @@ import getResultValue from './utils/getResultValue';
 export type Option = {
   key:          string
   label:        string
+  data?:        any
   userCreated?: boolean
 };
 

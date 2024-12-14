@@ -1,11 +1,12 @@
 import React from 'react';
-import Home from '../../googleMap';
-import DynamicSelect from '../../reusables/dynamicSelect';
-import { useThemeProps } from '@mui/material';
+import MainSearch from '../search';
+import MapLoader from '../../googleMap';
+import Icon from '../../../icons/Icon';
+import ButtonIcon from '../../reusables/buttonIcon';
 
-type LayoutMainViewProps = {
-  getMoreSearchItems: (search: string, limit: number, skip: number) => Promise<any>
-};
+import style from './style.module.scss';
+
+type LayoutMainViewProps = {};
 
 export default function LayoutMainView(props: LayoutMainViewProps) {
   return (
@@ -23,37 +24,20 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
             </div>
 
             <div className="col-sm-12 col-md-0 col-6 offset-sm-2 offset-md-0 hide-md">
-              <DynamicSelect
-                getMoreOptions={props.getMoreSearchItems}
-              />
+              <MainSearch />
             </div>
 
-            <div className="col-sm-12 col-md-8 col-3 d-flex justify-content-sm-center justify-content-flex-end">
-              <div className="support-box text-end d-none d-xl-block">
-                <span className="fs-6 text-muted">For Support?</span>
-                <h5 className="mb-0">+980-34984089</h5>
-              </div>
+            <div className="col-sm-12 col-md-8 col-3 d-flex flex-centered justify-content-sm-center justify-content-flex-end">
 
-              <ul className="d-flex justify-content-end list-unstyled m-0">
+              <ul className={style.headerIcons}>
                 <li>
-                  <a href="#" className="rounded-circle bg-light p-2 mx-1">
-                    <svg width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#user"></use></svg>
-                  </a>
+                  <ButtonIcon icon={<Icon name="person" />} className="text-primary" />
                 </li>
                 <li>
-                  <a href="#" className="rounded-circle bg-light p-2 mx-1">
-                    <svg width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#heart"></use></svg>
-                  </a>
+                  <ButtonIcon icon={<Icon name="anchor" />} className="text-primary" />
                 </li>
-                <li className="d-lg-none">
-                  <a href="#" className="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                    <svg width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#cart"></use></svg>
-                  </a>
-                </li>
-                <li className="d-lg-none">
-                  <a href="#" className="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
-                    <svg width="24" height="24" viewBox="0 0 24 24"><use xlinkHref="#search"></use></svg>
-                  </a>
+                <li>
+                  <ButtonIcon icon={<Icon name="camera-plus" />} className="text-primary" />
                 </li>
               </ul>
 
@@ -70,6 +54,35 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
       </header>
 
       <section className="py-2">
+        <div className="container-fluid">
+          <div className="columns">
+            <div
+              className="col-md-12 col-4"
+              style={{
+                fontFamily: 'San Francisco',
+                fontWeight: 700,
+                fontStyle:  'italic' }}
+            >
+              <div className="hero">
+                <div className="hero-body">
+                  <div className="bg-gray">AAA</div>
+                </div>
+                <div className="hero-body">
+                  <div className="bg-gray">AAA</div>
+                </div>
+                <div className="hero-body">
+                  <div className="bg-gray">AAA</div>
+                </div>
+
+              </div>
+            </div>
+
+            <div className="col-md-12 col-8">
+              <MapLoader />
+            </div>
+          </div>
+        </div>
+
 
       </section>
 

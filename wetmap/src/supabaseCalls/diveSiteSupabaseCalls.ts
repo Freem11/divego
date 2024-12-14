@@ -1,3 +1,4 @@
+import { DiveSiteWithUserName } from '../entities/diveSite';
 import { supabase } from '../supabase';
 
 export const diveSites = async () => {
@@ -33,7 +34,7 @@ export const getDiveSitesWithUser = async (values) => {
   }
 };
 
-export const getSiteNamesThatFit = async (value) => {
+export const getSiteNamesThatFit = async (value: string, limit: number = 10): Promise<DiveSiteWithUserName[]> => {
   if (value === '') {
     return [];
   }
@@ -41,16 +42,15 @@ export const getSiteNamesThatFit = async (value) => {
   const { data, error } = await supabase
     .from('diveSites')
     .select()
-    .ilike('name', '%' + value + '%');
+    .ilike('name', '%' + value + '%')
+    .limit(limit);
 
-  if (error) {
+  if (error || !data) {
     console.log('couldn\'t do it,', error);
     return [];
   }
 
-  if (data) {
-    return data;
-  }
+  return data as DiveSiteWithUserName[];
 };
 
 export const insertDiveSite = async (values) => {
@@ -108,23 +108,21 @@ export const getDiveSiteWithUserName = async (values) => {
   }
 };
 
-export const getDiveSitesByIDs = async (valueArray) => {
-  let Q1 = valueArray.substring(1, valueArray.length);
-  let Q2 = Q1.substring(Q1.length - 1, 0);
+export const getDiveSitesByIDs = async (valueArray: string): Promise<DiveSiteWithUserName[]> => {
+  const Q1 = valueArray.substring(1, valueArray.length);
+  const Q2 = Q1.substring(Q1.length - 1, 0);
 
   const { data, error } = await supabase
     .from('diveSites')
     .select()
     .or(`id.in.(${Q2})`);
 
-  if (error) {
+  if (error || !data) {
     console.log('couldn\'t do it 7,', error);
     return [];
   }
 
-  if (data) {
-    return data;
-  }
+  return data as DiveSiteWithUserName[];
 };
 
 export const getSingleDiveSiteByNameAndRegion = async (values) => {
