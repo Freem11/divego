@@ -2,6 +2,7 @@ import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import MapLoader from './googleMap';
 import SearchTool from './searchTool/index';
+import OnBoardingCarrousel from './onboarding/index';
 import SiteSubmitter from './newModals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';
@@ -80,9 +81,11 @@ const MapPage = React.memo(function MapPage() {
       let sessionUserId = activeSession.user.id;
       try {
         const success = await grabProfileById(sessionUserId);
+        console.log('HEY', success);
         if (success) {
           let bully = success[0] && success[0].UserName;
           if (bully == null || bully === '') {
+            handleOnBoarding();
             return;
           } else {
             setProfile(success[0]);
@@ -151,6 +154,10 @@ const MapPage = React.memo(function MapPage() {
     setDivesTog(!divesTog);
   };
 
+  const handleOnBoarding = () => {
+    animateOnBoardingModal();
+  };
+
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
 
@@ -202,6 +209,12 @@ const MapPage = React.memo(function MapPage() {
           animateLaunchModal={animateLaunchModal}
         />
       );
+    });
+  };
+
+  const animateOnBoardingModal = () => {
+    modalShow(OnBoardingCarrousel, {
+      size: 'large',
     });
   };
 

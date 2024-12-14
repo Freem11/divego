@@ -1,0 +1,16 @@
+@import '../../styles/variables.scss';
+
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: $primaryBlue;
+  z-index: 5;
+  position: relative;
+}
+
+.centerPage {
+  margin: 0 auto;
+  width: 30%;
+  min-width: 600px;
+  height: 100%;
+}
