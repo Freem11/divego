@@ -15,13 +15,15 @@ export default function PageOne() {
 
     <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: "center", flexDirection: 'column'}}>
       
-      <div style={{width: "80%", marginTop: '-5%'}}>
+      <div style={{width: "80%", marginTop: '5%'}}>
         <h1 style={{color: 'white'}}>{CarrouselData.PageOne.title}</h1>
+        </div>
+        <div style={{width: "60%", marginRight: '30%', marginBottom: '-15%'}}>
         <p style={{color: 'white'}}>{CarrouselData.PageOne.content}</p>
-         </div>
+        </div>
         <img src={Emilio} height='400vh' className={style.emilio}/>
 
-      <div style={{width: "50%", position: 'fixed', bottom: 20}}>
+      <div style={{width: "50%", position: 'fixed', bottom: 40}}>
           <Button onClick={slideForward} className="btn-lg">
             {CarrouselData.PageOne.buttonOneText}
           </Button>
