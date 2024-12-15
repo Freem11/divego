@@ -8,13 +8,33 @@ import { SliderContext } from '../../reusables/slider/context';
 import Emilio from '../../../images/EmilioNew.png';
 import CarrouselData from '../carrouselData.json';
 import style from '../style.module.scss';
+import { UserProfileContext } from '../../contexts/userProfileContext';
+import { ActiveProfile } from '../../../entities/profile';
+import { grabProfileById, updateProfile } from '../../../supabaseCalls/accountSupabaseCalls';
+import { SessionContext } from '../../contexts/sessionContext';
+
 
 export default function PageTwo() {
+  const { setProfile } = useContext(UserProfileContext);
+  const { activeSession } = useContext(SessionContext);
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
   const { slideForward } = useContext(SliderContext);
-  const onSubmit = (data: Form) => {
+
+  const onSubmit = async(data: Form) => {
+  if(activeSession){
+  await updateProfile({
+    id: activeSession?.user.id,
+    username: data.username,
+  });
+}
+  if(activeSession){
+    const success = await grabProfileById(activeSession?.user.id);
+    if(success){
+    let updatedprofile: ActiveProfile = success[0]
+    setProfile(updatedprofile);
     slideForward();
-    console.log(data);
+  }
+}
   };
 
   return (

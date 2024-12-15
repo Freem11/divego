@@ -81,7 +81,6 @@ const MapPage = React.memo(function MapPage() {
       let sessionUserId = activeSession.user.id;
       try {
         const success = await grabProfileById(sessionUserId);
-        console.log('HEY', success);
         if (success) {
           let bully = success[0] && success[0].UserName;
           if (bully == null || bully === '') {
@@ -214,7 +213,7 @@ const MapPage = React.memo(function MapPage() {
 
   const animateOnBoardingModal = () => {
     modalShow(OnBoardingCarrousel, {
-      size: 'large',
+      size: 'full',
     });
   };
 

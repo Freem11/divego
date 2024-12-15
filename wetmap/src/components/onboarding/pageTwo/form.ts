@@ -9,5 +9,5 @@ export interface Form {
 export const FormRules: FormValidationRules<Form> = {
   username: {
     required: 'Please enter your username',
-  },
+  }
 };

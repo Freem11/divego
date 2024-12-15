@@ -36,12 +36,13 @@
       max-width: 1200px;
     }
     &.full {
-      width: auto;
+      width: 100vw;
       max-width: none;
-      height: auto;
+      height: 100vh;
       margin: 0 auto;
       border: none;
       background: none;
+      border-radius: 0
     }
   }
 }
