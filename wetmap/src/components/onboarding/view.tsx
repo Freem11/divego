@@ -6,7 +6,11 @@ import PageTwo from './pageTwo';
 import PageThree from './pageThree';
 import PageFour from './pageFour';
 
-export default function OnBoardingView() {
+type OnboardingModalProps = {
+  onClose?: () => void
+};
+
+export default function OnBoardingView(props: OnboardingModalProps) {
   return (
     <div className={style.container}>
       <div className={style.centerPage}>
@@ -17,7 +21,7 @@ export default function OnBoardingView() {
             <PageOne key="step1"/>,
             <PageTwo key="step2"/>,
             <PageThree key="step3"/>,
-            <PageFour key="step4"/>
+            <PageFour key="step4" onClose={props.onClose}/>
           ]}
         />
       </div>
