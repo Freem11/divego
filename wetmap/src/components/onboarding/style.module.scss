@@ -14,3 +14,64 @@
   min-width: 600px;
   height: 100%;
 }
+
+.pageContainer {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.topContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 80vh;
+}
+
+.titleContainer{
+  width: 80%;
+  margin-top: 5%;
+}
+
+.contentContainer{
+  width: 80%;
+}
+
+.inputContainer{
+  background-color: white;
+  width: 60%;
+  margin-left: 20%;
+  position: fixed;
+  top: 35%;
+}
+
+.emilio {
+  position: fixed;
+  bottom: 80px;
+  transform: rotate(3deg);
+  margin-left: 40%;
+}
+
+.buttonContainer{
+  width: 50%;
+  position: fixed;
+  bottom: 40px
+}
+
+.buttonContainerAlt{
+  width: 50%;
+  margin-left: 25%;
+  position: fixed;
+  bottom: 40px
+}
+
+.buttonDoubleContainer{
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between ;
+  width: 100%;
+  position: fixed;
+  bottom: 40px
+}

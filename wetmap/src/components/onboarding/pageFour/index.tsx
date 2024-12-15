@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Button from '../../reusables/button';
-import { SliderContext } from '../../reusables/slider/context';
 import Emilio from '../../../images/EmilioNew.png';
 import CarrouselData from '../carrouselData.json';
 import style from '../style.module.scss';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
-export default function PageOne() {
-  const { slideForward } = useContext(SliderContext);
+type PageFourProps = Partial<ModalHandleProps>;
+
+export default function PageFour(props: PageFourProps) {
 
   return (
 
@@ -14,19 +15,19 @@ export default function PageOne() {
 
     <div className={style.topContainer}>
       <div className={style.titleContainer}>
-        <h1 style={{color: 'white'}}>{CarrouselData.PageOne.title}</h1>
+        <h1 style={{color: 'white'}}>{CarrouselData.PageFour.title}</h1>
       </div>
 
       <div className={style.contentContainer}>
-        <p style={{color: 'white'}}>{CarrouselData.PageOne.content}</p>
+        <p style={{color: 'white'}}>{CarrouselData.PageFour.content}</p>
       </div>
     </div>
     
     <img src={Emilio} height='400vh' className={style.emilio}/>
 
       <div className={style.buttonContainer}>
-          <Button onClick={slideForward} className="btn-lg">
-            {CarrouselData.PageOne.buttonOneText}
+          <Button onClick={props.onModalCancel} className="btn-lg">
+            {CarrouselData.PageFour.buttonOneText}
           </Button>
       </div>
     </div>
