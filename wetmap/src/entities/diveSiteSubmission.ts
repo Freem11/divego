@@ -1,6 +1,6 @@
 export type DiveSiteSubmissionData = {
-  Site:      string
+  Site?:     string
   Latitude:  number
   Longitude: number
-  UserID:    string
+  UserID?:   string
 };
