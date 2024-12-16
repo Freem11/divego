@@ -15,13 +15,16 @@ export default function ShopModal(props: ShopModalProps) {
   const { profile } = useContext(UserProfileContext);
 
   const [isMyShop, setIsMyShop] = useState<boolean>(false);
-  const [isPartnerAccount] = useState(false);
+  const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
 
   useEffect(() => {
     if (selectedShop) {
       getItineraries(selectedShop.id);
+    }
+    if (profile && profile.partnerAccount) {
+      setIsPartnerAccount(true);
     }
     if (
       (profile?.partnerAccount) &&
