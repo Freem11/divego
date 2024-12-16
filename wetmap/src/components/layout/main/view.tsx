@@ -5,6 +5,10 @@ import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
 
 import style from './style.module.scss';
+import Tabs from '../../reusables/tabs';
+import Select from '../../reusables/select';
+import PicUploader from '../../newModals/picUploader/index';
+import DiveSite from '../../newModals/siteSubmitter';
 
 type LayoutMainViewProps = {};
 
@@ -13,9 +17,9 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
     <div className="bg-white">
       <header>
         <div className="container-fluid">
-          <div className="columns py-2">
+          <div className="cols col-gapless">
 
-            <div className="col-sm-12 col-md-4 col-3 text-center text-sm-start">
+            <div className="col-sm-12 col-4">
               <div className="main-logo">
                 <a href="index.html">
                   <img src="images/logo.png" alt="logo" className="img-fluid" />
@@ -23,11 +27,11 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               </div>
             </div>
 
-            <div className="col-sm-12 col-md-0 col-6 offset-sm-2 offset-md-0 hide-md">
+            <div className="col-sm-12 col-4">
               <MainSearch />
             </div>
 
-            <div className="col-sm-12 col-md-8 col-3 d-flex flex-centered justify-content-sm-center justify-content-flex-end">
+            <div className="col-sm-12 col-4 flex-centered justify-content-sm-center justify-content-flex-end">
 
               <ul className={style.headerIcons}>
                 <li>
@@ -55,15 +59,17 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
       <section className="py-2">
         <div className="container-fluid">
-          <div className="columns">
-            <div
-              className="col-md-12 col-4"
-              style={{
-                fontFamily: 'San Francisco',
-                fontWeight: 700,
-                fontStyle:  'italic' }}
-            >
-              <div className="hero">
+          <div className="cols col-gapless">
+            <div className="col-md-12 col-4">
+              <Tabs data={[
+                { title: 'DiveSites', content: 'BBB' },
+                { title: () => 'Animals', content: DiveSite },
+                { title: 'DiveShops', content: 'CCC C C C C C C C C C' },
+                { title: 'Test', content: 'Lorem ipsum dolor sit amet' },
+              ]}
+              />
+
+              {/* <div className="hero">
                 <div className="hero-body">
                   <div className="bg-gray">AAA</div>
                 </div>
@@ -74,7 +80,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   <div className="bg-gray">AAA</div>
                 </div>
 
-              </div>
+              </div> */}
             </div>
 
             <div className="col-md-12 col-8">
@@ -88,7 +94,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
       <footer className="py-6">
         <div className="container-fluid">
-          <div className="columns">
+          <div className="cols col-gapless">
 
             <div className="col-3 col-md-6 col-sm-6">
               <div className="footer-menu">
