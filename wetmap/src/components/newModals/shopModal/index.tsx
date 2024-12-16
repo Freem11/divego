@@ -15,7 +15,7 @@ export default function ShopModal(props: ShopModalProps) {
   const { profile } = useContext(UserProfileContext);
 
   const [isMyShop, setIsMyShop] = useState<boolean>(false);
-  const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+  const [isPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
 
@@ -31,26 +31,12 @@ export default function ShopModal(props: ShopModalProps) {
     } else {
       setIsMyShop(false);
     }
-  }, [selectedShop]);
-
-  useEffect(() => {
-    if (profile && profile.partnerAccount) {
-      setIsPartnerAccount(true);
-    }
-    if (
-      (profile?.partnerAccount) &&
-      (selectedShop?.userId === profile.UserID)
-    ) {
-      setIsMyShop(true);
-    } else {
-      setIsMyShop(false);
-    }
-  }, []);
+  }, [selectedShop, profile]);
 
   const getItineraries = async (IdNum: number) => {
     try {
       const itins = await itineraries(IdNum);
-      if (itins && itins.length > 0) {
+      if (itins) {
         setItineraryList(itins);
       }
     } catch (e) {
