@@ -21,7 +21,7 @@ export default function SettingsView(props: SettingsProps) {
             }
           }}
         />
-        <h1 className="ml-4 mt-4 text-bold">{screenData.SettingsPage.header}</h1>
+        <h1 className="ml-10 mt-4 text-bold">{screenData.SettingsPage.header}</h1>
       </div>
     </>
   );

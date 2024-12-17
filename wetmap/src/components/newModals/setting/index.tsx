@@ -1,18 +1,6 @@
 
-{ /*
-import './settings.css';
-import { Label } from 'reactstrap';
-import Collapse from '@mui/material/Collapse';
-import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
-import ActDelDialog from './dialog';
-import { grabRequestById } from '../../supabaseCalls/partnerSupabaseCalls';
-import ModalHeader from '../reusables/modalHeader';
-import LargeButton from '../reusables/button/largeButton';
-import PartnerAccountRequestModal from './partnerAccountRequestModal';
-import { ModalContext } from '../reusables/modal/context';
-*/ }
 import SettingsView from './view';
-import { signOut } from '../../../supabaseCalls/authenticateSupabaseCalls';
+
 import { SessionContext } from '../../contexts/sessionContext';
 import { useContext, useState, useEffect } from 'react';
 import React from 'react';
