@@ -213,7 +213,8 @@ const MapPage = React.memo(function MapPage() {
 
   const animateOnBoardingModal = () => {
     modalShow(OnBoardingCarrousel, {
-      size: 'full',
+      size:        'full',
+      allowCancel: false,
     });
   };
 

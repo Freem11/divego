@@ -54,6 +54,9 @@ const ModalContextProvider = ({ children }: any) => {
     if (paused) {
       return;
     }
+    if (stack.length && stack[stack.length - 1].options.allowCancel === false) {
+      return;
+    }
     _modalClose(false, 'onCancelCallback');
   };
 

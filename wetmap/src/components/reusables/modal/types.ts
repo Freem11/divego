@@ -3,6 +3,7 @@ import React from 'react';
 const defaultOptions = {
   name:              null as null | string,
   size:              'medium' as ModalWindowSize,
+  allowCancel:       true as boolean,
   keepPreviousModal: false as boolean,
   onSuccessCallback: null as null | (() => void),
   onCancelCallback:  null as null | (() => void),

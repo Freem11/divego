@@ -36,9 +36,9 @@
       max-width: 1200px;
     }
     &.full {
-      width: 100vw;
+      width: auto;
       max-width: none;
-      height: 100vh;
+      height: auto;
       margin: 0 auto;
       border: none;
       background: none;
