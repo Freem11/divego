@@ -6,11 +6,7 @@ import PageTwo from './pageTwo';
 import PageThree from './pageThree';
 import PageFour from './pageFour';
 
-type OnboardingModalProps = {
-  onClose?: () => void
-};
-
-export default function OnBoardingView(props: OnboardingModalProps) {
+export default function OnBoardingView() {
   return (
     <div className={style.container}>
       <div className={style.centerPage}>
@@ -18,10 +14,10 @@ export default function OnBoardingView(props: OnboardingModalProps) {
           startIndex={0}
           showArrows={false}
           slides={[
-            <PageOne key="step1"/>,
-            <PageTwo key="step2"/>,
-            <PageThree key="step3"/>,
-            <PageFour key="step4" onClose={props.onClose}/>
+            <PageOne key="step1" />,
+            <PageTwo key="step2" />,
+            <PageThree key="step3" />,
+            <PageFour key="step4" />,
           ]}
         />
       </div>

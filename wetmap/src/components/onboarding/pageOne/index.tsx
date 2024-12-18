@@ -9,25 +9,18 @@ export default function PageOne() {
   const { slideForward } = useContext(SliderContext);
 
   return (
-
-    <div className={style.pageContainer}>
-
-    <div className={style.topContainer}>
-      <div className={style.titleContainer}>
-        <h1 style={{color: 'white'}}>{CarrouselData.PageOne.title}</h1>
+    <div className="py-10 flex-column-between flex-centered full-height">
+      <div className="col-10 mt-10">
+        <h1>{CarrouselData.PageOne.title}</h1>
+        <p>{CarrouselData.PageOne.content}</p>
       </div>
 
-      <div className={style.contentContainer}>
-        <p style={{color: 'white'}}>{CarrouselData.PageOne.content}</p>
-      </div>
-    </div>
-    
-    <img src={Emilio} height='400vh' className={style.emilio}/>
+      <img src={Emilio} className={style.emilio} />
 
-      <div className={style.buttonContainer}>
-          <Button onClick={slideForward} className="btn-lg">
-            {CarrouselData.PageOne.buttonOneText}
-          </Button>
+      <div className="col-6">
+        <Button onClick={slideForward} className="btn-lg">
+          {CarrouselData.PageOne.buttonOneText}
+        </Button>
       </div>
     </div>
   );

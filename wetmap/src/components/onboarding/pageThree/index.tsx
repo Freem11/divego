@@ -10,10 +10,10 @@ export default function PageThree() {
 
   function getLocation() {
     if (navigator.geolocation) {
-      navigator.permissions.query({name:'geolocation'}).then(permissionStatus => {
+      navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
         if (permissionStatus.state === 'denied') {
           alert('Please allow location access.');
-          window.location.href = "app-settings:location";
+          window.location.href = 'app-settings:location';
         } else {
           navigator.geolocation.getCurrentPosition(
             function (position) {
@@ -32,34 +32,28 @@ export default function PageThree() {
   }
 
   const grantPermissions = () => {
-    getLocation()
-    slideForward()
-  }
-  
+    getLocation();
+    slideForward();
+  };
+
   return (
 
-    <div className={style.pageContainer}>
+    <div className="py-10 flex-column-between flex-centered full-height">
 
-    <div className={style.topContainer}>
-      <div className={style.titleContainer}>
-        <h1 style={{color: 'white'}}>{CarrouselData.PageThree.title}</h1>
+      <div className="col-10 mt-10">
+        <h1>{CarrouselData.PageThree.title}</h1>
+        <p>{CarrouselData.PageThree.content}</p>
       </div>
 
-      <div className={style.contentContainer}>
-        <p style={{color: 'white'}}>{CarrouselData.PageThree.content}</p>
-      </div>
-    </div>
-    
-    <img src={Emilio} height='400vh' className={style.emilio}/>
+      <img src={Emilio} className={style.emilio} />
 
-      <div className={style.buttonDoubleContainer}>
-          <Button onClick={grantPermissions} className="btn-lg">
-            {CarrouselData.PageThree.buttonOneText}
-          </Button>
-          <div style={{width: '10%'}}></div>
-          <Button onClick={slideForward} className="btn-lg btn-primary">
-            {CarrouselData.PageThree.buttonTwoText}
-          </Button>
+      <div className="d-flex col-12">
+        <Button onClick={slideForward} className="btn-lg btn-primary mr-6">
+          {CarrouselData.PageThree.buttonTwoText}
+        </Button>
+        <Button onClick={grantPermissions} className="btn-lg">
+          {CarrouselData.PageThree.buttonOneText}
+        </Button>
       </div>
     </div>
   );

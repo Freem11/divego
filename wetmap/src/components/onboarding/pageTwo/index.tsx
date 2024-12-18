@@ -20,61 +20,44 @@ export default function PageTwo() {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
   const { slideForward } = useContext(SliderContext);
 
-  const onSubmit = async(data: Form) => {
-  if(activeSession){
-  await updateProfile({
-    id: activeSession?.user.id,
-    username: data.username,
-  });
-}
-  if(activeSession){
-    const success = await grabProfileById(activeSession?.user.id);
-    if(success){
-    let updatedprofile: ActiveProfile = success[0]
-    setProfile(updatedprofile);
-    slideForward();
-  }
-}
+  const onSubmit = async (data: Form) => {
+    if (activeSession) {
+      await updateProfile({
+        id:       activeSession?.user.id,
+        username: data.username,
+      });
+    }
+    if (activeSession) {
+      const success = await grabProfileById(activeSession?.user.id);
+      if (success) {
+        const updatedprofile: ActiveProfile = success[0];
+        setProfile(updatedprofile);
+        slideForward();
+      }
+    }
   };
 
   return (
+    <form onSubmit={handleSubmit(onSubmit)} className="py-10 flex-column-between flex-centered full-height">
+      <div className="col-10 mt-10">
+        <h1>{CarrouselData.PageTwo.title}</h1>
+        <p>{CarrouselData.PageTwo.content}</p>
+        <TextInput
+          error={errors.username}
+          className="bg-white"
+          iconLeft={<Icon name="person" />}
+          placeholder="Enter your username"
+          {...register('username', FormRules.username)}
+        />
+      </div>
 
-    <div className={style.pageContainer}>
+      <img src={Emilio} className={style.emilio} />
 
-        <div className={style.topContainer}>
-          <div className={style.titleContainer}>
-            <h1 style={{color: 'white'}}>{CarrouselData.PageTwo.title}</h1>
-          </div>
-
-          <div className={style.contentContainer}>
-          <p style={{color: 'white'}}>{CarrouselData.PageTwo.content}</p>
-          </div>
-        </div>
-
-        <form  style={{width: "100%"}} onSubmit={handleSubmit(onSubmit)}>
-          <div className={style.inputContainer}>
-            <TextInput
-              error={errors.username}
-              iconLeft={<Icon name="person" />}
-              placeholder="Enter your username"
-              {...register('username', FormRules.username)}
-            />
-          </div>
-          <div className={style.buttonContainerAlt}>
-            <Button
-              disabled={isSubmitting}
-              className="btn-lg"
-              type="submit"
-            >
-              {CarrouselData.PageTwo.buttonOneText}
-            </Button>
-          </div>
-        </form>
-
-        <img src={Emilio} height='400vh' className={style.emilio}/>
-
-    </div>
-
-
+      <div className="col-6">
+        <Button className="btn-lg" disabled={isSubmitting}>
+          {CarrouselData.PageTwo.buttonOneText}
+        </Button>
+      </div>
+    </form>
   );
 };
