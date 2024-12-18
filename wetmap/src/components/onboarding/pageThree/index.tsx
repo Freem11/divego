@@ -40,7 +40,7 @@ export default function PageThree() {
 
     <div className="py-10 flex-column-between flex-centered full-height">
 
-      <div className="col-10 mt-10">
+      <div className="col-10">
         <h1>{CarrouselData.PageThree.title}</h1>
         <p>{CarrouselData.PageThree.content}</p>
       </div>
