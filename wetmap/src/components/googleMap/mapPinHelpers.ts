@@ -60,8 +60,11 @@ const setupDiveSiteModal = async (diveSiteName: string, modalShow: ModalShow, se
   modalShow(DiveSite, {
     size: 'large',
   });
-  const chosenSite = await getDiveSiteWithUserName({ siteName: steName,region: siteRegion  });
-  setSelectedDiveSite(chosenSite[0]);
+  const chosenSite = await getDiveSiteWithUserName({ siteName: steName, region: siteRegion  });
+  if(chosenSite){
+    setSelectedDiveSite(chosenSite[0]);
+  }
+
 };
 
 function setupPinConfigs(info: ClusterProperty, modalShow: ModalShow, setSelectedDiveSite: (site: DiveSiteWithUserName) => void, setSelectedShop: (shop: DiveShop) => void) {

@@ -1,3 +1,4 @@
+import { DiveSiteWithUserName } from '../entities/diveSite';
 import { supabase } from '../supabase';
 
 export const diveSites = async () => {
@@ -88,14 +89,17 @@ export const getDiveSiteByName = async (value) => {
   }
 };
 
-export const getDiveSiteWithUserName = async (values) => {
-  const { data, error } = await supabase.rpc(
-    'get_single_divesites_with_username',
-    {
-      sitename: values.siteName,
-      region:   values.region,
-    },
-  );
+export const getDiveSiteWithUserName = async (values: {siteName: string, region: string | null}) => {
+  const query = supabase
+    .from('diveSites')
+    .select('*')
+    .eq('name', values.siteName);
+
+  if (values.region !== null) {
+    query.eq('region', values.region);
+  }
+
+  const { data, error } = await query;
 
   if (error) {
     console.log('couldn\'t do it 27,', error);
@@ -103,7 +107,7 @@ export const getDiveSiteWithUserName = async (values) => {
   }
 
   if (data) {
-    return data;
+    return data as DiveSiteWithUserName[];
   }
 };
 
