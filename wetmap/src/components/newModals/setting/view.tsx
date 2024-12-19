@@ -35,7 +35,7 @@ export default function SettingsView(props: SettingsProps) {
           <div className="col-3"></div>
           <div className="col-3">
             <Button
-              onClick={() => props.handleLogout}
+              onClick={props.handleLogout}
               className="btn-md bg-primary"
               iconRight={<Icon name="chevron-right" />}
               type="button"
