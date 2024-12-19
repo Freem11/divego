@@ -100,7 +100,8 @@ export const getPhotosforMapArea = async (value) => {
     .gte('latitude', value.minLat)
     .gte('longitude', value.minLng)
     .lte('latitude', value.maxLat)
-    .lte('longitude', value.maxLng);
+    .lte('longitude', value.maxLng)
+    .limit(10);
 
   if (error) {
     console.log('couldn\'t do it,', error);

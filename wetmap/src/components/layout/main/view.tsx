@@ -6,9 +6,8 @@ import ButtonIcon from '../../reusables/buttonIcon';
 
 import style from './style.module.scss';
 import Tabs from '../../reusables/tabs';
-import Select from '../../reusables/select';
-import PicUploader from '../../newModals/picUploader/index';
 import DiveSite from '../../newModals/siteSubmitter';
+import PhotosInTheArea from '../../photosInTheArea';
 
 type LayoutMainViewProps = {};
 
@@ -62,8 +61,8 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
             <div className="col-md-12 col-4">
               <Tabs data={[
-                { title: 'DiveSites', content: 'BBB' },
-                { title: () => 'Animals', content: DiveSite },
+                { title: 'Animals', content: PhotosInTheArea },
+                { title: 'DiveSites', content: DiveSite },
                 { title: 'DiveShops', content: 'CCC C C C C C C C C C' },
                 { title: 'Test', content: 'Lorem ipsum dolor sit amet' },
               ]}

@@ -10,7 +10,7 @@ export class DynamicSelectOptionsMainSearch extends DynamicSelectOptions {
 
     return Promise.all([placesPromise, diveSitePromise]).then(([places, diveSites]) => {
       const options = [];
-      places?.forEach((place) => {
+      places?.predictions?.forEach((place) => {
         options.push({ key: place.place_id, label: place.description, data: { type: 'place', id: place.place_id } });
       });
 
