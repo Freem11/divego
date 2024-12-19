@@ -1,13 +1,24 @@
 @import "../../../styles/variables.scss";
 
 .buttonBack {
-    position: absolute;
-    top: 6%;
-    left: 3%;
-    z-index: 1;
-
     svg {
         scale: 2;
     }
 }
+
+.outline {
+    border-top: 1px solid #5f5e5e; /* Top border */
+    border-bottom: 1px solid #5f5e5e; /* Bottom border */
+    margin-left: 2.2rem;
+}
+
+.horizontalButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 3;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+  }
 
