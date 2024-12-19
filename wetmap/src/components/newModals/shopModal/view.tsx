@@ -94,7 +94,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           {props?.itineraryList?.length === 0 && (
             <div>
               <p className="noSightings">
-                {screenData.DiveShop.emptyDrawer}
+                {`${props?.diveShop?.orgname} ${screenData.DiveShop.emptyDrawer}`}
               </p>
             </div>
           )}
