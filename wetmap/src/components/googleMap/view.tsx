@@ -136,25 +136,22 @@ export default function MapView(props: MapViewProps) {
           )
         : null}
 
-<div style={{zIndex: 10, position: 'absolute', right: 20, bottom: 15}}>
-              <div
-              style={{backgroundColor: "white", borderRadius: 25}}     
-              onClick={() => {
-                setMapZoom(mapZoom + 1);
-              }}
-              >
-              <RoundButtonIcon icon={<Icon name="plus" color='blue' />}/>
-              </div>
-              <div style={{height: 10}}></div>
-              <div 
-              style={{backgroundColor: "white", borderRadius: 25}}
-              onClick={() => {
-                setMapZoom(mapZoom - 1);
-              }}
-              >
-              <RoundButtonIcon icon={<Icon name="minus" color='blue'/>}/>
-              </div>
-              </div>
+      <div style={{zIndex: 10, position: 'absolute', right: 20, bottom: 15}}>
+        <div
+          style={{backgroundColor: "white", borderRadius: 25}}     
+          onClick={() => {setMapZoom(mapZoom + 1)}}
+        >
+          <RoundButtonIcon icon={<Icon name="plus" color='blue' />}/>
+        </div>
+          <div style={{height: 10}}></div>
+        <div 
+          style={{backgroundColor: "white", borderRadius: 25}}
+          onClick={() => {setMapZoom(mapZoom - 1)}}
+        >
+          <RoundButtonIcon icon={<Icon name="minus" color='blue'/>}/>
+        </div>
+      </div>
+      
     </GoogleMap>
   );
 }
