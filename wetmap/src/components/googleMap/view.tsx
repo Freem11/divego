@@ -10,6 +10,7 @@ import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { MapWithHeatmap } from './heatmap';
 import { DiveShop } from '../../entities/diveShop';
 import { ModalShow } from '../reusables/modal/types';
+import './style.css';
 
 type MapViewProps = {
   mapRef:                google.maps.Map | null
