@@ -76,7 +76,7 @@ export default function TextInputField(props) {
             <div style={{ width: '30px', height: '30px' }}></div>
           )}
 
-      {placeHolderText === 'Blow some bubbles'
+      {/* {placeHolderText === 'Blow some bubbles'
         ? (
             <Fontisto
               name="snorkel"
@@ -87,7 +87,7 @@ export default function TextInputField(props) {
           )
         : (
             <div style={{ width: '30px', height: '30px' }}></div>
-          )}
+          )} */}
     </div>
   );
 }

@@ -94,8 +94,16 @@
       {
         "drawerHeader" : "Offered Dive Trips",
         "emptyDrawer": " aren't currently offering any Dive Trips"
+      },
+      "CommentsModal" :
+      {
+        "header" : "Comments",
+        "commentsPlaceholder": "Blow some bubbles . . .",
+        "replyButton": "Reply",
+        "replyHideSingle": "Hide reply",
+        "replyHideMultiple": "Hide replies",
+        "replyViewSingle": "View Reply",
+        "replyViewMultiplOne": "View ",
+        "replyViewMultiplTwo":" Replies"
       }
     }
-
-  
-
