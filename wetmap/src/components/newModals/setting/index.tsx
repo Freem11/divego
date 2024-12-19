@@ -77,6 +77,7 @@ export default function Settings(props) {
   const handleLogout = async () => {
     await localStorage.removeItem('token');
     await signOut();
+    props?.onModalCancel?.();
     setActiveSession(null);
   };
 
