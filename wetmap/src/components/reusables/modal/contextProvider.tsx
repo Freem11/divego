@@ -29,7 +29,7 @@ const ModalContextProvider = ({ children }: any) => {
     setFreeze(true);
 
     setStack((prev) => {
-      for (const modalWindow of stack) {
+      for (const modalWindow of prev) {
         // we already have this modal window in the stack - no need to open it again
         if (modalWindow.name === newModalWindow.name) {
           return prev;
