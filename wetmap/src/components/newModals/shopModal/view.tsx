@@ -3,6 +3,7 @@ import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
 import PlainTextInput from '../../reusables/plainTextInput';
+import screenData from '../screenData.json';
 import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
@@ -93,7 +94,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           {props?.itineraryList?.length === 0 && (
             <div>
               <p className="noSightings">
-                No Trips are currently being offered.
+                {`${props?.diveShop?.orgname} ${screenData.DiveShop.emptyDrawer}`}
               </p>
             </div>
           )}
