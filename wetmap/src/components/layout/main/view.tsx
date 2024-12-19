@@ -11,6 +11,7 @@ import PhotosInTheArea from '../../photosInTheArea';
 
 type LayoutMainViewProps = {};
 
+
 export default function LayoutMainView(props: LayoutMainViewProps) {
   return (
     <div className="bg-white">
@@ -83,7 +84,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
             </div>
 
             <div className="col-md-12 col-8">
-              <MapLoader />
+              <MapLoader />          
             </div>
           </div>
         </div>

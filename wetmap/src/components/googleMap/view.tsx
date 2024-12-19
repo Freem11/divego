@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import style from './style.module.scss';
 import { Cluster, HeatPoint, HeatPointConfiguration, LatLngObject, MapConfiguration, SuperclusterInstance } from './types';
@@ -11,6 +11,9 @@ import { MapWithHeatmap } from './heatmap';
 import { DiveShop } from '../../entities/diveShop';
 import { ModalShow } from '../reusables/modal/types';
 import './style.css';
+import RoundButtonIcon from '../reusables/roundButton';
+import Icon from '../../icons/Icon';
+import { ZoomContext } from '../contexts/mapZoomContext';
 
 type MapViewProps = {
   mapRef:                google.maps.Map | null
@@ -30,7 +33,8 @@ type MapViewProps = {
   selectedDiveSite:      DiveSiteWithUserName | null
   setSelectedDiveSite:   (site: DiveSiteWithUserName) => void
   setSelectedShop:       (shop: DiveShop) => void
-  setMapZoom:            (zoomLev: number) => void
+  // mapZoom:                number
+  // setMapZoom:            (zoomLev: number) => void
   onLoad:                (map: google.maps.Map) => void
   handleMapUpdates:      () => void
   handleBoundsChange:    () => void
@@ -43,7 +47,7 @@ type MapViewProps = {
 };
 
 export default function MapView(props: MapViewProps) {
-  
+  const { mapZoom, setMapZoom } = useContext(ZoomContext);
   return (
     <GoogleMap
       zoom={props.zoom}
@@ -131,6 +135,26 @@ export default function MapView(props: MapViewProps) {
             </Marker>
           )
         : null}
+
+<div style={{zIndex: 10, position: 'absolute', right: 20, bottom: 15}}>
+              <div
+              style={{backgroundColor: "white", borderRadius: 25}}     
+              onClick={() => {
+                setMapZoom(mapZoom + 1);
+              }}
+              >
+              <RoundButtonIcon icon={<Icon name="plus" color='blue' />}/>
+              </div>
+              <div style={{height: 10}}></div>
+              <div 
+              style={{backgroundColor: "white", borderRadius: 25}}
+              onClick={() => {
+                setMapZoom(mapZoom - 1);
+              }}
+              >
+              <RoundButtonIcon icon={<Icon name="minus" color='blue'/>}/>
+              </div>
+              </div>
     </GoogleMap>
   );
 }
