@@ -14,14 +14,16 @@ export default function SettingsView(props: SettingsProps) {
       <div className={styles.buttonBack}>
         <ButtonIcon
           icon={<Icon name="chevron-left" />}
-          className="btn-lg text-gray"
+          className="btn-lg text-gray ml-4 mt-4"
           onClick={(e) => {
             if (props.onClose) {
               props.onClose(e);
             }
           }}
         />
-        <h1 className="ml-10 mt-4 text-bold">{screenData.SettingsPage.header}</h1>
+      </div>
+      <div className="mx-10 text-left">
+        <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
       </div>
     </>
   );
