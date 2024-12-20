@@ -29,7 +29,6 @@ export default function DiveSite(props: DiveSiteProps) {
     }
   }, [selectedDiveSite, profile]);
 
-
   useEffect(() => {
     if (profile && profile.partnerAccount) {
       setIsPartnerAccount(true);

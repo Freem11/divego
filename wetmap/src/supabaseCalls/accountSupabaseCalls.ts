@@ -78,7 +78,7 @@ export const deleteProfile = async (id) => {
   }
 };
 
-export const grabProfileById = async (id) => {
+export const grabProfileById = async (id: string) => {
   const { data, error } = await supabase
     .from('UserProfiles')
     .select()
@@ -90,7 +90,7 @@ export const grabProfileById = async (id) => {
   }
 
   if (data) {
-    return data;
+    return data as ActiveProfile[];
   }
 };
 
