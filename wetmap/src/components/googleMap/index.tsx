@@ -267,8 +267,6 @@ export default function MapLoader() {
       divesTog={divesTog}
       mapCoords={mapCoords}
       setMapCoords={setMapCoords}
-      // mapZoom={mapZoom}
-      // setMapZoom={setMapZoom}
       selectedDiveSite={selectedDiveSite}
       setSelectedDiveSite={setSelectedDiveSite}
       setSelectedShop={setSelectedShop}

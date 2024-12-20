@@ -8,6 +8,7 @@ import style from './style.module.scss';
 import Tabs from '../../reusables/tabs';
 import DiveSite from '../../newModals/siteSubmitter';
 import PhotosInTheArea from '../../photosInTheArea';
+import Modal from '../../reusables/modal/modal';
 
 type LayoutMainViewProps = {};
 
@@ -233,6 +234,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
         </div>
       </div>
 
+      <Modal />
     </div>
   );
 }

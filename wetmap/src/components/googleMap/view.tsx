@@ -33,8 +33,6 @@ type MapViewProps = {
   selectedDiveSite:      DiveSiteWithUserName | null
   setSelectedDiveSite:   (site: DiveSiteWithUserName) => void
   setSelectedShop:       (shop: DiveShop) => void
-  // mapZoom:                number
-  // setMapZoom:            (zoomLev: number) => void
   onLoad:                (map: google.maps.Map) => void
   handleMapUpdates:      () => void
   handleBoundsChange:    () => void
