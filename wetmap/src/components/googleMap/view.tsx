@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import style from './style.module.scss';
 import { Cluster, HeatPoint, HeatPointConfiguration, LatLngObject, MapConfiguration, SuperclusterInstance } from './types';
