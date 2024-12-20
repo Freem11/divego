@@ -5,3 +5,13 @@
   z-index: 1;
 }
 
+.zoomButtonContainer {
+  z-index: 10;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 85px;
+}
