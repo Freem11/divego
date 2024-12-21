@@ -3,6 +3,7 @@ import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
 import style from './style.module.scss';
+import screenData from '../screenData.json'
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import { ItineraryItem } from './types';
 import { DiveShop } from '../../../entities/diveShop';
@@ -48,7 +49,7 @@ export default function TripCreatorListView(props: TripCreatorListViewProps) {
           {props?.itineraryList?.length === 0 && (
             <div>
               <p className="noSightings">
-                No Trips are currently being offered.
+                {screenData.TripCreator.emptyDrawer}
               </p>
             </div>
           )}
