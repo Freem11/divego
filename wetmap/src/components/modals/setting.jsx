@@ -9,8 +9,9 @@ import ActDelDialog from './dialog';
 import { grabRequestById } from '../../supabaseCalls/partnerSupabaseCalls';
 import ModalHeader from '../reusables/modalHeader';
 import LargeButton from '../reusables/button/largeButton';
-import PartnerAccountRequestModal from './partnerAccountRequestModal';
+import PartnerAccountRequest from '../newModals/partnerAccountRequest';
 import { ModalContext } from '../reusables/modal/context';
+import PartnerAccountRequestModal from './partnerAccountRequestModal';
 
 const Settings = (props) => {
   const { activeSession, setActiveSession } = useContext(SessionContext);
@@ -26,7 +27,7 @@ const Settings = (props) => {
   };
 
   const handlePartnerButton = () => {
-    modalShow(PartnerAccountRequestModal, { keepPreviousModal: true });
+    modalShow(PartnerAccountRequest, { keepPreviousModal: true });
   };
   useEffect(() => {
     checkForRequest(activeSession.user.id);

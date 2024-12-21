@@ -10,6 +10,7 @@ type CustomInputProps = {
 
 const TextInput = React.forwardRef(function TextInput(props: TextInputProps & CustomInputProps, ref) {
   const { iconLeft, iconRight, className, error, ...rest } = props;
+
   return (
     <div className={`${className ?? ''} ${style.textInput} ${error ? style.error : ''}`}>
       {iconLeft && <i className={style.iconLeft}>{iconLeft}</i>}

@@ -1,0 +1,13 @@
+@import "../../../styles/variables.scss";
+
+.explanation {
+  color: $primary-color;
+  font-weight: bold;
+}
+
+.buttonBack {
+
+  svg {
+    scale: 2;
+  }
+}
