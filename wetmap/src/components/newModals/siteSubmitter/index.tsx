@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import SiteSubmitterView from './view';
 import { useContext } from 'react';
 import '../../modals/confirmationModal.css';
@@ -20,6 +20,15 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
   const { setMapConfig } = useContext(MapConfigContext);
 
   const { modalPause } = useContext(ModalContext);
+
+
+  useEffect(() => {
+    setAddSiteVals({
+      ...addSiteVals,
+      UserID:   profile?.UserID,
+      UserName: profile?.UserName,
+    });
+  },[])
 
   const getDeviceLocation = () => {
     if (navigator.geolocation) {
@@ -57,10 +66,9 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
   };
 
   const onClose = () => {
-    setAddSiteVals({ ...addSiteVals, Site: '', Latitude: 0, Longitude: 0 });
+    setAddSiteVals({ ...addSiteVals, Site: '', Latitude: undefined, Longitude: undefined });
     props?.onModalCancel?.();
   };
-
 
   return (
     <SiteSubmitterView

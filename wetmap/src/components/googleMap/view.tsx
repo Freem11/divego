@@ -51,8 +51,6 @@ type MapViewProps = {
 };
 
 export default function MapView(props: MapViewProps) {
-
-  console.log("???", props.mapConfig)
   return (
     <GoogleMap
       zoom={props.zoom}
