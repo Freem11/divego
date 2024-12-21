@@ -6,7 +6,6 @@ import LandingPage from './Landning';
 import SignInPage from './SignIn';
 import Slider from '../../reusables/slider';
 
-
 export default function AuthnticationPageView() {
   return (
     <div className={style.container}>

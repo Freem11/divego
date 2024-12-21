@@ -1,28 +1,28 @@
-[
-  {
-    "page": 1,
-    "title": "Sign Up",
-    "namePlaceholder": "Full Name",
-    "emailPlaceholder": "Email",
-    "passwordPlaceholder": "Password",
-    "buttonText": "Sign Up",
-    "promptText": "Already have an account?",
-    "promptLinkText": "Log In"
-  },
-  {
-    "page": 2,
-    "title": "Dive in. . .",
-    "buttonOneText": "Log In",
-    "buttonTwoText": "Create New Account",
-    "content": "Social Sign In:"
-  },
-  {
-    "page": 3,
-    "title": "Log In",
-    "emailPlaceholder": "Email",
-    "passwordPlaceholder": "Password",
-    "buttonText": "Log In",
-    "promptText": "Don't have an account?",
-    "promptLinkText": "Sign Up"
-  }
-]
+{
+  "SignUpPage":
+    {
+      "title": "Sign Up",
+      "namePlaceholder": "Full Name",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "buttonText": "Sign Up",
+      "promptText": "Already have an account?",
+      "promptLinkText": "Log In"
+    },
+  "LandingPage":
+    {
+      "title": "Dive in. . .",
+      "buttonOneText": "Log In",
+      "buttonTwoText": "Create New Account",
+      "content": "Social Sign In:"
+    },
+  "SignInPage":
+    {
+      "title": "Log In",
+      "emailPlaceholder": "Email",
+      "passwordPlaceholder": "Password",
+      "buttonText": "Log In",
+      "promptText": "Don't have an account?",
+      "promptLinkText": "Sign Up"
+    }
+}
