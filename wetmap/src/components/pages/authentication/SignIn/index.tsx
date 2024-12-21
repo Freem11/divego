@@ -1,10 +1,6 @@
 import React, { useState, useContext } from "react";
-import { Label } from "reactstrap";
-
-// import Button from "../../../reusables/button";
 import { SliderContext } from "../../../reusables/slider/context";
 import Icon from "../../../../icons/Icon";
-import { Box, Typography } from "@mui/material";
 import carouselData from "../carousel-data.json";
 import TextInput from "../../../reusables/textInput";
 import { useForm } from "react-hook-form";
@@ -16,7 +12,14 @@ import {
 } from "../../../../supabaseCalls/authenticateSupabaseCalls";
 import { SessionContext } from "../../../contexts/sessionContext";
 
-export default function TutorialStep3() {
+
+
+import { Label } from "reactstrap";
+import { Box, Typography } from "@mui/material";
+
+
+
+export default function SignInPage() {
   const [loginFail, setLoginFail] = useState<string | null>(null);
 
   const {

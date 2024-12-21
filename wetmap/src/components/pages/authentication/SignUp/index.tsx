@@ -1,5 +1,4 @@
 import React, { useContext, useState } from "react";
-// import Button from "../../../reusables/button";
 import { SliderContext } from "../../../reusables/slider/context";
 import Icon from "../../../../icons/Icon";
 import { Box, Typography } from "@mui/material";
@@ -9,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { Form, FormRules } from "./form";
 import Button from "../../../reusables/button";
 
-export default function TutorialStep3() {
+export default function SignUpPage() {
   const {
     register,
     handleSubmit,

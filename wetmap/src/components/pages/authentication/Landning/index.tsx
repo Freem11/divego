@@ -1,21 +1,14 @@
 import React, { useContext, useState } from "react";
 import Button from "../../../reusables/button";
-
 import { SessionContext } from "../../../contexts/sessionContext";
 import { SliderContext } from "../../../reusables/slider/context";
 import {
   register,
   signInStandard,
 } from "../../../../supabaseCalls/authenticateSupabaseCalls";
-
 import { createProfile } from "../../../../supabaseCalls/accountSupabaseCalls";
-
-/* KSB copies */
 import blackManta from "../../../../images/blackManta.png";
 import WavyBlock from "../../../reusables/wavyBlock";
-import Box from "@mui/material/Box";
-import Typography from "@mui/material/Typography";
-// import carouselData from "./carousel-data.json";
 import carouselData from "../carousel-data.json";
 import ButtonIcon from "../../../reusables/buttonIcon";
 import googleIcon from "../../../../images/google-color.png";
@@ -24,12 +17,17 @@ import appleIcon from "../../../../images/apple.png";
 import "./index.css";
 import { LoginSocialGoogle } from "reactjs-social-login";
 
+
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+
+
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID;
 const appleAppId = import.meta.env.VITE_APPLE_APP_ID;
 const REDIRECT_URI = window.location.href;
 
-export default function AuthnticationStep1() {
+export default function LandingPage() {
   const { slideForward, slideBackward } = useContext(SliderContext);
   const { setActiveSession } = useContext(SessionContext);
   const [profile, setProfile] = useState(null);
@@ -38,7 +36,7 @@ export default function AuthnticationStep1() {
     password: "",
   });
 
-  const [loginFail, setLoginFail] = useState(null);
+  const [loginFail, setLoginFail] = useState<string|null>(null);
 
   async function getGoogleUserData(token) {
     if (!token) return;

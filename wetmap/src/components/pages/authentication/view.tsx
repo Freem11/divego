@@ -1,9 +1,9 @@
 import React from 'react';
 
 import style from './style.module.scss';
-import AuthnticationStep1 from './step1';
-import AuthnticationStep2 from './step2';
-import AuthnticationStep3 from './step3';
+import SignUpPage from './SignUp';
+import LandingPage from './Landning';
+import SignInPage from './SignIn';
 import Slider from '../../reusables/slider';
 
 
@@ -15,9 +15,9 @@ export default function AuthnticationPageView() {
           startIndex={1}
           showArrows={false}
           slides={[
-            <AuthnticationStep1 key="step1" />,
-            <AuthnticationStep2 key="step2" />,
-            <AuthnticationStep3 key="step3" />,
+            <SignUpPage key="step1" />,
+            <LandingPage key="step2" />,
+            <SignInPage key="step3" />,
           ]}
         />
       </div>
