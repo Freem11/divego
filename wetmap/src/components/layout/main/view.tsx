@@ -10,7 +10,12 @@ import DiveSite from '../../newModals/siteSubmitter';
 import PhotosInTheArea from '../../photosInTheArea';
 import Modal from '../../reusables/modal/modal';
 
-type LayoutMainViewProps = {};
+type LayoutMainViewProps = {
+  mapConfig: number;
+  animateSitSubmitterModal: () => void;
+  animateProfileModal: () => void;
+  animateSettingsModal: () => void;
+};
 
 
 export default function LayoutMainView(props: LayoutMainViewProps) {
@@ -32,17 +37,32 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               <MainSearch />
             </div>
 
-            <div className="col-sm-12 col-4 flex-centered justify-content-sm-center justify-content-flex-end">
+            <div className="col-sm-12 col-4 flex-centered justify-content-sm-center justify-content-flex-start">
 
               <ul className={style.headerIcons}>
                 <li>
-                  <ButtonIcon icon={<Icon name="person" />} className="text-primary" />
+                  <ButtonIcon 
+                  disabled={props.mapConfig === 0 ? false: true}
+                  icon={<Icon name="person" color='blue' />} 
+                  className="text-primary" 
+                  onClick={props.animateProfileModal}
+                  />
                 </li>
                 <li>
-                  <ButtonIcon icon={<Icon name="anchor" />} className="text-primary" />
+                  <ButtonIcon 
+                  disabled={props.mapConfig === 0 ? false: true}
+                  icon={<Icon name="settings" color='blue'/>} 
+                  className="text-primary"
+                  onClick={props.animateSettingsModal}
+                  />
                 </li>
-                <li>
-                  <ButtonIcon icon={<Icon name="camera-plus" />} className="text-primary" />
+                <li style={{marginTop: '-1px'}}>
+                  <ButtonIcon 
+                  disabled={props.mapConfig === 0 ? false: true}
+                  icon={<Icon name="anchor-plus" color='blue'/>} 
+                  className="text-primary" 
+                  onClick={props.animateSitSubmitterModal}
+                  />
                 </li>
               </ul>
 

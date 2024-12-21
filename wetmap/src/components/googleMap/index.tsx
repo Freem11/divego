@@ -143,6 +143,14 @@ export default function MapLoader() {
     }
   };
 
+  const zoomMapOut = () => {
+    setMapZoom(mapZoom - 1)
+  }
+
+  const zoomMapIn = () => {
+    setMapZoom(mapZoom + 1)
+  }
+
   useLayoutEffect(() => {
     setMapCoords([center.lat, center.lng]);
     setMapZoom(zoom);
@@ -275,6 +283,8 @@ export default function MapLoader() {
       handleBoundsChange={handleBoundsChange}
       handleMapCenterChange={handleMapCenterChange}
       handleMapZoomChange={handleMapZoomChange}
+      zoomMapIn={zoomMapIn}
+      zoomMapOut={zoomMapOut}
       dragPin={dragPin}
       handlePinLoad={handlePinLoad}
       handleDragEnd={handleDragEnd}

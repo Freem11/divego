@@ -3,10 +3,17 @@ import LayoutMainView from './view';
 import { grabProfileById } from '../../../supabaseCalls/accountSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { SessionContext } from '../../contexts/sessionContext';
+import { ModalContext } from '../../reusables/modal/context';
+import SiteSubmitter from '../../newModals/siteSubmitter';
+import UserProfileModal from '../../modals/userProfileModal';
+import Settings from '../../modals/setting';
+import { MapConfigContext } from '../../contexts/mapConfigContext';
 
 export default function LayoutMain() {
+  const { mapConfig, setMapConfig } = useContext(MapConfigContext);
   const { activeSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
+  const { modalShow } = useContext(ModalContext);
   
   useEffect(() => {
     const getProfile = async () => {
@@ -32,7 +39,25 @@ export default function LayoutMain() {
     getProfile();
   }, []);
 
+  const animateSitSubmitterModal = () => {
+    modalShow(SiteSubmitter);
+  };
+
+  const animateSettingsModal = () => {
+    modalShow(Settings);
+    // create new settings here
+  };
+  
+  const animateProfileModal = () => {
+    modalShow(UserProfileModal);
+    // create new userprofile here
+  };
   return (
-    <LayoutMainView />
+    <LayoutMainView 
+    mapConfig={mapConfig}
+    animateSitSubmitterModal={animateSitSubmitterModal}
+    animateProfileModal={animateProfileModal}
+    animateSettingsModal={animateSettingsModal}
+    />
   );
 }

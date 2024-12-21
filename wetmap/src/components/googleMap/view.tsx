@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { GoogleMap, Marker } from '@react-google-maps/api';
 import style from './style.module.scss';
 import { Cluster, HeatPoint, HeatPointConfiguration, LatLngObject, MapConfiguration, SuperclusterInstance } from './types';
@@ -13,7 +13,6 @@ import { ModalShow } from '../reusables/modal/types';
 import './style.css';
 import RoundButtonIcon from '../reusables/roundButton';
 import Icon from '../../icons/Icon';
-import { ZoomContext } from '../contexts/mapZoomContext';
 
 type MapViewProps = {
   mapRef:                google.maps.Map | null
@@ -38,6 +37,8 @@ type MapViewProps = {
   handleBoundsChange:    () => void
   handleMapCenterChange: () => void
   handleMapZoomChange:   () => void
+  zoomMapIn:             () => void;
+  zoomMapOut:            () => void;
   dragPin:               LatLngObject
   handlePinLoad:         (marker: google.maps.Marker) => void
   handleDragEnd:         () => void
@@ -45,7 +46,6 @@ type MapViewProps = {
 };
 
 export default function MapView(props: MapViewProps) {
-  const { mapZoom, setMapZoom } = useContext(ZoomContext);
   return (
     <GoogleMap
       zoom={props.zoom}
@@ -135,8 +135,8 @@ export default function MapView(props: MapViewProps) {
         : null}
 
       <div className={style.zoomButtonContainer}>
-          <RoundButtonIcon icon={<Icon name="plus" color='blue' onClick={() => {setMapZoom(mapZoom + 1)}}/>}/>
-          <RoundButtonIcon icon={<Icon name="minus" color='blue'  onClick={() => {setMapZoom(mapZoom - 1)}}/>}/>
+          <RoundButtonIcon icon={<Icon name="plus" color='blue' onClick={props.zoomMapIn}/>}/>
+          <RoundButtonIcon icon={<Icon name="minus" color='blue'  onClick={props.zoomMapOut}/>}/>
       </div>
 
     </GoogleMap>
