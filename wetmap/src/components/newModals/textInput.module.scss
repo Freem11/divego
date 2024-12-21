@@ -2,10 +2,11 @@
 
 .inputContainer {
   display: flex;
-  height: 35px;
-  margin-left: 10%;
+  width: 100%;
+  margin-left: 5%;
   border-bottom: solid darkgrey 1px;
   align-items: flex-start;
+  // background-color: pink;
 }
 .inputText {
   width: 100%;
@@ -15,7 +16,6 @@
   color: $themeBlack;
   text-align: left;
   padding-left: 2%;
-  // background-color: pink;
 }
 
 .inputContainerPlain {

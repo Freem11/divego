@@ -1,0 +1,29 @@
+@import "../../../styles/variables.scss";
+
+.middleContainer {
+  height: 100%;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.commentEntryContainer {
+  display: flex;
+  padding: 0.8rem 1.2rem 2rem 1.2rem;
+  align-items: end;
+}
+
+.commentEntryInput {
+  width: 100%;
+  margin-left: 2%;
+}
+
+.replyLine {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 8px;
+  background-color: lightgray;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}

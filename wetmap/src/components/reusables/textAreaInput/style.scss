@@ -1,0 +1,18 @@
+:root {
+  --ssrc-text-area-input-border-color: gray;
+  --ssrc-text-area-input-placeholder-color: gray;
+}
+
+.ssrc-text-area-input {
+
+  border-bottom: 1px solid var(--ssrc-text-area-input-border-color);
+  max-height: 4em;
+  overflow: auto;
+
+  textarea {
+    resize: none;
+    width: 100%;
+    border: none;
+    outline: none;
+  }
+}
