@@ -6,10 +6,10 @@ import {
   signInStandard,
 } from '../../../../supabaseCalls/authenticateSupabaseCalls';
 import { SessionContext } from '../../../contexts/sessionContext';
-import SignInPageView from './view';
+import LogInPageView from './view';
 
 
-export default function SignInPage() {
+export default function LogInPage() {
   const { setActiveSession } = useContext(SessionContext);
   const { goToSlide } = useContext(SliderContext);
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -38,7 +38,7 @@ export default function SignInPage() {
   };
 
   return (
-    <SignInPageView
+    <LogInPageView
       onSubmit={onSubmit}
       goToSlide={goToSlide}
       secureTextEntry={secureTextEntry}

@@ -3,7 +3,7 @@ import React from 'react';
 import style from './style.module.scss';
 import SignUpPage from './SignUp';
 import LandingPage from './Landning';
-import SignInPage from './SignIn';
+import LogInPageView from './SignIn';
 import Slider from '../../reusables/slider';
 
 export default function AuthnticationPageView() {
@@ -16,7 +16,7 @@ export default function AuthnticationPageView() {
           slides={[
             <SignUpPage key="step1" />,
             <LandingPage key="step2" />,
-            <SignInPage key="step3" />,
+            <LogInPageView key="step3" />,
           ]}
         />
       </div>

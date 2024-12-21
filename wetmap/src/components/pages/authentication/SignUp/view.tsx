@@ -19,82 +19,90 @@ export default function SignUpPageView(props: SignUpPageProps) {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   return (
-    <div>
+    <div className="mt-10">
       <ButtonIcon
-        icon={<Icon name="chevron-left" />}
+        icon={<Icon name="chevron-left" color="lightgrey" style={{ scale: '2' }} />}
         className="btn-lg"
-        onClick={() => props.goToSlide(2)}
+        onClick={() => props.goToSlide(1)}
       />
 
-      <h1 className="text-clip">{carouselData.SignUpPage.title}</h1>
+      <div className="mt-10">
+        <h1 className="text-clip">{carouselData.SignUpPage.title}</h1>
 
-      <form
-        className="flex-column-between mx-6 mb-6"
-        onSubmit={handleSubmit(props.onSubmit)}
-      >
-        <div style={{ backgroundColor: 'white' }}>
-          <TextInput
-            error={errors.fullname}
-            iconLeft={<Icon name="person" />}
-            placeholder={carouselData.SignUpPage.namePlaceholder}
-            {...register('fullname', FormRules.fullname)}
-          />
-        </div>
-
-        <div style={{ backgroundColor: 'white' }}>
-          <TextInput
-            error={errors.email}
-            iconLeft={<Icon name="at" />}
-            placeholder={carouselData.SignUpPage.emailPlaceholder}
-            {...register('email', FormRules.email)}
-          />
-        </div>
-
-        <div style={{ backgroundColor: 'white' }}>
-          <TextInput
-            error={errors.password}
-            type={props.secureTextEntry ? 'password' : 'text'}
-            iconLeft={<Icon name="lock-outline" />}
-            iconRight={
-              props.secureTextEntry
-                ? (
-                    <Icon
-                      name="eye-off"
-                      onClick={() => props.setSecureTextEntry(false)}
-                    />
-                  )
-                : (
-                    <Icon name="eye" onClick={() => props.setSecureTextEntry(true)} />
-                  )
-            }
-            placeholder={carouselData.SignUpPage.passwordPlaceholder}
-            {...register('password', FormRules.password)}
-          />
-        </div>
-
-        <Button
-          disabled={isSubmitting}
-          className="btn-lg bg-primary w-25"
-          type="submit"
-          iconRight={<Icon name="chevron-right" />}
+        <form
+          className="flex-column-between mx-6 mb-6"
+          onSubmit={handleSubmit(props.onSubmit)}
         >
-          {carouselData.SignUpPage.buttonText}
-        </Button>
+          <div className="mt-10">
+            <TextInput
+              error={errors.fullname}
+              iconLeft={<Icon name="person" />}
+              placeholder={carouselData.SignUpPage.namePlaceholder}
+              {...register('fullname', FormRules.fullname)}
+            />
+          </div>
 
-        <p>
-          {carouselData.SignUpPage.promptText}
-          <span
-            style={{
-              cursor:         'pointer',
-              color:          'blue',
-              textDecoration: 'none',
-            }}
-            onClick={() => props.goToSlide(2)}
-          >
-            {carouselData.SignUpPage.promptLinkText}
-          </span>
-        </p>
-      </form>
+          <div className="mt-10">
+            <TextInput
+              error={errors.email}
+              iconLeft={<Icon name="at" />}
+              placeholder={carouselData.SignUpPage.emailPlaceholder}
+              {...register('email', FormRules.email)}
+            />
+          </div>
+
+          <div className="mt-10">
+            <TextInput
+              error={errors.password}
+              type={props.secureTextEntry ? 'password' : 'text'}
+              iconLeft={<Icon name="lock-outline" />}
+              iconRight={
+                props.secureTextEntry
+                  ? (
+                      <Icon
+                        name="eye-off"
+                        onClick={() => props.setSecureTextEntry(false)}
+                      />
+                    )
+                  : (
+                      <Icon name="eye" onClick={() => props.setSecureTextEntry(true)} />
+                    )
+              }
+              placeholder={carouselData.SignUpPage.passwordPlaceholder}
+              {...register('password', FormRules.password)}
+            />
+          </div>
+
+          <div className="cols">
+            <div className="col-8" />
+            <div className="col-4">
+              <Button
+                disabled={isSubmitting}
+                className="btn-lg bg-primary mt-10 col-3"
+                type="submit"
+                iconRight={<Icon name="chevron-right" />}
+              >
+                {carouselData.SignUpPage.buttonText}
+              </Button>
+            </div>
+          </div>
+        </form>
+      </div>
+
+      <p style={{ width: '100%', position: 'fixed', bottom: 10 }}>
+        {carouselData.SignUpPage.promptText}
+        <span
+          style={{
+            cursor:         'pointer',
+            color:          'blue',
+            textDecoration: 'none',
+          }}
+          onClick={() => props.goToSlide(2)}
+        >
+          {` ${carouselData.SignUpPage.promptLinkText}`}
+        </span>
+      </p>
+
     </div>
   );
 };

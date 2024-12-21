@@ -34,79 +34,80 @@ export default function LandingPageView(props: LandingPageProps) {
           <WavyBlock />
         </div>
 
-        <h1 className="text-clip">{carouselData.LandingPage.title}</h1>
+        <div className="mt-6">
+          <h1 className="text-clip">{carouselData.LandingPage.title}</h1>
 
-        <div className="buttonsContainer">
-          <Button
-            className="btn-primary btn-lg"
-            onClick={() => props.goToSlide(2)}
-          >
-            {carouselData.LandingPage.buttonOneText}
-          </Button>
-          <Button className="btn-lg" onClick={() => props.goToSlide(0)}>
-            {carouselData.LandingPage.buttonTwoText}
-          </Button>
-        </div>
+          <div className="buttonsContainer mt-10">
+            <Button
+              className="btn-primary btn-lg"
+              onClick={() => props.goToSlide(2)}
+            >
+              {carouselData.LandingPage.buttonOneText}
+            </Button>
+            <Button className="btn-lg" onClick={() => props.goToSlide(0)}>
+              {carouselData.LandingPage.buttonTwoText}
+            </Button>
+          </div>
 
-        <p>{carouselData.LandingPage.content}</p>
+          <p style={{ marginTop: '15%' }}>{carouselData.LandingPage.content}</p>
 
-        <div className="socialSignUps">
-          <LoginSocialGoogle
-            isOnlyGetToken
-            scope="https://www.googleapis.com/auth/userinfo.email"
-            client_id={props.googleClientId || ''}
-            onResolve={({ data }) => {
-              if (data) {
-                props.getGoogleUserData(data?.access_token);
-              }
-            }}
-            onReject={(err) => {
-              console.log(err);
-            }}
-          >
-            <ButtonIcon
-              icon={<img src={googleIcon} alt="Google" />}
-              className="google-icon"
-            />
-          </LoginSocialGoogle>
+          <div className="socialSignUps">
+            <LoginSocialGoogle
+              isOnlyGetToken
+              scope="https://www.googleapis.com/auth/userinfo.email"
+              client_id={props.googleClientId || ''}
+              onResolve={({ data }) => {
+                if (data) {
+                  props.getGoogleUserData(data?.access_token);
+                }
+              }}
+              onReject={(err) => {
+                console.log(err);
+              }}
+            >
+              <ButtonIcon
+                icon={<img src={googleIcon} alt="Google" />}
+                className="google-icon"
+              />
+            </LoginSocialGoogle>
 
-          <LoginSocialFacebook
-            isOnlyGetToken
-            appId={props.facebookAppId || ''}
-            state={false}
-            onResolve={({ data }) => {
-              props.getFacebookUserData(data?.accessToken);
-            }}
-            onReject={(err) => {
-              console.log(err);
-            }}
-          >
-            <ButtonIcon
-              icon={<img src={facebookIcon} alt="Facebook" />}
-              className="social-icons"
-            />
-          </LoginSocialFacebook>
+            <LoginSocialFacebook
+              isOnlyGetToken
+              appId={props.facebookAppId || ''}
+              state={false}
+              onResolve={({ data }) => {
+                props.getFacebookUserData(data?.accessToken);
+              }}
+              onReject={(err) => {
+                console.log(err);
+              }}
+            >
+              <ButtonIcon
+                icon={<img src={facebookIcon} alt="Facebook" />}
+                className="social-icons"
+              />
+            </LoginSocialFacebook>
 
-          <LoginSocialApple
-            client_id={props.appleAppId || '1'}
-            scope="name email"
-            redirect_uri={props.REDIRECT_URI}
-            onResolve={({ data }) => {
-              console.log('apple', data);
-              props.handleAppleUserData(data);
-            }}
-            onReject={(err) => {
-              console.log(err);
-            }}
-          >
-            <ButtonIcon
-              icon={<img src={appleIcon} alt="Apple" />}
-              className="social-icons"
-            />
-          </LoginSocialApple>
+            <LoginSocialApple
+              client_id={props.appleAppId || '1'}
+              scope="name email"
+              redirect_uri={props.REDIRECT_URI}
+              onResolve={({ data }) => {
+                console.log('apple', data);
+                props.handleAppleUserData(data);
+              }}
+              onReject={(err) => {
+                console.log(err);
+              }}
+            >
+              <ButtonIcon
+                icon={<img src={appleIcon} alt="Apple" />}
+                className="social-icons"
+              />
+            </LoginSocialApple>
+          </div>
         </div>
       </div>
-
     </div>
   );
 };

@@ -1,7 +1,7 @@
 .container {
   height: 100%;
   width: 100%;
-  // background-color: gray;
+  background-color: white;
   z-index: 5;
   position: relative;
 }
@@ -11,5 +11,5 @@
   width: 30%;
   min-width: 600px;
   height: 100%;
-  border: 2px solid red;
+  border: 2px solid lightgray;
 }
