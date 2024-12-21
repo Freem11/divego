@@ -6,7 +6,9 @@
 
 .socialSignUps {
   display: flex;
-  justify-content: center;
+  justify-content: space-evenly;
+  width: 50%;
+  margin-left: 25%;
 }
 
 .google-icon {
