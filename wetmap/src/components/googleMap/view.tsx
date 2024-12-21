@@ -13,41 +13,41 @@ import { ModalShow } from '../reusables/modal/types';
 import './style.css';
 import RoundButtonIcon from '../reusables/roundButton';
 import Icon from '../../icons/Icon';
-import Button from '../newModals/button';
+import Button from '../reusables/button';
 import screenData from '../newModals/screenData.json';
 
 type MapViewProps = {
-  mapRef:                google.maps.Map | null
-  mapConfigs:            MapConfiguration
-  heatpointConfigs:      HeatPointConfiguration
-  mapConfig:             number
-  setMapConfig:          (configType: number) => void
-  returnToSiteSubmitterModal:      () => void
-  returnToShopModal:     () => void
-  zoom:                  number
-  center:                LatLngObject
-  tempMarker:            LatLngObject | null
-  animalVal:             string[]
-  clusters:              Cluster[]
-  supercluster:          SuperclusterInstance
-  divesTog:              boolean
-  heatpts:               HeatPoint[]
-  mapCoords:             number[]
-  setMapCoords:          (coords: number[]) => void
-  selectedDiveSite:      DiveSiteWithUserName | null
-  setSelectedDiveSite:   (site: DiveSiteWithUserName) => void
-  setSelectedShop:       (shop: DiveShop) => void
-  onLoad:                (map: google.maps.Map) => void
-  handleMapUpdates:      () => void
-  handleBoundsChange:    () => void
-  handleMapCenterChange: () => void
-  handleMapZoomChange:   () => void
-  zoomMapIn:             () => void
-  zoomMapOut:            () => void
-  dragPin:               LatLngObject
-  handlePinLoad:         (marker: google.maps.Marker) => void
-  handleDragEnd:         () => void
-  modalShow:             ModalShow
+  mapRef:                     google.maps.Map | null
+  mapConfigs:                 MapConfiguration
+  heatpointConfigs:           HeatPointConfiguration
+  mapConfig:                  number
+  setMapConfig:               (configType: number) => void
+  returnToSiteSubmitterModal: () => void
+  returnToShopModal:          () => void
+  zoom:                       number
+  center:                     LatLngObject
+  tempMarker:                 LatLngObject | null
+  animalVal:                  string[]
+  clusters:                   Cluster[]
+  supercluster:               SuperclusterInstance
+  divesTog:                   boolean
+  heatpts:                    HeatPoint[]
+  mapCoords:                  number[]
+  setMapCoords:               (coords: number[]) => void
+  selectedDiveSite:           DiveSiteWithUserName | null
+  setSelectedDiveSite:        (site: DiveSiteWithUserName) => void
+  setSelectedShop:            (shop: DiveShop) => void
+  onLoad:                     (map: google.maps.Map) => void
+  handleMapUpdates:           () => void
+  handleBoundsChange:         () => void
+  handleMapCenterChange:      () => void
+  handleMapZoomChange:        () => void
+  zoomMapIn:                  () => void
+  zoomMapOut:                 () => void
+  dragPin:                    LatLngObject
+  handlePinLoad:              (marker: google.maps.Marker) => void
+  handleDragEnd:              () => void
+  modalShow:                  ModalShow
 };
 
 export default function MapView(props: MapViewProps) {
@@ -140,36 +140,39 @@ export default function MapView(props: MapViewProps) {
         : null}
 
       <div className={style.zoomButtonContainer}>
-          <RoundButtonIcon icon={<Icon name="plus" color='blue' onClick={props.zoomMapIn}/>}/>
-          <RoundButtonIcon icon={<Icon name="minus" color='blue'  onClick={props.zoomMapOut}/>}/>
+        <RoundButtonIcon icon={<Icon name="plus" color="blue" onClick={props.zoomMapIn} />} />
+        <RoundButtonIcon icon={<Icon name="minus" color="blue"  onClick={props.zoomMapOut} />} />
       </div>
 
-{/* MapConfigScenarios */}
-{/* 0 = Default */}
-{/* 1 = Dive Site Add */}
-{/* 2 = View Trip/Itinerary */}
-{/* 3 = Create Trip Sites List */}
+      {/* MapConfigScenarios */}
+      {/* 0 = Default */}
+      {/* 1 = Dive Site Add */}
+      {/* 2 = View Trip/Itinerary */}
+      {/* 3 = Create Trip Sites List */}
 
-{[1,2,3].includes(props.mapConfig) && (
-     <div className={style.navButtonContainer}> 
-     <Button
-       className="btn-md bg-primary"
-       type="button"
-       onClick={
-        props.mapConfig === 1 ? props.returnToSiteSubmitterModal :
-        props.mapConfig === 2 ? props.returnToShopModal : null
-       }
-     >
-       {
-       props.mapConfig == 1 ? screenData.GoogleMap.pinButton :
-       props.mapConfig == 2 ? screenData.GoogleMap.shopButton : 
-       props.mapConfig == 3 ? screenData.GoogleMap.sitesButton : null
-       }
-     </Button>
-   </div>
-)};
+      {[1, 2, 3].includes(props.mapConfig) && (
+        <div className={style.navButtonContainer}>
+          <Button
+            className="btn-md bg-primary a"
+            type="button"
+            onClick={
+              props.mapConfig === 1
+                ? props.returnToSiteSubmitterModal
+                : props.mapConfig === 2 ? props.returnToShopModal : null
+            }
+          >
+            {
+              props.mapConfig == 1
+                ? screenData.GoogleMap.pinButton
+                : props.mapConfig == 2
+                  ? screenData.GoogleMap.shopButton
+                  : props.mapConfig == 3 ? screenData.GoogleMap.sitesButton : null
+            }
+          </Button>
+        </div>
+      )}
+      ;
 
-   
 
     </GoogleMap>
   );
