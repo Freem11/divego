@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
@@ -6,14 +6,11 @@ import style from './style.module.scss';
 import screenData from '../screenData.json'
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import { ItineraryItem } from './types';
-import { DiveShop } from '../../../entities/diveShop';
-
 
 type TripCreatorListViewProps = {
   setSelectedID:                (id: number) => void
   handleBackButton:             () => void
 
-  diveShop:         DiveShop | null
   itineraryList:    ItineraryItem[] | null
   selectedID:       number
   headerPictureUrl: string | null

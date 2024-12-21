@@ -1,8 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalContext } from '../../reusables/modal/context';
 import { ItineraryItem } from './types';
 import TripCreatorListView from './view';
@@ -13,7 +11,6 @@ type TripCreatorListProps = Partial<ModalHandleProps>;
 
 export default function TripCreatorListModal(props: TripCreatorListProps) {
   const { selectedShop } = useContext(SelectedShopContext);
-  const { profile } = useContext(UserProfileContext);
   const modalContext = useContext(ModalContext);
   const { modalShow } = useContext(ModalContext);
 
@@ -50,7 +47,6 @@ export default function TripCreatorListModal(props: TripCreatorListProps) {
         <TripCreatorListView
           setSelectedID={setSelectedID}
           handleBackButton={handleBackButton}
-          diveShop={selectedShop}
           itineraryList={itineraryList}
           selectedID={selectedID}
           headerPictureUrl={null}
