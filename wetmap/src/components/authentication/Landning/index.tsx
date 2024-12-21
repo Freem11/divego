@@ -1,14 +1,14 @@
 import React, { useContext } from 'react';
-import { SessionContext } from '../../../contexts/sessionContext';
-import { SliderContext } from '../../../reusables/slider/context';
+import { SessionContext } from '../../contexts/sessionContext';
+import { SliderContext } from '../../reusables/slider/context';
 import {
   register,
   signInStandard,
-} from '../../../../supabaseCalls/authenticateSupabaseCalls';
-import { createProfile } from '../../../../supabaseCalls/accountSupabaseCalls';
+} from '../../../supabaseCalls/authenticateSupabaseCalls';
+import { createProfile } from '../../../supabaseCalls/accountSupabaseCalls';
 import './index.css';
 import LandingPageView from './view';
-import { UserProfileContext } from '../../../contexts/userProfileContext';
+import { UserProfileContext } from '../../contexts/userProfileContext';
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID;

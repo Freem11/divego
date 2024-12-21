@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { SliderContext } from '../../../reusables/slider/context';
+import { SliderContext } from '../../reusables/slider/context';
 import { Form } from './form';
 import SignUpPageView from './view';
 

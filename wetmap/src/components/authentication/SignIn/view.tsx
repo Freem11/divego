@@ -1,21 +1,23 @@
-import React from 'react';
-// import style from './style.module.scss';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, FormRules } from './form';
-import Button from '../../../reusables/button';
-import Icon from '../../../../icons/Icon';
-import ButtonIcon from '../../../reusables/buttonIcon';
+import Button from '../../reusables/button';
+import Icon from '../../../icons/Icon';
+import ButtonIcon from '../../reusables/buttonIcon';
 import carouselData from '../carousel-data.json';
-import TextInput from '../../../reusables/textInput';
+import TextInput from '../../reusables/textInput';
 
-type SignUpPageProps = {
+type LogInPageProps = {
   goToSlide:          (pageNumber: number) => void
   onSubmit:           (data: Form) => void
   secureTextEntry:    boolean
   setSecureTextEntry: (value: boolean) => void
+  loginFail:          string | null
+  setLoginFail:       Dispatch<SetStateAction<string | null>>
+
 };
 
-export default function SignUpPageView(props: SignUpPageProps) {
+export default function LogInPageView(props: LogInPageProps) {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   return (
@@ -27,7 +29,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
       />
 
       <div className="mt-10">
-        <h1 className="text-clip">{carouselData.SignUpPage.title}</h1>
+        <h1>{carouselData.SignInPage.title}</h1>
 
         <form
           className="flex-column-between mx-6 mb-6"
@@ -35,21 +37,14 @@ export default function SignUpPageView(props: SignUpPageProps) {
         >
           <div className="mt-10">
             <TextInput
-              error={errors.fullname}
-              iconLeft={<Icon name="person" />}
-              placeholder={carouselData.SignUpPage.namePlaceholder}
-              {...register('fullname', FormRules.fullname)}
-            />
-          </div>
-
-          <div className="mt-10">
-            <TextInput
               error={errors.email}
               iconLeft={<Icon name="at" />}
-              placeholder={carouselData.SignUpPage.emailPlaceholder}
+              placeholder={carouselData.SignInPage.emailPlaceholder}
+              onFocus={() => props.setLoginFail(null)}
               {...register('email', FormRules.email)}
             />
           </div>
+
 
           <div className="mt-10">
             <TextInput
@@ -68,10 +63,13 @@ export default function SignUpPageView(props: SignUpPageProps) {
                       <Icon name="eye" onClick={() => props.setSecureTextEntry(true)} />
                     )
               }
-              placeholder={carouselData.SignUpPage.passwordPlaceholder}
+              placeholder={carouselData.SignInPage.passwordPlaceholder}
+              onFocus={() => props.setLoginFail(null)}
               {...register('password', FormRules.password)}
             />
           </div>
+
+          {props.loginFail && <p className="erroMsg">{props.loginFail}</p>}
 
           <div className="cols">
             <div className="col-8" />
@@ -82,7 +80,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
                 type="submit"
                 iconRight={<Icon name="chevron-right" />}
               >
-                {carouselData.SignUpPage.buttonText}
+                {carouselData.SignInPage.buttonText}
               </Button>
             </div>
           </div>
@@ -90,16 +88,16 @@ export default function SignUpPageView(props: SignUpPageProps) {
       </div>
 
       <p style={{ width: '100%', position: 'fixed', bottom: 10 }}>
-        {carouselData.SignUpPage.promptText}
+        {carouselData.SignInPage.promptText}
         <span
           style={{
             cursor:         'pointer',
             color:          'blue',
             textDecoration: 'none',
           }}
-          onClick={() => props.goToSlide(2)}
+          onClick={() => props.goToSlide(0)}
         >
-          {` ${carouselData.SignUpPage.promptLinkText}`}
+          {` ${carouselData.SignInPage.promptLinkText}`}
         </span>
       </p>
 

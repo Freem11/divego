@@ -1,11 +1,11 @@
 import React, { useState, useContext } from 'react';
-import { SliderContext } from '../../../reusables/slider/context';
+import { SliderContext } from '../../reusables/slider/context';
 import { Form } from './form';
 import {
   sessionCheck,
   signInStandard,
-} from '../../../../supabaseCalls/authenticateSupabaseCalls';
-import { SessionContext } from '../../../contexts/sessionContext';
+} from '../../../supabaseCalls/authenticateSupabaseCalls';
+import { SessionContext } from '../../contexts/sessionContext';
 import LogInPageView from './view';
 
 
