@@ -4,7 +4,7 @@ import style from './style.module.scss';
 import SignUpPage from './SignUp';
 import LandingPage from './Landning';
 import LogInPageView from './SignIn';
-import Slider from '../../reusables/slider';
+import Slider from '../reusables/slider';
 
 export default function AuthnticationPageView() {
   return (

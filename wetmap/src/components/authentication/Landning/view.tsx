@@ -1,10 +1,9 @@
 import React, { Dispatch, SetStateAction } from 'react';
-// import style from './style.module.scss';
 import Button from '../../reusables/button';
-import blackManta from '../../../../images/blackManta.png';
-import googleIcon from '../../../../images/google-color.png';
-import facebookIcon from '../../../../images/facebook-color.png';
-import appleIcon from '../../../../images/apple.png';
+import blackManta from '../../../images/blackManta.png';
+import googleIcon from '../../../images/google-color.png';
+import facebookIcon from '../../../images/facebook-color.png';
+import appleIcon from '../../../images/apple.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import carouselData from '../carousel-data.json';
 import { LoginSocialApple, LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
