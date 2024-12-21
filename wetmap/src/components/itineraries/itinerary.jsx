@@ -16,7 +16,7 @@ export default function Itinerary(props) {
   const { setMapCoords } = useContext(CoordsContext);
   const { setMapZoom } = useContext(ZoomContext);
   const { setMapConfig } = useContext(MapConfigContext);
-  const modalContext = useContext(ModalContext);
+  const { modalPause } = useContext(ModalContext);
 
 
   const [hiddenHeigth, setHiddenHeigth] = useState(0);
@@ -61,7 +61,7 @@ export default function Itinerary(props) {
     setMapZoom(12);
     setMapConfig(2);
     setMapCoords([moveLat, moveLng]);
-    modalContext.modalCancel();
+    modalPause();
   };
 
   return (

@@ -33,10 +33,10 @@ export default function MapLoader() {
   const [newSites, setnewSites] = useState<DiveSiteWithUserName[]>([]);
   const [newShops, setnewShops] = useState<DiveShop[]>([]);
 
-  const { mapConfig } = useContext(MapConfigContext);
+  const { mapConfig, setMapConfig } = useContext(MapConfigContext);
   const { heatpts, setHeatPts } = useContext(HeatPointsContext);
 
-  const { sitesArray } = useContext(SitesArrayContext);
+  const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
 
   const { boundaries, setBoundaries } = useContext(MapBoundsContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
@@ -54,7 +54,7 @@ export default function MapLoader() {
   const { animalVal } = useContext(AnimalContext);
   const { divesTog } = useContext(DiveSitesContext);
 
-  const { modalShow } = useContext(ModalContext);
+  const { modalShow, modalResume } = useContext(ModalContext);
 
   const mapConfigs = useMemo(() => ({
     mapTypeId:         'hybrid',
@@ -150,6 +150,21 @@ export default function MapLoader() {
   const zoomMapIn = () => {
     setMapZoom(mapZoom + 1)
   }
+
+  const returnToSiteSubmitterModal = () => {
+    modalResume();
+    setMapConfig(0);
+  };
+
+  const returnToShopModal = () => {
+    if(selectedShop){
+      setMapCoords([selectedShop.lat, selectedShop.lng]);
+      setMapZoom(16);
+      setMapConfig(0);
+      setSitesArray([]);
+      modalResume();
+    }
+  };
 
   useLayoutEffect(() => {
     setMapCoords([center.lat, center.lng]);
@@ -265,6 +280,9 @@ export default function MapLoader() {
       mapConfigs={mapConfigs}
       heatpointConfigs={heatpointConfigs}
       mapConfig={mapConfig}
+      setMapConfig={setMapConfig}
+      returnToSiteSubmitterModal={returnToSiteSubmitterModal}
+      returnToShopModal={returnToShopModal}
       zoom={zoom}
       center={center}
       tempMarker={tempMarker}

@@ -105,5 +105,11 @@
         "replyViewSingle": "View Reply",
         "replyViewMultiplOne": "View ",
         "replyViewMultiplTwo":" Replies"
+      },
+      "GoogleMap" :
+      {
+        "pinButton" : "Set Pin",
+        "shopButton": "Return to Shop",
+        "sitesButton": "Set Sites"
       }
     }
