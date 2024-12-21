@@ -79,15 +79,16 @@ export default function TutorialStep3() {
           <div style={{ backgroundColor: "white" }}>
             <TextInput
               error={errors.password}
+              type={secureTextEntry ? "password" : "text"}
               iconLeft={<Icon name="lock-outline" />}
               iconRight={
                 secureTextEntry ? (
-                  <Icon name="eye" onClick={() => setSecureTextEntry(false)} />
-                ) : (
                   <Icon
                     name="eye-off"
-                    onClick={() => setSecureTextEntry(true)}
+                    onClick={() => setSecureTextEntry(false)}
                   />
+                ) : (
+                  <Icon name="eye" onClick={() => setSecureTextEntry(true)} />
                 )
               }
               placeholder={carouselData[0].passwordPlaceholder}
