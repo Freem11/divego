@@ -15,6 +15,7 @@ const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID;
 const appleAppId = import.meta.env.VITE_APPLE_APP_ID;
 const REDIRECT_URI = window.location.href;
 
+console.log('appleAppId', appleAppId);
 type formProps = {
   password:  string
   email:     string
