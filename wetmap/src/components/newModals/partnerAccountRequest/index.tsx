@@ -2,19 +2,19 @@ import React from 'react';
 import PartnerAccountRequestView from './view';
 import { useContext } from 'react';
 import { Form } from './form';
+import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import { SessionContext } from '../../contexts/sessionContext';
 import { createPartnerAccountRequest } from '../../../supabaseCalls/partnerSupabaseCalls';
 
 type PartnerAccountRequestpProps = Partial<ModalHandleProps>;
 
 export default function PartnerAccountRequest(props: PartnerAccountRequestpProps) {
-  const { activeSession } = useContext(SessionContext);
+  const { profile } = useContext(UserProfileContext);
 
   const onSubmit = (data: Form) => {
     createPartnerAccountRequest({
       ...data,
-      UserId: activeSession?.user?.id || null,
+      UserId: profile?.UserID || null,
     })
       .then(() => {
         props?.onModalSuccess?.();

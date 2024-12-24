@@ -7,7 +7,6 @@ import Button from '../../reusables/button';
 import { Form, FormRules } from './form';
 import style from './style.module.scss';
 import { Label } from 'reactstrap';
-import BackButton from '../../backButton';
 import ButtonIcon from '../../reusables/buttonIcon';
 
 
@@ -38,14 +37,14 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
         </div>
 
         <TextInput
-          iconLeft={<Icon name="diving-scuba-flag" />}
+          iconLeft={<Icon name="store" />}
           placeholder={screenData.PartnerRequestPage.businessPlaceholder}
           error={errors.BusinessName}
           {...register('BusinessName', FormRules.BusinessName)}
         />
 
         <TextInput
-          iconLeft={<Icon name="explore" />}
+          iconLeft={<Icon name="monitor-dashboard" />}
           placeholder={screenData.PartnerRequestPage.websitePlaceholder}
           error={errors.WebsiteLink}
           {...register('WebsiteLink', FormRules.WebsiteLink)}
