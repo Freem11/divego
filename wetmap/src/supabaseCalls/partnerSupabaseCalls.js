@@ -9,11 +9,11 @@ export const createPartnerAccountRequest = async (values) => {
     .from('partnerAccountRequests11')
     .insert([
       {
-        webpageLink: values.WebsiteLink,
+        webpageLink:  values.WebsiteLink,
         businessName: values.BusinessName,
-        latitude: values.Latitude,
-        longitude: values.Longitude,
-        userId: values.UserId,
+        latitude:     values.Latitude,
+        longitude:    values.Longitude,
+        userId:       values.UserId,
       },
     ])
 
