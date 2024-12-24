@@ -6,7 +6,7 @@ import { safeSupabase } from './_safeCall';
 export const createPartnerAccountRequest = async (values) => {
 
   const call = () => supabase
-    .from('partnerAccountRequests11')
+    .from('partnerAccountRequests')
     .insert([
       {
         webpageLink:  values.WebsiteLink,
