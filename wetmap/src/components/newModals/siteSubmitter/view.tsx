@@ -12,11 +12,11 @@ import style from './style.module.scss';
 
 
 type SiteSubmitterProps = {
-  values?:           Form
-  onClose:           () => void
+  values?: Form
+  onClose: () => void
   getDeviceLocation: () => void
-  onNavigate:        () => void
-  onSubmit:          (data: Form) => void
+  onNavigate: () => void
+  onSubmit: (data: Form) => void
 
 };
 
@@ -83,9 +83,8 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
         </div>
 
-        <div className={style.horizontalButtonContainer}>
-          <div className="col-3"></div>
-
+        <div className="cols mx-0">
+          <div className="col-9"></div>
           <div className="col-3">
             <Button
               disabled={isSubmitting}
