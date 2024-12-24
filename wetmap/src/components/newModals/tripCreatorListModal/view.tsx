@@ -9,7 +9,8 @@ import { ItineraryItem } from './types';
 
 type TripCreatorListViewProps = {
   setSelectedID:                (id: number) => void
-  handleBackButton:             () => void
+  // handleBackButton:             () => void
+  onClose?:                     () => void
 
   itineraryList:    ItineraryItem[] | null
   selectedID:       number
@@ -21,7 +22,7 @@ export default function TripCreatorListView(props: TripCreatorListViewProps) {
     <div className="cols mx-0 full-height">
      
       <div className="col-12 panel border-none full-height">
-        <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.handleBackButton}>
+        <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
         </WavyModalHeader>
         <div className="panel-header">
           <h3>Trip Creator</h3>

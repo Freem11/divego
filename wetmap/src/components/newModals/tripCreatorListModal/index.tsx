@@ -11,8 +11,8 @@ type TripCreatorListProps = Partial<ModalHandleProps>;
 
 export default function TripCreatorListModal(props: TripCreatorListProps) {
   const { selectedShop } = useContext(SelectedShopContext);
-  const modalContext = useContext(ModalContext);
-  const { modalShow } = useContext(ModalContext);
+  // const modalContext = useContext(ModalContext);
+  // const { modalShow } = useContext(ModalContext);
 
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
@@ -34,22 +34,22 @@ export default function TripCreatorListModal(props: TripCreatorListProps) {
     }
   };
 
-  const handleBackButton = async () => {
-    modalContext.modalCancel();
-    modalShow(DiveShopModal, {
-      size: 'large',
-    });
-  };
+  // const handleBackButton = async () => {
+  //   modalContext.modalCancel();
+  //   modalShow(DiveShopModal, {
+  //     size: 'large',
+  //   });
+  // };
 
   return (
     <>
       {selectedShop && (
         <TripCreatorListView
           setSelectedID={setSelectedID}
-          handleBackButton={handleBackButton}
           itineraryList={itineraryList}
           selectedID={selectedID}
           headerPictureUrl={null}
+          onClose={props.onModalCancel}
         />
       )}
     </>
