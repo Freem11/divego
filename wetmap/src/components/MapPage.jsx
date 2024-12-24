@@ -40,8 +40,8 @@ import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
 import Histogram from './histogram/histogramBody';
 import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
-
 import { MapConfigContext } from './contexts/mapConfigContext';
+import { ToastContainer } from 'react-toastify';
 
 
 const MapPage = React.memo(function MapPage() {
@@ -90,12 +90,12 @@ const MapPage = React.memo(function MapPage() {
             setProfile(success[0]);
             setPin({
               ...pin,
-              UserID:   success[0].UserID,
+              UserID: success[0].UserID,
               UserName: success[0].UserName,
             });
             setAddSiteVals({
               ...addSiteVals,
-              UserID:   success[0].UserID,
+              UserID: success[0].UserID,
               UserName: success[0].UserName,
             });
           }
@@ -112,20 +112,20 @@ const MapPage = React.memo(function MapPage() {
   const toggleButtonStyle = {
     '&.Mui-selected': {
       backgroundColor: '#538bdb',
-      width:           sideLength,
-      height:          sideLength,
+      width: sideLength,
+      height: sideLength,
     },
     '&.Mui-selected:hover': { backgroundColor: 'lightgrey', color: 'white' },
-    '&:hover':              {
-      color:           'lightgrey',
+    '&:hover': {
+      color: 'lightgrey',
       backgroundColor: 'white',
     },
     'backgroundColor': 'white',
-    'width':           sideLength,
-    'height':          sideLength,
-    'color':           '#538bdb',
-    'boxShadow':       '-2px 4px 4px #00000064',
-    'borderRadius':    '100%',
+    'width': sideLength,
+    'height': sideLength,
+    'color': '#538bdb',
+    'boxShadow': '-2px 4px 4px #00000064',
+    'borderRadius': '100%',
   };
 
 
@@ -162,7 +162,7 @@ const MapPage = React.memo(function MapPage() {
 
   const moveFabModal = useSpring({
     from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${fabsYCoord}px,0)` },
+    to: { transform: `translate3d(0,${fabsYCoord}px,0)` },
   });
 
   const animateFabs = () => {
@@ -195,8 +195,8 @@ const MapPage = React.memo(function MapPage() {
     animateSiteModal();
     setAddSiteVals({
       ...addSiteVals,
-      Site:      '',
-      Latitude:  '',
+      Site: '',
+      Latitude: '',
       Longitude: '',
     });
   };
@@ -213,7 +213,7 @@ const MapPage = React.memo(function MapPage() {
 
   const animateOnBoardingModal = () => {
     modalShow(OnBoardingCarrousel, {
-      size:        'full',
+      size: 'full',
       allowCancel: false,
     });
   };
@@ -254,27 +254,27 @@ const MapPage = React.memo(function MapPage() {
             <p className="animateFont">{menuUp ? 'Hide Menu' : 'Show Menu'}</p>
             {menuUp
               ? (
-                  <KeyboardArrowDownIcon
-                    sx={{
-                      height:       '3vh',
-                      color:        'white',
-                      marginTop:    '-2vh',
-                      marginBottom: '1vh',
-                      cursor:       'pointer',
-                    }}
-                  />
-                )
+                <KeyboardArrowDownIcon
+                  sx={{
+                    height: '3vh',
+                    color: 'white',
+                    marginTop: '-2vh',
+                    marginBottom: '1vh',
+                    cursor: 'pointer',
+                  }}
+                />
+              )
               : (
-                  <KeyboardArrowUpIcon
-                    sx={{
-                      height:       '3vh',
-                      color:        'white',
-                      marginTop:    '-2vh',
-                      marginBottom: '1vh',
-                      cursor:       'pointer',
-                    }}
-                  />
-                )}
+                <KeyboardArrowUpIcon
+                  sx={{
+                    height: '3vh',
+                    color: 'white',
+                    marginTop: '-2vh',
+                    marginBottom: '1vh',
+                    cursor: 'pointer',
+                  }}
+                />
+              )}
           </div>
 
           <div className="fabButtons">
@@ -451,37 +451,37 @@ const MapPage = React.memo(function MapPage() {
       {mapConfig === 1 && (
         <div
           style={{
-            display:       'flex',
+            display: 'flex',
             flexDirection: 'row',
-            position:      'absolute',
-            width:         '90%',
-            marginLeft:    '10%',
-            top:           '5px',
-            zIndex:        '2',
+            position: 'absolute',
+            width: '90%',
+            marginLeft: '10%',
+            top: '5px',
+            zIndex: '2',
           }}
         >
           <div
             style={{
-              width:    '90%',
+              width: '90%',
               position: 'relative',
-              zIndex:   '2',
+              zIndex: '2',
             }}
           >
             <Button
               onClick={returnToPicModal}
               sx={{
-                '&:hover':         { backgroundColor: 'lightblue' },
-                'color':           'gold',
-                'fontFamily':      'Patrick Hand',
-                'fontSize':        '2vw',
-                'width':           '20vw',
-                'height':          '80%',
-                'textAlign':       'center',
+                '&:hover': { backgroundColor: 'lightblue' },
+                'color': 'gold',
+                'fontFamily': 'Patrick Hand',
+                'fontSize': '2vw',
+                'width': '20vw',
+                'height': '80%',
+                'textAlign': 'center',
                 'backgroundColor': '#538bdb',
-                'marginTop':       '15px',
-                'borderRadius':    '10px',
-                'boxShadow':       ' 5px 5px 5px 5px rgba(0,0,0, 0.7)',
-                'zIndex':          3,
+                'marginTop': '15px',
+                'borderRadius': '10px',
+                'boxShadow': ' 5px 5px 5px 5px rgba(0,0,0, 0.7)',
+                'zIndex': 3,
               }}
             >
               Set Pin
@@ -493,37 +493,37 @@ const MapPage = React.memo(function MapPage() {
       {mapConfig === 2 && (
         <div
           style={{
-            display:       'flex',
+            display: 'flex',
             flexDirection: 'row',
-            position:      'absolute',
-            width:         '90%',
-            marginLeft:    '10%',
-            top:           '5px',
-            zIndex:        '2',
+            position: 'absolute',
+            width: '90%',
+            marginLeft: '10%',
+            top: '5px',
+            zIndex: '2',
           }}
         >
           <div
             style={{
-              width:    '90%',
+              width: '90%',
               position: 'relative',
-              zIndex:   '2',
+              zIndex: '2',
             }}
           >
             <Button
               onClick={onShopNavigate}
               sx={{
-                '&:hover':         { backgroundColor: 'lightblue' },
-                'color':           'gold',
-                'fontFamily':      'Patrick Hand',
-                'fontSize':        '2vw',
-                'width':           '20vw',
-                'height':          '80%',
-                'textAlign':       'center',
+                '&:hover': { backgroundColor: 'lightblue' },
+                'color': 'gold',
+                'fontFamily': 'Patrick Hand',
+                'fontSize': '2vw',
+                'width': '20vw',
+                'height': '80%',
+                'textAlign': 'center',
                 'backgroundColor': '#538bdb',
-                'marginTop':       '15px',
-                'borderRadius':    '10px',
-                'boxShadow':       ' 5px 5px 5px 5px rgba(0,0,0, 0.7)',
-                'zIndex':          3,
+                'marginTop': '15px',
+                'borderRadius': '10px',
+                'boxShadow': ' 5px 5px 5px 5px rgba(0,0,0, 0.7)',
+                'zIndex': 3,
               }}
             >
               Return to Shop
@@ -534,7 +534,7 @@ const MapPage = React.memo(function MapPage() {
 
 
       <Modal />
-
+      <ToastContainer autoClose={3000} />
     </div>
   );
 });

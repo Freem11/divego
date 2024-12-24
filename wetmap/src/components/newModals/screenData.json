@@ -105,5 +105,9 @@
         "replyViewSingle": "View Reply",
         "replyViewMultiplOne": "View ",
         "replyViewMultiplTwo":" Replies"
+      },
+      "Toast": {
+        "generalError": "Oops! Something went wrong... Please try again later.",
+        "successCreating": "Created successfully!"
       }
     }

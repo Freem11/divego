@@ -1,27 +1,24 @@
 import { supabase } from '../supabase';
+import { toast } from 'react-toastify';
+import screenData from '../components/newModals/screenData.json';
+import { safeSupabase } from './_safeCall';
 
 export const createPartnerAccountRequest = async (values) => {
-  const { data, error } = await supabase
-    .from('partnerAccountRequests')
+
+  const call = () => supabase
+    .from('partnerAccountRequests11')
     .insert([
       {
-        webpageLink:  values.WebsiteLink,
+        webpageLink: values.WebsiteLink,
         businessName: values.BusinessName,
-        latitude:     values.Latitude,
-        longitude:    values.Longitude,
-        userId:       values.UserId,
+        latitude: values.Latitude,
+        longitude: values.Longitude,
+        userId: values.UserId,
       },
-    ]);
+    ])
 
-  if (error) {
-    console.log('couldn\'t do it 33,', error);
-  }
-
-  if (data) {
-    console.log(data);
-  }
+  return safeSupabase(call, screenData.Toast.successCreating);
 };
-
 
 export const grabRequestById = async (id) => {
   const { data, error } = await supabase

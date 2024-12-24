@@ -117,7 +117,7 @@ const PhotoMenu = () => {
   const [boxWidth, setBoxWidth] = useState(screenInital * 0.8);
   const [tileWidth, setTileWidth] = useState((screenInital * 0.8) / 4);
 
-  window.addEventListener('resize', trackWidth);
+  // window.addEventListener('resize', trackWidth);
 
   function trackWidth() {
     setBoxWidth(window.innerWidth * 0.8);
