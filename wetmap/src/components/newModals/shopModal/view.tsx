@@ -3,6 +3,7 @@ import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
 import PlainTextInput from '../../reusables/plainTextInput';
+import screenData from '../screenData.json';
 import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
@@ -23,6 +24,7 @@ type ShopModelViewProps = {
   itineraryList:    ItineraryItem[] | null
   selectedID:       number
   headerPictureUrl: string | null
+  isMyShop:                     boolean
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
@@ -38,11 +40,11 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6">
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
           <div className={style.buttonImageUpload}>
-            {props?.isPartnerAccount && (
+            {(props?.isPartnerAccount && props.isMyShop) && (
               <ButtonIcon
                 icon={<Icon name="camera-plus" />}
                 className="btn-lg"
-                onClick={() => {}}
+                onClick={() => fileUploaderRef?.current?.click?.()}
               />
             )}
           </div>
@@ -60,7 +62,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
                 <PlainTextInput
                   placeholder={`A little about ${props?.diveShop?.orgname}`}
                   value={props?.diveShop?.diveshopbio || ''}
-                  readOnly={!props?.isPartnerAccount}
+                  readOnly={!props?.isPartnerAccount || !props.isMyShop}
                   onSave={props?.handleDiveShopBioChange}
                 />
               </div>
@@ -71,7 +73,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
           <h3>Offered Diving Trips</h3>
-          {props?.isPartnerAccount && (
+          {(props?.isPartnerAccount && props.isMyShop) && (
             <div className={`${style.buttonAddDivingEvents}`}>
               <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
                 Add diving event
@@ -94,7 +96,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           {props?.itineraryList?.length === 0 && (
             <div>
               <p className="noSightings">
-                No Trips are currently being offered.
+                {`${props?.diveShop?.orgname} ${screenData.DiveShop.emptyDrawer}`}
               </p>
             </div>
           )}

@@ -2,7 +2,8 @@ import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import MapLoader from './googleMap';
 import SearchTool from './searchTool/index';
-import SiteSubmitter from './modals/siteSubmitter';
+import OnBoardingCarrousel from './onboarding/index';
+import SiteSubmitter from './newModals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
 import UserProfileModal from './modals/userProfileModal';
 import Settings from './modals/setting';
@@ -70,6 +71,7 @@ const MapPage = React.memo(function MapPage() {
 
   const onShopNavigate = () => {
     setMapCoords([selectedShop.lat, selectedShop.lng]);
+    setMapZoom(16);
     setMapConfig(0);
     setSitesArray([]);
   };
@@ -82,6 +84,7 @@ const MapPage = React.memo(function MapPage() {
         if (success) {
           let bully = success[0] && success[0].UserName;
           if (bully == null || bully === '') {
+            handleOnBoarding();
             return;
           } else {
             setProfile(success[0]);
@@ -150,6 +153,10 @@ const MapPage = React.memo(function MapPage() {
     setDivesTog(!divesTog);
   };
 
+  const handleOnBoarding = () => {
+    animateOnBoardingModal();
+  };
+
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
 
@@ -204,12 +211,20 @@ const MapPage = React.memo(function MapPage() {
     });
   };
 
+  const animateOnBoardingModal = () => {
+    modalShow(OnBoardingCarrousel, {
+      size:        'full',
+      allowCancel: false,
+    });
+  };
+
   const animateSettingsModal = () => {
     modalShow(Settings);
   };
 
   const animateProfileModal = () => {
     modalShow(UserProfileModal);
+    // create new userprofile here
   };
 
   const animateSiteSearchModal = () => {
