@@ -5,10 +5,12 @@ import {
   register,
   signInStandard,
 } from '../../../supabaseCalls/authenticateSupabaseCalls';
-import { createProfile } from '../../../supabaseCalls/accountSupabaseCalls';
+import { createProfile, grabProfileById } from '../../../supabaseCalls/accountSupabaseCalls';
 import './index.css';
 import LandingPageView from './view';
 import { UserProfileContext } from '../../contexts/userProfileContext';
+import { supabase } from '../../../supabase';
+import { ActiveSession } from '../../../entities/session';
 
 const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID;
@@ -22,85 +24,36 @@ type formProps = {
   lastName:  string
 };
 
-type AppleData = {
-  authorization:  {
-    id_token: string
-  }
-  user?:    {
-    email: string
-    name: {
-      lastName:  string
-      firstName: string
-    }
-  }
-};
-
 export default function LandingPage() {
   const { goToSlide } = useContext(SliderContext);
   const { setActiveSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
 
-  function parseJwt(token: string) {
-    const base64Url = token.split('.')[1];
-    const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-    const jsonPayload = decodeURIComponent(
-      window
-        .atob(base64)
-        .split('')
-        .map(function (c) {
-          return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-        })
-        .join(''),
-    );
+  const handleAppleUserData = async () => {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'apple',
+    });
 
-    return JSON.parse(jsonPayload);
-  }
-
-  const handleAppleUserData = async (userData: AppleData) => {
-    const decoded = parseJwt(userData.authorization.id_token);
-
-    if (userData.user) {
-      const appleObject = {
-        name:  `${userData.user.name.firstName} ${userData.user.name.lastName}`,
-        email: userData.user.email,
-        id:    decoded.sub,
-      };
-      handleOAuthSubmit(appleObject);
-    } else {
-      const reUsedApple = {
-        email: decoded.email,
-        id:    decoded.sub,
-      };
-      handleOAuthSubmit(reUsedApple);
-    }
+    if (error) console.log(error);
+    if (data) handleSupabaseSetup(data, setActiveSession);
   };
 
-  async function getGoogleUserData(GoogleToken: string) {
-    if (!GoogleToken) return;
+  async function getGoogleUserData() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'google',
+    });
 
-    try {
-      const res = await fetch(`https://www.googleapis.com/userinfo/v2/me/`, {
-        headers: { Authorization: `Bearer ${GoogleToken}` },
-      });
-      const user = await res.json();
-      handleOAuthSubmit(user);
-    } catch (err) {
-      console.log('error', err);
-    }
+    if (error) console.log(error);
+    if (data) handleSupabaseSetup(data, setActiveSession);
   }
 
-  async function getFacebookUserData(FacebookToken: string) {
-    if (!FacebookToken) return;
+  async function getFacebookUserData() {
+    const { data, error } = await supabase.auth.signInWithOAuth({
+      provider: 'facebook',
+    });
 
-    try {
-      const res2 = await fetch(
-        `https://graph.facebook.com/me?access_token=${FacebookToken}&fields=id,name,email`,
-      );
-      const user2 = await res2.json();
-      handleOAuthSubmit(user2);
-    } catch (err) {
-      console.log('error', err);
-    }
+    if (error) console.log(error);
+    if (data) handleSupabaseSetup(data, setActiveSession);
   }
 
   const handleOAuthSubmit = async (user: any) => {
@@ -130,6 +83,33 @@ export default function LandingPage() {
     });
   };
 
+
+  async function handleSupabaseSetup(sessionToken: any, setActiveSession: React.Dispatch<React.SetStateAction<ActiveSession | null>>) {
+    if (sessionToken) {
+      await localStorage.setItem('token', JSON.stringify(sessionToken));
+      if (sessionToken.session) {
+        setActiveSession(sessionToken.session);
+      } else {
+        setActiveSession(sessionToken);
+      }
+      let sanitizeData;
+      if (sessionToken.session) {
+        sanitizeData = sessionToken.session;
+      } else {
+        sanitizeData = sessionToken;
+      }
+
+      const profileCheck = await grabProfileById(sanitizeData.user.id);
+
+      if (profileCheck && profileCheck.length === 0) {
+        await createProfile({
+          id:    sanitizeData.user.id,
+          email: sanitizeData.user.email,
+        });
+        console.log('profile created!');
+      }
+    }
+  }
   async function OAuthSignIn(formVals: formProps) {
     const accessToken = await signInStandard(formVals);
     if (accessToken?.data.session !== null) {

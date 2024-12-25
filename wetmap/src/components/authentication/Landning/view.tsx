@@ -6,7 +6,6 @@ import facebookIcon from '../../../images/facebook-color.png';
 import appleIcon from '../../../images/apple.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import carouselData from '../carousel-data.json';
-import { LoginSocialApple, LoginSocialFacebook, LoginSocialGoogle } from 'reactjs-social-login';
 import { ActiveProfile } from '../../../entities/profile';
 import WavyBlock from '../../reusables/wavyBlock';
 
@@ -51,59 +50,21 @@ export default function LandingPageView(props: LandingPageProps) {
           <p style={{ marginTop: '15%' }}>{carouselData.LandingPage.content}</p>
 
           <div className="socialSignUps">
-            <LoginSocialGoogle
-              isOnlyGetToken
-              scope="https://www.googleapis.com/auth/userinfo.email"
-              client_id={props.googleClientId || ''}
-              onResolve={({ data }) => {
-                if (data) {
-                  props.getGoogleUserData(data?.access_token);
-                }
-              }}
-              onReject={(err) => {
-                console.log(err);
-              }}
-            >
-              <ButtonIcon
-                icon={<img src={googleIcon} alt="Google" />}
-                className="google-icon"
-              />
-            </LoginSocialGoogle>
 
-            <LoginSocialFacebook
-              isOnlyGetToken
-              appId={props.facebookAppId || ''}
-              state={false}
-              onResolve={({ data }) => {
-                props.getFacebookUserData(data?.accessToken);
-              }}
-              onReject={(err) => {
-                console.log(err);
-              }}
-            >
-              <ButtonIcon
-                icon={<img src={facebookIcon} alt="Facebook" />}
-                className="social-icons"
-              />
-            </LoginSocialFacebook>
+            <ButtonIcon
+              icon={<img src={googleIcon} alt="Google" onClick={props.getGoogleUserData} />}
+              className="google-icon"
+            />
 
-            <LoginSocialApple
-              client_id={props.appleAppId || '1'}
-              scope="name email"
-              redirect_uri={props.REDIRECT_URI}
-              onResolve={({ data }) => {
-                console.log('apple', data);
-                props.handleAppleUserData(data);
-              }}
-              onReject={(err) => {
-                console.log(err);
-              }}
-            >
-              <ButtonIcon
-                icon={<img src={appleIcon} alt="Apple" />}
-                className="social-icons"
-              />
-            </LoginSocialApple>
+            <ButtonIcon
+              icon={<img src={facebookIcon} alt="Facebook" onClick={props.getFacebookUserData} />}
+              className="social-icons"
+            />
+
+            <ButtonIcon
+              icon={<img src={appleIcon} alt="Apple" onClick={props.handleAppleUserData} />}
+              className="social-icons"
+            />
           </div>
         </div>
       </div>
