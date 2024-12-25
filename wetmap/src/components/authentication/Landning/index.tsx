@@ -8,37 +8,14 @@ import { UserProfileContext } from '../../contexts/userProfileContext';
 import { supabase } from '../../../supabase';
 import { ActiveSession } from '../../../entities/session';
 
-const googleClientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
-const facebookAppId = import.meta.env.VITE_FACEBOOK_APP_ID;
-const appleAppId = import.meta.env.VITE_APPLE_APP_ID;
-const REDIRECT_URI = window.location.href;
-
 export default function LandingPage() {
   const { goToSlide } = useContext(SliderContext);
   const { setActiveSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
 
-  const handleAppleUserData = async () => {
+  async function socialSignIn(provider: any) {
     const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'apple',
-    });
-
-    if (error) console.log(error);
-    if (data) handleSupabaseSetup(data, setActiveSession);
-  };
-
-  async function getGoogleUserData() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'google',
-    });
-
-    if (error) console.log(error);
-    if (data) handleSupabaseSetup(data, setActiveSession);
-  }
-
-  async function getFacebookUserData() {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: 'facebook',
+      provider: provider,
     });
 
     if (error) console.log(error);
@@ -76,13 +53,7 @@ export default function LandingPage() {
     <LandingPageView
       goToSlide={goToSlide}
       setProfile={setProfile}
-      REDIRECT_URI={REDIRECT_URI}
-      googleClientId={googleClientId}
-      getGoogleUserData={getGoogleUserData}
-      facebookAppId={facebookAppId}
-      getFacebookUserData={getFacebookUserData}
-      appleAppId={appleAppId}
-      handleAppleUserData={handleAppleUserData}
+      socialSignIn={socialSignIn}
     />
   );
 }

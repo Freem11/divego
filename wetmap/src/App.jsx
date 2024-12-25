@@ -1,5 +1,5 @@
 import './App.scss';
-import { useState, useEffect, useLayoutEffect, useCallback } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import { supabase } from './supabase';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
@@ -11,7 +11,6 @@ import {
   sessionCheck,
   sessionRefresh,
 } from './supabaseCalls/authenticateSupabaseCalls';
-import { GoogleOAuthProvider } from '@react-oauth/google';
 import { AppContextProvider } from './components/contexts/appContextProvider';
 import { CoordsContext } from './components/contexts/mapCoordsContext';
 import { SessionContext } from './components/contexts/sessionContext';
@@ -50,8 +49,7 @@ function App() {
       }
       await sessionCheck();
       localStorage.removeItem('token');
-    }
-    catch (error) {
+    } catch (error) {
       console.log('no dice:', error);
     }
 
@@ -72,38 +70,36 @@ function App() {
 
   return (
     <div className="App">
-      <GoogleOAuthProvider clientId="803518830612-ullrhq9lgcfe9ornlc5tffhtch7o5t07.apps.googleusercontent.com">
-        <AppContextProvider>
-          <CoordsContext.Provider value={{ mapCoords, setMapCoords }}>
-            <SessionContext.Provider
-              value={{ activeSession, setActiveSession }}
-            >
-              <BrowserRouter>
-                <Routes>
-                  <Route
-                    path="/"
-                    element={
-                      activeSession
-                        ? (
-                            <MapPage screenHeigthInital={screenHeigthInital} />
-                          )
-                        : (
-                            <AuthenticationPage />
-                          )
-                    }
-                  />
-                  {/* <Route
+      <AppContextProvider>
+        <CoordsContext.Provider value={{ mapCoords, setMapCoords }}>
+          <SessionContext.Provider
+            value={{ activeSession, setActiveSession }}
+          >
+            <BrowserRouter>
+              <Routes>
+                <Route
+                  path="/"
+                  element={
+                    activeSession
+                      ? (
+                          <MapPage screenHeigthInital={screenHeigthInital} />
+                        )
+                      : (
+                          <AuthenticationPage />
+                        )
+                  }
+                />
+                {/* <Route
                     path="/admin"
                     element={
                       <AdminPage />
                     }
                   /> */}
-                </Routes>
-              </BrowserRouter>
-            </SessionContext.Provider>
-          </CoordsContext.Provider>
-        </AppContextProvider>
-      </GoogleOAuthProvider>
+              </Routes>
+            </BrowserRouter>
+          </SessionContext.Provider>
+        </CoordsContext.Provider>
+      </AppContextProvider>
       ;
     </div>
   );

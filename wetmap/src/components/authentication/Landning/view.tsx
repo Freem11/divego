@@ -10,15 +10,9 @@ import { ActiveProfile } from '../../../entities/profile';
 import WavyBlock from '../../reusables/wavyBlock';
 
 type LandingPageProps = {
-  goToSlide:           (pageNumber: number) => void
-  setProfile:          Dispatch<SetStateAction<ActiveProfile | null>>
-  REDIRECT_URI:        string
-  googleClientId:      string
-  getGoogleUserData:   (token: any) => void
-  facebookAppId:       string
-  getFacebookUserData: (token: any) => void
-  appleAppId:          string
-  handleAppleUserData: (token: any) => void
+  goToSlide:    (pageNumber: number) => void
+  setProfile:   Dispatch<SetStateAction<ActiveProfile | null>>
+  socialSignIn: (provider: any) => void
 };
 
 export default function LandingPageView(props: LandingPageProps) {
@@ -52,17 +46,17 @@ export default function LandingPageView(props: LandingPageProps) {
           <div className="socialSignUps">
 
             <ButtonIcon
-              icon={<img src={googleIcon} alt="Google" onClick={props.getGoogleUserData} />}
+              icon={<img src={googleIcon} alt="Google" onClick={() => props.socialSignIn('google')} />}
               className="google-icon"
             />
 
             <ButtonIcon
-              icon={<img src={facebookIcon} alt="Facebook" onClick={props.getFacebookUserData} />}
+              icon={<img src={facebookIcon} alt="Facebook" onClick={() => props.socialSignIn('facebook')} />}
               className="social-icons"
             />
 
             <ButtonIcon
-              icon={<img src={appleIcon} alt="Apple" onClick={props.handleAppleUserData} />}
+              icon={<img src={appleIcon} alt="Apple" onClick={() => props.socialSignIn('apple')} />}
               className="social-icons"
             />
           </div>
