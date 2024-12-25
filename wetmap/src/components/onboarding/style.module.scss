@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  background-color: $primaryBlue;
+  z-index: 5;
+  position: relative;
+  color: white;
+
+  h1 {
+    color: white;
+  }
+}
+
+.centerPage {
+  margin: 0 auto;
+  width: 30%;
+  min-width: 500px;
+  height: 100%;
+}
+
+.emilio {
+  position: fixed;
+  bottom: 90px;
+  transform: rotate(3deg);
+  margin-left: 40%;
+  height: 40%;
+  z-index: -1;
+}

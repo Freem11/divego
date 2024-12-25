@@ -32,21 +32,29 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
 
   const getDeviceLocation = () => {
     if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        function (position) {
-          setAddSiteVals({
-            ...addSiteVals,
-            Latitude:  position.coords.latitude,
-            Longitude: position.coords.longitude,
-          });
-        },
-        function (error) {
-          console.log('location permissions denied', error.message);
-        },
-        { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 },
-      );
+      navigator.permissions.query({name:'geolocation'}).then(permissionStatus => {
+        if (permissionStatus.state === 'denied') {
+          alert('Please allow location access.');
+          window.location.href = "app-settings:location";
+        } else {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              console.log("HEY", position)
+              setAddSiteVals({
+                ...addSiteVals,
+                Latitude:  position.coords.latitude,
+                Longitude: position.coords.longitude,
+              });
+            },
+            function (error) {
+              console.log('location permissions denied', error.message);
+            },
+            { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 },
+          );
+        }
+      });
     } else {
-      console.log('unsupported');
+      alert('Geolocation is not supported in your browser.');
     }
   };
 

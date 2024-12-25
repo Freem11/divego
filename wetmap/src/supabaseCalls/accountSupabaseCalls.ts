@@ -43,7 +43,7 @@ export const createProfile = async (values) => {
   }
 };
 
-export const updateProfile = async (values) => {
+export const updateProfile = async (values: {username: string, id: string }) => {
   console.log('supabase gets', values);
   const { data, error } = await supabase
     .from('UserProfiles')
@@ -58,7 +58,7 @@ export const updateProfile = async (values) => {
   }
 
   if (data) {
-    return data;
+    return data as ActiveProfile[];
   }
 };
 

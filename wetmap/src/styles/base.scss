@@ -61,6 +61,8 @@
 
 @include padding-variant(4, $unit-4);
 @include padding-variant(6, $unit-6);
+@include padding-variant(8, $unit-8);
+@include padding-variant(10, $unit-10);
 @include margin-variant(4, $unit-4);
 @include margin-variant(6, $unit-6);
 @include margin-variant(8, $unit-8);

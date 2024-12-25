@@ -30,6 +30,6 @@ export const FormRules: FormValidationRules<Form> = {
     },
     max:      {
       value:   180,
-      message: 'Latitude must be less than 10',
+      message: 'Latitude must be less than 180',
     } },
 };
