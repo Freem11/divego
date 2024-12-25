@@ -8,7 +8,7 @@ type PhotoItemProps = {
 };
 
 export default function PhotoItem(props: PhotoItemProps) {
-  const imageUrl = getPhotoPublicUrl(props.photo);
+  const imageUrl = getPhotoPublicUrl(props.photo.photoFile);
   if (!imageUrl) {
     return null;
   }

@@ -31,7 +31,7 @@ type MapViewProps = {
   clusters:                   Cluster[]
   supercluster:               SuperclusterInstance
   divesTog:                   boolean
-  heatpts:                    HeatPoint[]
+  heatpts:                    HeatPoint[] | null
   mapCoords:                  number[]
   setMapCoords:               (coords: number[]) => void
   selectedDiveSite:           DiveSiteWithUserName | null
@@ -115,7 +115,7 @@ export default function MapView(props: MapViewProps) {
         );
       })}
 
-      {([0, 2].includes(props.mapConfig)) && (props.heatpts.length > 0) && (
+      {([0, 2].includes(props.mapConfig)) && (props?.heatpts?.length) && (
         <MapWithHeatmap
           mapConfig={props.mapConfig}
           map={props.mapRef}

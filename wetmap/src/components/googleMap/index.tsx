@@ -27,7 +27,7 @@ import { ModalContext } from '../reusables/modal/context';
 const libraries: Libraries = ['places', 'visualization'];
 
 export default function MapLoader() {
-  const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
+  // const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
   const [pinRef, setPinRef] = useState<google.maps.Marker | null>(null);
   const [tempMarker, setTempMarker] = useState<LatLngObject | null>(null);
   const [newSites, setnewSites] = useState<DiveSiteWithUserName[]>([]);
@@ -38,7 +38,8 @@ export default function MapLoader() {
 
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
 
-  const { boundaries, setBoundaries } = useContext(MapBoundsContext);
+  // const { mapRef, setMapRef, diveSites, heatPoints, boundaries, setBoundaries } = useContext(MapBoundsContext);
+  const  mapContext = useContext(MapBoundsContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
 
@@ -56,6 +57,8 @@ export default function MapLoader() {
 
   const { modalShow, modalResume } = useContext(ModalContext);
 
+  // console.log('DiveSites', diveSites);
+
   const mapConfigs = useMemo(() => ({
     mapTypeId:         'hybrid',
     clickableIcons:    false,
@@ -72,7 +75,9 @@ export default function MapLoader() {
   }), []);
 
   const handleOnLoad = (map: google.maps.Map) => {
-    setMapRef(map);
+    if (typeof mapContext.setMapRef === 'function') {
+      mapContext.setMapRef(map);
+    }
   };
 
   let mapCenterTimoutHandler: number | undefined;
@@ -83,46 +88,42 @@ export default function MapLoader() {
 
 
   const handleMapUpdates = async () => {
-    if (mapRef) {
-      const boundaries: google.maps.LatLngBounds | undefined = mapRef.getBounds();
-      if (boundaries) {
-        const latHi = boundaries.getNorthEast().lat();
-        const latLo = boundaries.getSouthWest().lat();
-        const lngE = boundaries.getNorthEast().lng();
-        const lngW = boundaries.getSouthWest().lng();
+    // if (mapRef) {
+    // const boundaries: google.maps.LatLngBounds | undefined = mapRef.getBounds();
+    // if (boundaries) {
+    // const latHi = boundaries.getNorthEast().lat();
+    // const latLo = boundaries.getSouthWest().lat();
+    // const lngE = boundaries.getNorthEast().lng();
+    // const lngW = boundaries.getSouthWest().lng();
 
-        const diveSiteList = await getDiveSiteData(latHi, latLo, lngE, lngW);
-        setnewSites(!divesTog ? [] : diveSiteList);
+    // const diveSiteList = await getDiveSiteData(latHi, latLo, lngE, lngW);
+    // setnewSites(!divesTog ? [] : diveSiteList);
 
-        const heatPointList = await getHeatPointData(latHi, latLo, lngE, lngW, animalVal);
-        setHeatPts([0, 2].includes(mapConfig) ? heatPointList : []);
+    // const heatPointList = await getHeatPointData(latHi, latLo, lngE, lngW, animalVal);
+    // setHeatPts([0, 2].includes(mapConfig) ? heatPointList : []);
 
-        const shoplist = await getShopData(latHi, latLo, lngE, lngW);
-        setnewShops(!divesTog ? [] : shoplist);
-      }
-    }
+    // const shoplist = await getShopData(latHi, latLo, lngE, lngW);
+    // setnewShops(!divesTog ? [] : shoplist);
+    // }
+    // }
   };
 
   const handleBoundsChange = async () => {
-    if (mapRef) {
+    if (mapContext.mapRef) {
       window.clearTimeout(mapBoundariesTimoutHandler);
       mapBoundariesTimoutHandler = window.setTimeout(function () {
-        const boundaries: google.maps.LatLngBounds | undefined = mapRef?.getBounds();
+        const boundaries: google.maps.LatLngBounds | undefined = mapContext.mapRef?.getBounds();
         if (boundaries) {
-          const latHi = boundaries.getNorthEast().lat();
-          const latLo = boundaries.getSouthWest().lat();
-          const lngE = boundaries.getNorthEast().lng();
-          const lngW = boundaries.getSouthWest().lng();
-          setBoundaries([lngW, latLo, lngE, latHi]);
+          mapContext.setBoundaries(boundaries);
         }
-        handleMapUpdates();
+        // handleMapUpdates();
       }, 50);
     }
   };
 
   const handleMapCenterChange = async () => {
-    if (mapRef) {
-      const position = mapRef.getCenter();
+    if (mapContext.mapRef) {
+      const position = mapContext.mapRef.getCenter();
       if (position) {
         window.clearTimeout(mapCenterTimoutHandler);
         mapCenterTimoutHandler = window.setTimeout(function () {
@@ -134,8 +135,8 @@ export default function MapLoader() {
   };
 
   const handleMapZoomChange = async () => {
-    if (mapRef) {
-      const zoomLev = mapRef.getZoom();
+    if (mapContext.mapRef) {
+      const zoomLev = mapContext.mapRef.getZoom();
       if (zoomLev) {
         setMapZoom(zoomLev);
         handleMapUpdates();
@@ -144,12 +145,12 @@ export default function MapLoader() {
   };
 
   const zoomMapOut = () => {
-    setMapZoom(mapZoom - 1)
-  }
+    setMapZoom(mapZoom - 1);
+  };
 
   const zoomMapIn = () => {
-    setMapZoom(mapZoom + 1)
-  }
+    setMapZoom(mapZoom + 1);
+  };
 
   const returnToSiteSubmitterModal = () => {
     modalResume();
@@ -157,7 +158,7 @@ export default function MapLoader() {
   };
 
   const returnToShopModal = () => {
-    if(selectedShop){
+    if (selectedShop) {
       setMapCoords([selectedShop.lat, selectedShop.lng]);
       setMapZoom(16);
       setMapConfig(0);
@@ -173,20 +174,20 @@ export default function MapLoader() {
   }, []);
 
   useEffect(() => {
-    if (mapRef) {
-      mapRef.setZoom(mapZoom);
+    if (mapContext.mapRef) {
+      mapContext.mapRef.setZoom(mapZoom);
       handleMapZoomChange();
     }
   }, [mapZoom]);
 
 
   useEffect(() => {
-    if (mapRef) {
-      const position = mapRef.getCenter();
+    if (mapContext.mapRef) {
+      const position = mapContext.mapRef.getCenter();
       if (position) {
         if (selectedShop && selectedShop.orgname !== '') {
           const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
-          mapRef.panTo(latlng);
+          mapContext.mapRef.panTo(latlng);
           setMapZoom(16);
         }
       }
@@ -195,12 +196,12 @@ export default function MapLoader() {
 
 
   useEffect(() => {
-    if (mapRef) {
-      const position = mapRef.getCenter();
+    if (mapContext.mapRef) {
+      const position = mapContext.mapRef.getCenter();
       if (position) {
         if (selectedDiveSite && selectedDiveSite.name !== '') {
           const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
-          mapRef.panTo(latlng);
+          mapContext.mapRef.panTo(latlng);
           setMapZoom(16);
         }
       }
@@ -230,8 +231,8 @@ export default function MapLoader() {
   }, [mapConfig]);
 
   useEffect(() => {
-    if (mapRef) {
-      mapRef.panTo({ lat: mapCoords[0], lng: mapCoords[1] });
+    if (mapContext.mapRef) {
+      mapContext.mapRef.panTo({ lat: mapCoords[0], lng: mapCoords[1] });
     }
 
     handleMapUpdates();
@@ -239,13 +240,13 @@ export default function MapLoader() {
 
 
   const shopPoints = mapConfig === 0 ? setupShopClusters(newShops) : [];
-  const sitePoints = setupClusters(newSites, sitesArray);
+  const sitePoints = setupClusters((mapContext.diveSites ? mapContext.diveSites : []), sitesArray);
   const points: Cluster[] = [...sitePoints, ...shopPoints];
 
 
   const { clusters, supercluster } = useSupercluster({
     points:  points,
-    bounds:  boundaries,
+    bounds:  mapContext.boundaries,
     zoom:    mapZoom,
     options: { radius: 75, maxZoom: 16 },
   });
@@ -257,9 +258,8 @@ export default function MapLoader() {
   const handleDragEnd = () => {
     if (pinRef) {
       const position = pinRef.getPosition();
-      if (position instanceof google.maps.LatLng && addSiteVals) {
+      if (position instanceof google.maps.LatLng) {
         setAddSiteVals({
-          ...addSiteVals,
           Latitude:  position.lat(),
           Longitude: position.lng(),
         });
@@ -276,7 +276,7 @@ export default function MapLoader() {
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <MapView
-      mapRef={mapRef}
+      mapRef={mapContext.mapRef}
       mapConfigs={mapConfigs}
       heatpointConfigs={heatpointConfigs}
       mapConfig={mapConfig}
@@ -289,7 +289,7 @@ export default function MapLoader() {
       animalVal={animalVal}
       clusters={clusters}
       supercluster={supercluster}
-      heatpts={heatpts}
+      heatpts={mapContext.heatPoints}
       divesTog={divesTog}
       mapCoords={mapCoords}
       setMapCoords={setMapCoords}

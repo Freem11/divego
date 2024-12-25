@@ -6,15 +6,16 @@ import ButtonIcon from '../../reusables/buttonIcon';
 
 import style from './style.module.scss';
 import Tabs from '../../reusables/tabs';
-import DiveSite from '../../newModals/siteSubmitter';
-import PhotosInTheArea from '../../photosInTheArea';
 import Modal from '../../reusables/modal/modal';
+import SelectedAreaPhotos from '../../selectedAreaPhotos';
+import SelectedAreaDiveSites from '../../selectedAreaDiveSites';
+import SelectedAreaDiveShops from '../../selectedAreaDiveShops';
 
 type LayoutMainViewProps = {
-  mapConfig: number;
-  animateSitSubmitterModal: () => void;
-  animateProfileModal: () => void;
-  animateSettingsModal: () => void;
+  mapConfig:                number
+  animateSitSubmitterModal: () => void
+  animateProfileModal:      () => void
+  animateSettingsModal:     () => void
 };
 
 
@@ -41,27 +42,27 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
               <ul className={style.headerIcons}>
                 <li>
-                  <ButtonIcon 
-                  disabled={props.mapConfig === 0 ? false: true}
-                  icon={<Icon name="person" color='blue' />} 
-                  className="text-primary" 
-                  onClick={props.animateProfileModal}
+                  <ButtonIcon
+                    disabled={props.mapConfig === 0 ? false : true}
+                    icon={<Icon name="person" color="blue" />}
+                    className="text-primary"
+                    onClick={props.animateProfileModal}
                   />
                 </li>
                 <li>
-                  <ButtonIcon 
-                  disabled={props.mapConfig === 0 ? false: true}
-                  icon={<Icon name="settings" color='blue'/>} 
-                  className="text-primary"
-                  onClick={props.animateSettingsModal}
+                  <ButtonIcon
+                    disabled={props.mapConfig === 0 ? false : true}
+                    icon={<Icon name="settings" color="blue" />}
+                    className="text-primary"
+                    onClick={props.animateSettingsModal}
                   />
                 </li>
-                <li style={{marginTop: '-1px'}}>
-                  <ButtonIcon 
-                  disabled={props.mapConfig === 0 ? false: true}
-                  icon={<Icon name="anchor-plus" color='blue'/>} 
-                  className="text-primary" 
-                  onClick={props.animateSitSubmitterModal}
+                <li style={{ marginTop: '-1px' }}>
+                  <ButtonIcon
+                    disabled={props.mapConfig === 0 ? false : true}
+                    icon={<Icon name="anchor-plus" color="blue" />}
+                    className="text-primary"
+                    onClick={props.animateSitSubmitterModal}
                   />
                 </li>
               </ul>
@@ -83,9 +84,9 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
             <div className="col-md-12 col-4">
               <Tabs data={[
-                { title: 'Animals', content: PhotosInTheArea },
-                { title: 'DiveSites', content: DiveSite },
-                { title: 'DiveShops', content: 'CCC C C C C C C C C C' },
+                { title: 'Animals', content: SelectedAreaPhotos },
+                { title: 'DiveSites', content: SelectedAreaDiveSites },
+                { title: 'DiveShops', content: SelectedAreaDiveShops },
                 { title: 'Test', content: 'Lorem ipsum dolor sit amet' },
               ]}
               />
@@ -105,7 +106,9 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
             </div>
 
             <div className="col-md-12 col-8">
-              <MapLoader />          
+              <div style={{ height: '100vh' }}>
+                <MapLoader />
+              </div>
             </div>
           </div>
         </div>

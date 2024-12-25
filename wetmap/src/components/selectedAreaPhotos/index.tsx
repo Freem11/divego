@@ -4,7 +4,7 @@ import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import PhotoItem from './photoItem';
 import { Photo } from '../../entities/photos';
 
-export default function PhotosInTheArea() {
+export default function SelectedAreaPhotos() {
   const { boundaries } = useContext(MapBoundsContext);
   const [search, setSearch] = useState('');
   const [photos, setPhotos] = useState<Photo[]>([]);

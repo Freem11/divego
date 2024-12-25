@@ -22,13 +22,13 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
   const { modalPause } = useContext(ModalContext);
 
 
-  useEffect(() => {
-    setAddSiteVals({
-      ...addSiteVals,
-      UserID:   profile?.UserID,
-      UserName: profile?.UserName,
-    });
-  },[])
+  // useEffect(() => {
+  //   setAddSiteVals({
+  //     ...addSiteVals,
+  //     UserID:   profile?.UserID,
+  //     UserName: profile?.UserName,
+  //   });
+  // },[])
 
   const getDeviceLocation = () => {
     if (navigator.geolocation) {
