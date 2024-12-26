@@ -73,7 +73,7 @@ export default function ShopModal(props: ShopModalProps) {
   };
 
   const openTripCreatorList = async () => {
-    modalContext.modalCancel();
+    // modalContext.modalCancel();
     modalShow(TripCreatorListModal, {
       keepPreviousModal: true,
       size: 'medium',
@@ -94,7 +94,7 @@ export default function ShopModal(props: ShopModalProps) {
           selectedID={selectedID}
           headerPictureUrl={null}
           openTripCreatorList={openTripCreatorList}
-          isMyShop={isMyShop}
+          isMyShop={true}
           handleDiveShopImageSelection={handleImageSelection}
         />
       )}
