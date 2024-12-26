@@ -6,7 +6,7 @@ import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
 import UserProfileContextProvider from './userProfileContext';
 import HeatPointsContextProvider from './heatPointsContext';
-import MapBoundsContextProvider from './mapBoundariesContext';
+import MapBoundsContextProvider from './mapBoundariesContextProvider';
 import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
 import DiveSpotContextProvider from './diveSpotContext';
 import PinSpotContextProvider from './pinSpotContext';

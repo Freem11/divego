@@ -7,12 +7,17 @@ export default function SelectedAreaDiveSites() {
   // const [search, setSearch] = useState('');
   // const [photos, setPhotos] = useState<Photo[]>([]);
 
+  if (!diveSites.items) {
+    return <div className="p-2">Loading...</div>;
+  }
+
+  if (!diveSites.items.length) {
+    return <div className="p-2">No Dive Sites in this area</div>;
+  }
 
   return (
     <div className="p-2">
-      {!diveSites && <div>Loading</div>}
-      {diveSites?.length === 0 && <div>No Dive Sites in this area</div>}
-      {diveSites?.map((diveSite, index) => {
+      {diveSites?.items.map((diveSite, index) => {
         return (
           <div key={index}>
             <DiveSiteItem diveSite={diveSite} />

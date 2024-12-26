@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useLayoutEffect, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import {
   useJsApiLoader,
   Libraries,
@@ -86,6 +86,7 @@ export default function MapLoader() {
   const center = useMemo(() => ({ lat: mapCoords[0], lng: mapCoords[1] }), []);
   const zoom = useMemo(() => mapZoom, []);
 
+  const ref = useRef<number | undefined>(undefined);
 
   const handleMapUpdates = async () => {
     // if (mapRef) {
@@ -110,14 +111,14 @@ export default function MapLoader() {
 
   const handleBoundsChange = async () => {
     if (mapContext.mapRef) {
-      window.clearTimeout(mapBoundariesTimoutHandler);
-      mapBoundariesTimoutHandler = window.setTimeout(function () {
+      window.clearTimeout(ref.current);
+      ref.current = window.setTimeout(function () {
         const boundaries: google.maps.LatLngBounds | undefined = mapContext.mapRef?.getBounds();
         if (boundaries) {
           mapContext.setBoundaries(boundaries);
         }
         // handleMapUpdates();
-      }, 50);
+      }, 100);
     }
   };
 
@@ -240,7 +241,7 @@ export default function MapLoader() {
 
 
   const shopPoints = mapConfig === 0 ? setupShopClusters(newShops) : [];
-  const sitePoints = setupClusters((mapContext.diveSites ? mapContext.diveSites : []), sitesArray);
+  const sitePoints = setupClusters((mapContext?.diveSites?.items ? mapContext.diveSites.items : []), sitesArray);
   const points: Cluster[] = [...sitePoints, ...shopPoints];
 
 

@@ -1,3 +1,5 @@
+import { Pagination } from '../entities/pagination';
+import { Photo } from '../entities/photos';
 import { supabase } from '../supabase';
 
 export const getAnimalNames = async () => {
@@ -92,24 +94,31 @@ export const getAnimalMultiSelect = async (text) => {
   }
 };
 
-export const getPhotosforMapArea = async (value) => {
-  const { data, error } = await supabase
+export const getPhotosforMapArea = async (value, pagination?: Pagination) => {
+  const builder = supabase
     .from('photos')
     .select()
-    .ilike('label', '%' + value.animal + '%')
     .gte('latitude', value.minLat)
     .gte('longitude', value.minLng)
     .lte('latitude', value.maxLat)
-    .lte('longitude', value.maxLng)
-    .limit(10);
+    .lte('longitude', value.maxLng);
 
+  if (value.label) {
+    builder.ilike('label', '%' + value.animal + '%');
+  }
+
+  if (pagination?.page) {
+    builder.range(pagination.from(), pagination.to());
+  }
+
+  const { data, error } = await builder;
   if (error) {
     console.log('couldn\'t do it,', error);
     return [];
   }
 
   if (data) {
-    return data;
+    return data as Photo[];
   }
 };
 
