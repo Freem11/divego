@@ -23,6 +23,13 @@
       "passwordPlaceholder": "Password",
       "buttonText": "Log In",
       "promptText": "Don't have an account?",
-      "promptLinkText": "Sign Up"
+      "promptLinkText": "Sign Up",
+      "passwordReset": "Forgot Password?"
+    },
+    "PasswordRecoveryPage":
+    {
+      "title": "Reset Password",
+      "emailPlaceholder": "Email",
+      "buttonText": "Send Recovery Email"
     }
 }

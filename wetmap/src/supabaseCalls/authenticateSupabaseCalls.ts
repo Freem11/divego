@@ -117,3 +117,9 @@ export const userDelete = async (userIdValue) => {
     console.log('user was deleted');
   }
 };
+
+export const sendPasswordResetEmail = async (email: string, url: string) => {
+  await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: url,
+  });
+};
