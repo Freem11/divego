@@ -8,6 +8,7 @@ import Button from '../../reusables/button';
 type SettingsProps = {
   onClose:      () => void
   handleLogout: () => Promise<void>
+  profileType:  string | null
 };
 
 export default function SettingsView(props: SettingsProps) {
@@ -24,7 +25,7 @@ export default function SettingsView(props: SettingsProps) {
         <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
         <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
         <div className={styles.outline}>
-          <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">Diver Account</h4>
+          <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
           <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
         </div>
         <div className={styles.horizontalButtonContainer}>
