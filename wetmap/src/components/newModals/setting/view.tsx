@@ -15,11 +15,7 @@ export default function SettingsView(props: SettingsProps) {
         <ButtonIcon
           icon={<Icon name="chevron-left" />}
           className="btn-lg text-gray ml-4 mt-4"
-          onClick={(e) => {
-            if (props.onClose) {
-              props.onClose(e);
-            }
-          }}
+          onClick={props.onClose}
         />
       </div>
       <div className="mx-10 text-left">
