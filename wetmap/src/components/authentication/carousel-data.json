@@ -29,7 +29,7 @@
     "PasswordRecoveryPage":
     {
       "title": "Reset Password",
-      "emailPlaceholder": "Email",
+      "emailPlaceholder": "Enter Your Account Email",
       "buttonText": "Send Recovery Email"
     }
 }

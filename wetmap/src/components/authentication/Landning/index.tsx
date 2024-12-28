@@ -5,21 +5,18 @@ import { createProfile, grabProfileById } from '../../../supabaseCalls/accountSu
 import './index.css';
 import LandingPageView from './view';
 import { UserProfileContext } from '../../contexts/userProfileContext';
-import { supabase } from '../../../supabase';
 import { ActiveSession } from '../../../entities/session';
+import { socialSignIn } from '../../../supabaseCalls/authenticateSupabaseCalls';
 
 export default function LandingPage() {
   const { goToSlide } = useContext(SliderContext);
   const { setActiveSession } = useContext(SessionContext);
   const { setProfile } = useContext(UserProfileContext);
 
-  async function socialSignIn(provider: any) {
-    const { data, error } = await supabase.auth.signInWithOAuth({
-      provider: provider,
-    });
+  async function getSocialSignIn(provider: any) {
+    const signInData = socialSignIn(provider);
 
-    if (error) console.log(error);
-    if (data) handleSupabaseSetup(data, setActiveSession);
+    if (signInData) handleSupabaseSetup(signInData, setActiveSession);
   }
 
   async function handleSupabaseSetup(sessionToken: any, setActiveSession: React.Dispatch<React.SetStateAction<ActiveSession | null>>) {
@@ -53,7 +50,7 @@ export default function LandingPage() {
     <LandingPageView
       goToSlide={goToSlide}
       setProfile={setProfile}
-      socialSignIn={socialSignIn}
+      socialSignIn={getSocialSignIn}
     />
   );
 }
