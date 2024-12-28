@@ -22,10 +22,11 @@ export default function SettingsView(props: SettingsProps) {
           onClick={props.onClose}
         />
       </div>
+
       <div className="mx-10 text-left">
         <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
         <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
-        <div className={styles.outline}>
+        <div className={styles.grayoutline}>
           <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
           { props.profileType === 'Diver Account'
             ? (
@@ -39,6 +40,7 @@ export default function SettingsView(props: SettingsProps) {
                 </span>
               )}
         </div>
+
         <div className={styles.horizontalButtonContainer}>
           <div className="col-3"></div>
           <div className="col-3">
@@ -52,7 +54,15 @@ export default function SettingsView(props: SettingsProps) {
             </Button>
           </div>
         </div>
+
+        <div className={styles.redText}>
+          <h2 className="my-2 text-center" style={{ color: '#8b0a0a' }}>{screenData.SettingsPage.dangerZoneBar}</h2>
+          <div className={styles.redoutline}>
+            <h4 className="my-4 text-bold text-center" style={{ color: '#8b0a0a' }}>{screenData.SettingsPage.delAccount}</h4>
+          </div>
+        </div>
       </div>
+
 
     </>
   );

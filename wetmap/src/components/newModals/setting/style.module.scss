@@ -6,9 +6,17 @@
     }
 }
 
-.outline {
-    border-top: 1px solid #5f5e5e; /* Top border */
-    border-bottom: 1px solid #5f5e5e; /* Bottom border */
+.redoutline {
+    color: #8b0a0a;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
+    background-color: rgb(247, 217, 217);
+}
+
+.grayoutline {
+    color: #5f5e5e;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
 }
 
 .horizontalButtonContainer {
@@ -21,4 +29,16 @@
     height: 20%;
     margin-top: 1rem;
   }
+
+  .verticalButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 50;
+    flex-direction: column;
+    //width: 100%;
+    //height: 100%;
+    //margin-top: 1rem;
+  }
+
+
 
