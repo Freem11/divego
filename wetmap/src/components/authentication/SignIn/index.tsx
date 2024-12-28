@@ -21,7 +21,7 @@ export default function LogInPage() {
       return;
     } else {
       const accessToken = await signInStandard(data);
-
+      console.log(accessToken);
       if (accessToken && accessToken?.data?.session !== null) {
         localStorage.setItem(
           'token',

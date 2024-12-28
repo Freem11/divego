@@ -12,13 +12,17 @@ export default function SignUpPage() {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [regFail, setRegFail] = useState<string | null>(null);
 
-
   const onSubmit = async (data: Form) => {
     if (data.fullname === '' || data.email === '' || data.password === '') {
       setRegFail('Please supply your name, email and password');
       return;
     } else {
-      const registrationToken = await register(data);
+      const regData = {
+        email:     data.email,
+        password:  data.password,
+        fullName:  data.fullname,
+      };
+      const registrationToken = await register(regData);
       if (registrationToken && registrationToken.data.session !== null) {
         await createProfile({ id: registrationToken.data.session.user.id, email: data.email });
         await localStorage.setItem(
