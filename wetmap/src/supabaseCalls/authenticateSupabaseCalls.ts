@@ -75,6 +75,21 @@ export const signInStandard = async (loginDetails: loginDetails) => {
   }
 };
 
+
+export const performPasswordReset = async (newPassowrd: string) => {
+  const { data, error } = await supabase.auth.updateUser({
+    password: newPassowrd,
+  });
+
+  if (error) {
+    console.log('couldn\'t update password,', error);
+  }
+
+  if (data) {
+    return { data };
+  }
+};
+
 export const signInFaceBook = async () => {
   const { user, session, error } = await supabase.auth.signIn({
     provider: 'facebook',
