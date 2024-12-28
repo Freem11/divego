@@ -4,12 +4,16 @@ import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
+import ActDelDialog from '../../modals/dialog';
 
 type SettingsProps = {
   onClose:             () => void
   handleLogout:        () => Promise<void>
   profileType:         string | null
   handlePartnerButton: () => void
+  handleDanger:        () => void
+  setOpenDialog:       (value: React.SetStateAction<boolean>) => void
+  openDialog:          boolean
 };
 
 export default function SettingsView(props: SettingsProps) {
@@ -57,12 +61,13 @@ export default function SettingsView(props: SettingsProps) {
 
         <div className={styles.redText}>
           <h2 className="my-2 text-center" style={{ color: '#8b0a0a' }}>{screenData.SettingsPage.dangerZoneBar}</h2>
-          <div className={styles.redoutline}>
+          <div className={styles.redoutline} onClick={props.handleDanger}>
             <h4 className="my-4 text-bold text-center" style={{ color: '#8b0a0a' }}>{screenData.SettingsPage.delAccount}</h4>
           </div>
         </div>
       </div>
 
+      <ActDelDialog openDialog={props.openDialog} setOpenDialog={props.setOpenDialog} />
 
     </>
   );
