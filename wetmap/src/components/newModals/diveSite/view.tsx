@@ -101,8 +101,8 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
             </Button>
           </div>
         </div>
-        <div className="panel-body">
-          {props?.diveSitePics 
+        <div style={{ overflowY: 'scroll' }}>
+          {props?.diveSitePics
           && props?.diveSitePics.map((packet) => {
             return (
               <div key={packet.dateTaken} className={style.panelBodyDiveSite}>
@@ -116,7 +116,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
               </div>
             );
           })}
-             {props?.diveSitePics?.length === 0 && (
+          {props?.diveSitePics?.length === 0 && (
             <div>
               <p className="noSightings">
                 {screenData.DiveSite.emptyDrawer}

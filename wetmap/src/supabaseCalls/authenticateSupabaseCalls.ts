@@ -161,6 +161,7 @@ export const socialSignIn = async (provider: any) => {
   }
 
   if (data) {
+    console.log(data);
     return data;
   }
 };
