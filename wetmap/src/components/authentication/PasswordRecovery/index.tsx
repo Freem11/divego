@@ -16,6 +16,7 @@ export default function PasswordRecoveryPage() {
       return;
     } else {
       sendPasswordResetEmail(data.email, window.location.origin);
+      // sendPasswordResetEmail(data.email, `${window.location.origin}/passwordReset`);
       setSubmitFail('Email Sent! Check Your Email For A Link To Reset Your Password');
     }
   };

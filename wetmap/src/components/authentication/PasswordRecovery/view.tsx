@@ -44,6 +44,10 @@ export default function LogInPageView(props: LogInPageProps) {
             />
           </div>
 
+          <a href="http://localhost:3000">Continue on Desktop</a>
+
+          <a href="scubaseasons://">Continue on Mobile</a>
+
           {props.submitFail && <p className="erroMsg">{props.submitFail}</p>}
 
           <div className="cols">
