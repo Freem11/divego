@@ -43,7 +43,7 @@ export default function UserProfileView(props: userProfileViewProps) {
 
           <div className={style.buttonImageUpload}>
             <ButtonIcon
-              icon={<Icon name="settings" />}
+              icon={<Icon name="camera-plus" />}
               className="btn-lg"
               onClick={() => {}}
             />
@@ -80,7 +80,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                   // value={props?.diveSite?.divesitebio || ''}
                   // readOnly={!props?.isPartnerAccount}
                   onSave={() => {}}
-                  placeholder="Description"
+                  placeholder={screenData.UserProfile.userDefaultDescription}
                 />
               </div>
             </div>
@@ -92,11 +92,11 @@ export default function UserProfileView(props: userProfileViewProps) {
         <div className="panel-header">
           <h3>User's Sea Creature Encounters</h3>
           <div className={style.addPictureButton}>
-            <Button className="btn-lg" onClick={() => {}}>
+            {/* <Button className="btn-lg" onClick={() => {}}>
               <span className="hide-sm">
-                {screenData.DiveSite.addSightingButton}
+                Settings
               </span>
-            </Button>
+            </Button> */}
           </div>
         </div>
         {/* <div className="panel-header">
