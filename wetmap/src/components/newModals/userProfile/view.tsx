@@ -41,13 +41,13 @@ export default function UserProfileView(props: userProfileViewProps) {
         >
           <div className={style.buttonOpenPictureUpload}></div>
 
-          <div className={style.buttonImageUpload}>
+          {/* <div className={style.buttonImageUpload}>
             <ButtonIcon
               icon={<Icon name="camera-plus" />}
               className="btn-lg"
               onClick={() => {}}
             />
-          </div>
+          </div> */}
         </WavyModalHeader>
 
         <div className="ml-6">
