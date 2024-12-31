@@ -1,6 +1,4 @@
 import { supabase } from '../supabase';
-import { toast } from 'react-toastify';
-import screenData from '../components/newModals/screenData.json';
 
 export const createPartnerAccountRequest = async (values) => {
   const { data, error } = await supabase
