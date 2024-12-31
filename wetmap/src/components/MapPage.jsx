@@ -42,6 +42,7 @@ import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
+import { ToastContainer } from 'react-toastify';
 
 
 const MapPage = React.memo(function MapPage() {
@@ -532,9 +533,9 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-
+      
       <Modal />
-
+      <ToastContainer autoClose={3000} />
     </div>
   );
 });
