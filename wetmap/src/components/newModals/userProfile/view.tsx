@@ -77,16 +77,17 @@ export default function UserProfileView(props: userProfileViewProps) {
               </div> */}
             </div>
 
-            {/* <div className="panel border-none">
+            <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
-                  placeholder={`A little about ${props?.diveSite?.name}`}
-                  value={props?.diveSite?.divesitebio || ''}
-                  readOnly={!props?.isPartnerAccount}
-                  onSave={props?.onDiveSiteBioChange}
+                  // placeholder={`A little about ${props?.diveSite?.name}`}
+                  // value={props?.diveSite?.divesitebio || ''}
+                  // readOnly={!props?.isPartnerAccount}
+                  onSave={() => {}}
+                  placeholder="Description"
                 />
               </div>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
@@ -94,11 +95,13 @@ export default function UserProfileView(props: userProfileViewProps) {
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
           <h3>User's Sea Creature Encounters</h3>
-          <Button className="btn-lg" onClick={() => {}}>
-            <span className="hide-sm">
-              {screenData.DiveSite.addSightingButton}
-            </span>
-          </Button>
+          <div className={style.addPictureButton}>
+            <Button className="btn-lg" onClick={() => {}}>
+              <span className="hide-sm">
+                {screenData.DiveSite.addSightingButton}
+              </span>
+            </Button>
+          </div>
         </div>
         {/* <div className="panel-header">
           <h3>{screenData.DiveSite.drawerHeader}</h3>
