@@ -58,7 +58,7 @@ export default function UserProfileView(props: userProfileViewProps) {
           <div className="stack-4">
             <div>
               <div className="d-flex">
-                <h1 className="mb-0">Test</h1>
+                <h1 className="mb-0">User Name</h1>
                 <div>
                   {/* <Icon
                     name="flag"
@@ -92,7 +92,14 @@ export default function UserProfileView(props: userProfileViewProps) {
       </div>
 
       <div className="col-6 panel border-none full-height">
-        <div>Test</div>
+        <div className="panel-header">
+          <h3>User's Sea Creature Encounters</h3>
+          <Button className="btn-lg" onClick={() => {}}>
+            <span className="hide-sm">
+              {screenData.DiveSite.addSightingButton}
+            </span>
+          </Button>
+        </div>
         {/* <div className="panel-header">
           <h3>{screenData.DiveSite.drawerHeader}</h3>
           <div className={style.addPictureButton}>
