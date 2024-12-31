@@ -41,17 +41,13 @@ export default function UserProfileView(props: userProfileViewProps) {
         >
           <div className={style.buttonOpenPictureUpload}></div>
 
-          {/* {props.isPartnerAccount
-          && (
-            <div className={style.buttonImageUpload}>
-              <ButtonIcon
-                icon={<Icon name="camera-plus" />}
-                className="btn-lg"
-                onClick={() => fileUploaderRef?.current?.click?.()}
-              />
-            </div>
-          )} */}
-
+          <div className={style.buttonImageUpload}>
+            <ButtonIcon
+              icon={<Icon name="settings" />}
+              className="btn-lg"
+              onClick={() => {}}
+            />
+          </div>
         </WavyModalHeader>
 
         <div className="ml-6">
