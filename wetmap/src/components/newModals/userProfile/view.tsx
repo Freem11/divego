@@ -75,13 +75,13 @@ export default function UserProfileView(props: userProfileViewProps) {
 
             <div className="panel border-none">
               <div className="panel-body">
-                <PlainTextInput
+                {/* <PlainTextInput
                   // placeholder={`A little about ${props?.diveSite?.name}`}
                   // value={props?.diveSite?.divesitebio || ''}
                   // readOnly={!props?.isPartnerAccount}
                   onSave={() => {}}
                   placeholder={screenData.UserProfile.userDefaultDescription}
-                />
+                /> */}
               </div>
             </div>
           </div>
