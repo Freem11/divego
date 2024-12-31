@@ -1,11 +1,9 @@
 import { supabase } from '../supabase';
 import { toast } from 'react-toastify';
 import screenData from '../components/newModals/screenData.json';
-import { safeSupabase } from './_safeCall';
 
 export const createPartnerAccountRequest = async (values) => {
-
-  const call = () => supabase
+  const { data, error } = await supabase
     .from('partnerAccountRequests')
     .insert([
       {
@@ -15,9 +13,15 @@ export const createPartnerAccountRequest = async (values) => {
         longitude:    values.Longitude,
         userId:       values.UserId,
       },
-    ])
+    ]);
 
-  return safeSupabase(call, screenData.Toast.successCreating);
+  if (error) {
+    console.log('couldn\'t do it 33,', error);
+  }
+
+  if (data) {
+    console.log(data);
+  }
 };
 
 export const grabRequestById = async (id) => {
