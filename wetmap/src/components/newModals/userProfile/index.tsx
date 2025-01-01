@@ -30,7 +30,8 @@ export default function UserProfile(props: DiveSiteProps) {
 
   // console.log(profile);
   const handleProfileNameChange = async (newName: string) => {
-    if (newName === '') {
+    // console.log(((newName ?? '').localeCompare('')));
+    if (((newName ?? '').localeCompare('')) == 1) {
       console.log('Your Username cannot be blank!');
       // I'm thinking we can add a toast to alert the user of this
       return false;
