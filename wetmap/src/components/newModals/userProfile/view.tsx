@@ -14,9 +14,10 @@ import { ActiveProfile } from '../../../entities/profile';
 
 
 type userProfileViewProps = {
-  onClose?:               () => void
-  profile:                ActiveProfile
-  handleProfileBioChange: (profileBio: string) => void
+  onClose?:                () => void
+  profile:                 ActiveProfile
+  handleProfileBioChange:  (profileBio: string) => void
+  handleProfileNameChange: (profileName: string) => void
 //   openPicUploader:      () => void
 //   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
 //   onDiveSiteBioChange:  (newValue: string) => void
@@ -58,7 +59,15 @@ export default function UserProfileView(props: userProfileViewProps) {
           <div className="stack-4">
             <div>
               <div className="d-flex">
-                <h1 className="mb-0">{props.profile.UserName}</h1>
+                <h1 className="mb-0">
+                  <PlainTextInput
+                    // placeholder={`A little about ${props?.diveSite?.name}`}
+                    // value={props?.diveSite?.divesitebio || ''}
+                    // readOnly={!props?.isPartnerAccount}
+                    onSave={props?.handleProfileNameChange}
+                    placeholder={props.profile.UserName}
+                  />
+                </h1>
                 <div>
                   {/* <Icon
                     name="flag"

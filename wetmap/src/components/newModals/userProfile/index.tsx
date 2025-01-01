@@ -29,6 +29,34 @@ export default function UserProfile(props: DiveSiteProps) {
   //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
+  const handleProfileNameChange = async (newName: string) => {
+    if (newName === '') {
+      console.log('Your Username cannot be blank!');
+      // I'm thinking we can add a toast to alert the user of this
+      return false;
+    } else {
+      if (profile) {
+        setProfile({ ...profile, UserName: newName });
+        try {
+          await updateProfile({
+            id:       profile!.UserID,
+            username: newName,
+          });
+        } catch (e) {
+          // if (e && e.code === '23505') {
+          //   console.log('This username belongs to another user');
+          //   // probably a toast for this as well
+          //   return false;
+          // }
+          console.log('Something went wrong. Please try later.');
+          console.log((e as Error).message);
+          // toast for this as well
+          return false;
+        }
+      }
+    }
+  };
+
   const handleProfileBioChange = async (newBio: string) => {
     if (profile) {
       setProfile({ ...profile, profileBio: newBio });
@@ -129,26 +157,13 @@ export default function UserProfile(props: DiveSiteProps) {
       onClose={props.onModalCancel}
       profile={profile!}
       handleProfileBioChange={handleProfileBioChange}
+      handleProfileNameChange={handleProfileNameChange}
       //   openPicUploader={openPicUploader}
       //   handleImageSelection={handleImageSelection}
       //   diveSite={selectedDiveSite}
       //   diveSitePics={diveSitePics}
       //   isPartnerAccount={isPartnerAccount}
       //   headerPictureUrl={headerPictureUrl}
-    //   onDiveSiteBioChange={async (newValue) => {
-    //     if (selectedDiveSite) {
-    //       setSelectedDiveSite({ ...selectedDiveSite, divesitebio: newValue });
-    //       try {
-    //         await updateDiveSite({
-    //           id:    selectedDiveSite.id,
-    //           bio:   newValue,
-    //           photo: selectedDiveSite.divesiteprofilephoto,
-    //         });
-    //       } catch (e) {
-    //         console.log({ title: 'Error19', message: (e as Error).message });
-    //       }
-    //     }
-    //   }}
     />
   );
 }
