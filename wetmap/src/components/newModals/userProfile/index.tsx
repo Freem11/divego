@@ -31,30 +31,31 @@ export default function UserProfile(props: DiveSiteProps) {
   // console.log(profile);
   const handleProfileNameChange = async (newName: string) => {
     // console.log(((newName ?? '').localeCompare('')));
-    if (((newName ?? '').localeCompare('')) == 1) {
-      console.log('Your Username cannot be blank!');
-      // I'm thinking we can add a toast to alert the user of this
-      return false;
-    } else {
-      if (profile) {
-        setProfile({ ...profile, UserName: newName });
-        try {
-          await updateProfile({
-            id:       profile!.UserID,
-            username: newName,
-          });
-        } catch (e) {
-          // if (e && e.code === '23505') {
-          //   console.log('This username belongs to another user');
-          //   // probably a toast for this as well
-          //   return false;
-          // }
-          console.log('Something went wrong. Please try later.');
-          console.log((e as Error).message);
-          // toast for this as well
-          return false;
-        }
+    // console.log((newName));
+    // if (((newName ?? '').localeCompare('')) == 1) {
+    //   console.log('Your Username cannot be blank!');
+    //   // I'm thinking we can add a toast to alert the user of this
+    //   return false;
+    // } else {
+    if (profile) {
+      setProfile({ ...profile, UserName: newName });
+      try {
+        await updateProfile({
+          id:       profile!.UserID,
+          username: newName,
+        });
+      } catch (e) {
+        // if (e && e.code === '23505') {
+        //   console.log('This username belongs to another user');
+        //   // probably a toast for this as well
+        //   return false;
+        // }
+        console.log('Something went wrong. Please try later.');
+        console.log((e as Error).message);
+        // toast for this as well
+        return false;
       }
+      // }
     }
   };
 
