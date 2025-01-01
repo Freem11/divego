@@ -68,6 +68,7 @@ export const updateProfileDescription = async (values: { profileBio: string | nu
     .from('UserProfiles')
     .update({ profileBio: values.profileBio })
     .eq('UserID', values.id);
+    // .select();
 
   console.log('supa sends', data, error);
 
