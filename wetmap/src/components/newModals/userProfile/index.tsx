@@ -68,28 +68,6 @@ export default function UserProfile(props: DiveSiteProps) {
     }
   };
 
-  // (newValue) => {
-  //         if (selectedDiveSite) {
-  //           setSelectedDiveSite({ ...selectedDiveSite, divesitebio: newValue });
-  //           try {
-  //             await updateDiveSite({
-  //               id:    selectedDiveSite.id,
-  //               bio:   newValue,
-  //               photo: selectedDiveSite.divesiteprofilephoto,
-  //             });
-  //           } catch (e) {
-  //             console.log({ title: 'Error19', message: (e as Error).message });
-  //           }
-  //         }
-  //       }}
-
-  //   useEffect(() => {
-  //     if (selectedDiveSite) {
-  //       getPhotos(selectedDiveSite, profile);
-  //     }
-  //   }, [selectedDiveSite, profile]);
-
-
   //   useEffect(() => {
   //     if (profile && profile.partnerAccount) {
   //       setIsPartnerAccount(true);
