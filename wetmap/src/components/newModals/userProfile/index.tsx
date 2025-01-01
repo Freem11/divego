@@ -24,21 +24,10 @@ export default function UserProfile(props: DiveSiteProps) {
   const { profile, setProfile }          = useContext(UserProfileContext);
   console.log(profile);
 
-//   const { modalShow }        = useContext(ModalContext);
-//   const { pin, setPin }      = useContext(PinContext);
-//   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
-//   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
-//   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
-
-  // const handleProfileBioChange = async (profileBio: string) => {
-  //   if (profileBio) {
-  //     if (profileBio == '') {
-  //       await updateProfileDescription({ profileBio: null, id: profile!.UserID });
-  //     } else {
-  //       await updateProfileDescription({ profileBio: profileBio, id: profile!.UserID });
-  //     }
-  //   }
-  // };
+  //   const { modalShow }        = useContext(ModalContext);
+  //   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
+  //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
+  //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
   const handleProfileBioChange = async (newBio: string) => {
     if (profile) {
