@@ -11,11 +11,11 @@ import { ModalContext } from '../../reusables/modal/context';
 import PicUploader from '../picUploader/index';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
-import { ActiveProfile } from '../../../entities/profile';
 import {
   grabProfileById,
   getProfileWithStats,
   updateProfile,
+  updateProfileDescription,
 } from '../../../supabaseCalls/accountSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
 
@@ -29,6 +29,15 @@ export default function UserProfile(props: DiveSiteProps) {
 //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
 //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
+  const handleProfileBioChange = async (profileBio: string) => {
+    if (profileBio) {
+      if (profileBio == '') {
+        await updateProfileDescription({ profileBio: null, id: profile!.UserID });
+      } else {
+        await updateProfileDescription({ profileBio: profileBio, id: profile!.UserID });
+      }
+    }
+  };
   //   useEffect(() => {
   //     if (selectedDiveSite) {
   //       getPhotos(selectedDiveSite, profile);
@@ -102,6 +111,7 @@ export default function UserProfile(props: DiveSiteProps) {
     <UserProfileView
       onClose={props.onModalCancel}
       profile={profile!}
+      handleProfileBioChange={handleProfileBioChange}
       //   openPicUploader={openPicUploader}
       //   handleImageSelection={handleImageSelection}
       //   diveSite={selectedDiveSite}

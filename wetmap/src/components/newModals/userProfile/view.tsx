@@ -13,10 +13,10 @@ import SeaLifeImageCard from '../../reusables/seaLifeImageCard';
 import { ActiveProfile } from '../../../entities/profile';
 
 
-
 type userProfileViewProps = {
-  onClose?: () => void
-  profile:  ActiveProfile
+  onClose?:               () => void
+  profile:                ActiveProfile
+  handleProfileBioChange: (profileBio: string) => void
 //   openPicUploader:      () => void
 //   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
 //   onDiveSiteBioChange:  (newValue: string) => void
@@ -45,13 +45,13 @@ export default function UserProfileView(props: userProfileViewProps) {
         >
           <div className={style.buttonOpenPictureUpload}></div>
 
-          {/* <div className={style.buttonImageUpload}>
+          <div className={style.buttonImageUpload}>
             <ButtonIcon
               icon={<Icon name="camera-plus" />}
               className="btn-lg"
               onClick={() => {}}
             />
-          </div> */}
+          </div>
         </WavyModalHeader>
 
         <div className="ml-6">
@@ -70,11 +70,6 @@ export default function UserProfileView(props: userProfileViewProps) {
                   /> */}
                 </div>
               </div>
-
-              {/* <div className="d-flex">
-                {'Added by: '}
-                <a href="#">{props?.diveSite?.newusername}</a>
-              </div> */}
             </div>
 
             <div className="panel border-none">
@@ -83,7 +78,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                   // placeholder={`A little about ${props?.diveSite?.name}`}
                   // value={props?.diveSite?.divesitebio || ''}
                   // readOnly={!props?.isPartnerAccount}
-                  onSave={() => {}}
+                  onSave={props?.handleProfileBioChange}
                   placeholder={(props.profile.profileBio) ? (props.profile.profileBio) : (screenData.UserProfile.userDefaultDescription)}
                 />
               </div>
@@ -96,11 +91,11 @@ export default function UserProfileView(props: userProfileViewProps) {
         <div className="panel-header">
           <h3>User's Sea Creature Encounters</h3>
           <div className={style.addPictureButton}>
-            {/* <Button className="btn-lg" onClick={() => {}}>
+            <Button className="btn-lg" onClick={() => {}}>
               <span className="hide-sm">
                 Settings
               </span>
-            </Button> */}
+            </Button>
           </div>
         </div>
         {/* <div className="panel-header">

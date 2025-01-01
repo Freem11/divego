@@ -43,11 +43,30 @@ export const createProfile = async (values) => {
   }
 };
 
-export const updateProfile = async (values: {username: string, id: string }) => {
+export const updateProfile = async (values: { username: string, id: string }) => {
   console.log('supabase gets', values);
   const { data, error } = await supabase
     .from('UserProfiles')
     .update({ UserName: values.username })
+    .eq('UserID', values.id);
+
+  console.log('supa sends', data, error);
+
+  if (error) {
+    console.log('couldn\'t do it,', error);
+    throw error;
+  }
+
+  if (data) {
+    return data as ActiveProfile[];
+  }
+};
+
+export const updateProfileDescription = async (values: { profileBio: string | null, id: string }) => {
+  console.log('supabase gets', values);
+  const { data, error } = await supabase
+    .from('UserProfiles')
+    .update({ profileBio: values.profileBio })
     .eq('UserID', values.id);
 
   console.log('supa sends', data, error);
