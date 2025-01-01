@@ -21,23 +21,51 @@ import { SessionContext } from '../../contexts/sessionContext';
 
 type DiveSiteProps = Partial<ModalHandleProps>;
 export default function UserProfile(props: DiveSiteProps) {
-  const { profile }          = useContext(UserProfileContext);
+  const { profile, setProfile }          = useContext(UserProfileContext);
   console.log(profile);
+
 //   const { modalShow }        = useContext(ModalContext);
 //   const { pin, setPin }      = useContext(PinContext);
 //   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
 //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
 //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
-  const handleProfileBioChange = async (profileBio: string) => {
-    if (profileBio) {
-      if (profileBio == '') {
-        await updateProfileDescription({ profileBio: null, id: profile!.UserID });
-      } else {
-        await updateProfileDescription({ profileBio: profileBio, id: profile!.UserID });
+  // const handleProfileBioChange = async (profileBio: string) => {
+  //   if (profileBio) {
+  //     if (profileBio == '') {
+  //       await updateProfileDescription({ profileBio: null, id: profile!.UserID });
+  //     } else {
+  //       await updateProfileDescription({ profileBio: profileBio, id: profile!.UserID });
+  //     }
+  //   }
+  // };
+
+  const handleProfileBioChange = async (newBio: string) => {
+    if (profile) {
+      setProfile({ ...profile, profileBio: newBio });
+      try {
+        await updateProfileDescription({ profileBio: newBio, id: profile!.UserID });
+      } catch (e) {
+        console.log((e as Error).message);
       }
     }
   };
+
+  // (newValue) => {
+  //         if (selectedDiveSite) {
+  //           setSelectedDiveSite({ ...selectedDiveSite, divesitebio: newValue });
+  //           try {
+  //             await updateDiveSite({
+  //               id:    selectedDiveSite.id,
+  //               bio:   newValue,
+  //               photo: selectedDiveSite.divesiteprofilephoto,
+  //             });
+  //           } catch (e) {
+  //             console.log({ title: 'Error19', message: (e as Error).message });
+  //           }
+  //         }
+  //       }}
+
   //   useEffect(() => {
   //     if (selectedDiveSite) {
   //       getPhotos(selectedDiveSite, profile);
