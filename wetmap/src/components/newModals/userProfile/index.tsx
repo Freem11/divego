@@ -12,11 +12,17 @@ import PicUploader from '../picUploader/index';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ActiveProfile } from '../../../entities/profile';
+import {
+  grabProfileById,
+  getProfileWithStats,
+  updateProfile,
+} from '../../../supabaseCalls/accountSupabaseCalls';
+import { SessionContext } from '../../contexts/sessionContext';
 
 type DiveSiteProps = Partial<ModalHandleProps>;
 export default function UserProfile(props: DiveSiteProps) {
-//   const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
-//   const { profile }          = useContext(UserProfileContext);
+  const { profile }          = useContext(UserProfileContext);
+  console.log(profile);
 //   const { modalShow }        = useContext(ModalContext);
 //   const { pin, setPin }      = useContext(PinContext);
 //   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
@@ -95,6 +101,7 @@ export default function UserProfile(props: DiveSiteProps) {
   return (
     <UserProfileView
       onClose={props.onModalCancel}
+      profile={profile!}
       //   openPicUploader={openPicUploader}
       //   handleImageSelection={handleImageSelection}
       //   diveSite={selectedDiveSite}

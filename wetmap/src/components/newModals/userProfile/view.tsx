@@ -10,9 +10,13 @@ import PlainTextInput from '../../reusables/plainTextInput';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import ButtonIcon from '../../reusables/buttonIcon';
 import SeaLifeImageCard from '../../reusables/seaLifeImageCard';
+import { ActiveProfile } from '../../../entities/profile';
+
+
 
 type userProfileViewProps = {
-  onClose?:             () => void
+  onClose?: () => void
+  profile:  ActiveProfile
 //   openPicUploader:      () => void
 //   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
 //   onDiveSiteBioChange:  (newValue: string) => void
@@ -54,7 +58,7 @@ export default function UserProfileView(props: userProfileViewProps) {
           <div className="stack-4">
             <div>
               <div className="d-flex">
-                <h1 className="mb-0">User Name</h1>
+                <h1 className="mb-0">{props.profile.UserName}</h1>
                 <div>
                   {/* <Icon
                     name="flag"
@@ -80,7 +84,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                   // value={props?.diveSite?.divesitebio || ''}
                   // readOnly={!props?.isPartnerAccount}
                   onSave={() => {}}
-                  placeholder={screenData.UserProfile.userDefaultDescription}
+                  placeholder={(props.profile.profileBio) ? (props.profile.profileBio) : (screenData.UserProfile.userDefaultDescription)}
                 />
               </div>
             </div>
