@@ -18,17 +18,17 @@ import {
   updateProfileDescription,
 } from '../../../supabaseCalls/accountSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
+import Settings from '../../modals/setting';
 
 type DiveSiteProps = Partial<ModalHandleProps>;
 export default function UserProfile(props: DiveSiteProps) {
   const { profile, setProfile }          = useContext(UserProfileContext);
-  console.log(profile);
-
-  //   const { modalShow }        = useContext(ModalContext);
+  const { modalShow }                    = useContext(ModalContext);
   //   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
+  // console.log(profile);
   const handleProfileNameChange = async (newName: string) => {
     if (newName === '') {
       console.log('Your Username cannot be blank!');
@@ -66,6 +66,10 @@ export default function UserProfile(props: DiveSiteProps) {
         console.log((e as Error).message);
       }
     }
+  };
+
+  const openSettings = () => {
+    modalShow(Settings);
   };
 
   //   useEffect(() => {
@@ -136,6 +140,7 @@ export default function UserProfile(props: DiveSiteProps) {
       profile={profile!}
       handleProfileBioChange={handleProfileBioChange}
       handleProfileNameChange={handleProfileNameChange}
+      openSettings={openSettings}
       //   openPicUploader={openPicUploader}
       //   handleImageSelection={handleImageSelection}
       //   diveSite={selectedDiveSite}

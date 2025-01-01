@@ -18,6 +18,7 @@ type userProfileViewProps = {
   profile:                 ActiveProfile
   handleProfileBioChange:  (profileBio: string) => void
   handleProfileNameChange: (profileName: string) => void
+  openSettings:            () => void
 //   openPicUploader:      () => void
 //   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
 //   onDiveSiteBioChange:  (newValue: string) => void
@@ -100,7 +101,7 @@ export default function UserProfileView(props: userProfileViewProps) {
         <div className="panel-header">
           <h3>User's Sea Creature Encounters</h3>
           <div className={style.addPictureButton}>
-            <Button className="btn-lg" onClick={() => {}}>
+            <Button className="btn-lg" onClick={props.openSettings}>
               <span className="hide-sm">
                 Settings
               </span>
