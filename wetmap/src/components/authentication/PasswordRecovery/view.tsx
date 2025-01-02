@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, FormRules } from './form';
 import Button from '../../reusables/button';
@@ -7,16 +7,12 @@ import ButtonIcon from '../../reusables/buttonIcon';
 import carouselData from '../carousel-data.json';
 import TextInput from '../../reusables/textInput';
 
-type LogInPageProps = {
-  goToSlide:          (pageNumber: number) => void
-  onSubmit:           (data: Form) => void
-  secureTextEntry:    boolean
-  setSecureTextEntry: (value: boolean) => void
-  submitFail:         string | null
-  setSubmitFail:      Dispatch<SetStateAction<string | null>>
+type PasswordRecoveryProps = {
+  goToSlide: (pageNumber: number) => void
+  onSubmit:  (data: Form) => void
 };
 
-export default function LogInPageView(props: LogInPageProps) {
+export default function PasswordRecoveryView(props: PasswordRecoveryProps) {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   return (
@@ -39,12 +35,9 @@ export default function LogInPageView(props: LogInPageProps) {
               error={errors.email}
               iconLeft={<Icon name="at" />}
               placeholder={carouselData.PasswordRecoveryPage.emailPlaceholder}
-              onFocus={() => props.setSubmitFail(null)}
               {...register('email', FormRules.email)}
             />
           </div>
-
-          {props.submitFail && <p className="erroMsg">{props.submitFail}</p>}
 
           <div className="cols">
             <div className="col-7" />

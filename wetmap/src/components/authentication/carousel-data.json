@@ -30,6 +30,9 @@
     {
       "title": "Reset Password",
       "emailPlaceholder": "Enter Your Account Email",
-      "buttonText": "Send Recovery Email"
+      "buttonText": "Send Recovery Email",
+      "emailInvalidMessage": "Please supply the email that you use to login",
+      "passwordResetEmailSent": "Email Sent! Check Your Email For A Link To Reset Your Password",
+      "passwordResetError": "Something went wrong. Please try again later"
     }
 }

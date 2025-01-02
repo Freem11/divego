@@ -1,4 +1,6 @@
 import { FormValidationRules } from '../../../forms/form';
+import { validationEmail } from '../../../forms/validation';
+import t from '../carousel-data.json';
 
 export interface Form {
   email: string
@@ -6,7 +8,8 @@ export interface Form {
 
 export const FormRules: FormValidationRules<Form> = {
   email: {
-    required: 'Please enter your email',
+    required: t.PasswordRecoveryPage.emailInvalidMessage,
+    ...validationEmail,
   },
 
 };

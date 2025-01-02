@@ -77,17 +77,15 @@ export const signInStandard = async (loginDetails: loginDetails) => {
 
 
 export const performPasswordReset = async (newPassowrd: string) => {
-  const { data, error } = await supabase.auth.updateUser({
+  const response = await supabase.auth.updateUser({
     password: newPassowrd,
   });
 
-  if (error) {
-    console.log('couldn\'t update password,', error);
+  if (response.error) {
+    console.log('couldn\'t update password,', response.error);
   }
 
-  if (data) {
-    return { data };
-  }
+  return response;
 };
 
 export const signInFaceBook = async () => {
@@ -145,9 +143,15 @@ export const userDelete = async (userIdValue: string) => {
 };
 
 export const sendPasswordResetEmail = async (email: string, url: string) => {
-  await supabase.auth.resetPasswordForEmail(email, {
+  const response = await supabase.auth.resetPasswordForEmail(email, {
     redirectTo: url,
   });
+
+  if (response.error) {
+    console.log(response.error);
+  }
+
+  return response;
 };
 
 

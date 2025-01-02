@@ -109,5 +109,14 @@
       "Toast": {
         "generalError": "Oops! Something went wrong... Please try again later.",
         "successCreating": "Created successfully!"
+      },
+      "PasswordUpdate": {
+        "header": "Update Password",
+        "password1Placeholder": "Enter your new password",
+        "password2Placeholder": "Please confirm your new password",
+        "passwordsDoNotMatch": "Your passwords do no match",
+        "passwordUpdatedSuccessfully": "Your password has been updated successfully",
+        "passwordUpdateError": "Something went wrong. Please try again later",
+        "submitButton": "Submit"
       }
     }

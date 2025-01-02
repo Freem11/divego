@@ -1,33 +1,34 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Form } from './form';
-import LogInPageView from './view';
+import PasswordRecoveryView from './view';
 import { sendPasswordResetEmail } from '../../../supabaseCalls/authenticateSupabaseCalls';
 import { SliderContext } from '../../reusables/slider/context';
+import { toast } from 'react-toastify';
+import carouselData from '../carousel-data.json';
 
 export default function PasswordRecoveryPage() {
   const { goToSlide } = useContext(SliderContext);
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [submitFail, setSubmitFail] = useState<string | null>(null);
 
   const onSubmit = async (data: Form) => {
-    if (data.email === '') {
-      setSubmitFail('Please supply the email that you use to login');
+    const response = await sendPasswordResetEmail(data.email, window.location.origin + '/account/password/');
 
+    if (!response.error && response.data) {
+      toast.success(carouselData.PasswordRecoveryPage.passwordResetEmailSent);
       return;
-    } else {
-      sendPasswordResetEmail(data.email, window.location.origin);
-      setSubmitFail('Email Sent! Check Your Email For A Link To Reset Your Password');
     }
+
+    if (response.error && response.error.message) {
+      toast.error(response.error.message);
+      return;
+    }
+
+    toast.error(carouselData.PasswordRecoveryPage.passwordResetError);
   };
 
   return (
-    <LogInPageView
+    <PasswordRecoveryView
       goToSlide={goToSlide}
       onSubmit={onSubmit}
-      secureTextEntry={secureTextEntry}
-      setSecureTextEntry={setSecureTextEntry}
-      submitFail={submitFail}
-      setSubmitFail={setSubmitFail}
     />
   );
 };
