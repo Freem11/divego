@@ -27,7 +27,7 @@ export default function UserProfile(props: UserProps) {
   const { activeSession } = useContext(SessionContext);
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
-  const [openedProfile, setOpenedProfile] = useState(profile);
+  const [openedProfile, setOpenedProfile] = useState<ActiveProfile>(profile!);
   //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
