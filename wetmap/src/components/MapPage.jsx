@@ -5,7 +5,8 @@ import SearchTool from './searchTool/index';
 import OnBoardingCarrousel from './onboarding/index';
 import SiteSubmitter from './newModals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
-import UserProfileModal from './modals/userProfileModal';
+// import UserProfileModal from './modals/userProfileModal';
+import UserProfileModal from './newModals/userProfile/index';
 import Settings from './modals/setting';
 import PhotoMenu from './photoMenu/photoMenu2';
 import PhotoFilterer from './photoMenu/photoFilter';
@@ -223,7 +224,9 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateProfileModal = () => {
-    modalShow(UserProfileModal);
+    modalShow(UserProfileModal, {
+      size: 'large',
+    });
     // create new userprofile here
   };
 
