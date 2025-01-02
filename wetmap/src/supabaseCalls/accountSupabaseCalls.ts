@@ -62,13 +62,26 @@ export const updateProfile = async (values: { username: string, id: string }) =>
   }
 };
 
-export const updateProfileDescription = async (values: { profileBio: string | null, id: string }) => {
+export const updateProfileCustom = async (values: { username?: string, profileBio?: string | null, id: string }) => {
   console.log('supabase gets', values);
+
+  // Build the update object dynamically
+  const updateFields: Partial<{ UserName: string, profileBio: string | null }> = {};
+  if (values.username !== undefined) {
+    updateFields.UserName = values.username;
+  }
+  if (values.profileBio !== undefined) {
+    updateFields.profileBio = values.profileBio;
+  }
+
+  if (Object.keys(updateFields).length === 0) {
+    throw new Error('No fields provided for update');
+  }
+
   const { data, error } = await supabase
     .from('UserProfiles')
-    .update({ profileBio: values.profileBio })
+    .update(updateFields)
     .eq('UserID', values.id);
-    // .select();
 
   console.log('supa sends', data, error);
 
