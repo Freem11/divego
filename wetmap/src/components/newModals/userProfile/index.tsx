@@ -21,29 +21,24 @@ import { SessionContext } from '../../contexts/sessionContext';
 import Settings from '../../modals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 
-interface CustomUserProps extends Partial<ModalHandleProps> {
-  selectedProfile?: any
-}
 
-type UserProps = CustomUserProps;
+type UserProps = Partial<ModalHandleProps> & { selectedProfile?: any };
 export default function UserProfile(props: UserProps) {
   const { activeSession } = useContext(SessionContext);
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
+  const [openedProfile, setOpenedProfile] = useState(profile);
   //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   useEffect(() => {
     if (props.selectedProfile) {
       (getProfileDetails(props.selectedProfile));
-    } else {
-      (getProfileDetails(activeSession?.user.id));
     }
   }, []);
 
   const getProfileDetails = async (profile: any) => {
     try {
-      const openProfile = await grabProfileById(profile);
-      setProfile(openProfile![0]);
+      setOpenedProfile((await grabProfileById(profile))![0]);
     } catch (e) {
       console.log((e as Error).message);
     }
@@ -147,12 +142,12 @@ export default function UserProfile(props: UserProps) {
   return (
     <UserProfileView
       onClose={props.onModalCancel}
-      profile={profile!}
+      profile={openedProfile!}
       handleProfileBioChange={handleProfileBioChange}
       handleProfileNameChange={handleProfileNameChange}
       handleFollow={() => {}}
       openSettings={openSettings}
-      isActiveProfile={activeSession?.user.id == profile?.UserID}
+      isActiveProfile={activeSession?.user.id == openedProfile!.UserID}
       //   openPicUploader={openPicUploader}
       //   handleImageSelection={handleImageSelection}
       //   headerPictureUrl={headerPictureUrl}
