@@ -5,12 +5,12 @@ import { SelectedDiveSiteContext } from '../../contexts/selectedDiveSiteContext'
 import { PhotosGroupedByDate } from '../../../entities/photos';
 import { getPhotosByDiveSiteWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
+import { ActiveSession } from '../../../entities/session';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { PinContext } from '../../contexts/staticPinContext';
 import { ModalContext } from '../../reusables/modal/context';
 import PicUploader from '../picUploader/index';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import {
   grabProfileById,
   getProfileWithStats,
@@ -19,15 +19,35 @@ import {
 } from '../../../supabaseCalls/accountSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
 import Settings from '../../modals/setting';
+import { ActiveProfile } from '../../../entities/profile';
 
-type DiveSiteProps = Partial<ModalHandleProps>;
-export default function UserProfile(props: DiveSiteProps) {
+interface CustomUserProps extends Partial<ModalHandleProps> {
+  selectedProfile?: any
+}
+
+type UserProps = CustomUserProps;
+export default function UserProfile(props: UserProps) {
+  const { activeSession } = useContext(SessionContext);
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
-  //   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+  useEffect(() => {
+    if (props.selectedProfile) {
+      (getProfileDetails(props.selectedProfile));
+    } else {
+      (getProfileDetails(activeSession?.user.id));
+    }
+  }, []);
 
+  const getProfileDetails = async (profile: any) => {
+    try {
+      const openProfile = await grabProfileById(profile);
+      setProfile(openProfile![0]);
+    } catch (e) {
+      console.log((e as Error).message);
+    }
+  };
   // console.log(profile);
   const handleProfileNameChange = async (newName: string) => {
     // console.log(((newName ?? '').localeCompare('')));
@@ -124,30 +144,17 @@ export default function UserProfile(props: DiveSiteProps) {
   //     modalShow(PicUploader);
   //   };
 
-
-  //   useEffect(() => {
-  //     if (selectedDiveSite?.divesiteprofilephoto) {
-  //       const photoName = selectedDiveSite.divesiteprofilephoto.split('/').pop();
-  //       setHeaderPictureUrl(
-  //         import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${photoName}`,
-  //       );
-  //     } else {
-  //       setHeaderPictureUrl(null);
-  //     }
-  //   }, [selectedDiveSite?.divesiteprofilephoto]);
-
   return (
     <UserProfileView
       onClose={props.onModalCancel}
       profile={profile!}
       handleProfileBioChange={handleProfileBioChange}
       handleProfileNameChange={handleProfileNameChange}
+      handleFollow={() => {}}
       openSettings={openSettings}
+      isActiveProfile={activeSession?.user.id == profile?.UserID}
       //   openPicUploader={openPicUploader}
       //   handleImageSelection={handleImageSelection}
-      //   diveSite={selectedDiveSite}
-      //   diveSitePics={diveSitePics}
-      //   isPartnerAccount={isPartnerAccount}
       //   headerPictureUrl={headerPictureUrl}
     />
   );

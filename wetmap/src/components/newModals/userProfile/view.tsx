@@ -18,7 +18,9 @@ type userProfileViewProps = {
   profile:                 ActiveProfile
   handleProfileBioChange:  (profileBio: string) => void
   handleProfileNameChange: (profileName: string) => void
+  handleFollow:            () => void
   openSettings:            () => void
+  isActiveProfile:         boolean
 //   openPicUploader:      () => void
 //   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
 //   onDiveSiteBioChange:  (newValue: string) => void
@@ -47,13 +49,15 @@ export default function UserProfileView(props: userProfileViewProps) {
         >
           <div className={style.buttonOpenPictureUpload}></div>
 
-          <div className={style.buttonImageUpload}>
-            <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className="btn-lg"
-              onClick={() => {}}
-            />
-          </div>
+          {(props.isActiveProfile) && (
+            <div className={style.buttonImageUpload}>
+              <ButtonIcon
+                icon={<Icon name="camera-plus" />}
+                className="btn-lg"
+                onClick={() => {}}
+              />
+            </div>
+          )}
         </WavyModalHeader>
 
         <div className="ml-6">
@@ -64,7 +68,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                   <PlainTextInput
                     // placeholder={`A little about ${props?.diveSite?.name}`}
                     // value={props?.diveSite?.divesitebio || ''}
-                    // readOnly={!props?.isPartnerAccount}
+                    readOnly={!props?.isActiveProfile}
                     onSave={props?.handleProfileNameChange}
                     placeholder={props.profile.UserName}
                   />
@@ -87,7 +91,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                 <PlainTextInput
                   // placeholder={`A little about ${props?.diveSite?.name}`}
                   // value={props?.diveSite?.divesitebio || ''}
-                  // readOnly={!props?.isPartnerAccount}
+                  readOnly={!props?.isActiveProfile}
                   onSave={props?.handleProfileBioChange}
                   placeholder={(props.profile.profileBio) ? (props.profile.profileBio) : (screenData.UserProfile.userDefaultDescription)}
                 />
@@ -101,11 +105,21 @@ export default function UserProfileView(props: userProfileViewProps) {
         <div className="panel-header">
           <h3>User's Sea Creature Encounters</h3>
           <div className={style.addPictureButton}>
-            <Button className="btn-lg" onClick={props.openSettings}>
-              <span className="hide-sm">
-                Settings
-              </span>
-            </Button>
+            {(props.isActiveProfile)
+              ? (
+                  <Button className="btn-lg" onClick={props.openSettings}>
+                    <span className="hide-sm">
+                      Settings
+                    </span>
+                  </Button>
+                )
+              : (
+                  <Button className="btn-lg" onClick={props.handleFollow}>
+                    <span className="hide-sm">
+                      Follow
+                    </span>
+                  </Button>
+                )}
           </div>
         </div>
         {/* <div className="panel-header">

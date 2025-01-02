@@ -6,7 +6,8 @@ import {
   deletePhotoLike,
 } from '../../../supabaseCalls/photoLikeSupabaseCalls';
 import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCalls';
-import UserProfileModal from '../../modals/userProfileModal';
+// import UserProfileModal from '../../modals/userProfileModal';
+import UserProfileModal from '../../newModals/userProfile';
 import { ModalContext } from '../../reusables/modal/context';
 import CommentsModal from '../../newModals/commentsModal';
 import FullScreenModal from '../../modals/fullScreenModal';
@@ -40,6 +41,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
     modalShow(UserProfileModal, {
       keepPreviousModal: true,
       selectedProfile:   picOwnerAccount && picOwnerAccount.UserID,
+      size:              'large',
     });
   };
 
