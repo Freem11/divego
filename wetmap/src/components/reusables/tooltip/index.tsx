@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, ReactNode } from "react";
 import styles from "./style.module.scss";
 
 export const TOOLTIP_DIRECTION = {
@@ -6,19 +6,28 @@ export const TOOLTIP_DIRECTION = {
     BOTTOM: "bottom",
     LEFT: "left",
     RIGHT: "right",
-};
+} as const;
+
+type TooltipDirection = typeof TOOLTIP_DIRECTION[keyof typeof TOOLTIP_DIRECTION];
 
 const DELAY = 400;
 
-const Tooltip = ({
+type TooltipProps = {
+    children: ReactNode;
+    content: ReactNode;
+    direction?: TooltipDirection;
+    delay?: number;
+};
+
+export default function Tooltip({
     children,
     content,
     direction = TOOLTIP_DIRECTION.TOP,
     delay = DELAY
-}) => {
+}: TooltipProps) {
     
     const [isActive, setIsActive] = useState(false);
-    let timeout;
+    let timeout: ReturnType<typeof setTimeout>;
 
     const showTip = () => {
         timeout = setTimeout(() => setIsActive(true), delay);
@@ -43,6 +52,4 @@ const Tooltip = ({
             )}
         </div>
     );
-};
-
-export default Tooltip;
+}
