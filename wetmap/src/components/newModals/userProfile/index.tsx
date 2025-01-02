@@ -30,6 +30,7 @@ export default function UserProfile(props: UserProps) {
   const [openedProfile, setOpenedProfile] = useState(profile);
   //   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   //   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+
   useEffect(() => {
     if (props.selectedProfile) {
       (getProfileDetails(props.selectedProfile));
@@ -43,7 +44,7 @@ export default function UserProfile(props: UserProps) {
       console.log((e as Error).message);
     }
   };
-  // console.log(profile);
+
   const handleProfileNameChange = async (newName: string) => {
     // console.log(((newName ?? '').localeCompare('')));
     // console.log((newName));
@@ -54,6 +55,7 @@ export default function UserProfile(props: UserProps) {
     // } else {
     if (profile) {
       setProfile({ ...profile, UserName: newName });
+      setOpenedProfile({ ...openedProfile!, UserName: newName });
       try {
         await updateProfile({
           id:       profile!.UserID,
@@ -77,6 +79,7 @@ export default function UserProfile(props: UserProps) {
   const handleProfileBioChange = async (newBio: string) => {
     if (profile) {
       setProfile({ ...profile, profileBio: newBio });
+      setOpenedProfile({ ...openedProfile!, profileBio: newBio });
       try {
         await updateProfileDescription({ profileBio: newBio, id: profile!.UserID });
       } catch (e) {
