@@ -5,21 +5,28 @@ import { Form } from './form';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { createPartnerAccountRequest } from '../../../supabaseCalls/partnerSupabaseCalls';
+import { safeCall } from '../../../supabaseCalls/_safeCall';
 
 type PartnerAccountRequestpProps = Partial<ModalHandleProps>;
 
 export default function PartnerAccountRequest(props: PartnerAccountRequestpProps) {
   const { profile } = useContext(UserProfileContext);
 
-  const onSubmit = (data: Form) => {
-    createPartnerAccountRequest({
-      ...data,
-      UserId: profile?.UserID || null,
-    })
-      .then(() => {
-        props?.onModalSuccess?.();
-        onClose();
-      })
+  const onSubmit = async (data: Form) => {
+
+    await safeCall(
+      () =>
+        createPartnerAccountRequest({
+          WebsiteLink: data.WebsiteLink || '',
+          BusinessName: data.BusinessName || '',
+          Latitude: data.Latitude || 0,
+          Longitude: data.Longitude || 0,
+          UserId: profile?.UserID || '',
+        }),
+    );
+
+    props?.onModalSuccess?.();
+    onClose();
   };
 
   const onClose = () => {
