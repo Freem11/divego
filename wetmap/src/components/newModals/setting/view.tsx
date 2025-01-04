@@ -18,44 +18,46 @@ type SettingsProps = {
 
 export default function SettingsView(props: SettingsProps) {
   return (
-    <>
-      <div className={styles.buttonBack}>
-        <ButtonIcon
-          icon={<Icon name="chevron-left" />}
-          className="btn-lg text-gray ml-4 mt-4"
-          onClick={props.onClose}
-        />
-      </div>
-
-      <div className="mx-10 text-left">
-        <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
-        <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
-        <div className={styles.grayOutline}>
-          <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
-          { props.profileType === 'Diver Account'
-            ? (
-                <span onClick={props.handlePartnerButton}>
-                  <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
-                </span>
-              )
-            : null}
+    <div className="flex-column-between full-height">
+      <div className="flex-column-between full-height  mb-6">
+        <div className={styles.buttonBack}>
+          <ButtonIcon
+            icon={<Icon name="chevron-left" />}
+            className="btn-lg text-gray ml-4 mt-4"
+            onClick={props.onClose}
+          />
         </div>
 
-        <div className={styles.horizontalButtonContainer}>
-          <div className="col-3"></div>
-          <div className="col-3">
-            <Button
-              onClick={props.handleLogout}
-              className="btn-md bg-primary"
-              iconRight={<Icon name="chevron-right" />}
-              type="button"
-            >
-              {screenData.SettingsPage.logout}
-            </Button>
+        <div className="mx-10 text-left">
+          <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
+          <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
+          <div className={styles.grayOutline}>
+            <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
+            { props.profileType === 'Diver Account'
+              ? (
+                  <span onClick={props.handlePartnerButton}>
+                    <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
+                  </span>
+                )
+              : null}
+          </div>
+
+          <div className={styles.horizontalButtonContainer}>
+            <div className="col-3"></div>
+            <div className="col-3">
+              <Button
+                onClick={props.handleLogout}
+                className="btn-md bg-primary"
+                iconRight={<Icon name="chevron-right" />}
+                type="button"
+              >
+                {screenData.SettingsPage.logout}
+              </Button>
+            </div>
           </div>
         </div>
 
-        <div className="mt-4">
+        <div className="mt-4 mx-10">
           <h2 className="my-2 text-center" style={{ color: 'maroon' }}>{screenData.SettingsPage.dangerZoneBar}</h2>
           <div className={styles.redOutline} onClick={props.handleDanger}>
             <h4 className="my-4 text-bold text-center" style={{ color: 'maroon' }}>{screenData.SettingsPage.delAccount}</h4>
@@ -65,6 +67,7 @@ export default function SettingsView(props: SettingsProps) {
 
       <ActDelDialog openDialog={props.openDialog} setOpenDialog={props.setOpenDialog} />
 
-    </>
+    </div>
+
   );
 }
