@@ -8,7 +8,7 @@ import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
-import { ItineraryItem } from './types';
+import { ItineraryItem } from '../../../entities/itineraryItem';
 import { DiveShop } from '../../../entities/diveShop';
 
 

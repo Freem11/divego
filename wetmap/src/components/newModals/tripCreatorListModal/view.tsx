@@ -5,7 +5,7 @@ import Button from '../../reusables/button';
 import style from './style.module.scss';
 import screenData from '../screenData.json'
 import defaultHeaderPicture from '../../../images/blackManta.png';
-import { ItineraryItem } from './types';
+import { ItineraryItem } from '../../../entities/itineraryItem';
 
 type TripCreatorListViewProps = {
   setSelectedID:                (id: number) => void

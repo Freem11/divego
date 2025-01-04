@@ -4,7 +4,7 @@ import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
-import { ItineraryItem } from './types';
+import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';

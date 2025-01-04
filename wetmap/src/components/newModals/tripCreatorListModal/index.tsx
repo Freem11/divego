@@ -1,15 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { ModalContext } from '../../reusables/modal/context';
-import { ItineraryItem } from './types';
+import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorListView from './view';
-import { ModalHandleProps } from '../../reusables/modal/types';
-import DiveShopModal from '../shopModal/index';
 
-type TripCreatorListProps = Partial<ModalHandleProps>;
 
-export default function TripCreatorListModal(props: TripCreatorListProps) {
+export default function TripCreatorListModal(props) {
   const { selectedShop } = useContext(SelectedShopContext);
 
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
