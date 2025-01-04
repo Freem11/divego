@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
-import SignInRoute from './signIn';
 import SignUpRoute from './signUp';
 import AuthticationPage from './authentication';
 
@@ -92,7 +91,6 @@ export default function AuthenticationPage() {
           index={0}
           style={{ backgroundColor: '#538dbd', height: '100%' }}
         >
-          <SignInRoute setValue={setValue} />
         </TabPanel>
         <TabPanel
           value={value}

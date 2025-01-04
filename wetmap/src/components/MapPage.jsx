@@ -42,8 +42,7 @@ import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
-import { ToastContainer } from 'react-toastify';
-
+import { Outlet } from 'react-router-dom';
 
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
@@ -537,9 +536,9 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-      
+      <Outlet />
       <Modal />
-      <ToastContainer autoClose={3000} />
+
     </div>
   );
 });
