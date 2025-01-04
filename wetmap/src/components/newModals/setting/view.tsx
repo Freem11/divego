@@ -30,7 +30,7 @@ export default function SettingsView(props: SettingsProps) {
       <div className="mx-10 text-left">
         <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
         <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
-        <div className={styles.grayoutline}>
+        <div className={styles.grayOutline}>
           <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
           { props.profileType === 'Diver Account'
             ? (
@@ -38,11 +38,7 @@ export default function SettingsView(props: SettingsProps) {
                   <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
                 </span>
               )
-            : (
-                <span onClick={props.handlePartnerButton}>
-                  <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notResearcherAccount}</p>
-                </span>
-              )}
+            : null}
         </div>
 
         <div className={styles.horizontalButtonContainer}>
@@ -59,10 +55,10 @@ export default function SettingsView(props: SettingsProps) {
           </div>
         </div>
 
-        <div className={styles.redText}>
-          <h2 className="my-2 text-center" style={{ color: '#8b0a0a' }}>{screenData.SettingsPage.dangerZoneBar}</h2>
-          <div className={styles.redoutline} onClick={props.handleDanger}>
-            <h4 className="my-4 text-bold text-center" style={{ color: '#8b0a0a' }}>{screenData.SettingsPage.delAccount}</h4>
+        <div className="mt-4">
+          <h2 className="my-2 text-center" style={{ color: 'maroon' }}>{screenData.SettingsPage.dangerZoneBar}</h2>
+          <div className={styles.redOutline} onClick={props.handleDanger}>
+            <h4 className="my-4 text-bold text-center" style={{ color: 'maroon' }}>{screenData.SettingsPage.delAccount}</h4>
           </div>
         </div>
       </div>

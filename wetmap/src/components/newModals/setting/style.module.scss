@@ -6,14 +6,14 @@
     }
 }
 
-.redoutline {
+.redOutline {
     color: maroon;
     border-top: 1px solid; /* Top border */
     border-bottom: 1px solid; /* Bottom border */
     background-color: rgb(247, 217, 217);
 }
 
-.grayoutline {
+.grayOutline {
     color: #5f5e5e;
     border-top: 1px solid; /* Top border */
     border-bottom: 1px solid; /* Bottom border */
@@ -28,16 +28,6 @@
     width: 100%;
     height: 20%;
     margin-top: 1rem;
-  }
-
-  .verticalButtonContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: 50;
-    flex-direction: column;
-    //width: 100%;
-    //height: 100%;
-    //margin-top: 1rem;
   }
 
 
