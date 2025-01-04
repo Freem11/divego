@@ -28,16 +28,24 @@ export default function SettingsView(props: SettingsProps) {
         <div className={styles.outline}>
           <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
           { props.profileType === 'Diver Account'
-            ? (
-                <span onClick={props.handlePartnerButton}>
-                  <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
-                </span>
-              )
-            : (
-                <span onClick={props.handlePartnerButton}>
-                  <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notResearcherAccount}</p>
-                </span>
-              )}
+          && (
+            <span onClick={props.handlePartnerButton}>
+              <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
+            </span>
+          )}
+          { props.profileType === 'Partner Account'
+          && (
+            <span onClick={props.handlePartnerButton}>
+              <p className="ml-10 mb-1 p-0 text-bold text-primary ">&nbsp;</p>
+            </span>
+          )}
+          { props.profileType === null
+          && (
+            <span onClick={props.handlePartnerButton}>
+              <p className="ml-10 mb-1 p-0 text-bold text-primary ">&nbsp;</p>
+            </span>
+          )}
+
         </div>
         <div className={styles.horizontalButtonContainer}>
           <div className="col-3"></div>
