@@ -6,3 +6,19 @@
     }
 }
 
+.outline {
+    border-top: 1px solid #5f5e5e; /* Top border */
+    border-bottom: 1px solid #5f5e5e; /* Bottom border */
+}
+
+.horizontalButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 3;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    margin-top: 1rem;
+  }
+
