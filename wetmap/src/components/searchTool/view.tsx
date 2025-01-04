@@ -26,6 +26,7 @@ type SearchViewProps = {
 export default function SearchView(props: SearchViewProps) {
   return (
     <div className="mt-6 mb-6 mb-6 mr-4 pr-4 pb-6 full-height" style={{ overflow: 'scroll'}}>
+      <div style={{width: '95%'}}>
       <TextInputField
         dataType="text"
         icon="navigation-variant-outline"
@@ -35,6 +36,7 @@ export default function SearchView(props: SearchViewProps) {
         handleClear={props.handleClear}
         secure={false}
       />
+      </div>
       {props.options.length >  0 && props.options.map((option) => {
         return (
           <ListItemView

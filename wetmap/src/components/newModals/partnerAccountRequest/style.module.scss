@@ -1,0 +1,15 @@
+@import "../../../styles/variables.scss";
+
+.explanation {
+  color: $primary-color;
+  font-weight: bold;
+}
+
+.buttonBack {
+  margin-top: 20px;
+  margin-left: 20px;
+
+  svg {
+    scale: 2;
+  }
+}

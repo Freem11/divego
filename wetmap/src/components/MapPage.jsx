@@ -2,10 +2,11 @@ import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import MapLoader from './googleMap';
 import SearchTool from './searchTool/index';
+import OnBoardingCarrousel from './onboarding/index';
 import SiteSubmitter from './newModals/siteSubmitter';
 import HowToGuide from './modals/howToGuide';
-import UserProfileModal from './modals/userProfileModal';
 import Settings from './newModals/setting';
+import UserProfileModal from './newModals/userProfile/index';
 import PhotoMenu from './photoMenu/photoMenu2';
 import PhotoFilterer from './photoMenu/photoFilter';
 import { useState, useContext, useEffect } from 'react';
@@ -41,6 +42,7 @@ import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
+import { ToastContainer } from 'react-toastify';
 
 
 const MapPage = React.memo(function MapPage() {
@@ -83,6 +85,7 @@ const MapPage = React.memo(function MapPage() {
         if (success) {
           let bully = success[0] && success[0].UserName;
           if (bully == null || bully === '') {
+            handleOnBoarding();
             return;
           } else {
             setProfile(success[0]);
@@ -151,6 +154,10 @@ const MapPage = React.memo(function MapPage() {
     setDivesTog(!divesTog);
   };
 
+  const handleOnBoarding = () => {
+    animateOnBoardingModal();
+  };
+
   const [fabsYCoord, setfabsYCoord] = useState(0);
   const [menuUp, setMenuUp] = useState(false);
 
@@ -205,6 +212,13 @@ const MapPage = React.memo(function MapPage() {
     });
   };
 
+  const animateOnBoardingModal = () => {
+    modalShow(OnBoardingCarrousel, {
+      size:        'full',
+      allowCancel: false,
+    });
+  };
+
   const animateSettingsModal = () => {
     modalShow(Settings, {
       size: 'medium', // not really necessary as this is the defaul parameter
@@ -212,7 +226,9 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateProfileModal = () => {
-    modalShow(UserProfileModal);
+    modalShow(UserProfileModal, {
+      size: 'large',
+    });
     // create new userprofile here
   };
 
@@ -521,9 +537,9 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-
+      
       <Modal />
-
+      <ToastContainer autoClose={3000} />
     </div>
   );
 });

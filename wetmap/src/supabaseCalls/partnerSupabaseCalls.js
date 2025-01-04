@@ -22,7 +22,6 @@ export const createPartnerAccountRequest = async (values) => {
   }
 };
 
-
 export const grabRequestById = async (id) => {
   const { data, error } = await supabase
     .from('partnerAccountRequests')

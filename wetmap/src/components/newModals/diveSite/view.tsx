@@ -102,7 +102,8 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
           </div>
         </div>
         <div className="panel-body">
-          {props?.diveSitePics?.map((packet) => {
+          {props?.diveSitePics
+          && props?.diveSitePics.map((packet) => {
             return (
               <div key={packet.dateTaken} className={style.panelBodyDiveSite}>
                 <h2 className={style.panelDate}>{packet.dateTaken}</h2>
@@ -115,6 +116,13 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
               </div>
             );
           })}
+          {props?.diveSitePics?.length === 0 && (
+            <div>
+              <p className="noSightings">
+                {screenData.DiveSite.emptyDrawer}
+              </p>
+            </div>
+          )}
         </div>
         <div className="panel-footer"></div>
       </div>

@@ -27,14 +27,14 @@ export default function DiveSite(props: DiveSiteProps) {
     if (selectedDiveSite) {
       getPhotos(selectedDiveSite, profile);
     }
-  }, [selectedDiveSite]);
+  }, [selectedDiveSite, profile]);
 
 
   useEffect(() => {
     if (profile && profile.partnerAccount) {
       setIsPartnerAccount(true);
     }
-  }, []);
+  }, [profile]);
 
   const getPhotos = async (site: DiveSiteWithUserName, user: ActiveProfile | null) => {
     try {
@@ -43,7 +43,7 @@ export default function DiveSite(props: DiveSiteProps) {
         lng:    site.lng,
         userId: user?.UserID,
       });
-      if (photos && photos.length > 0) {
+      if (photos) {
         setDiveSitePics(photos);
       }
     } catch (e) {

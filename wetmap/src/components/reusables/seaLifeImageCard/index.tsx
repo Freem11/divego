@@ -8,7 +8,7 @@ import {
 import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCalls';
 import UserProfileModal from '../../modals/userProfileModal';
 import { ModalContext } from '../../reusables/modal/context';
-import CommentsModal from '../../modals/commentsModal';
+import CommentsModal from '../../newModals/commentsModal';
 import FullScreenModal from '../../modals/fullScreenModal';
 import SeaLifeImageCardView from './view';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';

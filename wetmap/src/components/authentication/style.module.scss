@@ -1,0 +1,15 @@
+.container {
+  height: 100%;
+  width: 100%;
+  background-color: white;
+  z-index: 5;
+  position: relative;
+}
+
+.centerPage {
+  margin: 0 auto;
+  width: 30%;
+  min-width: 600px;
+  height: 100%;
+  border: 2px solid lightgray;
+}
