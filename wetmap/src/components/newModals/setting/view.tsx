@@ -41,13 +41,13 @@ export default function SettingsView(props: SettingsProps) {
             )}
             { props.profileType === 'Partner Account'
             && (
-              <span onClick={props.handlePartnerButton}>
+              <span>
                 <p className="ml-10 mb-1 p-0 text-bold text-primary ">&nbsp;</p>
               </span>
             )}
             { props.profileType === null
             && (
-              <span onClick={props.handlePartnerButton}>
+              <span>
                 <p className="ml-10 mb-1 p-0 text-bold text-primary ">&nbsp;</p>
               </span>
             )}
