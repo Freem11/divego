@@ -2,14 +2,14 @@ import { FormValidationRules } from '../../../forms/form';
 
 
 export interface Form {
-  fullname: string
+  fullName: string
   email:    string
   password: string
 }
 
 
 export const FormRules: FormValidationRules<Form> = {
-  fullname: {
+  fullName: {
     required: 'Please enter your full name',
   },
   email: {

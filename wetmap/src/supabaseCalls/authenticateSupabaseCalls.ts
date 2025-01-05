@@ -32,8 +32,7 @@ type registrationDetails = {
 };
 
 export const register = async (registerDetails: registrationDetails) => {
-  console.log('auth got,', registerDetails);
-  const { data, error } = await supabase.auth.signUp(
+  const response = await supabase.auth.signUp(
     {
       email:    registerDetails.email,
       password: registerDetails.password,
@@ -45,14 +44,11 @@ export const register = async (registerDetails: registrationDetails) => {
     },
   );
 
-  if (error) {
-    console.log('couldn\'t register,', error);
-    return { data };
+  if (response.error) {
+    console.log(response.error);
   }
 
-  if (data) {
-    return { data };
-  }
+  return response;
 };
 
 type loginDetails = {
