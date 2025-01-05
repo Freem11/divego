@@ -56,7 +56,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
                 <h1 className="mb-0">{props?.diveShop?.orgname}</h1>
               </div>
             </div>
-
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
