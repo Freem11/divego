@@ -89,31 +89,25 @@ export const getDiveSiteByName = async (value) => {
   }
 };
 
-export const getDiveSiteWithUserName = async (values: {siteName: string, region: string | null}) => {
-  const query = supabase
-    .from('diveSites')
-    .select('*')
-    .eq('name', values.siteName);
-
-  if (values.region !== null) {
-    query.eq('region', values.region);
-  }
-
-  const { data, error } = await query;
+export const getDiveSiteWithUserName = async (values: { siteName: string, region: string | null }) => {
+  const { data, error } = await supabase.rpc('get_single_divesite_info_with_username', {
+    sitename: values.siteName,
+    region:   values.region,
+  });
 
   if (error) {
-    console.log('couldn\'t do it 27,', error);
+    console.log('couldn\'t do it 7,', error);
     return [];
   }
 
   if (data) {
-    return data as DiveSiteWithUserName[];
+    return data;
   }
 };
 
 export const getDiveSitesByIDs = async (valueArray) => {
-  let Q1 = valueArray.substring(1, valueArray.length);
-  let Q2 = Q1.substring(Q1.length - 1, 0);
+  const Q1 = valueArray.substring(1, valueArray.length);
+  const Q2 = Q1.substring(Q1.length - 1, 0);
 
   const { data, error } = await supabase
     .from('diveSites')
@@ -130,38 +124,28 @@ export const getDiveSitesByIDs = async (valueArray) => {
   }
 };
 
-export const getSingleDiveSiteByNameAndRegion = async (values) => {
-  if (values.region === undefined) {
-    const { data, error } = await supabase
-      .from('diveSites')
-      .select()
-      .eq('name', values.name);
+export const getSingleDiveSiteByNameAndRegion = async (values: { name: string, region: string | null }) => {
+  const query = supabase
+    .from('diveSites')
+    .select('*')
+    .eq('name', values.name);
 
-    if (error) {
-      console.log('couldn\'t do it 7,', error);
-      return [];
-    }
+  if (values.region !== null) {
+    query.eq('region', values.region);
+  }
 
-    if (data) {
-      return data;
-    }
-  } else {
-    const { data, error } = await supabase
-      .from('diveSites')
-      .select()
-      .eq('name', values.name)
-      .eq('region', values.region);
+  const { data, error } = await query;
 
-    if (error) {
-      console.log('couldn\'t do it 7,', error);
-      return [];
-    }
+  if (error) {
+    console.log('couldn\'t do it 27,', error);
+    return [];
+  }
 
-    if (data) {
-      return data;
-    }
+  if (data) {
+    return data;
   }
 };
+
 
 export const updateDiveSite = async (values) => {
   console.log('updating...', values);

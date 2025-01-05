@@ -20,9 +20,6 @@ export default function PartnerAccountRequest(props: PartnerAccountRequestpProps
         props?.onModalSuccess?.();
         onClose();
       })
-      .catch((error) => {
-        console.error('Error submitting partner account request in (createPartnerAccountRequest)', error);
-      });
   };
 
   const onClose = () => {

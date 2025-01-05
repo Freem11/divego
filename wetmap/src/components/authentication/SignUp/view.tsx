@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, FormRules } from './form';
 import Button from '../../reusables/button';
@@ -12,6 +12,8 @@ type SignUpPageProps = {
   onSubmit:           (data: Form) => void
   secureTextEntry:    boolean
   setSecureTextEntry: (value: boolean) => void
+  regFail:            string | null
+  setRegFail:         Dispatch<SetStateAction<string | null>>
 };
 
 export default function SignUpPageView(props: SignUpPageProps) {
@@ -37,6 +39,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
               error={errors.fullname}
               iconLeft={<Icon name="person" />}
               placeholder={carouselData.SignUpPage.namePlaceholder}
+              onFocus={() => props.setRegFail(null)}
               {...register('fullname', FormRules.fullname)}
             />
           </div>
@@ -46,6 +49,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
               error={errors.email}
               iconLeft={<Icon name="at" />}
               placeholder={carouselData.SignUpPage.emailPlaceholder}
+              onFocus={() => props.setRegFail(null)}
               {...register('email', FormRules.email)}
             />
           </div>
@@ -68,9 +72,12 @@ export default function SignUpPageView(props: SignUpPageProps) {
                     )
               }
               placeholder={carouselData.SignUpPage.passwordPlaceholder}
+              onFocus={() => props.setRegFail(null)}
               {...register('password', FormRules.password)}
             />
           </div>
+
+          {props.regFail && <p className="erroMsg">{props.regFail}</p>}
 
           <div className="cols">
             <div className="col-8" />
