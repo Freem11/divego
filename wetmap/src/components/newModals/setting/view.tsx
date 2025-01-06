@@ -18,7 +18,7 @@ type SettingsProps = {
 
 export default function SettingsView(props: SettingsProps) {
   return (
-    <div className="flex-column-between full-height">
+    <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
       <div className={styles.buttonBack}>
         <ButtonIcon
           icon={<Icon name="chevron-left" />}
@@ -27,7 +27,7 @@ export default function SettingsView(props: SettingsProps) {
         />
       </div>
 
-      <div className="flex-column-between full-height  mb-6">
+      <div className="flex-column-between full-height mb-6">
         <div className="mx-10 text-left">
           <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
           <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
