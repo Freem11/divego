@@ -51,6 +51,20 @@ export default function PasswordUpdateView(props: PasswordUpdateProps) {
             />
           </div>
 
+          <div className="cols mx-0">
+            <div className="col-9"></div>
+            <div className="col-3">
+              <Button
+                disabled={isSubmitting}
+                className="btn-md bg-primary"
+                type="submit"
+                iconRight={<Icon name="chevron-right" />}
+              >
+                {screenData.PasswordUpdate.submitButton}
+              </Button>
+            </div>
+          </div>
+
           {props.revealRoutes && (
             <div className="flex-column-between mt-10">
               <a onClick={props.onClose}>Continue on Desktop?</a>
@@ -67,20 +81,6 @@ export default function PasswordUpdateView(props: PasswordUpdateProps) {
             </div>
           )}
 
-
-          <div className="cols mx-0">
-            <div className="col-9"></div>
-            <div className="col-3">
-              <Button
-                disabled={isSubmitting}
-                className="btn-md bg-primary"
-                type="submit"
-                iconRight={<Icon name="chevron-right" />}
-              >
-                {screenData.PasswordUpdate.submitButton}
-              </Button>
-            </div>
-          </div>
         </div>
       </form>
     </div>
