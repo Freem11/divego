@@ -25,8 +25,6 @@ export default function PasswordUpdate(props: ModalHandleProps) {
     setRunningOn(platform);
   }, []);
 
-  console.log(runningOn);
-
   const onSubmit = async (data: Form) => {
     const response = await performPasswordReset(data.password1);
 
