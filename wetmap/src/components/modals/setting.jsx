@@ -11,7 +11,6 @@ import ModalHeader from '../reusables/modalHeader';
 import LargeButton from '../reusables/button/largeButton';
 import PartnerAccountRequest from '../newModals/partnerAccountRequest';
 import { ModalContext } from '../reusables/modal/context';
-import PartnerAccountRequestModal from './partnerAccountRequestModal';
 
 const Settings = (props) => {
   const { activeSession, setActiveSession } = useContext(SessionContext);

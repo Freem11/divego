@@ -6,7 +6,7 @@ import {
   deletePhotoLike,
 } from '../../../supabaseCalls/photoLikeSupabaseCalls';
 import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCalls';
-import UserProfileModal from '../../modals/userProfileModal';
+import UserProfileModal from '../../modals/userProfileModal'; // The old modal is being used here
 import { ModalContext } from '../../reusables/modal/context';
 import CommentsModal from '../../newModals/commentsModal';
 import FullScreenModal from '../../modals/fullScreenModal';

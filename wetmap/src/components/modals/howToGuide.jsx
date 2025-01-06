@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import './siteSubmitter.css';
 import ModalHeader from '../reusables/modalHeader';
 import LargeButton from '../reusables/button/largeButton';
 import { ModalContext } from '../reusables/modal/context';
