@@ -6,7 +6,7 @@ import { ModalHandleProps } from '../../reusables/modal/types';
 import SettingsView from './view';
 import React, { useEffect, useState } from 'react';
 import { useContext } from 'react';
-import PartnerAccountRequestModal from '../../modals/partnerAccountRequestModal';
+import PartnerAccountRequest from '../partnerAccountRequest';
 import { ModalContext } from '../../reusables/modal/context';
 
 
@@ -39,7 +39,7 @@ export default function Settings(props: SettingsProps) {
   };
 
   const handlePartnerButton = () => {
-    modalShow(PartnerAccountRequestModal, { keepPreviousModal: true });
+    modalShow(PartnerAccountRequest, { keepPreviousModal: true });
   };
 
   return (
