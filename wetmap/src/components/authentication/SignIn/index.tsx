@@ -18,11 +18,10 @@ export default function LogInPage() {
   const onSubmit = async (data: Form) => {
     if (data.email === '' || data.password === '') {
       setLoginFail('Please fill out both email and password');
-
       return;
     } else {
       const accessToken = await signInStandard(data);
-
+      console.log(accessToken);
       if (accessToken && accessToken?.data?.session !== null) {
         localStorage.setItem(
           'token',
