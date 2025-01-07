@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import Button from '../../reusables/button';
 import blackManta from '../../../images/blackManta.png';
 import googleIcon from '../../../images/google-color.png';
@@ -8,7 +8,6 @@ import ButtonIcon from '../../reusables/buttonIcon';
 import screenData from '../../newModals/screenData.json';
 import { ActiveProfile } from '../../../entities/profile';
 import WavyBlock from '../../reusables/wavyBlock';
-import { detectOS } from '../../reusables/_helpers/detectOs';
 import style from './style.module.scss';
 
 type LandingPageProps = {
@@ -18,11 +17,6 @@ type LandingPageProps = {
 };
 
 export default function LandingPageView(props: LandingPageProps) {
-  useEffect(() => {
-    const OS = detectOS();
-    console.log(OS);
-  });
-
   return (
     <div className="flex-column-between full-height">
       <div>
@@ -45,7 +39,7 @@ export default function LandingPageView(props: LandingPageProps) {
       </div>
 
       <div>
-        <div className="mb-2">{screenData.LandingPage.content}</div>
+        <div className="mb-2 text-center">{screenData.LandingPage.content}</div>
         <div className="flex-centered">
           <div className="col-6 flex-row-between" style={{ height: '3.5rem' }}>
             <ButtonIcon

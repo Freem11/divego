@@ -6,10 +6,11 @@ import {
   signInStandard,
 } from '../../../supabaseCalls/authenticateSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
-import LogInPageView from './view';
+import SignInPageView from './view';
 import { toast } from 'react-toastify';
+import screenData from '../../newModals/screenData.json';
 
-export default function LogInPage() {
+export default function SignInPage() {
   const { setActiveSession } = useContext(SessionContext);
   const { goToSlide } = useContext(SliderContext);
 
@@ -22,14 +23,14 @@ export default function LogInPage() {
       );
       setActiveSession(accessToken.data.session);
     } else {
-      toast.error('The credentials you supplied are not valid');
+      toast.error(screenData.SignInPage.signInError);
       return;
     }
     await sessionCheck();
   };
 
   return (
-    <LogInPageView
+    <SignInPageView
       onSubmit={onSubmit}
       goToSlide={goToSlide}
     />

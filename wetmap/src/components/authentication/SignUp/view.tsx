@@ -72,13 +72,13 @@ export default function SignUpPageView(props: SignUpPageProps) {
         </form>
       </div>
 
-      <p>
+      <div className="text-center mb-6">
         {screenData.SignUpPage.promptText}
         { ' '}
         <a onClick={() => props.goToSlide(2)}>
           {`${screenData.SignUpPage.promptLinkText}`}
         </a>
-      </p>
+      </div>
 
     </div>
   );

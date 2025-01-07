@@ -128,7 +128,8 @@
         "passwordPlaceholder": "Password",
         "buttonText": "Sign Up",
         "promptText": "Already have an account?",
-        "promptLinkText": "Log In"
+        "promptLinkText": "Log In",
+        "signUpError": "Something went wrong. Please try again later"
       },
     "LandingPage":
       {
@@ -145,7 +146,8 @@
         "buttonText": "Log In",
         "promptText": "Don't have an account?",
         "promptLinkText": "Sign Up",
-        "passwordReset": "Forgot Password?"
+        "passwordReset": "Forgot Password?",
+        "signInError": "The credentials you supplied are not valid"
       },
       "PasswordRecoveryPage":
       {

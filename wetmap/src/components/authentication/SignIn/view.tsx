@@ -8,12 +8,12 @@ import screenData from '../../newModals/screenData.json';
 import TextInput from '../../reusables/textInput';
 import SecureTextInput from '../../reusables/secureTextInput';
 
-type LogInPageProps = {
+type SignInPageProps = {
   goToSlide: (pageNumber: number) => void
   onSubmit:  (data: Form) => void
 };
 
-export default function LogInPageView(props: LogInPageProps) {
+export default function SignInPageView(props: SignInPageProps) {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   return (
@@ -47,23 +47,20 @@ export default function LogInPageView(props: LogInPageProps) {
             />
           </div>
 
-          <div className="cols">
-            <div className="col-8" />
-            <div className="col-4">
-              <Button
-                disabled={isSubmitting}
-                className="btn-lg bg-primary mt-10 col-3"
-                type="submit"
-                iconRight={<Icon name="chevron-right" />}
-              >
-                {screenData.SignInPage.buttonText}
-              </Button>
-            </div>
+          <div className="d-flex justify-end">
+            <Button
+              disabled={isSubmitting}
+              className="btn-lg bg-primary mt-10 flex-fit"
+              type="submit"
+              iconRight={<Icon name="chevron-right" />}
+            >
+              {screenData.SignInPage.buttonText}
+            </Button>
           </div>
         </form>
       </div>
 
-      <p>
+      <div className="text-center mb-6">
         <div>
           <a onClick={() => props.goToSlide(3)}>
             {screenData.SignInPage.passwordReset}
@@ -76,7 +73,7 @@ export default function LogInPageView(props: LogInPageProps) {
             {` ${screenData.SignInPage.promptLinkText}`}
           </a>
         </div>
-      </p>
+      </div>
     </div>
   );
 };

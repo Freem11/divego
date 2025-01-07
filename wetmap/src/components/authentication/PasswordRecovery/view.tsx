@@ -38,18 +38,15 @@ export default function PasswordRecoveryView(props: PasswordRecoveryProps) {
             />
           </div>
 
-          <div className="cols">
-            <div className="col-7" />
-            <div className="col-5">
-              <Button
-                disabled={isSubmitting}
-                className="btn-lg bg-primary mt-10 col-3"
-                type="submit"
-                iconRight={<Icon name="chevron-right" />}
-              >
-                {screenData.PasswordRecoveryPage.buttonText}
-              </Button>
-            </div>
+          <div className="d-flex justify-end">
+            <Button
+              disabled={isSubmitting}
+              className="btn-lg bg-primary mt-10 flex-fit"
+              type="submit"
+              iconRight={<Icon name="chevron-right" />}
+            >
+              {screenData.PasswordRecoveryPage.buttonText}
+            </Button>
           </div>
         </form>
       </div>

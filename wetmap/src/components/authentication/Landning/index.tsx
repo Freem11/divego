@@ -18,7 +18,6 @@ export default function LandingPage() {
   }
 
   async function handleSupabaseSetup(sessionToken: any, setActiveSession: React.Dispatch<React.SetStateAction<ActiveSession | null>>) {
-    console.log(sessionToken);
     if (sessionToken) {
       await localStorage.setItem('token', JSON.stringify(sessionToken));
       if (sessionToken.session) {
@@ -40,7 +39,6 @@ export default function LandingPage() {
           id:    sanitizeData.user.id,
           email: sanitizeData.user.email,
         });
-        console.log('profile created!');
       }
     }
   }

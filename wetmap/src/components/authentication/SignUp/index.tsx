@@ -6,6 +6,7 @@ import { register, sessionCheck } from '../../../supabaseCalls/authenticateSupab
 import { createProfile } from '../../../supabaseCalls/accountSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
 import { toast } from 'react-toastify';
+import screenData from '../../newModals/screenData.json';
 
 export default function SignUpPage() {
   const { setActiveSession } = useContext(SessionContext);
@@ -28,7 +29,7 @@ export default function SignUpPage() {
       );
       setActiveSession(session);
     } else {
-      toast.error(`You have already registered this account, please sign in`);
+      toast.error(screenData.SignUpPage.signUpError);
     }
     await sessionCheck();
   };

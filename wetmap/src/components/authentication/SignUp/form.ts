@@ -1,4 +1,5 @@
 import { FormValidationRules } from '../../../forms/form';
+import { validationEmail, validationPassword } from '../../../forms/validation';
 
 
 export interface Form {
@@ -14,8 +15,10 @@ export const FormRules: FormValidationRules<Form> = {
   },
   email: {
     required: 'Please enter your email',
+    ...validationEmail,
   },
   password: {
     required: 'Please enter your password',
+    ...validationPassword,
   },
 };
