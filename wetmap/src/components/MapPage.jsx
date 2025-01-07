@@ -4,7 +4,7 @@ import MapLoader from './googleMap';
 import SearchTool from './searchTool/index';
 import OnBoardingCarrousel from './onboarding/index';
 import SiteSubmitter from './newModals/siteSubmitter';
-import HowToGuide from './modals/howToGuide';
+import GuidesModal from './newModals/guides';
 import Settings from './newModals/setting';
 import UserProfileModal from './newModals/userProfile/index';
 import PhotoMenu from './photoMenu/photoMenu2';
@@ -137,7 +137,7 @@ const MapPage = React.memo(function MapPage() {
     animateSettingsModal();
   };
 
-  const handleTutorialButton = () => {
+  const handleGuidesButton = () => {
     animateLaunchModal();
   };
 
@@ -202,13 +202,7 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateLaunchModal = () => {
-    modalShow(function TutorialModal() {
-      return (
-        <HowToGuide
-          animateLaunchModal={animateLaunchModal}
-        />
-      );
-    });
+    modalShow(GuidesModal)
   };
 
   const animateOnBoardingModal = () => {
@@ -318,7 +312,7 @@ const MapPage = React.memo(function MapPage() {
                   sx={toggleButtonStyle}
                   value="check"
                   onChange={() => {
-                    handleTutorialButton();
+                    handleGuidesButton();
                   }}
                 >
                   <QuestionMarkIcon sx={{ width: '3vw', height: '1.5vw' }} />
