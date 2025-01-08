@@ -1,0 +1,32 @@
+@import "../../../styles/variables.scss";
+
+.header{
+  margin-top: 30px;
+}
+
+.noSightings {
+  flex: 1 ;
+  width: 60% ;
+  align-items: center ;
+  justify-content: center ;
+  text-align: center ;
+  margin-top: 40% ;
+  font-size: 18 ;
+  color: $themeWhite ;
+}
+
+.buttonBack {
+  position: absolute;
+  top: 25px;
+  left: 3%;
+  z-index: 1;
+  color: #afafaf;
+
+  svg {
+      scale: 2;
+  }
+  &:hover,
+  &:focus {
+    color: #484848;
+  }
+}
