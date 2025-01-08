@@ -7,22 +7,14 @@ type CustomInputProps = {
   iconLeft?: React.ReactNode
   iconRight?: React.ReactNode
   error?: any,
-  tooltip?: string
 };
 
 const TextInput = React.forwardRef(function TextInput(props: TextInputProps & CustomInputProps, ref) {
-  const { iconLeft, iconRight, className, error, tooltip, ...rest } = props;
+  const { iconLeft, iconRight, className, error, ...rest } = props;
 
   return (
-    <div className={`${className ?? ''} ${style.textInput} ${error ? style.error : ''}`}>
-
-      {tooltip && iconLeft ? (
-        <Tooltip content={tooltip}>
-          <i className={style.iconLeft}>{iconLeft}</i>
-        </Tooltip>
-      ) : (
-        iconLeft && <i className={style.iconLeft}>{iconLeft}</i>
-      )}
+    <div className={`${className ?? ''} ${style.textInput} ${error ? style.error : ''}`}>    
+      {iconLeft && <div className={style.iconLeft}>{iconLeft}</div>}
       <input ref={ref} {...rest} />
       {iconRight && <i className={style.iconRight}>{iconRight}</i>}
     </div>

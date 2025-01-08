@@ -1,8 +1,7 @@
 @import "../../../styles/functions.scss";
+@import "../../../styles/variables.scss";
 
 :root {
-  --tooltip-text-color: white;
-  --tooltip-background-color: black;
   --tooltip-margin: 30px;
   --tooltip-arrow-size: 6px;
 }
@@ -17,8 +16,8 @@
   left: 50%;
   transform: translateX(-50%);
   padding: 6px;
-  color: var(--tooltip-text-color);
-  background: var(--tooltip-background-color);
+  color: $themeWhite;
+  background: $primaryBlue;
   font-size: 14px;
   font-family: sans-serif;
   line-height: 1;
@@ -44,7 +43,7 @@
 
 .top::before {
   top: 100%;
-  border-top-color: var(--tooltip-background-color);
+  border-top-color: $primaryBlue;
 }
 
 .right {
@@ -56,7 +55,7 @@
   left: calc(var(--tooltip-arrow-size) * -1);
   top: 50%;
   transform: translateY(-50%);
-  border-right-color: var(--tooltip-background-color);
+  border-right-color: $primaryBlue;
 }
 
 .bottom {
@@ -64,7 +63,7 @@
 }
 .bottom::before {
   bottom: 100%;
-  border-bottom-color: var(--tooltip-background-color);
+  border-bottom-color: $primaryBlue;
 }
 
 .left {
@@ -78,5 +77,5 @@
   right: calc(var(--tooltip-arrow-size) * -2);
   top: 50%;
   transform: translateY(-50%);
-  border-left-color: var(--tooltip-background-color);
+  border-left-color: $primaryBlue;
 }

@@ -9,7 +9,6 @@ import style from './style.module.scss';
 import { Label } from 'reactstrap';
 import ButtonIcon from '../../reusables/buttonIcon';
 
-
 type PartnerAccountRequestViewProps = {
   values?: Form
   onClose: () => void
@@ -23,7 +22,7 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
 
   return (
     <div className="flex-column-between full-height">
-     <div className={style.buttonBack}>
+      <div className={style.buttonBack}>
         <ButtonIcon
           icon={<Icon name="chevron-left" fill="darkgray" />}
           className="btn-lg"
@@ -51,7 +50,7 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
         />
 
         <TextInput
-          iconLeft={<Icon name="latitude" />}
+          iconLeft={<Icon name="latitude"  />}
           placeholder={screenData.PartnerRequestPage.latPlaceholder}
           error={errors.Latitude}
           {...register('Latitude', FormRules.Latitude)}
@@ -73,7 +72,7 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
               className="btn-md bg-primary"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
-            >
+              >
               {screenData.PartnerRequestPage.submitButton}
             </Button>
           </div>
