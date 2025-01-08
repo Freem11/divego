@@ -1,21 +1,20 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react';
-import style from './style.module.scss';
+import React, { DetailedHTMLProps, InputHTMLAttributes  } from 'react';
+import './style.scss';
 
-type TextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
-type CustomInputProps = {
-  iconLeft?: React.ReactNode
+export type TextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
+  iconLeft?:  React.ReactNode
   iconRight?: React.ReactNode
   error?: any,
 };
 
-const TextInput = React.forwardRef(function TextInput(props: TextInputProps & CustomInputProps, ref) {
+const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function TextInput(props: TextInputProps, ref) {
   const { iconLeft, iconRight, className, error, ...rest } = props;
 
   return (
-    <div className={`${className ?? ''} ${style.textInput} ${error ? style.error : ''}`}>    
-      {iconLeft && <div className={style.iconLeft}>{iconLeft}</div>}
+    <div className={`${className ?? ''} ssrc-text-input ${error ? 'ssrc-text-input--error' : ''}`}>
+      {iconLeft && <i className="ssrc-text-input__icon-left">{iconLeft}</i>}
       <input ref={ref} {...rest} />
-      {iconRight && <i className={style.iconRight}>{iconRight}</i>}
+      {iconRight && <i className="ssrc-text-input__icon-right">{iconRight}</i>}
     </div>
   );
 });

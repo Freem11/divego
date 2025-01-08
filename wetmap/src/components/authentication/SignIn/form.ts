@@ -1,8 +1,7 @@
-import { FormValidationRules } from '../../../../forms/form';
-
+import { FormValidationRules } from '../../../forms/form';
 
 export interface Form {
-  email: string,
+  email:    string
   password: string
 }
 

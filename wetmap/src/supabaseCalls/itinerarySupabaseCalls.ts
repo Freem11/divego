@@ -1,5 +1,5 @@
 import { supabase } from '../supabase';
-import { ItineraryItem } from '../components/newModals/shopModal/types';
+import { ItineraryItem } from '../entities/itineraryItem';
 
 export const itineraries = async (IdNo: Number) => {
   const { data, error } = await supabase
