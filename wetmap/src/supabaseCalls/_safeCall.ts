@@ -1,19 +1,6 @@
 import { toast } from 'react-toastify';
 import screenData from '../components/newModals/screenData.json';
 
-export class SupabaseError extends Error {
-    constructor(message: string, public details?: string) {
-        super(message);
-        this.name = "[SupabaseError]";
-
-        if (details) {
-            this.message = `${message} - ${details}`;
-        }
-        throw this;
-    }
-
-}
-
 type SupabaseCall<T> = () => Promise<{ data: T | null; error: any }>;
 
 export const safeCall = async <T>(
@@ -25,7 +12,6 @@ export const safeCall = async <T>(
 
         if (error) {
             toast.error(errorMessage);
-            throw new SupabaseError(error.message, error.details);
         }
 
         if (successMessage) {
@@ -33,5 +19,4 @@ export const safeCall = async <T>(
         }
 
         return data;
-
 };
