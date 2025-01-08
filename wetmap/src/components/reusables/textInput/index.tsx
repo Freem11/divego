@@ -1,6 +1,5 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import style from './style.module.scss';
-import Tooltip from '../tooltip';
 
 type TextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 type CustomInputProps = {
