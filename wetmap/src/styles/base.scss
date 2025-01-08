@@ -127,4 +127,8 @@ h6 {
   --ssrc-select-create-button-text-color: #{$primary-color};
 
   --ssrc-text-area-input-border-color: #{$gray-color};
+
+  --ssrc-text-input-height: #{$control-size};
+  --ssrc-text-input-color: #{$gray-color};
+  --ssrc-text-input-border-color: #{$gray-color};
 }

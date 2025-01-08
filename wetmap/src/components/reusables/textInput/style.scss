@@ -1,14 +1,20 @@
-@import "../../../styles/variables.scss";
+:root {
+  --ssrc-text-input-height: 1.8em;
+  --ssrc-text-input-color: rgba(0, 0, 0, 0.15);
+  --ssrc-text-input-border-color: rgba(0, 0, 0, 0.15);
+  --ssrc-text-input-error-border-color: red;
+}
 
-.textInput {
-  height: $control-size;
+// ssrc: scuba seasons reusable component
+.ssrc-text-input {
+  height: var(--ssrc-text-input-height);
   display: flex;
-  border-bottom: 1px solid $gray-color;
-  color: $gray-color;
+  border-bottom: 1px solid var(--ssrc-text-input-border-color);
+  color: var(--ssrc-text-input-color);
   position: relative;
 
-  &.error {
-    border-bottom: 1px solid red;
+  &.ssrc-text-input--error {
+    border-bottom: 1px solid var(--ssrc-text-input-error-border-color);
   }
 
   input {
@@ -38,12 +44,12 @@
     width: auto;
   }
 
-  .iconLeft,
-  .iconRight {
+  .ssrc-text-input__icon-left,
+  .ssrc-text-input__icon-right {
     display: block;
     height: 100%;
 
-    svg {
+    & * {
       height: 100%;
     }
   }

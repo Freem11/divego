@@ -81,7 +81,8 @@
         "drawerHeader" : "'s Sea Creature Encounters",
         "emptyDrawer": " hasn't posted any sightings yet.",
         "userDoesFollow": "Following",
-        "UserDoesNotFollow": "Follow"
+        "UserDoesNotFollow": "Follow",
+        "userDefaultDescription": "Say a little about yourself..."
       },
       "DiveSite" :
       {
@@ -111,5 +112,18 @@
         "pinButton" : "Set Pin",
         "shopButton": "Return to Shop",
         "sitesButton": "Set Sites"
+      },
+      "Toast": {
+        "generalError": "Oops! Something went wrong... Please try again later.",
+        "successCreating": "Created successfully!"
+      },
+      "PasswordUpdate": {
+        "header": "Update Password",
+        "password1Placeholder": "Enter your new password",
+        "password2Placeholder": "Please confirm your new password",
+        "passwordsDoNotMatch": "Your passwords do no match",
+        "passwordUpdatedSuccessfully": "Your password has been updated successfully",
+        "passwordUpdateError": "Something went wrong. Please try again later",
+        "submitButton": "Submit"
       }
     }
