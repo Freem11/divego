@@ -4,19 +4,19 @@ import { SessionContext } from '../../contexts/sessionContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import SettingsView from './view';
-import React, { useEffect, useState } from 'react';
-import { useContext } from 'react';
 import PartnerAccountRequest from '../partnerAccountRequest';
+import React, { useEffect, useState, useContext } from 'react';
 import { ModalContext } from '../../reusables/modal/context';
 
-
 type SettingsProps = Partial<ModalHandleProps>;
+
 
 export default function Settings(props: SettingsProps) {
   const { setActiveSession } = useContext(SessionContext);
   const { profile } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
   const [profileType, setProfileType] = useState<string | null>(null);
+  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     if (profile?.partnerAccount) {
@@ -42,6 +42,10 @@ export default function Settings(props: SettingsProps) {
     modalShow(PartnerAccountRequest, { keepPreviousModal: true });
   };
 
+  const handleDanger = () => {
+    setOpenDialog(true);
+  };
+
   return (
     <SettingsView
 
@@ -49,6 +53,9 @@ export default function Settings(props: SettingsProps) {
       handleLogout={handleLogout}
       profileType={profileType}
       handlePartnerButton={handlePartnerButton}
+      handleDanger={handleDanger}
+      setOpenDialog={setOpenDialog}
+      openDialog={openDialog}
     />
   );
 }
