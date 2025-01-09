@@ -8,20 +8,22 @@ import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
-import { ItineraryItem } from './types';
+import { ItineraryItem } from '../../../entities/itineraryItem';
 import { DiveShop } from '../../../entities/diveShop';
 
 
 type ShopModelViewProps = {
   setSelectedID:                (id: number) => void
   onClose?:                     () => void
-  handleImageSelection:         (event: React.ChangeEvent<HTMLInputElement>) => void
   handleDiveShopBioChange:      (newValue: string) => void
-  diveShop:                     DiveShop | null
-  isPartnerAccount:             boolean
-  itineraryList:                ItineraryItem[] | null
-  selectedID:                   number
-  headerPictureUrl:             string | null
+  handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
+  openTripCreatorList: () => void
+
+  diveShop:         DiveShop | null
+  isPartnerAccount: boolean
+  itineraryList:    ItineraryItem[] | null
+  selectedID:       number
+  headerPictureUrl: string | null
   isMyShop:                     boolean
 };
 
@@ -33,7 +35,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
         ref={fileUploaderRef}
         className="d-hide"
         type="file"
-        onChange={props.handleImageSelection}
+        onChange={props.handleDiveShopImageSelection}
       />
       <div className="col-6">
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
@@ -73,7 +75,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
           <h3>Offered Diving Trips</h3>
           {(props?.isPartnerAccount && props.isMyShop) && (
             <div className={`${style.buttonAddDivingEvents}`}>
-              <Button className="mt-2 btn-lg">
+              <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
                 Add diving event
               </Button>
             </div>
