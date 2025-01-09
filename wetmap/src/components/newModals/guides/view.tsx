@@ -1,9 +1,9 @@
-import React from "react";
-import backGroundPic from "../../../images/boat.png";
-import WavyModalHeader from "../../reusables/wavyModalHeader";
+import React from 'react';
+import backGroundPic from '../../../images/boat.png';
+import WavyModalHeader from '../../reusables/wavyModalHeader';
 
 type GuidesModalViewProps = {
-  onClose: () => void;
+  onClose: () => void
 };
 
 export default function GuidesModalView({ onClose }: GuidesModalViewProps) {

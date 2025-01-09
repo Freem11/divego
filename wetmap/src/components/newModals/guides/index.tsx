@@ -1,6 +1,6 @@
-import React from "react";
-import { ModalHandleProps } from "../../reusables/modal/types";
-import GuidesModalView from "./view";
+import React from 'react';
+import { ModalHandleProps } from '../../reusables/modal/types';
+import GuidesModalView from './view';
 
 type GuidesModalProps = Partial<ModalHandleProps>;
 

@@ -202,7 +202,7 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateLaunchModal = () => {
-    modalShow(GuidesModal)
+    modalShow(GuidesModal);
   };
 
   const animateOnBoardingModal = () => {
