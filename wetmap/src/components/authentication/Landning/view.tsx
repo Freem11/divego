@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction, useEffect } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import Button from '../../reusables/button';
 import blackManta from '../../../images/blackManta.png';
 import googleIcon from '../../../images/google-color.png';
@@ -15,50 +15,7 @@ type LandingPageProps = {
   socialSignIn: (provider: any) => void
 };
 
-const detectOS = (): string => {
-  const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
-
-  // Check for Android
-  if (/android/i.test(userAgent)) {
-    return 'Android';
-  }
-
-  // Check for iOS
-  if (/iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream) {
-    return 'iOS';
-  }
-
-  // Check for Windows
-  if (/windows phone/i.test(userAgent)) {
-    return 'Windows Phone';
-  }
-
-  // Check for macOS
-  if (/Macintosh/.test(userAgent)) {
-    return 'macOS';
-  }
-
-  // Check for Windows
-  if (/Win/.test(userAgent)) {
-    return 'Windows';
-  }
-
-  // Check for Linux
-  if (/Linux/.test(userAgent)) {
-    return 'Linux';
-  }
-
-  // Default to "Unknown"
-  return 'Unknown';
-};
-
-
 export default function LandingPageView(props: LandingPageProps) {
-  useEffect(() => {
-    const OS = detectOS();
-    console.log(OS);
-  });
-
   return (
     <div>
       <div className="authenticationPage">
