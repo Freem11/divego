@@ -70,7 +70,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                     // value={props?.diveSite?.divesitebio || ''}
                     readOnly={!props?.isActiveProfile}
                     onSave={props?.handleProfileNameChange}
-                    placeholder={props.profile.UserName}
+                    value={props.profile.UserName}
                   />
                 </h1>
                 <div>
@@ -93,7 +93,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                   // value={props?.diveSite?.divesitebio || ''}
                   readOnly={!props?.isActiveProfile}
                   onSave={props?.handleProfileBioChange}
-                  placeholder={(props.profile.profileBio) ? (props.profile.profileBio) : (screenData.UserProfile.userDefaultDescription)}
+                  value={(props.profile.profileBio) ? (props.profile.profileBio) : (screenData.UserProfile.userDefaultDescription)}
                 />
               </div>
             </div>
