@@ -6,8 +6,8 @@ export const sessionCheck = async () => {
   return session;
 };
 
-export const sessionRefresh = async (refresh_token) => {
-  const { data, error } = await supabase.auth.getSession({ refresh_token });
+export const sessionRefresh = async (refresh_token: string) => {
+  const { data, error } = await supabase.auth.refreshSession({ refresh_token });
 
   if (error) {
     console.log('couldn\'t refresh session,', error);
@@ -24,16 +24,23 @@ export const userCheck = async () => {
   return user;
 };
 
-export const register = async (registerDetails) => {
+type registrationDetails = {
+  email:    string
+  password: string
+  fullName: string
+
+};
+
+export const register = async (registerDetails: registrationDetails) => {
+  console.log('auth got,', registerDetails);
   const { data, error } = await supabase.auth.signUp(
     {
       email:    registerDetails.email,
       password: registerDetails.password,
-    },
-    {
-      data: {
-        firstName: registerDetails.firstName,
-        lastName:  registerDetails.lastName,
+      options:  {
+        data: {
+          fullName: registerDetails.fullName,
+        },
       },
     },
   );
@@ -48,8 +55,12 @@ export const register = async (registerDetails) => {
   }
 };
 
-export const signInStandard = async (loginDetails) => {
-  // console.log("auth got,", loginDetails);
+type loginDetails = {
+  email:    string
+  password: string
+};
+
+export const signInStandard = async (loginDetails: loginDetails) => {
   const { data, error } = await supabase.auth.signInWithPassword({
     email:    loginDetails.email,
     password: loginDetails.password,
@@ -60,8 +71,21 @@ export const signInStandard = async (loginDetails) => {
   }
 
   if (data) {
-    return { data, error };
+    return { data };
   }
+};
+
+
+export const performPasswordReset = async (newPassowrd: string) => {
+  const response = await supabase.auth.updateUser({
+    password: newPassowrd,
+  });
+
+  if (response.error) {
+    console.log('couldn\'t update password,', response.error);
+  }
+
+  return response;
 };
 
 export const signInFaceBook = async () => {
@@ -104,7 +128,7 @@ export const signOut = async () => {
   }
 };
 
-export const userDelete = async (userIdValue) => {
+export const userDelete = async (userIdValue: string) => {
   console.log('supa gets', userIdValue);
   const { data, error } = await supabase.rpc('delete_user', { userid: userIdValue });
 
@@ -115,5 +139,33 @@ export const userDelete = async (userIdValue) => {
 
   if (data) {
     console.log('user was deleted');
+  }
+};
+
+export const sendPasswordResetEmail = async (email: string, url: string) => {
+  const response = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: url,
+  });
+
+  if (response.error) {
+    console.log(response.error);
+  }
+
+  return response;
+};
+
+
+export const socialSignIn = async (provider: any) => {
+  const { data, error } = await supabase.auth.signInWithOAuth({
+    provider: provider,
+  });
+
+  if (error) {
+    console.log(error);
+  }
+
+  if (data) {
+    console.log(data);
+    return data;
   }
 };

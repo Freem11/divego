@@ -87,6 +87,19 @@ export default function LogInPageView(props: LogInPageProps) {
         </form>
       </div>
 
+      <p style={{ width: '100%', position: 'fixed', bottom: 40 }}>
+        <span
+          style={{
+            cursor:         'pointer',
+            color:          'blue',
+            textDecoration: 'none',
+          }}
+          onClick={() => props.goToSlide(3)}
+        >
+          {carouselData.SignInPage.passwordReset}
+        </span>
+      </p>
+
       <p style={{ width: '100%', position: 'fixed', bottom: 10 }}>
         {carouselData.SignInPage.promptText}
         <span
