@@ -1,50 +1,43 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { SliderContext } from '../../reusables/slider/context';
 import { Form } from './form';
 import SignUpPageView from './view';
 import { register, sessionCheck } from '../../../supabaseCalls/authenticateSupabaseCalls';
 import { createProfile } from '../../../supabaseCalls/accountSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
+import { toast } from 'react-toastify';
+import screenData from '../../newModals/screenData.json';
 
 export default function SignUpPage() {
   const { setActiveSession } = useContext(SessionContext);
   const { goToSlide } = useContext(SliderContext);
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [regFail, setRegFail] = useState<string | null>(null);
 
   const onSubmit = async (data: Form) => {
-    if (data.fullname === '' || data.email === '' || data.password === '') {
-      setRegFail('Please supply your name, email and password');
+    const response = await register(data);
+    const session = response.data.session;
+
+    if (response.error?.message) {
+      toast.error(response.error.message);
       return;
-    } else {
-      const regData = {
-        email:     data.email,
-        password:  data.password,
-        fullName:  data.fullname,
-      };
-      const registrationToken = await register(regData);
-      if (registrationToken && registrationToken.data.session !== null) {
-        await createProfile({ id: registrationToken.data.session.user.id, email: data.email });
-        await localStorage.setItem(
-          'token',
-          JSON.stringify(registrationToken.data.session.refresh_token),
-        );
-        setActiveSession(registrationToken.data.session);
-      } else {
-        setRegFail(`You have already registered this account, please sign in`);
-      }
-      await sessionCheck();
     }
+
+    if (session !== null) {
+      await createProfile({ id: session.user.id, email: data.email });
+      await localStorage.setItem(
+        'token',
+        JSON.stringify(session.refresh_token),
+      );
+      setActiveSession(session);
+    } else {
+      toast.error(screenData.SignUpPage.signUpError);
+    }
+    await sessionCheck();
   };
 
   return (
     <SignUpPageView
       onSubmit={onSubmit}
       goToSlide={goToSlide}
-      secureTextEntry={secureTextEntry}
-      setSecureTextEntry={setSecureTextEntry}
-      regFail={regFail}
-      setRegFail={setRegFail}
     />
   );
 }

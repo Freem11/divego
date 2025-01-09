@@ -4,8 +4,8 @@ import { SessionContext } from '../../contexts/sessionContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import SettingsView from './view';
+import PartnerAccountRequest from '../partnerAccountRequest';
 import React, { useEffect, useState, useContext } from 'react';
-import PartnerAccountRequestModal from '../../modals/partnerAccountRequestModal';
 import { ModalContext } from '../../reusables/modal/context';
 
 type SettingsProps = Partial<ModalHandleProps>;
@@ -39,7 +39,7 @@ export default function Settings(props: SettingsProps) {
   };
 
   const handlePartnerButton = () => {
-    modalShow(PartnerAccountRequestModal, { keepPreviousModal: true });
+    modalShow(PartnerAccountRequest, { keepPreviousModal: true });
   };
 
   const handleDanger = () => {
