@@ -1,0 +1,56 @@
+:root {
+  --ssrc-text-input-height: 1.8em;
+  --ssrc-text-input-color: rgba(0, 0, 0, 0.15);
+  --ssrc-text-input-border-color: rgba(0, 0, 0, 0.15);
+  --ssrc-text-input-error-border-color: red;
+}
+
+// ssrc: scuba seasons reusable component
+.ssrc-text-input {
+  height: var(--ssrc-text-input-height);
+  display: flex;
+  border-bottom: 1px solid var(--ssrc-text-input-border-color);
+  color: var(--ssrc-text-input-color);
+  position: relative;
+
+  &.ssrc-text-input--error {
+    border-bottom: 1px solid var(--ssrc-text-input-error-border-color);
+  }
+
+  input {
+    border: none;
+    width: 100%;
+  }
+
+  input:focus {
+    outline: none;
+  }
+
+  input:disabled {
+    background-color: transparent;
+  }
+
+  // to open calendar onClick on the whole input, not only small picker icon
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    background: transparent;
+    bottom: 0;
+    color: transparent;
+    cursor: pointer;
+    height: auto;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: auto;
+  }
+
+  .ssrc-text-input__icon-left,
+  .ssrc-text-input__icon-right {
+    display: block;
+    height: 100%;
+
+    & * {
+      height: 100%;
+    }
+  }
+}

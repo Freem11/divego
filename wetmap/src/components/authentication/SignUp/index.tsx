@@ -1,22 +1,43 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { SliderContext } from '../../reusables/slider/context';
 import { Form } from './form';
 import SignUpPageView from './view';
+import { register, sessionCheck } from '../../../supabaseCalls/authenticateSupabaseCalls';
+import { createProfile } from '../../../supabaseCalls/accountSupabaseCalls';
+import { SessionContext } from '../../contexts/sessionContext';
+import { toast } from 'react-toastify';
+import screenData from '../../newModals/screenData.json';
 
 export default function SignUpPage() {
+  const { setActiveSession } = useContext(SessionContext);
   const { goToSlide } = useContext(SliderContext);
-  const [secureTextEntry, setSecureTextEntry] = useState(true);
 
-  const onSubmit = (data: Form) => {
-    console.log(data);
+  const onSubmit = async (data: Form) => {
+    const response = await register(data);
+    const session = response.data.session;
+
+    if (response.error?.message) {
+      toast.error(response.error.message);
+      return;
+    }
+
+    if (session !== null) {
+      await createProfile({ id: session.user.id, email: data.email });
+      await localStorage.setItem(
+        'token',
+        JSON.stringify(session.refresh_token),
+      );
+      setActiveSession(session);
+    } else {
+      toast.error(screenData.SignUpPage.signUpError);
+    }
+    await sessionCheck();
   };
 
   return (
     <SignUpPageView
       onSubmit={onSubmit}
       goToSlide={goToSlide}
-      secureTextEntry={secureTextEntry}
-      setSecureTextEntry={setSecureTextEntry}
     />
   );
 }

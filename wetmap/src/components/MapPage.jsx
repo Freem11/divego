@@ -4,9 +4,9 @@ import MapLoader from './googleMap';
 import SearchTool from './searchTool/index';
 import OnBoardingCarrousel from './onboarding/index';
 import SiteSubmitter from './newModals/siteSubmitter';
-import HowToGuide from './modals/howToGuide';
-import UserProfileModal from './modals/userProfileModal';
-import Settings from './modals/setting';
+import GuidesModal from './newModals/guides';
+import Settings from './newModals/setting';
+import UserProfileModal from './newModals/userProfile/index';
 import PhotoMenu from './photoMenu/photoMenu2';
 import PhotoFilterer from './photoMenu/photoFilter';
 import { useState, useContext, useEffect } from 'react';
@@ -42,7 +42,7 @@ import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
-
+import { Outlet } from 'react-router-dom';
 
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
@@ -137,7 +137,7 @@ const MapPage = React.memo(function MapPage() {
     animateSettingsModal();
   };
 
-  const handleTutorialButton = () => {
+  const handleGuidesButton = () => {
     animateLaunchModal();
   };
 
@@ -202,13 +202,7 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateLaunchModal = () => {
-    modalShow(function TutorialModal() {
-      return (
-        <HowToGuide
-          animateLaunchModal={animateLaunchModal}
-        />
-      );
-    });
+    modalShow(GuidesModal);
   };
 
   const animateOnBoardingModal = () => {
@@ -219,11 +213,15 @@ const MapPage = React.memo(function MapPage() {
   };
 
   const animateSettingsModal = () => {
-    modalShow(Settings);
+    modalShow(Settings, {
+      size: 'medium', // not really necessary as this is the defaul parameter
+    });
   };
 
   const animateProfileModal = () => {
-    modalShow(UserProfileModal);
+    modalShow(UserProfileModal, {
+      size: 'large',
+    });
     // create new userprofile here
   };
 
@@ -314,7 +312,7 @@ const MapPage = React.memo(function MapPage() {
                   sx={toggleButtonStyle}
                   value="check"
                   onChange={() => {
-                    handleTutorialButton();
+                    handleGuidesButton();
                   }}
                 >
                   <QuestionMarkIcon sx={{ width: '3vw', height: '1.5vw' }} />
@@ -532,7 +530,7 @@ const MapPage = React.memo(function MapPage() {
         </div>
       )}
 
-
+      <Outlet />
       <Modal />
 
     </div>

@@ -1,0 +1,34 @@
+@import "../../../styles/variables.scss";
+
+.buttonBack {
+    svg {
+        scale: 2;
+    }
+}
+
+.redOutline {
+    color: maroon;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
+    background-color: rgb(247, 217, 217);
+}
+
+.grayOutline {
+    color: #5f5e5e;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
+}
+
+.horizontalButtonContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: 3;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 20%;
+    margin-top: 1rem;
+  }
+
+
+

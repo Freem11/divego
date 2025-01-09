@@ -1,0 +1,38 @@
+@import "../../../styles/variables.scss";
+
+.buttonAddDivingEvents {
+    margin-inline: auto; 
+    width: fit-content;
+    z-index: 1;
+}
+
+.pictureZone {
+    height: 44.9%;
+    background-color: $primaryBlue;
+    overflow: hidden;
+}
+
+.itineraryList {
+  padding-top: 1em;
+  overflow-y: auto;
+  height: 100%;
+}
+
+.buttonImageUpload {
+  position: absolute;
+  right: 3%;
+  bottom: 15%;
+  z-index: 1;
+}
+
+.noSightings {
+  flex: 1 ;
+  width: 60% ;
+  align-items: center ;
+  justify-content: center ;
+  text-align: center ;
+  margin-top: 40% ;
+  font-size: 18 ;
+  color: $themeWhite ;
+}
+

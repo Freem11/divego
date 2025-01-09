@@ -19,9 +19,6 @@ export default function PartnerAccountRequest(props: PartnerAccountRequestpProps
       .then(() => {
         props?.onModalSuccess?.();
         onClose();
-      })
-      .catch((error) => {
-        console.error('Error submitting partner account request in (createPartnerAccountRequest)', error);
       });
   };
 
@@ -35,9 +32,9 @@ export default function PartnerAccountRequest(props: PartnerAccountRequestpProps
       onSubmit={onSubmit}
       values={{
         BusinessName: '',
-        WebsiteLink: '',
-        Latitude: undefined,
-        Longitude: undefined,
+        WebsiteLink:  '',
+        Latitude:     undefined,
+        Longitude:    undefined,
       }}
     />
   );
