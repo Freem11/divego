@@ -4,7 +4,7 @@ import './style.scss';
 export type TextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   iconLeft?:  React.ReactNode
   iconRight?: React.ReactNode
-  error?: any,
+  error?:     any
 };
 
 const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function TextInput(props: TextInputProps, ref) {

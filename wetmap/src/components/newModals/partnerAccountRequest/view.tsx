@@ -6,12 +6,11 @@ import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
 import { Form, FormRules } from './form';
 import style from './style.module.scss';
-import { Label } from 'reactstrap';
 import ButtonIcon from '../../reusables/buttonIcon';
 
 type PartnerAccountRequestViewProps = {
-  values?: Form
-  onClose: () => void
+  values?:  Form
+  onClose:  () => void
   onSubmit: (data: Form) => void
 };
 
@@ -31,8 +30,8 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
       </div>
       <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
         <div>
-          <h1 >{screenData.PartnerRequestPage.header}</h1>
-          <Label className={style.explanation}>{screenData.PartnerRequestPage.explanation}</Label>
+          <h1>{screenData.PartnerRequestPage.header}</h1>
+          <div className={style.explanation}>{screenData.PartnerRequestPage.explanation}</div>
         </div>
 
         <TextInput
@@ -72,7 +71,7 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
               className="btn-md bg-primary"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
-              >
+            >
               {screenData.PartnerRequestPage.submitButton}
             </Button>
           </div>
