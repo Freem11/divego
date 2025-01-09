@@ -52,3 +52,12 @@ src/helpers/VisionTest.js/
 node_modules
 wetmap/node_modules
 *storybook.log
+
+#for favour
+wetmap/certs/cert.pem
+wetmap/certs/key.pem
+wetmap/vite.config.js
+wetmap/package.json
+wetmap/package-lock.json
+wetmap/src/styles/base.scss
+wetmap/src/styles/variables.scss
