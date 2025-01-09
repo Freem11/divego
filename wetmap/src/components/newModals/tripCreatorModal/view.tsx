@@ -1,36 +1,105 @@
 import React from 'react';
-import style from './style.module.scss';
+import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import { ItineraryItem } from '../../../entities/itineraryItem';
+import screenData from '../screenData.json';
+import TextInput from '../textInput';
+import { Form, FormRules } from './form';
+import { useForm } from 'react-hook-form';
+import Button from '@mui/material/Button';
 
 type TripCreatorViewProps = {
   setSelectedID: (id: number) => void
-  onClose?: () => void
+  onClose?:      () => void
 
-  itineraryList: ItineraryItem[] | null
-  selectedID: number
+  itineraryList:    ItineraryItem[] | null
+  selectedID:       number
   headerPictureUrl: string | null
+  values?:          Form
+  onSubmit:         (data: Form) => void
 };
 
 export default function TripCreatorView(props: TripCreatorViewProps) {
+  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
+    values: props.values,
+  });
+
   return (
-    <div className="cols mx-0 full-height">
-      <div className="col-12 panel border-none full-height">
-        {/* <div className={style.buttonBack}> */}
-          <ButtonIcon
-            icon={<Icon name="chevron-left" />}
-            className={`btn-lg ${style.buttonBack}`}
-            onClick={(e) => {
-              if (props.onClose) {
-                props.onClose(e);
-              }
-            }}
-          />
-        <div className={style.header}>
-          <h3>Trip Creator</h3>
-        </div>
-        <div className="panel-footer"></div>
+    <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
+
+      <div className={styles.buttonBack}>
+        <ButtonIcon
+          icon={<Icon name="chevron-left" />}
+          className="btn-lg text-gray ml-4 mt-4"
+          onClick={props.onClose}
+        />
+      </div>
+
+      <div className="flex-column-between full-height mb-6 mr-6">
+        <h1 className="mt-4 text-bold">{screenData.TripCreator.headerEdit}</h1>
+
+        <form className="flex-column-between full-height mb-6 mr-6" onSubmit={handleSubmit(props.onSubmit)}>
+          <div className="stack-4 mb-2">
+
+            <TextInput
+              iconLeft={<Icon name="store" />}
+              placeholder={screenData.TripCreator.tripNamePlaceholder}
+              error={errors.Name}
+              {...register('Name', FormRules.Name)}
+            />
+
+            <TextInput
+              iconLeft={<Icon name="at" />}
+              placeholder={screenData.TripCreator.bookingLinkPlaceholder}
+              error={errors.Link}
+              {...register('Link', FormRules.Link)}
+            />
+
+
+            <TextInput
+              iconLeft={<Icon name="diving-scuba-flag" />}
+              placeholder={screenData.TripCreator.pricePlaceholder}
+              error={errors.Price}
+              {...register('Price', FormRules.Price)}
+            />
+
+            <TextInput
+              iconLeft={<Icon name="calendar-month" />}
+              placeholder={screenData.TripCreator.startDatePlaceholder}
+              error={errors.Start}
+              {...register('Start', FormRules.Start)}
+            />
+
+            <TextInput
+              iconLeft={<Icon name="calendar-month" />}
+              placeholder={screenData.TripCreator.endDatePlaceholder}
+              error={errors.End}
+              {...register('End', FormRules.End)}
+            />
+
+            <TextInput
+              iconLeft={<Icon name="diving-scuba-flag" />}
+              placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
+              error={errors.Details}
+              {...register('Details', FormRules.Details)}
+            />
+          </div>
+          <div className="cols mx-0">
+            <div className="col-9"></div>
+            <div className="col-3">
+              <Button
+                disabled={isSubmitting}
+                className="btn-md bg-primary"
+                type="submit"
+                iconRight={<Icon name="chevron-right" />}
+              >
+                {screenData.TripCreator.submitButton}
+              </Button>
+            </div>
+          </div>
+
+        </form>
       </div>
     </div>
   );

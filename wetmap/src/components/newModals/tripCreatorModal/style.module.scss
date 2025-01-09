@@ -16,17 +16,7 @@
 }
 
 .buttonBack {
-  position: absolute;
-  top: 25px;
-  left: 3%;
-  z-index: 1;
-  color: #afafaf;
-
   svg {
       scale: 2;
-  }
-  &:hover,
-  &:focus {
-    color: #484848;
   }
 }
