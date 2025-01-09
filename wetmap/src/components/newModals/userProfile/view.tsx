@@ -103,7 +103,7 @@ export default function UserProfileView(props: userProfileViewProps) {
 
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
-          <h3>User's Sea Creature Encounters</h3>
+          <h3>{`${props.profile.UserName}'s Sea Creature Encounters`}</h3>
           <div className={style.addPictureButton}>
             {(props.isActiveProfile)
               ? (
