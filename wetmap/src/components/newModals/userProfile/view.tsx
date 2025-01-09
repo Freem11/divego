@@ -22,10 +22,6 @@ type userProfileViewProps = {
   openSettings:            () => void
   isActiveProfile:         boolean
 //   openPicUploader:      () => void
-//   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
-//   onDiveSiteBioChange:  (newValue: string) => void
-//   diveSite:             DiveSiteWithUserName | null
-//   diveSitePics:         PhotosGroupedByDate[] | null
 //   isPartnerAccount:     boolean
 //   headerPictureUrl:     string | null
 };
