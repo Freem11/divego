@@ -4,8 +4,11 @@ import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorListView from './view';
 
+type TripCreatorListModalProps = {
+  onModalCancel: () => void
+};
 
-export default function TripCreatorListModal(props) {
+export default function TripCreatorListModal({ onModalCancel }: TripCreatorListModalProps) {
   const { selectedShop } = useContext(SelectedShopContext);
 
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
@@ -33,7 +36,7 @@ export default function TripCreatorListModal(props) {
         <TripCreatorListView
           itineraryList={itineraryList}
           headerPictureUrl={null}
-          onClose={props.onModalCancel}
+          onClose={onModalCancel}
         />
       )}
     </>
