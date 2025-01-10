@@ -9,12 +9,30 @@ import { getDiveSitesByIDs } from '../../../supabaseCalls/diveSiteSupabaseCalls'
 import style from './style.module.scss';
 import MainSearchDropdownItem from './components/mainSearchDropdownItem';
 
+type optionData = {
+  key:   string | number
+  label: string
+  data: {
+    type: string
+    id:   string | null | undefined
+  }
+};
+
+type eventType = {
+  target: {
+    namme: undefined
+    value: optionData
+  }
+
+};
+
 export default function MainSearch() {
   const { setMapCoords } = useContext(CoordsContext);
   const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
 
 
-  const handleSelect = async (event) => {
+  const handleSelect = async (event: eventType) => {
+    console.log(event);
     let coordinates: number[] = [];
 
     const data = event?.target?.value?.data;
