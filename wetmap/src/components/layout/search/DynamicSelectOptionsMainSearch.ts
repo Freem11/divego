@@ -1,15 +1,7 @@
 import { DynamicSelectOptions } from '../../reusables/dynamicSelect/DynamicSelectOptions';
 import getPlacePredictions from '../../../helpers/googleMapAutocomplete';
 import { getSiteNamesThatFit } from '../../../supabaseCalls/diveSiteSupabaseCalls';
-
-type optionData = {
-  key:   string | number
-  label: string
-  data: {
-    type: string
-    id:   string
-  }
-};
+import { optionData } from './types';
 
 export class DynamicSelectOptionsMainSearch extends DynamicSelectOptions {
   static getMoreOptions(search: string) {

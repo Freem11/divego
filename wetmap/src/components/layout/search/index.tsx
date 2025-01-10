@@ -8,23 +8,7 @@ import { SelectedDiveSiteContext } from '../../contexts/selectedDiveSiteContext'
 import { getDiveSitesByIDs } from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import style from './style.module.scss';
 import MainSearchDropdownItem from './components/mainSearchDropdownItem';
-
-type optionData = {
-  key:   string | number
-  label: string
-  data: {
-    type: string
-    id:   string | null | undefined
-  }
-};
-
-type eventType = {
-  target: {
-    namme: undefined
-    value: optionData
-  }
-
-};
+import { eventType } from './types';
 
 export default function MainSearch() {
   const { setMapCoords } = useContext(CoordsContext);
