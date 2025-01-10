@@ -1,3 +1,4 @@
+import { DiveShop } from '../entities/diveShop';
 import { supabase } from '../supabase';
 
 export const getDiveShops = async (values) => {
@@ -38,7 +39,7 @@ export const shops = async (GPSBubble) => {
   }
 };
 
-export const getShopByName = async (value) => {
+export const getShopByName = async (value: string) => {
   const { data, error } = await supabase.rpc('get_diveshops_byname', {
     orgname: value,
   });
@@ -72,7 +73,7 @@ export const updateDiveShop = async (values) => {
 };
 
 
-export const getShopByUserID = async (value) => {
+export const getShopByUserID = async (value: string) => {
   const { data, error } = await supabase
     .from('shops')
     .select()
@@ -84,6 +85,6 @@ export const getShopByUserID = async (value) => {
   }
 
   if (data) {
-    return data;
+    return data as DiveShop[];
   }
 };

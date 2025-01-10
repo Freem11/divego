@@ -1,19 +1,31 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import LayoutMainView from './view';
 import { grabProfileById } from '../../../supabaseCalls/accountSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { SessionContext } from '../../contexts/sessionContext';
 import { ModalContext } from '../../reusables/modal/context';
-import SiteSubmitter from '../../newModals/siteSubmitter';
 import { MapConfigContext } from '../../contexts/mapConfigContext';
+import SiteSubmitter from '../../newModals/siteSubmitter';
 import Settings from '../../newModals/setting';
 import UserProfile from '../../newModals/userProfile';
+import GuidesModal from '../../newModals/guides';
+import TripCreatorListModal from '../../newModals/tripCreatorListModal';
+import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
+import { SelectedShopContext } from '../../contexts/selectedShopContext';
 
 export default function LayoutMain() {
   const { mapConfig } = useContext(MapConfigContext);
   const { activeSession } = useContext(SessionContext);
-  const { setProfile } = useContext(UserProfileContext);
+  const { profile, setProfile } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
+  const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+  const { setSelectedShop } = useContext(SelectedShopContext);
+
+  useEffect(() => {
+    if (profile && profile.partnerAccount) {
+      setIsPartnerAccount(true);
+    }
+  }, [profile]);
 
   useEffect(() => {
     const getProfile = async () => {
@@ -39,25 +51,51 @@ export default function LayoutMain() {
     getProfile();
   }, []);
 
-  const animateSitSubmitterModal = () => {
+
+  const getShop = async (id: string) => {
+    try {
+      const shop = await getShopByUserID(id);
+      if (shop) {
+        setSelectedShop(shop[0]);
+      }
+    } catch (e) {
+      console.log({ title: 'Error', message: (e as Error).message });
+    }
+  };
+
+  const animateSiteSubmitterModal = () => {
     modalShow(SiteSubmitter);
   };
 
   const animateSettingsModal = () => {
     modalShow(Settings);
-    // create new settings here
   };
 
   const animateProfileModal = () => {
     modalShow(UserProfile);
-    // create new userprofile here
   };
+
+  const animateGuidesModal = () => {
+    modalShow(GuidesModal);
+  };
+
+  const animateTripCreatorListModal = () => {
+    if (profile) {
+      getShop(profile?.UserID);
+    };
+    modalShow(TripCreatorListModal);
+  };
+
+
   return (
     <LayoutMainView
       mapConfig={mapConfig}
-      animateSitSubmitterModal={animateSitSubmitterModal}
+      animateSiteSubmitterModal={animateSiteSubmitterModal}
       animateProfileModal={animateProfileModal}
       animateSettingsModal={animateSettingsModal}
+      animateGuidesModal={animateGuidesModal}
+      animateTripCreatorListModal={animateTripCreatorListModal}
+      isPartnerAccount={isPartnerAccount}
     />
   );
 }
