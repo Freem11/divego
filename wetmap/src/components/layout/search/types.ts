@@ -9,7 +9,7 @@ export type optionData = {
 
 export type eventType = {
   target: {
-    namme: undefined
+    name:  undefined
     value: optionData
   }
 
