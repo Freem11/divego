@@ -54,7 +54,10 @@
         "whenPlaceholder": "Date of Sighting",
         "whereLabel": "Where you saw it",
         "wherePlaceholder": "Location of Sighting",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "uploadError": "Error uploading photo. Please try again later.",
+        "uploadSuccess": "Photo uploaded successfully!",
+        "fileUploadError": "Error uploading file. Please try again later."
       },
       "TripList" :
       {
