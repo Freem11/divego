@@ -79,7 +79,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                       </li>
                     )
                   :                   (
-                      <li>
+                      <li style={{ marginTop: '-1px' }}>
                         <ButtonIcon
                           disabled={props.mapConfig === 0 ? false : true}
                           icon={<Icon name="question-mark" color="blue" />}
