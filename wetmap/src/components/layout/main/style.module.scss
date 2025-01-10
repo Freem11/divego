@@ -1,5 +1,9 @@
 @import "../../../styles/variables.scss";
 
+.footer{
+  background-color: $primaryBlue;
+}
+
 .headerIcons {
   display: flex;
   justify-content: flex-end;
@@ -23,4 +27,16 @@
 
 .mainLogo:hover{
   text-decoration: none;
+}
+
+
+.lowerLogo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 7%;
+  color: $themeBlack;
+  font-style: italic;
+  font-size:x-large;
+  font-weight: lighter;
 }
