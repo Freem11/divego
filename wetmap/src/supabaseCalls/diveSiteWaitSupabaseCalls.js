@@ -1,8 +1,10 @@
 import { supabase } from '../supabase';
 
+const TABLE_NAME = 'diveSiteWait';
+
 export const diveSiteWaits = async () => {
   const { data, error } = await supabase
-    .from('diveSiteWait')
+    .from(TABLE_NAME)
     .select();
 
   if (error) {
@@ -17,7 +19,7 @@ export const diveSiteWaits = async () => {
 
 export const insertDiveSiteWaits = async (values) => {
   const { data, error } = await supabase
-    .from('diveSiteWait')
+    .from(TABLE_NAME)
     .insert([
       {
         name:   values.Site,
@@ -31,14 +33,12 @@ export const insertDiveSiteWaits = async (values) => {
     console.log('couldn\'t do it,', error);
   }
 
-  if (data) {
-    console.log(data);
-  }
+  return { data, error };
 };
 
 export const grabDiveSiteWaitById = async (id) => {
   const { data, error } = await supabase
-    .from('diveSiteWait')
+    .from(TABLE_NAME)
     .select()
     .eq('id', id);
 
@@ -54,7 +54,7 @@ export const grabDiveSiteWaitById = async (id) => {
 
 export const deleteDiveSiteWait = async (id) => {
   const { data, error } = await supabase
-    .from('diveSiteWait')
+    .from(TABLE_NAME)
     .delete()
     .eq('id', id);
 

@@ -38,7 +38,11 @@
         "myLocationButton" : "Use my location",
         "myLocationExplainer" : "This can take up to 30 seconds",
         "pinButton" : "Drop a pin",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "allowLocation": "Please allow location access.",
+        "locationNotSupported": "Geolocation is not supported in your browser.",
+        "addSiteError": "Error adding site. Please try again later.",
+        "addSiteSuccess": "Site added successfully!"
       },
       "PicUploader" :
       {
