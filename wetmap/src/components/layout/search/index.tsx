@@ -16,9 +16,7 @@ export default function MainSearch() {
 
 
   const handleSelect = async (event: eventType) => {
-    console.log(event);
     let coordinates: number[] = [];
-
     const data = event?.target?.value?.data;
 
     if (data?.type === 'diveSite') {
