@@ -20,7 +20,9 @@
         "latPlaceholder": "Latitude",
         "lngPlaceholder": "Longitude",
         "latLngExplainer": "To place your business on the map",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "createSuccess": "Request Created Successfully!",
+        "createError": "Error creating request. Please try again later."
       },
       "SearchPage" :
       {
