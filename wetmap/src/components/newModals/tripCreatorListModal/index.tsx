@@ -9,7 +9,6 @@ export default function TripCreatorListModal(props) {
   const { selectedShop } = useContext(SelectedShopContext);
 
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [selectedID, setSelectedID] = useState<number>(0);
 
   useEffect(() => {
     if (selectedShop) {
@@ -32,9 +31,7 @@ export default function TripCreatorListModal(props) {
     <>
       {selectedShop && (
         <TripCreatorListView
-          setSelectedID={setSelectedID}
           itineraryList={itineraryList}
-          selectedID={selectedID}
           headerPictureUrl={null}
           onClose={props.onModalCancel}
         />
