@@ -3,7 +3,7 @@ import MainSearch from '../search';
 import MapLoader from '../../googleMap';
 import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
-
+import blackMantaIcon from '../../../images/Matt_Manta_Black.png';
 import style from './style.module.scss';
 import Tabs from '../../reusables/tabs';
 import Modal from '../../reusables/modal/modal';
@@ -28,8 +28,9 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
             <div className="col-sm-12 col-4">
               <div className="main-logo">
-                <a href="index.html">
-                  <img src="images/logo.png" alt="logo" className="img-fluid" />
+                <a href="index.html" className={style.mainLogo} style={{ color: 'black' }}>
+                  <img src={blackMantaIcon} height={40} alt="logo" style={{ marginBottom: 5 }} />
+                  Scuba SEAsons
                 </a>
               </div>
             </div>

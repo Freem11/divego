@@ -1,3 +1,5 @@
+@import "../../../styles/variables.scss";
+
 .headerIcons {
   display: flex;
   justify-content: flex-end;
@@ -6,4 +8,19 @@
   li{
     margin: 0;
   }
+}
+
+.mainLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  color: $themeBlack;
+  font-style: italic;
+  font-size: larger;
+  font-weight: lighter;
+}
+
+.mainLogo:hover{
+  text-decoration: none;
 }
