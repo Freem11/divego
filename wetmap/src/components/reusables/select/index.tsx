@@ -7,11 +7,18 @@ import DropdownItem from './components/dropdownItem';
 import getInitialValue from './utils/getInitialValue';
 import getResultValue from './utils/getResultValue';
 
-export type Option = {
+export type Option<T = object> = {
   key:          string
   label:        string
-  data?:        any
+  data?:        T
   userCreated?: boolean
+};
+
+export type onChangeEvent<T = object> = {
+  target: {
+    name:  string | undefined
+    value: Option<T> | Option<T>[] | string | string[]
+  }
 };
 
 export type InitialValue = Option | Option[] | string | string[] | undefined;
