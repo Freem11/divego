@@ -7,8 +7,8 @@ import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { useForm } from 'react-hook-form';
-import Button from '@mui/material/Button';
-import Itinerary from '../../itineraries/itinerary';
+import Button from '../../reusables/button';
+
 
 type TripCreatorViewProps = {
   setSelectedID: (id: number) => void
@@ -22,7 +22,7 @@ type TripCreatorViewProps = {
 };
 
 export default function TripCreatorView(props: TripCreatorViewProps) {
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
+  const { register, handleSubmit, formState: { errors } } = useForm<Form>({
     values: props.values,
   });
 
@@ -62,7 +62,6 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               iconLeft={<Icon name="diving-scuba-flag" />}
               placeholder={screenData.TripCreator.pricePlaceholder}
               error={errors.Price}
-              type="number"
               {...register('Price', FormRules.Price)}
             />
 
@@ -84,23 +83,9 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
             <textarea
               placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
+              {...register}
             />
-
           </div>
-          <div className="cols mx-0">
-            <div className="col-9"></div>
-            <div className="col-3">
-              <Button
-                disabled={isSubmitting}
-                className="btn-md bg-primary"
-                type="submit"
-                iconRight={<Icon name="chevron-right" />}
-              >
-                {screenData.TripCreator.submitButton}
-              </Button>
-            </div>
-          </div>
-
         </form>
       </div>
     </div>
