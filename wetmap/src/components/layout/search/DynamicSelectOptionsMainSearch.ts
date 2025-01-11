@@ -3,7 +3,7 @@ import getPlacePredictions from '../../../helpers/googleMapAutocomplete';
 import { getSiteNamesThatFit } from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import { Option } from '../../reusables/select';
 
-export type data = {
+export type OptionAdditionalData = {
   id:   string
   type: string
 };
@@ -14,7 +14,7 @@ export class DynamicSelectOptionsMainSearch extends DynamicSelectOptions {
     const diveSitePromise = getSiteNamesThatFit(search);
 
     return Promise.all([placesPromise, diveSitePromise]).then(([places, diveSites]) => {
-      const options: Option<data>[] = [];
+      const options: Option<OptionAdditionalData>[] = [];
       places?.predictions?.forEach((place) => {
         options.push({ key: place.place_id, label: place.description, data: { type: 'place', id: place.place_id } });
       });
