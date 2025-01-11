@@ -39,9 +39,6 @@ export default function TripCreatorModal(props: SiteSubmitterProps) {
     <>
       {selectedShop && (
         <TripCreatorView
-          setSelectedID={setSelectedID}
-          itineraryList={itineraryList}
-          selectedID={selectedID}
           headerPictureUrl={null}
           onClose={props.onModalCancel}
           onSubmit={onSubmit}

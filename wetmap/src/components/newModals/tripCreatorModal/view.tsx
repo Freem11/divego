@@ -10,14 +10,9 @@ import { useForm } from 'react-hook-form';
 
 
 type TripCreatorViewProps = {
-  setSelectedID: (id: number) => void
-  onClose?:      () => void
-
-  itineraryList:    ItineraryItem[] | null
-  selectedID:       number
-  headerPictureUrl: string | null
-  values?:          Form
-  onSubmit:         (data: Form) => void
+  onClose?: () => void
+  values?:  Form
+  onSubmit: (data: Form) => void
 };
 
 export default function TripCreatorView(props: TripCreatorViewProps) {
