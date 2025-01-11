@@ -29,14 +29,33 @@
   text-decoration: none;
 }
 
-
 .lowerLogo {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin-left: 7%;
-  color: $themeBlack;
+  color: $themeWhite;
   font-style: italic;
   font-size:x-large;
+  font-weight: lighter;
+}
+
+
+.headers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px;
+  padding-top: 20px;
+  padding-left: 1.5%;
+  color: $themeWhite;
+  font-style: italic;
+  font-size:x-large;
+  font-weight: lighter;
+}
+
+.footerRights {
+  margin: 10px;
+  color: $themeWhite;
   font-weight: lighter;
 }
