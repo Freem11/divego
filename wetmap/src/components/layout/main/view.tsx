@@ -126,7 +126,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
 
             <div className="cols col-12">
-              <div className="col-12 py-2 pl-10 ml-6">
+              <div className="col-12 py-2 pl-10 ml-10">
                 <div className={style.lowerLogo}>
                   <img src={whiteMantaIcon} height={40} alt="logo" style={{ marginBottom: 5, marginRight: 7 }} />
                   Scuba SEAsons
@@ -164,7 +164,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </div>
                 </div>
               </div>
-              <div className="col-2 py-2 pl-10 ml-2">
+              <div className="col-2 py-2 pl-10 ml-6">
                 <div className="col-md-6 copyright">
                   <p className={style.footerRights}>© 2025. All rights reserved.</p>
                 </div>
