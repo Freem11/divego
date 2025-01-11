@@ -1,218 +1,189 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>SVG Parser</title>    
+    <style >
+      a {
+        text-decoration: none;
+      }
+      pre {
+        font-size: 1.2rem;
+        color: #369;
+      }
+      body {
+        font-family: monospace;
+      }
+      .icons-list {
+        display:flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+      .icon-def {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin: 20px;
+      }
 
-<head>
-  <meta charset="utf-8" />
-  <title>SVG Parser</title>
-  <style>
-    a {
-      text-decoration: none;
-    }
+      .icon-name {
+        padding: 5px 5px;
+        color: #999;
+        width: 90px;
+        text-align: center;
+      }
 
-    pre {
-      font-size: 1.2rem;
-      color: #369;
-    }
+      .icon-img img{
+        width: 3rem;
+        height: 3rem;
+        color: #246;
+      }
 
-    body {
-      font-family: monospace;
-    }
-
-    .icons-list {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: flex-start;
-    }
-
-    .icon-def {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 20px;
-    }
-
-    .icon-name {
-      padding: 5px 5px;
-      color: #999;
-      width: 90px;
-      text-align: center;
-    }
-
-    .icon-img img {
-      width: 3rem;
-      height: 3rem;
-      color: #246;
-    }
-  </style>
-</head>
-
-<body>
-  <main>
-    <div class='icons-list'>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/add-location-alt.svg" /></span>
+    </style>   
+  </head>
+  <body>
+    <main>      
+      <div class='icons-list'>
+        <div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/add-location-alt.svg"/></span>
         <span class='icon-name'>add-location-alt.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/add-photo-alt.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/add-photo-alt.svg"/></span>
         <span class='icon-name'>add-photo-alt.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/add.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/add.svg"/></span>
         <span class='icon-name'>add.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/anchor-plus.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/anchor-plus.svg"/></span>
         <span class='icon-name'>anchor-plus.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/anchor.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/anchor.svg"/></span>
         <span class='icon-name'>anchor.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/at.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/apple.svg"/></span>
+        <span class='icon-name'>apple.svg</span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/at.svg"/></span>
         <span class='icon-name'>at.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/calendar-month.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/calendar-month.svg"/></span>
         <span class='icon-name'>calendar-month.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/camera-plus.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/camera-plus.svg"/></span>
         <span class='icon-name'>camera-plus.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/check-bold.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/check-bold.svg"/></span>
         <span class='icon-name'>check-bold.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/chevron-left.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/chevron-left.svg"/></span>
         <span class='icon-name'>chevron-left.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/chevron-right.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/chevron-right.svg"/></span>
         <span class='icon-name'>chevron-right.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/close.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/close.svg"/></span>
         <span class='icon-name'>close.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/compass-outline.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/compass-outline.svg"/></span>
         <span class='icon-name'>compass-outline.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/diving-scuba-flag.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/diving-scuba-flag.svg"/></span>
         <span class='icon-name'>diving-scuba-flag.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/diving-snorkel.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/diving-snorkel.svg"/></span>
         <span class='icon-name'>diving-snorkel.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/error-outline.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/email-send-outline.svg"/></span>
+        <span class='icon-name'>email-send-outline.svg</span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/error-outline.svg"/></span>
         <span class='icon-name'>error-outline.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/explore.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/explore.svg"/></span>
         <span class='icon-name'>explore.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/eye-off.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/eye-off.svg"/></span>
         <span class='icon-name'>eye-off.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/eye.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/eye.svg"/></span>
         <span class='icon-name'>eye.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/flag.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/facebook.svg"/></span>
+        <span class='icon-name'>facebook.svg</span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/flag.svg"/></span>
         <span class='icon-name'>flag.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/highlight-off.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/highlight-off.svg"/></span>
         <span class='icon-name'>highlight-off.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/latitude.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/instagram.svg"/></span>
+        <span class='icon-name'>instagram.svg</span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/latitude.svg"/></span>
         <span class='icon-name'>latitude.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/location-on.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/location-on.svg"/></span>
         <span class='icon-name'>location-on.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/lock-outline.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/lock-outline.svg"/></span>
         <span class='icon-name'>lock-outline.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/longitude.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/longitude.svg"/></span>
         <span class='icon-name'>longitude.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/map-outlined.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/map-outlined.svg"/></span>
         <span class='icon-name'>map-outlined.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/minus.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/minus.svg"/></span>
         <span class='icon-name'>minus.svg</span>
-        <span class='icon-img'><img src="./svg/monitor-dashboard.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/monitor-dashboard.svg"/></span>
         <span class='icon-name'>monitor-dashboard.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/my-location.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/my-location.svg"/></span>
         <span class='icon-name'>my-location.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/navigation-variant-outline.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/navigation-variant-outline.svg"/></span>
         <span class='icon-name'>navigation-variant-outline.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/pencil.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/pencil.svg"/></span>
         <span class='icon-name'>pencil.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/person.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/person.svg"/></span>
         <span class='icon-name'>person.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/photo-camera.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/photo-camera.svg"/></span>
         <span class='icon-name'>photo-camera.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/photo.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/photo.svg"/></span>
         <span class='icon-name'>photo.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/plus.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/plus.svg"/></span>
         <span class='icon-name'>plus.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/question-mark.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/question-mark.svg"/></span>
         <span class='icon-name'>question-mark.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/remove.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/remove.svg"/></span>
         <span class='icon-name'>remove.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/settings.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/settings.svg"/></span>
         <span class='icon-name'>settings.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/shark.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/shark.svg"/></span>
         <span class='icon-name'>shark.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/store.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/store.svg"/></span>
         <span class='icon-name'>store.svg</span>
-      </div>
-      <div class='icon-def'>
-        <span class='icon-img'><img src="./svg/travel-explore.svg" /></span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/travel-explore.svg"/></span>
         <span class='icon-name'>travel-explore.svg</span>
+        </div><div class='icon-def'>
+        <span class='icon-img'><img src = "./svg/youtube.svg"/></span>
+        <span class='icon-name'>youtube.svg</span>
+        </div>  
       </div>
-    </div>
-  </main>
-</body>
-
+    </main>
+  </body>         
 </html>
