@@ -8,6 +8,7 @@ import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
+import Itinerary from '../../itineraries/itinerary';
 
 type TripCreatorViewProps = {
   setSelectedID: (id: number) => void
@@ -81,12 +82,10 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               {...register('End', FormRules.End)}
             />
 
-            <TextInput
-              iconLeft={<Icon name="diving-scuba-flag" />}
+            <textarea
               placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
-              error={errors.Details}
-              {...register('Details', FormRules.Details)}
             />
+
           </div>
           <div className="cols mx-0">
             <div className="col-9"></div>
