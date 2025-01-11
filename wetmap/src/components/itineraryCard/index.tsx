@@ -10,12 +10,13 @@ import ItineraryCardView from './view';
 import { ItineraryItem } from '../../entities/itineraryItem';
 
 type ItineraryCardProps = {
-  itinerary:       ItineraryItem
-  selectedCard:    number
-  setSelectedCard: (id: number) => void
+  itinerary:           ItineraryItem
+  selectedCard:        number
+  setSelectedCard:     (id: number) => void
+  canChangeItinerary?: boolean
 };
 
-export default function ItineraryCard({ itinerary, selectedCard, setSelectedCard }: ItineraryCardProps) {
+export default function ItineraryCard({ itinerary, selectedCard, setSelectedCard, canChangeItinerary }: ItineraryCardProps) {
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapCoords } = useContext(CoordsContext);
   const { setMapZoom } = useContext(ZoomContext);
@@ -81,6 +82,7 @@ export default function ItineraryCard({ itinerary, selectedCard, setSelectedCard
     <ItineraryCardView
       itinerary={itinerary}
       flipMap={flipMap}
+      canChangeItinerary={canChangeItinerary}
       startMoreInfoAnimation={startMoreInfoAnimation}
       heightChange={heightChange}
     />

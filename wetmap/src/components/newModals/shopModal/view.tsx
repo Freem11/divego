@@ -78,7 +78,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
             </div>
           )}
         </div>
-        <ItineraryCardList itineraryList={props.itineraryList} />
+        <ItineraryCardList itineraryList={props.itineraryList} canChangeItineraries={props?.isPartnerAccount && props.isMyShop} />
         <div className="panel-footer"></div>
       </div>
     </div>

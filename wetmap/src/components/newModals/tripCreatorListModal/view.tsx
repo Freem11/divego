@@ -28,7 +28,7 @@ export default function TripCreatorListView(props: TripCreatorListViewProps) {
             </Button>
           </div>
         </div>
-        <ItineraryCardList itineraryList={props.itineraryList} />
+        <ItineraryCardList itineraryList={props.itineraryList} canChangeItineraries={true} />
         <div className="panel-footer"></div>
       </div>
     </div>
