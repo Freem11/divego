@@ -7,7 +7,6 @@ import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { useForm } from 'react-hook-form';
-import Button from '../../reusables/button';
 
 
 type TripCreatorViewProps = {
