@@ -10,8 +10,6 @@ import Settings from '../../newModals/setting';
 import UserProfile from '../../newModals/userProfile';
 import GuidesModal from '../../newModals/guides';
 import TripCreatorListModal from '../../newModals/tripCreatorListModal';
-import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
-import { SelectedShopContext } from '../../contexts/selectedShopContext';
 
 export default function LayoutMain() {
   const { mapConfig } = useContext(MapConfigContext);
@@ -19,7 +17,6 @@ export default function LayoutMain() {
   const { profile, setProfile } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
-  const { setSelectedShop } = useContext(SelectedShopContext);
 
   useEffect(() => {
     if (profile && profile.partnerAccount) {
@@ -51,18 +48,6 @@ export default function LayoutMain() {
     getProfile();
   }, []);
 
-
-  const getShop = async (id: string) => {
-    try {
-      const shop = await getShopByUserID(id);
-      if (shop) {
-        setSelectedShop(shop[0]);
-      }
-    } catch (e) {
-      console.log({ title: 'Error', message: (e as Error).message });
-    }
-  };
-
   const animateSiteSubmitterModal = () => {
     modalShow(SiteSubmitter);
   };
@@ -80,9 +65,6 @@ export default function LayoutMain() {
   };
 
   const animateTripCreatorListModal = () => {
-    if (profile) {
-      getShop(profile?.UserID);
-    };
     modalShow(TripCreatorListModal);
   };
 
