@@ -58,6 +58,7 @@
 @import "./fonts.scss";
 @import "./mixins/stack.scss";
 @import "./mixins/blinking.scss";
+@import "./mixins/justify.scss";
 
 @include padding-variant(4, $unit-4);
 @include padding-variant(6, $unit-6);
@@ -68,7 +69,7 @@
 @include margin-variant(8, $unit-8);
 @include margin-variant(10, $unit-10);
 
-@include justify-variant("flex-end");
+@include justify-variant("end");
 @include justify-variant("center");
 
 @include bg-color-variant(".bg-white", $white);
@@ -98,12 +99,28 @@
   justify-content: space-between;
 }
 
+.flex-row-between {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex-fit {
+  flex: 0 1 fit-content;
+}
+
 .border-none {
   border: none;
 }
 
 .full-height {
   height: 100%;
+}
+
+a {
+  text-decoration: none;
+  cursor: pointer;
+  color: $primary-color;
 }
 
 h1,

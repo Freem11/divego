@@ -19,7 +19,7 @@ export default function PartnerAccountRequest(props: PartnerAccountRequestpProps
       .then(() => {
         props?.onModalSuccess?.();
         onClose();
-      })
+      });
   };
 
   const onClose = () => {
@@ -32,9 +32,9 @@ export default function PartnerAccountRequest(props: PartnerAccountRequestpProps
       onSubmit={onSubmit}
       values={{
         BusinessName: '',
-        WebsiteLink: '',
-        Latitude: undefined,
-        Longitude: undefined,
+        WebsiteLink:  '',
+        Latitude:     undefined,
+        Longitude:    undefined,
       }}
     />
   );

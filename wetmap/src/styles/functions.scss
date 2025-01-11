@@ -1,0 +1,5 @@
+@import "./variables.scss";
+
+@function z-index($key) {
+    @return map-get($zIndexes, $key);
+}
