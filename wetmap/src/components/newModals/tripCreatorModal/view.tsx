@@ -4,7 +4,7 @@ import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import screenData from '../screenData.json';
-import TextInput from '../textInput';
+import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { useForm } from 'react-hook-form';
 import Button from '@mui/material/Button';
@@ -39,7 +39,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
       <div className="flex-column-between full-height mb-6 mr-6">
         <h1 className="mt-4 text-bold">{screenData.TripCreator.headerEdit}</h1>
 
-        <form className="flex-column-between full-height mb-6 mr-6" onSubmit={handleSubmit(props.onSubmit)}>
+        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
           <div className="stack-4 mb-2">
 
             <TextInput
@@ -61,6 +61,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               iconLeft={<Icon name="diving-scuba-flag" />}
               placeholder={screenData.TripCreator.pricePlaceholder}
               error={errors.Price}
+              type="number"
               {...register('Price', FormRules.Price)}
             />
 
@@ -68,6 +69,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               iconLeft={<Icon name="calendar-month" />}
               placeholder={screenData.TripCreator.startDatePlaceholder}
               error={errors.Start}
+              type="date"
               {...register('Start', FormRules.Start)}
             />
 
@@ -75,6 +77,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               iconLeft={<Icon name="calendar-month" />}
               placeholder={screenData.TripCreator.endDatePlaceholder}
               error={errors.End}
+              type="date"
               {...register('End', FormRules.End)}
             />
 

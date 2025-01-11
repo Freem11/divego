@@ -23,14 +23,14 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
 
   const getDeviceLocation = () => {
     if (navigator.geolocation) {
-      navigator.permissions.query({name:'geolocation'}).then(permissionStatus => {
+      navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
         if (permissionStatus.state === 'denied') {
           alert('Please allow location access.');
-          window.location.href = "app-settings:location";
+          window.location.href = 'app-settings:location';
         } else {
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              console.log("HEY", position)
+              console.log('HEY', position);
               setAddSiteVals({
                 ...addSiteVals,
                 Latitude:  position.coords.latitude,

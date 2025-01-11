@@ -12,11 +12,11 @@ import style from './style.module.scss';
 
 
 type SiteSubmitterProps = {
-  values?: Form
-  onClose: () => void
+  values?:           Form
+  onClose:           () => void
   getDeviceLocation: () => void
-  onNavigate: () => void
-  onSubmit: (data: Form) => void
+  onNavigate:        () => void
+  onSubmit:          (data: Form) => void
 
 };
 

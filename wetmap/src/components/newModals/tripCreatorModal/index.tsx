@@ -2,10 +2,13 @@ import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
-import TripCreatorListView from './view';
+import TripCreatorView from './view';
+import { Form } from './form';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
+type SiteSubmitterProps = Partial<ModalHandleProps>;
 
-export default function TripCreatorModal(props) {
+export default function TripCreatorModal(props: SiteSubmitterProps) {
   const { selectedShop } = useContext(SelectedShopContext);
 
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
@@ -28,15 +31,20 @@ export default function TripCreatorModal(props) {
     }
   };
 
+  const onSubmit = (data: Form) => {
+    console.log(data);
+  };
+
   return (
     <>
       {selectedShop && (
-        <TripCreatorListView
+        <TripCreatorView
           setSelectedID={setSelectedID}
           itineraryList={itineraryList}
           selectedID={selectedID}
           headerPictureUrl={null}
           onClose={props.onModalCancel}
+          onSubmit={onSubmit}
         />
       )}
     </>
