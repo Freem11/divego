@@ -31,7 +31,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
 
             <div className="col-sm-12 col-4">
-              <div className="main-logo col-6 mt-2">
+              <div className="col-12 mt-2">
                 <a href="index.html" className={style.mainLogo} style={{ color: 'black' }}>
                   <img src={blackMantaIcon} height={50} alt="logo" style={{ marginBottom: 5 }} />
                   Scuba SEAsons
@@ -132,8 +132,8 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   Scuba SEAsons
                 </div>
               </div>
-              <div className="col-1"></div>
-              <div className="col-4">
+              <div className="col-sm-0 col-1"></div>
+              <div className="col-sm-12 col-md-12 col-4">
                 <div className={style.headers}>
                   Available on Mobile
                   <div className="mobile-links flex-centered  justify-content-sm-center justify-content-flex-start mt-6">
@@ -146,10 +146,10 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </div>
                 </div>
               </div>
-              <div className="col-4">
+              <div className="col-sm-12 col-md-12 col-4">
                 <div className={style.headers}>
                   Connect with us
-                  <div className="social-links flex-row-between justify-content-sm-center justify-content-flex-start mt-10 col-6">
+                  <div className="social-links flex-row-between mt-10 col-8 col-md-6 col-sm-10">
                     <a href="https://www.facebook.com/profile.php?id=61554622375177" target="_blank" rel="noreferrer">
                       <ButtonIcon icon={<Icon name="facebook" color="white" style={{ scale: '2' }} />} />
                     </a>
@@ -165,10 +165,10 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </div>
                 </div>
               </div>
-              <div className="col-2">
+              <div className="col-sm-12 col-md-12 col-2">
                 <img src={Emilio} height={200} className={style.emilio} />
               </div>
-              <div className="col-1"></div>
+              <div className="col-sm-0 col-1"></div>
               <div className="col-2 pl-10 ml-6">
                 <div className="col-md-6 copyright">
                   <p className={style.footerRights}>© 2025. All rights reserved.</p>
