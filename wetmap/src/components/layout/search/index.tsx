@@ -9,6 +9,7 @@ import { getDiveSitesByIDs } from '../../../supabaseCalls/diveSiteSupabaseCalls'
 import style from './style.module.scss';
 import MainSearchDropdownItem from './components/mainSearchDropdownItem';
 import { onChangeEvent, Option } from '../../reusables/select';
+import Icon from '../../../icons/Icon';
 
 export default function MainSearch() {
   const { setMapCoords } = useContext(CoordsContext);
@@ -45,6 +46,7 @@ export default function MainSearch() {
     <div className={style.mainSearch}>
       <DynamicSelect
         labelInValue={true}
+        iconLeft={<Icon name="navigation-variant-outline" style={{ scale: '0.7' }} />}
         getMoreOptions={DynamicSelectOptionsMainSearch.getMoreOptions}
         onChange={handleSelect}
         dropdownItemComponent={(props: DropdownItemProps) => {

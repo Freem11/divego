@@ -11,19 +11,17 @@ import Icon from '../../../icons/Icon';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import { DiveShop } from '../../../entities/diveShop';
 
-
 type ShopModelViewProps = {
   setSelectedID:                (id: number) => void
   onClose?:                     () => void
   handleDiveShopBioChange:      (newValue: string) => void
   handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
-  openTripCreatorList: () => void
-
-  diveShop:         DiveShop | null
-  isPartnerAccount: boolean
-  itineraryList:    ItineraryItem[] | null
-  selectedID:       number
-  headerPictureUrl: string | null
+  openTripCreatorList:          () => void
+  diveShop:                     DiveShop | null
+  isPartnerAccount:             boolean
+  itineraryList:                ItineraryItem[] | null
+  selectedID:                   number
+  headerPictureUrl:             string | null
   isMyShop:                     boolean
 };
 
