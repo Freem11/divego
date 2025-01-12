@@ -9,6 +9,7 @@ import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorModal from '../tripCreatorModal/index';
+import { EditModeContext } from '../../contexts/editModeContext';
 
 type ShopModalProps = Partial<ModalHandleProps>;
 
@@ -19,6 +20,7 @@ export default function ShopModal(props: ShopModalProps) {
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
   const { modalShow } = useContext(ModalContext);
+  const { setEditMode } = useContext(EditModeContext);
 
   useEffect(() => {
     if (selectedShop) {
@@ -28,8 +30,8 @@ export default function ShopModal(props: ShopModalProps) {
       setIsPartnerAccount(true);
     }
     if (
-      (profile?.partnerAccount) &&
-      (selectedShop?.userId === profile.UserID)
+      (profile?.partnerAccount)
+      && (selectedShop?.userId === profile.UserID)
     ) {
       setIsMyShop(true);
     } else {
@@ -72,8 +74,9 @@ export default function ShopModal(props: ShopModalProps) {
   const openTripCreatorList = async () => {
     modalShow(TripCreatorModal, {
       keepPreviousModal: true,
-      size: 'medium',
+      size:              'medium',
     });
+    setEditMode(false);
   };
 
 

@@ -5,29 +5,31 @@ export interface Form {
   Name?:    string
   Link?:    string
   Price?:   number
-  Start?:   number
-  End?:     number
+  Start?:   string
+  End?:     string
   Details?: string
 }
 
 
 export const FormRules: FormValidationRules<Form> = {
   Name: {
-    required: 'Dive site name cannot be empty',
+    required: 'Trip name name cannot be empty',
   },
   Link: {
-    required: 'Dive site name cannot be empty',
+    required: 'Link is required',
   },
   Price: {
-    required: 'Dive site name cannot be empty',
+    required: 'Price is required',
+    min:      {
+      value:   0,
+      message: 'Price must be atleast 0',
+    },
+    pattern: /^\$\d+(\.\d{1,2})?$/,
   },
   Start: {
-    required: 'Dive site name cannot be empty',
+    required: 'Start date is required',
   },
   End: {
-    required: 'Dive site name cannot be empty',
-  },
-  Details: {
-    required: 'Dive site name cannot be empty',
+    required: 'End date is required',
   },
 };

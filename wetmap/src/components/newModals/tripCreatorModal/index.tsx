@@ -5,14 +5,15 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorView from './view';
 import { Form } from './form';
 import { ModalHandleProps } from '../../reusables/modal/types';
+import { EditModeContext } from '../../contexts/editModeContext';
 
-type SiteSubmitterProps = Partial<ModalHandleProps>;
+type TripCreatorProps = Partial<ModalHandleProps>;
 
-export default function TripCreatorModal(props: SiteSubmitterProps) {
+export default function TripCreatorModal(props: TripCreatorProps) {
   const { selectedShop } = useContext(SelectedShopContext);
 
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [selectedID, setSelectedID] = useState<number>(0);
+  const { editMode } = useContext(EditModeContext);
 
   useEffect(() => {
     if (selectedShop) {
@@ -32,16 +33,16 @@ export default function TripCreatorModal(props: SiteSubmitterProps) {
   };
 
   const onSubmit = (data: Form) => {
-    console.log(data);
+    console.log(data, data.Start);
   };
 
   return (
     <>
       {selectedShop && (
         <TripCreatorView
-          headerPictureUrl={null}
           onClose={props.onModalCancel}
           onSubmit={onSubmit}
+          editMode={editMode}
         />
       )}
     </>
