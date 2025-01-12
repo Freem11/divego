@@ -3,7 +3,6 @@ import MainSearch from '../search';
 import MapLoader from '../../googleMap';
 import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
-
 import style from './style.module.scss';
 import Tabs from '../../reusables/tabs';
 import Modal from '../../reusables/modal/modal';
@@ -12,10 +11,13 @@ import SelectedAreaDiveSites from '../../selectedAreaDiveSites';
 import SelectedAreaDiveShops from '../../selectedAreaDiveShops';
 
 type LayoutMainViewProps = {
-  mapConfig:                number
-  animateSitSubmitterModal: () => void
-  animateProfileModal:      () => void
-  animateSettingsModal:     () => void
+  mapConfig:                   number
+  animateSiteSubmitterModal:   () => void
+  animateProfileModal:         () => void
+  animateSettingsModal:        () => void
+  animateGuidesModal:          () => void
+  animateTripCreatorListModal: () => void
+  isPartnerAccount:            boolean
 };
 
 
@@ -62,9 +64,30 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                     disabled={props.mapConfig === 0 ? false : true}
                     icon={<Icon name="anchor-plus" color="blue" />}
                     className="text-primary"
-                    onClick={props.animateSitSubmitterModal}
+                    onClick={props.animateSiteSubmitterModal}
                   />
                 </li>
+                {props.isPartnerAccount
+                  ? (
+                      <li>
+                        <ButtonIcon
+                          disabled={props.mapConfig === 0 ? false : true}
+                          icon={<Icon name="diving-scuba-flag" color="blue" />}
+                          className="text-primary"
+                          onClick={props.animateTripCreatorListModal}
+                        />
+                      </li>
+                    )
+                  :                   (
+                      <li style={{ marginTop: '-1px' }}>
+                        <ButtonIcon
+                          disabled={props.mapConfig === 0 ? false : true}
+                          icon={<Icon name="question-mark" color="blue" />}
+                          className="text-primary"
+                          onClick={props.animateGuidesModal}
+                        />
+                      </li>
+                    )}
               </ul>
 
               <div className="cart text-end d-none d-lg-block dropdown">

@@ -3,16 +3,15 @@ import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
 import style from './style.module.scss';
-import screenData from '../screenData.json'
+import screenData from '../screenData.json';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 
 type TripCreatorListViewProps = {
-  setSelectedID: (id: number) => void
-  onClose?: () => void
-
-  itineraryList: ItineraryItem[] | null
-  selectedID: number
+  setSelectedID:    (id: number) => void
+  onClose?:         () => void
+  itineraryList:    ItineraryItem[] | null
+  selectedID:       number
   headerPictureUrl: string | null
 };
 
@@ -33,16 +32,16 @@ export default function TripCreatorListView(props: TripCreatorListViewProps) {
         </div>
         <div className={`${style.itineraryList}`}>
           {props?.itineraryList// in the future, if itineraryList is not empty, render a loading spinner
-            && props?.itineraryList.map((itinerary) => {
-              return (
-                <Itinerary
-                  key={itinerary.id}
-                  itinerary={itinerary}
-                  setSelectedID={props?.setSelectedID}
-                  selectedID={props?.selectedID}
-                />
-              );
-            })}
+          && props?.itineraryList.map((itinerary) => {
+            return (
+              <Itinerary
+                key={itinerary.id}
+                itinerary={itinerary}
+                setSelectedID={props?.setSelectedID}
+                selectedID={props?.selectedID}
+              />
+            );
+          })}
           {props?.itineraryList?.length === 0 && (
             <div>
               <p className="noSightings">
