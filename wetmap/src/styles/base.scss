@@ -75,6 +75,7 @@
 @include bg-color-variant(".bg-white", $white);
 @include bg-color-variant(".bg-gray", $bg-color);
 @include text-color-variant(".text-primary", #142800);
+@include text-color-variant(".text-blue", $primaryBlue);
 
 @include stack('stack-4', $unit-4);
 

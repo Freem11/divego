@@ -52,7 +52,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 <li>
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="person" color="blue" style={{ scale: '1.5' }} />}
+                    icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
                     className="text-primary"
                     onClick={props.animateProfileModal}
                   />
@@ -60,7 +60,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 <li>
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="settings" color="blue" style={{ scale: '1.5' }} />}
+                    icon={<Icon name="settings" className="text-blue" style={{ scale: '1.5' }} />}
                     className="text-primary"
                     onClick={props.animateSettingsModal}
                   />
@@ -68,7 +68,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 <li style={{ marginTop: '2px' }}>
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="anchor-plus" color="blue" style={{ scale: '1.45' }} />}
+                    icon={<Icon name="anchor-plus" className="text-blue" style={{ scale: '1.45' }} />}
                     className="text-primary"
                     onClick={props.animateSiteSubmitterModal}
                   />
@@ -78,7 +78,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                       <li>
                         <ButtonIcon
                           disabled={props.mapConfig === 0 ? false : true}
-                          icon={<Icon name="diving-scuba-flag" color="blue" style={{ scale: '1.5' }} />}
+                          icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
                           className="text-primary"
                           onClick={props.animateTripCreatorListModal}
                         />
@@ -88,7 +88,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                       <li style={{ marginTop: '2px' }}>
                         <ButtonIcon
                           disabled={props.mapConfig === 0 ? false : true}
-                          icon={<Icon name="question-mark" color="blue" style={{ scale: '1.5' }} />}
+                          icon={<Icon name="question-mark" className="text-blue" style={{ scale: '1.5' }} />}
                           className="text-primary"
                           onClick={props.animateGuidesModal}
                         />
