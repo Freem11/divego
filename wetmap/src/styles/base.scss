@@ -4,24 +4,24 @@
 // Some sections are not required right now so they are disabled to minimize the bundle size
 // Enable ones that you need 
 
-@import "node_modules/spectre.css/src/mixins";
+@import "spectre.css/src/mixins";
 
 // Reset and dependencies
-@import "node_modules/spectre.css/src/normalize";
-@import "node_modules/spectre.css/src/base";
+@import "spectre.css/src/normalize";
+@import "spectre.css/src/base";
 
 // Elements
-@import "node_modules/spectre.css/src/typography";
+@import "spectre.css/src/typography";
 // @import "node_modules/spectre.css/src/asian";
 // @import "node_modules/spectre.css/src/tables";
-@import "node_modules/spectre.css/src/buttons";
+@import "spectre.css/src/buttons";
 // @import "node_modules/spectre.css/src/forms";
 // @import "node_modules/spectre.css/src/labels";
 // @import "node_modules/spectre.css/src/codes";
 // @import "node_modules/spectre.css/src/media";
 
 // Layout
-@import "node_modules/spectre.css/src/layout";
+@import "spectre.css/src/layout";
 @import "node_modules/spectre.css/src/hero";
 // @import "node_modules/spectre.css/src/navbar";
 
@@ -84,10 +84,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-
-// [class*="col-"] {
-//   border: 1px solid red;
-// }
 
 .extra-shadow {
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);

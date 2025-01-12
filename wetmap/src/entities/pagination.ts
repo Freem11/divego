@@ -5,10 +5,10 @@ export class Pagination {
   ipp:  number;
   sort: string;
 
-  constructor(page: number = 1, sort: string = 'asc', ipp: number = 10) {
-    this.page = page;
-    this.sort = sort;
-    this.ipp = ipp;
+  constructor(page: number = 0, sort: string = 'asc', ipp: number = 10) {
+    this.page    = page;
+    this.sort    = sort;
+    this.ipp     = ipp;
   }
 
   from() {
@@ -25,6 +25,7 @@ export class Pagination {
   }
 
   next() {
+    console.log('CALLING NEXT');
     this.page++;
     return this;
   }

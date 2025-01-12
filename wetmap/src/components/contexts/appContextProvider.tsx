@@ -20,6 +20,7 @@ import SelectedShopContextProvider from './selectedShopContext';
 import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from '../reusables/modal//contextProvider';
 import MapConfigContextProvider from './mapConfigContext';
+import MapBoundariesPhotoContextProvider from './mapBoundariesPhotoContext';
 
 const providers = [
   AreaPicsContextProvider,
@@ -42,6 +43,7 @@ const providers = [
   SitesArrayContextProvider,
   ModalContextProvider,
   MapConfigContextProvider,
+  MapBoundariesPhotoContextProvider,
 ];
 
 export const AppContextProvider = combineComponents(...providers);

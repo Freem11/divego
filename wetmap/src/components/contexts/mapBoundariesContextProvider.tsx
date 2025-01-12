@@ -70,22 +70,22 @@ const MapBoundsContextProvider = ({ children }: any) => {
   // }, [boundaries, animalVal]);
 
 
-  useEffect(() => {
-    (async () => {
-      if (boundaries) {
-        const items = await getPhotosInBoundaries(boundaries, photos.filter, photos.pagination);
-        setPhotos((prev) => {
-          return { ...prev, items };
-        });
-      }
-    })();
-  }, [boundaries, photos?.pagination?.page, photos.filter?.label]);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (boundaries) {
+  //       const items = await getPhotosInBoundaries(boundaries, photos.filter, photos.pagination);
+  //       setPhotos((prev) => {
+  //         return { ...prev, items: prev.items ? [prev.items, ...items] : items };
+  //       });
+  //     }
+  //   })();
+  // }, [boundaries, photos?.pagination?.page, photos.filter?.label]);
 
   useEffect(() => {
     (async () => {
       if (boundaries) {
         const items = await getDiveSitesInBoundaries(boundaries);
-        console.log('FETCH DIVE SITES');
+        // console.log('FETCH DIVE SITES');
         setDiveSites((prev) => {
           return { ...prev, items };
         });

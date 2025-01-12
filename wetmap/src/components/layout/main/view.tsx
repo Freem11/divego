@@ -110,13 +110,13 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
       <section className="py-2">
         <div className="container-fluid">
-          <div className="cols col-gapless">
-            <div className="col-md-12 col-4">
+          <div className="cols col-gapless" style={{ height: '70vh' }}>
+            <div className="col-md-12 col-4 full-height" style={{ overflow: 'hidden' }}>
               <Tabs data={[
-                { title: 'Animals', content: SelectedAreaPhotos },
-                { title: 'DiveSites', content: SelectedAreaDiveSites },
-                { title: 'DiveShops', content: SelectedAreaDiveShops },
-                { title: 'Test', content: 'Lorem ipsum dolor sit amet' },
+                { key: 't-1', title: 'DiveSites', content: SelectedAreaDiveSites },
+                { key: 't-2', title: 'Animals', content: SelectedAreaPhotos },
+                { key: 't-3', title: 'DiveShops', content: SelectedAreaDiveShops },
+                { key: 't-4', title: 'Test', content: 'Lorem ipsum dolor sit amet' },
               ]}
               />
 
@@ -134,10 +134,8 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               </div> */}
             </div>
 
-            <div className="col-md-12 col-8">
-              <div style={{ height: '100vh' }}>
-                <MapLoader />
-              </div>
+            <div className="col-md-12 col-8 full-height">
+              <MapLoader />
             </div>
           </div>
         </div>

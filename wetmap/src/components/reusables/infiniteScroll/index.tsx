@@ -1,53 +1,82 @@
-import React, { useState, ReactNode, useRef, useEffect } from 'react';
-import { debounce } from '../_helpers/debounce';
+import React, { useState, ReactNode } from 'react';
+import './style.scss';
+import Container from './components/container';
 
-
-type InfiniteScrollProps = {
-  children:          ReactNode
-  loadingIndicator?: ReactNode
-  loadMore?:         () => void
-  hasMore?:          boolean
+const defaultProps = {
+  ipp:           20 as number,
+  page:          0 as number,
+  renderLoading: () => {
+    return <div>Loading...</div>;
+  },
+  renderEmpty:   () => {
+    return <div>Infinite scroll is empty</div>;
+  },
 };
 
-const InfiniteScroll = (props: InfiniteScrollProps) => {
-  const ref = useRef<HTMLDivElement>(null);
+type InfiniteScrollProps = Partial<typeof defaultProps> & {
+  loadMore:   (page: number) => Promise<any>
+  renderItem: (item: any, index: number) => ReactNode
+};
+
+const InfiniteScroll = (_props: InfiniteScrollProps) => {
+  const props = { ...defaultProps, ..._props };
+  const [hasMore, setHasMore] = useState(true);
+  const [items, setItems] = useState<any[] | null>(null);
   const [loading, setLoading] = useState(false);
+  const [page, setPage] = useState(props.page);
 
+  console.log('rerender because of Reset. HasMore:', hasMore, 'Page:', page);
 
-  const handleScroll = () => {
-    if (!ref.current) {
-      return;
-    }
-    const content = ref.current.children[0];
-    if (!content) {
-      return;
-    }
+  const loadMore = async () => {
+    setLoading(true);
+    const newPage = page + 1;
 
-    if ((ref.current.scrollTop + ref.current.offsetHeight) > (ref.current.scrollHeight - 50)) {
-      setLoading(true);
+    const items = await props.loadMore(newPage);
 
-      if (props.loadMore && typeof props.loadMore === 'function') {
-        props.loadMore();
+    setPage(newPage);
+    setLoading(false);
+    setHasMore(() => {
+      if (!items) {
+        return false;
       }
-    }
+      if (items.length < props.ipp) {
+        // no need to load more because there are no more items
+        return false;
+      }
+      if (items.length > props.ipp) {
+        // seems like there is no pagination - doesnt make sense to load more
+        return false;
+      }
+      return true;
+    });
+    setItems((prev) => {
+      if (!items) {
+        return prev;
+      } else if (prev === null) {
+        return items;
+      } else if (items) {
+        return [...prev, ...items];
+      } else {
+        return prev;
+      }
+    });
   };
-
-  useEffect(() => {
-    ref.current?.addEventListener('scroll', debounce(handleScroll, 100));
-    handleScroll();
-    return () => {
-      ref.current?.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
 
   return (
-    <div ref={ref}>
-      <div>
-        {props.children}
-        {loading && <div>Loading...</div>}
-      </div>
-    </div>
+    <Container
+      loadMore={loadMore}
+      hasMore={hasMore}
+      loading={loading}
+    >
+      {(page > 0) && items?.map((item, index) => {
+        return props.renderItem(item, index);
+      })}
+
+      {!items?.length && !loading && props.renderEmpty()}
+
+      {loading && props.renderLoading()}
+    </Container>
   );
 };
 
