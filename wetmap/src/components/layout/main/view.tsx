@@ -13,7 +13,7 @@ import SelectedAreaDiveSites from '../../selectedAreaDiveSites';
 import SelectedAreaDiveShops from '../../selectedAreaDiveShops';
 import AppleLinkButton from '../../../images/AppleCTA.png';
 import GoogleLinkButton from '../../../images/GoogleCTA.png';
-
+import Emilio from '../../../images/EmilioNew.png';
 
 type LayoutMainViewProps = {
   mapConfig:                number
@@ -31,7 +31,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
 
             <div className="col-sm-12 col-4">
-              <div className="main-logo col-6">
+              <div className="main-logo col-6 mt-2">
                 <a href="index.html" className={style.mainLogo} style={{ color: 'black' }}>
                   <img src={blackMantaIcon} height={40} alt="logo" style={{ marginBottom: 5 }} />
                   Scuba SEAsons
@@ -49,7 +49,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 <li>
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="person" color="blue" />}
+                    icon={<Icon name="person" color="blue" style={{ scale: '1.5' }} />}
                     className="text-primary"
                     onClick={props.animateProfileModal}
                   />
@@ -57,15 +57,15 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 <li>
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="settings" color="blue" />}
+                    icon={<Icon name="settings" color="blue" style={{ scale: '1.5' }} />}
                     className="text-primary"
                     onClick={props.animateSettingsModal}
                   />
                 </li>
-                <li style={{ marginTop: '-1px' }}>
+                <li style={{ marginTop: '2px' }}>
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="anchor-plus" color="blue" />}
+                    icon={<Icon name="anchor-plus" color="blue" style={{ scale: '1.45' }} />}
                     className="text-primary"
                     onClick={props.animateSitSubmitterModal}
                   />
@@ -126,16 +126,17 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
 
             <div className="cols col-12">
-              <div className="col-12 py-2 pl-10 ml-10">
+              <div className="col-12 pl-10 ml-8 mt-6">
                 <div className={style.lowerLogo}>
                   <img src={whiteMantaIcon} height={40} alt="logo" style={{ marginBottom: 5, marginRight: 7 }} />
                   Scuba SEAsons
                 </div>
               </div>
-              <div className="col-6 py-2">
+              <div className="col-1"></div>
+              <div className="col-4">
                 <div className={style.headers}>
                   Avilable on Mobile
-                  <div className="mobile-links flex-centered  justify-content-sm-center justify-content-flex-start mt-5">
+                  <div className="mobile-links flex-centered  justify-content-sm-center justify-content-flex-start mt-6">
                     <a href="https://apps.apple.com/us/app/divego/id6450968950" target="_blank" rel="noreferrer">
                       <img  src={AppleLinkButton} height={60} />
                     </a>
@@ -145,10 +146,10 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </div>
                 </div>
               </div>
-              <div className="col-6 py-2">
+              <div className="col-4">
                 <div className={style.headers}>
                   Connect with us
-                  <div className="social-links flex-row-between justify-content-sm-center justify-content-flex-start mt-4 col-6">
+                  <div className="social-links flex-row-between justify-content-sm-center justify-content-flex-start mt-10 col-6">
                     <a href="https://www.facebook.com/profile.php?id=61554622375177" target="_blank" rel="noreferrer">
                       <ButtonIcon icon={<Icon name="facebook" color="white" style={{ scale: '2' }} />} />
                     </a>
@@ -164,7 +165,11 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </div>
                 </div>
               </div>
-              <div className="col-2 py-2 pl-10 ml-6">
+              <div className="col-2">
+                <img src={Emilio} height={200} className={style.emilio} />
+              </div>
+              <div className="col-1"></div>
+              <div className="col-2 pt-6 pl-10 ml-6">
                 <div className="col-md-6 copyright">
                   <p className={style.footerRights}>© 2025. All rights reserved.</p>
                 </div>
