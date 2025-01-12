@@ -16,12 +16,12 @@ export default function SelectedAreaPhotos() {
   // };
 
   const loadMore = async (page: number) => {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, 1000);
-    });
-    // return await getPhotosInBoundaries(boundaries, {}, new Pagination(page, 'asc', ipp));
+    // return new Promise((resolve) => {
+    //   setTimeout(() => {
+    //     resolve();
+    //   }, 1000);
+    // });
+    return await getPhotosInBoundaries(boundaries, {}, new Pagination(page, 'asc', ipp));
   };
 
   // useEffect(() => {
