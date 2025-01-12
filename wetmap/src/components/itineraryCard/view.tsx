@@ -1,77 +1,98 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import style from './style.module.scss';
 import ButtonIcon from '../reusables/buttonIcon';
 import Icon from '../../icons/Icon';
-import { animated, SpringValue } from 'react-spring';
 import { ItineraryItem } from '../../entities/itineraryItem';
+import { format } from 'date-fns';
 
 type TripCardViewProps = {
-  itinerary:              ItineraryItem
-  flipMap:                (siteList: number[]) => Promise<void>
-  canChangeItinerary?:    boolean
-  startMoreInfoAnimation: (id: number) => void
-  heightChange:           { height: SpringValue<number> }
+  itinerary:           ItineraryItem
+  flipMap:             (siteList: number[]) => Promise<void>
+  canChangeItinerary?: boolean
 };
 
-export default function ItineraryCardView({ itinerary, flipMap, canChangeItinerary, startMoreInfoAnimation, heightChange }: TripCardViewProps) {
+export default function ItineraryCardView({ itinerary, flipMap, canChangeItinerary }: TripCardViewProps) {
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isOverflowing, setIsOverflowing] = useState(false);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  useEffect(() => {
+    if (textRef.current) {
+      // Check if the text overflows the container
+      const isTextOverflowing = textRef.current.scrollHeight > textRef.current.clientHeight;
+      setIsOverflowing(isTextOverflowing);
+    }
+  }, [itinerary.description]);
+
   return (
-    <div className={style.masterBox} key={itinerary.id}>
-      <div className={style.shadowbox}>
-        <div className={style.moreBox}>
-          <p className={style.tripName}>{itinerary.tripName}</p>
-          <p
-            className={style.opener}
-            onClick={() => startMoreInfoAnimation(itinerary.id)}
-          >
-            More Info
-          </p>
-        </div>
-        {canChangeItinerary
-          ? (
-              <div className={style.buttonBox}>
-                <ButtonIcon
-                  icon={<Icon name="pencil" />}
-                  className={`btn-lg ${style.buttonStyling}`}
-                  title="Edit trip"
-                  // onClick={}
-                />
-                <ButtonIcon
-                  icon={<Icon name="trash" />}
-                  className={`btn-lg ${style.buttonStyling}`}
-                  title="Delete trip"
-                  // onClick={}
-                />
-              </div>
-            )
-          : (
-              <div className={style.buttonBox}>
-                <ButtonIcon
-                  icon={<Icon name="anchor" />}
-                  className={`btn-lg ${style.buttonStyling}`}
-                  title="Visit dive sites"
-                  onClick={() => flipMap(itinerary.siteList)}
-                />
-                <ButtonIcon
-                  icon={<Icon name="diving-scuba-flag" />}
-                  className={`btn-lg ${style.buttonStyling}`}
-                  title="Book trip"
-                  // onClick={}
-                />
-              </div>
-            )}
-      </div>
-      <animated.div className={style.extraBox} style={heightChange}>
-        <div className={style.topRail}>
-          <p className={style.dateText}>
-            {itinerary.startDate}
-            {' to '}
-            {itinerary.endDate}
-          </p>
-          <p className={style.priceText}>{itinerary.price }</p>
+    <div className={style.card}>
+      <div className={style.cardTop}>
+        <div className={style.mainContent}>
+          <p className={style.title}>{itinerary.tripName}</p>
+          <div className={style.info}>
+            <p>
+              {format(new Date(itinerary.startDate), 'MMM d, yyyy')}
+              {' - '}
+              {format(new Date(itinerary.endDate), 'MMM d, yyyy')}
+            </p>
+            <span>|</span>
+            <p>{itinerary.price }</p>
+          </div>
         </div>
 
-        <p className={style.lowerText}>{itinerary.description}</p>
-      </animated.div>
+        <div className={style.actions}>
+          {canChangeItinerary
+            ? (
+                <>
+                  <ButtonIcon
+                    icon={<Icon name="pencil" />}
+                    className={style.actionIcon}
+                    title="Edit trip"
+                    // onClick={}
+                  />
+                  <ButtonIcon
+                    icon={<Icon name="trash" />}
+                    className={style.actionIcon}
+                    title="Delete trip"
+                    // onClick={}
+                  />
+                </>
+              )
+            : (
+                <>
+                  <ButtonIcon
+                    icon={<Icon name="anchor" />}
+                    className={style.actionIcon}
+                    title="Visit dive sites"
+                    onClick={() => flipMap(itinerary.siteList)}
+                  />
+                  <ButtonIcon
+                    icon={<Icon name="diving-scuba-flag" />}
+                    className={style.actionIcon}
+                    title="Book trip"
+                    // onClick={}
+                  />
+                </>
+              )}
+        </div>
+      </div>
+
+      <div className={style.description}>
+        <p
+          ref={textRef}
+          className={`${style.text} ${isExpanded ? style.expanded : style.collapsed}`}
+        >
+          {itinerary.description}
+        </p>
+        {isOverflowing && (
+          <span
+            className={style.showMore}
+            onClick={() => setIsExpanded(prev => !prev)}
+          >
+            {isExpanded ? 'Read less' : 'Read more'}
+          </span>
+        )}
+      </div>
     </div>
   );
 }

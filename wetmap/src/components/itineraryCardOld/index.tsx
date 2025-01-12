@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
+import { useSpring } from 'react-spring';
 import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { CoordsContext } from '../contexts/mapCoordsContext';
 import { MapConfigContext } from '../contexts/mapConfigContext';
@@ -10,15 +11,44 @@ import { ItineraryItem } from '../../entities/itineraryItem';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
+  selectedCard:        number
+  setSelectedCard:     (id: number) => void
   canChangeItinerary?: boolean
 };
 
-export default function ItineraryCard({ itinerary, canChangeItinerary }: ItineraryCardProps) {
+export default function ItineraryCard({ itinerary, selectedCard, setSelectedCard, canChangeItinerary }: ItineraryCardProps) {
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapCoords } = useContext(CoordsContext);
   const { setMapZoom } = useContext(ZoomContext);
   const { setMapConfig } = useContext(MapConfigContext);
   const modalContext = useContext(ModalContext);
+
+  const [hiddenHeigth, setHiddenHeigth] = useState(0);
+
+  const heightChange = useSpring({
+    from: { height: 0 },
+    to:   { height: hiddenHeigth },
+  });
+
+  useEffect(() => {
+    if (selectedCard !== itinerary.id) {
+      releaseMoreInfoAnimations();
+    }
+  }, [selectedCard]);
+
+  const startMoreInfoAnimation = (id: number) => {
+    setSelectedCard(id);
+
+    if (hiddenHeigth === 0) {
+      setHiddenHeigth(150);
+    } else {
+      setHiddenHeigth(0);
+    }
+  };
+
+  const releaseMoreInfoAnimations = () => {
+    setHiddenHeigth(0);
+  };
 
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
@@ -53,6 +83,8 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       itinerary={itinerary}
       flipMap={flipMap}
       canChangeItinerary={canChangeItinerary}
+      startMoreInfoAnimation={startMoreInfoAnimation}
+      heightChange={heightChange}
     />
   );
 }
