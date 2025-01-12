@@ -16,10 +16,13 @@ import GoogleLinkButton from '../../../images/GoogleCTA.png';
 import Emilio from '../../../images/EmilioNew.png';
 
 type LayoutMainViewProps = {
-  mapConfig:                number
-  animateSitSubmitterModal: () => void
-  animateProfileModal:      () => void
-  animateSettingsModal:     () => void
+  mapConfig:                   number
+  animateSiteSubmitterModal:   () => void
+  animateProfileModal:         () => void
+  animateSettingsModal:        () => void
+  animateGuidesModal:          () => void
+  animateTripCreatorListModal: () => void
+  isPartnerAccount:            boolean
 };
 
 
@@ -67,9 +70,30 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                     disabled={props.mapConfig === 0 ? false : true}
                     icon={<Icon name="anchor-plus" color="blue" style={{ scale: '1.45' }} />}
                     className="text-primary"
-                    onClick={props.animateSitSubmitterModal}
+                    onClick={props.animateSiteSubmitterModal}
                   />
                 </li>
+                {props.isPartnerAccount
+                  ? (
+                      <li>
+                        <ButtonIcon
+                          disabled={props.mapConfig === 0 ? false : true}
+                          icon={<Icon name="diving-scuba-flag" color="blue" style={{ scale: '1.5' }} />}
+                          className="text-primary"
+                          onClick={props.animateTripCreatorListModal}
+                        />
+                      </li>
+                    )
+                  :                   (
+                      <li style={{ marginTop: '2px' }}>
+                        <ButtonIcon
+                          disabled={props.mapConfig === 0 ? false : true}
+                          icon={<Icon name="question-mark" color="blue" style={{ scale: '1.5' }} />}
+                          className="text-primary"
+                          onClick={props.animateGuidesModal}
+                        />
+                      </li>
+                    )}
               </ul>
 
               <div className="cart text-end d-none d-lg-block dropdown">

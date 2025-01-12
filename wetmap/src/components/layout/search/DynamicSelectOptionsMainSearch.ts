@@ -9,7 +9,7 @@ export type OptionAdditionalData = {
 };
 
 export class DynamicSelectOptionsMainSearch extends DynamicSelectOptions {
-  static getMoreOptions(search: string, limit, skip) {
+  static getMoreOptions(search: string) {
     const placesPromise = getPlacePredictions({ input: search, types: ['locality'] });
     const diveSitePromise = getSiteNamesThatFit(search);
 
@@ -20,7 +20,7 @@ export class DynamicSelectOptionsMainSearch extends DynamicSelectOptions {
       });
 
       diveSites?.forEach((diveSite) => {
-        options.push({ key: diveSite.id.toString(), label: diveSite.name, data: { type: 'diveSite', id: diveSite.id.toString() } });
+        options.push({ key: diveSite.id.toString(), label: diveSite.region ? `${diveSite.name} - ${diveSite.region}` : diveSite.name, data: { type: 'diveSite', id: diveSite.id.toString() } });
       });
 
       return { options, totalCount: null };
