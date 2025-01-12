@@ -33,7 +33,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
             <div className="col-sm-12 col-4">
               <div className="main-logo col-6 mt-2">
                 <a href="index.html" className={style.mainLogo} style={{ color: 'black' }}>
-                  <img src={blackMantaIcon} height={40} alt="logo" style={{ marginBottom: 5 }} />
+                  <img src={blackMantaIcon} height={50} alt="logo" style={{ marginBottom: 5 }} />
                   Scuba SEAsons
                 </a>
               </div>
