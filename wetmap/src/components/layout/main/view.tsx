@@ -33,13 +33,13 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
         <div className="container-fluid">
           <div className="cols col-gapless">
 
-            <div className="col-md-12 col-3">
+            <div className="col-md-12 col-3 mt-1">
               <a href="index.html" className={style.mainLogo} style={{ color: 'black', marginTop: 10 }}>
                 <img src={blackMantaIcon} height={50} alt="logo" style={{ marginBottom: 5 }} />
                 Scuba SEAsons
               </a>
             </div>
-            <div className="col-md-12 col-6">
+            <div className="col-md-12 col-6 mt-1">
               <MainSearch />
             </div>
             <div className="col-md-0 col-1">
