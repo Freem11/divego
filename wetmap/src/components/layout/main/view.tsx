@@ -113,7 +113,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               <Tabs data={[
                 { key: 't-1', title: 'Dive Sites', content: SelectedAreaDiveSites },
                 { key: 't-2', title: 'Sea Life', content: SelectedAreaPhotos },
-                { key: 't-3', title: 'Dive Shops', content: SelectedAreaDiveShops },
+                { key: 't-3', title: 'Dive Centers', content: SelectedAreaDiveShops },
                 { key: 't-4', title: 'Test', content: 'Lorem ipsum dolor sit amet' },
               ]}
               />
