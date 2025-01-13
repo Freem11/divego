@@ -29,24 +29,22 @@ type LayoutMainViewProps = {
 export default function LayoutMainView(props: LayoutMainViewProps) {
   return (
     <div className="bg-white">
-      <header>
+      <header style={{ minHeight: '10vh' }}>
         <div className="container-fluid">
           <div className="cols col-gapless">
 
-            <div className="col-sm-12 col-4">
-              <div className="col-12 mt-2">
-                <a href="index.html" className={style.mainLogo} style={{ color: 'black' }}>
-                  <img src={blackMantaIcon} height={50} alt="logo" style={{ marginBottom: 5 }} />
-                  Scuba SEAsons
-                </a>
-              </div>
+            <div className="col-md-12 col-3">
+              <a href="index.html" className={style.mainLogo} style={{ color: 'black', marginTop: 10 }}>
+                <img src={blackMantaIcon} height={50} alt="logo" style={{ marginBottom: 5 }} />
+                Scuba SEAsons
+              </a>
             </div>
-
-            <div className="col-sm-12 col-4">
+            <div className="col-md-12 col-6">
               <MainSearch />
             </div>
-
-            <div className="col-sm-12 col-4 flex-centered justify-content-sm-center justify-content-flex-start">
+            <div className="col-md-0 col-1">
+            </div>
+            <div className="col-md-12 col-2 flex-centered justify-content-sm-center justify-content-flex-start">
 
               <ul className={style.headerIcons}>
                 <li>
@@ -108,10 +106,10 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
         </div>
       </header>
 
-      <section className="py-2">
+      <section>
         <div className="container-fluid">
-          <div className="cols col-gapless" style={{ height: '70vh' }}>
-            <div className="col-md-12 col-4 full-height" style={{ overflow: 'hidden' }}>
+          <div className="cols col-gapless">
+            <div className="col-md-12 col-4 full-height" style={{ overflow: 'hidden', height: '90vh' }}>
               <Tabs data={[
                 { key: 't-1', title: 'DiveSites', content: SelectedAreaDiveSites },
                 { key: 't-2', title: 'Animals', content: SelectedAreaPhotos },
@@ -134,7 +132,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               </div> */}
             </div>
 
-            <div className="col-md-12 col-8 full-height">
+            <div className="col-md-12 col-8 full-height" style={{ height: '90vh' }}>
               <MapLoader />
             </div>
           </div>
@@ -148,7 +146,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
 
             <div className="cols col-12">
-              <div className="col-12 pl-10 ml-8 mt-6">
+              <div className="col-12 pl-8 mt-6">
                 <div className={style.lowerLogo}>
                   <img src={whiteMantaIcon} height={40} alt="logo" style={{ marginBottom: 5, marginRight: 7 }} />
                   Scuba SEAsons
