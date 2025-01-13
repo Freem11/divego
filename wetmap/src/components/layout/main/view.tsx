@@ -111,9 +111,9 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
             <div className="col-md-12 col-4 full-height" style={{ overflow: 'hidden', height: '90vh' }}>
               <Tabs data={[
-                { key: 't-1', title: 'DiveSites', content: SelectedAreaDiveSites },
-                { key: 't-2', title: 'Animals', content: SelectedAreaPhotos },
-                { key: 't-3', title: 'DiveShops', content: SelectedAreaDiveShops },
+                { key: 't-1', title: 'Dive Sites', content: SelectedAreaDiveSites },
+                { key: 't-2', title: 'Sea Life', content: SelectedAreaPhotos },
+                { key: 't-3', title: 'Dive Shops', content: SelectedAreaDiveShops },
                 { key: 't-4', title: 'Test', content: 'Lorem ipsum dolor sit amet' },
               ]}
               />
