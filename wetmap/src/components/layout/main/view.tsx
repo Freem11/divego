@@ -44,7 +44,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
             </div>
             <div className="col-md-0 col-1">
             </div>
-            <div className="col-md-12 col-2 flex-centered justify-content-sm-center justify-content-flex-start">
+            <div className="col-md-12 col-2 mt-2 flex-centered justify-content-sm-center justify-content-flex-start">
 
               <ul className={style.headerIcons}>
                 <li>
