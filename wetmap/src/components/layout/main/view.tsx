@@ -189,7 +189,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 <img src={Emilio} height={200} className={style.emilio} />
               </div>
               <div className="col-md-0 col-1"></div>
-              <div className="col-12 justify-content-flex-start">
+              <div className="col-12">
                 <p className={style.footerRights}>© 2025. All rights reserved.</p>
               </div>
             </div>
