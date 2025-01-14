@@ -49,6 +49,7 @@ export default function MainSearch() {
         iconLeft={<Icon name="navigation-variant-outline" style={{ scale: '0.7' }} />}
         getMoreOptions={DynamicSelectOptionsMainSearch.getMoreOptions}
         onChange={handleSelect}
+        placeholder="Search by city or dive site name"
         dropdownItemComponent={(props: DropdownItemProps) => {
           return <MainSearchDropdownItem {...props} />;
         }}
