@@ -45,14 +45,12 @@ export default function TripCreatorModal(props: TripCreatorProps) {
 
     if (regex1.test(num.toString())) {
       const result = '$' + num.toString();
-      console.log(result);
       setThePrice(result);
     }
 
     if (regex2.test(num.toString())) {
       const num2 = num.replace(/[^0-9.]/g, '');
       const result = '$' + num2.toString();
-      console.log(result);
       setThePrice(result);
     }
   };
