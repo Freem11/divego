@@ -4,7 +4,7 @@ import { FormValidationRules } from '../../../forms/form';
 export interface Form {
   Name?:    string
   Link?:    string
-  Price?:   number
+  Price?:   string
   Start?:   string
   End?:     string
   Details?: string
@@ -24,7 +24,7 @@ export const FormRules: FormValidationRules<Form> = {
       value:   0,
       message: 'Price must be atleast 0',
     },
-    pattern: /^\$\d+(\.\d{1,2})?$/,
+    pattern:  /^\$\d+(\.\d{1,2})?$/,
   },
   Start: {
     required: 'Start date is required',

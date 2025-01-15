@@ -10,10 +10,11 @@ import Button from '../../reusables/button/button';
 
 
 type TripCreatorViewProps = {
-  onClose?: () => void
-  values?:  Form
-  editMode: boolean
-  onSubmit: (data: Form) => void
+  onClose?:    () => void
+  values?:     Form
+  editMode:    boolean
+  onSubmit:    (data: Form) => void
+  priceChange: (data: any) => void
 };
 
 export default function TripCreatorView(props: TripCreatorViewProps) {
@@ -62,6 +63,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               placeholder={screenData.TripCreator.pricePlaceholder}
               error={errors.Price}
               {...register('Price', FormRules.Price)}
+              onChange={props.priceChange}
             />
 
             <TextInput
