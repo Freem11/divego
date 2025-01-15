@@ -30,5 +30,12 @@
     margin-top: 1rem;
   }
 
-
+.upgradeLink {
+    margin-left: 32px;
+    margin-bottom: 4px;
+    font-weight: bold;
+    color: $primaryBlue;
+    cursor: pointer;
+    width: max-content;
+}
 
