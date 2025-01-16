@@ -47,13 +47,11 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
                   <ButtonIcon
                     icon={<Icon name="pencil" />}
                     className={style.actionIcon}
-                    title="Edit trip"
                     // onClick={}
                   />
                   <ButtonIcon
                     icon={<Icon name="trash" />}
                     className={style.actionIcon}
-                    title="Delete trip"
                     // onClick={}
                   />
                 </>
@@ -63,13 +61,11 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
                   <ButtonIcon
                     icon={<Icon name="anchor" />}
                     className={style.actionIcon}
-                    title="Visit dive sites"
                     onClick={() => flipMap(itinerary.siteList)}
                   />
                   <ButtonIcon
                     icon={<Icon name="diving-scuba-flag" />}
                     className={style.actionIcon}
-                    title="Book trip"
                     // onClick={}
                   />
                 </>
