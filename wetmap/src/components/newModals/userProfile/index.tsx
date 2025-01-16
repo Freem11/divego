@@ -14,7 +14,7 @@ import {
   updateProfile,
 } from '../../../supabaseCalls/accountSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
-import Settings from '../../modals/setting';
+// import Settings from '../../modals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 
 
@@ -83,7 +83,7 @@ export default function UserProfile(props: UserProps) {
   };
 
   const openSettings = () => {
-    modalShow(Settings);
+    // modalShow(Settings);
   };
 
   return (
