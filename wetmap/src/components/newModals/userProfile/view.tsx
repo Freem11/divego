@@ -89,7 +89,8 @@ export default function UserProfileView(props: userProfileViewProps) {
                   // value={props?.diveSite?.divesitebio || ''}
                   readOnly={!props?.isActiveProfile}
                   onSave={props?.handleProfileBioChange}
-                  value={(props.profile.profileBio) ? (props.profile.profileBio) : (screenData.UserProfile.userDefaultDescription)}
+                  value={props.profile.profileBio}
+                  placeholder={screenData.UserProfile.userDefaultDescription}
                 />
               </div>
             </div>
