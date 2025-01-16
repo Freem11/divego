@@ -8,7 +8,7 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import TripCreatorListModal from '../tripCreatorListModal/index';
+import TripCreatorModal from '../tripCreatorModal/index';
 
 type ShopModalProps = Partial<ModalHandleProps>;
 
@@ -70,7 +70,7 @@ export default function ShopModal(props: ShopModalProps) {
   };
 
   const openTripCreatorList = async () => {
-    modalShow(TripCreatorListModal, {
+    modalShow(TripCreatorModal, {
       keepPreviousModal: true,
       size: 'medium',
     });
