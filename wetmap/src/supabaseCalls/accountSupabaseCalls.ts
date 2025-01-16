@@ -43,12 +43,12 @@ export const createProfile = async (values) => {
   }
 };
 
-export const updateProfile = async (values: { username: string, id: string }) => {
-  console.log('supabase gets', values);
+export const updateProfile = async (profile: Partial<ActiveProfile>) => {
+  console.log('supabase gets', profile);
   const { data, error } = await supabase
     .from('UserProfiles')
-    .update({ UserName: values.username })
-    .eq('UserID', values.id);
+    .update(profile)
+    .eq('UserID', profile.UserID);
 
   console.log('supa sends', data, error);
 

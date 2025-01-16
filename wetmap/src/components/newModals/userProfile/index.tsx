@@ -11,7 +11,7 @@ import { ModalHandleProps } from '../../reusables/modal/types';
 import {
   grabProfileById,
   getProfileWithStats,
-  updateProfileCustom,
+  updateProfile,
 } from '../../../supabaseCalls/accountSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
 import Settings from '../../modals/setting';
@@ -51,9 +51,9 @@ export default function UserProfile(props: UserProps) {
       setProfile({ ...profile, UserName: newName });
       setOpenedProfile({ ...openedProfile!, UserName: newName });
       try {
-        await updateProfileCustom({
-          id:       profile!.UserID,
-          username: newName,
+        await updateProfile({
+          UserID:       profile!.UserID,
+          UserName: newName,
         });
       } catch (e) {
         // if (e && e.code === '23505') {
@@ -75,7 +75,7 @@ export default function UserProfile(props: UserProps) {
       setProfile({ ...profile, profileBio: newBio });
       setOpenedProfile({ ...openedProfile!, profileBio: newBio });
       try {
-        await updateProfileCustom({ profileBio: newBio, id: profile!.UserID });
+        await updateProfile({ profileBio: newBio, UserID: profile!.UserID });
       } catch (e) {
         console.log((e as Error).message);
       }
