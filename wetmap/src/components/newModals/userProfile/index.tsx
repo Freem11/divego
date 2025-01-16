@@ -13,6 +13,11 @@ import {
   getProfileWithStats,
   updateProfile,
 } from '../../../supabaseCalls/accountSupabaseCalls';
+import {
+  insertUserFollow,
+  deleteUserFollow,
+  checkIfUserFollows,
+} from '../../../supabaseCalls/userFollowSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
 // import Settings from '../../modals/setting';
 import { ActiveProfile } from '../../../entities/profile';
@@ -23,6 +28,8 @@ export default function UserProfile(props: UserProps) {
   const { activeSession } = useContext(SessionContext);
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
+  const [userFollows, setUserFollows] = useState(false);
+  const [followData, setFollowData] = useState(activeSession!.user.id);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile>(profile!);
 
   useEffect(() => {
@@ -30,6 +37,44 @@ export default function UserProfile(props: UserProps) {
       (getProfileDetails(props.selectedProfile));
     }
   }, []);
+
+  const handleFollow = async () => {
+    // if (profile[0].UserID === picOwnerAccount[0].UserID){
+    //   return
+    // }
+
+    if (userFollows) {
+      deleteUserFollow(followData);
+      setUserFollows(false);
+    }
+    else {
+      if (userStats) {
+        let newRecord = await insertUserFollow(
+          profile!.UserID,
+          userStats[0].userid,
+        );
+        setFollowData(newRecord[0].id);
+        setUserFollows(true);
+      }
+    }
+  };
+
+  useEffect(() => {
+    getProfile();
+
+    async function followCheck() {
+      let alreadyFollows = await checkIfUserFollows(
+        activeSession!.user.id,
+        props.selectedProfile,
+      );
+      if (alreadyFollows!.length > 0) {
+        setUserFollows(true);
+        setFollowData(alreadyFollows![0].id);
+      }
+    }
+
+    followCheck();
+  }, [selectedProfile]);
 
   const getProfileDetails = async (profile: any) => {
     try {
