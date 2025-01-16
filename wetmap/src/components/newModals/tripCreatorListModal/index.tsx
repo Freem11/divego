@@ -3,10 +3,9 @@ import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorListView from './view';
+import { ModalHandleProps } from '../../reusables/modal/types';
 
-type TripCreatorListModalProps = {
-  onModalCancel: () => void
-};
+type TripCreatorListModalProps = Partial<ModalHandleProps>;
 
 export default function TripCreatorListModal({ onModalCancel }: TripCreatorListModalProps) {
   const { selectedShop } = useContext(SelectedShopContext);
