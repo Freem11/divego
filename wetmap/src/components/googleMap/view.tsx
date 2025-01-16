@@ -32,13 +32,11 @@ type MapViewProps = {
   supercluster:               SuperclusterInstance
   divesTog:                   boolean
   heatpts:                    HeatPoint[] | null
-  mapCoords:                  number[]
   setMapCoords:               (coords: number[]) => void
   selectedDiveSite:           DiveSiteWithUserName | null
   setSelectedDiveSite:        (site: DiveSiteWithUserName) => void
   setSelectedShop:            (shop: DiveShop) => void
   onLoad:                     (map: google.maps.Map) => void
-  handleMapUpdates:           () => void
   handleBoundsChange:         () => void
   handleMapCenterChange:      () => void
   handleMapZoomChange:        () => void

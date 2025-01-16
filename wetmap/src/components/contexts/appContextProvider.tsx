@@ -21,6 +21,7 @@ import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from '../reusables/modal//contextProvider';
 import MapConfigContextProvider from './mapConfigContext';
 import MapBoundariesPhotoContextProvider from './mapBoundariesPhotoContext';
+import MapBoundariesDiveSiteContextProvider from './mapBoundariesDiveSiteContext';
 
 const providers = [
   AreaPicsContextProvider,
@@ -44,6 +45,7 @@ const providers = [
   ModalContextProvider,
   MapConfigContextProvider,
   MapBoundariesPhotoContextProvider,
+  MapBoundariesDiveSiteContextProvider,
 ];
 
 export const AppContextProvider = combineComponents(...providers);

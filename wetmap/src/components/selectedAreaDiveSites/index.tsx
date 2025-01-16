@@ -1,23 +1,23 @@
-import React, { useState, useContext } from 'react';
-import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import React, { useContext } from 'react';
 import DiveSiteItem from './DiveSitetem';
+import { MapBoundariesDiveSiteContext } from '../contexts/mapBoundariesDiveSiteContext';
+import InfiniteScroll from '../reusables/infiniteScroll';
+import { DiveSiteWithUserName } from '../../entities/diveSite';
 
 export default function SelectedAreaDiveSites() {
-  const { diveSites } = useContext(MapBoundsContext);
-  // const [search, setSearch] = useState('');
-  // const [photos, setPhotos] = useState<Photo[]>([]);
+  const { paginator } = useContext(MapBoundariesDiveSiteContext);
 
-  if (!diveSites.items) {
+  if (!paginator.items) {
     return <div className="p-2">Loading...</div>;
   }
 
-  if (!diveSites.items.length) {
+  if (!paginator.items.length) {
     return <div className="p-2">No Dive Sites in this area</div>;
   }
 
   return (
     <div className="p-2">
-      {diveSites?.items.map((diveSite, index) => {
+      {paginator?.items.map((diveSite, index) => {
         return (
           <div key={index}>
             <DiveSiteItem diveSite={diveSite} />

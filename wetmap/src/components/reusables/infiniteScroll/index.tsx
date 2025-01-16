@@ -25,8 +25,6 @@ const InfiniteScroll = (_props: InfiniteScrollProps) => {
   const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(props.page);
 
-  console.log('rerender because of Reset. HasMore:', hasMore, 'Page:', page);
-
   const loadMore = async () => {
     setLoading(true);
     const newPage = page + 1;

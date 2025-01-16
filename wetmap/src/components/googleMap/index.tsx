@@ -23,6 +23,8 @@ import { MapConfigContext } from '../contexts/mapConfigContext';
 import { DiveSpotContext } from '../contexts/diveSpotContext';
 import { PinSpotContext } from '../contexts/pinSpotContext';
 import { ModalContext } from '../reusables/modal/context';
+import { debounce } from '../reusables/_helpers/debounce';
+import { MapBoundariesDiveSiteContext } from '../contexts/mapBoundariesDiveSiteContext';
 
 const libraries: Libraries = ['places', 'visualization'];
 
@@ -41,7 +43,7 @@ export default function MapLoader() {
   // const { mapRef, setMapRef, diveSites, heatPoints, boundaries, setBoundaries } = useContext(MapBoundsContext);
   const  mapContext = useContext(MapBoundsContext);
   const { mapCoords, setMapCoords } = useContext(CoordsContext);
-  const { mapZoom, setMapZoom } = useContext(ZoomContext);
+  // const { mapZoom, setMapZoom } = useContext(ZoomContext);
 
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(
@@ -54,8 +56,11 @@ export default function MapLoader() {
 
   const { animalVal } = useContext(AnimalContext);
   const { divesTog } = useContext(DiveSitesContext);
+  const diveSiteContext = useContext(MapBoundariesDiveSiteContext);
 
   const { modalShow, modalResume } = useContext(ModalContext);
+
+  // const [zoom, setZoom] = useState(mapContext.mapZoom);
 
   // console.log('DiveSites', diveSites);
 
@@ -84,73 +89,76 @@ export default function MapLoader() {
   let mapBoundariesTimoutHandler: number;
 
   const center = useMemo(() => ({ lat: mapCoords[0], lng: mapCoords[1] }), []);
-  const zoom = useMemo(() => mapZoom, []);
+  // const zoom = useMemo(() => mapContext.mapZoom, []);
 
-  const ref = useRef<number | undefined>(undefined);
+  // const ref = useRef<number | undefined>(undefined);
 
-  const handleMapUpdates = async () => {
-    // if (mapRef) {
-    // const boundaries: google.maps.LatLngBounds | undefined = mapRef.getBounds();
-    // if (boundaries) {
-    // const latHi = boundaries.getNorthEast().lat();
-    // const latLo = boundaries.getSouthWest().lat();
-    // const lngE = boundaries.getNorthEast().lng();
-    // const lngW = boundaries.getSouthWest().lng();
+  // const handleMapUpdates = async () => {
+  //   if (mapContext.mapRef) {
+  //     const boundaries: google.maps.LatLngBounds | undefined = mapContext.mapRef.getBounds();
+  //     if (boundaries) {
+  //       const latHi = boundaries.getNorthEast().lat();
+  //       const latLo = boundaries.getSouthWest().lat();
+  //       const lngE = boundaries.getNorthEast().lng();
+  //       const lngW = boundaries.getSouthWest().lng();
 
-    // const diveSiteList = await getDiveSiteData(latHi, latLo, lngE, lngW);
-    // setnewSites(!divesTog ? [] : diveSiteList);
+  //       const diveSiteList = await getDiveSiteData(latHi, latLo, lngE, lngW);
+  //       setnewSites(!divesTog ? [] : diveSiteList);
 
-    // const heatPointList = await getHeatPointData(latHi, latLo, lngE, lngW, animalVal);
-    // setHeatPts([0, 2].includes(mapConfig) ? heatPointList : []);
+  //       const heatPointList = await getHeatPointData(latHi, latLo, lngE, lngW, animalVal);
+  //       setHeatPts([0, 2].includes(mapConfig) ? heatPointList : []);
 
-    // const shoplist = await getShopData(latHi, latLo, lngE, lngW);
-    // setnewShops(!divesTog ? [] : shoplist);
-    // }
-    // }
-  };
+  //       const shoplist = await getShopData(latHi, latLo, lngE, lngW);
+  //       setnewShops(!divesTog ? [] : shoplist);
+  //     }
+  //   }
+  // };
 
-  const handleBoundsChange = async () => {
-    if (mapContext.mapRef) {
-      window.clearTimeout(ref.current);
-      ref.current = window.setTimeout(function () {
-        const boundaries: google.maps.LatLngBounds | undefined = mapContext.mapRef?.getBounds();
-        if (boundaries) {
-          mapContext.setBoundaries(boundaries);
-        }
-        // handleMapUpdates();
-      }, 100);
+
+  // console.log('Rere');
+
+  const handleBoundsChange = debounce(() => {
+    if (!mapContext.mapRef) {
+      return;
     }
-  };
+    const boundaries: google.maps.LatLngBounds | undefined = mapContext.mapRef.getBounds();
+    if (boundaries) {
+      mapContext.setBoundaries(boundaries);
+      console.log('Setting boundaries to: ', boundaries);
+    }
+  }, 500);
+
 
   const handleMapCenterChange = async () => {
-    if (mapContext.mapRef) {
-      const position = mapContext.mapRef.getCenter();
-      if (position) {
-        window.clearTimeout(mapCenterTimoutHandler);
-        mapCenterTimoutHandler = window.setTimeout(function () {
-          setMapCoords([position.lat(), position.lng()]);
-          handleMapUpdates();
-        }, 50);
-      }
-    }
+    // if (mapContext.mapRef) {
+    //   const position = mapContext.mapRef.getCenter();
+    //   if (position) {
+    //     window.clearTimeout(mapCenterTimoutHandler);
+    //     mapCenterTimoutHandler = window.setTimeout(function () {
+    //       setMapCoords([position.lat(), position.lng()]);
+    //       // handleMapUpdates();
+    //     }, 50);
+    //   }
+    // }
   };
 
-  const handleMapZoomChange = async () => {
-    if (mapContext.mapRef) {
-      const zoomLev = mapContext.mapRef.getZoom();
-      if (zoomLev) {
-        setMapZoom(zoomLev);
-        handleMapUpdates();
-      }
+  const handleMapZoomChange = debounce(() => {
+    if (!mapContext.mapRef) {
+      return;
     }
-  };
+    const zoomLev = mapContext?.mapRef?.getZoom();
+    if (zoomLev) {
+      mapContext.setMapZoom(zoomLev);
+      console.log('Setting zoom to: ', zoomLev);
+    }
+  }, 500);
 
   const zoomMapOut = () => {
-    setMapZoom(mapZoom - 1);
+    mapContext.setMapZoom(prev => prev - 1);
   };
 
   const zoomMapIn = () => {
-    setMapZoom(mapZoom + 1);
+    mapContext.setMapZoom(prev => prev + 1);
   };
 
   const returnToSiteSubmitterModal = () => {
@@ -161,7 +169,7 @@ export default function MapLoader() {
   const returnToShopModal = () => {
     if (selectedShop) {
       setMapCoords([selectedShop.lat, selectedShop.lng]);
-      setMapZoom(16);
+      mapContext.setMapZoom(16);
       setMapConfig(0);
       setSitesArray([]);
       modalResume();
@@ -169,17 +177,17 @@ export default function MapLoader() {
   };
 
   useLayoutEffect(() => {
-    setMapCoords([center.lat, center.lng]);
-    setMapZoom(zoom);
-    handleMapUpdates();
+    // setMapCoords([center.lat, center.lng]);
+    // setMapZoom(zoom);
+    // handleMapUpdates();
   }, []);
 
-  useEffect(() => {
-    if (mapContext.mapRef) {
-      mapContext.mapRef.setZoom(mapZoom);
-      handleMapZoomChange();
-    }
-  }, [mapZoom]);
+  // useEffect(() => {
+  //   if (mapContext.mapRef) {
+  //     mapContext.mapRef.setZoom(mapZoom);
+  //     handleMapZoomChange();
+  //   }
+  // }, [mapZoom]);
 
 
   useEffect(() => {
@@ -236,21 +244,30 @@ export default function MapLoader() {
       mapContext.mapRef.panTo({ lat: mapCoords[0], lng: mapCoords[1] });
     }
 
-    handleMapUpdates();
+    // handleMapUpdates();
   }, [mapCoords, divesTog, animalVal]);
 
+  useEffect(() => {
+    diveSiteContext.fetchItems(true);
+  }, [mapContext.boundaries?.toString()]);
 
   const shopPoints = mapConfig === 0 ? setupShopClusters(newShops) : [];
-  const sitePoints = setupClusters((mapContext?.diveSites?.items ? mapContext.diveSites.items : []), sitesArray);
+
+  const sitePoints = setupClusters((diveSiteContext?.paginator?.items ? diveSiteContext?.paginator?.items : []), sitesArray);
   const points: Cluster[] = [...sitePoints, ...shopPoints];
 
+  const latHi = mapContext?.boundaries?.getNorthEast().lat();
+  const latLo = mapContext?.boundaries?.getSouthWest().lat();
+  const lngE = mapContext?.boundaries?.getNorthEast().lng();
+  const lngW = mapContext?.boundaries?.getSouthWest().lng();
 
   const { clusters, supercluster } = useSupercluster({
     points:  points,
-    bounds:  mapContext.boundaries,
-    zoom:    mapZoom,
+    bounds:  [lngW, latLo, lngE, latHi],
+    zoom:    mapContext.mapZoom,
     options: { radius: 75, maxZoom: 16 },
   });
+
 
   const handlePinLoad = (marker: google.maps.Marker) => {
     setPinRef(marker);
@@ -284,7 +301,7 @@ export default function MapLoader() {
       setMapConfig={setMapConfig}
       returnToSiteSubmitterModal={returnToSiteSubmitterModal}
       returnToShopModal={returnToShopModal}
-      zoom={zoom}
+      zoom={mapContext.mapZoom}
       center={center}
       tempMarker={tempMarker}
       animalVal={animalVal}
@@ -292,13 +309,11 @@ export default function MapLoader() {
       supercluster={supercluster}
       heatpts={mapContext.heatPoints}
       divesTog={divesTog}
-      mapCoords={mapCoords}
       setMapCoords={setMapCoords}
       selectedDiveSite={selectedDiveSite}
       setSelectedDiveSite={setSelectedDiveSite}
       setSelectedShop={setSelectedShop}
       onLoad={handleOnLoad}
-      handleMapUpdates={handleMapUpdates}
       handleBoundsChange={handleBoundsChange}
       handleMapCenterChange={handleMapCenterChange}
       handleMapZoomChange={handleMapZoomChange}

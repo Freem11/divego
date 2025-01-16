@@ -3,12 +3,12 @@ import React  from 'react';
 import style from './style.module.scss';
 
 type DiveShopItemProps = {
-  imageUrl: string
+  imageUrl: string | null
   title:    string
   date:     string
 };
 
-export default function DiveShopItemView(props: DiveShopItemProps) {
+export default function DiveSiteItemView(props: DiveShopItemProps) {
   return (
     <div className={style.photoItemContainer}>
       <div className="d-flex">

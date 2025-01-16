@@ -9,27 +9,13 @@ import { Photo } from '../../entities/photos';
 
 export default function SelectedAreaPhotos() {
   const { boundaries } = useContext(MapBoundsContext);
-
   const ipp = 20;
-  // const loadMore = async (page: number) => {
-  //   return await getPhotosInBoundaries(boundaries, {}, new Pagination(page, 'asc', ipp));
-  // };
 
   const loadMore = async (page: number) => {
-    // return new Promise((resolve) => {
-    //   setTimeout(() => {
-    //     resolve();
-    //   }, 1000);
-    // });
-    return await getPhotosInBoundaries(boundaries, {}, new Pagination(page, 'asc', ipp));
+    if (boundaries) {
+      return await getPhotosInBoundaries(boundaries, {}, new Pagination({ page, ipp }));
+    }
   };
-
-  // useEffect(() => {
-  //   setPage(0);
-  //   console.log('Reset');
-  // }, [boundaries]);
-
-  console.log('key: ', boundaries?.toString());
 
   return (
     <div className="p-2">

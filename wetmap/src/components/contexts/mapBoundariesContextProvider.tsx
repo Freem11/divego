@@ -12,31 +12,39 @@ import { getDiveSitesInBoundaries } from '../../helpers/boundaries/getDiveSitesI
 import { MapBoundsContext } from './mapBoundariesContext';
 
 export type MapBoundsContextType = {
-  photos:              PaginatedItems<Photo>
-  setPhotos:           React.Dispatch<React.SetStateAction<PaginatedItems<Photo>>>
-  diveSites:           PaginatedItems<DiveSiteWithUserName>
-  diveShops:           DiveShop[] | null
-  heatPoints:          HeatPoint[] | null
-  // photos:              Photo[] | null
-  mapRef:              google.maps.Map | null
-  boundaries:          google.maps.LatLngBounds
-  setMapRef:           React.Dispatch<React.SetStateAction<google.maps.Map | null>>
-  setBoundaries:       React.Dispatch<React.SetStateAction<google.maps.LatLngBounds>>
-  setAnimalVal:        React.Dispatch<React.SetStateAction<string[]>>
-  setPhotoSearchValue: React.Dispatch<React.SetStateAction<string | null>>
+  mapRef:        google.maps.Map | null
+  setMapRef:     React.Dispatch<React.SetStateAction<google.maps.Map | null>>
+  boundaries:    google.maps.LatLngBounds | null
+  setBoundaries: React.Dispatch<React.SetStateAction<google.maps.LatLngBounds | null>>
+  mapZoom:       number
+  setMapZoom:    React.Dispatch<React.SetStateAction<number>>
+
+
+  // photos:     PaginatedItems<Photo>
+  // setPhotos:  React.Dispatch<React.SetStateAction<PaginatedItems<Photo>>>
+  // diveSites:  PaginatedItems<DiveSiteWithUserName>
+  // diveShops:  DiveShop[] | null
+  // heatPoints: HeatPoint[] | null
+  // // photos:              Photo[] | null
+
+
+  // setAnimalVal:        React.Dispatch<React.SetStateAction<string[]>>
+  // setPhotoSearchValue: React.Dispatch<React.SetStateAction<string | null>>
 };
 
 const MapBoundsContextProvider = ({ children }: any) => {
   // const [diveSites, setDiveSites] = useState<DiveSiteWithUserName[] | null>(null);
-  const [diveShops, setDiveShops] = useState<DiveShop[] | null>(null);
-  const [heatPoints, setHeatPoints] = useState<HeatPoint[] | null>(null);
-  const [photos, setPhotos] = useState<PaginatedItems<Photo>>({ items: null, pagination: new Pagination() });
-  const [diveSites, setDiveSites] = useState<PaginatedItems<DiveSiteWithUserName>>({ items: null });
+  // const [diveShops, setDiveShops] = useState<DiveShop[] | null>(null);
+  // const [heatPoints, setHeatPoints] = useState<HeatPoint[] | null>(null);
+  // const [photos, setPhotos] = useState<PaginatedItems<Photo>>({ items: null, pagination: new Pagination() });
+  // const [diveSites, setDiveSites] = useState<PaginatedItems<DiveSiteWithUserName>>({ items: null });
+  // const [animalVal, setAnimalVal] = useState<string[]>([]);
+  // const [photoSearchValue, setPhotoSearchValue] = useState<string | null>(null);
+
 
   const [mapRef, setMapRef] = useState<google.maps.Map | null>(null);
   const [boundaries, setBoundaries] = useState<google.maps.LatLngBounds | null>(null);
-  const [animalVal, setAnimalVal] = useState<string[]>([]);
-  const [photoSearchValue, setPhotoSearchValue] = useState<string | null>(null);
+  const [mapZoom, setMapZoom] = useState<number>(10);
 
 
   // useEffect(() => {
@@ -81,32 +89,36 @@ const MapBoundsContextProvider = ({ children }: any) => {
   //   })();
   // }, [boundaries, photos?.pagination?.page, photos.filter?.label]);
 
-  useEffect(() => {
-    (async () => {
-      if (boundaries) {
-        const items = await getDiveSitesInBoundaries(boundaries);
-        // console.log('FETCH DIVE SITES');
-        setDiveSites((prev) => {
-          return { ...prev, items };
-        });
-      }
-    })();
-  }, [boundaries]);
+  // useEffect(() => {
+  //   (async () => {
+  //     if (boundaries) {
+  //       const items = await getDiveSitesInBoundaries(boundaries);
+  //       // console.log('FETCH DIVE SITES');
+  //       setDiveSites((prev) => {
+  //         return { ...prev, items };
+  //       });
+  //     }
+  //   })();
+  // }, [boundaries]);
 
 
   return (
     <MapBoundsContext.Provider value={{
-      diveSites,
-      diveShops,
-      heatPoints,
-      photos,
-      setPhotos,
       mapRef,
-      boundaries,
       setMapRef,
+      mapZoom,
+      setMapZoom,
+      boundaries,
       setBoundaries,
-      setAnimalVal,
-      setPhotoSearchValue,
+
+      // diveSites,
+      // diveShops,
+      // heatPoints,
+      // photos,
+      // setPhotos,
+
+      // setAnimalVal,
+      // setPhotoSearchValue,
     }}
     >
       {children}

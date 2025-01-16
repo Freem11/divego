@@ -1,11 +1,12 @@
 
 
 export class Pagination {
+  // ipp - items per page
   page: number;
   ipp:  number;
   sort: string;
 
-  constructor(page: number = 0, sort: string = 'asc', ipp: number = 10) {
+  constructor({ page: page = 0, sort: sort = 'asc', ipp: ipp = 10 } = {}) {
     this.page    = page;
     this.sort    = sort;
     this.ipp     = ipp;
