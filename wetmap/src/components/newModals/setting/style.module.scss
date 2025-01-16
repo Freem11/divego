@@ -6,9 +6,17 @@
     }
 }
 
-.outline {
-    border-top: 1px solid #5f5e5e; /* Top border */
-    border-bottom: 1px solid #5f5e5e; /* Bottom border */
+.redOutline {
+    color: maroon;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
+    background-color: rgb(247, 217, 217);
+}
+
+.grayOutline {
+    color: #5f5e5e;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
 }
 
 .horizontalButtonContainer {
@@ -21,4 +29,6 @@
     height: 20%;
     margin-top: 1rem;
   }
+
+
 
