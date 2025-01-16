@@ -36,7 +36,7 @@ export default function SettingsView(props: SettingsProps) {
             { props.profileType === 'Diver Account'
             && (
               <span onClick={props.handlePartnerButton}>
-                <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
+                <p className={styles.upgradeLink}>{screenData.SettingsPage.notPartnerAccount}</p>
               </span>
             )}
             { props.profileType === 'Partner Account'
