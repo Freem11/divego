@@ -62,39 +62,6 @@ export const updateProfile = async (profile: Partial<ActiveProfile>) => {
   }
 };
 
-export const updateProfileCustom = async (values: { username?: string, profileBio?: string | null, id: string }) => {
-  console.log('supabase gets', values);
-
-  // Build the update object dynamically
-  const updateFields: Partial<{ UserName: string, profileBio: string | null }> = {};
-  if (values.username !== undefined) {
-    updateFields.UserName = values.username;
-  }
-  if (values.profileBio !== undefined) {
-    updateFields.profileBio = values.profileBio;
-  }
-
-  if (Object.keys(updateFields).length === 0) {
-    throw new Error('No fields provided for update');
-  }
-
-  const { data, error } = await supabase
-    .from('UserProfiles')
-    .update(updateFields)
-    .eq('UserID', values.id);
-
-  console.log('supa sends', data, error);
-
-  if (error) {
-    console.log('couldn\'t do it,', error);
-    throw error;
-  }
-
-  if (data) {
-    return data as ActiveProfile[];
-  }
-};
-
 export const deleteProfile = async (id) => {
   const { data, error } = await supabase
     .from('UserProfiles')
