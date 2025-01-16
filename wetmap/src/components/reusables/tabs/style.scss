@@ -1,0 +1,61 @@
+:root {
+  --ssrc-tabs-underline-width: 1px;
+  --ssrc-tabs-underline-color: red;
+  --ssrc-tabs-active-underline-width: .1rem;
+  --ssrc-tabs-active-underline-color: blue;
+  --ssrc-tabs-active-text-color: blue;
+  --ssrc-tabs-focus-text-color: blue;
+  --ssrc-tabs-item-padding: .4rem .2rem .3rem .2rem;
+}
+
+// ssrc: scuba seasons reusable component
+.ssrc-tabs_content{
+  display: none;
+  &.ssrc-tabs_content--active{
+    display: block;
+  }
+}
+
+.ssrc-tabs_items {
+  align-items: center;
+  border-bottom: var(--ssrc-tabs-underline-width) solid var(--ssrc-tabs-underline-color);
+  display: flex;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+
+  .ssrc-tabs_item {
+    margin-top: 0;
+
+    button {
+      border-bottom: var(--ssrc-tabs-active-underline-width) solid transparent;
+      color: inherit;
+      display: block;
+      margin: 0 .4rem 0 0;
+      padding: var(--ssrc-tabs-item-padding);
+      text-decoration: none;
+      background-color: transparent;
+      border-color: transparent;
+      outline: none;
+      &:focus,
+      &:hover {
+        color: var(--ssrc-tabs-focus-text-color);
+      }
+    }
+    &.ssrc-tabs_item--active button {
+      border-bottom-color: var(--ssrc-tabs-active-underline-color);
+      color: var(--ssrc-tabs-active-text-color);
+    }
+  }
+
+  &.full-width {
+    .ssrc-tabs_item {
+      flex: 1 0 0;
+      text-align: center;
+
+      a {
+        margin: 0;
+      }
+    }
+  }
+}
