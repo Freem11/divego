@@ -51,10 +51,10 @@ export default function PicUploader(props: PicUploaderProps) {
 
     if (error) {
       toast.error(screenData.PicUploader.uploadError);
-      return;
+    } else {
+      toast.success(screenData.PicUploader.uploadSuccess);
     }
 
-    toast.success(screenData.PicUploader.uploadSuccess);
     setPin({ ...pin, PicFile: null });
   };
 
