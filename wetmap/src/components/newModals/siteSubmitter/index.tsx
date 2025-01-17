@@ -56,19 +56,19 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
   };
 
   const onSubmit = async (formData: Form) => {
-    const { error, data } = await insertDiveSiteWaits({
+    const { error } = await insertDiveSiteWaits({
       Site:      formData.Site,
       Latitude:  formData.Latitude,
       Longitude: formData.Longitude,
       UserID:    profile && profile.UserID,
     });
-    onClose();
+
     if (error) {
       toast.error(screenData.DiveSiteAdd.addSiteError);
-    }
-    if (data) {
+    } else {
       toast.success(screenData.DiveSiteAdd.addSiteSuccess);
     }
+    onClose();
   };
 
   const onClose = () => {

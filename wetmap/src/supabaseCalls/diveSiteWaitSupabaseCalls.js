@@ -22,9 +22,9 @@ export const insertDiveSiteWaits = async (values) => {
     .from(TABLE_NAME)
     .insert([
       {
-        name:   values.Site,
-        lat:    values.Latitude,
-        lng:    values.Longitude,
+        name: values.Site,
+        lat: values.Latitude,
+        lng: values.Longitude,
         UserID: values.UserID,
       },
     ]);
@@ -32,7 +32,6 @@ export const insertDiveSiteWaits = async (values) => {
   if (error) {
     console.log('couldn\'t do it,', error);
   }
-
   return { data, error };
 };
 
