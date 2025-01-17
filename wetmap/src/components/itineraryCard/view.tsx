@@ -31,9 +31,17 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
           <p className={style.title}>{itinerary.tripName}</p>
           <div className={style.info}>
             <p>
-              {format(new Date(itinerary.startDate), 'MMM d, yyyy')}
+              {new Intl.DateTimeFormat('en-US', {
+                month: 'short',
+                day:   'numeric',
+                year:  'numeric',
+              }).format(new Date(itinerary.startDate))}
               {' - '}
-              {format(new Date(itinerary.endDate), 'MMM d, yyyy')}
+              {new Intl.DateTimeFormat('en-US', {
+                month: 'short',
+                day:   'numeric',
+                year:  'numeric',
+              }).format(new Date(itinerary.endDate))}
             </p>
             <span>|</span>
             <p>{itinerary.price }</p>
