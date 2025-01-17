@@ -23,8 +23,8 @@ export default function PartnerAccountRequest(props: PartnerAccountRequestpProps
       toast.error(screenData.PartnerRequestPage.createError);
     } else {
       toast.success(screenData.PartnerRequestPage.createSuccess);
-      onClose();
     }
+    onClose();
   };
 
   const onClose = () => {
