@@ -1,4 +1,5 @@
 import { DiveSiteWithUserName } from '../entities/diveSite';
+import { GPSBubble } from '../entities/GPSBubble';
 import { supabase } from '../supabase';
 
 export const diveSites = async () => {
@@ -14,13 +15,13 @@ export const diveSites = async () => {
   }
 };
 
-export const getDiveSitesWithUser = async (values) => {
+export const getDiveSitesWithUser = async (bubble: GPSBubble, filter?: Partial<DiveSiteWithUserName>) => {
   const { data, error } = await supabase.rpc('get_divesites_with_username', {
-    max_lat: values.maxLat,
-    min_lat: values.minLat,
-    max_lng: values.maxLng,
-    min_lng: values.minLng,
-    userid:  values.myDiveSites,
+    max_lat: bubble.maxLat,
+    min_lat: bubble.minLat,
+    max_lng: bubble.maxLng,
+    min_lng: bubble.minLng,
+    userid:  filter?.userid ?? '',
   });
 
   if (error) {

@@ -12,8 +12,11 @@ import PicUploader from '../picUploader/index';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ActiveProfile } from '../../../entities/profile';
+import { MapBoundsContext } from '../../contexts/mapBoundariesContext';
 
-type DiveSiteProps = Partial<ModalHandleProps>;
+type DiveSiteProps = Partial<ModalHandleProps> & {
+  panTo?: boolean
+};
 export default function DiveSite(props: DiveSiteProps) {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { profile }          = useContext(UserProfileContext);
@@ -22,10 +25,16 @@ export default function DiveSite(props: DiveSiteProps) {
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+  const mapContext = useContext(MapBoundsContext);
 
   useEffect(() => {
     if (selectedDiveSite) {
       getPhotos(selectedDiveSite, profile);
+    }
+
+    if (props.panTo && selectedDiveSite && mapContext.mapRef) {
+      const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
+      mapContext.mapRef.panTo(latlng);
     }
   }, [selectedDiveSite, profile]);
 

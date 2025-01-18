@@ -1,7 +1,8 @@
 import { DiveShop } from '../entities/diveShop';
+import { GPSBubble } from '../entities/GPSBubble';
 import { supabase } from '../supabase';
 
-export const getDiveShops = async (values) => {
+export const getDiveShops = async (values: GPSBubble) => {
   const { data, error } = await supabase.rpc('get_diveshops', {
     max_lat: values.maxLat,
     min_lat: values.minLat,
@@ -16,8 +17,9 @@ export const getDiveShops = async (values) => {
 
   if (data) {
     // console.log(data);
-    return data;
+    return data as DiveShop[];
   }
+  return [];
 };
 
 export const shops = async (GPSBubble) => {

@@ -6,6 +6,7 @@ type InfiniteScrollProps = {
   loadMore?:         () => Promise<any>
   hasMore?:          boolean
   loading?:          boolean
+  className?:        string
 };
 
 
@@ -49,7 +50,7 @@ export default function Container(props: InfiniteScrollProps) {
 
 
   return (
-    <div className="ssrc-infinite-scroll" ref={wrapperRef}>
+    <div className={`${props.className ?? ''} ssrc-infinite-scroll`} ref={wrapperRef}>
       {props.children}
       <div ref={targetRef}></div>
     </div>

@@ -9,8 +9,11 @@ import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorListModal from '../tripCreatorListModal/index';
+import { MapBoundsContext } from '../../contexts/mapBoundariesContext';
 
-type ShopModalProps = Partial<ModalHandleProps>;
+type ShopModalProps = Partial<ModalHandleProps> & {
+  panTo: boolean
+};
 
 export default function ShopModal(props: ShopModalProps) {
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
@@ -20,6 +23,7 @@ export default function ShopModal(props: ShopModalProps) {
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
   const { modalShow } = useContext(ModalContext);
+  const mapContext = useContext(MapBoundsContext);
 
   useEffect(() => {
     if (selectedShop) {
@@ -35,6 +39,11 @@ export default function ShopModal(props: ShopModalProps) {
       setIsMyShop(true);
     } else {
       setIsMyShop(false);
+    }
+
+    if (props.panTo && selectedShop && mapContext.mapRef) {
+      const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
+      mapContext.mapRef.panTo(latlng);
     }
   }, [selectedShop, profile]);
 

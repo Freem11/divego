@@ -16,6 +16,7 @@ const defaultProps = {
 type InfiniteScrollProps = Partial<typeof defaultProps> & {
   loadMore:   (page: number) => Promise<any>
   renderItem: (item: any, index: number) => ReactNode
+  className?: string
 };
 
 const InfiniteScroll = (_props: InfiniteScrollProps) => {
@@ -66,6 +67,7 @@ const InfiniteScroll = (_props: InfiniteScrollProps) => {
       loadMore={loadMore}
       hasMore={hasMore}
       loading={loading}
+      className={props.className}
     >
       {(page > 0) && items?.map((item, index) => {
         return props.renderItem(item, index);

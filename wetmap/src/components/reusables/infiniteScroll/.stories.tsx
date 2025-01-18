@@ -5,7 +5,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import Component from './index';
 
 const loadMore = async (page: number) => {
-  return await getPhotosInBoundaries(boundaries, {}, new Pagination(page, 'asc', ipp));
+
 };
 
 const meta: Meta<typeof Component> = {

@@ -27,7 +27,6 @@ type MapViewProps = {
   zoom:                       number
   center:                     LatLngObject
   tempMarker:                 LatLngObject | null
-  animalVal:                  string[]
   clusters:                   Cluster[]
   supercluster:               SuperclusterInstance
   divesTog:                   boolean

@@ -1,20 +1,17 @@
 import React from 'react';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
-import DiveShopItemView from './view';
 import { DiveShop } from '../../../entities/diveShop';
+import ListItemWithImage from '../../reusables/listItemWithImage';
 
-type PhotoItemProps = {
+type DiveShopItemProps = {
   diveShop: DiveShop
 };
 
-export default function DiveShopItem(props: PhotoItemProps) {
+export default function DiveShopItem(props: DiveShopItemProps) {
   const imageUrl = getPhotoPublicUrl(props.diveShop.diveshopprofilephoto);
-  if (!imageUrl) {
-    return null;
-  }
 
   return (
-    <DiveShopItemView
+    <ListItemWithImage
       imageUrl={imageUrl}
       title={props.diveShop.orgname}
       date={props.diveShop.diveshopbio}

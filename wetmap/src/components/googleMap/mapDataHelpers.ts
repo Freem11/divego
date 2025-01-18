@@ -11,33 +11,33 @@ import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
 
 async function getDiveSiteData(northValue: number, southValue: number, eastValue: number, westValue: number) {
-  if (westValue > eastValue) {
-    const AmericanDiveSites = await getDiveSitesWithUser({
-      myDiveSites: '',
-      minLat:      southValue,
-      maxLat:      northValue,
-      minLng:      -180,
-      maxLng:      eastValue,
-    });
-    const AsianDiveSites = await getDiveSitesWithUser({
-      myDiveSites: '',
-      minLat:      southValue,
-      maxLat:      northValue,
-      minLng:      westValue,
-      maxLng:      180,
-    });
-    const diveSiteList: DiveSiteWithUserName[] = [...AsianDiveSites, ...AmericanDiveSites];
-    return diveSiteList;
-  } else {
-    const diveSiteList: DiveSiteWithUserName[] = await getDiveSitesWithUser({
-      myDiveSites: '',
-      minLat:               southValue,
-      maxLat:               northValue,
-      minLng:               westValue,
-      maxLng:               eastValue,
-    });
-    return diveSiteList;
-  }
+  // if (westValue > eastValue) {
+  //   const AmericanDiveSites = await getDiveSitesWithUser({
+  //     myDiveSites: '',
+  //     minLat:      southValue,
+  //     maxLat:      northValue,
+  //     minLng:      -180,
+  //     maxLng:      eastValue,
+  //   });
+  //   const AsianDiveSites = await getDiveSitesWithUser({
+  //     myDiveSites: '',
+  //     minLat:      southValue,
+  //     maxLat:      northValue,
+  //     minLng:      westValue,
+  //     maxLng:      180,
+  //   });
+  //   const diveSiteList: DiveSiteWithUserName[] = [...AsianDiveSites, ...AmericanDiveSites];
+  //   return diveSiteList;
+  // } else {
+  //   const diveSiteList: DiveSiteWithUserName[] = await getDiveSitesWithUser({
+  //     myDiveSites: '',
+  //     minLat:               southValue,
+  //     maxLat:               northValue,
+  //     minLng:               westValue,
+  //     maxLng:               eastValue,
+  //   });
+  //   return diveSiteList;
+  // }
 }
 
 async function getHeatPointData(northValue: number, southValue: number, eastValue: number, westValue: number, selectedCreatures: string[]) {
@@ -119,12 +119,12 @@ function formatHeatVals(heatValues: HeatData[]) {
 }
 
 async function getShopData(northValue: number, southValue: number, eastValue: number, westValue: number) {
-  const shopList: DiveShop[] = await getDiveShops({
-    minLat: southValue,
-    maxLat: northValue,
-    minLng: westValue,
-    maxLng: eastValue,
-  });
-  return shopList;
+  // const shopList: DiveShop[] = await getDiveShops({
+  //   minLat: southValue,
+  //   maxLat: northValue,
+  //   minLng: westValue,
+  //   maxLng: eastValue,
+  // });
+  // return shopList;
 }
 export { getDiveSiteData, getHeatPointData, formatHeatVals, getShopData };

@@ -10,7 +10,6 @@ import { MapBoundsContext } from '../contexts/mapBoundariesContext';
 import { SitesArrayContext } from '../contexts/sitesArrayContext';
 import { CoordsContext } from '../contexts/mapCoordsContext';
 import { ZoomContext } from '../contexts/mapZoomContext';
-import { AnimalContext } from '../contexts/animalContext';
 import { HeatPointsContext } from '../contexts/heatPointsContext';
 import { DiveSitesContext } from '../contexts/diveSitesContext';
 import { SelectedShopContext } from '../contexts/selectedShopContext';
@@ -25,6 +24,9 @@ import { PinSpotContext } from '../contexts/pinSpotContext';
 import { ModalContext } from '../reusables/modal/context';
 import { debounce } from '../reusables/_helpers/debounce';
 import { MapBoundariesDiveSiteContext } from '../contexts/mapBoundariesDiveSiteContext';
+import { MapBoundariesDiveShopContext } from '../contexts/mapBoundariesDiveShopContext';
+import { getHeatPointsInBoundaries } from '../../helpers/getHeatPointsInBoundaries';
+import { MapBoundariesPhotoContext } from '../contexts/mapBoundariesPhotoContext';
 
 const libraries: Libraries = ['places', 'visualization'];
 
@@ -54,9 +56,10 @@ export default function MapLoader() {
 
   const { dragPin, setDragPin } = useContext(PinSpotContext);
 
-  const { animalVal } = useContext(AnimalContext);
   const { divesTog } = useContext(DiveSitesContext);
   const diveSiteContext = useContext(MapBoundariesDiveSiteContext);
+  const diveShopContext = useContext(MapBoundariesDiveShopContext);
+  const photoContext = useContext(MapBoundariesPhotoContext);
 
   const { modalShow, modalResume } = useContext(ModalContext);
 
@@ -190,30 +193,30 @@ export default function MapLoader() {
   // }, [mapZoom]);
 
 
-  useEffect(() => {
-    if (mapContext.mapRef) {
-      const position = mapContext.mapRef.getCenter();
-      if (position) {
-        if (selectedShop && selectedShop.orgname !== '') {
-          const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
-          mapContext.mapRef.panTo(latlng);
-          setMapZoom(16);
-        }
-      }
-    }
-  }, [selectedShop]);
+  // useEffect(() => {
+  //   if (mapContext.mapRef) {
+  //     const position = mapContext.mapRef.getCenter();
+  //     if (position) {
+  //       if (selectedShop && selectedShop.orgname !== '') {
+  //         const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
+  //         mapContext.mapRef.panTo(latlng);
+  //         setMapZoom(16);
+  //       }
+  //     }
+  //   }
+  // }, [selectedShop]);
 
 
   useEffect(() => {
     if (mapContext.mapRef) {
-      const position = mapContext.mapRef.getCenter();
-      if (position) {
-        if (selectedDiveSite && selectedDiveSite.name !== '') {
-          const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
-          mapContext.mapRef.panTo(latlng);
-          setMapZoom(16);
-        }
-      }
+      // const position = mapContext.mapRef.getCenter();
+      // if (position) {
+      //   if (selectedDiveSite && selectedDiveSite.name !== '') {
+      //     const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
+      //     mapContext.mapRef.panTo(latlng);
+      //     setMapZoom(16);
+      //   }
+      // }
       if (selectedDiveSite && !selectedDiveSite.lat) {
         setTempMarker({
           lat: selectedDiveSite.lat,
@@ -245,13 +248,16 @@ export default function MapLoader() {
     }
 
     // handleMapUpdates();
-  }, [mapCoords, divesTog, animalVal]);
+  }, [mapCoords, divesTog]);
 
   useEffect(() => {
-    diveSiteContext.fetchItems(true);
+    if (mapContext.boundaries) {
+      diveSiteContext.fetchItems(true);
+      diveShopContext.fetchItems(true);
+    }
   }, [mapContext.boundaries?.toString()]);
 
-  const shopPoints = mapConfig === 0 ? setupShopClusters(newShops) : [];
+  const shopPoints = mapConfig === 0 ? setupShopClusters(diveShopContext?.paginator?.items ? diveShopContext?.paginator?.items : []) : [];
 
   const sitePoints = setupClusters((diveSiteContext?.paginator?.items ? diveSiteContext?.paginator?.items : []), sitesArray);
   const points: Cluster[] = [...sitePoints, ...shopPoints];
@@ -304,10 +310,9 @@ export default function MapLoader() {
       zoom={mapContext.mapZoom}
       center={center}
       tempMarker={tempMarker}
-      animalVal={animalVal}
       clusters={clusters}
       supercluster={supercluster}
-      heatpts={mapContext.heatPoints}
+      heatpts={photoContext.heatPoints}
       divesTog={divesTog}
       setMapCoords={setMapCoords}
       selectedDiveSite={selectedDiveSite}

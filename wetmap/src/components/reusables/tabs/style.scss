@@ -10,9 +10,8 @@
 
 // ssrc: scuba seasons reusable component
 .ssrc-tabs_content{
-  display: none;
-  &.ssrc-tabs_content--active{
-    display: block;
+  &.ssrc-tabs_content--hidden{
+    display: none;
   }
 }
 

@@ -2,9 +2,10 @@ import React from 'react';
 import './style.scss';
 
 type TabItem = {
-  key?:    string
-  title:   string | React.FC
-  content: string | React.FC
+  key?:       string
+  title:      string | React.FC
+  content:    string | React.FC
+  className?: string
 };
 type TabsProps = {
   data:       TabItem[]
@@ -36,23 +37,16 @@ const Tabs = (props: TabsProps) => {
           );
         })}
       </ul>
-      <div>
-        {props?.data?.map((tab, index) => {
-          const className = `ssrc-tabs_content ${activeTab === index ? 'ssrc-tabs_content--active' : ''}`;
-          return             (
-            <div key={index} className={className}>
-              {typeof tab.content === 'function' ? <tab.content /> : tab.content}
-            </div>
-          );
-        })}
-        {/* {props?.data?.filter((_, index) => activeTab === index).map((tab, index) => {
-          return (
-            <div key={index} className="ssrc-tabs_content ssrc-tabs_content--active">
-              {typeof tab.content === 'function' ? <tab.content /> : tab.content}
-            </div>
-          );
-        })} */}
-      </div>
+
+      {props?.data?.map((tab, index) => {
+        const className = `ssrc-tabs_content ${tab?.className ?? ''} ${activeTab === index ? '' : 'ssrc-tabs_content--hidden'}`;
+        return (
+          <div key={index} className={className}>
+            {typeof tab.content === 'function' ? <tab.content /> : tab.content}
+          </div>
+        );
+      })}
+
     </div>
   );
 };

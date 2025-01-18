@@ -8,12 +8,12 @@ import whiteMantaIcon from '../../../images/Matt_Manta_White.png';
 import style from './style.module.scss';
 import Tabs from '../../reusables/tabs';
 import Modal from '../../reusables/modal/modal';
-import SelectedAreaPhotos from '../../selectedAreaPhotos';
-import SelectedAreaDiveSites from '../../selectedAreaDiveSites';
-import SelectedAreaDiveShops from '../../selectedAreaDiveShops';
 import AppleLinkButton from '../../../images/AppleCTA.png';
 import GoogleLinkButton from '../../../images/GoogleCTA.png';
 import Emilio from '../../../images/EmilioNew.png';
+import { BoundaryDiveShops } from '../../boundaryDiveShops';
+import { BoundaryPhotos } from '../../boundaryPhotos';
+import { BoundaryDiveSites } from '../../boundaryDiveSites';
 
 type LayoutMainViewProps = {
   mapConfig:                   number
@@ -109,13 +109,15 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
       <section>
         <div className="container-fluid">
           <div className="cols col-gapless">
-            <div className="col-md-12 col-4 full-height" style={{ overflow: 'hidden', height: '90vh' }}>
-              <Tabs data={[
-                { key: 't-1', title: 'Dive Sites', content: SelectedAreaDiveSites },
-                { key: 't-2', title: 'Sea Life', content: SelectedAreaPhotos },
-                { key: 't-3', title: 'Dive Centers', content: SelectedAreaDiveShops },
-                { key: 't-4', title: 'Test', content: 'Lorem ipsum dolor sit amet' },
-              ]}
+            <div className="col-md-12 col-4 full-height scroll-container" style={{ overflow: 'hidden', height: '90vh' }}>
+              <Tabs
+                className="scroll-container non-scrollable"
+                data={[
+                  { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites',    content: BoundaryDiveSites },
+                  { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryPhotos },
+                  { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Centers',  content: BoundaryDiveShops },
+                  { key: 't-4', title: 'Test', content: 'Lorem ipsum dolor sit amet' },
+                ]}
               />
 
               {/* <div className="hero">

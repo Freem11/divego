@@ -59,6 +59,7 @@
 @import "./mixins/stack.scss";
 @import "./mixins/blinking.scss";
 @import "./mixins/justify.scss";
+@import "./utils/scrollable.scss";
 
 @include padding-variant(4, $unit-4);
 @include padding-variant(6, $unit-6);
@@ -145,4 +146,6 @@ h6 {
   --ssrc-text-input-height: #{$control-size};
   --ssrc-text-input-color: #{$gray-color};
   --ssrc-text-input-border-color: #{$gray-color};
+
+  --ssrc-list-item-with-image-hover-color:#{$secondary-color};
 }

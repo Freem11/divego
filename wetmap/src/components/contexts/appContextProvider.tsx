@@ -20,8 +20,9 @@ import SelectedShopContextProvider from './selectedShopContext';
 import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from '../reusables/modal//contextProvider';
 import MapConfigContextProvider from './mapConfigContext';
-import MapBoundariesPhotoContextProvider from './mapBoundariesPhotoContext';
-import MapBoundariesDiveSiteContextProvider from './mapBoundariesDiveSiteContext';
+import MapBoundariesDiveSiteContextProvider from './mapBoundariesDiveSiteContextProvider';
+import MapBoundariesDiveShopContextProvider from './mapBoundariesDiveShopContextProvider';
+import { MapBoundariesPhotoContextProvider } from './mapBoundariesPhotoContextProvider';
 
 const providers = [
   AreaPicsContextProvider,
@@ -44,8 +45,9 @@ const providers = [
   SitesArrayContextProvider,
   ModalContextProvider,
   MapConfigContextProvider,
-  MapBoundariesPhotoContextProvider,
   MapBoundariesDiveSiteContextProvider,
+  MapBoundariesDiveShopContextProvider,
+  MapBoundariesPhotoContextProvider,
 ];
 
 export const AppContextProvider = combineComponents(...providers);
