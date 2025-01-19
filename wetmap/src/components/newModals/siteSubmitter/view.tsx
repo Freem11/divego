@@ -32,7 +32,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
       <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
         <div>
           <div className="d-flex">
-            <h1 className="text-clip">{screenData.PicUploader.header}</h1>
+            <h1 className="text-clip">{screenData.DiveSiteAdd.header}</h1>
           </div>
 
           <div className="stack-4 mb-2">
