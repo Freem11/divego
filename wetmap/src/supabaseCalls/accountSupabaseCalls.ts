@@ -86,12 +86,13 @@ export const grabProfileById = async (id: string) => {
 
   if (error) {
     console.log('couldn\'t do it,', error);
-    return [];
+    return null;
   }
 
-  if (data) {
-    return data as ActiveProfile[];
+  if (data[0]) {
+    return data[0] as ActiveProfile;
   }
+  return null;
 };
 
 export const grabProfileByUserName = async (userName: string) => {

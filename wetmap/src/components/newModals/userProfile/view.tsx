@@ -4,7 +4,6 @@ import style from './style.module.scss';
 import Button from '../../reusables/button';
 import Icon from '../../../icons/Icon';
 import defaultHeaderPicture from '../../../images/blackManta.png';
-import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { PhotosGroupedByDate } from '../../../entities/photos';
 import PlainTextInput from '../../reusables/plainTextInput';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
@@ -15,7 +14,7 @@ import { ActiveProfile } from '../../../entities/profile';
 
 type userProfileViewProps = {
   onClose?:                () => void
-  profile:                 ActiveProfile
+  profile:                 ActiveProfile | null
   handleProfileBioChange:  (profileBio: string) => void
   handleProfileNameChange: (profileName: string) => void
   handleFollow:            () => void
@@ -66,7 +65,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                     // value={props?.diveSite?.divesitebio || ''}
                     readOnly={!props?.isActiveProfile}
                     onSave={props?.handleProfileNameChange}
-                    value={props.profile.UserName}
+                    value={props.profile?.UserName}
                   />
                 </h1>
                 <div>
@@ -89,7 +88,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                   // value={props?.diveSite?.divesitebio || ''}
                   readOnly={!props?.isActiveProfile}
                   onSave={props?.handleProfileBioChange}
-                  value={props.profile.profileBio ?? ''}
+                  value={props.profile?.profileBio ?? ''}
                   placeholder={screenData.UserProfile.userDefaultDescription}
                 />
               </div>
@@ -100,7 +99,7 @@ export default function UserProfileView(props: userProfileViewProps) {
 
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
-          <h3>{`${props.profile.UserName}'s Sea Creature Encounters`}</h3>
+          <h3>{`${props.profile?.UserName}'s Sea Creature Encounters`}</h3>
           <div className={style.addPictureButton}>
             {(props.isActiveProfile)
               ? (

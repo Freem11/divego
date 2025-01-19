@@ -39,7 +39,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
 
     modalShow(UserProfile, {
       keepPreviousModal: true,
-      selectedProfile:   picOwnerAccount && picOwnerAccount.UserID,
+      userProfileID:     picOwnerAccount && picOwnerAccount.UserID,
       size:              'large',
 
     });

@@ -18,26 +18,37 @@ import Settings from '../../newModals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 
 
-type UserProps = Partial<ModalHandleProps> & { selectedProfile?: any };
+type UserProps = Partial<ModalHandleProps> & {
+  userProfileID?: string
+};
 export default function UserProfile(props: UserProps) {
   const { activeSession } = useContext(SessionContext);
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
-  const [openedProfile, setOpenedProfile] = useState<ActiveProfile>(profile!);
+  const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
+  const isActiveProfile: boolean = !props.userProfileID;
 
   useEffect(() => {
-    if (props.selectedProfile) {
-      (getProfileDetails(props.selectedProfile));
-    }
+    (async () => {
+      if (props.userProfileID) {
+        const testProfile = await grabProfileById(props.userProfileID);
+        console.log(testProfile);
+        setOpenedProfile(testProfile);
+      } else {
+        setOpenedProfile(profile);
+      }
+    })();
   }, []);
 
-  const getProfileDetails = async (profile: any) => {
-    try {
-      setOpenedProfile((await grabProfileById(profile))![0]);
-    } catch (e) {
-      console.log((e as Error).message);
-    }
-  };
+  // console.log(openedProfile);
+  // const getProfileDetails = async (profile: any) => {
+  //   try {
+  //     const testProfile = await grabProfileById(profile)[0];
+  //     setOpenedProfile(testProfile);
+  //   } catch (e) {
+  //     console.log((e as Error).message);
+  //   }
+  // };
 
   const handleProfileNameChange = async (newName: string) => {
     // console.log(((newName ?? '').localeCompare('')));
@@ -49,7 +60,7 @@ export default function UserProfile(props: UserProps) {
     // } else {
     if (profile) {
       setProfile({ ...profile, UserName: newName });
-      setOpenedProfile({ ...openedProfile!, UserName: newName });
+      setOpenedProfile({ ...openedProfile, UserName: newName });
       try {
         await updateProfile({
           UserID:       profile!.UserID,
@@ -75,7 +86,7 @@ export default function UserProfile(props: UserProps) {
       setProfile({ ...profile, profileBio: newBio });
       setOpenedProfile({ ...openedProfile!, profileBio: newBio });
       try {
-        await updateProfile({ profileBio: newBio, UserID: profile!.UserID });
+        await updateProfile({ profileBio: newBio, UserID: profile.UserID });
       } catch (e) {
         console.log((e as Error).message);
       }
@@ -89,12 +100,12 @@ export default function UserProfile(props: UserProps) {
   return (
     <UserProfileView
       onClose={props.onModalCancel}
-      profile={openedProfile!}
+      profile={openedProfile}
       handleProfileBioChange={handleProfileBioChange}
       handleProfileNameChange={handleProfileNameChange}
       handleFollow={() => {}}
       openSettings={openSettings}
-      isActiveProfile={activeSession?.user.id == openedProfile!.UserID}
+      isActiveProfile={isActiveProfile}
     />
   );
 }
