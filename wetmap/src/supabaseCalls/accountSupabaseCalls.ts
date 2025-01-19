@@ -44,22 +44,16 @@ export const createProfile = async (values) => {
 };
 
 export const updateProfile = async (profile: Partial<ActiveProfile>) => {
-  console.log('supabase gets', profile);
-  const { data, error } = await supabase
+  const response = await supabase
     .from('UserProfiles')
     .update(profile)
     .eq('UserID', profile.UserID);
 
-  console.log('supa sends', data, error);
-
-  if (error) {
-    console.log('couldn\'t do it,', error);
-    throw error;
+  if (response.error) {
+    console.log('couldn\'t do it,', response.error);
   }
 
-  if (data) {
-    return data as ActiveProfile[];
-  }
+  return response;
 };
 
 export const deleteProfile = async (id) => {

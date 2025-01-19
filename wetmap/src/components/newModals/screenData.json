@@ -82,7 +82,10 @@
         "emptyDrawer": " hasn't posted any sightings yet.",
         "userDoesFollow": "Following",
         "UserDoesNotFollow": "Follow",
-        "userDefaultDescription": "Say a little about yourself..."
+        "userDefaultDescription": "Say a little about yourself...",
+        "UserProfileUpdateSuccessMessage": "User Profile updated successfully...",
+        "DuplicateUserNameErrorMessage": "Username already in use, please try again...",
+        "EmptyUserNameError": "Username cannot be empty, please try again..."
       },
       "DiveSite" :
       {
