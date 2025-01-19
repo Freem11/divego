@@ -9,25 +9,26 @@ type ConfirmDeleteAccountViewProps = {
 
 export default function DiveSiteView(props: ConfirmDeleteAccountViewProps) {
   return (
-    <div className="flex-column-between full-height grid-lg text-center p-2">
-
-
+    <div className="flex-column-between full-height p-8">
       <div className="columns">
-        <div className="column col-12">
-          <h1 className="text-primary">{screenData.ConfirmDeleteAccount.title}</h1>
+        <div className="d-flex">
+          <h1 className="text-clip uppercase">{screenData.ConfirmDeleteAccount.title}</h1>
         </div>
       </div>
-      <div className="columns">
-        <div className="column col-12">
-          <h3 className="text-secondary">{screenData.ConfirmDeleteAccount.subHeader}</h3>
+      <div>
+
+        <div className="columns">
+          <div className="column col-12">
+            <h3 className="text-gray">{screenData.ConfirmDeleteAccount.subHeader}</h3>
+          </div>
         </div>
+        <p className="text-gray">{screenData.ConfirmDeleteAccount.body}</p>
       </div>
-      <p className="text-gray">{screenData.ConfirmDeleteAccount.body}</p>
       <div className={style.horizontalButtonContainer}>
         <div className="col-3">
           <Button
             onClick={() => {}}
-            className="btn-md bg-error"
+            className="btn-md "
             type="button"
           >
             {screenData.ConfirmDeleteAccount.deleteBtnText}
@@ -37,7 +38,7 @@ export default function DiveSiteView(props: ConfirmDeleteAccountViewProps) {
 
           <Button
             onClick={() => {}}
-            className="btn-md"
+            className="btn-md bg-primary"
             type="button"
           >
             {screenData.ConfirmDeleteAccount.cancelBtnText}
@@ -46,7 +47,7 @@ export default function DiveSiteView(props: ConfirmDeleteAccountViewProps) {
         <div className="col-3">
           <Button
             onClick={() => {}}
-            className="btn-md"
+            className="btn-md bg-primary"
             type="button"
           >
             {screenData.ConfirmDeleteAccount.contact}
