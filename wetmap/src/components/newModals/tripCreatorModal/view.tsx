@@ -7,6 +7,7 @@ import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { useForm } from 'react-hook-form';
 import Button from '../../reusables/button/button';
+import Label from '../../reusables/label';
 
 
 type TripCreatorViewProps = {
@@ -42,45 +43,52 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
         <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
           <div className="stack-4 mb-2">
+            <Label label={screenData.TripCreator.tripNameLabel}>
+              <TextInput
+                iconLeft={<Icon name="store" />}
+                placeholder={screenData.TripCreator.tripNamePlaceholder}
+                error={errors.Name}
+                {...register('Name', FormRules.Name)}
+              />
+            </Label>
 
-            <TextInput
-              iconLeft={<Icon name="store" />}
-              placeholder={screenData.TripCreator.tripNamePlaceholder}
-              error={errors.Name}
-              {...register('Name', FormRules.Name)}
-            />
+            <Label label={screenData.TripCreator.bookingLinkLabel}>
+              <TextInput
+                iconLeft={<Icon name="at" />}
+                placeholder={screenData.TripCreator.bookingLinkPlaceholder}
+                error={errors.Link}
+                {...register('Link', FormRules.Link)}
+              />
+            </Label>
 
-            <TextInput
-              iconLeft={<Icon name="at" />}
-              placeholder={screenData.TripCreator.bookingLinkPlaceholder}
-              error={errors.Link}
-              {...register('Link', FormRules.Link)}
-            />
+            <Label label={screenData.TripCreator.priceLabel}>
+              <TextInput
+                iconLeft={<Icon name="diving-scuba-flag" />}
+                placeholder={screenData.TripCreator.pricePlaceholder}
+                error={errors.Price}
+                {...register('Price', FormRules.Price)}
+                onChange={props.priceChange}
+              />
+            </Label>
+            <Label label={screenData.TripCreator.startDateLabel}>
+              <TextInput
+                iconLeft={<Icon name="calendar-month" />}
+                placeholder={screenData.TripCreator.startDatePlaceholder}
+                error={errors.Start}
+                type="date"
+                {...register('Start', FormRules.Start)}
+              />
+            </Label>
 
-
-            <TextInput
-              iconLeft={<Icon name="diving-scuba-flag" />}
-              placeholder={screenData.TripCreator.pricePlaceholder}
-              error={errors.Price}
-              {...register('Price', FormRules.Price)}
-              onChange={props.priceChange}
-            />
-
-            <TextInput
-              iconLeft={<Icon name="calendar-month" />}
-              placeholder={screenData.TripCreator.startDatePlaceholder}
-              error={errors.Start}
-              type="date"
-              {...register('Start', FormRules.Start)}
-            />
-
-            <TextInput
-              iconLeft={<Icon name="calendar-month" />}
-              placeholder={screenData.TripCreator.endDatePlaceholder}
-              error={errors.End}
-              type="date"
-              {...register('End', FormRules.End)}
-            />
+            <Label label={screenData.TripCreator.endDateLabel}>
+              <TextInput
+                iconLeft={<Icon name="calendar-month" />}
+                placeholder={screenData.TripCreator.endDatePlaceholder}
+                error={errors.End}
+                type="date"
+                {...register('End', FormRules.End)}
+              />
+            </Label>
 
             <textarea
               placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
