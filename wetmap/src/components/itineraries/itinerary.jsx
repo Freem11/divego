@@ -85,7 +85,6 @@ export default function Itinerary(props) {
           <ButtonIcon
             icon={<Icon name="diving-scuba-flag" />}
             className={`btn-lg ${style.buttonStyling}`}
-            // onClick={}
           />
         </div>
       </div>

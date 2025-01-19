@@ -5,7 +5,7 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorListView from './view';
 
 
-export default function TripCreatorListModal(props) {
+export default function TripCreatorModal(props) {
   const { selectedShop } = useContext(SelectedShopContext);
 
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
