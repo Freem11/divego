@@ -110,44 +110,6 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
         </div>
       </form>
-
-      {/* maybe react toastify
-    <animated.div
-      className="successModal modalBase"
-      //style={props.sucessModalSlide}
-      //ref={props.successModalRef}
-    >
-    {isModalOpen && (
-      <animated.div
-      className="successModal modalBase"
-      //style={props.sucessModalSlide}
-      //ref={props.successModalRef}
-      >
-        <ConfirmationModal
-          submissionItem="dive site"
-          animateModal={props.animateSuccessModal}
-          handleClose={props.onClose}
-          isSuccess={false}
-        />
-      </animated.div>
-      )}
-
-
-      <animated.div
-        className="cautionModal modalBase"
-        style={props.cautionModalSlide}
-        ref={props.cautionModalRef}
-      >
-      <div>
-        <ConfirmationModal
-          submissionItem="dive site"
-          animateModal={props.animateCautionModal}
-          isSuccess={false}
-        />
-      </div>
-      </div></animated.div>
-      */}
-
     </div>
   );
 }
