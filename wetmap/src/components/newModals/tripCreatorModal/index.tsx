@@ -5,7 +5,6 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorView from './view';
 import { Form } from './form';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import { EditModeContext } from '../../contexts/editModeContext';
 
 type TripCreatorProps = Partial<ModalHandleProps>;
 
@@ -13,7 +12,6 @@ export default function TripCreatorModal(props: TripCreatorProps) {
   const { selectedShop } = useContext(SelectedShopContext);
 
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const { editMode } = useContext(EditModeContext);
   const [thePrice, setThePrice] = useState('');
 
   useEffect(() => {
@@ -61,7 +59,7 @@ export default function TripCreatorModal(props: TripCreatorProps) {
         <TripCreatorView
           onClose={props.onModalCancel}
           onSubmit={onSubmit}
-          editMode={editMode}
+          isEditModeOn={props.isEditModeOn}
           priceChange={priceChange}
           values={{
             Price: thePrice,

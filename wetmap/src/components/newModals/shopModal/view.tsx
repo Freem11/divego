@@ -17,14 +17,14 @@ type ShopModelViewProps = {
   onClose?:                     () => void
   handleDiveShopBioChange:      (newValue: string) => void
   handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
-  openTripCreatorList: () => void
+  openTripCreatorList:          () => void
 
   diveShop:         DiveShop | null
   isPartnerAccount: boolean
   itineraryList:    ItineraryItem[] | null
   selectedID:       number
   headerPictureUrl: string | null
-  isMyShop:                     boolean
+  isMyShop:         boolean
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
@@ -71,14 +71,16 @@ export default function ShopModalView(props: ShopModelViewProps) {
       </div>
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
-          {(props?.isPartnerAccount && props.isMyShop) ? (
-            <div className={`${style.buttonAddDivingEvents}`}>
-              <h3>Trip Creator List</h3>
-              <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
-                Add diving event
-              </Button>
-            </div>
-          ) : <h3>Offered Diving Trips</h3>}
+          {(props?.isPartnerAccount && props.isMyShop)
+            ? (
+                <div className={`${style.buttonAddDivingEvents}`}>
+                  <h3>Trip Creator List</h3>
+                  <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
+                    Add diving event
+                  </Button>
+                </div>
+              )
+            : <h3>Offered Diving Trips</h3>}
         </div>
         <div className={`${style.itineraryList}`}>
           {props?.itineraryList// in the future, if itineraryList is not empty, render a loading spinner

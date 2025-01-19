@@ -10,11 +10,11 @@ import Button from '../../reusables/button/button';
 
 
 type TripCreatorViewProps = {
-  onClose?:    () => void
-  values?:     Form
-  editMode:    boolean
-  onSubmit:    (data: Form) => void
-  priceChange: (data: any) => void
+  onClose?:     () => void
+  values?:      Form
+  isEditModeOn: boolean
+  onSubmit:     (data: Form) => void
+  priceChange:  (data: any) => void
 };
 
 export default function TripCreatorView(props: TripCreatorViewProps) {
@@ -35,7 +35,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
       <div className="flex-column-between full-height mb-6 mr-6">
         {
-          props.editMode
+          props.isEditModeOn
             ? (<h1 className="mt-4 text-bold">{screenData.TripCreator.headerEdit}</h1>)
             : (<h1 className="mt-4 text-bold">{screenData.TripCreator.header}</h1>)
         }
