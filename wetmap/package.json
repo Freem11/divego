@@ -43,7 +43,6 @@
     "react-fs": "^0.0.0",
     "react-geocode": "^0.2.3",
     "react-hook-form": "^7.53.1",
-    "react-infinite-scroller": "^1.2.6",
     "react-router-dom": "^6.3.0",
     "react-spring": "^9.7.2",
     "react-toastify": "^11.0.2",
