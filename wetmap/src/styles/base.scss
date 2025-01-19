@@ -4,25 +4,25 @@
 // Some sections are not required right now so they are disabled to minimize the bundle size
 // Enable ones that you need 
 
-@import "node_modules/spectre.css/src/mixins";
+@import "spectre.css/src/mixins";
 
 // Reset and dependencies
-@import "node_modules/spectre.css/src/normalize";
-@import "node_modules/spectre.css/src/base";
+@import "spectre.css/src/normalize";
+@import "spectre.css/src/base";
 
 // Elements
-@import "node_modules/spectre.css/src/typography";
+@import "spectre.css/src/typography";
 // @import "node_modules/spectre.css/src/asian";
 // @import "node_modules/spectre.css/src/tables";
-@import "node_modules/spectre.css/src/buttons";
+@import "spectre.css/src/buttons";
 // @import "node_modules/spectre.css/src/forms";
 // @import "node_modules/spectre.css/src/labels";
 // @import "node_modules/spectre.css/src/codes";
 // @import "node_modules/spectre.css/src/media";
 
 // Layout
-@import "node_modules/spectre.css/src/layout";
-@import "node_modules/spectre.css/src/hero";
+@import "spectre.css/src/layout";
+@import "spectre.css/src/hero";
 // @import "node_modules/spectre.css/src/navbar";
 
 // Components
@@ -39,7 +39,7 @@
 //@import "../node_modules/spectre.css/src/modals";
 // @import "node_modules/spectre.css/src/navs";
 // @import "node_modules/spectre.css/src/pagination";
-@import "node_modules/spectre.css/src/panels";
+@import "spectre.css/src/panels";
 // @import "node_modules/spectre.css/src/popovers";
 // @import "node_modules/spectre.css/src/steps";
 // @import "node_modules/spectre.css/src/tabs";
@@ -49,7 +49,7 @@
 
 // Utility classes
 // @import "node_modules/spectre.css/src/animations";
-@import "node_modules/spectre.css/src/utilities";
+@import "spectre.css/src/utilities";
 @import "./fonts.scss";
 @import "./mixins/stack.scss";
 @import "./mixins/blinking.scss";
