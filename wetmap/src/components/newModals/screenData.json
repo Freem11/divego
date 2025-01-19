@@ -165,6 +165,8 @@
         "body": "Please note that deleting your account will not delete your previous dive site or photo submissions, please contact us if you wish to have those removed from the community",
         "deleteBtnText": "Delete account",
         "cancelBtnText": "Cancel",
-        "contact": "Contact us"
+        "contact": "Contact us",
+        "contantEmail": "DiveGo2022@gmail.com",
+        "errorDeleting": "Something went wrong. Please try again later"
       }
     }

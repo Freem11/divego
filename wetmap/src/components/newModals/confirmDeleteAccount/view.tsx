@@ -4,10 +4,12 @@ import Button from '../../reusables/button';
 import style from './style.module.scss';
 
 type ConfirmDeleteAccountViewProps = {
-  onClose?: () => void
+  onClose:     () => void
+  onDelete:    () => void
+  onContactUs: () => void
 };
 
-export default function DiveSiteView(props: ConfirmDeleteAccountViewProps) {
+export default function DiveSiteView({ onClose, onContactUs, onDelete }: ConfirmDeleteAccountViewProps) {
   return (
     <div className="flex-column-between full-height p-8">
       <div className="columns">
@@ -27,7 +29,7 @@ export default function DiveSiteView(props: ConfirmDeleteAccountViewProps) {
       <div className={style.horizontalButtonContainer}>
         <div className="col-3">
           <Button
-            onClick={() => {}}
+            onClick={() => onDelete()}
             className="btn-md "
             type="button"
           >
@@ -37,7 +39,7 @@ export default function DiveSiteView(props: ConfirmDeleteAccountViewProps) {
         <div className="col-3">
 
           <Button
-            onClick={() => {}}
+            onClick={() => onClose()}
             className="btn-md bg-primary"
             type="button"
           >
@@ -46,7 +48,7 @@ export default function DiveSiteView(props: ConfirmDeleteAccountViewProps) {
         </div>
         <div className="col-3">
           <Button
-            onClick={() => {}}
+            onClick={() => onContactUs()}
             className="btn-md bg-primary"
             type="button"
           >

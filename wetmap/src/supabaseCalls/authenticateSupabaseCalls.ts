@@ -122,20 +122,22 @@ export const signOut = async () => {
   if (error) {
     console.log('couldn\'t logout,', error);
   }
+  return { error };
 };
 
 export const userDelete = async (userIdValue: string) => {
-  console.log('supa gets', userIdValue);
-  const { data, error } = await supabase.rpc('delete_user', { userid: userIdValue });
+  const response = await supabase.rpc('delete_user', { userid: userIdValue });
 
-  if (error) {
-    console.log('couldn\'t delete user,', error);
-    return [];
+  console.log('supa gets', userIdValue);
+  if (response.error) {
+    console.log('couldn\'t delete user,', response.error);
   }
 
-  if (data) {
+  if (response.data) {
     console.log('user was deleted');
   }
+
+  return response;
 };
 
 export const sendPasswordResetEmail = async (email: string, url: string) => {
