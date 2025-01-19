@@ -1,6 +1,5 @@
 import React from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
-import '../../modals/confirmationModal.css';
 import backGroundPic from '../../../images/boat.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import screenData from '../screenData.json';

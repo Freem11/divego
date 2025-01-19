@@ -1,7 +1,6 @@
 import React from 'react';
 import SiteSubmitterView from './view';
 import { useContext } from 'react';
-import '../../modals/confirmationModal.css';
 import { insertDiveSiteWaits } from '../../../supabaseCalls/diveSiteWaitSupabaseCalls';
 import { DiveSpotContext } from '../../contexts/diveSpotContext';
 import { MapConfigContext } from '../../contexts/mapConfigContext';
