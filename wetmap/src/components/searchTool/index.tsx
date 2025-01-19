@@ -1,9 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import SearchView from './view';
 import { getSingleDiveSiteByNameAndRegion, getSiteNamesThatFit } from '../../supabaseCalls/diveSiteSupabaseCalls';
-import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import { MapContext } from '../googleMap/mapContext';
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
-import { CoordsContext } from '../contexts/mapCoordsContext';
 import { addIconTypeDiveSite, addIconTypePlaces, addIndexNumber } from '../../helpers/optionHelpers';
 import usePlacesAutocomplete, {
   getGeocode,
@@ -12,9 +11,8 @@ import usePlacesAutocomplete, {
 
 export default function SearchTool(props: any) {
   const { onModalCancel } = props;
-  const { boundaries } = useContext(MapBoundsContext);
+  const { boundaries } = useContext(MapContext);
   const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
-  const { setMapCoords } = useContext(CoordsContext);
 
   const [list, setList] = useState<any>([]);
   const [searchValue, setSearchValue] = useState('');
@@ -101,7 +99,6 @@ export default function SearchTool(props: any) {
         const results = await getGeocode({ address });
 
         const { lat, lng } = await getLatLng(results[0]);
-        setMapCoords([lat, lng]);
         setValue('');
       };
     }

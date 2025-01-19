@@ -5,21 +5,16 @@ import SearchTextContextProvider from './searchTextContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
 import UserProfileContextProvider from './userProfileContext';
-import HeatPointsContextProvider from './heatPointsContext';
-import MapBoundsContextProvider from './mapBoundariesContextProvider';
+import { MapContextProvider } from '../googleMap/mapContextProvider';
 import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
-import DiveSpotContextProvider from './diveSpotContext';
-import PinSpotContextProvider from './pinSpotContext';
 import PictureContextProvider from './pictureContext';
 import AnimalContextProvider from './animalContext';
-import ZoomContextProvider from './mapZoomContext';
 import PinContextProvider from './staticPinContext';
 import DiveSitesContextProvider from './diveSitesContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SelectedShopContextProvider from './selectedShopContext';
 import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from '../reusables/modal//contextProvider';
-import MapConfigContextProvider from './mapConfigContext';
 import MapBoundariesDiveSiteContextProvider from './mapBoundariesDiveSiteContextProvider';
 import MapBoundariesDiveShopContextProvider from './mapBoundariesDiveShopContextProvider';
 import { MapBoundariesPhotoContextProvider } from './mapBoundariesPhotoContextProvider';
@@ -30,21 +25,16 @@ const providers = [
   PullTabContextProvider,
   CarrouselTilesContextProvider,
   UserProfileContextProvider,
-  HeatPointsContextProvider,
-  MapBoundsContextProvider,
+  MapContextProvider,
   SelectedDiveSiteContextProvider,
-  DiveSpotContextProvider,
-  PinSpotContextProvider,
   PictureContextProvider,
   AnimalContextProvider,
-  ZoomContextProvider,
   PinContextProvider,
   DiveSitesContextProvider,
   SelectedPictureContextProvider,
   SelectedShopContextProvider,
   SitesArrayContextProvider,
   ModalContextProvider,
-  MapConfigContextProvider,
   MapBoundariesDiveSiteContextProvider,
   MapBoundariesDiveShopContextProvider,
   MapBoundariesPhotoContextProvider,

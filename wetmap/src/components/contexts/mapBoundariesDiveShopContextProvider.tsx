@@ -1,31 +1,37 @@
-import React, { useContext, useState } from 'react';
-import { MapBoundsContext } from './mapBoundariesContext';
-import { PaginatedItems } from '../../entities/paginatedItems';
+import React, { useContext, useEffect, useState } from 'react';
+import { MapContext } from '../googleMap/mapContext';
 import { DiveShop } from '../../entities/diveShop';
 import { MapBoundariesDiveShopContext } from './mapBoundariesDiveShopContext';
 import { getDiveShops } from '../../supabaseCalls/shopsSupabaseCalls';
 import { GPSBubble } from '../../entities/GPSBubble';
+import { PagedCollection } from '../../entities/pagedCollection';
 
 const MapBoundariesDiveShopContextProvider = ({ children }: any) => {
-  const { boundaries } = useContext(MapBoundsContext);
-  const [paginator, setPaginator] = useState(new PaginatedItems<DiveShop>());
+  const { boundaries } = useContext(MapContext);
+  const [pagedCollection, setPagedCollection] = useState(new PagedCollection<DiveShop>());
 
 
-  const fetchItems = async (reset: boolean = false) => {
+  const updateCollection = async (reset: boolean = false) => {
     if (boundaries) {
-      setPaginator(prev => ({ ...prev, loading: true }));
+      setPagedCollection(prev => ({ ...prev, loading: true }));
       const bubble = GPSBubble.createFromBoundaries(boundaries);
       const items = await getDiveShops(bubble);
-      setPaginator((prev) => {
-        return PaginatedItems.updateItems(prev, items, reset);
+      setPagedCollection((prev) => {
+        return PagedCollection.updateItems(prev, items, reset);
       });
     }
   };
 
+  useEffect(() => {
+    if (boundaries) {
+      updateCollection(true);
+    }
+  }, [boundaries?.toString()]);
+
   return (
     <MapBoundariesDiveShopContext.Provider value={{
-      paginator,
-      fetchItems,
+      pagedCollection,
+      updateCollection,
     }}
     >
       {children}

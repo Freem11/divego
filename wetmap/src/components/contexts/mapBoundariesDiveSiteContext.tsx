@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 
-import { PaginatedItems } from '../../entities/paginatedItems';
+import { PagedCollection } from '../../entities/pagedCollection';
 
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 
 type MapBoundariesDiveSiteContextType = {
-  paginator:  PaginatedItems<DiveSiteWithUserName>
-  fetchItems: (reset?: boolean) => Promise<void>
+  pagedCollection:  PagedCollection<DiveSiteWithUserName>
+  updateCollection: (reset?: boolean) => Promise<void>
 };
 
 export const MapBoundariesDiveSiteContext = createContext<MapBoundariesDiveSiteContextType>({} as MapBoundariesDiveSiteContextType);

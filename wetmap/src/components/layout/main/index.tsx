@@ -4,15 +4,15 @@ import { grabProfileById } from '../../../supabaseCalls/accountSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { SessionContext } from '../../contexts/sessionContext';
 import { ModalContext } from '../../reusables/modal/context';
-import { MapConfigContext } from '../../contexts/mapConfigContext';
 import SiteSubmitter from '../../newModals/siteSubmitter';
 import Settings from '../../newModals/setting';
 import UserProfile from '../../newModals/userProfile';
 import GuidesModal from '../../newModals/guides';
 import TripCreatorListModal from '../../newModals/tripCreatorListModal';
+import { MapContext } from '../../googleMap/mapContext';
 
 export default function LayoutMain() {
-  const { mapConfig } = useContext(MapConfigContext);
+  const { mapConfig } = useContext(MapContext);
   const { activeSession } = useContext(SessionContext);
   const { profile, setProfile } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);

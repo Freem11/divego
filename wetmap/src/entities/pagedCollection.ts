@@ -1,14 +1,14 @@
 import { Pagination } from './pagination';
 
 
-export class PaginatedItems<T> {
+export class PagedCollection<T> {
   items?:      T[] | null;
   filter?:     Partial<T> | null;
   loading?:    boolean;
   hasMore?:    boolean;
   pagination?: Pagination;
 
-  constructor(props: Partial<PaginatedItems<T>> = {}) {
+  constructor(props: Partial<PagedCollection<T>> = {}) {
     this.items      = props.items || null;
     this.filter     = props.filter || null;
     this.loading    = props.loading || false;
@@ -16,7 +16,7 @@ export class PaginatedItems<T> {
     this.pagination = props.pagination || new Pagination();
   }
 
-  static updateItems(prev: PaginatedItems<any>, items: any[], reset: boolean = false) {
+  static updateItems(prev: PagedCollection<any>, items: any[], reset: boolean = false) {
     // reset means we dont have to append items to the list
     // for example reset true means that boundaries changed and we have completely new list ofitems
     // reset false means that boundaries did not change and we have to append items to the list because pagination changed

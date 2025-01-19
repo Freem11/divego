@@ -12,10 +12,11 @@ import PicUploader from '../picUploader/index';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ActiveProfile } from '../../../entities/profile';
-import { MapBoundsContext } from '../../contexts/mapBoundariesContext';
+import { MapContext } from '../../googleMap/mapContext';
 
 type DiveSiteProps = Partial<ModalHandleProps> & {
   panTo?: boolean
+  id?:    number
 };
 export default function DiveSite(props: DiveSiteProps) {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
@@ -25,7 +26,7 @@ export default function DiveSite(props: DiveSiteProps) {
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
-  const mapContext = useContext(MapBoundsContext);
+  const mapContext = useContext(MapContext);
 
   useEffect(() => {
     if (selectedDiveSite) {

@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import { DynamicSelectOptionsMainSearch, OptionAdditionalData } from './DynamicSelectOptionsMainSearch';
 import DynamicSelect from '../../reusables/dynamicSelect';
 import { DropdownItemProps } from '../../reusables/select/components/dropdownItem';
-import { CoordsContext } from '../../contexts/mapCoordsContext';
 import getPlaceLocation from '../../../helpers/googleMapGeocoder';
 import { SelectedDiveSiteContext } from '../../contexts/selectedDiveSiteContext';
 import { getDiveSitesByIDs } from '../../../supabaseCalls/diveSiteSupabaseCalls';
@@ -10,9 +9,10 @@ import style from './style.module.scss';
 import MainSearchDropdownItem from './components/mainSearchDropdownItem';
 import { onChangeEvent, Option } from '../../reusables/select';
 import Icon from '../../../icons/Icon';
+import { MapContext } from '../../googleMap/mapContext';
 
 export default function MainSearch() {
-  const { setMapCoords } = useContext(CoordsContext);
+  const { mapRef } = useContext(MapContext);
   const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
 
   const handleSelect = async (event: onChangeEvent<OptionAdditionalData>) => {
@@ -24,6 +24,7 @@ export default function MainSearch() {
       const diveSites = await getDiveSitesByIDs(JSON.stringify([option?.data.id]));
       diveSites?.some((diveSite) => {
         coordinates = [diveSite.lat, diveSite.lng];
+        mapRef?.setZoom(15);
         setSelectedDiveSite(diveSite);
         return true;
       });
@@ -38,7 +39,7 @@ export default function MainSearch() {
     }
 
     if (coordinates.length > 0) {
-      setMapCoords(coordinates);
+      mapRef?.panTo({ lat: coordinates[0], lng: coordinates[1] });
     }
   };
 

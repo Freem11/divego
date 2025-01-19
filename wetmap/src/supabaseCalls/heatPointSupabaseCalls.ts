@@ -1,4 +1,5 @@
 import { GPSBubble } from '../entities/GPSBubble';
+import { HeatPoint } from '../entities/heatPoint';
 import { supabase } from '../supabase';
 
 type HeatPointFilter = {
@@ -19,9 +20,9 @@ export const getHeatPoints = async (bubble: GPSBubble, filter?: HeatPointFilter)
   }
 
 
-  const { data, error } = await builder;
+  const { data } = await builder;
 
-  return data;
+  return data as HeatPoint[];
 };
 
 // not in use - remove
@@ -191,49 +192,51 @@ export const getHeatPoints = async (bubble: GPSBubble, filter?: HeatPointFilter)
 //   }
 // };
 
-export const getHeatPointsWithUser = async (bubble: GPSBubble, filter = {}) => {
-  const params = {
-    userid:  '',
-    max_lat: bubble.maxLat,
-    min_lat: bubble.minLat,
-    max_lng: bubble.maxLng,
-    min_lng: bubble.minLng,
-  };
+// not in use - remove
+// export const getHeatPointsWithUser = async (bubble: GPSBubble, filter = {}) => {
+//   const params = {
+//     userid:  '',
+//     max_lat: bubble.maxLat,
+//     min_lat: bubble.minLat,
+//     max_lng: bubble.maxLng,
+//     min_lng: bubble.minLng,
+//   };
 
-  if (filter?.animals) {
-    params.animals = filter.animals;
-  }
-  const { data, error } = await supabase.rpc('get_heatpoints_with_user', params);
+//   if (filter?.animals) {
+//     params.animals = filter.animals;
+//   }
+//   const { data, error } = await supabase.rpc('get_heatpoints_with_user', params);
 
-  if (error) {
-    console.log('couldn\'t do it 27,', error);
-    return [];
-  }
+//   if (error) {
+//     console.log('couldn\'t do it 27,', error);
+//     return [];
+//   }
 
-  if (data) {
-    return data;
-  }
-};
+//   if (data) {
+//     return data;
+//   }
+// };
 
-export const getHeatPointsWithUserEmpty = async (values) => {
-  const { data, error } = await supabase.rpc('get_heatpoints_with_username', {
-    max_lat: values.maxLat,
-    min_lat: values.minLat,
-    max_lng: values.maxLng,
-    min_lng: values.minLng,
-    userid:  values.myCreatures,
-  });
+// not in use - remove
+// export const getHeatPointsWithUserEmpty = async (values) => {
+//   const { data, error } = await supabase.rpc('get_heatpoints_with_username', {
+//     max_lat: values.maxLat,
+//     min_lat: values.minLat,
+//     max_lng: values.maxLng,
+//     min_lng: values.minLng,
+//     userid:  values.myCreatures,
+//   });
 
-  if (error) {
-    console.log('couldn\'t do it 27,', error);
-    return [];
-  }
+//   if (error) {
+//     console.log('couldn\'t do it 27,', error);
+//     return [];
+//   }
 
-  if (data) {
-    // console.log(data)
-    return data;
-  }
-};
+//   if (data) {
+//     // console.log(data)
+//     return data;
+//   }
+// };
 
 
 // not in use - remove

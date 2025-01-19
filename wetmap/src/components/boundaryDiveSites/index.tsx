@@ -4,21 +4,22 @@ import { MapBoundariesDiveSiteContext } from '../contexts/mapBoundariesDiveSiteC
 import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { ModalContext } from '../reusables/modal/context';
 import DiveSite from '../newModals/diveSite';
+import { DiveSiteWithUserName } from '../../entities/diveSite';
 
 export function BoundaryDiveSites() {
-  const { paginator } = useContext(MapBoundariesDiveSiteContext);
+  const { pagedCollection } = useContext(MapBoundariesDiveSiteContext);
   const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
   const { modalShow } = useContext(ModalContext);
 
-  if (!paginator.items) {
+  if (!pagedCollection.items) {
     return <div className="p-2">Loading...</div>;
   }
 
-  if (!paginator.items.length) {
+  if (!pagedCollection.items.length) {
     return <div className="p-2">No Dive Sites in this area</div>;
   }
 
-  const openModal = (item) => {
+  const openModal = (item: DiveSiteWithUserName) => {
     setSelectedDiveSite(item);
     modalShow(DiveSite, {
       panTo: true,
@@ -28,7 +29,7 @@ export function BoundaryDiveSites() {
 
   return (
     <div className="p-2 scrollable">
-      {paginator?.items.map((item) => {
+      {pagedCollection?.items.map((item: DiveSiteWithUserName) => {
         return (
           <div key={item.id} onClick={() => openModal(item)}>
             <DiveSiteItem diveSite={item} />

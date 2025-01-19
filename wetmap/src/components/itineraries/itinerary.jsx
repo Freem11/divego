@@ -1,21 +1,17 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { animated, useSpring } from 'react-spring';
 import { SitesArrayContext } from '../contexts/sitesArrayContext';
-import { CoordsContext } from '../contexts/mapCoordsContext';
-import { MapConfigContext } from '../contexts/mapConfigContext';
-import { ZoomContext } from '../contexts/mapZoomContext';
 import { ModalContext } from '../reusables/modal/context';
 import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import style from './style.module.scss';
 import ButtonIcon from '../reusables/buttonIcon';
 import Icon from '../../icons/Icon';
+import { MapContext } from '../googleMap/mapContext';
 
 export default function Itinerary(props) {
   const { itinerary, selectedID, setSelectedID } = props;
   const { setSitesArray } = useContext(SitesArrayContext);
-  const { setMapCoords } = useContext(CoordsContext);
-  const { setMapZoom } = useContext(ZoomContext);
-  const { setMapConfig } = useContext(MapConfigContext);
+  const { mapRef, setMapConfig } = useContext(MapContext);
   const { modalPause } = useContext(ModalContext);
 
 
@@ -56,11 +52,11 @@ export default function Itinerary(props) {
       lats.push(site.lat);
       lngs.push(site.lng);
     });
-    let moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
-    let moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
-    setMapZoom(12);
+    let lat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
+    let lng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
+
     setMapConfig(2);
-    setMapCoords([moveLat, moveLng]);
+    mapRef?.panTo({ lat, lng });
     modalPause();
   };
 

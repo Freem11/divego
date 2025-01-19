@@ -1,10 +1,10 @@
 import { createContext } from 'react';
-import { PaginatedItems } from '../../entities/paginatedItems';
 import { DiveShop } from '../../entities/diveShop';
+import { PagedCollection } from '../../entities/pagedCollection';
 
 type MapBoundariesDiveShopContextType = {
-  paginator:  PaginatedItems<DiveShop>
-  fetchItems: (reset?: boolean) => Promise<void>
+  pagedCollection:  PagedCollection<DiveShop>
+  updateCollection: (reset?: boolean) => Promise<void>
 };
 
 export const MapBoundariesDiveShopContext = createContext<MapBoundariesDiveShopContextType>({} as MapBoundariesDiveShopContextType);

@@ -1,28 +1,34 @@
-import React, { useContext, useState } from 'react';
-import { MapBoundsContext } from './mapBoundariesContext';
-import { PaginatedItems } from '../../entities/paginatedItems';
+import React, { useContext, useEffect, useState } from 'react';
+import { MapContext } from '../googleMap/mapContext';
+import { PagedCollection } from '../../entities/pagedCollection';
 import { getDiveSitesInBoundaries } from '../../helpers/getDiveSitesInBoundaries';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { MapBoundariesDiveSiteContext } from './mapBoundariesDiveSiteContext';
 
 const MapBoundariesDiveSiteContextProvider = ({ children }: any) => {
-  const { boundaries } = useContext(MapBoundsContext);
-  const [paginator, setPaginator] = useState(new PaginatedItems<DiveSiteWithUserName>());
+  const { boundaries } = useContext(MapContext);
+  const [pagedCollection, setPagedCollection] = useState(new PagedCollection<DiveSiteWithUserName>());
 
-  const fetchItems = async (reset: boolean = false) => {
+  const updateCollection = async (reset: boolean = false) => {
     if (boundaries) {
-      setPaginator(prev => ({ ...prev, loading: true }));
+      setPagedCollection(prev => ({ ...prev, loading: true }));
       const items = await getDiveSitesInBoundaries(boundaries);
-      setPaginator((prev) => {
-        return PaginatedItems.updateItems(prev, items, reset);
+      setPagedCollection((prev) => {
+        return PagedCollection.updateItems(prev, items, reset);
       });
     }
   };
 
+  useEffect(() => {
+    if (boundaries) {
+      updateCollection(true);
+    }
+  }, [boundaries?.toString()]);
+
   return (
     <MapBoundariesDiveSiteContext.Provider value={{
-      paginator,
-      fetchItems,
+      pagedCollection,
+      updateCollection,
     }}
     >
       {children}

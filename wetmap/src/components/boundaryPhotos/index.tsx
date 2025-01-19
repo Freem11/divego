@@ -1,9 +1,7 @@
 import React, { useContext } from 'react';
-import { MapBoundsContext } from '../contexts/mapBoundariesContext';
-import { Pagination } from '../../entities/pagination';
+import { MapContext } from '../googleMap/mapContext';
 import InfiniteScroll from '../reusables/infiniteScroll';
 import { Photo } from '../../entities/photos';
-import { getPhotosInBoundaries } from '../../helpers/getPhotosInBoundaries';
 import { PhotoItem } from './photoItem';
 import DynamicSelect from '../reusables/dynamicSelect';
 import { DynamicSelectOptionsAnimals } from '../../entities/DynamicSelectOptionsAnimals';
@@ -13,11 +11,11 @@ import { Option } from '../reusables/select';
 
 
 export function BoundaryPhotos() {
-  const { boundaries } = useContext(MapBoundsContext);
-  const { photosIpp, fetchPhotos, selectedAnimals, setSelectedAnimals } = useContext(MapBoundariesPhotoContext);
+  const { boundaries } = useContext(MapContext);
+  const { photosIpp, getPhotos, selectedAnimals, setSelectedAnimals } = useContext(MapBoundariesPhotoContext);
 
   const loadMore = async (page: number) => {
-    return await fetchPhotos(page);
+    return await getPhotos(page);
   };
 
   const onChange = (e: any) => {
