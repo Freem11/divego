@@ -11,6 +11,8 @@
     border-top: 1px solid; /* Top border */
     border-bottom: 1px solid; /* Bottom border */
     background-color: rgb(247, 217, 217);
+    cursor: pointer;
+    user-select: none;
 }
 
 .grayOutline {
@@ -30,5 +32,11 @@
     margin-top: 1rem;
   }
 
-
+.upgradeLink {
+    margin-left: 2.5rem;
+    margin-bottom: 0.25rem;
+    color: $primaryBlue;
+    cursor: pointer;
+    width: max-content;
+}
 

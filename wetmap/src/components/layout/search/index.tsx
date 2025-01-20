@@ -24,8 +24,8 @@ export default function MainSearch() {
       const diveSites = await getDiveSitesByIDs(JSON.stringify([option?.data.id]));
       diveSites?.some((diveSite) => {
         coordinates = [diveSite.lat, diveSite.lng];
-        mapRef?.setZoom(15);
         setSelectedDiveSite(diveSite);
+        mapRef?.setZoom(15);
         return true;
       });
     }
@@ -34,6 +34,7 @@ export default function MainSearch() {
       const response = await getPlaceLocation({ placeId: option?.data.id });
       response?.results?.some((result) => {
         coordinates = [result.geometry.location.lat(), result.geometry.location.lng()];
+        mapRef?.setZoom(14);
         return true;
       });
     }

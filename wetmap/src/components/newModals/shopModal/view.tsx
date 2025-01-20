@@ -1,18 +1,16 @@
 import React, { useRef } from 'react';
-import Itinerary from '../../itineraries/itinerary';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
 import PlainTextInput from '../../reusables/plainTextInput';
-import screenData from '../screenData.json';
 import style from './style.module.scss';
 import defaultHeaderPicture from '../../../images/blackManta.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import { DiveShop } from '../../../entities/diveShop';
+import ItineraryCardList from '../../itineraryCardList';
 
 type ShopModelViewProps = {
-  setSelectedID:                (id: number) => void
   onClose?:                     () => void
   handleDiveShopBioChange:      (newValue: string) => void
   handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
@@ -20,7 +18,6 @@ type ShopModelViewProps = {
   diveShop:                     DiveShop | null
   isPartnerAccount:             boolean
   itineraryList:                ItineraryItem[] | null
-  selectedID:                   number
   headerPictureUrl:             string | null
   isMyShop:                     boolean
 };
@@ -54,7 +51,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
                 <h1 className="mb-0">{props?.diveShop?.orgname}</h1>
               </div>
             </div>
-
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
@@ -70,35 +66,18 @@ export default function ShopModalView(props: ShopModelViewProps) {
       </div>
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
-          <h3>Offered Diving Trips</h3>
-          {(props?.isPartnerAccount && props.isMyShop) && (
-            <div className={`${style.buttonAddDivingEvents}`}>
-              <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
-                Add diving event
-              </Button>
-            </div>
-          )}
+          {(props?.isPartnerAccount && props.isMyShop)
+            ? (
+                <div className={`${style.buttonAddDivingEvents}`}>
+                  <h3>Trip Creator List</h3>
+                  <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
+                    Add diving event
+                  </Button>
+                </div>
+              )
+            : <h3>Offered Diving Trips</h3>}
         </div>
-        <div className={`${style.itineraryList}`}>
-          {props?.itineraryList// in the future, if itineraryList is not empty, render a loading spinner
-          && props?.itineraryList.map((itinerary) => {
-            return (
-              <Itinerary
-                key={itinerary.id}
-                itinerary={itinerary}
-                setSelectedID={props?.setSelectedID}
-                selectedID={props?.selectedID}
-              />
-            );
-          })}
-          {props?.itineraryList?.length === 0 && (
-            <div>
-              <p className="noSightings">
-                {`${props?.diveShop?.orgname} ${screenData.DiveShop.emptyDrawer}`}
-              </p>
-            </div>
-          )}
-        </div>
+        <ItineraryCardList itineraryList={props.itineraryList} canChangeItineraries={props?.isPartnerAccount && props.isMyShop} />
         <div className="panel-footer"></div>
       </div>
     </div>

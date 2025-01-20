@@ -14,7 +14,7 @@ import DiveSitesContextProvider from './diveSitesContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SelectedShopContextProvider from './selectedShopContext';
 import SitesArrayContextProvider from './sitesArrayContext';
-import ModalContextProvider from '../reusables/modal//contextProvider';
+import ModalContextProvider from '../reusables/modal/contextProvider';
 import MapBoundariesDiveSiteContextProvider from './mapBoundariesDiveSiteContextProvider';
 import MapBoundariesDiveShopContextProvider from './mapBoundariesDiveShopContextProvider';
 import { MapBoundariesPhotoContextProvider } from './mapBoundariesPhotoContextProvider';

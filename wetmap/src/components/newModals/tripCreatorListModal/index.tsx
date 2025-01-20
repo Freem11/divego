@@ -4,16 +4,16 @@ import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorListView from './view';
-import { ModalHandleProps } from '../../reusables/modal/types';
 import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
+import TripCreatorModal from '../tripCreatorModal';
+import { ModalContext } from '../../reusables/modal/context';
 
-type TripCreatorListProps = Partial<ModalHandleProps>;
 
-export default function TripCreatorListModal(props: TripCreatorListProps) {
+export default function TripCreatorListModal() {
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
+  const { modalShow, modalCancel } = useContext(ModalContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [selectedID, setSelectedID] = useState<number>(0);
 
   useEffect(() => {
     if (profile) {
@@ -47,15 +47,21 @@ export default function TripCreatorListModal(props: TripCreatorListProps) {
     }
   };
 
+  const openTripCreator = async () => {
+    modalShow(TripCreatorModal, {
+      keepPreviousModal: true,
+      size:              'medium',
+    });
+  };
+
   return (
     <>
       {selectedShop && (
         <TripCreatorListView
-          setSelectedID={setSelectedID}
           itineraryList={itineraryList}
-          selectedID={selectedID}
           headerPictureUrl={null}
-          onClose={props.onModalCancel}
+          onClose={modalCancel}
+          openTripCreator={openTripCreator}
         />
       )}
     </>

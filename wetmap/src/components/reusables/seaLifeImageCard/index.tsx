@@ -9,7 +9,7 @@ import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCal
 import UserProfile from '../../newModals/userProfile';
 import { ModalContext } from '../../reusables/modal/context';
 import CommentsModal from '../../newModals/commentsModal';
-import FullScreenModal from '../../modals/fullScreenModal';
+import FullScreenImage from '../fullScreenImage/fullScreenImage';
 import SeaLifeImageCardView from './view';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
 
@@ -39,7 +39,9 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
 
     modalShow(UserProfile, {
       keepPreviousModal: true,
-      selectedProfile:   picOwnerAccount && picOwnerAccount.UserID, // TODO: fix type error
+      userProfileID:     picOwnerAccount && picOwnerAccount.UserID,
+      size:              'large',
+
     });
   };
 
@@ -67,7 +69,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
   };
 
   const handleModalOpen = () => {
-    modalShow(FullScreenModal, {
+    modalShow(FullScreenImage, {
       keepPreviousModal: true,
       size:              'full',
       src:               `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`,

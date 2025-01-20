@@ -8,7 +8,7 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import TripCreatorListModal from '../tripCreatorListModal/index';
+import TripCreatorListModal from '../tripCreatorListModal';
 import { MapContext } from '../../googleMap/mapContext';
 
 type ShopModalProps = Partial<ModalHandleProps> & {
@@ -22,7 +22,6 @@ export default function ShopModal(props: ShopModalProps) {
   const [isMyShop, setIsMyShop] = useState<boolean>(false);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [selectedID, setSelectedID] = useState<number>(0);
   const { modalShow } = useContext(ModalContext);
   const mapContext = useContext(MapContext);
 
@@ -92,13 +91,11 @@ export default function ShopModal(props: ShopModalProps) {
     <>
       {selectedShop && (
         <ShopModalView
-          setSelectedID={setSelectedID}
           onClose={props.onModalCancel}
           handleDiveShopBioChange={handleDiveShopBioChange}
           diveShop={selectedShop}
           isPartnerAccount={isPartnerAccount}
           itineraryList={itineraryList}
-          selectedID={selectedID}
           headerPictureUrl={null}
           openTripCreatorList={openTripCreatorList}
           isMyShop={isMyShop}
