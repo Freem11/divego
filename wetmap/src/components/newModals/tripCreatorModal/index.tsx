@@ -1,33 +1,15 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
+import React, { useState, useContext } from 'react';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
-import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorView from './view';
 import { Form } from './form';
 import { ModalHandleProps } from '../../reusables/modal/types';
 
-type TripCreatorProps = Partial<ModalHandleProps>;
+type TripCreatorModalProps = Partial<ModalHandleProps>;
 
-export default function TripCreatorModal(props: TripCreatorProps) {
+export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
   const { selectedShop } = useContext(SelectedShopContext);
-  const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
+  const [isEditModeOn, setIsEditModeOn] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (selectedShop) {
-      getItineraries(selectedShop.id);
-    }
-  }, [selectedShop]);
-
-  const getItineraries = async (IdNum: number) => {
-    try {
-      const itins = await itineraries(IdNum);
-      if (itins && itins.length > 0) {
-        setItineraryList(itins);
-      }
-    } catch (e) {
-      console.log({ title: 'Error', message: (e as Error).message });
-    }
-  };
 
   const onSubmit = (data: Form) => {
     console.log(data, data.Start);
@@ -37,9 +19,9 @@ export default function TripCreatorModal(props: TripCreatorProps) {
     <>
       {selectedShop && (
         <TripCreatorView
-          onClose={props.onModalCancel}
+          onClose={onModalCancel}
           onSubmit={onSubmit}
-          isEditModeOn={props.isEditModeOn}
+          isEditModeOn={isEditModeOn}
         />
       )}
     </>

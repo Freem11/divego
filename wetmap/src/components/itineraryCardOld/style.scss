@@ -1,13 +1,10 @@
-@import "../../styles/variables.scss";
-
 .masterBox {
   display: flex;
   flex-direction: column;
-  width: 98%;
   height: fit-content;
-  margin: 0 auto 3%;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .shadowbox {

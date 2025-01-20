@@ -10,7 +10,6 @@ import Button from '../../reusables/button/button';
 import Label from '../../reusables/label';
 import PriceTextInput from '../../reusables/priceTextInput';
 
-
 type TripCreatorViewProps = {
   onClose?:     () => void
   isEditModeOn: boolean
