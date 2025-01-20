@@ -8,14 +8,13 @@ import { Form, FormRules } from './form';
 import { useForm } from 'react-hook-form';
 import Button from '../../reusables/button/button';
 import Label from '../../reusables/label';
+import PriceTextInput from '../../reusables/priceTextInput';
 
 
 type TripCreatorViewProps = {
   onClose?:     () => void
-  values?:      Form
   isEditModeOn: boolean
   onSubmit:     (data: Form) => void
-  priceChange:  (data: any) => void
 };
 
 export default function TripCreatorView(props: TripCreatorViewProps) {
@@ -41,7 +40,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
             : (<h1 className="mt-4 text-bold">{screenData.TripCreator.header}</h1>)
         }
 
-        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
+        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)} style={{ overflowY: 'scroll' }}>
           <div className="stack-4 mb-2">
             <Label label={screenData.TripCreator.tripNameLabel}>
               <TextInput
@@ -62,17 +61,17 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
             </Label>
 
             <Label label={screenData.TripCreator.priceLabel}>
-              <TextInput
-                iconLeft={<Icon name="diving-scuba-flag" />}
+              <PriceTextInput
+                iconLeft={<Icon name="currency-usd" />}
                 placeholder={screenData.TripCreator.pricePlaceholder}
                 error={errors.Price}
                 {...register('Price', FormRules.Price)}
-                onChange={props.priceChange}
               />
             </Label>
+
             <Label label={screenData.TripCreator.startDateLabel}>
               <TextInput
-                iconLeft={<Icon name="calendar-month" />}
+                iconLeft={<Icon name="calendar-start" />}
                 placeholder={screenData.TripCreator.startDatePlaceholder}
                 error={errors.Start}
                 type="date"
@@ -82,7 +81,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
             <Label label={screenData.TripCreator.endDateLabel}>
               <TextInput
-                iconLeft={<Icon name="calendar-month" />}
+                iconLeft={<Icon name="calendar-end" />}
                 placeholder={screenData.TripCreator.endDatePlaceholder}
                 error={errors.End}
                 type="date"
