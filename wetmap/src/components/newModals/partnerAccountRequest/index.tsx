@@ -5,21 +5,26 @@ import { Form } from './form';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { createPartnerAccountRequest } from '../../../supabaseCalls/partnerSupabaseCalls';
+import { toast } from 'react-toastify';
+import screenData from '../screenData.json';
 
 type PartnerAccountRequestpProps = Partial<ModalHandleProps>;
 
 export default function PartnerAccountRequest(props: PartnerAccountRequestpProps) {
   const { profile } = useContext(UserProfileContext);
 
-  const onSubmit = (data: Form) => {
-    createPartnerAccountRequest({
+  const onSubmit = async (data: Form) => {
+    const { error } = await createPartnerAccountRequest({
       ...data,
       UserId: profile?.UserID || null,
-    })
-      .then(() => {
-        props?.onModalSuccess?.();
-        onClose();
-      });
+    });
+
+    if (error) {
+      toast.error(screenData.PartnerRequestPage.createError);
+    } else {
+      toast.success(screenData.PartnerRequestPage.createSuccess);
+    }
+    onClose();
   };
 
   const onClose = () => {

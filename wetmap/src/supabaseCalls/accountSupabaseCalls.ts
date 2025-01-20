@@ -47,23 +47,17 @@ export const createProfile = async (values) => {
   }
 };
 
-export const updateProfile = async (values: { username: string, id: string }) => {
-  console.log('supabase gets', values);
-  const { data, error } = await supabase
+export const updateProfile = async (profile: Partial<ActiveProfile>) => {
+  const response = await supabase
     .from(USERS_PROFILE_TABLE)
-    .update({ UserName: values.username })
-    .eq('UserID', values.id);
+    .update(profile)
+    .eq('UserID', profile.UserID);
 
-  console.log('supa sends', data, error);
-
-  if (error) {
-    console.log('couldn\'t do it,', error);
-    throw error;
+  if (response.error) {
+    console.log('couldn\'t do it,', response.error);
   }
 
-  if (data) {
-    return data as ActiveProfile[];
-  }
+  return response;
 };
 
 export const deleteProfile = async (id: string) => {
@@ -91,12 +85,13 @@ export const grabProfileById = async (id: string) => {
 
   if (error) {
     console.log('couldn\'t do it,', error);
-    return [];
+    return null;
   }
 
-  if (data) {
-    return data as ActiveProfile[];
+  if (data[0]) {
+    return data[0] as ActiveProfile;
   }
+  return null;
 };
 
 export const grabProfileByUserName = async (userName: string) => {

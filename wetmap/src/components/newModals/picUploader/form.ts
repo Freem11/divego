@@ -18,7 +18,7 @@ export const FormRules: FormValidationRules<Form> = {
     required: 'Please tell us when you saw it',
   },
   photo: {
-    required: 'We didn\'t get your photo',
+    required: 'No picture uploaded',
   },
   // longitude: {
   //   required: 'Longitude is required',
