@@ -6,9 +6,19 @@
     }
 }
 
-.outline {
-    border-top: 1px solid #5f5e5e; /* Top border */
-    border-bottom: 1px solid #5f5e5e; /* Bottom border */
+.redOutline {
+    color: maroon;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
+    background-color: rgb(247, 217, 217);
+    cursor: pointer;
+    user-select: none;
+}
+
+.grayOutline {
+    color: #5f5e5e;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
 }
 
 .horizontalButtonContainer {
@@ -21,4 +31,12 @@
     height: 20%;
     margin-top: 1rem;
   }
+
+.upgradeLink {
+    margin-left: 2.5rem;
+    margin-bottom: 0.25rem;
+    color: $primaryBlue;
+    cursor: pointer;
+    width: max-content;
+}
 

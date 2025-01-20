@@ -4,7 +4,7 @@ import { Form, FormRules } from './form';
 import Button from '../../reusables/button';
 import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
-import carouselData from '../carousel-data.json';
+import screenData from '../../newModals/screenData.json';
 import TextInput from '../../reusables/textInput';
 
 type PasswordRecoveryProps = {
@@ -16,41 +16,37 @@ export default function PasswordRecoveryView(props: PasswordRecoveryProps) {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   return (
-    <div className="mt-10">
-      <ButtonIcon
-        icon={<Icon name="chevron-left" color="lightgrey" style={{ scale: '2' }} />}
-        className="btn-lg"
-        onClick={() => props.goToSlide(2)}
-      />
-
+    <div className="flex-column-between full-height">
       <div className="mt-10">
-        <h1>{carouselData.PasswordRecoveryPage.title}</h1>
+        <ButtonIcon
+          icon={<Icon name="chevron-left" color="lightgrey" style={{ scale: '2' }} />}
+          className="btn-lg"
+          onClick={() => props.goToSlide(2)}
+        />
+        <h1>{screenData.PasswordRecoveryPage.title}</h1>
 
         <form
-          className="flex-column-between mx-6 mb-6"
+          className="mx-6 mb-6"
           onSubmit={handleSubmit(props.onSubmit)}
         >
           <div className="mt-10">
             <TextInput
               error={errors.email}
               iconLeft={<Icon name="at" />}
-              placeholder={carouselData.PasswordRecoveryPage.emailPlaceholder}
+              placeholder={screenData.PasswordRecoveryPage.emailPlaceholder}
               {...register('email', FormRules.email)}
             />
           </div>
 
-          <div className="cols">
-            <div className="col-7" />
-            <div className="col-5">
-              <Button
-                disabled={isSubmitting}
-                className="btn-lg bg-primary mt-10 col-3"
-                type="submit"
-                iconRight={<Icon name="chevron-right" />}
-              >
-                {carouselData.PasswordRecoveryPage.buttonText}
-              </Button>
-            </div>
+          <div className="d-flex justify-end">
+            <Button
+              disabled={isSubmitting}
+              className="btn-lg bg-primary mt-10 flex-fit"
+              type="submit"
+              iconRight={<Icon name="chevron-right" />}
+            >
+              {screenData.PasswordRecoveryPage.buttonText}
+            </Button>
           </div>
         </form>
       </div>

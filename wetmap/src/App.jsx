@@ -1,7 +1,7 @@
 import './App.scss';
 import { useState, useEffect, useLayoutEffect } from 'react';
 import { supabase } from './supabase';
-import AuthenticationPage from './components/authenticationPage';
+import AuthenticationPage from './components/authentication';
 import LoadingScreen from './LoadingScreen';
 import { getMostRecentPhoto } from './supabaseCalls/photoSupabaseCalls';
 import {

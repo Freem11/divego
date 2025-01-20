@@ -1,18 +1,17 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
 import { Form, FormRules } from './form';
 import style from './style.module.scss';
-import { Label } from 'reactstrap';
 import ButtonIcon from '../../reusables/buttonIcon';
-
+import { toast } from 'react-toastify';
 
 type PartnerAccountRequestViewProps = {
-  values?: Form
-  onClose: () => void
+  values?:  Form
+  onClose:  () => void
   onSubmit: (data: Form) => void
 };
 
@@ -21,19 +20,33 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
     values: props.values,
   });
 
+  const handleError = (errors: FieldErrors<Form>) => {
+    toast.dismiss();
+    Object.values(errors).forEach((error) => {
+      if (error?.message) {
+        toast.error(error.message);
+      }
+    });
+  };
+
+  const onSubmit = (data: Form) => {
+    toast.dismiss();
+    props.onSubmit(data);
+  };
+
   return (
     <div className="flex-column-between full-height">
-     <div className={style.buttonBack}>
+      <div className={style.buttonBack}>
         <ButtonIcon
           icon={<Icon name="chevron-left" fill="darkgray" />}
           className="btn-lg"
           onClick={props.onClose}
         />
       </div>
-      <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
+      <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(onSubmit, handleError)}>
         <div>
-          <h1 >{screenData.PartnerRequestPage.header}</h1>
-          <Label className={style.explanation}>{screenData.PartnerRequestPage.explanation}</Label>
+          <h1>{screenData.PartnerRequestPage.header}</h1>
+          <div className={style.explanation}>{screenData.PartnerRequestPage.explanation}</div>
         </div>
 
         <TextInput
@@ -51,7 +64,7 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
         />
 
         <TextInput
-          iconLeft={<Icon name="latitude" />}
+          iconLeft={<Icon name="latitude"  />}
           placeholder={screenData.PartnerRequestPage.latPlaceholder}
           error={errors.Latitude}
           {...register('Latitude', FormRules.Latitude)}
