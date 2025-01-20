@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import ButtonIcon from '../reusables/buttonIcon';
 import Icon from '../../icons/Icon';
 import { ItineraryItem } from '../../entities/itineraryItem';
-import { format } from 'date-fns';
+import readableDate from '../../helpers/readableDate';
 
 type TripCardViewProps = {
   itinerary:           ItineraryItem
@@ -31,17 +31,9 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
           <p className={style.title}>{itinerary.tripName}</p>
           <div className={style.info}>
             <p>
-              {new Intl.DateTimeFormat('en-US', {
-                month: 'short',
-                day:   'numeric',
-                year:  'numeric',
-              }).format(new Date(itinerary.startDate))}
+              {readableDate(itinerary.startDate)}
               {' - '}
-              {new Intl.DateTimeFormat('en-US', {
-                month: 'short',
-                day:   'numeric',
-                year:  'numeric',
-              }).format(new Date(itinerary.endDate))}
+              {readableDate(itinerary.endDate)}
             </p>
             <span>|</span>
             <p>{itinerary.price }</p>
