@@ -34,7 +34,7 @@ export default function LandingPage() {
 
       const profileCheck = await grabProfileById(sanitizeData.user.id);
 
-      if (profileCheck && profileCheck.length === 0) {
+      if (profileCheck) {
         await createProfile({
           id:    sanitizeData.user.id,
           email: sanitizeData.user.email,

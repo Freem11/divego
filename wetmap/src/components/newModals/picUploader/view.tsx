@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button/index';
@@ -14,6 +14,7 @@ import style from './style.module.scss';
 import { Form, FormRules } from './form';
 import FileInput from '../../reusables/fileInput';
 import Label from '../../reusables/label';
+import { toast } from 'react-toastify';
 
 type PicUploaderViewProps = {
   values:               Form
@@ -28,6 +29,20 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
     values:   props.values,
   });
+
+  const handleError = (errors: FieldErrors<Form>) => {
+    toast.dismiss();
+    Object.values(errors).forEach((error) => {
+      if (error?.message) {
+        toast.error(error.message);
+      }
+    });
+  };
+
+  const onSubmit = (data: Form) => {
+    toast.dismiss();
+    props.onSubmit(data);
+  };
 
   return (
     <div className="flex-column-between full-height">
@@ -49,7 +64,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
 
       <form
         className="flex-column-between full-height mx-10 mb-6"
-        onSubmit={handleSubmit(props.onSubmit)}
+        onSubmit={handleSubmit(onSubmit, handleError)}
       >
         <div className="d-flex">
           <h1 className="mb-0 text-clip">{screenData.PicUploader.header}</h1>

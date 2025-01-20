@@ -11,3 +11,11 @@ export type ActiveProfile = {
   profileBio:           string | null
   profilePhoto:         string
 };
+
+
+export type DeletedAccountInfo = {
+  firstName: string
+  lastName:  string
+  email:     string
+  UserID:    string
+};
