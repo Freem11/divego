@@ -3,7 +3,6 @@ import UserProfileView from './view';
 // import { PhotosGroupedByDate } from '../../../entities/photos';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalContext } from '../../reusables/modal/context';
-// import PicUploader from '../picUploader/index';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import {
   grabProfileById,
@@ -32,7 +31,7 @@ export default function UserProfile(props: UserProps) {
         setOpenedProfile(profile);
       }
     })();
-  }, []);
+  }, [props.userProfileID]);
 
   const handleProfileNameChange = async (newName: string) => {
     if (newName == '') {
