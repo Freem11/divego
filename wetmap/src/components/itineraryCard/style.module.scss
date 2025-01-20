@@ -1,0 +1,109 @@
+.card {
+  border: 1px solid #dadada;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  border-radius: 0.5rem;
+  width: 100%;
+  padding: 1.5rem;
+  text-align: left;
+  line-height: 1.4em;
+}
+
+.card p {
+  margin: 0;
+}
+
+.cardTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.subtitle {
+  font-weight: 600;
+}
+
+.info {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  column-gap: 0.5rem;
+  font-size: 14px;
+  color: rgb(101, 101, 101);
+  text-wrap: nowrap;
+  flex-wrap: wrap;
+}
+
+.actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.actionIcon {
+  color: rgb(71, 71, 71);
+  border: 1px solid #dadada;
+  height: 1.8rem;
+}
+
+.actionIcon:hover {
+  border: 1px solid #cdcbcb;
+  background-color: transparent;
+}
+
+.text {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2; /* Number of lines to show when truncated */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 4.5em; /* Adjust based on line height */
+  line-height: 1.5em; /* Matches the max-height calculation */
+  transition: max-height 0.3s ease;
+  color: #474747;
+}
+
+.text.expanded {
+  -webkit-line-clamp: unset;
+  max-height: none;
+  overflow: visible;
+}
+
+.showMore {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.description {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.seperator {
+  background: #dadada;
+  height: 1px;
+  width: 100%;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 640px) { 
+  .card {
+    padding: 1rem;
+  }
+}

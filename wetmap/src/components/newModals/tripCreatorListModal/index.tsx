@@ -2,15 +2,17 @@ import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
+import TripCreatorListView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import TripCreatorView from './view';
+import TripCreatorModal from '../tripCreatorModal';
+import { ModalContext } from '../../reusables/modal/context';
 
-type TripCreatorModalProps = Partial<ModalHandleProps>;
+type TripCreatorListModalProps = Partial<ModalHandleProps>;
 
-export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
+export default function TripCreatorListModal({ onModalCancel }: TripCreatorListModalProps) {
   const { selectedShop } = useContext(SelectedShopContext);
+  const { modalShow } = useContext(ModalContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [selectedID, setSelectedID] = useState<number>(0);
 
   useEffect(() => {
     if (selectedShop) {
@@ -29,15 +31,21 @@ export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProp
     }
   };
 
+  const openTripCreator = async () => {
+    modalShow(TripCreatorModal, {
+      keepPreviousModal: true,
+      size:              'medium',
+    });
+  };
+
   return (
     <>
       {selectedShop && (
-        <TripCreatorView
-          setSelectedID={setSelectedID}
+        <TripCreatorListView
           itineraryList={itineraryList}
-          selectedID={selectedID}
           headerPictureUrl={null}
           onClose={onModalCancel}
+          openTripCreator={openTripCreator}
         />
       )}
     </>
