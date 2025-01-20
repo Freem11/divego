@@ -1,4 +1,4 @@
-import React,  { useState, useContext, useEffect, useRef } from 'react';
+import React,  { useState, useContext, useEffect } from 'react';
 import screenData from './screenData.json';
 import Icon  from '../../icons/Icon';
 import style from './modalContent.module.scss';
@@ -9,37 +9,20 @@ import WavyHeader from './wavyHeader';
 import TextInputField from '../newModals/textInput';
 import AutoSuggest from '../autoSuggest/autoSuggest';
 import { PinContext } from '../contexts/staticPinContext';
-import { UserProfileContext } from '../contexts/userProfileContext';
 import { insertPhotoWaits } from '../../supabaseCalls/photoWaitSupabaseCalls';
 import { handleImageUpload, clearPreviousImage } from './imageUploadHelpers';
-import ConfirmationModal from '../modals/confirmationModal';
-import { animated, useSpring } from 'react-spring';
-import { ModalContext } from '../contexts/modalContext.jsx';
 
 const screenWidthInital = window.innerWidth;
 const screenHeitghInital = window.innerHeight;
 
 export default function PicUploader(props) {
   const { onModalCancel } = props;
-  const { profile } = useContext(UserProfileContext);
   const { pin, setPin } = useContext(PinContext);
   const [picUrl, setPicUrl] = useState(null);
 
-  const successModalRef = useRef(null);
-  const cautionModalRef = useRef(null);
   const [successModalYCoord, setSuccessModalYCoord] = useState(0);
   const [cautionModalYCoord, setCautionModalYCoord] = useState(0);
-  const { modalPause } = useContext(ModalContext);
 
-  const sucessModalSlide = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${successModalYCoord}px,0)` },
-  });
-
-  const cautionModalSlide = useSpring({
-    from: { transform: `translate3d(0,0,0)` },
-    to:   { transform: `translate3d(0,${cautionModalYCoord}px,0)` },
-  });
 
   const animateSuccessModal = () => {
     if (successModalYCoord === 0) {
@@ -129,20 +112,20 @@ export default function PicUploader(props) {
   }
 
   const backgroundStyle = {
-    paddingTop: '25%',
-    backgroundImage: `url(${picUrl})`,
-    display: 'flex',
-    aspectRatio: 1,
-    width: '100%',
-    backgroundSize: 'cover',
-    backgroundRepeat: 'no-repeat',
-    backgroundPosition: 'center',
-    borderTopLeftRadius: '2vw',
+    paddingTop:           '25%',
+    backgroundImage:      `url(${picUrl})`,
+    display:              'flex',
+    aspectRatio:          1,
+    width:                '100%',
+    backgroundSize:       'cover',
+    backgroundRepeat:     'no-repeat',
+    backgroundPosition:   'center',
+    borderTopLeftRadius:  '2vw',
     borderTopRightRadius: '2vw',
-    borderWidth: 0,
-    alignItems: "center",
-    justifyContent: 'center',
- };
+    borderWidth:          0,
+    alignItems:           'center',
+    justifyContent:       'center',
+  };
 
   return (
     <div
@@ -163,10 +146,10 @@ export default function PicUploader(props) {
         />
       </div>
 
-      <div className={style.picZone} >
+      <div className={style.picZone}>
         {picUrl
           ? (
-            <div style={backgroundStyle}/>
+              <div style={backgroundStyle} />
               // <img src={picUrl} width="100%" className={style.picStyles}></img>
             )
           : (
@@ -198,7 +181,7 @@ export default function PicUploader(props) {
 
         {picUrl
           ? (
-              <div style={{ position: 'absolute', right: '5%', marginTop: '30vh'}}>
+              <div style={{ position: 'absolute', right: '5%', marginTop: '30vh' }}>
                 <Icon
                   name="camera-plus"
                   fill="white"
@@ -290,30 +273,6 @@ export default function PicUploader(props) {
         pin={pin}
       >
       </WavyHeader>
-
-      <animated.div
-        className="successModal modalBase"
-        style={sucessModalSlide}
-        ref={successModalRef}
-      >
-        <ConfirmationModal
-          submissionItem="sea creature submission"
-          animateModal={animateSuccessModal}
-          isSuccess={true}
-        />
-      </animated.div>
-
-      <animated.div
-        className="cautionModal modalBase"
-        style={cautionModalSlide}
-        ref={cautionModalRef}
-      >
-        <ConfirmationModal
-          submissionItem="sea creature submission"
-          animateModal={animateCautionModal}
-          isSuccess={false}
-        />
-      </animated.div>
     </div>
   );
 }

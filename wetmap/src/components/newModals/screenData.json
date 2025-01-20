@@ -20,7 +20,9 @@
         "latPlaceholder": "Latitude",
         "lngPlaceholder": "Longitude",
         "latLngExplainer": "To place your business on the map",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "createSuccess": "Request Created Successfully!",
+        "createError": "Error creating request. Please try again later."
       },
       "SearchPage" :
       {
@@ -38,7 +40,11 @@
         "myLocationButton" : "Use my location",
         "myLocationExplainer" : "This can take up to 30 seconds",
         "pinButton" : "Drop a pin",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "allowLocation": "Please allow location access.",
+        "locationNotSupported": "Geolocation is not supported in your browser.",
+        "addSiteError": "Error adding site. Please try again later.",
+        "addSiteSuccess": "Site added successfully!"
       },
       "PicUploader" :
       {
@@ -50,7 +56,10 @@
         "whenPlaceholder": "Date of Sighting",
         "whereLabel": "Where you saw it",
         "wherePlaceholder": "Location of Sighting",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "uploadError": "Error uploading photo. Please try again later.",
+        "uploadSuccess": "Photo uploaded successfully!",
+        "fileUploadError": "Error uploading file. Please try again later."
       },
       "TripList" :
       {
