@@ -30,8 +30,13 @@ const getSvgXml = (content) => {
  * @returns string
  */
 const getOptimizedPathData = (xml) => {
-  const regex = new RegExp('^<path.*?d="(.*?)"/>$', 'ms');
-  const match = regex.exec(xml);
+  // it can be:
+  // <path d="..."></path> or <path d="..."/>
+  if (!xml) {
+    return null;
+  }
+  const regex = new RegExp('^<path.*?d="(.*?)"/?>(</path>)?$', 'ms');
+  const match = regex.exec(xml.trim());
   if (!match || match[1] === undefined) {
     return null;
   }

@@ -51,7 +51,6 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
                     icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
-                    className="text-primary"
                     onClick={props.animateProfileModal}
                   />
                 </li>
@@ -59,7 +58,6 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
                     icon={<Icon name="settings" className="text-blue" style={{ scale: '1.5' }} />}
-                    className="text-primary"
                     onClick={props.animateSettingsModal}
                   />
                 </li>
@@ -67,7 +65,6 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   <ButtonIcon
                     disabled={props.mapConfig === 0 ? false : true}
                     icon={<Icon name="anchor-plus" className="text-blue" style={{ scale: '1.45' }} />}
-                    className="text-primary"
                     onClick={props.animateSiteSubmitterModal}
                   />
                 </li>
@@ -77,7 +74,6 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                         <ButtonIcon
                           disabled={props.mapConfig === 0 ? false : true}
                           icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
-                          className="text-primary"
                           onClick={props.animateTripCreatorListModal}
                         />
                       </li>
@@ -87,7 +83,6 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                         <ButtonIcon
                           disabled={props.mapConfig === 0 ? false : true}
                           icon={<Icon name="question-mark" className="text-blue" style={{ scale: '1.5' }} />}
-                          className="text-primary"
                           onClick={props.animateGuidesModal}
                         />
                       </li>
