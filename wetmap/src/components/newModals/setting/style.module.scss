@@ -11,6 +11,8 @@
     border-top: 1px solid; /* Top border */
     border-bottom: 1px solid; /* Bottom border */
     background-color: rgb(247, 217, 217);
+    cursor: pointer;
+    user-select: none;
 }
 
 .grayOutline {

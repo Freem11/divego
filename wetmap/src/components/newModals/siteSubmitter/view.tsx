@@ -73,7 +73,6 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
 
         <div className={style.horizontalButtonContainer}>
-
           <div className="col-3">
             <Button
               onClick={props.getDeviceLocation}
