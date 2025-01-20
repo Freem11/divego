@@ -7,8 +7,8 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import ItineraryCardList from '../../itineraryCardList';
 
 type TripCreatorListViewProps = {
-  onClose?:      () => void
-
+  onClose?:         () => void
+  openTripCreator:  () => void
   itineraryList:    ItineraryItem[]
   headerPictureUrl: string | null
 };
@@ -23,7 +23,7 @@ export default function TripCreatorListView(props: TripCreatorListViewProps) {
         <div className="panel-header">
           <h3>Trip Creator</h3>
           <div className={`${style.buttonAddDivingEvents}`}>
-            <Button className="mt-2 btn-lg">
+            <Button className="mt-2 btn-lg" onClick={props.openTripCreator}>
               Add new trip
             </Button>
           </div>

@@ -4,7 +4,6 @@ import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
-import ActDelDialog from '../../modals/dialog';
 
 type SettingsProps = {
   onClose:             () => void
@@ -36,7 +35,7 @@ export default function SettingsView(props: SettingsProps) {
             { props.profileType === 'Diver Account'
             && (
               <span onClick={props.handlePartnerButton}>
-                <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
+                <p className={styles.upgradeLink}>{screenData.SettingsPage.notPartnerAccount}</p>
               </span>
             )}
             { props.profileType === 'Partner Account'
@@ -75,9 +74,6 @@ export default function SettingsView(props: SettingsProps) {
           </div>
         </div>
       </div>
-
-      <ActDelDialog openDialog={props.openDialog} setOpenDialog={props.setOpenDialog} />
-
     </div>
 
   );

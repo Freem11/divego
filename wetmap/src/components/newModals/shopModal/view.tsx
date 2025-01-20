@@ -53,7 +53,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
                 <h1 className="mb-0">{props?.diveShop?.orgname}</h1>
               </div>
             </div>
-
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
@@ -69,14 +68,16 @@ export default function ShopModalView(props: ShopModelViewProps) {
       </div>
       <div className="col-6 panel border-none full-height">
         <div className="panel-header">
-          <h3>Offered Diving Trips</h3>
-          {(props?.isPartnerAccount && props.isMyShop) && (
-            <div className={`${style.buttonAddDivingEvents}`}>
-              <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
-                Add diving event
-              </Button>
-            </div>
-          )}
+          {(props?.isPartnerAccount && props.isMyShop)
+            ? (
+                <div className={`${style.buttonAddDivingEvents}`}>
+                  <h3>Trip Creator List</h3>
+                  <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
+                    Add diving event
+                  </Button>
+                </div>
+              )
+            : <h3>Offered Diving Trips</h3>}
         </div>
         <ItineraryCardList itineraryList={props.itineraryList} canChangeItineraries={props?.isPartnerAccount && props.isMyShop} />
         <div className="panel-footer"></div>

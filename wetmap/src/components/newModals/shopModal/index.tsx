@@ -8,7 +8,7 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import TripCreatorListModal from '../tripCreatorListModal/index';
+import TripCreatorListModal from '../tripCreatorListModal';
 
 type ShopModalProps = Partial<ModalHandleProps>;
 
