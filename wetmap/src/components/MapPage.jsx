@@ -80,23 +80,22 @@ const MapPage = React.memo(function MapPage() {
     const getProfile = async () => {
       let sessionUserId = activeSession.user.id;
       try {
-        const success = await grabProfileById(sessionUserId);
-        if (success) {
-          let bully = success[0] && success[0].UserName;
-          if (bully == null || bully === '') {
+        const profile = await grabProfileById(sessionUserId);
+        if (profile) {
+          if (profile.UserName == null || profile.UserName === '') {
             handleOnBoarding();
             return;
           } else {
-            setProfile(success[0]);
+            setProfile(profile);
             setPin({
               ...pin,
-              UserID:   success[0].UserID,
-              UserName: success[0].UserName,
+              UserID:   profile.UserID,
+              UserName: profile.UserName,
             });
             setAddSiteVals({
               ...addSiteVals,
-              UserID:   success[0].UserID,
-              UserName: success[0].UserName,
+              UserID:   profile.UserID,
+              UserName: profile.UserName,
             });
           }
         }

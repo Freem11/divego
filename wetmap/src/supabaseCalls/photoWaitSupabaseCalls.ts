@@ -1,9 +1,10 @@
 import { PhotoWaits } from '../entities/photoWaits';
 import { supabase } from '../supabase';
 
+const TABLE_NAME = 'photoWait';
 export const photoWaits = async () => {
   const { data, error } = await supabase
-    .from('photoWait')
+    .from(TABLE_NAME)
     .select();
 
   if (error) {
@@ -18,7 +19,7 @@ export const photoWaits = async () => {
 
 export const insertPhotoWaits = async (values: Omit<PhotoWaits, 'id' | 'created_at' | 'userName'>) => {
   const { data, error } = await supabase
-    .from('photoWait')
+    .from(TABLE_NAME)
     .insert([values]);
 
   if (error) {
@@ -28,11 +29,13 @@ export const insertPhotoWaits = async (values: Omit<PhotoWaits, 'id' | 'created_
   if (data) {
     console.log(data);
   }
+
+  return { data, error };
 };
 
-export const grabPhotoWaitById = async (id) => {
+export const grabPhotoWaitById = async (id: string) => {
   const { data, error } = await supabase
-    .from('photoWait')
+    .from(TABLE_NAME)
     .select()
     .eq('id', id);
 
@@ -46,9 +49,9 @@ export const grabPhotoWaitById = async (id) => {
   }
 };
 
-export const deletePhotoWait = async (id) => {
+export const deletePhotoWait = async (id: string) => {
   const { data, error } = await supabase
-    .from('photoWait')
+    .from(TABLE_NAME)
     .delete()
     .eq('id', id);
 

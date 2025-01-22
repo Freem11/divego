@@ -20,7 +20,9 @@
         "latPlaceholder": "Latitude",
         "lngPlaceholder": "Longitude",
         "latLngExplainer": "To place your business on the map",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "createSuccess": "Request Created Successfully!",
+        "createError": "Error creating request. Please try again later."
       },
       "SearchPage" :
       {
@@ -38,7 +40,11 @@
         "myLocationButton" : "Use my location",
         "myLocationExplainer" : "This can take up to 30 seconds",
         "pinButton" : "Drop a pin",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "allowLocation": "Please allow location access.",
+        "locationNotSupported": "Geolocation is not supported in your browser.",
+        "addSiteError": "Error adding site. Please try again later.",
+        "addSiteSuccess": "Site added successfully!"
       },
       "PicUploader" :
       {
@@ -50,7 +56,10 @@
         "whenPlaceholder": "Date of Sighting",
         "whereLabel": "Where you saw it",
         "wherePlaceholder": "Location of Sighting",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "uploadError": "Error uploading photo. Please try again later.",
+        "uploadSuccess": "Photo uploaded successfully!",
+        "fileUploadError": "Error uploading file. Please try again later."
       },
       "TripList" :
       {
@@ -82,7 +91,10 @@
         "emptyDrawer": " hasn't posted any sightings yet.",
         "userDoesFollow": "Following",
         "UserDoesNotFollow": "Follow",
-        "userDefaultDescription": "Say a little about yourself..."
+        "userDefaultDescription": "Say a little about yourself...",
+        "UserProfileUpdateSuccessMessage": "User Profile updated successfully...",
+        "DuplicateUserNameErrorMessage": "Username already in use, please try again...",
+        "EmptyUserNameError": "Username cannot be empty, please try again..."
       },
       "DiveSite" :
       {
@@ -157,5 +169,16 @@
         "emailInvalidMessage": "Please supply the email that you use to login",
         "passwordResetEmailSent": "Email Sent! Check Your Email For A Link To Reset Your Password",
         "passwordResetError": "Something went wrong. Please try again later"
+      },
+      "ConfirmDeleteAccount":
+      {
+        "title": "Account deletion",
+        "subHeader": "Are you sure you want to delete your account?",
+        "body": "Please note that deleting your account will not delete your previous dive site or photo submissions, please contact us if you wish to have those removed from the community",
+        "deleteBtnText": "Delete account",
+        "cancelBtnText": "Cancel",
+        "contact": "Contact us",
+        "contantEmail": "scubaseasons@gmail.com",
+        "errorDeleting": "Something went wrong. Please try again later"
       }
     }

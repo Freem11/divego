@@ -1,8 +1,10 @@
 import { supabase } from '../supabase';
 
+const TABLE_NAME = 'partnerAccountRequests';
+
 export const createPartnerAccountRequest = async (values) => {
   const { data, error } = await supabase
-    .from('partnerAccountRequests')
+    .from(TABLE_NAME)
     .insert([
       {
         webpageLink:  values.WebsiteLink,
@@ -20,11 +22,13 @@ export const createPartnerAccountRequest = async (values) => {
   if (data) {
     console.log(data);
   }
+
+  return { data, error };
 };
 
 export const grabRequestById = async (id) => {
   const { data, error } = await supabase
-    .from('partnerAccountRequests')
+    .from(TABLE_NAME)
     .select()
     .eq('userId', id);
 
