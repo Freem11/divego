@@ -71,6 +71,40 @@ export const updateDiveShop = async (values) => {
   }
 };
 
+export const insertDocument = async () => {
+  console.log('inserting a record');
+  const { data, error } = await supabase
+    .from('RLS_Test_Playground')
+    .insert([
+      {
+      },
+    ]);
+
+  if (error) {
+    console.log('couldn\'t do it,', error);
+  }
+
+  if (data) {
+    console.log(data);
+  }
+};
+
+export const readAllTestRecords = async () => {
+  console.log('returning authorized documents:');
+  const { data, error } = await supabase
+    .from('RLS_Test_Playground')
+    .select();
+
+  if (error) {
+    console.log('couldn\'t do it,', error);
+  }
+
+  if (data) {
+    console.log(data);
+  }
+};
+
+
 
 export const getShopByUserID = async (value) => {
   const { data, error } = await supabase

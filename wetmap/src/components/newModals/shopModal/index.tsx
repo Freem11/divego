@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
+import { updateDiveShop, insertDocument, readAllTestRecords } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
@@ -15,7 +15,7 @@ type ShopModalProps = Partial<ModalHandleProps>;
 export default function ShopModal(props: ShopModalProps) {
   const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
   const { profile } = useContext(UserProfileContext);
-  const [isMyShop, setIsMyShop] = useState<boolean>(false);  const [isPartnerAccount, setIsPartnerAccount] = useState(false);
+  const [isMyShop, setIsMyShop] = useState<boolean>(false); const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [selectedID, setSelectedID] = useState<number>(0);
   const { modalShow } = useContext(ModalContext);
@@ -28,8 +28,8 @@ export default function ShopModal(props: ShopModalProps) {
       setIsPartnerAccount(true);
     }
     if (
-      (profile?.partnerAccount) &&
-      (selectedShop?.userId === profile.UserID)
+      (profile?.partnerAccount)
+      && (selectedShop?.userId === profile.UserID)
     ) {
       setIsMyShop(true);
     } else {
@@ -54,6 +54,14 @@ export default function ShopModal(props: ShopModalProps) {
     }
   };
 
+  const handleInsertTest = async () => {
+    await insertDocument();
+  };
+
+  const handleSelectTest = async () => {
+    await readAllTestRecords();
+  }
+
   const handleImageSelection = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!selectedShop) {
       return;
@@ -72,7 +80,7 @@ export default function ShopModal(props: ShopModalProps) {
   const openTripCreatorList = async () => {
     modalShow(TripCreatorModal, {
       keepPreviousModal: true,
-      size: 'medium',
+      size:              'medium',
     });
   };
 
@@ -91,6 +99,8 @@ export default function ShopModal(props: ShopModalProps) {
           headerPictureUrl={null}
           openTripCreatorList={openTripCreatorList}
           isMyShop={isMyShop}
+          handleInsertTest={handleInsertTest}
+          handleSelectTest={handleSelectTest}
           handleDiveShopImageSelection={handleImageSelection}
         />
       )}
