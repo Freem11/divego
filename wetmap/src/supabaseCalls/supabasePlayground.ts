@@ -1,6 +1,6 @@
 import { supabase } from '../supabase';
 
-export const insertRecord = async () => {
+export const addDeletedAccountInfo = async () => {
   console.log('inserting a record');
   const { data, error } = await supabase
     .from('RLS_Test_Playground')
@@ -17,5 +17,3 @@ export const insertRecord = async () => {
     console.log(data);
   }
 };
-
-export const selected
