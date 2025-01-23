@@ -17,9 +17,7 @@ type TripCreatorViewProps = {
 };
 
 export default function TripCreatorView(props: TripCreatorViewProps) {
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
-    values: props.values,
-  });
+  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>

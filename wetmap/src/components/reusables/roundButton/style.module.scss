@@ -1,0 +1,29 @@
+@import '../../../styles/variables.scss';
+
+.button {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	pointer-events: all;
+	background-color: $themeWhite;
+	border: none;
+	border-radius: 50%;
+	padding: 0.4rem;
+	color: $primaryBlue;
+
+	&:hover,
+	&:focus {
+		background-color: $themeWhite
+	}
+
+}
+
+.icon {
+	display: contents;
+
+	svg,
+	img {
+		height: 100%;
+	}
+}

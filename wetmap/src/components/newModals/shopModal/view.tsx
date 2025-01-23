@@ -10,18 +10,16 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import { DiveShop } from '../../../entities/diveShop';
 import ItineraryCardList from '../../itineraryCardList';
 
-
 type ShopModelViewProps = {
   onClose?:                     () => void
   handleDiveShopBioChange:      (newValue: string) => void
   handleDiveShopImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
   openTripCreatorList:          () => void
-
-  diveShop:         DiveShop
-  isPartnerAccount: boolean
-  itineraryList:    ItineraryItem[]
-  headerPictureUrl: string | null
-  isMyShop:         boolean
+  diveShop:                     DiveShop | null
+  isPartnerAccount:             boolean
+  itineraryList:                ItineraryItem[] | null
+  headerPictureUrl:             string | null
+  isMyShop:                     boolean
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {

@@ -22,7 +22,7 @@
 
 // Layout
 @import "spectre.css/src/layout";
-@import "spectre.css/src/hero";
+@import "node_modules/spectre.css/src/hero";
 // @import "node_modules/spectre.css/src/navbar";
 
 // Components
@@ -49,11 +49,17 @@
 
 // Utility classes
 // @import "node_modules/spectre.css/src/animations";
-@import "spectre.css/src/utilities";
+@import "node_modules/spectre.css/src/utilities/display";
+@import "node_modules/spectre.css/src/utilities/loading";
+@import "node_modules/spectre.css/src/utilities/position";
+@import "node_modules/spectre.css/src/utilities/shapes";
+@import "node_modules/spectre.css/src/utilities/text";
+@import "./mixins/justify.scss";
 @import "./fonts.scss";
 @import "./mixins/stack.scss";
 @import "./mixins/blinking.scss";
 @import "./mixins/justify.scss";
+@import "./utils/scrollable.scss";
 
 @include padding-variant(4, $unit-4);
 @include padding-variant(6, $unit-6);
@@ -68,8 +74,18 @@
 @include justify-variant("center");
 
 @include bg-color-variant(".bg-white", $white);
+@include bg-color-variant(".bg-gray", $bg-color);
+@include text-color-variant(".text-primary", #142800);
+@include text-color-variant(".text-blue", $primaryBlue);
 
 @include stack('stack-4', $unit-4);
+
+.container-fluid {
+  max-width: 1600px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 .extra-shadow {
   box-shadow: 1px 1px 3px 3px rgba(0, 0, 0, 0.25);
@@ -130,4 +146,6 @@ h6 {
   --ssrc-text-input-height: #{$control-size};
   --ssrc-text-input-color: #{$gray-color};
   --ssrc-text-input-border-color: #{$gray-color};
+
+  --ssrc-list-item-with-image-hover-color:#{$secondary-color};
 }

@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import MapPage from './components/MapPage';
 import { useRoutes } from 'react-router-dom';
 import { ModalContext } from './components/reusables/modal/context';
 import PasswordUpdate from './components/newModals/passwordUpdate';
+import LayoutMain from './components/layout/main';
 
 const ShowModal = ({ component }: { component: React.FC<any> }): JSX.Element | null => {
   const { modalShow } = useContext(ModalContext);
@@ -15,7 +15,7 @@ const ShowModal = ({ component }: { component: React.FC<any> }): JSX.Element | n
 export const routes = [
   {
     path:     '*',
-    element:  <MapPage />,
+    element:  <LayoutMain />,
     children: [
       {
         path:     'account', children: [

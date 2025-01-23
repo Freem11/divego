@@ -1,4 +1,6 @@
 import { DiveSiteWithUserName } from '../entities/diveSite';
+import { GPSBubble } from '../entities/GPSBubble';
+import { Pagination } from '../entities/pagination';
 import { supabase } from '../supabase';
 
 export const diveSites = async () => {
@@ -14,14 +16,36 @@ export const diveSites = async () => {
   }
 };
 
-export const getDiveSitesWithUser = async (values) => {
-  const { data, error } = await supabase.rpc('get_divesites_with_username', {
-    max_lat: values.maxLat,
-    min_lat: values.minLat,
-    max_lng: values.maxLng,
-    min_lng: values.minLng,
-    userid:  values.myDiveSites,
+export const getDiveSitesBasic = async (bubble: GPSBubble) => {
+  const { data, error } = await supabase
+    .from('diveSites')
+    .select('id,lat,lng,name')
+    .gte('lat', bubble.minLat)
+    .gte('lng', bubble.minLng)
+    .lte('lat', bubble.maxLat)
+    .lte('lng', bubble.maxLng);
+
+  if (error || !data) {
+    console.log('couldn\'t do it,', error);
+    return [];
+  }
+
+  return data as DiveSiteWithUserName[];
+};
+export const getDiveSitesWithUser = async (bubble: GPSBubble, filter?: Partial<DiveSiteWithUserName>, pagination?: Pagination) => {
+  const builder = supabase.rpc('get_divesites_with_username', {
+    max_lat: bubble.maxLat,
+    min_lat: bubble.minLat,
+    max_lng: bubble.maxLng,
+    min_lng: bubble.minLng,
+    userid:  filter?.userid ?? '',
   });
+
+  if (pagination?.page) {
+    builder.range(pagination.from(), pagination.to());
+  }
+
+  const { data, error } = await builder;
 
   if (error) {
     console.log('couldn\'t do it 27,', error);
@@ -34,7 +58,7 @@ export const getDiveSitesWithUser = async (values) => {
   }
 };
 
-export const getSiteNamesThatFit = async (value) => {
+export const getSiteNamesThatFit = async (value: string, limit: number = 10): Promise<DiveSiteWithUserName[]> => {
   if (value === '') {
     return [];
   }
@@ -42,16 +66,15 @@ export const getSiteNamesThatFit = async (value) => {
   const { data, error } = await supabase
     .from('diveSites')
     .select()
-    .ilike('name', '%' + value + '%');
+    .ilike('name', '%' + value + '%')
+    .limit(limit);
 
-  if (error) {
+  if (error || !data) {
     console.log('couldn\'t do it,', error);
     return [];
   }
 
-  if (data) {
-    return data;
-  }
+  return data as DiveSiteWithUserName[];
 };
 
 export const insertDiveSite = async (values) => {
@@ -105,23 +128,18 @@ export const getDiveSiteWithUserName = async (values: { siteName: string, region
   }
 };
 
-export const getDiveSitesByIDs = async (valueArray) => {
-  const Q1 = valueArray.substring(1, valueArray.length);
-  const Q2 = Q1.substring(Q1.length - 1, 0);
-
+export const getDiveSitesByIDs = async (ids: number[]): Promise<DiveSiteWithUserName[]> => {
   const { data, error } = await supabase
     .from('diveSites')
     .select()
-    .or(`id.in.(${Q2})`);
+    .in('id', ids);
 
-  if (error) {
+  if (error || !data) {
     console.log('couldn\'t do it 7,', error);
     return [];
   }
 
-  if (data) {
-    return data;
-  }
+  return data as DiveSiteWithUserName[];
 };
 
 export const getSingleDiveSiteByNameAndRegion = async (values: { name: string, region: string | null }) => {
@@ -133,6 +151,25 @@ export const getSingleDiveSiteByNameAndRegion = async (values: { name: string, r
   if (values.region !== null) {
     query.eq('region', values.region);
   }
+
+  const { data, error } = await query;
+
+  if (error) {
+    console.log('couldn\'t do it 27,', error);
+    return [];
+  }
+
+  if (data) {
+    return data;
+  }
+};
+
+export const getDiveSiteById = async (id: string | number) => {
+  const query = supabase
+    .from('diveSites')
+    .select('*')
+    .eq('id', id);
+
 
   const { data, error } = await query;
 
@@ -164,21 +201,22 @@ export const updateDiveSite = async (values) => {
   }
 };
 
-export const getDiveSitesforMapArea = async (value) => {
-  const { data, error } = await supabase
-    .from('diveSites')
-    .select()
-    .gte('lat', value.minLat)
-    .gte('lng', value.minLng)
-    .lte('lat', value.maxLat)
-    .lte('lng', value.maxLng);
+// not in use
+// export const getDiveSitesforMapArea = async (value) => {
+//   const { data, error } = await supabase
+//     .from('diveSites')
+//     .select()
+//     .gte('lat', value.minLat)
+//     .gte('lng', value.minLng)
+//     .lte('lat', value.maxLat)
+//     .lte('lng', value.maxLng);
 
-  if (error) {
-    console.log('couldn\'t do it,', error);
-    return [];
-  }
+//   if (error) {
+//     console.log('couldn\'t do it,', error);
+//     return [];
+//   }
 
-  if (data) {
-    return data;
-  }
-};
+//   if (data) {
+//     return data;
+//   }
+// };
