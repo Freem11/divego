@@ -37,6 +37,30 @@ export class GPSBubble {
     });
   }
 
+  /**
+ * GPS bubble - some area on the map.
+ * If GPS bubble crosses the IDL(International Date Line), we need to get items from both sides of the IDL
+ * so we need to do two API request twice
+ * @param bubble GPS bubble
+ * @param callable - API request to get items
+ * @param args - arguments for API request
+ * @returns
+ */
+  static async getItemsInGpsBubble<T extends (...args: any[]) => any>(callable: T, ...args: Parameters<T>): Promise<ReturnType<T>> {
+    const [bubble, ...rest] = args as GPSBubble[];
+    if (bubble.isIDL()) {
+      const american = await callable(bubble.getAmericanBubble(), ...rest);
+      const asian = await callable(bubble.getAsianBubble(), ...rest);
+
+      return [
+        ...(american ? american : []),
+        ...(asian ? asian : []),
+      ] as ReturnType<T>;
+    } else {
+      return await callable(bubble, ...rest);
+    }
+  }
+
   static createFromBoundaries(boundaries: google.maps.LatLngBounds) {
     return new GPSBubble({
       minLat: boundaries.getSouthWest().lat(),

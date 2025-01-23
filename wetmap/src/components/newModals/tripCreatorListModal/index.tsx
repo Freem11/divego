@@ -1,16 +1,16 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorListView from './view';
 import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
 import TripCreatorModal from '../tripCreatorModal';
 import { ModalContext } from '../../reusables/modal/context';
+import { DiveShopContext } from '../../contexts/diveShopContext';
 
 
 export default function TripCreatorListModal() {
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  const { selectedShop, setSelectedShop } = useContext(DiveShopContext);
   const { profile } = useContext(UserProfileContext);
   const { modalShow, modalCancel } = useContext(ModalContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);

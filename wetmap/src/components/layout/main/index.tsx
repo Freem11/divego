@@ -32,11 +32,11 @@ export default function LayoutMain() {
         try {
           const success = await grabProfileById(sessionUserId);
           if (success) {
-            const bully = success[0] && success[0].UserName;
+            const bully = success && success.UserName;
             if (bully == null || bully === '') {
               return;
             } else {
-              setProfile(success[0]);
+              setProfile(success);
             }
           }
         } catch (e) {

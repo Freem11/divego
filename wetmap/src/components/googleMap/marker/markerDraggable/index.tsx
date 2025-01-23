@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Marker } from '@react-google-maps/api';
-import mantaIcon from '../../../../images/Manta32.png';
+import icon from '../../../../images/Manta32.png';
 import { MapContext } from '../../mapContext';
 
 type MarkerDraggableProps = {
@@ -35,9 +35,9 @@ export function MarkerDraggable(props: MarkerDraggableProps) {
 
   return (
     <Marker
+      icon={icon}
       position={initialPosition}
       draggable={true}
-      icon={mantaIcon}
       onLoad={onLoad}
       onDragEnd={onDragEnd}
     >

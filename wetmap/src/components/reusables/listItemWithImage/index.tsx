@@ -3,6 +3,7 @@ import './style.scss';
 
 type ListItemWithImageProps = {
   imageUrl:     string | null
+  imageAlt?:    string
   title:        string
   date:         string
   highlighted?: boolean
@@ -13,7 +14,7 @@ export default function ListItemWithImage(props: ListItemWithImageProps) {
     <div className={`ssrc-list-item-with-image ${props.highlighted ? 'highlighted' : ''}`}>
       <div className="ssrc-list-item-with-image__container">
 
-        <img src={props.imageUrl} className="" alt="" />
+        <img src={props.imageUrl || ''} alt={props.imageAlt} />
 
         <div className="">
           <div className="">

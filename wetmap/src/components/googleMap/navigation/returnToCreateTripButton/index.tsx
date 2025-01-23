@@ -3,13 +3,13 @@ import { MapContext } from '../../mapContext';
 import { ModalContext } from '../../../reusables/modal/context';
 import Button from '../../../reusables/button';
 import screenData from '../../../newModals/screenData.json';
-import { SelectedShopContext } from '../../../contexts/selectedShopContext';
 import { SitesArrayContext } from '../../../contexts/sitesArrayContext';
+import { DiveShopContext } from '../../../contexts/diveShopContext';
 
 export function ReturnToCreateTripButton() {
   const { mapRef, setMapConfig } = useContext(MapContext);
   const { modalResume } = useContext(ModalContext);
-  const { selectedShop } = useContext(SelectedShopContext);
+  const { selectedShop } = useContext(DiveShopContext);
   const { setSitesArray } = useContext(SitesArrayContext);
 
   return (

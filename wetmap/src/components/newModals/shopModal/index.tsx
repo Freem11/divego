@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
-import { SelectedShopContext } from '../../contexts/selectedShopContext';
+import { getDiveShopById, updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { ItineraryItem } from '../../../entities/itineraryItem';
@@ -10,20 +9,39 @@ import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorListModal from '../tripCreatorListModal';
 import { MapContext } from '../../googleMap/mapContext';
+import { DiveShopContext } from '../../contexts/diveShopContext';
 
 type ShopModalProps = Partial<ModalHandleProps> & {
-  panTo?: boolean
   id?:    number
+  panTo?: boolean
 };
 
 export default function ShopModal(props: ShopModalProps) {
-  const { selectedShop, setSelectedShop } = useContext(SelectedShopContext);
+  const { selectedShop, setSelectedShop } = useContext(DiveShopContext);
   const { profile } = useContext(UserProfileContext);
   const [isMyShop, setIsMyShop] = useState<boolean>(false);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const { modalShow } = useContext(ModalContext);
   const mapContext = useContext(MapContext);
+
+  useEffect(() => {
+    (async () => {
+      if (props.id) {
+        const shop = await getDiveShopById(props.id);
+        if (shop) {
+          setSelectedShop(shop);
+        }
+      }
+    })();
+  }, [props.id]);
+
+  useEffect(() => {
+    if (props.panTo && selectedShop && mapContext.mapRef) {
+      const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
+      mapContext.mapRef.panTo(latlng);
+    }
+  }, [props.panTo, selectedShop]);
 
   useEffect(() => {
     if (selectedShop) {
@@ -39,11 +57,6 @@ export default function ShopModal(props: ShopModalProps) {
       setIsMyShop(true);
     } else {
       setIsMyShop(false);
-    }
-
-    if (props.panTo && selectedShop && mapContext.mapRef) {
-      const latlng = new google.maps.LatLng(selectedShop.lat, selectedShop.lng);
-      mapContext.mapRef.panTo(latlng);
     }
   }, [selectedShop, profile]);
 

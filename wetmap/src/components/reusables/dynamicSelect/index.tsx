@@ -6,8 +6,10 @@ const defaultProps = {
   searchLimit: 100,
 };
 
+export type GetMoreOptions = (search: string, limit: number, skip: number) => Promise<{ options: any[] }>;
+
 type DynamicSelectProps = SelectProps & Partial<typeof defaultProps> & {
-  getMoreOptions:      (search: string, limit: number, skip: number) => Promise<any>
+  getMoreOptions:      GetMoreOptions
   getSelectedOptions?: (values: any) => Promise<any>
 };
 

@@ -3,25 +3,25 @@ import { DynamicSelectOptionsMainSearch, OptionAdditionalData } from './DynamicS
 import DynamicSelect from '../../reusables/dynamicSelect';
 import { DropdownItemProps } from '../../reusables/select/components/dropdownItem';
 import getPlaceLocation from '../../../helpers/googleMapGeocoder';
-import { SelectedDiveSiteContext } from '../../contexts/selectedDiveSiteContext';
 import { getDiveSitesByIDs } from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import style from './style.module.scss';
 import MainSearchDropdownItem from './components/mainSearchDropdownItem';
 import { onChangeEvent, Option } from '../../reusables/select';
 import Icon from '../../../icons/Icon';
 import { MapContext } from '../../googleMap/mapContext';
+import { DiveSiteContext } from '../../contexts/diveSiteContext';
 
 export default function MainSearch() {
   const { mapRef } = useContext(MapContext);
-  const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
+  const { setSelectedDiveSite } = useContext(DiveSiteContext);
 
   const handleSelect = async (event: onChangeEvent<OptionAdditionalData>) => {
     let coordinates: number[] = [];
 
     const option = event?.target?.value as Option<OptionAdditionalData>;
 
-    if (option?.data?.type === 'diveSite') {
-      const diveSites = await getDiveSitesByIDs(JSON.stringify([option?.data.id]));
+    if (option?.data?.type === 'diveSite' && option?.data.id) {
+      const diveSites = await getDiveSitesByIDs([+option.data.id]);
       diveSites?.some((diveSite) => {
         coordinates = [diveSite.lat, diveSite.lng];
         setSelectedDiveSite(diveSite);

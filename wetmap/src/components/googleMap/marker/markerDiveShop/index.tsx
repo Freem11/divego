@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { Marker } from '@react-google-maps/api';
-import icon from '../../../../images/mapIcons/AnchorBlue1.png';
+import icon from '../../../../images/mapIcons/DiveCentre24x24.png';
 import { ModalContext } from '../../../reusables/modal/context';
-import DiveSite from '../../../newModals/diveSite';
+import ShopModal from '../../../newModals/shopModal';
 
-type MarkerDiveSiteProps = {
+type MarkerDiveShopProps = {
   id:       number
   title:    string
   position: google.maps.LatLngLiteral
 };
 
-export function MarkerDiveSite(props: MarkerDiveSiteProps) {
+export function MarkerDiveShop(props: MarkerDiveShopProps) {
   const { modalShow } = useContext(ModalContext);
 
   return (
@@ -19,7 +19,7 @@ export function MarkerDiveSite(props: MarkerDiveSiteProps) {
       title={props.title}
       position={props.position}
       onClick={() => {
-        modalShow(DiveSite, {
+        modalShow(ShopModal, {
           id:   props.id,
           size: 'large',
         });

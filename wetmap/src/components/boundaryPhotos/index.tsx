@@ -1,24 +1,29 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useRef } from 'react';
 import { MapContext } from '../googleMap/mapContext';
-import InfiniteScroll from '../reusables/infiniteScroll';
-import { Photo } from '../../entities/photos';
-import { PhotoItem } from './photoItem';
-import DynamicSelect from '../reusables/dynamicSelect';
 import { DynamicSelectOptionsAnimals } from '../../entities/DynamicSelectOptionsAnimals';
-import Icon from '../../icons/Icon';
-import { MapBoundariesPhotoContext } from '../contexts/mapBoundariesPhotoContext';
+import { PhotoContext } from '../contexts/photoContext';
 import { Option } from '../reusables/select';
+import { BoundaryPhotosView } from './view';
+import useOnScreen from '../reusables/_helpers/useOnScreen';
 
 
 export function BoundaryPhotos() {
   const { boundaries } = useContext(MapContext);
-  const { photosIpp, getPhotos, selectedAnimals, setSelectedAnimals } = useContext(MapBoundariesPhotoContext);
+  const { collection, updatePhotoCollection, selectedAnimals, setSelectedAnimals } = useContext(PhotoContext);
+  const ref = useRef<HTMLDivElement>(null);
+  const isVisible = useOnScreen(ref);
 
-  const loadMore = async (page: number) => {
-    return await getPhotos(page);
+  useEffect(() => {
+    if (isVisible) {
+      updatePhotoCollection(1, true);
+    }
+  }, [boundaries, isVisible]);
+
+  const loadMore = (page: number) => {
+    updatePhotoCollection(page);
   };
 
-  const onChange = (e: any) => {
+  const handleAnimalSelect = (e: any) => {
     setSelectedAnimals(() => {
       if (Array.isArray(e?.target?.value)) {
         return e.target.value.map((option: Option) => option.label);
@@ -29,27 +34,17 @@ export function BoundaryPhotos() {
   };
 
   return (
-    <>
-      <DynamicSelect
-        labelInValue={true}
-        maxSelectedOptions={2}
-        placeholder="Search for an animal"
-        getMoreOptions={DynamicSelectOptionsAnimals.getMoreOptions}
-        iconLeft={<Icon name="shark" />}
-        onChange={onChange}
+    <div ref={ref} className="scroll-container non-scrollable">
+      <BoundaryPhotosView
+        uniqueKey={boundaries?.toString()}
+        getMoreAnimals={DynamicSelectOptionsAnimals.getMoreOptions}
+        handleAnimalSelect={handleAnimalSelect}
+        loadMorePhotos={loadMore}
+        hasMorePhotos={!!collection.hasMore}
+        selectedPhotos={selectedAnimals}
+        isLoadingPhotos={!!collection.isLoading}
+        photos={collection.items}
       />
-      <InfiniteScroll
-        key={boundaries?.toString()}
-        ipp={photosIpp}
-        className="p-2 scrollable"
-        loadMore={loadMore}
-        renderItem={(item: Photo, index: number) => {
-          return <PhotoItem key={index} photo={item} highlighted={selectedAnimals.includes(item.label)} />;
-        }}
-        renderEmpty={() => {
-          return <div>No Pictures in this area</div>;
-        }}
-      />
-    </>
+    </div>
   );
 }

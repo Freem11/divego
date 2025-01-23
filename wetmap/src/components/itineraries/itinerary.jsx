@@ -44,7 +44,7 @@ export default function Itinerary(props) {
 
   const flipMap = async (siteList) => {
     setSitesArray(siteList);
-    let itinerizedDiveSites = await getDiveSitesByIDs(JSON.stringify(siteList));
+    let itinerizedDiveSites = await getDiveSitesByIDs(siteList);
 
     let lats = [];
     let lngs = [];

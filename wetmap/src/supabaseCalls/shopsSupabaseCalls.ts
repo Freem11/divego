@@ -90,3 +90,30 @@ export const getShopByUserID = async (value: string) => {
     return data as DiveShop[];
   }
 };
+
+
+export const getDiveShopById = async (id: number) => {
+  const { data, error } = await supabase
+    .from('shops')
+    .select()
+    .eq('id', id);
+
+  if (error) {
+    console.log('couldn\'t do it 39,', error);
+  }
+
+  if (data && data.length > 0) {
+    return {
+      id:                   data[0].id,
+      orgname:              data[0].orgName,
+      lat:                  data[0].lat,
+      lng:                  data[0].lng,
+      userId:               data[0].userId,
+      created_at:           data[0].created_at,
+      diveshopbio:          data[0].diveShopBio,
+      diveshopprofilephoto: data[0].diveShopProfilePhoto,
+    } as DiveShop;
+  }
+
+  return null;
+};

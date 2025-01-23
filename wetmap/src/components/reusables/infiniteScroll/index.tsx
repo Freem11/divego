@@ -3,79 +3,46 @@ import './style.scss';
 import Container from './components/container';
 
 const defaultProps = {
-  ipp:           20 as number,
-  page:          0 as number,
+  hasMore:       false,
   renderLoading: () => {
     return <div>Loading...</div>;
   },
-  renderEmpty:   () => {
-    return <div>Infinite scroll is empty</div>;
+  renderEmpty: () => {
+    return <div></div>;
   },
 };
 
 type InfiniteScrollProps = Partial<typeof defaultProps> & {
-  loadMore:   (page: number) => Promise<any>
-  renderItem: (item: any, index: number) => ReactNode
+  loadMore:   (page: number) => void
   className?: string
+  children?:  ReactNode
+  isLoading?: boolean
 };
 
 const InfiniteScroll = (_props: InfiniteScrollProps) => {
   const props = { ...defaultProps, ..._props };
-  const [hasMore, setHasMore] = useState(true);
-  const [items, setItems] = useState<any[] | null>(null);
-  const [loading, setLoading] = useState(false);
-  const [page, setPage] = useState(props.page);
+  const [page, setPage] = useState(1);
 
   const loadMore = async () => {
-    setLoading(true);
     const newPage = page + 1;
-
-    const items = await props.loadMore(newPage);
-
+    await props.loadMore(newPage);
     setPage(newPage);
-    setLoading(false);
-    setHasMore(() => {
-      if (!items) {
-        return false;
-      }
-      if (items.length < props.ipp) {
-        // no need to load more because there are no more items
-        return false;
-      }
-      if (items.length > props.ipp) {
-        // seems like there is no pagination - doesnt make sense to load more
-        return false;
-      }
-      return true;
-    });
-    setItems((prev) => {
-      if (!items) {
-        return prev;
-      } else if (prev === null) {
-        return items;
-      } else if (items) {
-        return [...prev, ...items];
-      } else {
-        return prev;
-      }
-    });
   };
 
+  if (React.Children.count(props.children) === 0) {
+    return props.renderEmpty();
+  }
 
   return (
     <Container
       loadMore={loadMore}
-      hasMore={hasMore}
-      loading={loading}
+      hasMore={props.hasMore}
+      isLoading={props.isLoading}
       className={props.className}
     >
-      {(page > 0) && items?.map((item, index) => {
-        return props.renderItem(item, index);
-      })}
+      {props.children}
 
-      {!items?.length && !loading && props.renderEmpty()}
-
-      {loading && props.renderLoading()}
+      {props.isLoading && props.renderLoading()}
     </Container>
   );
 };

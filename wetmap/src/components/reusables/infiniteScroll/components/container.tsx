@@ -5,7 +5,7 @@ type InfiniteScrollProps = {
   loadingIndicator?: ReactNode
   loadMore?:         () => Promise<any>
   hasMore?:          boolean
-  loading?:          boolean
+  isLoading?:        boolean
   className?:        string
 };
 
@@ -20,7 +20,7 @@ export default function Container(props: InfiniteScrollProps) {
       if (props.hasMore === false) {
         return;
       }
-      if (props.loading) {
+      if (props.isLoading) {
         return;
       }
       if (!entry.isIntersecting) {
@@ -46,11 +46,11 @@ export default function Container(props: InfiniteScrollProps) {
         observer.unobserve(targetRef.current);
       }
     };
-  }, [props.hasMore, props.loading]);
+  }, [props.hasMore, props.isLoading]);
 
 
   return (
-    <div className={`${props.className ?? ''} ssrc-infinite-scroll`} ref={wrapperRef}>
+    <div className={`ssrc-infinite-scroll ${props.className ?? ''} ${props.isLoading ? 'ssrc-infinite-scroll--loading' : ''}`} ref={wrapperRef}>
       {props.children}
       <div ref={targetRef}></div>
     </div>

@@ -19,7 +19,7 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
 
-    const itinerizedDiveSites = await getDiveSitesByIDs(JSON.stringify(siteList));
+    const itinerizedDiveSites = await getDiveSitesByIDs(siteList);
 
     if (!itinerizedDiveSites || itinerizedDiveSites.length === 0) {
       console.error('No dive sites found or itinerizedDiveSites is undefined.');

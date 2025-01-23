@@ -9,7 +9,6 @@ type DiveSiteItemProps = {
 
 export default function DiveSiteItem(props: DiveSiteItemProps) {
   const imageUrl = getPhotoPublicUrl(props.diveSite.photo);
-
   return (
     <ListItemWithImage
       imageUrl={imageUrl}

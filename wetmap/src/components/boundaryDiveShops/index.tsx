@@ -1,42 +1,44 @@
-import React, { useContext } from 'react';
-import DiveShopItem from './diveShopItem';
-import { MapBoundariesDiveShopContext } from '../contexts/mapBoundariesDiveShopContext';
+import React, { useContext, useEffect } from 'react';
+import { DiveShopContext } from '../contexts/diveShopContext';
 import { DiveShop } from '../../entities/diveShop';
 import { ModalContext } from '../reusables/modal/context';
 import ShopModal from '../newModals/shopModal';
-import { SelectedShopContext } from '../contexts/selectedShopContext';
+import { MapContext } from '../googleMap/mapContext';
+import { BoundaryDiveShopsView } from './view';
 
 export function BoundaryDiveShops() {
-  const { pagedCollection } = useContext(MapBoundariesDiveShopContext);
+  const { collection, setSelectedShop } = useContext(DiveShopContext);
   const { modalShow } = useContext(ModalContext);
-  const { setSelectedShop } = useContext(SelectedShopContext);
+  const { boundaries } = useContext(MapContext);
 
-  if (!pagedCollection.items) {
-    return <div className="p-2">Loading...</div>;
-  }
+  useEffect(() => {
+    // TODO: doesnt make sense until pagination is added
+    // updateDiveShopCollection(1, true);
+  }, [boundaries]);
 
-  if (!pagedCollection.items.length) {
-    return <div className="p-2">No Dive Shops in this area</div>;
-  }
+  const loadMore = () => {
+    // TODO: doesnt make sense until pagination is added
+  //   updateDiveShopCollection(page);
+  };
 
-  const openModal = (item: DiveShop) => {
+
+  const handleOpenDiveShop = (item: DiveShop) => {
     setSelectedShop(item);
     modalShow(ShopModal, {
-      size:   'large',
       panTo: true,
-      id:     item.id,
+      size:  'large',
+      id:    item.id,
     });
   };
 
   return (
-    <div className="p-2 scrollable">
-      {pagedCollection?.items.map((item: DiveShop) => {
-        return (
-          <div key={item.id} onClick={() => openModal(item)}>
-            <DiveShopItem diveShop={item} />
-          </div>
-        );
-      })}
-    </div>
+    <BoundaryDiveShopsView
+      key={boundaries?.toString()}
+      diveShops={collection.items}
+      handleOpenDiveShop={handleOpenDiveShop}
+      hasMoreDiveShops={collection.hasMore}
+      isLoadingDiveShops={collection.isLoading}
+      loadMoreDiveShops={loadMore}
+    />
   );
 }

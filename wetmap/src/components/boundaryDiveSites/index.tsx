@@ -1,41 +1,41 @@
-import React, { useContext } from 'react';
-import DiveSiteItem from './diveSiteItem';
-import { MapBoundariesDiveSiteContext } from '../contexts/mapBoundariesDiveSiteContext';
-import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
+import React, { useCallback, useContext, useEffect } from 'react';
+import { DiveSiteContext } from '../contexts/diveSiteContext';
 import { ModalContext } from '../reusables/modal/context';
 import DiveSite from '../newModals/diveSite';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
+import { MapContext } from '../googleMap/mapContext';
+import { BoundaryDiveSitesView } from './view';
 
 export function BoundaryDiveSites() {
-  const { pagedCollection } = useContext(MapBoundariesDiveSiteContext);
-  const { setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
+  const { updateDiveSiteCollection, collection, setSelectedDiveSite } = useContext(DiveSiteContext);
   const { modalShow } = useContext(ModalContext);
+  const { boundaries } = useContext(MapContext);
 
-  if (!pagedCollection.items) {
-    return <div className="p-2">Loading...</div>;
-  }
+  useEffect(() => {
+    updateDiveSiteCollection(1, true);
+  }, [boundaries]);
 
-  if (!pagedCollection.items.length) {
-    return <div className="p-2">No Dive Sites in this area</div>;
-  }
+  const loadMore = useCallback((page: number) => {
+    updateDiveSiteCollection(page);
+  }, [boundaries]);
 
-  const openModal = (item: DiveSiteWithUserName) => {
+
+  const handleOpenDiveSite = (item: DiveSiteWithUserName) => {
     setSelectedDiveSite(item);
     modalShow(DiveSite, {
-      panTo: true,
       size:  'large',
+      panTo: true,
     });
   };
 
   return (
-    <div className="p-2 scrollable">
-      {pagedCollection?.items.map((item: DiveSiteWithUserName) => {
-        return (
-          <div key={item.id} onClick={() => openModal(item)}>
-            <DiveSiteItem diveSite={item} />
-          </div>
-        );
-      })}
-    </div>
+    <BoundaryDiveSitesView
+      uniqueKey={boundaries?.toString()}
+      diveSites={collection.items}
+      handleOpenDiveSite={handleOpenDiveSite}
+      hasMoreDiveSites={collection.hasMore}
+      isLoadingDiveSites={collection.isLoading}
+      loadMoreDiveSites={loadMore}
+    />
   );
 }

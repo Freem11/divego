@@ -1,7 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import DiveSiteView from './view';
-import { updateDiveSite } from '../../../supabaseCalls/diveSiteSupabaseCalls';
-import { SelectedDiveSiteContext } from '../../contexts/selectedDiveSiteContext';
+import { getDiveSitesByIDs, updateDiveSite } from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import { PhotosGroupedByDate } from '../../../entities/photos';
 import { getPhotosByDiveSiteWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
@@ -13,13 +12,14 @@ import { ModalHandleProps } from '../../reusables/modal/types';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ActiveProfile } from '../../../entities/profile';
 import { MapContext } from '../../googleMap/mapContext';
+import { DiveSiteContext } from '../../contexts/diveSiteContext';
 
 type DiveSiteProps = Partial<ModalHandleProps> & {
-  panTo?: boolean
   id?:    number
+  panTo?: boolean
 };
 export default function DiveSite(props: DiveSiteProps) {
-  const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
+  const { selectedDiveSite, setSelectedDiveSite } = useContext(DiveSiteContext);
   const { profile }          = useContext(UserProfileContext);
   const { modalShow }        = useContext(ModalContext);
   const { pin, setPin }      = useContext(PinContext);
@@ -29,13 +29,26 @@ export default function DiveSite(props: DiveSiteProps) {
   const mapContext = useContext(MapContext);
 
   useEffect(() => {
-    if (selectedDiveSite) {
-      getPhotos(selectedDiveSite, profile);
-    }
+    (async () => {
+      if (props.id) {
+        const diveSites = await getDiveSitesByIDs([props.id]);
+        if (diveSites && diveSites.length) {
+          setSelectedDiveSite(diveSites[0]);
+        }
+      }
+    })();
+  }, [props.id]);
 
+  useEffect(() => {
     if (props.panTo && selectedDiveSite && mapContext.mapRef) {
       const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
       mapContext.mapRef.panTo(latlng);
+    }
+  }, [selectedDiveSite, props.panTo]);
+
+  useEffect(() => {
+    if (selectedDiveSite) {
+      getPhotos(selectedDiveSite, profile);
     }
   }, [selectedDiveSite, profile]);
 
@@ -69,9 +82,14 @@ export default function DiveSite(props: DiveSiteProps) {
     }
 
     const createFileName = await handleImageUpload(event);
-    setSelectedDiveSite({
-      ...selectedDiveSite,
-      divesiteprofilephoto: `animalphotos/public/${createFileName}`,
+    setSelectedDiveSite((prev) => {
+      if (!prev) {
+        return prev;
+      }
+      return {
+        ...prev,
+        divesiteprofilephoto: `animalphotos/public/${createFileName}`,
+      };
     });
   };
 
@@ -84,7 +102,6 @@ export default function DiveSite(props: DiveSiteProps) {
         siteName:  selectedDiveSite.name,
       });
     }
-
 
     modalShow(PicUploader);
   };
@@ -112,7 +129,6 @@ export default function DiveSite(props: DiveSiteProps) {
       headerPictureUrl={headerPictureUrl}
       onDiveSiteBioChange={async (newValue) => {
         if (selectedDiveSite) {
-          setSelectedDiveSite({ ...selectedDiveSite, divesitebio: newValue });
           try {
             await updateDiveSite({
               id:    selectedDiveSite.id,

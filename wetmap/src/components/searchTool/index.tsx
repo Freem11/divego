@@ -2,17 +2,17 @@ import React, { useState, useContext, useEffect } from 'react';
 import SearchView from './view';
 import { getSingleDiveSiteByNameAndRegion, getSiteNamesThatFit } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import { MapContext } from '../googleMap/mapContext';
-import { SelectedDiveSiteContext } from '../contexts/selectedDiveSiteContext';
 import { addIconTypeDiveSite, addIconTypePlaces, addIndexNumber } from '../../helpers/optionHelpers';
 import usePlacesAutocomplete, {
   getGeocode,
   getLatLng,
 } from 'use-places-autocomplete';
+import { DiveSiteContext } from '../contexts/diveSiteContext';
 
 export default function SearchTool(props: any) {
   const { onModalCancel } = props;
   const { boundaries } = useContext(MapContext);
-  const { selectedDiveSite, setSelectedDiveSite } = useContext(SelectedDiveSiteContext);
+  const { selectedDiveSite, setSelectedDiveSite } = useContext(DiveSiteContext);
 
   const [list, setList] = useState<any>([]);
   const [searchValue, setSearchValue] = useState('');
