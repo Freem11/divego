@@ -1,7 +1,7 @@
 import { supabase } from '../supabase';
 import { ItineraryItem } from '../entities/itineraryItem';
 
-export const itineraries = async (IdNo: Number) => {
+export const itineraries = async (IdNo: number) => {
   const { data, error } = await supabase
     .from('itineraries')
     .select()
