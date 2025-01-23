@@ -1,23 +1,22 @@
 import './App.scss';
-import { useState, useEffect, useLayoutEffect } from 'react';
+import { useState, useEffect, useLayoutEffect, useContext } from 'react';
 import { supabase } from './supabase';
-import AuthenticationPage from './components/authenticationPage';
+import AuthenticationPage from './components/authentication';
 import LoadingScreen from './LoadingScreen';
 import { getMostRecentPhoto } from './supabaseCalls/photoSupabaseCalls';
 import {
   sessionCheck,
   sessionRefresh,
 } from './supabaseCalls/authenticateSupabaseCalls';
-import { AppContextProvider } from './components/contexts/appContextProvider';
-import { CoordsContext } from './components/contexts/mapCoordsContext';
 import { SessionContext } from './components/contexts/sessionContext';
 import { toast, ToastContainer } from 'react-toastify';
 import Router from './router';
+import { MapContext } from './components/googleMap/mapContext';
 // DiveLocker
 
 function App() {
+  const { setInitialPoint } = useContext(MapContext);
   const [appIsReady, setAppIsReady] = useState(false);
-  const [mapCoords, setMapCoords] = useState([49.316666, -123.066666]);
   const [activeSession, setActiveSession] = useState(null);
 
   useEffect(() => {
@@ -49,16 +48,20 @@ function App() {
     } catch (error) {
       console.log('no dice:', error);
     }
-
-    const photoLocation = await getMostRecentPhoto();
-    if (photoLocation) {
-      setMapCoords([photoLocation[0].latitude, photoLocation[0].longitude]);
-      setAppIsReady(true);
-    }
   };
 
   useLayoutEffect(() => {
     handleStartup();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const photoLocation = await getMostRecentPhoto();
+      if (photoLocation) {
+        setInitialPoint([photoLocation[0].latitude, photoLocation[0].longitude]);
+        setAppIsReady(true);
+      }
+    })();
   }, []);
 
 
@@ -81,13 +84,10 @@ function App() {
     <div className="App">
       <ToastContainer autoClose={10000} />
 
-      <AppContextProvider>
-        <CoordsContext.Provider value={{ mapCoords, setMapCoords }}>
-          <SessionContext.Provider value={{ activeSession, setActiveSession }}>
-            { !activeSession ? <AuthenticationPage /> : <Router /> }
-          </SessionContext.Provider>
-        </CoordsContext.Provider>
-      </AppContextProvider>
+      <SessionContext.Provider value={{ activeSession, setActiveSession }}>
+        { !activeSession ? <AuthenticationPage /> : <Router /> }
+      </SessionContext.Provider>
+
     </div>
   );
 }

@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { AnimalContext } from '../contexts/animalContext';
-import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import { MapContext } from '../googleMap/mapContext';
 import { getHistoData } from '../../supabaseCalls/photoSupabaseCalls';
 import AxisBar from './histogramAxis';
 import DataBar from './histogramBar';
@@ -8,7 +8,7 @@ import './histogram.css';
 
 export default function Histogram() {
   const { animalVal } = useContext(AnimalContext);
-  const { boundaries } = useContext(MapBoundsContext);
+  const { boundaries } = useContext(MapContext);
   const [histoData, setHistoData] = useState([]);
 
   useEffect(() => {
@@ -49,15 +49,13 @@ export default function Histogram() {
           maxVal = dataArray.reduce((a, b) => Math.max(a, b), -Infinity);
           if (maxVal === 0) {
             percentArr = dataArray;
-          }
-          else {
+          } else {
             percentArr = dataArray.map(val => (val / maxVal) * 100);
           }
 
           setHistoData(percentArr);
         }
-      }
-      catch (e) {
+      } catch (e) {
         console.log({ title: 'Error', message: e.message });
       }
     }

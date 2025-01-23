@@ -28,10 +28,9 @@ export default function PageTwo() {
       });
     }
     if (activeSession) {
-      const success = await grabProfileById(activeSession?.user.id);
-      if (success) {
-        const updatedprofile: ActiveProfile = success[0];
-        setProfile(updatedprofile);
+      const profile = await grabProfileById(activeSession?.user.id);
+      if (profile) {
+        setProfile(profile);
         slideForward();
       }
     }

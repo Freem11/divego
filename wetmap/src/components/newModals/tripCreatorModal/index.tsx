@@ -1,16 +1,15 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
-import TripCreatorView from './view';
-import { Form } from './form';
 import { ModalHandleProps } from '../../reusables/modal/types';
+import TripCreatorView from './view';
+import { DiveShopContext } from '../../contexts/diveShopContext';
+import { Form } from './form';
 
-type TripCreatorProps = Partial<ModalHandleProps>;
+type TripCreatorModalProps = Partial<ModalHandleProps>;
 
-export default function TripCreatorModal(props: TripCreatorProps) {
-  const { selectedShop } = useContext(SelectedShopContext);
-
+export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
+  const { selectedShop } = useContext(DiveShopContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const [thePrice, setThePrice] = useState('');
 
@@ -57,13 +56,9 @@ export default function TripCreatorModal(props: TripCreatorProps) {
     <>
       {selectedShop && (
         <TripCreatorView
-          onClose={props.onModalCancel}
-          onSubmit={onSubmit}
-          isEditModeOn={props.isEditModeOn}
-          priceChange={priceChange}
-          values={{
-            Price: thePrice,
-          }}
+          itineraryList={itineraryList}
+          headerPictureUrl={null}
+          onClose={onModalCancel}
         />
       )}
     </>

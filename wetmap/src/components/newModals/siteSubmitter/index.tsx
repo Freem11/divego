@@ -1,74 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SiteSubmitterView from './view';
 import { useContext } from 'react';
-import '../../modals/confirmationModal.css';
-import '../../modals/siteSubmitter.css';
 import { insertDiveSiteWaits } from '../../../supabaseCalls/diveSiteWaitSupabaseCalls';
-import { DiveSpotContext } from '../../contexts/diveSpotContext';
-import { MapConfigContext } from '../../contexts/mapConfigContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { Form } from './form';
 import { ModalContext } from '../../reusables/modal/context';
 import { ModalHandleProps } from '../../reusables/modal/types';
+import { MapContext } from '../../googleMap/mapContext';
+import { toast } from 'react-toastify';
+import screenData from '../screenData.json';
 
 type SiteSubmitterProps = Partial<ModalHandleProps>;
 
 export default function SiteSubmitter(props: SiteSubmitterProps) {
-  const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { profile } = useContext(UserProfileContext);
-
-  const { setMapConfig } = useContext(MapConfigContext);
+  const [deviceLocation, setDeviceLocation] = useState<google.maps.LatLngLiteral | null>(null);
+  const { setMapConfig, draggablePoint, setDraggablePoint } = useContext(MapContext);
 
   const { modalPause } = useContext(ModalContext);
 
   const getDeviceLocation = () => {
+    setDraggablePoint(null);
     if (navigator.geolocation) {
       navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
         if (permissionStatus.state === 'denied') {
-          alert('Please allow location access.');
+          toast.error(screenData.DiveSiteAdd.allowLocation);
           window.location.href = 'app-settings:location';
         } else {
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              console.log('HEY', position);
-              setAddSiteVals({
-                ...addSiteVals,
-                Latitude:  position.coords.latitude,
-                Longitude: position.coords.longitude,
+              setDeviceLocation({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
               });
             },
             function (error) {
-              console.log('location permissions denied', error.message);
+              console.log('Location permissions denied', error.message);
+              toast.error(screenData.DiveSiteAdd.allowLocation);
             },
             { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 },
           );
         }
       });
     } else {
-      alert('Geolocation is not supported in your browser.');
+      toast.error(screenData.DiveSiteAdd.locationNotSupported);
     }
   };
 
   const onNavigate = () => {
+    setDeviceLocation(null);
     setMapConfig(1);
     modalPause();
   };
 
-  const onSubmit = (data: Form) => {
-    insertDiveSiteWaits({
-      Site:      data.Site,
-      Latitude:  data.Latitude,
-      Longitude: data.Longitude,
+  const onSubmit = async (formData: Form) => {
+    const { error } = await insertDiveSiteWaits({
+      Site:      formData.Site,
+      Latitude:  formData.Latitude,
+      Longitude: formData.Longitude,
       UserID:    profile && profile.UserID,
     });
+
+    if (error) {
+      toast.error(screenData.DiveSiteAdd.addSiteError);
+    } else {
+      toast.success(screenData.DiveSiteAdd.addSiteSuccess);
+    }
     onClose();
   };
 
   const onClose = () => {
-    setAddSiteVals({ ...addSiteVals, Site: '', Latitude: 0, Longitude: 0 });
+    setDraggablePoint(null);
     props?.onModalCancel?.();
   };
-
 
   return (
     <SiteSubmitterView
@@ -77,8 +81,8 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
       onClose={onClose}
       onSubmit={onSubmit}
       values={{
-        Latitude:  addSiteVals?.Latitude,
-        Longitude: addSiteVals?.Longitude,
+        Latitude:  draggablePoint ? draggablePoint?.lat : deviceLocation?.lat,
+        Longitude: draggablePoint ? draggablePoint?.lng : deviceLocation?.lng,
       }}
     />
   );

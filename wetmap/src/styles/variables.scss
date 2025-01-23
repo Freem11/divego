@@ -2,6 +2,7 @@
 $control-size-lg: 2.5rem;
 $primary-color: #538bdb;
 $light-color: #f0eeeb;
+$bg-color: #ecedec;
 $hover-color: #3e7dd7;
 $active-color: #538dbd;
 $gray-color: darkgray;
@@ -66,6 +67,10 @@ $fontSizeHeader: 34px;
 $fontSizeSubHeading: 24px;
 $fontSizeStandardText: 18px;
 $fontSizeSmallText: 14px;
+
+$zIndexes: (
+	"tooltip": 1
+);
 
 
 // export const fonts = {

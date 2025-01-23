@@ -1,0 +1,23 @@
+:root {
+  --ssrc-list-item-with-image-hover-color: red;
+}
+
+// ssrc: scuba seasons reusable component
+.ssrc-list-item-with-image {
+  
+  &.highlighted,
+  &:hover{
+    background-color: var(--ssrc-list-item-with-image-hover-color);
+  }
+
+  .ssrc-list-item-with-image__container{
+    display: flex;
+    padding: 5px;
+  }
+
+  img{
+    object-fit: cover;
+    width: 70px;
+    height: 70px;
+  }
+}

@@ -32,8 +32,7 @@ type registrationDetails = {
 };
 
 export const register = async (registerDetails: registrationDetails) => {
-  console.log('auth got,', registerDetails);
-  const { data, error } = await supabase.auth.signUp(
+  const response = await supabase.auth.signUp(
     {
       email:    registerDetails.email,
       password: registerDetails.password,
@@ -45,14 +44,11 @@ export const register = async (registerDetails: registrationDetails) => {
     },
   );
 
-  if (error) {
-    console.log('couldn\'t register,', error);
-    return { data };
+  if (response.error) {
+    console.log(response.error);
   }
 
-  if (data) {
-    return { data };
-  }
+  return response;
 };
 
 type loginDetails = {
@@ -126,20 +122,22 @@ export const signOut = async () => {
   if (error) {
     console.log('couldn\'t logout,', error);
   }
+  return { error };
 };
 
 export const userDelete = async (userIdValue: string) => {
-  console.log('supa gets', userIdValue);
-  const { data, error } = await supabase.rpc('delete_user', { userid: userIdValue });
+  const response = await supabase.rpc('delete_user', { userid: userIdValue });
 
-  if (error) {
-    console.log('couldn\'t delete user,', error);
-    return [];
+  console.log('supa gets', userIdValue);
+  if (response.error) {
+    console.log('couldn\'t delete user,', response.error);
   }
 
-  if (data) {
+  if (response.data) {
     console.log('user was deleted');
   }
+
+  return response;
 };
 
 export const sendPasswordResetEmail = async (email: string, url: string) => {
