@@ -4,11 +4,15 @@ import { ItineraryItem } from '../../entities/itineraryItem';
 import style from './style.module.scss';
 
 type ItineraryCardListProps = {
-  itineraryList:         ItineraryItem[]
+  itineraryList:         ItineraryItem[] | null
   canChangeItineraries?: boolean
 };
 
 export default function ItineraryCardList({ itineraryList, canChangeItineraries }: ItineraryCardListProps) {
+  if (!itineraryList) {
+    return null;
+  }
+
   return         (
     <div className={style.itineraryList}>
       {itineraryList // in the future, if itineraryList is not empty, render a loading spinner

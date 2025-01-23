@@ -7,17 +7,25 @@ import DropdownItem from './components/dropdownItem';
 import getInitialValue from './utils/getInitialValue';
 import getResultValue from './utils/getResultValue';
 
-export type Option = {
+export type Option<T = object> = {
   key:          string
   label:        string
+  data?:        T
   userCreated?: boolean
+};
+
+export type onChangeEvent<T = object> = {
+  target: {
+    name:  string | undefined
+    value: Option<T> | Option<T>[] | string | string[]
+  }
 };
 
 export type InitialValue = Option | Option[] | string | string[] | undefined;
 
 export type SelectProps = Partial<typeof defaultProps> & {
-  name:     string
-  onChange: (value: any) => void
+  name?:     string
+  onChange?: (value: any) => void
 };
 
 export type Values = Map<string, Option>;

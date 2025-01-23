@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SiteSubmitterView from './view';
 import { useContext } from 'react';
 import { insertDiveSiteWaits } from '../../../supabaseCalls/diveSiteWaitSupabaseCalls';
-import { DiveSpotContext } from '../../contexts/diveSpotContext';
-import { MapConfigContext } from '../../contexts/mapConfigContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { Form } from './form';
 import { ModalContext } from '../../reusables/modal/context';
 import { ModalHandleProps } from '../../reusables/modal/types';
+import { MapContext } from '../../googleMap/mapContext';
 import { toast } from 'react-toastify';
 import screenData from '../screenData.json';
 
 type SiteSubmitterProps = Partial<ModalHandleProps>;
 
 export default function SiteSubmitter(props: SiteSubmitterProps) {
-  const { addSiteVals, setAddSiteVals } = useContext(DiveSpotContext);
   const { profile } = useContext(UserProfileContext);
-
-  const { setMapConfig } = useContext(MapConfigContext);
+  const [deviceLocation, setDeviceLocation] = useState<google.maps.LatLngLiteral | null>(null);
+  const { setMapConfig, draggablePoint, setDraggablePoint } = useContext(MapContext);
 
   const { modalPause } = useContext(ModalContext);
 
   const getDeviceLocation = () => {
+    setDraggablePoint(null);
     if (navigator.geolocation) {
       navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
         if (permissionStatus.state === 'denied') {
@@ -30,10 +29,9 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
         } else {
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              setAddSiteVals({
-                ...addSiteVals,
-                Latitude:  position.coords.latitude,
-                Longitude: position.coords.longitude,
+              setDeviceLocation({
+                lat: position.coords.latitude,
+                lng: position.coords.longitude,
               });
             },
             function (error) {
@@ -50,6 +48,7 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
   };
 
   const onNavigate = () => {
+    setDeviceLocation(null);
     setMapConfig(1);
     modalPause();
   };
@@ -71,10 +70,9 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
   };
 
   const onClose = () => {
-    setAddSiteVals({ ...addSiteVals, Site: '', Latitude: 0, Longitude: 0 });
+    setDraggablePoint(null);
     props?.onModalCancel?.();
   };
-
 
   return (
     <SiteSubmitterView
@@ -83,8 +81,8 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
       onClose={onClose}
       onSubmit={onSubmit}
       values={{
-        Latitude:  addSiteVals?.Latitude,
-        Longitude: addSiteVals?.Longitude,
+        Latitude:  draggablePoint ? draggablePoint?.lat : deviceLocation?.lat,
+        Longitude: draggablePoint ? draggablePoint?.lng : deviceLocation?.lng,
       }}
     />
   );

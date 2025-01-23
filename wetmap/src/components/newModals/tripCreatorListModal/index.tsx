@@ -1,24 +1,40 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { SelectedShopContext } from '../../contexts/selectedShopContext';
+import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorListView from './view';
-import { ModalHandleProps } from '../../reusables/modal/types';
+import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
 import TripCreatorModal from '../tripCreatorModal';
 import { ModalContext } from '../../reusables/modal/context';
+import { DiveShopContext } from '../../contexts/diveShopContext';
 
-type TripCreatorListModalProps = Partial<ModalHandleProps>;
 
-export default function TripCreatorListModal({ onModalCancel }: TripCreatorListModalProps) {
-  const { selectedShop } = useContext(SelectedShopContext);
-  const { modalShow } = useContext(ModalContext);
+export default function TripCreatorListModal() {
+  const { selectedShop, setSelectedShop } = useContext(DiveShopContext);
+  const { profile } = useContext(UserProfileContext);
+  const { modalShow, modalCancel } = useContext(ModalContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
 
   useEffect(() => {
+    if (profile) {
+      getShop(profile?.UserID);
+    }
+
     if (selectedShop) {
       getItineraries(selectedShop.id);
     }
   }, [selectedShop]);
+
+  const getShop = async (id: string) => {
+    try {
+      const shop = await getShopByUserID(id);
+      if (shop) {
+        setSelectedShop(shop[0]);
+      }
+    } catch (e) {
+      console.log({ title: 'Error', message: (e as Error).message });
+    }
+  };
 
   const getItineraries = async (IdNum: number) => {
     try {
@@ -44,7 +60,7 @@ export default function TripCreatorListModal({ onModalCancel }: TripCreatorListM
         <TripCreatorListView
           itineraryList={itineraryList}
           headerPictureUrl={null}
-          onClose={onModalCancel}
+          onClose={modalCancel}
           openTripCreator={openTripCreator}
         />
       )}

@@ -1,5 +1,28 @@
 .mapContainer {
-    height: 100vh;
-    width: 100vw;
-    z-index: 1;
-  };
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+.zoomButtonContainer {
+  z-index: 10;
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 85px;
+  pointer-events: none;
+}
+
+.navButtonContainer {
+  z-index: 10;
+  position: absolute;
+  left: 40%;
+  bottom: 15px;
+  display: flex;
+  height: 8%;
+  width: 20%;
+  cursor: pointer;
+}

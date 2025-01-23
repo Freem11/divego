@@ -8,8 +8,8 @@ import ItineraryCardList from '../../itineraryCardList';
 
 type TripCreatorListViewProps = {
   onClose?:         () => void
+  itineraryList:    ItineraryItem[] | null
   openTripCreator:  () => void
-  itineraryList:    ItineraryItem[]
   headerPictureUrl: string | null
 };
 
