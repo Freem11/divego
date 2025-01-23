@@ -73,7 +73,7 @@ export default function ShopModal(props: ShopModalProps) {
   const openTripCreatorList = async () => {
     modalShow(TripCreatorModal, {
       keepPreviousModal: true,
-      size:              'medium',
+      size:              'large',
       isEditModeOn:      false,
     });
   };

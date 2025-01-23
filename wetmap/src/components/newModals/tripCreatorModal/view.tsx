@@ -6,8 +6,9 @@ import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { useForm } from 'react-hook-form';
-import Button from '../../reusables/button/button';
+import Button from '../../reusables/button';
 import Label from '../../reusables/label';
+import SiteSelector from '../../reusables/siteSelector';
 
 
 type TripCreatorViewProps = {
@@ -24,7 +25,8 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
   });
 
   return (
-    <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
+    <div className="" style={{ paddingBottom: '4.5rem' }}>
+
 
       <div className={styles.buttonBack}>
         <ButtonIcon
@@ -34,15 +36,14 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
         />
       </div>
 
-      <div className="flex-column-between full-height mb-6 mr-6">
-        {
-          props.isEditModeOn
-            ? (<h1 className="mt-4 text-bold">{screenData.TripCreator.headerEdit}</h1>)
-            : (<h1 className="mt-4 text-bold">{screenData.TripCreator.header}</h1>)
-        }
-
-        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
-          <div className="stack-4 mb-2">
+      {
+        props.isEditModeOn
+          ? (<h1 className="mt-4">{screenData.TripCreator.headerEdit}</h1>)
+          : (<h1 className="mt-4">{screenData.TripCreator.header}</h1>)
+      }
+      <form className="full-width mx-10 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
+        <div className={styles.formColumns}>
+          <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.tripNameLabel}>
               <TextInput
                 iconLeft={<Icon name="store" />}
@@ -89,27 +90,36 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 {...register('End', FormRules.End)}
               />
             </Label>
+          </div>
+          <div className={styles.formColumn}>
+            <Label label="Dive sites">
+              <SiteSelector  />
+            </Label>
+            <Label label="Trip details">
+              <textarea
+                placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
+                {...register('Details')}
+              />
+            </Label>
+          </div>
+        </div>
 
-            <textarea
-              placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
-              {...register('Details')}
-            />
+        <div className="cols mx-0">
+          <div className="col-9"></div>
+          <div className="col-3">
+            <Button
+              disabled={isSubmitting}
+              className="btn-primary btn-md"
+              type="submit"
+              iconRight={<Icon name="chevron-right" />}
+            >
+              {screenData.TripCreator.submitButton}
+            </Button>
           </div>
-          <div className="cols mx-0">
-            <div className="col-9"></div>
-            <div className="col-3">
-              <Button
-                disabled={isSubmitting}
-                className="btn-md bg-primary"
-                type="submit"
-                iconRight={<Icon name="chevron-right" />}
-              >
-                {screenData.TripCreator.submitButton}
-              </Button>
-            </div>
-          </div>
-        </form>
-      </div>
+        </div>
+
+      </form>
     </div>
+
   );
 }
