@@ -24,6 +24,7 @@ type DiveSiteViewProps = {
 
 export default function DiveSiteView(props: DiveSiteViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
+
   return (
     <div className="cols mx-0 full-height">
       <input
