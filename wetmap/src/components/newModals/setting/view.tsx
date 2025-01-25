@@ -4,6 +4,9 @@ import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
+import WavyModalHeader from '../../reusables/wavyModalHeader';
+import defaultHeaderPicture from '../../../images/blackManta.png';
+import Tooltip from '../../reusables/tooltip';
 
 type SettingsProps = {
   onClose:             () => void
@@ -17,37 +20,34 @@ type SettingsProps = {
 
 export default function SettingsView(props: SettingsProps) {
   return (
-    <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
-      <div className={styles.buttonBack}>
-        <ButtonIcon
-          icon={<Icon name="chevron-left" />}
-          className="btn-lg text-gray ml-4 mt-4"
-          onClick={props.onClose}
-        />
-      </div>
-
+    <div className="full-height pb-4">
       <div className="flex-column-between full-height mb-6">
+        <WavyModalHeader image={defaultHeaderPicture} onClose={props.onClose}>
+          <div className={styles.buttonImageUpload}>
+            <Tooltip content={screenData.SettingsPage.addPhotoButton} direction="left">
+              <ButtonIcon
+                icon={<Icon name="camera-plus" />}
+                className="btn-lg mr-0 ml-auto"
+                // onClick={// TODO: Allow user profile picture uploads}
+              />
+            </Tooltip>
+          </div>
+        </WavyModalHeader>
         <div className="mx-10 text-left">
-          <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
+          <h1 className="text-bold">{screenData.SettingsPage.header}</h1>
           <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
           <div className={styles.grayOutline}>
-            <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
+            <h4 className="ml-8 mb-0 my-1 text-bold text-dark">{props.profileType}</h4>
             { props.profileType === 'Diver Account'
             && (
               <span onClick={props.handlePartnerButton}>
                 <p className={styles.upgradeLink}>{screenData.SettingsPage.notPartnerAccount}</p>
               </span>
             )}
-            { props.profileType === 'Partner Account'
-            && (
-              <span>
-                <p className="ml-10 mb-1 p-0 text-bold text-primary ">&nbsp;</p>
-              </span>
-            )}
             { props.profileType === null
             && (
               <span>
-                <p className="ml-10 mb-1 p-0 text-bold text-primary ">&nbsp;</p>
+                <p className="ml-10 mb-1 p-0 text-bold text-primary ">Unknown profile Type</p>
               </span>
             )}
           </div>

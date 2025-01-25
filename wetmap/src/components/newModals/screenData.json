@@ -6,7 +6,8 @@
         "notResearcherAccount": "Request upgrade to Researcher Account?",
         "logout": "Log Out",
         "delAccount": "Delete Account",
-        "dangerZoneBar": "Danger Zone"
+        "dangerZoneBar": "Danger Zone",
+        "addPhotoButton": "Add a Profile Photo"
       },
       "PartnerRequestPage": {
         "header": "Partner Account Upgrade",
