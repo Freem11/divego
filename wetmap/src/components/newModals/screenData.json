@@ -65,7 +65,9 @@
       },
       "TripCard": {
         "editButton": "Edit",
-        "deleteButton": "Delete"
+        "deleteButton": "Delete",
+        "anchorButton" : "Go to trip location",
+        "bookButton" : "Book trip"
       },
       "TripCreator": {
         "header": "Create a New Dive Trip",

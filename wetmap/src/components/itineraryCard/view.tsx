@@ -64,16 +64,20 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
               )
             : (
                 <>
-                  <ButtonIcon
-                    icon={<Icon name="anchor" />}
-                    className={style.actionIcon}
-                    onClick={() => flipMap(itinerary.siteList)}
-                  />
-                  <ButtonIcon
-                    icon={<Icon name="diving-scuba-flag" />}
-                    className={style.actionIcon}
-                    // onClick={}
-                  />
+                  <Tooltip content={screenData.TripCard.anchorButton}>
+                    <ButtonIcon
+                      icon={<Icon name="anchor" />}
+                      className={style.actionIcon}
+                      onClick={() => flipMap(itinerary.siteList)}
+                    />
+                  </Tooltip>
+                  <Tooltip content={screenData.TripCard.bookButton}>
+                    <ButtonIcon
+                      icon={<Icon name="diving-scuba-flag" />}
+                      className={style.actionIcon}
+                      // onClick={}
+                    />
+                  </Tooltip>
                 </>
               )}
         </div>
