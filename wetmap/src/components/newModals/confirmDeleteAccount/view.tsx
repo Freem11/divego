@@ -13,7 +13,7 @@ type ConfirmDeleteAccountViewProps = {
 
 export default function ConfirmDeleteAccountView(props: ConfirmDeleteAccountViewProps) {
   return (
-    <div className="flex-column-between full-height p-8">
+    <div className="flex-column-between full-height">
       <WavyModalHeader image={backGroundPic} />
       <div className="columns">
         <div className="d-flex ml-8">
