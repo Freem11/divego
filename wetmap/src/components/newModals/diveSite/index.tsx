@@ -13,6 +13,8 @@ import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ActiveProfile } from '../../../entities/profile';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
+import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCalls';
+import UserProfile from '../userProfile';
 
 type DiveSiteProps = Partial<ModalHandleProps> & {
   id?:    number
@@ -118,11 +120,30 @@ export default function DiveSite(props: DiveSiteProps) {
     }
   }, [selectedDiveSite?.divesiteprofilephoto]);
 
+  const handleProfileSwitch = async (userName: string) => {
+    let picOwnerAccount;
+    const accounts = await grabProfileByUserName(userName);
+    if (accounts) {
+      picOwnerAccount = accounts[0];
+
+      if (profile?.UserID === picOwnerAccount.UserID) {
+        return;
+      }
+    }
+
+    modalShow(UserProfile, {
+      keepPreviousModal: true,
+      userProfileID:     picOwnerAccount && picOwnerAccount.UserID,
+      size:              'large',
+
+    });
+  };
   return (
     <DiveSiteView
       onClose={props.onModalCancel}
       openPicUploader={openPicUploader}
       handleImageSelection={handleImageSelection}
+      handleProfileSwitch={handleProfileSwitch}
       diveSite={selectedDiveSite}
       diveSitePics={diveSitePics}
       isPartnerAccount={isPartnerAccount}

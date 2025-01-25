@@ -25,7 +25,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
   const photoName = pic.photoFile.split('/').pop();
 
 
-  const handleFollow = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, userName: string) => {
+  const handleProfileSwitch = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, userName: string) => {
     e.stopPropagation();
     let picOwnerAccount;
     const accounts = await grabProfileByUserName(userName);
@@ -82,7 +82,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
       handleModalOpen={handleModalOpen}
       handleLike={handleLike}
       handleCommentModal={handleCommentModal}
-      handleFollow={handleFollow}
+      handleProfileSwitch={handleProfileSwitch}
       countOfLikes={countOfLikes}
       picLiked={picLiked}
     />

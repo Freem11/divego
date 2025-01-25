@@ -15,12 +15,14 @@ type DiveSiteViewProps = {
   onClose?:             () => void
   openPicUploader:      () => void
   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleProfileSwitch:  (username: string) => Promise<void>
   onDiveSiteBioChange:  (newValue: string) => void
   diveSite:             DiveSiteWithUserName | null
   diveSitePics:         PhotosGroupedByDate[] | null
   isPartnerAccount:     boolean
   headerPictureUrl:     string | null
 };
+
 
 export default function DiveSiteView(props: DiveSiteViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
@@ -57,7 +59,9 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
           <div className="stack-4">
             <div>
               <div className="d-flex">
-                <h1 className="mb-0">{props?.diveSite?.name}</h1>
+                <h1 className="mb-0">
+                  {props?.diveSite?.name}
+                </h1>
                 <div>
                   <Icon
                     name="flag"
@@ -72,7 +76,12 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
 
               <div className="d-flex">
                 {'Added by: '}
-                <a href="#">{props?.diveSite?.newusername}</a>
+                <a
+                  href="#"
+                  onClick={() => props.handleProfileSwitch(props?.diveSite?.newusername)}
+                >
+                  {props?.diveSite?.newusername}
+                </a>
               </div>
             </div>
 
