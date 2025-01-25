@@ -54,10 +54,12 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
             onFileChange={props.handleImageSelection}
             className="d-none"
           >
-            <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className={`btn-lg ${errors.photo ? 'blinking' : ''}`}
-            />
+            <Tooltip content={screenData.PicUploader.uploadIcon}>
+              <ButtonIcon
+                icon={<Icon name="camera-plus" />}
+                className={`btn-lg ${errors.photo ? 'blinking' : ''}`}
+              />
+            </Tooltip>
           </FileInput>
         </div>
       </WavyModalHeader>
@@ -79,16 +81,24 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               modeSelectedTags="on"
               placeholder={screenData.PicUploader.whatPlaceholder}
               getMoreOptions={props.getMoreAnimals}
-              iconLeft={<Icon name="shark" />}
+              iconLeft={
+                <Tooltip content={screenData.PicUploader.whatIcon}>
+                  <Icon name="shark" />
+                </Tooltip>
+              }
               error={errors.animal}
             />
           </Label>
 
-          <Label label={screenData.PicUploader.whatLabel}>
+          <Label label={screenData.PicUploader.whenLabel}>
             <TextInput
               {...register('date', FormRules.date)}
               type="date"
-              iconLeft={<Icon name="calendar-month" />}
+              iconLeft={
+                <Tooltip content={screenData.PicUploader.whenIcon}>
+                  <Icon name="calendar-month" />
+                </Tooltip>
+              }
               placeholder={screenData.PicUploader.whenPlaceholder}
               error={errors.date}
             />
@@ -97,7 +107,11 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <Label label={screenData.PicUploader.whereLabel}>
             <TextInput
               {...register('diveSiteName')}
-              iconLeft={<Icon name="anchor" />}
+              iconLeft={
+                <Tooltip content={screenData.PicUploader.whereIcon}>
+                  <Icon name="anchor" />
+                </Tooltip>
+              }
               placeholder={screenData.PicUploader.wherePlaceholder}
               disabled={true}
             />

@@ -52,3 +52,6 @@ src/helpers/VisionTest.js/
 node_modules
 wetmap/node_modules
 *storybook.log
+
+cert.pem
+key.pem
