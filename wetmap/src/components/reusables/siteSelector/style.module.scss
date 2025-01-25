@@ -45,11 +45,6 @@
     color: inherit;
 }
 
-button.site {
-    cursor: pointer;
-    width: fit-content
-}
-
 .siteLeft {
     display: flex;
     justify-content: space-between;
@@ -99,5 +94,121 @@ button.site {
     width: 1rem;
     height: auto;
     cursor: pointer;
-    rotate: 90deg;
 }
+
+.emptyState {
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    background: #f9f9f9;
+    border: 1px dashed #dadada;
+    border-radius: 0.5rem;
+}
+
+.emptyStateIcons {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.3rem;
+}
+
+.emptyStateIcon {
+    width: 1.75rem;
+    height: auto;
+    padding: 0.2rem;
+    border-radius: 100%;
+    color: white;
+    background-color: $primaryBlue;
+    position: absolute;
+    z-index: 10;
+    //box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    border: 0.1rem #f9f9f9 solid;
+}
+
+.emptyStateIconLeft {
+    width: 1.5rem;
+    height: auto;
+    padding: 0.2rem;
+    border-radius: 100%;
+    color: white;
+    background-color: $primaryBlue;
+    position: absolute;
+    top: -0.3rem;
+    left: -0.75rem;
+    z-index: 5;
+    scale: 0.9;
+    //box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.emptyStateIconRight {
+    width: 1.5rem;
+    height: auto;
+    padding: 0.2rem;
+    border-radius: 100%;
+    color: white;
+    background-color: $primaryBlue;
+    position: absolute;
+    top: -0.3rem;
+    right: -0.75rem;
+    z-index: 5;
+    scale: 0.9;
+    //box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+}
+
+.emptyState p {
+    font-weight: 500;
+    margin: 0;
+}
+
+.button {
+    margin-left: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    width: fit-content;
+    font-weight: 500;
+}
+
+.button svg {
+    width: 1rem;
+    height: auto;
+    cursor: pointer;
+}
+
+.loadingState {
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.loader {
+    border: 4px solid rgb(208, 208, 208);
+    border-top: 4px solid $primaryBlue; 
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }

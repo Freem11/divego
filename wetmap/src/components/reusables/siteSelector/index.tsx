@@ -1,69 +1,51 @@
-import React, { useState } from 'react';
-import styles from './style.module.scss';
-import Icon from '../../../icons/Icon';
+import React, { useContext, useEffect, useState } from 'react';
+import { MapContext } from '../../googleMap/mapContext';
+import { ModalContext } from '../modal/context';
+import { SitesArrayContext } from '../../contexts/sitesArrayContext';
+import {  getDiveSitesByIDs } from '../../../supabaseCalls/diveSiteSupabaseCalls';
+import { DiveSiteWithUserName } from '../../../entities/diveSite';
+import SiteSelectorView from './view';
 
 export default function SiteSelector() {
-  const testDiveSites = [
-    [1, 'Whytecliff Park'],
-    [2, 'Lookout Point'],
-    [3, 'Copper Cove Road'],
-    [4, 'Ansell Place'],
-    [5, 'Bowyer Island'],
-    [6, 'Kelvin Grove'],
-    [7, 'Pam Rocks'],
-    [8, 'Seymour Bay'],
-    [9, 'HMCS Annapolis Wreck'],
-    [10, 'Coopers Green'],
-  ];
+  const { setMapConfig } = useContext(MapContext);
+  const { modalPause } = useContext(ModalContext);
+  const { sitesArray, setSitesArray } = useContext(SitesArrayContext); // Site id's
+  const [sites, setSites] = useState<DiveSiteWithUserName[] | null>(null); // Site info
 
-  const [sites, setSites] = useState<any[][]>(testDiveSites);
+  useEffect(() => {
+    async function fetchSites() {
+      try {
+        const fetchedSites = await getDiveSitesByIDs(sitesArray);
+        setSites(fetchedSites);
+      } catch (e) {
+        console.log({ title: 'Error', message: (e as Error).message });
+      }
+    };
+
+    // Logic to minimize db fetches
+    if (sites === null && sitesArray.length !== 0) { // If there is no site info and there are site id's
+      fetchSites(); // Get the site info
+    } else if (sites !== null) { // If there is site info
+      if (sitesArray.length > sites.length) { // If there are more id's than corresponding info
+        fetchSites(); // Get the new site info
+      } else { // If there is more info than corresponding id's
+        setSites(sites.filter(site => sitesArray.includes(site.id))); // Remove the info with no matching id
+      }
+    } else { // If there are no id's
+      setSites([]); // Set site info to empty array
+    }
+  }, [sitesArray]);
 
   function handleSitesAdd() {
-    // Set map config to 3
-    // Modal pause
+    setMapConfig(3);
+    modalPause();
   }
 
-  // update marker so that is checks the map config and add site sets sites array context if it's not already in the array (or remove if already in array)
-  // button brings modal back, sites array is kept in context until trip is created
-
-  function unselect(siteId: number) {
-    setSites(prevSites => prevSites.filter(site => site[0] !== siteId));
+  function handleSiteRemove(siteId: number) {
+    setSitesArray(prev => prev.filter(id => id !== siteId));
   }
 
   return (
-    <>
-      <div className={styles.siteSelector}>
-        {sites.length === 0
-          ? (
-              <p>No sites yet.</p>
-            )
-          : (
-              <div className={styles.siteList}>
-
-                {sites.map(site => (
-                  <div key={site[0]} className={styles.site}>
-                    <div className={styles.siteLeft}>
-                      <Icon name="anchor" />
-                      <span>{site[1]}</span>
-                    </div>
-                    <div className={styles.siteRight}>
-                      <span className={styles.siteCoordinates}>41.40338, 2.17403</span>
-                      <div className={styles.siteActions}>
-                        <Icon name="close" onClick={() => unselect(site[0])} />
-                      </div>
-                    </div>
-                  </div>
-                ))}
-
-              </div>
-            )}
-        <button className={styles.site} type="button" onClick={handleSitesAdd}>
-          <div className={styles.siteLeft}>
-            <Icon name="add" />
-            <span>Add dive sites</span>
-          </div>
-        </button>
-      </div>
-    </>
+    <SiteSelectorView sites={sites} handleSitesAdd={handleSitesAdd} handleSiteRemove={handleSiteRemove} />
   );
 }
