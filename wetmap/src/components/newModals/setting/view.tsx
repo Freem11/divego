@@ -30,7 +30,7 @@ export default function SettingsView(props: SettingsProps) {
         <div className="mx-10 text-left">
           <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
           <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
-          <div className={styles.grayOutline} style={{ height: '70px' }}>
+          <div className={styles.grayOutline}>
             <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
             { props.profileType === 'Diver Account'
             && (
