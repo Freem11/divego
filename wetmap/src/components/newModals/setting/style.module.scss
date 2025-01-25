@@ -23,6 +23,10 @@
 }
 
 .grayOutline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 75px;
     color: #5f5e5e;
     border-top: 1px solid; /* Top border */
     border-bottom: 1px solid; /* Bottom border */
