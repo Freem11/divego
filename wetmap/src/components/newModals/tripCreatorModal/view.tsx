@@ -6,7 +6,7 @@ import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { useForm } from 'react-hook-form';
-import Button from '../../reusables/button/button';
+import Button from '../../reusables/button';
 import Label from '../../reusables/label';
 import PriceTextInput from '../../reusables/priceTextInput';
 
@@ -59,7 +59,6 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
             <Label label={screenData.TripCreator.priceLabel}>
               <PriceTextInput
-                iconLeft={<Icon name="currency-usd" />}
                 placeholder={screenData.TripCreator.pricePlaceholder}
                 error={errors.Price}
                 {...register('Price', FormRules.Price)}

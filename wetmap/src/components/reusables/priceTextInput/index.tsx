@@ -1,5 +1,7 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes, useState  } from 'react';
 import './style.scss';
+import TextInput from '../textInput';
+import Icon from '../../../icons/Icon';
 
 export type PriceTextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
   iconLeft?:  React.ReactNode
@@ -7,13 +9,11 @@ export type PriceTextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInpu
   error?:     any
 };
 
-const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(function PriceTextInput(props: PriceTextInputProps, ref) {
-  const { iconLeft, iconRight, className, error, ...rest } = props;
-
-  const [thePrice, setThePrice] = useState('');
+const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(function PriceTextInput({ error, ...rest }: PriceTextInputProps, ref) {
+  const [price, setPrice] = useState('');
   const [prevPrice, setPrevPrice] = useState('');
 
-  const priceChange = (data: any) => {
+  const handlePriceChange = (data: any) => {
     const currPrice = data.target.value;
 
     const curr2 = currPrice.replace(/[^0-9.]/g, '');
@@ -27,24 +27,31 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
       const num = curr2;
       setPrevPrice(num);
       const result = (num.length == 0) ? '' : '$' + num; // dupe
-      setThePrice(result);
+      setPrice(result);
     } else {
       const validated = regex1.test(curr2);
       const num = (validated) ? curr2 : prev2;
       setPrevPrice(num);
       const result = '$' + num; // dupe
-      setThePrice(result);
+      setPrice(result);
     }
 
-    data.target.value = thePrice;
+    data.target.value = price;
   };
 
   return (
-    <div className={`${className ?? ''} ssrc-text-input ${error ? 'ssrc-text-input--error' : ''}`}>
-      {iconLeft && <i className="ssrc-text-input__icon-left">{iconLeft}</i>}
-      <input  value={thePrice} ref={ref} {...rest} onChange={priceChange} />
-      {iconRight && <i className="ssrc-text-input__icon-right">{iconRight}</i>}
-    </div>
+    <TextInput
+      value={price}
+      ref={ref}
+      error={error}
+      {...rest}
+      onChange={handlePriceChange}
+      iconLeft={(
+        <i className="ssrc-text-input__icon-left">
+          <Icon name="currency-usd" />
+        </i>
+      )}
+    />
   );
 });
 
