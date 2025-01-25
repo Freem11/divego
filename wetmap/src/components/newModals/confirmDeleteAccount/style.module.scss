@@ -1,5 +1,9 @@
 @import "../../../styles/variables.scss";
 
+.subHeader {
+  color: $primaryBlue;
+  font-size: $fontSizeSubHeading
+}
 
 .horizontalButtonContainer {
     display: flex;

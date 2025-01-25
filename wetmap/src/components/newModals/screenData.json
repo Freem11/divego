@@ -162,7 +162,7 @@
       },
       "ConfirmDeleteAccount":
       {
-        "title": "Account deletion",
+        "title": "Account Deletion",
         "subHeader": "Are you sure you want to delete your account?",
         "body": "Please note that deleting your account will not delete your previous dive site or photo submissions, please contact us if you wish to have those removed from the community",
         "deleteBtnText": "Delete account",
