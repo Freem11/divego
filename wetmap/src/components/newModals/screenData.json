@@ -152,6 +152,13 @@
         "passwordReset": "Forgot Password?",
         "signInError": "The credentials you supplied are not valid"
       },
+      "MainPage": {
+        "profileTooltip": "Profile",
+        "settingsTooltip": "Settings",
+        "newDiveSiteTooltip": "Add a New Dive Site",
+        "tripCreatorTooltip": "Create Trip",
+        "guideTooltip": "User Guide"
+      },
       "PasswordRecoveryPage": {
         "title": "Reset Password",
         "emailPlaceholder": "Enter Your Account Email",
