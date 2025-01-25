@@ -92,7 +92,12 @@
         "drawerHeader": "Sea Creature Sightings",
         "emptyDrawer": "No sightings at this site yet.",
         "addSightingButton": "Add Sighting",
-        "submitButton": "Submit"
+        "submitButton": "Submit",
+        "reportSiteTooltip": "Report an issue with this dive site",
+        "addPhotoTooltip": "Add a photo of this dive site"
+      },
+      "SeaLifeImageCard": {
+        "reportPictureTooltip": "Report an issue with this picture"
       },
       "DiveShop": {
         "drawerHeader": "Offered Dive Trips",

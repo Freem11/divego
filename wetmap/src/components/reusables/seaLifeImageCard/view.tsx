@@ -4,6 +4,9 @@ import Icon from '../../../icons/Icon';
 import notLiked from '../../../images/Hand-Hollow-Blue.png';
 import liked from '../../../images/Hand-Filled-Blue.png';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
+import Tooltip from '../../reusables/tooltip';
+import { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
+import ScreenData from '../../newModals/screenData.json';
 
 type SeaLifeImageCardViewProps = {
   pic:                PhotoWithLikesAndComments
@@ -25,11 +28,13 @@ export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
           className={style.atagp}
           href={`mailto:DiveGo2022@gmail.com?subject=Reporting%20issue%20with%20picture:%20"${props.pic.label}"%20${props.pic.photoFile}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Animal%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20animal%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Copy%20write%20image%20claim%0D%0A%0D%0A(Please%20provide%20proof%20that%20you%20own%20the%20submitted%20photo%20and%20we%20will%20remove%20it%20as%20you%20have%20requested)`}
         >
-          <Icon
-            name="flag"
-            color="maroon"
-            width="30px"
-          />
+          <Tooltip direction={TOOLTIP_DIRECTION.LEFT} content={ScreenData.SeaLifeImageCard.reportPictureTooltip}>
+            <Icon
+              name="flag"
+              color="maroon"
+              width="30px"
+            />
+          </Tooltip>
         </a>
       </div>
 
