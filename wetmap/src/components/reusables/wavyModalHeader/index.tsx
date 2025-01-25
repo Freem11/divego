@@ -14,7 +14,7 @@ export default function WavyModalHeader(props: WavyModalHeaderProps) {
   return (
     <div className={style.wavyModalHeader} style={{ backgroundImage: `url(${props.image})` }}>
       <div className={style.buttonBack}>
-        <ButtonIcon
+        {props.onClose && <ButtonIcon
           icon={<Icon name="chevron-left" />}
           className="btn-lg"
           onClick={(e) => {
@@ -22,7 +22,7 @@ export default function WavyModalHeader(props: WavyModalHeaderProps) {
               props.onClose(e);
             }
           }}
-        />
+        />}
       </div>
 
       {props.children}
