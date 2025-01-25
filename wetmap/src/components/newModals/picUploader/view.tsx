@@ -94,11 +94,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
             <TextInput
               {...register('date', FormRules.date)}
               type="date"
-              iconLeft={
-                <Tooltip content={screenData.PicUploader.whenIcon}>
-                  <Icon name="calendar-month" />
-                </Tooltip>
-              }
+              iconLeft={<Icon name="calendar-month" />}
               placeholder={screenData.PicUploader.whenPlaceholder}
               error={errors.date}
             />
