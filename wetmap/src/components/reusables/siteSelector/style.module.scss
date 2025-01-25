@@ -127,7 +127,6 @@
     background-color: $primaryBlue;
     position: absolute;
     z-index: 10;
-    //box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
     border: 0.1rem #f9f9f9 solid;
 }
 
@@ -143,7 +142,6 @@
     left: -0.75rem;
     z-index: 5;
     scale: 0.9;
-    //box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .emptyStateIconRight {
@@ -158,7 +156,6 @@
     right: -0.75rem;
     z-index: 5;
     scale: 0.9;
-    //box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
 }
 
 .emptyState p {
