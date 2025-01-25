@@ -11,7 +11,7 @@ type ConfirmDeleteAccountViewProps = {
   onContactUs: () => void
 };
 
-export default function DiveSiteView(props: ConfirmDeleteAccountViewProps) {
+export default function ConfirmDeleteAccountView(props: ConfirmDeleteAccountViewProps) {
   return (
     <div className="flex-column-between full-height p-8">
       <WavyModalHeader image={backGroundPic} />
