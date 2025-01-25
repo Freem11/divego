@@ -2,6 +2,7 @@ import React from 'react';
 import styles from './style.module.scss';
 import Icon from '../../../icons/Icon';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
+import EmptyState from '../emptyState';
 
 type SiteSelectorViewProps = {
   sites:            DiveSiteWithUserName[] | null
@@ -22,14 +23,17 @@ export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemo
           : (
               sites.length === 0
                 ? (
-                    <div className={styles.emptyState}>
-                      <div className={styles.emptyStateIcons}>
-                        <Icon name="anchor" className={styles.emptyStateIconLeft} />
-                        <Icon name="anchor" className={styles.emptyStateIcon} />
-                        <Icon name="anchor" className={styles.emptyStateIconRight} />
-                      </div>
-                      <p>No dive sites yet.</p>
-                    </div>
+                    <EmptyState
+                      visual={(
+                        <div className={styles.emptyStateIcons}>
+                          <Icon name="anchor" className={styles.emptyStateIconLeft} />
+                          <Icon name="anchor" className={styles.emptyStateIcon} />
+                          <Icon name="anchor" className={styles.emptyStateIconRight} />
+                        </div>
+                      )}
+                      text="No dive sites yet."
+                    />
+
                   )
                 : (
                     <div className={styles.siteList}>

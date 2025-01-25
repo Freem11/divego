@@ -96,18 +96,6 @@
     cursor: pointer;
 }
 
-.emptyState {
-    height: 8rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    background: #f9f9f9;
-    border: 1px dashed #dadada;
-    border-radius: 0.5rem;
-}
-
 .emptyStateIcons {
     position: relative;
     width: 2rem;
@@ -156,11 +144,6 @@
     right: -0.75rem;
     z-index: 5;
     scale: 0.9;
-}
-
-.emptyState p {
-    font-weight: 500;
-    margin: 0;
 }
 
 .button {
