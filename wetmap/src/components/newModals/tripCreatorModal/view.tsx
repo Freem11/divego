@@ -5,10 +5,11 @@ import Icon from '../../../icons/Icon';
 import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 import Button from '../../reusables/button/button';
 import Label from '../../reusables/label';
 import PriceTextInput from '../../reusables/priceTextInput';
+import { toast } from 'react-toastify';
 
 type TripCreatorViewProps = {
   onClose?:     () => void
@@ -17,8 +18,18 @@ type TripCreatorViewProps = {
 };
 
 export default function TripCreatorView(props: TripCreatorViewProps) {
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
+  const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
+  const startDate = watch('Start');
+
+    const handleError = (errors: FieldErrors<Form>) => {
+      toast.dismiss();
+      Object.values(errors).forEach((error) => {
+        if (error?.message) {
+          toast.error(error.message);
+        }
+      });
+    };
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
 
@@ -37,14 +48,14 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
             : (<h1 className="mt-4 text-bold">{screenData.TripCreator.header}</h1>)
         }
 
-        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)} style={{ overflowY: 'scroll' }}>
+        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit,handleError)} style={{ overflowY: 'scroll' }}>
           <div className="stack-4 mb-2">
             <Label label={screenData.TripCreator.tripNameLabel}>
               <TextInput
                 iconLeft={<Icon name="store" />}
                 placeholder={screenData.TripCreator.tripNamePlaceholder}
                 error={errors.Name}
-                {...register('Name', FormRules.Name)}
+                {...register('Name', FormRules(startDate).Name)}
               />
             </Label>
 
@@ -53,7 +64,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 iconLeft={<Icon name="at" />}
                 placeholder={screenData.TripCreator.bookingLinkPlaceholder}
                 error={errors.Link}
-                {...register('Link', FormRules.Link)}
+                {...register('Link', FormRules(startDate).Link)}
               />
             </Label>
 
@@ -62,19 +73,23 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 iconLeft={<Icon name="currency-usd" />}
                 placeholder={screenData.TripCreator.pricePlaceholder}
                 error={errors.Price}
-                {...register('Price', FormRules.Price)}
+                {...register('Price', FormRules(startDate).Price)}
               />
             </Label>
 
             <Label label={screenData.TripCreator.startDateLabel}>
+              
               <TextInput
                 iconLeft={<Icon name="calendar-start" />}
                 placeholder={screenData.TripCreator.startDatePlaceholder}
                 error={errors.Start}
                 type="date"
-                {...register('Start', FormRules.Start)}
+                {...register('Start', FormRules(startDate).Start)}
+                max="2025-03-01"
               />
+            
             </Label>
+            
 
             <Label label={screenData.TripCreator.endDateLabel}>
               <TextInput
@@ -82,7 +97,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 placeholder={screenData.TripCreator.endDatePlaceholder}
                 error={errors.End}
                 type="date"
-                {...register('End', FormRules.End)}
+                {...register('End', FormRules(startDate).End)}
               />
             </Label>
 
@@ -96,11 +111,13 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
             <div className="col-3">
               <Button
                 disabled={isSubmitting}
-                className="btn-md bg-primary"
+                className="btn-lg bg-primary"
                 type="submit"
                 iconRight={<Icon name="chevron-right" />}
               >
-                {screenData.TripCreator.submitButton}
+                {/* {screenData.TripCreator.submitButton}
+                 */}
+                 Submit
               </Button>
             </div>
           </div>
