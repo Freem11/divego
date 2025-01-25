@@ -63,6 +63,10 @@
         "editButton": "Edit",
         "deleteButton": "Delete"
       },
+      "TripCard": {
+        "editButton": "Edit",
+        "deleteButton": "Delete"
+      },
       "TripCreator": {
         "header": "Create a New Dive Trip",
         "headerEdit": "Submit Trip Edits",
@@ -96,7 +100,8 @@
       },
       "DiveShop": {
         "drawerHeader": "Offered Dive Trips",
-        "emptyDrawer": " aren't currently offering any Dive Trips"
+        "emptyDrawer": " aren't currently offering any Dive Trips",
+        "addDiveShopPhotoButton": "Add a photo of your dive shop"
       },
       "CommentsModal": {
         "header": "Comments",
