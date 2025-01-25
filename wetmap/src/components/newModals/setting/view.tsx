@@ -18,13 +18,11 @@ type SettingsProps = {
 export default function SettingsView(props: SettingsProps) {
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
-      <div className={styles.buttonBack}>
-        <ButtonIcon
-          icon={<Icon name="chevron-left" />}
-          className="btn-lg text-gray ml-4 mt-4"
-          onClick={props.onClose}
-        />
-      </div>
+      <ButtonIcon
+        icon={<Icon name="chevron-left" />}
+        className={`btn-lg text-gray ml-4 mt-4 ${styles.buttonBack}`}
+        onClick={props.onClose}
+      />
 
       <div className="flex-column-between full-height mb-6">
         <div className="mx-10 text-left">
