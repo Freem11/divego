@@ -9,6 +9,7 @@ import Button from '../../reusables/button';
 import { Form, FormRules } from './form';
 import style from './style.module.scss';
 import { toast } from 'react-toastify';
+import Tooltip from '../../reusables/tooltip';
 
 type SiteSubmitterProps = {
   values?:           Form
@@ -48,22 +49,34 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
 
           <div className="stack-4 mb-2">
-            <TextInput
-              iconLeft={<Icon name="diving-scuba-flag" />}
+            <TextInput // Once approved ill add the content stuff to screenData json
+              iconLeft={(
+                <Tooltip content="Enter the name of your dive site">
+                  <Icon name="diving-scuba-flag" />
+                </Tooltip>
+              )}
               placeholder={screenData.DiveSiteAdd.siteNamePlaceholder}
               error={errors.Site}
               {...register('Site', FormRules.Site)}
             />
 
             <TextInput
-              iconLeft={<Icon name="latitude" />}
+              iconLeft={(
+                <Tooltip content="Enter a number">
+                  <Icon name="latitude" />
+                </Tooltip>
+              )}
               placeholder={screenData.DiveSiteAdd.latPlaceholder}
               error={errors.Latitude}
               {...register('Latitude', FormRules.Latitude)}
             />
 
             <TextInput
-              iconLeft={<Icon name="longitude" />}
+              iconLeft={(
+                <Tooltip content="Enter a number">
+                  <Icon name="longitude" />
+                </Tooltip>
+              )}
               placeholder={screenData.DiveSiteAdd.lngPlaceholder}
               error={errors.Longitude}
               {...register('Longitude', FormRules.Longitude)}
@@ -74,23 +87,27 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
         <div className={style.horizontalButtonContainer}>
           <div className="col-3">
-            <Button
-              onClick={props.getDeviceLocation}
-              className="btn-md"
-              type="button"
-            >
-              {screenData.DiveSiteAdd.myLocationButton}
-            </Button>
+            <Tooltip content="Select latitude and longitude">
+              <Button
+                onClick={props.getDeviceLocation}
+                className="btn-md"
+                type="button"
+              >
+                {screenData.DiveSiteAdd.myLocationButton}
+              </Button>
+            </Tooltip>
           </div>
 
           <div className="col-3 ">
-            <Button
-              onClick={props.onNavigate}
-              className="btn-md"
-              type="button"
-            >
-              {screenData.DiveSiteAdd.pinButton}
-            </Button>
+            <Tooltip content="Select latitude and longitude">
+              <Button
+                onClick={props.onNavigate}
+                className="btn-md"
+                type="button"
+              >
+                {screenData.DiveSiteAdd.pinButton}
+              </Button>
+            </Tooltip>
           </div>
         </div>
 
