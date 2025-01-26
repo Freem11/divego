@@ -51,7 +51,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           <div className="stack-4 mb-2">
             <TextInput // Once approved ill add the content stuff to screenData json
               iconLeft={(
-                <Tooltip content="Enter the name of your dive site">
+                <Tooltip content={screenData.DiveSiteAdd.siteNameTooltip}>
                   <Icon name="diving-scuba-flag" />
                 </Tooltip>
               )}
@@ -62,7 +62,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
             <TextInput
               iconLeft={(
-                <Tooltip content="Enter a number">
+                <Tooltip content={screenData.DiveSiteAdd.latTooltip}>
                   <Icon name="latitude" />
                 </Tooltip>
               )}
@@ -73,7 +73,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
             <TextInput
               iconLeft={(
-                <Tooltip content="Enter a number">
+                <Tooltip content={screenData.DiveSiteAdd.lngTooltip}>
                   <Icon name="longitude" />
                 </Tooltip>
               )}
@@ -87,7 +87,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
         <div className={style.horizontalButtonContainer}>
           <div className="col-3">
-            <Tooltip content="Select latitude and longitude">
+            <Tooltip content={screenData.DiveSiteAdd.myLocationTooltip}>
               <Button
                 onClick={props.getDeviceLocation}
                 className="btn-md"
@@ -99,7 +99,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
 
           <div className="col-3 ">
-            <Tooltip content="Select latitude and longitude">
+            <Tooltip content={screenData.DiveSiteAdd.pinButtonTooltip}>
               <Button
                 onClick={props.onNavigate}
                 className="btn-md"

@@ -40,7 +40,12 @@
         "allowLocation": "Please allow location access.",
         "locationNotSupported": "Geolocation is not supported in your browser.",
         "addSiteError": "Error adding site. Please try again later.",
-        "addSiteSuccess": "Site added successfully!"
+        "addSiteSuccess": "Site added successfully!",
+        "siteNameTooltip": "Enter the name of your dive site",
+        "latTooltip": "Enter a number",
+        "lngTooltip": "Enter a number",
+        "myLocationTooltip": "Select latitude and longitude",
+        "pinButtonTooltip": "Select latitude and longitude"
       },
       "PicUploader": {
         "header": "Your Sea Creature Sighting",
