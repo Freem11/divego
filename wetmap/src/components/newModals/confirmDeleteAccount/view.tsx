@@ -43,7 +43,7 @@ export default function ConfirmDeleteAccountView(props: ConfirmDeleteAccountView
 
           <Button
             onClick={() => props.onClose()}
-            className="btn-md bg-primary"
+            className="btn-md btn-primary"
             type="button"
           >
             {screenData.ConfirmDeleteAccount.cancelBtnText}
@@ -52,7 +52,7 @@ export default function ConfirmDeleteAccountView(props: ConfirmDeleteAccountView
         <div className="col-3">
           <Button
             onClick={() => props.onContactUs()}
-            className="btn-md bg-primary"
+            className="btn-md btn-primary"
             type="button"
           >
             {screenData.ConfirmDeleteAccount.contact}

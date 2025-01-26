@@ -117,7 +117,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <div className="col-4">
             <Button
               disabled={isSubmitting}
-              className="btn-lg bg-primary col-3"
+              className="btn-md btn-primary col-3"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >

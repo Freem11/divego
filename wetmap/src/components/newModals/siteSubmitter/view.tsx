@@ -99,7 +99,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           <div className="col-3">
             <Button
               disabled={isSubmitting}
-              className="btn-md bg-primary"
+              className="btn-md btn-primary"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >
