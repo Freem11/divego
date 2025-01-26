@@ -70,7 +70,9 @@ export default function LayoutMain() {
   };
 
   const animateProfileModal = () => {
-    modalShow(UserProfile);
+    modalShow(UserProfile, {
+      size:        'large',
+    });
   };
 
   const animateGuidesModal = () => {

@@ -49,11 +49,11 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
             <div className="col-md-12 col-2 mt-2 flex-centered justify-content-sm-center justify-content-flex-start">
 
               <ul className={style.headerIcons}>
-                <li>  
+                <li>
                   <Tooltip content={ScreenData.MainPage.profileTooltip} direction="bottom">
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
-                      icon={ <Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
+                      icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
                       onClick={props.animateProfileModal}
                     />
                   </Tooltip>
