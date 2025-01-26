@@ -48,7 +48,7 @@ export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
       <div className={style.footer} style={{ marginTop: '-6vh' }}>
         <h4
           className={style.userLabel}
-          onClick={e => props.handleProfileSwitch(e, props.pic.UserName)}
+          onClick={e => props.handleProfileSwitch(e, props.pic.UserID)}
         >
           Added by:
           {' '}

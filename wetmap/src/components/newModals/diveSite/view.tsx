@@ -85,7 +85,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                 {'Added by: '}
                 <a
                   href="#"
-                  onClick={() => props.handleProfileSwitch(props?.diveSite?.newusername)}
+                  onClick={() => props.handleProfileSwitch(props?.diveSite?.userid)}
                 >
                   {props?.diveSite?.newusername}
                 </a>

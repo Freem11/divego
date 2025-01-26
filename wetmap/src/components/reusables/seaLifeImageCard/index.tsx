@@ -24,22 +24,15 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
   const { modalShow } = useContext(ModalContext);
   const photoName = pic.photoFile.split('/').pop();
 
-
-  const handleProfileSwitch = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, userName: string) => {
+  const handleProfileSwitch = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, userId: string) => {
     e.stopPropagation();
-    let picOwnerAccount;
-    const accounts = await grabProfileByUserName(userName);
-    if (accounts) {
-      picOwnerAccount = accounts[0];
 
-      if (profile?.UserID === picOwnerAccount.UserID) {
-        return;
-      }
+    if (profile?.UserID === userId) {
+      return;
     }
-
     modalShow(UserProfile, {
       keepPreviousModal: true,
-      userProfileID:     picOwnerAccount && picOwnerAccount.UserID,
+      userProfileID:     userId,
       size:              'large',
 
     });
