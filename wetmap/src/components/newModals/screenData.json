@@ -63,6 +63,12 @@
         "editButton": "Edit",
         "deleteButton": "Delete"
       },
+      "TripCard": {
+        "editButton": "Edit",
+        "deleteButton": "Delete",
+        "anchorButton" : "Go to trip location",
+        "bookButton" : "Book trip"
+      },
       "TripCreator": {
         "header": "Create a New Dive Trip",
         "headerEdit": "Submit Trip Edits",
@@ -92,11 +98,17 @@
         "drawerHeader": "Sea Creature Sightings",
         "emptyDrawer": "No sightings at this site yet.",
         "addSightingButton": "Add Sighting",
-        "submitButton": "Submit"
+        "submitButton": "Submit",
+        "reportSiteTooltip": "Report an issue with this dive site",
+        "addPhotoTooltip": "Add a photo of this dive site"
+      },
+      "SeaLifeImageCard": {
+        "reportPictureTooltip": "Report an issue with this picture"
       },
       "DiveShop": {
         "drawerHeader": "Offered Dive Trips",
-        "emptyDrawer": " aren't currently offering any Dive Trips"
+        "emptyDrawer": " aren't currently offering any Dive Trips",
+        "addDiveShopPhotoButton": "Add a photo of your dive shop"
       },
       "CommentsModal": {
         "header": "Comments",
@@ -152,6 +164,13 @@
         "passwordReset": "Forgot Password?",
         "signInError": "The credentials you supplied are not valid"
       },
+      "MainPage": {
+        "profileTooltip": "Profile",
+        "settingsTooltip": "Settings",
+        "newDiveSiteTooltip": "Add a New Dive Site",
+        "tripCreatorTooltip": "Create Trip",
+        "guideTooltip": "User Guide"
+      },
       "PasswordRecoveryPage": {
         "title": "Reset Password",
         "emailPlaceholder": "Enter Your Account Email",
@@ -162,7 +181,7 @@
       },
       "ConfirmDeleteAccount":
       {
-        "title": "Account deletion",
+        "title": "Account Deletion",
         "subHeader": "Are you sure you want to delete your account?",
         "body": "Please note that deleting your account will not delete your previous dive site or photo submissions, please contact us if you wish to have those removed from the community",
         "deleteBtnText": "Delete account",
