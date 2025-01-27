@@ -85,7 +85,6 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 error={errors.Start}
                 type="date"
                 {...register('Start', FormRules(startDate).Start)}
-                max="2025-03-01"
               />
             
             </Label>
