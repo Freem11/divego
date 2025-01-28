@@ -94,8 +94,9 @@ const defaultProps = {
    * In case of multiselect it is a list of selected blocks.
    * - on: selected items appear as tags in the trigger
    * - off: selected items appear as labels in search input
+   * - empty: selected items do not appear neither as tags nor as labels. Search input resets to empty
    */
-  modeSelectedTags: 'off' as 'on' | 'off',
+  modeSelectedTags: 'off' as 'on' | 'off' | 'empty',
 
   /**
    * When to open dropdown
@@ -172,6 +173,10 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
       if (selectedOption) {
         searchRef.current.value = selectedOption.label;
       }
+    }
+
+    if (props.modeSelectedTags === 'empty' && searchRef.current) {
+      searchRef.current.value = '';
     }
 
     // prepare data to be passed to onChange(except first render)
@@ -290,6 +295,14 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
     });
   }, []);
 
+  const getPlaceholder = () => {
+    if (showSelectedTags) {
+      return value?.size ? undefined : props.placeholder;
+    } else {
+      return searchRef?.current?.value ? undefined : props.placeholder;
+    }
+  };
+
   return (
     <div
       ref={wrapperRef}
@@ -317,7 +330,7 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
           onChange={e => onSearch(e.target.value)}
           ref={searchRef}
           type="search"
-          placeholder={!value?.size ? props.placeholder : undefined}
+          placeholder={getPlaceholder()}
         />
 
         <button className="trigger-button">
