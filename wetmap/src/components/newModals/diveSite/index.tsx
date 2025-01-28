@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import DiveSiteView from './view';
-import { getDiveSitesByIDs, updateDiveSite, getDiveSiteById } from '../../../supabaseCalls/diveSiteSupabaseCalls';
+import { updateDiveSite, getDiveSiteById } from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import { PhotosGroupedByDate } from '../../../entities/photos';
 import { getPhotosByDiveSiteWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
-import { PinContext } from '../../contexts/staticPinContext';
 import { ModalContext } from '../../reusables/modal/context';
 import PicUploader from '../picUploader/index';
 import { ModalHandleProps } from '../../reusables/modal/types';
@@ -22,7 +21,6 @@ export default function DiveSite(props: DiveSiteProps) {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(DiveSiteContext);
   const { profile }          = useContext(UserProfileContext);
   const { modalShow }        = useContext(ModalContext);
-  const { pin, setPin }      = useContext(PinContext);
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
@@ -94,15 +92,6 @@ export default function DiveSite(props: DiveSiteProps) {
   };
 
   const openPicUploader = () => {
-    if (selectedDiveSite) {
-      setPin({
-        ...pin,
-        Latitude:  selectedDiveSite.lat,
-        Longitude: selectedDiveSite.lng,
-        siteName:  selectedDiveSite.name,
-      });
-    }
-
     modalShow(PicUploader);
   };
 
