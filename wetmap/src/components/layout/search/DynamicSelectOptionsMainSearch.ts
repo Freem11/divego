@@ -10,7 +10,7 @@ export type OptionAdditionalData = {
 
 export class DynamicSelectOptionsMainSearch extends DynamicSelectOptions {
   static getMoreOptions(search: string) {
-    const placesPromise = getPlacePredictions({ input: search, types: ['locality'] });
+    const placesPromise = getPlacePredictions({ input: search, types: ['geocode'] });
     const diveSitePromise = getSiteNamesThatFit(search);
 
     return Promise.all([placesPromise, diveSitePromise]).then(([places, diveSites]) => {
