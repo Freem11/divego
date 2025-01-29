@@ -14,6 +14,7 @@ import { Form, FormRules } from './form';
 import FileInput from '../../reusables/fileInput';
 import Label from '../../reusables/label';
 import { toast } from 'react-toastify';
+import Tooltip from '../../reusables/tooltip';
 
 type PicUploaderViewProps = {
   values:               Form
@@ -87,7 +88,11 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               modeSelectedTags="on"
               placeholder={screenData.PicUploader.whatPlaceholder}
               getMoreOptions={props.getMoreAnimals}
-              iconLeft={<Icon name="shark" />}
+              iconLeft={(
+                <Tooltip content={screenData.PicUploader.whatIcon}>
+                  <Icon name="shark" />
+                </Tooltip>
+              )}
               error={errors.animal}
             />
           </Label>
@@ -105,7 +110,11 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <Label label={screenData.PicUploader.whereLabel}>
             <TextInput
               {...register('diveSiteName')}
-              iconLeft={<Icon name="anchor" />}
+              iconLeft={(
+                <Tooltip content={screenData.PicUploader.whereIcon}>
+                  <Icon name="anchor" />
+                </Tooltip>
+              )}
               placeholder={screenData.PicUploader.wherePlaceholder}
               disabled={true}
             />
