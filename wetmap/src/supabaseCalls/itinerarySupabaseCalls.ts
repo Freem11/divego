@@ -33,11 +33,7 @@ export const insertItineraryRequest = async (values: ItineraryItem, reqType: str
   ]);
 
   if (error) {
-    console.log('couldn\'t do it 03,', error);
+    console.log('couldn\'t do it: itinerary edit/delete request,', error);
   }
-
-  if (data) {
-    return data;
-    // console.log(data);
-  }
+  return { data, error };
 };

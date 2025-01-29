@@ -6,6 +6,8 @@ import ItineraryCardView from './view';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import { MapContext } from '../googleMap/mapContext';
 import { insertItineraryRequest } from '../../supabaseCalls/itinerarySupabaseCalls';
+import { toast } from 'react-toastify';
+import screenData from '../newModals/screenData.json';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
@@ -45,8 +47,8 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
     modalContext.modalCancel();
   };
 
-  const handleDeleteButton = (itinerary: ItineraryItem) => {
-    insertItineraryRequest(
+  const handleDeleteButton = async (itinerary: ItineraryItem) => {
+    const { error } = await insertItineraryRequest(
       {
         BookingPage: itinerary.BookingPage,
         tripName:    itinerary.tripName,
@@ -62,6 +64,12 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       },
       'Delete',
     );
+
+    if (error) {
+      toast.error(screenData.TripCard.deleteTripError);
+    } else {
+      toast.success(screenData.TripCard.deleteTripSuccess);
+    }
   };
 
   return (
