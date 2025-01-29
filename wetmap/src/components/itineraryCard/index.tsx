@@ -5,6 +5,7 @@ import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import ItineraryCardView from './view';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import { MapContext } from '../googleMap/mapContext';
+import { insertItineraryRequest } from '../../supabaseCalls/itinerarySupabaseCalls';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
@@ -44,11 +45,31 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
     modalContext.modalCancel();
   };
 
+  const handleDeleteButton = (itinerary: ItineraryItem) => {
+    insertItineraryRequest(
+      {
+        BookingPage: itinerary.BookingPage,
+        tripName:    itinerary.tripName,
+        startDate:   itinerary.startDate,
+        endDate:     itinerary.endDate,
+        price:       itinerary.price,
+        description: itinerary.description,
+        siteList:    itinerary.siteList,
+        shopID:      itinerary.shopID,
+        created_at:  itinerary.created_at,
+        id:          itinerary.id,
+        name:        itinerary.name,
+      },
+      'Delete',
+    );
+  };
+
   return (
     <ItineraryCardView
       itinerary={itinerary}
       flipMap={flipMap}
       canChangeItinerary={canChangeItinerary}
+      handleDeleteButton={handleDeleteButton}
     />
   );
 }
