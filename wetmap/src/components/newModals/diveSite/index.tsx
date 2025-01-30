@@ -13,6 +13,7 @@ import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ActiveProfile } from '../../../entities/profile';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
+import UserProfile from '../userProfile';
 
 type DiveSiteProps = Partial<ModalHandleProps> & {
   id?:    number
@@ -118,11 +119,24 @@ export default function DiveSite(props: DiveSiteProps) {
     }
   }, [selectedDiveSite?.divesiteprofilephoto]);
 
+  const handleProfileSwitch = async (userId: string) => {
+    if (profile?.UserID === userId) {
+      return;
+    }
+    modalShow(UserProfile, {
+      keepPreviousModal: true,
+      userProfileID:     userId,
+      size:              'large',
+
+    });
+  };
+
   return (
     <DiveSiteView
       onClose={props.onModalCancel}
       openPicUploader={openPicUploader}
       handleImageSelection={handleImageSelection}
+      handleProfileSwitch={handleProfileSwitch}
       diveSite={selectedDiveSite}
       diveSitePics={diveSitePics}
       isPartnerAccount={isPartnerAccount}
