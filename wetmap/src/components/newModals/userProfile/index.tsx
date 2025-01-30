@@ -7,6 +7,7 @@ import { ModalHandleProps } from '../../reusables/modal/types';
 import {
   grabProfileById,
   updateProfile,
+  getProfileWithStats,
 } from '../../../supabaseCalls/accountSupabaseCalls';
 import {
   insertUserFollow,
@@ -25,10 +26,14 @@ type UserProps = Partial<ModalHandleProps> & {
   userProfileID?: string
 };
 export default function UserProfile(props: UserProps) {
+  const { activeSession } = useContext(SessionContext);
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
+  const [userFollows, setUserFollows] = useState(false);
+  const [userStats, setUserStats] = useState<any>('');
+  const [followData, setFollowData] = useState(activeSession.user.id);
 
   useEffect(() => {
     (async () => {
@@ -39,6 +44,60 @@ export default function UserProfile(props: UserProps) {
       }
     })();
   }, [props.userProfileID]);
+
+  useEffect(() => {
+    getProfile();
+
+    async function followCheck() {
+      let alreadyFollows = await checkIfUserFollows(
+        profile.UserID,
+        openedProfile,
+      );
+      if (alreadyFollows.length > 0) {
+        setUserFollows(true);
+        setFollowData(alreadyFollows[0].id);
+      }
+      console.log(alreadyFollows);
+      // this function does not seem to be working properly
+    }
+
+    followCheck();
+  }, []);
+
+  const getProfile = async () => {
+    let userID;
+    if (openedProfile) {
+      userID = openedProfile.UserID;
+      try {
+        const success = await getProfileWithStats(userID);
+        if (success) {
+          setUserStats(success);
+        }
+      }
+      catch (e) {
+        console.log({ title: 'Error', message: (e as Error).message });
+      }
+    }
+  };
+
+  const handleFollow = async () => {
+    console.log(userFollows);
+    if (userFollows) {
+      console.log(userFollows);
+      deleteUserFollow(followData);
+      setUserFollows(false);
+    } else {
+      if (userStats && profile) {
+        let newRecord = await insertUserFollow(
+          profile.UserID,
+          openedProfile?.UserID,
+        );
+        setFollowData(newRecord[0].id);
+        setUserFollows(true);
+        // console.log(userStats[0]);
+      }
+    }
+  };
 
   const handleProfileNameChange = async (newName: string) => {
     if (newName == '') {
@@ -95,10 +154,11 @@ export default function UserProfile(props: UserProps) {
       profile={openedProfile}
       handleProfileBioChange={handleProfileBioChange}
       handleProfileNameChange={handleProfileNameChange}
-      handleFollow={() => {}}
+      handleFollow={handleFollow}
       openSettings={openSettings}
       isActiveProfile={isActiveProfile}
       handleImageSelection={() => {}}
+      isFollowing={userFollows}
     />
   );
 }
