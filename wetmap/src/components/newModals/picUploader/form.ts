@@ -9,13 +9,16 @@ export interface Form {
   diveSiteName?: string
 }
 
-
 export const FormRules: FormValidationRules<Form> = {
   animal: {
     required: 'Please tell us what you saw',
   },
   date: {
     required: 'Please tell us when you saw it',
+    max:      {
+      value:   new Date().toISOString().split('T')[0],
+      message: 'Date can\'t be in the future',
+    },
   },
   photo: {
     required: 'No picture uploaded',
