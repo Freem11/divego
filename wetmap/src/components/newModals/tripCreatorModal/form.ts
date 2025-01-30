@@ -29,9 +29,11 @@ export const FormRules = (startDate: string | undefined): FormValidationRules<Fo
   Start: {
     required: 'Start date is required',
   },
-  End: {
-    required: 'End date is required',
-    validate: value =>
-      !startDate || new Date(value) >= new Date(startDate) || 'End date must be after start date',
-  },
+
+  // {/*should these be deleted?
+  //  End: {
+  //    required: 'End date is required',
+  //    validate: value =>
+  //      !startDate || new Date(value) >= new Date(startDate) || 'End date must be after start date',
+  //  },*/}
 });
