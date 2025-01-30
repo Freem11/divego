@@ -6,7 +6,6 @@ import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
 import UserProfileContextProvider from './userProfileContext';
 import AnimalContextProvider from './animalContext';
-import PinContextProvider from './staticPinContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SitesArrayContextProvider from './sitesArrayContext';
 import ModalContextProvider from '../reusables/modal/contextProvider';
@@ -23,7 +22,6 @@ const providers = [
   UserProfileContextProvider,
   MapContextProvider,
   AnimalContextProvider,
-  PinContextProvider,
   SelectedPictureContextProvider,
   SitesArrayContextProvider,
   ModalContextProvider,
