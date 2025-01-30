@@ -87,7 +87,9 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               modeSelectedTags="on"
               placeholder={screenData.PicUploader.whatPlaceholder}
               getMoreOptions={props.getMoreAnimals}
-              iconLeft={<Icon name="shark" />}
+              iconLeft={(
+                <Icon name="shark" />
+              )}
               error={errors.animal}
             />
           </Label>
@@ -105,7 +107,9 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <Label label={screenData.PicUploader.whereLabel}>
             <TextInput
               {...register('diveSiteName')}
-              iconLeft={<Icon name="anchor" />}
+              iconLeft={
+                <Icon name="anchor" />
+              }
               placeholder={screenData.PicUploader.wherePlaceholder}
               disabled={true}
             />
