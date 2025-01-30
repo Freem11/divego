@@ -7,7 +7,6 @@ import TextInput from '../../reusables/textInput';
 import ButtonIcon from '../../reusables/buttonIcon';
 import screenData from '../screenData.json';
 import DynamicSelect from '../../reusables/dynamicSelect';
-import backGroundPic from '../../../images/blackManta.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 
 import style from './style.module.scss';
@@ -47,19 +46,28 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
   return (
     <div className="flex-column-between full-height">
 
-      <WavyModalHeader image={props.headerPictureUrl || backGroundPic} onClose={props.onClose}>
-        <div className={style.buttonImageUpload}>
-          <FileInput
-            {...register('photo', FormRules.photo)}
-            onFileChange={props.handleImageSelection}
-            className="d-none"
-          >
-            <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className={`btn-lg ${errors.photo ? 'blinking' : ''}`}
-            />
-          </FileInput>
-        </div>
+      <WavyModalHeader image={props.headerPictureUrl} onClose={props.onClose}>
+
+        <FileInput
+          {...register('photo', FormRules.photo)}
+          onFileChange={props.handleImageSelection}
+          className="d-none"
+        >
+          {props.headerPictureUrl
+            ? (
+                <ButtonIcon
+                  icon={<Icon name="camera-plus" />}
+                  className={`btn-lg ${style.buttonImageUpload} ${errors.photo ? 'blinking' : ''}`}
+                />
+              )
+            : (
+                <Button
+                  className={`btn-lg ${style.buttonImageUploadLarge}`}
+                >
+                  {screenData.PicUploader.uploadButton}
+                </Button>
+              )}
+        </FileInput>
       </WavyModalHeader>
 
       <form
@@ -109,7 +117,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <div className="col-4">
             <Button
               disabled={isSubmitting}
-              className="btn-lg bg-primary col-3"
+              className="btn-md btn-primary col-3"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >

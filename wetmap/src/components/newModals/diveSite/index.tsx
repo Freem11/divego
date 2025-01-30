@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import DiveSiteView from './view';
-import { getDiveSitesByIDs, updateDiveSite } from '../../../supabaseCalls/diveSiteSupabaseCalls';
+import { getDiveSitesByIDs, updateDiveSite, getDiveSiteById } from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import { PhotosGroupedByDate } from '../../../entities/photos';
 import { getPhotosByDiveSiteWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
@@ -31,7 +31,7 @@ export default function DiveSite(props: DiveSiteProps) {
   useEffect(() => {
     (async () => {
       if (props.id) {
-        const diveSites = await getDiveSitesByIDs([props.id]);
+        const diveSites = await getDiveSiteById(props.id);
         if (diveSites && diveSites.length) {
           setSelectedDiveSite(diveSites[0]);
         }
