@@ -4,13 +4,16 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorView from './view';
 import { DiveShopContext } from '../../contexts/diveShopContext';
+import { Form } from './form';
 
 type TripCreatorModalProps = Partial<ModalHandleProps>;
 
 export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
   const { selectedShop } = useContext(DiveShopContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [selectedID, setSelectedID] = useState<number>(0);
+
+  const isEditModeOn = false;
+
 
   useEffect(() => {
     if (selectedShop) {
@@ -29,15 +32,29 @@ export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProp
     }
   };
 
+  const onSubmit = async (formData: Form) => {
+    // const { error } = await insertDiveSiteWaits({
+    //   Site:      formData.Site,
+    //   Latitude:  formData.Latitude,
+    //   Longitude: formData.Longitude,
+    //   UserID:    profile && profile.UserID,
+    // });
+
+    // if (error) {
+    //   toast.error(screenData.DiveSiteAdd.addSiteError);
+    // } else {
+    //   toast.success(screenData.DiveSiteAdd.addSiteSuccess);
+    // }
+    // onClose();
+  };
+
   return (
     <>
       {selectedShop && (
         <TripCreatorView
-          setSelectedID={setSelectedID}
-          itineraryList={itineraryList}
-          selectedID={selectedID}
-          headerPictureUrl={null}
           onClose={onModalCancel}
+          onSubmit={onSubmit}
+          isEditModeOn={isEditModeOn}
         />
       )}
     </>
