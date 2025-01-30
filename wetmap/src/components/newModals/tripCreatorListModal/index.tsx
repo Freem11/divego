@@ -1,21 +1,40 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { SelectedShopContext } from '../../contexts/selectedShopContext';
+import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import TripCreatorListView from './view';
+import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
+import TripCreatorModal from '../tripCreatorModal';
+import { ModalContext } from '../../reusables/modal/context';
+import { DiveShopContext } from '../../contexts/diveShopContext';
 
 
-export default function TripCreatorListModal(props) {
-  const { selectedShop } = useContext(SelectedShopContext);
-
+export default function TripCreatorListModal() {
+  const { selectedShop, setSelectedShop } = useContext(DiveShopContext);
+  const { profile } = useContext(UserProfileContext);
+  const { modalShow, modalCancel } = useContext(ModalContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [selectedID, setSelectedID] = useState<number>(0);
 
   useEffect(() => {
+    if (profile) {
+      getShop(profile?.UserID);
+    }
+
     if (selectedShop) {
       getItineraries(selectedShop.id);
     }
   }, [selectedShop]);
+
+  const getShop = async (id: string) => {
+    try {
+      const shop = await getShopByUserID(id);
+      if (shop) {
+        setSelectedShop(shop[0]);
+      }
+    } catch (e) {
+      console.log({ title: 'Error', message: (e as Error).message });
+    }
+  };
 
   const getItineraries = async (IdNum: number) => {
     try {
@@ -28,15 +47,21 @@ export default function TripCreatorListModal(props) {
     }
   };
 
+  const openTripCreator = async () => {
+    modalShow(TripCreatorModal, {
+      keepPreviousModal: true,
+      size:              'medium',
+    });
+  };
+
   return (
     <>
       {selectedShop && (
         <TripCreatorListView
-          setSelectedID={setSelectedID}
           itineraryList={itineraryList}
-          selectedID={selectedID}
           headerPictureUrl={null}
-          onClose={props.onModalCancel}
+          onClose={modalCancel}
+          openTripCreator={openTripCreator}
         />
       )}
     </>

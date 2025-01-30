@@ -7,6 +7,7 @@ import SettingsView from './view';
 import PartnerAccountRequest from '../partnerAccountRequest';
 import React, { useEffect, useState, useContext } from 'react';
 import { ModalContext } from '../../reusables/modal/context';
+import ConfirmDeleteAccount from '../confirmDeleteAccount';
 
 type SettingsProps = Partial<ModalHandleProps>;
 
@@ -43,8 +44,11 @@ export default function Settings(props: SettingsProps) {
   };
 
   const handleDanger = () => {
-    setOpenDialog(true);
+    // setOpenDialog(true);
+
+    modalShow(ConfirmDeleteAccount, { keepPreviousModal: true });
   };
+
 
   return (
     <SettingsView

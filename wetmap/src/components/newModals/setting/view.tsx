@@ -4,7 +4,6 @@ import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
-import ActDelDialog from '../../modals/dialog';
 
 type SettingsProps = {
   onClose:             () => void
@@ -19,13 +18,11 @@ type SettingsProps = {
 export default function SettingsView(props: SettingsProps) {
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
-      <div className={styles.buttonBack}>
-        <ButtonIcon
-          icon={<Icon name="chevron-left" />}
-          className="btn-lg text-gray ml-4 mt-4"
-          onClick={props.onClose}
-        />
-      </div>
+      <ButtonIcon
+        icon={<Icon name="chevron-left" />}
+        className={`btn-lg text-gray ml-4 mt-4 ${styles.buttonBack}`}
+        onClick={props.onClose}
+      />
 
       <div className="flex-column-between full-height mb-6">
         <div className="mx-10 text-left">
@@ -36,19 +33,13 @@ export default function SettingsView(props: SettingsProps) {
             { props.profileType === 'Diver Account'
             && (
               <span onClick={props.handlePartnerButton}>
-                <p className="ml-10 mb-1 p-0 text-bold text-primary">{screenData.SettingsPage.notPartnerAccount}</p>
-              </span>
-            )}
-            { props.profileType === 'Partner Account'
-            && (
-              <span>
-                <p className="ml-10 mb-1 p-0 text-bold text-primary ">&nbsp;</p>
+                <p className={styles.upgradeLink}>{screenData.SettingsPage.notPartnerAccount}</p>
               </span>
             )}
             { props.profileType === null
             && (
               <span>
-                <p className="ml-10 mb-1 p-0 text-bold text-primary ">&nbsp;</p>
+                <p className="ml-10 mb-1 p-0 text-bold text-primary ">Unknown account type</p>
               </span>
             )}
           </div>
@@ -58,7 +49,7 @@ export default function SettingsView(props: SettingsProps) {
             <div className="col-3">
               <Button
                 onClick={props.handleLogout}
-                className="btn-md bg-primary"
+                className="btn-md btn-primary"
                 iconRight={<Icon name="chevron-right" />}
                 type="button"
               >
@@ -75,9 +66,6 @@ export default function SettingsView(props: SettingsProps) {
           </div>
         </div>
       </div>
-
-      <ActDelDialog openDialog={props.openDialog} setOpenDialog={props.setOpenDialog} />
-
     </div>
 
   );

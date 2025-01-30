@@ -1,8 +1,13 @@
 @import "../../../styles/variables.scss";
 
 .buttonBack {
+    color: #afafaf;
     svg {
         scale: 2;
+    }
+    &:hover,
+    &:focus {
+        color: #484848;
     }
 }
 
@@ -11,9 +16,15 @@
     border-top: 1px solid; /* Top border */
     border-bottom: 1px solid; /* Bottom border */
     background-color: rgb(247, 217, 217);
+    cursor: pointer;
+    user-select: none;
 }
 
 .grayOutline {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 70px;
     color: #5f5e5e;
     border-top: 1px solid; /* Top border */
     border-bottom: 1px solid; /* Bottom border */
@@ -30,5 +41,11 @@
     margin-top: 1rem;
   }
 
-
+.upgradeLink {
+    margin-left: 2.5rem;
+    margin-bottom: 0.25rem;
+    color: $primaryBlue;
+    cursor: pointer;
+    width: max-content;
+}
 

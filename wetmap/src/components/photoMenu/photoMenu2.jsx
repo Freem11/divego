@@ -4,7 +4,7 @@ import {
   multiHeatPoints,
 } from '../../supabaseCalls/heatPointSupabaseCalls';
 import { getPhotosforMapArea } from '../../supabaseCalls/photoSupabaseCalls';
-import { MapBoundsContext } from '../contexts/mapBoundariesContext';
+import { MapContext } from '../googleMap/mapContext';
 import { HeatPointsContext } from '../contexts/heatPointsContext';
 import { AreaPicsContext } from '../contexts/areaPicsContext';
 import { SearchTextContext } from '../contexts/searchTextContext';
@@ -19,7 +19,7 @@ import 'react-alice-carousel/lib/alice-carousel.css';
 
 const PhotoMenu = () => {
   const { animalVal, setAnimalVal } = useContext(AnimalContext);
-  const { boundaries } = useContext(MapBoundsContext);
+  const { boundaries } = useContext(MapContext);
   const { setHeatPts } = useContext(HeatPointsContext);
   const { areaPics, setAreaPics } = useContext(AreaPicsContext);
   const { textvalue } = useContext(SearchTextContext);

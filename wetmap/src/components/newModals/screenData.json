@@ -1,16 +1,14 @@
     {
-      "SettingsPage": 
-      {
-       "header": "Settings",
-       "subHeading1": "Account Type",
-       "notPartnerAccount": "Request upgrade to Partner Account?",
-       "notResearcherAccount": "Request upgrade to Researcher Account?",
-       "logout": "Log Out",
-       "delAccount": "Delete Account",
-       "dangerZoneBar": "Danger Zone"
+      "SettingsPage": {
+        "header": "Settings",
+        "subHeading1": "Account Type",
+        "notPartnerAccount": "Request upgrade to Partner Account?",
+        "notResearcherAccount": "Request upgrade to Researcher Account?",
+        "logout": "Log Out",
+        "delAccount": "Delete Account",
+        "dangerZoneBar": "Danger Zone"
       },
-      "PartnerRequestPage":
-      {
+      "PartnerRequestPage": {
         "header": "Partner Account Upgrade",
         "explanation": "To qualify for a 'Partner Account' Your Account must represent a diving business that takes divers out diving. \n Examples include: Dive Shops, Dive Charters, Diver Centres and Liveaboards",
         "businessPlaceholder": "Full business name",
@@ -20,48 +18,58 @@
         "latPlaceholder": "Latitude",
         "lngPlaceholder": "Longitude",
         "latLngExplainer": "To place your business on the map",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "createSuccess": "Request Created Successfully!",
+        "createError": "Error creating request. Please try again later."
       },
-      "SearchPage" :
-      {
+      "SearchPage": {
         "header": "Map Navigation",
         "placeholder": "Search by Dive Site name or Location",
         "diveAddPrompt": "Can't find your dive site?",
         "diveAddLink": "Tap here to add it!"
       },
-      "DiveSiteAdd" :
-      {
+      "DiveSiteAdd": {
         "header": "Add a New Dive Site",
         "siteNamePlaceholder": "Dive Site Name",
         "latPlaceholder": "Latitude",
         "lngPlaceholder": "Longitude",
-        "myLocationButton" : "Use my location",
-        "myLocationExplainer" : "This can take up to 30 seconds",
-        "pinButton" : "Drop a pin",
-        "submitButton" : "Submit"
+        "myLocationButton": "Use my location",
+        "myLocationExplainer": "This can take up to 30 seconds",
+        "pinButton": "Drop a pin",
+        "submitButton" : "Submit",
+        "allowLocation": "Please allow location access.",
+        "locationNotSupported": "Geolocation is not supported in your browser.",
+        "addSiteError": "Error adding site. Please try again later.",
+        "addSiteSuccess": "Site added successfully!"
       },
-      "PicUploader" :
-      {
+      "PicUploader": {
         "header": "Your Sea Creature Sighting",
-        "uploadButton" : "Upload a Photo",
+        "uploadButton": "Upload a Photo",
         "whatLabel": "What you saw",
         "whatPlaceholder": "Sea Life Encountered",
         "whenLabel": "When you saw it",
         "whenPlaceholder": "Date of Sighting",
         "whereLabel": "Where you saw it",
         "wherePlaceholder": "Location of Sighting",
-        "submitButton" : "Submit"
+        "submitButton" : "Submit",
+        "uploadError": "Error uploading photo. Please try again later.",
+        "uploadSuccess": "Photo uploaded successfully!",
+        "fileUploadError": "Error uploading file. Please try again later."
       },
-      "TripList" :
-      {
+      "TripList": {
         "header": "Your Dive Trip Offerings",
         "creatNewTripButton": "New Trip",
         "expandTrip": "More Info",
         "editButton": "Edit",
         "deleteButton": "Delete"
       },
-      "TripCreator" :
-      {
+      "TripCard": {
+        "editButton": "Edit",
+        "deleteButton": "Delete",
+        "anchorButton" : "Go to trip location",
+        "bookButton" : "Book trip"
+      },
+      "TripCreator": {
         "header": "Create a New Dive Trip",
         "headerEdit": "Submit Trip Edits",
         "cloneButton": "Clone This Trip",
@@ -70,42 +78,52 @@
         "pricePlaceholder": "Trip Price",
         "startDatePlaceholder": "Start Date",
         "endDatePlaceholder": "End Date",
-        "tripDescriptionPlaceholder" : "Please add any further details about your trip that you think would be helpful in promoting your trip to divers, right here",
-        "submitButton" : "Submit",
+        "tripDescriptionPlaceholder": "Please add any further details about your trip that you think would be helpful in promoting your trip to divers, right here",
+        "submitButton": "Submit",
         "selectSitesButton": "Select Dive Sites",
-        "drawerHeader" : "Possible Sites in this Trip   (Press to Remove)",
+        "drawerHeader": "Possible Sites in this Trip   (Press to Remove)",
         "emptyDrawer": "No Dive Sites have been added to this Trip yet."
       },
-      "UserProfile" :
-      {
-        "drawerHeader" : "'s Sea Creature Encounters",
+      "UserProfile": {
+        "drawerHeader": "'s Sea Creature Encounters",
         "emptyDrawer": " hasn't posted any sightings yet.",
         "userDoesFollow": "Following",
         "UserDoesNotFollow": "Follow",
-        "userDefaultDescription": "Say a little about yourself..."
+        "userDefaultDescription": "Say a little about yourself...",
+        "UserProfileUpdateSuccessMessage": "User Profile updated successfully...",
+        "DuplicateUserNameErrorMessage": "Username already in use, please try again...",
+        "EmptyUserNameError": "Username cannot be empty, please try again..."
       },
-      "DiveSite" :
-      {
-        "drawerHeader" : "Sea Creature Sightings",
+      "DiveSite": {
+        "drawerHeader": "Sea Creature Sightings",
         "emptyDrawer": "No sightings at this site yet.",
-        "addSightingButton" : "Add Sighting",
-        "submitButton": "Submit"
+        "addSightingButton": "Add Sighting",
+        "submitButton": "Submit",
+        "reportSiteTooltip": "Report an issue with this dive site",
+        "addPhotoTooltip": "Add a photo of this dive site"
       },
-      "DiveShop" :
-      {
-        "drawerHeader" : "Offered Dive Trips",
-        "emptyDrawer": " aren't currently offering any Dive Trips"
+      "SeaLifeImageCard": {
+        "reportPictureTooltip": "Report an issue with this picture"
       },
-      "CommentsModal" :
-      {
-        "header" : "Comments",
+      "DiveShop": {
+        "drawerHeader": "Offered Dive Trips",
+        "emptyDrawer": " aren't currently offering any Dive Trips",
+        "addDiveShopPhotoButton": "Add a photo of your dive shop"
+      },
+      "CommentsModal": {
+        "header": "Comments",
         "commentsPlaceholder": "Blow some bubbles . . .",
         "replyButton": "Reply",
         "replyHideSingle": "Hide reply",
         "replyHideMultiple": "Hide replies",
         "replyViewSingle": "View Reply",
         "replyViewMultiplOne": "View ",
-        "replyViewMultiplTwo":" Replies"
+        "replyViewMultiplTwo": " Replies"
+      },
+      "GoogleMap": {
+        "pinButton": "Set Pin",
+        "shopButton": "Return to Shop",
+        "sitesButton": "Set Sites"
       },
       "Toast": {
         "generalError": "Oops! Something went wrong... Please try again later.",
@@ -120,8 +138,7 @@
         "passwordUpdateError": "Something went wrong. Please try again later",
         "submitButton": "Submit"
       },
-      "SignUpPage":
-      {
+      "SignUpPage": {
         "title": "Sign Up",
         "namePlaceholder": "Full Name",
         "emailPlaceholder": "Email",
@@ -131,15 +148,13 @@
         "promptLinkText": "Log In",
         "signUpError": "Something went wrong. Please try again later"
       },
-    "LandingPage":
-      {
+      "LandingPage": {
         "title": "Dive in. . .",
         "buttonOneText": "Log In",
         "buttonTwoText": "Create New Account",
         "content": "Social Sign In:"
       },
-    "SignInPage":
-      {
+      "SignInPage": {
         "title": "Log In",
         "emailPlaceholder": "Email",
         "passwordPlaceholder": "Password",
@@ -149,13 +164,30 @@
         "passwordReset": "Forgot Password?",
         "signInError": "The credentials you supplied are not valid"
       },
-      "PasswordRecoveryPage":
-      {
+      "MainPage": {
+        "profileTooltip": "Profile",
+        "settingsTooltip": "Settings",
+        "newDiveSiteTooltip": "Add a New Dive Site",
+        "tripCreatorTooltip": "Create Trip",
+        "guideTooltip": "User Guide"
+      },
+      "PasswordRecoveryPage": {
         "title": "Reset Password",
         "emailPlaceholder": "Enter Your Account Email",
         "buttonText": "Send Recovery Email",
         "emailInvalidMessage": "Please supply the email that you use to login",
         "passwordResetEmailSent": "Email Sent! Check Your Email For A Link To Reset Your Password",
         "passwordResetError": "Something went wrong. Please try again later"
+      },
+      "ConfirmDeleteAccount":
+      {
+        "title": "Account Deletion",
+        "subHeader": "Are you sure you want to delete your account?",
+        "body": "Please note that deleting your account will not delete your previous dive site or photo submissions, please contact us if you wish to have those removed from the community",
+        "deleteBtnText": "Delete account",
+        "cancelBtnText": "Cancel",
+        "contact": "Contact us",
+        "contantEmail": "scubaseasons@gmail.com",
+        "errorDeleting": "Something went wrong. Please try again later"
       }
     }

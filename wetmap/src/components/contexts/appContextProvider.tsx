@@ -5,21 +5,15 @@ import SearchTextContextProvider from './searchTextContext';
 import PullTabContextProvider from './pullTabContext';
 import CarrouselTilesContextProvider from './carrouselTilesContext';
 import UserProfileContextProvider from './userProfileContext';
-import HeatPointsContextProvider from './heatPointsContext';
-import MapBoundsContextProvider from './mapBoundariesContext';
-import SelectedDiveSiteContextProvider from './selectedDiveSiteContext';
-import DiveSpotContextProvider from './diveSpotContext';
-import PinSpotContextProvider from './pinSpotContext';
-import PictureContextProvider from './pictureContext';
 import AnimalContextProvider from './animalContext';
-import ZoomContextProvider from './mapZoomContext';
 import PinContextProvider from './staticPinContext';
-import DiveSitesContextProvider from './diveSitesContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
-import SelectedShopContextProvider from './selectedShopContext';
 import SitesArrayContextProvider from './sitesArrayContext';
-import ModalContextProvider from '../reusables/modal//contextProvider';
-import MapConfigContextProvider from './mapConfigContext';
+import ModalContextProvider from '../reusables/modal/contextProvider';
+import { MapContextProvider } from '../googleMap/mapContextProvider';
+import { DiveSiteContextProvider } from './diveSiteContextProvider';
+import { DiveShopContextProvider } from './diveShopContextProvider';
+import { PhotoContextProvider } from './photoContextProvider';
 
 const providers = [
   AreaPicsContextProvider,
@@ -27,21 +21,15 @@ const providers = [
   PullTabContextProvider,
   CarrouselTilesContextProvider,
   UserProfileContextProvider,
-  HeatPointsContextProvider,
-  MapBoundsContextProvider,
-  SelectedDiveSiteContextProvider,
-  DiveSpotContextProvider,
-  PinSpotContextProvider,
-  PictureContextProvider,
+  MapContextProvider,
   AnimalContextProvider,
-  ZoomContextProvider,
   PinContextProvider,
-  DiveSitesContextProvider,
   SelectedPictureContextProvider,
-  SelectedShopContextProvider,
   SitesArrayContextProvider,
   ModalContextProvider,
-  MapConfigContextProvider,
+  DiveSiteContextProvider,
+  DiveShopContextProvider,
+  PhotoContextProvider,
 ];
 
 export const AppContextProvider = combineComponents(...providers);

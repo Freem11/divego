@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { FieldErrors, useForm } from 'react-hook-form';
 
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button/index';
@@ -7,13 +7,13 @@ import TextInput from '../../reusables/textInput';
 import ButtonIcon from '../../reusables/buttonIcon';
 import screenData from '../screenData.json';
 import DynamicSelect from '../../reusables/dynamicSelect';
-import backGroundPic from '../../../images/blackManta.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 
 import style from './style.module.scss';
 import { Form, FormRules } from './form';
 import FileInput from '../../reusables/fileInput';
 import Label from '../../reusables/label';
+import { toast } from 'react-toastify';
 
 type PicUploaderViewProps = {
   values:               Form
@@ -29,27 +29,50 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
     values:   props.values,
   });
 
+  const handleError = (errors: FieldErrors<Form>) => {
+    toast.dismiss();
+    Object.values(errors).forEach((error) => {
+      if (error?.message) {
+        toast.error(error.message);
+      }
+    });
+  };
+
+  const onSubmit = (data: Form) => {
+    toast.dismiss();
+    props.onSubmit(data);
+  };
+
   return (
     <div className="flex-column-between full-height">
 
-      <WavyModalHeader image={props.headerPictureUrl || backGroundPic} onClose={props.onClose}>
-        <div className={style.buttonImageUpload}>
-          <FileInput
-            {...register('photo', FormRules.photo)}
-            onFileChange={props.handleImageSelection}
-            className="d-none"
-          >
-            <ButtonIcon
-              icon={<Icon name="camera-plus" />}
-              className={`btn-lg ${errors.photo ? 'blinking' : ''}`}
-            />
-          </FileInput>
-        </div>
+      <WavyModalHeader image={props.headerPictureUrl} onClose={props.onClose}>
+
+        <FileInput
+          {...register('photo', FormRules.photo)}
+          onFileChange={props.handleImageSelection}
+          className="d-none"
+        >
+          {props.headerPictureUrl
+            ? (
+                <ButtonIcon
+                  icon={<Icon name="camera-plus" />}
+                  className={`btn-lg ${style.buttonImageUpload} ${errors.photo ? 'blinking' : ''}`}
+                />
+              )
+            : (
+                <Button
+                  className={`btn-lg ${style.buttonImageUploadLarge}`}
+                >
+                  {screenData.PicUploader.uploadButton}
+                </Button>
+              )}
+        </FileInput>
       </WavyModalHeader>
 
       <form
         className="flex-column-between full-height mx-10 mb-6"
-        onSubmit={handleSubmit(props.onSubmit)}
+        onSubmit={handleSubmit(onSubmit, handleError)}
       >
         <div className="d-flex">
           <h1 className="mb-0 text-clip">{screenData.PicUploader.header}</h1>
@@ -94,7 +117,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <div className="col-4">
             <Button
               disabled={isSubmitting}
-              className="btn-lg bg-primary col-3"
+              className="btn-md btn-primary col-3"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >

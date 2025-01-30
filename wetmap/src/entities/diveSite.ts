@@ -12,3 +12,10 @@ export type DiveSiteWithUserName = {
   newusername:          string
   divesiteprofilephoto: string
 };
+
+export type DiveSiteBasic = {
+  id:   number
+  name: string
+  lat:  number
+  lng:  number
+};

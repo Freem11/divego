@@ -23,15 +23,14 @@ export default function PageTwo() {
   const onSubmit = async (data: Form) => {
     if (activeSession) {
       await updateProfile({
-        id:       activeSession?.user.id,
-        username: data.username,
+        UserID:       activeSession?.user.id,
+        UserName: data.username,
       });
     }
     if (activeSession) {
-      const success = await grabProfileById(activeSession?.user.id);
-      if (success) {
-        const updatedprofile: ActiveProfile = success[0];
-        setProfile(updatedprofile);
+      const profile = await grabProfileById(activeSession?.user.id);
+      if (profile) {
+        setProfile(profile);
         slideForward();
       }
     }
