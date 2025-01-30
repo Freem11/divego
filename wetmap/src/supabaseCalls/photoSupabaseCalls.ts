@@ -45,9 +45,7 @@ export const getAnimalNamesThatFit = async (value) => {
     return [];
   }
 
-  const { data, error } = await supabase
-    .from('photos')
-    .select('label, id')
+  const { data, error } = await supabase.rpc('get_unique_photo')
     .ilike('label', '%' + value + '%');
 
   if (error) {
