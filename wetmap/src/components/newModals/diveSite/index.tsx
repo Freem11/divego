@@ -13,6 +13,7 @@ import { ActiveProfile } from '../../../entities/profile';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
 import UserProfile from '../userProfile';
+import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 
 type DiveSiteProps = Partial<ModalHandleProps> & {
   id?:    number
@@ -99,10 +100,8 @@ export default function DiveSite(props: DiveSiteProps) {
 
   useEffect(() => {
     if (selectedDiveSite?.divesiteprofilephoto) {
-      const photoName = selectedDiveSite.divesiteprofilephoto.split('/').pop();
-      setHeaderPictureUrl(
-        import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${photoName}`,
-      );
+      const photoName = getPhotoPublicUrl(selectedDiveSite.divesiteprofilephoto);
+      setHeaderPictureUrl(photoName);
     } else {
       setHeaderPictureUrl(null);
     }

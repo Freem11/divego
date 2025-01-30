@@ -10,6 +10,7 @@ import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorListModal from '../tripCreatorListModal';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveShopContext } from '../../contexts/diveShopContext';
+import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 
 type ShopModalProps = Partial<ModalHandleProps> & {
   id?:    number
@@ -103,10 +104,8 @@ export default function ShopModal(props: ShopModalProps) {
 
   useEffect(() => {
     if (selectedShop?.diveshopprofilephoto) {
-      const photoName = selectedShop.diveshopprofilephoto.split('/').pop();
-      setHeaderPictureUrl(
-        import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${photoName}`,
-      );
+      const photoName = getPhotoPublicUrl(selectedShop.diveshopprofilephoto);
+      setHeaderPictureUrl(photoName);
     } else {
       setHeaderPictureUrl(null);
     }
