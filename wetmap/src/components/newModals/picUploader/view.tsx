@@ -92,7 +92,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
             />
           </Label>
 
-          <Label label={screenData.PicUploader.whatLabel}>
+          <Label label={screenData.PicUploader.whenLabel}>
             <TextInput
               {...register('date', FormRules.date)}
               type="date"

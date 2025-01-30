@@ -50,7 +50,7 @@ export default function TripCreatorListModal() {
   const openTripCreator = async () => {
     modalShow(TripCreatorModal, {
       keepPreviousModal: true,
-      size:              'medium',
+      size:              'large',
     });
   };
 
