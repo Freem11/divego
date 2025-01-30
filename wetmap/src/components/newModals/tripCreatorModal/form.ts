@@ -11,7 +11,7 @@ export interface Form {
 }
 
 
-export const FormRules = (startDate: string | undefined) : FormValidationRules<Form>  => ({
+export const FormRules = (startDate: string | undefined): FormValidationRules<Form>  => ({
   Name: {
     required: 'Trip name name cannot be empty',
   },
@@ -31,7 +31,7 @@ export const FormRules = (startDate: string | undefined) : FormValidationRules<F
   },
   End: {
     required: 'End date is required',
-     validate: (value) =>
-      !startDate || new Date(value) >= new Date(startDate) || "End date must be after start date",
+    validate: value =>
+      !startDate || new Date(value) >= new Date(startDate) || 'End date must be after start date',
   },
 });

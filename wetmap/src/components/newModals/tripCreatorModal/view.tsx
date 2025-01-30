@@ -22,17 +22,16 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
   const startDate = watch('Start');
 
-    const handleError = (errors: FieldErrors<Form>) => {
-      toast.dismiss();
-      Object.values(errors).forEach((error) => {
-        if (error?.message) {
-          toast.error(error.message);
-        }
-      });
-    };
+  const handleError = (errors: FieldErrors<Form>) => {
+    toast.dismiss();
+    Object.values(errors).forEach((error) => {
+      if (error?.message) {
+        toast.error(error.message);
+      }
+    });
+  };
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
-
       <div className={styles.buttonBack}>
         <ButtonIcon
           icon={<Icon name="chevron-left" />}
@@ -48,7 +47,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
             : (<h1 className="mt-4 text-bold">{screenData.TripCreator.header}</h1>)
         }
 
-        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit,handleError)} style={{ overflowY: 'scroll' }}>
+        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit, handleError)} style={{ overflowY: 'scroll' }}>
           <div className="stack-4 mb-2">
             <Label label={screenData.TripCreator.tripNameLabel}>
               <TextInput
@@ -78,7 +77,6 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
             </Label>
 
             <Label label={screenData.TripCreator.startDateLabel}>
-              
               <TextInput
                 iconLeft={<Icon name="calendar-start" />}
                 placeholder={screenData.TripCreator.startDatePlaceholder}
@@ -86,9 +84,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 type="date"
                 {...register('Start', FormRules(startDate).Start)}
               />
-            
             </Label>
-            
 
             <Label label={screenData.TripCreator.endDateLabel}>
               <TextInput
@@ -96,8 +92,18 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 placeholder={screenData.TripCreator.endDatePlaceholder}
                 error={errors.End}
                 type="date"
-                {...register('End', FormRules(startDate).End)}
+                {...register('End',
+                  { required: 'End date is required',
+                    validate: (value) => {
+                      if (!startDate || !value) return true;
+                      const start = new Date(startDate);
+                      const end = new Date(value);
+                      return end >= start || 'End date must be after start date';
+                    },
+                  })}
+                max={startDate}
               />
+
             </Label>
 
             <textarea
@@ -116,7 +122,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               >
                 {/* {screenData.TripCreator.submitButton}
                  */}
-                 Submit
+                Submit
               </Button>
             </div>
           </div>
