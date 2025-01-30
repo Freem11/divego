@@ -27,7 +27,7 @@ export default function UserProfile(props: UserProps) {
   const { modalShow }                    = useContext(ModalContext);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
-  const [userFollows, setUserFollows] = useState(false);
+  const [userIsFollowing, setUserIsFollowing] = useState(false);
   const [followRecordID, setFollowRecordID] = useState(activeSession?.user.id);
 
   async function followCheck() {
@@ -38,7 +38,7 @@ export default function UserProfile(props: UserProps) {
         selectedProfile?.UserID,
       );
       if (alreadyFollows && alreadyFollows.length > 0) {
-        setUserFollows(true);
+        setUserIsFollowing(true);
         setFollowRecordID(alreadyFollows[0].id);
       }
       setOpenedProfile(selectedProfile);
@@ -49,13 +49,13 @@ export default function UserProfile(props: UserProps) {
 
   useEffect(() => {
     followCheck();
-  }, [props.userProfileID, userFollows]);
+  }, [props.userProfileID, userIsFollowing]);
 
 
   const handleFollow = async () => {
-    if (userFollows) {
+    if (userIsFollowing) {
       deleteUserFollow(followRecordID);
-      setUserFollows(false);
+      setUserIsFollowing(false);
     } else {
       if (profile) {
         const newRecord = await insertUserFollow(
@@ -63,7 +63,7 @@ export default function UserProfile(props: UserProps) {
           openedProfile?.UserID,
         );
         setFollowRecordID(newRecord && newRecord[0].id);
-        setUserFollows(true);
+        setUserIsFollowing(true);
       }
     }
   };
@@ -127,7 +127,7 @@ export default function UserProfile(props: UserProps) {
       openSettings={openSettings}
       isActiveProfile={isActiveProfile}
       handleImageSelection={() => {}}
-      isFollowing={userFollows}
+      isFollowing={userIsFollowing}
     />
   );
 }
