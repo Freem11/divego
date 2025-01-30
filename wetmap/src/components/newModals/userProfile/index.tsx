@@ -1,13 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react';
 import UserProfileView from './view';
-// import { PhotosGroupedByDate } from '../../../entities/photos';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalContext } from '../../reusables/modal/context';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import {
   grabProfileById,
   updateProfile,
-  getProfileWithStats,
 } from '../../../supabaseCalls/accountSupabaseCalls';
 import {
   insertUserFollow,
@@ -31,7 +29,6 @@ export default function UserProfile(props: UserProps) {
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
   const [userFollows, setUserFollows] = useState(false);
-  const [userStats, setUserStats] = useState<any>('');
   const [followData, setFollowData] = useState(activeSession?.user.id);
 
   async function followCheck() {
@@ -52,32 +49,15 @@ export default function UserProfile(props: UserProps) {
   }
 
   useEffect(() => {
-    getProfile();
     followCheck();
   }, [props.userProfileID, userFollows]);
-
-
-  const getProfile = async () => {
-    let userID;
-    if (openedProfile) {
-      userID = openedProfile.UserID;
-      try {
-        const success = await getProfileWithStats(userID);
-        if (success) {
-          setUserStats(success);
-        }
-      } catch (e) {
-        console.log({ title: 'Error', message: (e as Error).message });
-      }
-    }
-  };
 
   const handleFollow = async () => {
     if (userFollows) {
       deleteUserFollow(followData);
       setUserFollows(false);
     } else {
-      if (userStats && profile) {
+      if (profile) {
         const newRecord = await insertUserFollow(
           profile.UserID,
           openedProfile?.UserID,
