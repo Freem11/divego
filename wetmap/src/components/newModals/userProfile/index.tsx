@@ -15,7 +15,6 @@ import {
   checkIfUserFollows,
 } from '../../../supabaseCalls/userFollowSupabaseCalls';
 import { SessionContext } from '../../contexts/sessionContext';
-// import Settings from '../../modals/setting';
 import Settings from '../../newModals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 import { toast } from 'react-toastify';
@@ -33,36 +32,30 @@ export default function UserProfile(props: UserProps) {
   const isActiveProfile: boolean = !props.userProfileID;
   const [userFollows, setUserFollows] = useState(false);
   const [userStats, setUserStats] = useState<any>('');
-  const [followData, setFollowData] = useState(activeSession.user.id);
+  const [followData, setFollowData] = useState(activeSession?.user.id);
 
-  useEffect(() => {
-    (async () => {
-      if (props.userProfileID) {
-        setOpenedProfile(await grabProfileById(props.userProfileID));
-      } else {
-        setOpenedProfile(profile);
-      }
-    })();
-  }, [props.userProfileID]);
-
-  useEffect(() => {
-    getProfile();
-
-    async function followCheck() {
-      let alreadyFollows = await checkIfUserFollows(
-        profile.UserID,
-        openedProfile,
+  async function followCheck() {
+    if (props.userProfileID) {
+      const selectedProfile = await grabProfileById(props.userProfileID);
+      const alreadyFollows = await checkIfUserFollows(
+        profile?.UserID,
+        selectedProfile?.UserID,
       );
-      if (alreadyFollows.length > 0) {
+      if (alreadyFollows && alreadyFollows.length > 0) {
         setUserFollows(true);
         setFollowData(alreadyFollows[0].id);
       }
-      console.log(alreadyFollows);
-      // this function does not seem to be working properly
+      setOpenedProfile(selectedProfile);
+    } else {
+      setOpenedProfile(profile);
     }
+  }
 
+  useEffect(() => {
+    getProfile();
     followCheck();
-  }, []);
+  }, [props.userProfileID, userFollows]);
+
 
   const getProfile = async () => {
     let userID;
@@ -73,28 +66,24 @@ export default function UserProfile(props: UserProps) {
         if (success) {
           setUserStats(success);
         }
-      }
-      catch (e) {
+      } catch (e) {
         console.log({ title: 'Error', message: (e as Error).message });
       }
     }
   };
 
   const handleFollow = async () => {
-    console.log(userFollows);
     if (userFollows) {
-      console.log(userFollows);
       deleteUserFollow(followData);
       setUserFollows(false);
     } else {
       if (userStats && profile) {
-        let newRecord = await insertUserFollow(
+        const newRecord = await insertUserFollow(
           profile.UserID,
           openedProfile?.UserID,
         );
-        setFollowData(newRecord[0].id);
+        setFollowData(newRecord && newRecord[0].id);
         setUserFollows(true);
-        // console.log(userStats[0]);
       }
     }
   };

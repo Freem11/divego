@@ -96,7 +96,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                   </Button>
                 )
               : (
-                  <Button className="btn-lg" onClick={props.handleFollow}>
+                  <Button className={props.isFollowing ? 'btn-lg btn-primary' : 'btn-lg'}onClick={props.handleFollow}>
                     {(props.isFollowing)
                       ? (
                           <span className="hide-sm">
