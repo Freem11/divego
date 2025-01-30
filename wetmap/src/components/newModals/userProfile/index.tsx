@@ -28,7 +28,7 @@ export default function UserProfile(props: UserProps) {
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
   const [userFollows, setUserFollows] = useState(false);
-  const [followData, setFollowData] = useState(activeSession?.user.id);
+  const [followRecordID, setFollowRecordID] = useState(activeSession?.user.id);
 
   async function followCheck() {
     if (props.userProfileID) {
@@ -39,7 +39,7 @@ export default function UserProfile(props: UserProps) {
       );
       if (alreadyFollows && alreadyFollows.length > 0) {
         setUserFollows(true);
-        setFollowData(alreadyFollows[0].id);
+        setFollowRecordID(alreadyFollows[0].id);
       }
       setOpenedProfile(selectedProfile);
     } else {
@@ -54,7 +54,7 @@ export default function UserProfile(props: UserProps) {
 
   const handleFollow = async () => {
     if (userFollows) {
-      deleteUserFollow(followData);
+      deleteUserFollow(followRecordID);
       setUserFollows(false);
     } else {
       if (profile) {
@@ -62,7 +62,7 @@ export default function UserProfile(props: UserProps) {
           profile.UserID,
           openedProfile?.UserID,
         );
-        setFollowData(newRecord && newRecord[0].id);
+        setFollowRecordID(newRecord && newRecord[0].id);
         setUserFollows(true);
       }
     }
