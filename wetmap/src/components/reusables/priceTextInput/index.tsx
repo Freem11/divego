@@ -1,11 +1,8 @@
 import React, { DetailedHTMLProps, InputHTMLAttributes, useState  } from 'react';
-import './style.scss';
 import TextInput from '../textInput';
 import Icon from '../../../icons/Icon';
 
 export type PriceTextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
-  iconLeft?:  React.ReactNode
-  iconRight?: React.ReactNode
   error?:     any
 };
 
@@ -47,9 +44,7 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
       {...rest}
       onChange={handlePriceChange}
       iconLeft={(
-        <i className="ssrc-text-input__icon-left">
-          <Icon name="currency-usd" />
-        </i>
+        <Icon name="currency-usd" />
       )}
     />
   );

@@ -2,12 +2,12 @@
 import React from 'react';
 import type { Meta, StoryObj } from '@storybook/react';
 
-import Component from './index';
+import PriceTextInput from './index';
 
 
-const meta: Meta<typeof Component> = {
+const meta: Meta<typeof PriceTextInput> = {
   title:      'Components/Reusables/PriceTextInput',
-  component:  Component,
+  component:  PriceTextInput,
   tags:       ['autodocs'],
   args:       { },
   decorators: [
@@ -20,7 +20,7 @@ const meta: Meta<typeof Component> = {
 };
 
 export default meta;
-type Story = StoryObj<typeof Component>;
+type Story = StoryObj<typeof PriceTextInput>;
 
 
 export const Input: Story = {
@@ -30,6 +30,6 @@ export const Input: Story = {
 
 export const InputWithValue: Story = {
   args: {
-    value: 'Lorem ipsum',
+    value: '$250',
   },
 };

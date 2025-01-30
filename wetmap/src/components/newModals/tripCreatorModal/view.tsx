@@ -20,25 +20,23 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   return (
-    <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
-
+    <div className={styles.wrapper}>
       <div className={styles.buttonBack}>
         <ButtonIcon
           icon={<Icon name="chevron-left" />}
-          className="btn-lg text-gray ml-4 mt-4"
           onClick={props.onClose}
         />
       </div>
 
-      <div className="flex-column-between full-height mb-6 mr-6">
-        {
-          props.isEditModeOn
-            ? (<h1 className="mt-4 text-bold">{screenData.TripCreator.headerEdit}</h1>)
-            : (<h1 className="mt-4 text-bold">{screenData.TripCreator.header}</h1>)
-        }
+      {
+        props.isEditModeOn
+          ? (<h1>{screenData.TripCreator.headerEdit}</h1>)
+          : (<h1>{screenData.TripCreator.header}</h1>)
+      }
 
-        <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)} style={{ overflowY: 'scroll' }}>
-          <div className="stack-4 mb-2">
+      <form onSubmit={handleSubmit(props.onSubmit)} className={styles.form}>
+        <div className={styles.formColumns}>
+          <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.tripNameLabel}>
               <TextInput
                 iconLeft={<Icon name="store" />}
@@ -50,7 +48,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
             <Label label={screenData.TripCreator.bookingLinkLabel}>
               <TextInput
-                iconLeft={<Icon name="at" />}
+                iconLeft={<Icon name="link" />}
                 placeholder={screenData.TripCreator.bookingLinkPlaceholder}
                 error={errors.Link}
                 {...register('Link', FormRules.Link)}
@@ -84,27 +82,24 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 {...register('End', FormRules.End)}
               />
             </Label>
-
+          </div>
+          <div className={styles.formColumn}>
             <textarea
               placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
               {...register('Details')}
             />
           </div>
-          <div className="cols mx-0">
-            <div className="col-9"></div>
-            <div className="col-3">
-              <Button
-                disabled={isSubmitting}
-                className="btn-md bg-primary"
-                type="submit"
-                iconRight={<Icon name="chevron-right" />}
-              >
-                {screenData.TripCreator.submitButton}
-              </Button>
-            </div>
-          </div>
-        </form>
-      </div>
+        </div>
+        <div className={styles.formBottom}>
+          <Button
+            disabled={isSubmitting}
+            type="submit"
+            iconRight={<Icon name="chevron-right" />}
+          >
+            {screenData.TripCreator.submitButton}
+          </Button>
+        </div>
+      </form>
     </div>
   );
 }
