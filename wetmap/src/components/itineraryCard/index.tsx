@@ -48,22 +48,7 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
   };
 
   const handleDeleteButton = async (itinerary: ItineraryItem) => {
-    const { error } = await insertItineraryRequest(
-      {
-        BookingPage: itinerary.BookingPage,
-        tripName:    itinerary.tripName,
-        startDate:   itinerary.startDate,
-        endDate:     itinerary.endDate,
-        price:       itinerary.price,
-        description: itinerary.description,
-        siteList:    itinerary.siteList,
-        shopID:      itinerary.shopID,
-        created_at:  itinerary.created_at,
-        id:          itinerary.id,
-        name:        itinerary.name,
-      },
-      'Delete',
-    );
+    const { error } = await insertItineraryRequest(itinerary, 'Delete');
 
     if (error) {
       toast.error(screenData.TripCard.deleteTripError);
