@@ -18,7 +18,6 @@ import { ActiveProfile } from '../../../entities/profile';
 import { toast } from 'react-toastify';
 import screenData from '../screenData.json';
 
-
 type UserProps = Partial<ModalHandleProps> & {
   userProfileID?: string
 };
@@ -51,6 +50,7 @@ export default function UserProfile(props: UserProps) {
   useEffect(() => {
     followCheck();
   }, [props.userProfileID, userFollows]);
+
 
   const handleFollow = async () => {
     if (userFollows) {
