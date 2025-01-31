@@ -6,7 +6,7 @@ import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { FieldErrors, useForm } from 'react-hook-form';
-import Button from '../../reusables/button/button';
+import Button from '../../reusables/button';
 import Label from '../../reusables/label';
 import PriceTextInput from '../../reusables/priceTextInput';
 import { toast } from 'react-toastify';
@@ -123,6 +123,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
         </div>
         <div className={styles.formBottom}>
           <Button
+            className="btn-primary"
             disabled={isSubmitting}
             type="submit"
             iconRight={<Icon name="chevron-right" />}
