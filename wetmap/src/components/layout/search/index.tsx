@@ -44,6 +44,7 @@ export default function MainSearch() {
     <div className={style.mainSearch}>
       <DynamicSelect
         modeSelectedTags="empty"
+        triggerOnChangeWhenReselect={true}
         labelInValue={true}
         iconLeft={<Icon name="navigation-variant-outline" style={{ scale: '0.7' }} />}
         getMoreOptions={DynamicSelectOptionsMainSearch.getMoreOptions}

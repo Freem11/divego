@@ -105,6 +105,11 @@ const defaultProps = {
    */
   modeDropdownOpen: 'onChange' as 'onClick' | 'onChange',
 
+  /**
+   * If true, onChange event is triggered when user selects an already selected option
+   */
+  triggerOnChangeWhenReselect: false as boolean,
+
   onSearch:           (search: string) => {
     // TODO: implement search by static options
   },
@@ -232,7 +237,7 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
 
       if (props.maxSelectedOptions === 1) {
         // if user clicks on selected item - do not trigger onChange
-        if (prev.has(key)) {
+        if (!props.triggerOnChangeWhenReselect && prev.has(key)) {
           return prev;
         }
 
