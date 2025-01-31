@@ -4,6 +4,8 @@ import ButtonIcon from '../reusables/buttonIcon';
 import Icon from '../../icons/Icon';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import readableDate from '../../helpers/readableDate';
+import Tooltip from '../reusables/tooltip';
+import screenData from '../newModals/screenData.json';
 
 type TripCardViewProps = {
   itinerary:           ItineraryItem
@@ -44,30 +46,38 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
           {canChangeItinerary
             ? (
                 <>
-                  <ButtonIcon
-                    icon={<Icon name="pencil" />}
-                    className={style.actionIcon}
-                    // onClick={}
-                  />
-                  <ButtonIcon
-                    icon={<Icon name="trash" />}
-                    className={style.actionIcon}
-                    // onClick={}
-                  />
+                  <Tooltip content={screenData.TripCard.editButton}>
+                    <ButtonIcon
+                      icon={<Icon name="pencil" />}
+                      className={style.actionIcon}
+                      // onClick={}
+                    />
+                  </Tooltip>
+                  <Tooltip content={screenData.TripCard.deleteButton}>
+                    <ButtonIcon
+                      icon={<Icon name="trash" />}
+                      className={style.actionIcon}
+                      // onClick={}
+                    />
+                  </Tooltip>
                 </>
               )
             : (
                 <>
-                  <ButtonIcon
-                    icon={<Icon name="anchor" />}
-                    className={style.actionIcon}
-                    onClick={() => flipMap(itinerary.siteList)}
-                  />
-                  <ButtonIcon
-                    icon={<Icon name="diving-scuba-flag" />}
-                    className={style.actionIcon}
-                    // onClick={}
-                  />
+                  <Tooltip content={screenData.TripCard.anchorButton}>
+                    <ButtonIcon
+                      icon={<Icon name="anchor" />}
+                      className={style.actionIcon}
+                      onClick={() => flipMap(itinerary.siteList)}
+                    />
+                  </Tooltip>
+                  <Tooltip content={screenData.TripCard.bookButton}>
+                    <ButtonIcon
+                      icon={<Icon name="diving-scuba-flag" />}
+                      className={style.actionIcon}
+                      // onClick={}
+                    />
+                  </Tooltip>
                 </>
               )}
         </div>

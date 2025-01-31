@@ -164,17 +164,14 @@ export const getSingleDiveSiteByNameAndRegion = async (values: { name: string, r
   }
 };
 
+
 export const getDiveSiteById = async (id: string | number) => {
-  const query = supabase
-    .from('diveSites')
-    .select('*')
-    .eq('id', id);
-
-
-  const { data, error } = await query;
+  const { data, error } = await supabase.rpc('get_single_divesite_byid_info_with_username', {
+    idnum: id,
+  });
 
   if (error) {
-    console.log('couldn\'t do it 27,', error);
+    console.log('couldn\'t do it 7,', error);
     return [];
   }
 

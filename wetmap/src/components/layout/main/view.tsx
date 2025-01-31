@@ -14,6 +14,8 @@ import Emilio from '../../../images/EmilioNew.png';
 import { BoundaryDiveShops } from '../../boundaryDiveShops';
 import { BoundaryPhotos } from '../../boundaryPhotos';
 import { BoundaryDiveSites } from '../../boundaryDiveSites';
+import Tooltip from '../../reusables/tooltip';
+import ScreenData from '../../newModals/screenData.json';
 
 type LayoutMainViewProps = {
   mapConfig:                   number
@@ -48,43 +50,53 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
               <ul className={style.headerIcons}>
                 <li>
-                  <ButtonIcon
-                    disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
-                    onClick={props.animateProfileModal}
-                  />
+                  <Tooltip content={ScreenData.MainPage.profileTooltip} direction="bottom">
+                    <ButtonIcon
+                      disabled={props.mapConfig === 0 ? false : true}
+                      icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
+                      onClick={props.animateProfileModal}
+                    />
+                  </Tooltip>
                 </li>
                 <li>
-                  <ButtonIcon
-                    disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="settings" className="text-blue" style={{ scale: '1.5' }} />}
-                    onClick={props.animateSettingsModal}
-                  />
+                  <Tooltip content={ScreenData.MainPage.settingsTooltip} direction="bottom">
+                    <ButtonIcon
+                      disabled={props.mapConfig === 0 ? false : true}
+                      icon={<Icon name="settings" className="text-blue" style={{ scale: '1.5' }} />}
+                      onClick={props.animateSettingsModal}
+                    />
+                  </Tooltip>
                 </li>
                 <li style={{ marginTop: '2px' }}>
-                  <ButtonIcon
-                    disabled={props.mapConfig === 0 ? false : true}
-                    icon={<Icon name="anchor-plus" className="text-blue" style={{ scale: '1.45' }} />}
-                    onClick={props.animateSiteSubmitterModal}
-                  />
+                  <Tooltip content={ScreenData.MainPage.newDiveSiteTooltip} direction="bottom">
+                    <ButtonIcon
+                      disabled={props.mapConfig === 0 ? false : true}
+                      icon={<Icon name="anchor-plus" className="text-blue" style={{ scale: '1.45' }} />}
+                      onClick={props.animateSiteSubmitterModal}
+                    />
+                  </Tooltip>
                 </li>
                 {props.isPartnerAccount
                   ? (
-                      <li>
-                        <ButtonIcon
-                          disabled={props.mapConfig === 0 ? false : true}
-                          icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
-                          onClick={props.animateTripCreatorListModal}
-                        />
+                      <li style={{ marginTop: '2px', marginRight: '10px' }}>
+                        <Tooltip content={ScreenData.MainPage.tripCreatorTooltip} direction="bottom">
+                          <ButtonIcon
+                            disabled={props.mapConfig === 0 ? false : true}
+                            icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
+                            onClick={props.animateTripCreatorListModal}
+                          />
+                        </Tooltip>
                       </li>
                     )
                   :                   (
-                      <li style={{ marginTop: '2px' }}>
-                        <ButtonIcon
-                          disabled={props.mapConfig === 0 ? false : true}
-                          icon={<Icon name="question-mark" className="text-blue" style={{ scale: '1.5' }} />}
-                          onClick={props.animateGuidesModal}
-                        />
+                      <li style={{ marginTop: '2px', marginRight: '10px' }}>
+                        <Tooltip content={ScreenData.MainPage.guideTooltip} direction="bottom">
+                          <ButtonIcon
+                            disabled={props.mapConfig === 0 ? false : true}
+                            icon={<Icon name="question-mark" className="text-blue" style={{ scale: '1.5' }} />}
+                            onClick={props.animateGuidesModal}
+                          />
+                        </Tooltip>
                       </li>
                     )}
               </ul>

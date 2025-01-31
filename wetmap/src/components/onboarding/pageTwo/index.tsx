@@ -23,8 +23,8 @@ export default function PageTwo() {
   const onSubmit = async (data: Form) => {
     if (activeSession) {
       await updateProfile({
-        id:       activeSession?.user.id,
-        username: data.username,
+        UserID:       activeSession?.user.id,
+        UserName: data.username,
       });
     }
     if (activeSession) {
