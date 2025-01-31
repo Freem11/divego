@@ -30,26 +30,36 @@ export default function UserProfile(props: UserProps) {
   const [userIsFollowing, setUserIsFollowing] = useState(false);
   const [followRecordID, setFollowRecordID] = useState(activeSession?.user.id);
 
-  async function followCheck() {
+  async function profileCheck() {
     if (props.userProfileID) {
       const selectedProfile = await grabProfileById(props.userProfileID);
-      const alreadyFollows = await checkIfUserFollows(
-        profile?.UserID,
-        selectedProfile?.UserID,
-      );
-      if (alreadyFollows && alreadyFollows.length > 0) {
-        setUserIsFollowing(true);
-        setFollowRecordID(alreadyFollows[0].id);
-      }
       setOpenedProfile(selectedProfile);
     } else {
       setOpenedProfile(profile);
     }
   }
 
+  async function followCheck() {
+    if (openedProfile && profile) {
+      const alreadyFollows = await checkIfUserFollows(
+        profile.UserID,
+        openedProfile.UserID,
+      );
+      if (alreadyFollows && alreadyFollows.length > 0) {
+        setUserIsFollowing(true);
+        setFollowRecordID(alreadyFollows[0].id);
+      }
+    }
+  }
+
+  useEffect(() => {
+    profileCheck();
+  }, [props.userProfileID]);
+
+
   useEffect(() => {
     followCheck();
-  }, [props.userProfileID, userIsFollowing]);
+  }, [openedProfile]);
 
 
   const handleFollow = async () => {
