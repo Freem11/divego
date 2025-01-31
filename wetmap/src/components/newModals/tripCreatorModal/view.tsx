@@ -21,6 +21,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
   const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   const startDate = watch('Start');
+  const endDate = watch('End');
 
   const handleError = (errors: FieldErrors<Form>) => {
     toast.dismiss();
@@ -45,7 +46,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
           : (<h1>{screenData.TripCreator.header}</h1>)
       }
 
-      <form onSubmit={handleSubmit(props.onSubmit)} className={styles.form}>
+      <form onSubmit={handleSubmit(props.onSubmit, handleError)} className={styles.form}>
         <div className={styles.formColumns}>
           <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.tripNameLabel}>
@@ -53,7 +54,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 iconLeft={<Icon name="store" />}
                 placeholder={screenData.TripCreator.tripNamePlaceholder}
                 error={errors.Name}
-                {...register('Name', FormRules(startDate).Name)}
+                {...register('Name', FormRules.Name)}
               />
             </Label>
 
@@ -62,7 +63,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 iconLeft={<Icon name="link" />}
                 placeholder={screenData.TripCreator.bookingLinkPlaceholder}
                 error={errors.Link}
-                {...register('Link', FormRules(startDate).Link)}
+                {...register('Link', FormRules.Link)}
               />
             </Label>
 
@@ -70,7 +71,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               <PriceTextInput
                 placeholder={screenData.TripCreator.pricePlaceholder}
                 error={errors.Price}
-                {...register('Price', FormRules(startDate).Price)}
+                {...register('Price', FormRules.Price)}
               />
             </Label>
 
@@ -80,7 +81,16 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 placeholder={screenData.TripCreator.startDatePlaceholder}
                 error={errors.Start}
                 type="date"
-                {...register('Start', FormRules(startDate).Start)}
+                {...register('Start',
+                  { required: 'Start date is required',
+                    validate: (value) => {
+                      if (!endDate || !value) return true;
+                      const end = new Date(endDate);
+                      const start = new Date(value);
+                      return end >= start || 'Start date must be before end date';
+                    },
+                  })}
+                max={endDate}
               />
             </Label>
 
@@ -99,7 +109,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                       return end >= start || 'End date must be after start date';
                     },
                   })}
-                max={startDate}
+                min={startDate}
               />
 
             </Label>
