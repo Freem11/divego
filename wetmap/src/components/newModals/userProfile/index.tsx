@@ -1,6 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
 import UserProfileView from './view';
-// import { PhotosGroupedByDate } from '../../../entities/photos';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalContext } from '../../reusables/modal/context';
 import { ModalHandleProps } from '../../reusables/modal/types';
@@ -8,30 +7,76 @@ import {
   grabProfileById,
   updateProfile,
 } from '../../../supabaseCalls/accountSupabaseCalls';
+import {
+  insertUserFollow,
+  deleteUserFollow,
+  checkIfUserFollows,
+} from '../../../supabaseCalls/userFollowSupabaseCalls';
+import { SessionContext } from '../../contexts/sessionContext';
 import Settings from '../../newModals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 import { toast } from 'react-toastify';
 import screenData from '../screenData.json';
 
-
 type UserProps = Partial<ModalHandleProps> & {
   userProfileID?: string
 };
 export default function UserProfile(props: UserProps) {
+  const { activeSession } = useContext(SessionContext);
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
+  const [userIsFollowing, setUserIsFollowing] = useState(false);
+  const [followRecordID, setFollowRecordID] = useState(activeSession?.user.id);
+
+  async function profileCheck() {
+    if (props.userProfileID) {
+      const selectedProfile = await grabProfileById(props.userProfileID);
+      setOpenedProfile(selectedProfile);
+    } else {
+      setOpenedProfile(profile);
+    }
+  }
+
+  async function followCheck() {
+    if (openedProfile && profile) {
+      const alreadyFollows = await checkIfUserFollows(
+        profile.UserID,
+        openedProfile.UserID,
+      );
+      if (alreadyFollows && alreadyFollows.length > 0) {
+        setUserIsFollowing(true);
+        setFollowRecordID(alreadyFollows[0].id);
+      }
+    }
+  }
 
   useEffect(() => {
-    (async () => {
-      if (props.userProfileID) {
-        setOpenedProfile(await grabProfileById(props.userProfileID));
-      } else {
-        setOpenedProfile(profile);
-      }
-    })();
+    profileCheck();
   }, [props.userProfileID]);
+
+
+  useEffect(() => {
+    followCheck();
+  }, [openedProfile]);
+
+
+  const handleFollow = async () => {
+    if (userIsFollowing) {
+      deleteUserFollow(followRecordID);
+      setUserIsFollowing(false);
+    } else {
+      if (profile) {
+        const newRecord = await insertUserFollow(
+          profile.UserID,
+          openedProfile?.UserID,
+        );
+        setFollowRecordID(newRecord && newRecord[0].id);
+        setUserIsFollowing(true);
+      }
+    }
+  };
 
   const handleProfileNameChange = async (newName: string) => {
     if (newName == '') {
@@ -88,10 +133,11 @@ export default function UserProfile(props: UserProps) {
       profile={openedProfile}
       handleProfileBioChange={handleProfileBioChange}
       handleProfileNameChange={handleProfileNameChange}
-      handleFollow={() => {}}
+      handleFollow={handleFollow}
       openSettings={openSettings}
       isActiveProfile={isActiveProfile}
       handleImageSelection={() => {}}
+      isFollowing={userIsFollowing}
     />
   );
 }

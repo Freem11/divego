@@ -22,6 +22,7 @@ type userProfileViewProps = {
   openSettings:            () => void
   isActiveProfile:         boolean
   handleImageSelection:    (event: React.ChangeEvent<HTMLInputElement>) => void
+  isFollowing:             boolean
 //   isPartnerAccount:     boolean
 //   headerPictureUrl:     string | null
 };
@@ -95,10 +96,18 @@ export default function UserProfileView(props: userProfileViewProps) {
                   </Button>
                 )
               : (
-                  <Button className="btn-lg" onClick={props.handleFollow}>
-                    <span className="hide-sm">
-                      Follow
-                    </span>
+                  <Button className={props.isFollowing ? 'btn-lg btn-primary' : 'btn-lg'}onClick={props.handleFollow}>
+                    {(props.isFollowing)
+                      ? (
+                          <span className="hide-sm">
+                            Following
+                          </span>
+                        )
+                      : (
+                          <span className="hide-sm">
+                            Follow
+                          </span>
+                        )}
                   </Button>
                 )}
           </div>
