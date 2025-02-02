@@ -94,8 +94,9 @@ const defaultProps = {
    * In case of multiselect it is a list of selected blocks.
    * - on: selected items appear as tags in the trigger
    * - off: selected items appear as labels in search input
+   * - empty: selected items do not appear neither as tags nor as labels. Search input resets to empty
    */
-  modeSelectedTags: 'off' as 'on' | 'off',
+  modeSelectedTags: 'off' as 'on' | 'off' | 'empty',
 
   /**
    * When to open dropdown
@@ -103,6 +104,11 @@ const defaultProps = {
    * - onChange: dropdown opens when user starts typing in search input
    */
   modeDropdownOpen: 'onChange' as 'onClick' | 'onChange',
+
+  /**
+   * If true, onChange event is triggered when user selects an already selected option
+   */
+  triggerOnChangeWhenReselect: false as boolean,
 
   onSearch:           (search: string) => {
     // TODO: implement search by static options
@@ -174,6 +180,10 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
       }
     }
 
+    if (props.modeSelectedTags === 'empty' && searchRef.current) {
+      searchRef.current.value = '';
+    }
+
     // prepare data to be passed to onChange(except first render)
     const result = getResultValue(value, props.labelInValue, isMulti);
     if (initRef.current && typeof props.onChange === 'function') {
@@ -227,7 +237,7 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
 
       if (props.maxSelectedOptions === 1) {
         // if user clicks on selected item - do not trigger onChange
-        if (prev.has(key)) {
+        if (!props.triggerOnChangeWhenReselect && prev.has(key)) {
           return prev;
         }
 
@@ -290,6 +300,14 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
     });
   }, []);
 
+  const getPlaceholder = () => {
+    if (showSelectedTags) {
+      return value?.size ? undefined : props.placeholder;
+    } else {
+      return searchRef?.current?.value ? undefined : props.placeholder;
+    }
+  };
+
   return (
     <div
       ref={wrapperRef}
@@ -317,7 +335,7 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
           onChange={e => onSearch(e.target.value)}
           ref={searchRef}
           type="search"
-          placeholder={!value?.size ? props.placeholder : undefined}
+          placeholder={getPlaceholder()}
         />
 
         <button className="trigger-button">

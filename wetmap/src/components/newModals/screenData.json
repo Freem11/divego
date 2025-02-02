@@ -40,7 +40,12 @@
         "allowLocation": "Please allow location access.",
         "locationNotSupported": "Geolocation is not supported in your browser.",
         "addSiteError": "Error adding site. Please try again later.",
-        "addSiteSuccess": "Site added successfully!"
+        "addSiteSuccess": "Site added successfully!",
+        "siteNameTooltip": "Enter the name of your dive site",
+        "latTooltip": "Enter a number",
+        "lngTooltip": "Enter a number",
+        "myLocationTooltip": "Select latitude and longitude",
+        "pinButtonTooltip": "Select latitude and longitude"
       },
       "PicUploader": {
         "header": "Your Sea Creature Sighting",
@@ -67,14 +72,29 @@
         "editButton": "Edit",
         "deleteButton": "Delete"
       },
+      "TripCard": {
+        "editButton": "Edit",
+        "deleteButton": "Delete",
+        "anchorButton" : "Go to trip location",
+        "bookButton" : "Book trip",
+        "editTripError" : "There was an error submitting trip edit request. Please try again later.",
+        "deleteTripError" : "There was an error submitting trip deletion request. Please try again later.",
+        "editTripSuccess": "You trip edit request was successfully submitted! Please allow up to 24 hours for the changes to be approved and reflected in your trip.",
+        "deleteTripSuccess": "You trip deletion request was successfully submitted! Please allow up to 24 hours for it to be approved and reflected in your trip list."
+      },
       "TripCreator": {
         "header": "Create a New Dive Trip",
         "headerEdit": "Submit Trip Edits",
         "cloneButton": "Clone This Trip",
+        "tripNameLabel": "What it's called",
         "tripNamePlaceholder": "Your Trip's Name",
+        "bookingLinkLabel": "Where to book",
         "bookingLinkPlaceholder": "Link to your trip's booking page",
+        "priceLabel": "What it costs",
         "pricePlaceholder": "Trip Price",
+        "startDateLabel": "When it starts",
         "startDatePlaceholder": "Start Date",
+        "endDateLabel": "When it ends",
         "endDatePlaceholder": "End Date",
         "tripDescriptionPlaceholder": "Please add any further details about your trip that you think would be helpful in promoting your trip to divers, right here",
         "submitButton": "Submit",
@@ -96,11 +116,17 @@
         "drawerHeader": "Sea Creature Sightings",
         "emptyDrawer": "No sightings at this site yet.",
         "addSightingButton": "Add Sighting",
-        "submitButton": "Submit"
+        "submitButton": "Submit",
+        "reportSiteTooltip": "Report an issue with this dive site",
+        "addPhotoTooltip": "Add a photo of this dive site"
+      },
+      "SeaLifeImageCard": {
+        "reportPictureTooltip": "Report an issue with this picture"
       },
       "DiveShop": {
         "drawerHeader": "Offered Dive Trips",
-        "emptyDrawer": " aren't currently offering any Dive Trips"
+        "emptyDrawer": " aren't currently offering any Dive Trips",
+        "addDiveShopPhotoButton": "Add a photo of your dive shop"
       },
       "CommentsModal": {
         "header": "Comments",
@@ -156,6 +182,13 @@
         "passwordReset": "Forgot Password?",
         "signInError": "The credentials you supplied are not valid"
       },
+      "MainPage": {
+        "profileTooltip": "Profile",
+        "settingsTooltip": "Settings",
+        "newDiveSiteTooltip": "Add a New Dive Site",
+        "tripCreatorTooltip": "Create Trip",
+        "guideTooltip": "User Guide"
+      },
       "PasswordRecoveryPage": {
         "title": "Reset Password",
         "emailPlaceholder": "Enter Your Account Email",
@@ -166,7 +199,7 @@
       },
       "ConfirmDeleteAccount":
       {
-        "title": "Account deletion",
+        "title": "Account Deletion",
         "subHeader": "Are you sure you want to delete your account?",
         "body": "Please note that deleting your account will not delete your previous dive site or photo submissions, please contact us if you wish to have those removed from the community",
         "deleteBtnText": "Delete account",

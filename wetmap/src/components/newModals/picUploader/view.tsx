@@ -7,7 +7,6 @@ import TextInput from '../../reusables/textInput';
 import ButtonIcon from '../../reusables/buttonIcon';
 import screenData from '../screenData.json';
 import DynamicSelect from '../../reusables/dynamicSelect';
-import backGroundPic from '../../../images/blackManta.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 
 import style from './style.module.scss';
@@ -62,6 +61,20 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               />
             </Tooltip>
           </FileInput>
+          {props.headerPictureUrl
+            ? (
+                <ButtonIcon
+                  icon={<Icon name="camera-plus" />}
+                  className={`btn-lg ${style.buttonImageUpload} ${errors.photo ? 'blinking' : ''}`}
+                />
+              )
+            : (
+                <Button
+                  className={`btn-lg ${style.buttonImageUploadLarge}`}
+                >
+                  {screenData.PicUploader.uploadButton}
+                </Button>
+              )}
         </div>
       </WavyModalHeader>
 
@@ -124,7 +137,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <div className="col-4">
             <Button
               disabled={isSubmitting}
-              className="btn-lg bg-primary col-3"
+              className="btn-md btn-primary col-3"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >

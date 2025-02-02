@@ -10,6 +10,7 @@ import UserProfile from '../../newModals/userProfile';
 import GuidesModal from '../../newModals/guides';
 import TripCreatorListModal from '../../newModals/tripCreatorListModal';
 import { MapContext } from '../../googleMap/mapContext';
+import OnBoardingCarrousel from '../../onboarding';
 
 export default function LayoutMain() {
   const { mapConfig } = useContext(MapContext);
@@ -34,6 +35,7 @@ export default function LayoutMain() {
           if (success) {
             const bully = success && success.UserName;
             if (bully == null || bully === '') {
+              handleOnBoarding();
               return;
             } else {
               setProfile(success);
@@ -48,6 +50,17 @@ export default function LayoutMain() {
     getProfile();
   }, []);
 
+  const handleOnBoarding = () => {
+    animateOnBoardingModal();
+  };
+
+  const animateOnBoardingModal = () => {
+    modalShow(OnBoardingCarrousel, {
+      size:        'full',
+      allowCancel: false,
+    });
+  };
+
   const animateSiteSubmitterModal = () => {
     modalShow(SiteSubmitter);
   };
@@ -57,7 +70,9 @@ export default function LayoutMain() {
   };
 
   const animateProfileModal = () => {
-    modalShow(UserProfile);
+    modalShow(UserProfile, {
+      size:        'large',
+    });
   };
 
   const animateGuidesModal = () => {

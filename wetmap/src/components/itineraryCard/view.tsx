@@ -4,14 +4,17 @@ import ButtonIcon from '../reusables/buttonIcon';
 import Icon from '../../icons/Icon';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import readableDate from '../../helpers/readableDate';
+import Tooltip from '../reusables/tooltip';
+import screenData from '../newModals/screenData.json';
 
 type TripCardViewProps = {
   itinerary:           ItineraryItem
   flipMap:             (siteList: number[]) => Promise<void>
   canChangeItinerary?: boolean
+  handleDeleteButton:  (itinerary: ItineraryItem) => void
 };
 
-export default function ItineraryCardView({ itinerary, flipMap, canChangeItinerary }: TripCardViewProps) {
+export default function ItineraryCardView({ itinerary, flipMap, canChangeItinerary, handleDeleteButton }: TripCardViewProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -44,30 +47,38 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
           {canChangeItinerary
             ? (
                 <>
-                  <ButtonIcon
-                    icon={<Icon name="pencil" />}
-                    className={style.actionIcon}
-                    // onClick={}
-                  />
-                  <ButtonIcon
-                    icon={<Icon name="trash" />}
-                    className={style.actionIcon}
-                    // onClick={}
-                  />
+                  <Tooltip content={screenData.TripCard.editButton}>
+                    <ButtonIcon
+                      icon={<Icon name="pencil" />}
+                      className={style.actionIcon}
+                      // onClick={}
+                    />
+                  </Tooltip>
+                  <Tooltip content={screenData.TripCard.deleteButton}>
+                    <ButtonIcon
+                      icon={<Icon name="trash" />}
+                      className={style.actionIcon}
+                      onClick={() => handleDeleteButton(itinerary)}
+                    />
+                  </Tooltip>
                 </>
               )
             : (
                 <>
-                  <ButtonIcon
-                    icon={<Icon name="anchor" />}
-                    className={style.actionIcon}
-                    onClick={() => flipMap(itinerary.siteList)}
-                  />
-                  <ButtonIcon
-                    icon={<Icon name="diving-scuba-flag" />}
-                    className={style.actionIcon}
-                    // onClick={}
-                  />
+                  <Tooltip content={screenData.TripCard.anchorButton}>
+                    <ButtonIcon
+                      icon={<Icon name="anchor" />}
+                      className={style.actionIcon}
+                      onClick={() => flipMap(itinerary.siteList)}
+                    />
+                  </Tooltip>
+                  <Tooltip content={screenData.TripCard.bookButton}>
+                    <ButtonIcon
+                      icon={<Icon name="diving-scuba-flag" />}
+                      className={style.actionIcon}
+                      // onClick={}
+                    />
+                  </Tooltip>
                 </>
               )}
         </div>

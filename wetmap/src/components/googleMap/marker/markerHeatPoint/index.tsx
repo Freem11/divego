@@ -37,7 +37,7 @@ export function MarkerHeatPoint(props: MarkerHeatPointProps) {
         ref.current.setMap(null);
       }
     };
-  }, [options.data]);
+  }, [props.heatPoints]);
 
   return null;
 }
