@@ -16,6 +16,7 @@ type SeaLifeImageCardViewProps = {
   handleCommentModal:  () => void
   countOfLikes:        number
   picLiked:            boolean
+  isShowAuthor:        boolean
 };
 
 export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
@@ -46,14 +47,20 @@ export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
       </img>
 
       <div className={style.footer} style={{ marginTop: '-6vh' }}>
-        <h4
-          className={style.userLabel}
-          onClick={e => props.handleProfileSwitch(e, props.pic.UserID)}
-        >
-          Added by:
-          {' '}
-          {props.pic.UserName}
-        </h4>
+        {props.isShowAuthor
+          ? (
+              <h4
+                className={style.userLabel}
+                onClick={e => props.handleProfileSwitch(e, props.pic.UserID)}
+              >
+                Added by:
+                {' '}
+                {props.pic.UserName}
+              </h4>
+            )
+          : (
+              <div style={{ height: '24px' }}></div>
+            )}
 
         <div className={style.likeButtonContainer}>
           {props.countOfLikes > 0

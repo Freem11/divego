@@ -13,8 +13,8 @@ import FullScreenImage from '../fullScreenImage/fullScreenImage';
 import SeaLifeImageCardView from './view';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
 
-export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments }) {
-  const { pic } = props;
+export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments, isShowAuthor?: boolean }) {
+  const { pic, isShowAuthor = true } = props;
   const { profile } = useContext(UserProfileContext);
   const [picLiked, setPicLiked] = useState(pic.likedbyuser);
   const [likeData, setLikeData] = useState(pic.likeid);
@@ -78,6 +78,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
       handleProfileSwitch={handleProfileSwitch}
       countOfLikes={countOfLikes}
       picLiked={picLiked}
+      isShowAuthor={isShowAuthor}
     />
   );
 }
