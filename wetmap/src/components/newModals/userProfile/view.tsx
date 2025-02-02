@@ -23,8 +23,8 @@ type userProfileViewProps = {
   isActiveProfile:         boolean
   handleImageSelection:    (event: React.ChangeEvent<HTMLInputElement>) => void
   isFollowing:             boolean
+  headerPictureUrl:        string | null
 //   isPartnerAccount:     boolean
-//   headerPictureUrl:     string | null
 };
 
 export default function UserProfileView(props: userProfileViewProps) {
@@ -32,8 +32,7 @@ export default function UserProfileView(props: userProfileViewProps) {
     <div className="cols mx-0 full-height">
       <div className="col-6">
         <WavyModalHeader
-        //   image={props.headerPictureUrl || defaultHeaderPicture}
-          image={defaultHeaderPicture}
+          image={props.headerPictureUrl || defaultHeaderPicture}
           onClose={props.onClose}
         >
           <div className={style.buttonOpenPictureUpload}></div>
