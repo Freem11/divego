@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
+import { itineraries, insertItinerary } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorView from './view';
