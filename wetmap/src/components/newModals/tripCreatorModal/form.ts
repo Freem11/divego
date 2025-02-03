@@ -22,7 +22,7 @@ export const FormRules: FormValidationRules<Form> =   {
     required: 'Price is required',
     min:      {
       value:   0,
-      message: 'Price must be atleast 0',
+      message: 'Price must be at least 0',
     },
     pattern:  /^\$\d+(\.\d{1,2})?$/,
   },
