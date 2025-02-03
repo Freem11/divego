@@ -11,7 +11,9 @@ type TripCreatorModalProps = Partial<ModalHandleProps>;
 export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
   const { selectedShop } = useContext(DiveShopContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [thePrice, setThePrice] = useState('');
+
+  const isEditModeOn = false;
+
 
   useEffect(() => {
     if (selectedShop) {
@@ -30,35 +32,29 @@ export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProp
     }
   };
 
-  const onSubmit = (data: Form) => {
-    console.log(data, data.Start);
-  };
+  const onSubmit = async (formData: Form) => {
+    // const { error } = await insertDiveSiteWaits({
+    //   Site:      formData.Site,
+    //   Latitude:  formData.Latitude,
+    //   Longitude: formData.Longitude,
+    //   UserID:    profile && profile.UserID,
+    // });
 
-  const priceChange = (data: any) => {
-    const num = data.target.value;
-
-    const regex1 = /^\d+(\.\d{1,2})?$/; // price without money symbol
-    const regex2 = /^\$\d+(\.\d{1,2})?$/; // price with money symbol
-
-    if (regex1.test(num.toString())) {
-      const result = '$' + num.toString();
-      setThePrice(result);
-    }
-
-    if (regex2.test(num.toString())) {
-      const num2 = num.replace(/[^0-9.]/g, '');
-      const result = '$' + num2.toString();
-      setThePrice(result);
-    }
+    // if (error) {
+    //   toast.error(screenData.DiveSiteAdd.addSiteError);
+    // } else {
+    //   toast.success(screenData.DiveSiteAdd.addSiteSuccess);
+    // }
+    // onClose();
   };
 
   return (
     <>
       {selectedShop && (
         <TripCreatorView
-          itineraryList={itineraryList}
-          headerPictureUrl={null}
           onClose={onModalCancel}
+          onSubmit={onSubmit}
+          isEditModeOn={isEditModeOn}
         />
       )}
     </>

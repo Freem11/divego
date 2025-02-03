@@ -9,6 +9,8 @@ import Icon from '../../../icons/Icon';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import { DiveShop } from '../../../entities/diveShop';
 import ItineraryCardList from '../../itineraryCardList';
+import Tooltip from '../../reusables/tooltip';
+import screenData from '../../newModals/screenData.json';
 
 type ShopModelViewProps = {
   onClose?:                     () => void
@@ -36,11 +38,13 @@ export default function ShopModalView(props: ShopModelViewProps) {
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
           <div className={style.buttonImageUpload}>
             {(props?.isPartnerAccount && props.isMyShop) && (
-              <ButtonIcon
-                icon={<Icon name="camera-plus" />}
-                className="btn-lg"
-                onClick={() => fileUploaderRef?.current?.click?.()}
-              />
+              <Tooltip content={screenData.DiveShop.addDiveShopPhotoButton}>
+                <ButtonIcon
+                  icon={<Icon name="camera-plus" />}
+                  className="btn-lg"
+                  onClick={() => fileUploaderRef?.current?.click?.()}
+                />
+              </Tooltip>
             )}
           </div>
         </WavyModalHeader>

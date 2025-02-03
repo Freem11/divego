@@ -53,3 +53,5 @@ node_modules
 wetmap/node_modules
 *storybook.log
 
+cert.pem
+key.pem

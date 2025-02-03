@@ -11,7 +11,7 @@ export interface Form {
 }
 
 
-export const FormRules: FormValidationRules<Form> = {
+export const FormRules: FormValidationRules<Form> =   {
   Name: {
     required: 'Trip name name cannot be empty',
   },
@@ -25,11 +25,5 @@ export const FormRules: FormValidationRules<Form> = {
       message: 'Price must be atleast 0',
     },
     pattern:  /^\$\d+(\.\d{1,2})?$/,
-  },
-  Start: {
-    required: 'Start date is required',
-  },
-  End: {
-    required: 'End date is required',
   },
 };
