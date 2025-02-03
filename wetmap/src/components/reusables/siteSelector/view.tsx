@@ -3,6 +3,7 @@ import styles from './style.module.scss';
 import Icon from '../../../icons/Icon';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import EmptyState from '../emptyState';
+import Loader from '../loader';
 
 type SiteSelectorViewProps = {
   sites:            DiveSiteWithUserName[] | null
@@ -17,7 +18,7 @@ export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemo
         {sites === null
           ? (
               <div className={styles.loadingState}>
-                <div className={styles.loader}></div>
+                <Loader />
               </div>
             )
           : (
