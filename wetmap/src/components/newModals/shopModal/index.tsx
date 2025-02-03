@@ -98,10 +98,6 @@ export default function ShopModal(props: ShopModalProps) {
     modalShow(TripCreatorListModal, {
       keepPreviousModal: true,
       size:              'medium',
-<<<<<<<<< Temporary merge branch 1
-      isEditModeOn:      false,
-=========
->>>>>>>>> Temporary merge branch 2
     });
   };
 
