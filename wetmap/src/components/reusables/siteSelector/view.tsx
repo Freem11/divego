@@ -21,6 +21,7 @@ export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemo
 
         {sites !== null && sites.length === 0 && (
           <EmptyState
+            onClick={handleSitesAdd}
             visual={(
               <div className={styles.emptyStateIcons}>
                 <Icon name="anchor" className={styles.emptyStateIconLeft} />
