@@ -5,7 +5,6 @@ import {
   insertPhotoLike,
   deletePhotoLike,
 } from '../../../supabaseCalls/photoLikeSupabaseCalls';
-import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCalls';
 import UserProfile from '../../newModals/userProfile';
 import { ModalContext } from '../../reusables/modal/context';
 import CommentsModal from '../../newModals/commentsModal';
