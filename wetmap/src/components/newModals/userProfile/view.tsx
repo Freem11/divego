@@ -115,9 +115,9 @@ export default function UserProfileView(props: userProfileViewProps) {
         </div>
         <div className="panel-body">
           {props?.diveSitePics
-          && props?.diveSitePics.map((packet) => {
+          && props?.diveSitePics.map((packet, packetIndex) => {
             return (
-              <div key={packet.dateTaken} className={style.panelBodyDiveSite}>
+              <div key={`${packet.dateTaken}-${packetIndex}`} className={style.panelBodyDiveSite}>
                 <h2 className={`${style.panelDate} d-flex flex-column`}>
                   <span>
                     {packet.name}
