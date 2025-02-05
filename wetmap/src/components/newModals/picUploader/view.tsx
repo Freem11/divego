@@ -99,6 +99,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               iconLeft={<Icon name="calendar-month" />}
               placeholder={screenData.PicUploader.whenPlaceholder}
               error={errors.date}
+              max={new Date().toISOString().split('T')[0]}
             />
           </Label>
 
