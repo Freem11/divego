@@ -1,4 +1,6 @@
-@import "../../../styles/variables.scss";
+:root {
+    --ssrc-chip-color: #0073E6;
+}
 
 .chip {
     padding-top: 0.2rem;
@@ -17,7 +19,7 @@
     gap: 0.25rem;
     text-wrap: nowrap;
     transition: ease 0.1s;
-    color: $primaryBlue;
+    color: var(--ssrc-chip-color);
 }
 
 .icon {
