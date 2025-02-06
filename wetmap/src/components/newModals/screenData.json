@@ -97,7 +97,9 @@
         "submitButton": "Submit",
         "selectSitesButton": "Select Dive Sites",
         "drawerHeader": "Possible Sites in this Trip   (Press to Remove)",
-        "emptyDrawer": "No Dive Sites have been added to this Trip yet."
+        "emptyDrawer": "No Dive Sites have been added to this Trip yet.",
+        "submitSuccess": "Trip created successfully!",
+        "submitError": "Error creating trip. Please try again later."
       },
       "UserProfile": {
         "drawerHeader": "'s Sea Creature Encounters",

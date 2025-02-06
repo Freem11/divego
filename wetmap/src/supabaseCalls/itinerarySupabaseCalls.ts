@@ -35,10 +35,7 @@ export const insertItinerary = async (values: ItineraryItem) => {
     console.log('couldn\'t do it 03,', error);
   }
 
-  if (data) {
-    return data;
-    // console.log(data);
-  }
+  return { data, error };
 };
 
 export const insertItineraryRequest = async (values: ItineraryItem, reqType: string) => {
