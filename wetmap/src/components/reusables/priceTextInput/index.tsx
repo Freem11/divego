@@ -6,8 +6,8 @@ export type PriceTextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInpu
   error?: any
 };
 
-const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(function PriceTextInput({ error, ...rest }: PriceTextInputProps, ref) {
-  const [price, setPrice] = useState('');
+const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(function PriceTextInput({ error, value: initialValue, ...rest }: PriceTextInputProps, ref) {
+  const [price, setPrice] = useState(initialValue);
   const [prevPrice, setPrevPrice] = useState('');
 
   const handlePriceChange = (data: any) => {
@@ -19,20 +19,22 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
     const regex1 = /^\d+(\.\d{1,2})?$/; // price without money symbol
     const regex4 = /^\d+(\.)?$/; // number with decimal at end
 
+    let result = '';
     if (curr2 == '' || regex4.test(curr2)) {
       const num = curr2;
       setPrevPrice(num);
-      const result = (num.length == 0) ? '' : '$' + num; // dupe
+      result = (num.length == 0) ? '' : '$' + num; // dupe
       setPrice(result);
     } else {
       const validated = regex1.test(curr2);
       const num = (validated) ? curr2 : prev2;
       setPrevPrice(num);
-      const result = '$' + num; // dupe
+      result = '$' + num; // dupe
       setPrice(result);
     }
 
-    data.target.value = price;
+    setPrice(result);
+    if (rest.onChange) rest.onChange(data);
   };
 
   const handleBlur = (data: any) => {
