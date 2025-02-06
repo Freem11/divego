@@ -8,24 +8,27 @@ import TripCreatorModal from '../tripCreatorModal';
 import { ModalContext } from '../../reusables/modal/context';
 import { DiveShopContext } from '../../contexts/diveShopContext';
 
-
 export default function TripCreatorListModal() {
-  const { selectedShop } = useContext(DiveShopContext);
   const { profile } = useContext(UserProfileContext);
   const { modalShow, modalCancel } = useContext(ModalContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
+  const { setSelectedShop, selectedShop } = useContext(DiveShopContext);
 
   useEffect(() => {
     if (profile) {
       getShop(profile?.UserID);
     }
-  }, []);
+
+    if (selectedShop) {
+      getItineraries(selectedShop.id);
+    }
+  }, [selectedShop]);
 
   const getShop = async (id: string) => {
     try {
       const shop = await getShopByUserID(id);
       if (shop) {
-        getItineraries(shop[0].id);
+        setSelectedShop(shop[0]);
       }
     } catch (e) {
       console.log({ title: 'Error', message: (e as Error).message });
@@ -52,14 +55,12 @@ export default function TripCreatorListModal() {
 
   return (
     <>
-      {selectedShop && (
-        <TripCreatorListView
-          itineraryList={itineraryList}
-          headerPictureUrl={null}
-          onClose={modalCancel}
-          openTripCreator={openTripCreator}
-        />
-      )}
+      <TripCreatorListView
+        itineraryList={itineraryList}
+        headerPictureUrl={null}
+        onClose={modalCancel}
+        openTripCreator={openTripCreator}
+      />
     </>
   );
 }
