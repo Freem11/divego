@@ -29,6 +29,13 @@ export const NoSites: Story = {
   },
 };
 
+export const Error: Story = {
+  args: {
+    sites: [],
+    error: true,
+  },
+};
+
 export const OneSites: Story = {
   args: {
     sites: [

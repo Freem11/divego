@@ -6,7 +6,11 @@ import {  getDiveSitesByIDs } from '../../../supabaseCalls/diveSiteSupabaseCalls
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import SiteSelectorView from './view';
 
-export default function SiteSelector() {
+type SiteSelectorProps = {
+  error: boolean
+};
+
+export default function SiteSelector({ error }: SiteSelectorProps) {
   const { setMapConfig } = useContext(MapContext);
   const { modalPause } = useContext(ModalContext);
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext); // Site id's
@@ -46,6 +50,11 @@ export default function SiteSelector() {
   }
 
   return (
-    <SiteSelectorView sites={sites} handleSitesAdd={handleSitesAdd} handleSiteRemove={handleSiteRemove} />
+    <SiteSelectorView
+      sites={sites}
+      handleSitesAdd={handleSitesAdd}
+      handleSiteRemove={handleSiteRemove}
+      error={error}
+    />
   );
 }

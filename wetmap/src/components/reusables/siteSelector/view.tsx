@@ -9,9 +9,10 @@ type SiteSelectorViewProps = {
   sites:            DiveSiteWithUserName[] | null
   handleSitesAdd:   () => void
   handleSiteRemove: (id: number) => void
+  error:            boolean
 };
 
-export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemove }: SiteSelectorViewProps) {
+export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemove, error }: SiteSelectorViewProps) {
   return (
     <>
       <div className={styles.siteSelector}>
@@ -30,6 +31,7 @@ export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemo
               </div>
             )}
             text="No dive sites yet."
+            error={error}
           />
         )}
 
