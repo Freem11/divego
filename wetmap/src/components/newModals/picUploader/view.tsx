@@ -26,8 +26,12 @@ type PicUploaderViewProps = {
 };
 
 export default function PicUploaderView(props: PicUploaderViewProps) {
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
-    values:   props.values,
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+  } = useForm<Form>({
+    values: props.values,
   });
 
   const handleError = (errors: FieldErrors<Form>) => {
@@ -46,36 +50,31 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
 
   return (
     <div className="flex-column-between full-height">
-
-      <WavyModalHeader image={props.headerPictureUrl || backGroundPic} onClose={props.onClose}>
-        <div className={style.buttonImageUpload}>
-          <FileInput
-            {...register('photo', FormRules.photo)}
-            onFileChange={props.handleImageSelection}
-            className="d-none"
-          >
-            <Tooltip content={screenData.PicUploader.uploadIcon}>
-              <ButtonIcon
-                icon={<Icon name="camera-plus" />}
-                className={`btn-lg ${errors.photo ? 'blinking' : ''}`}
-              />
-            </Tooltip>
-          </FileInput>
+      <WavyModalHeader image={props.headerPictureUrl} onClose={props.onClose}>
+        <FileInput
+          {...register('photo', FormRules.photo)}
+          onFileChange={props.handleImageSelection}
+          className="d-none"
+        >
           {props.headerPictureUrl
             ? (
-                <ButtonIcon
-                  icon={<Icon name="camera-plus" />}
-                  className={`btn-lg ${style.buttonImageUpload} ${errors.photo ? 'blinking' : ''}`}
-                />
+                <div className={style.buttonImageUpload}>
+                  <Tooltip content={screenData.PicUploader.uploadIcon}>
+                    <ButtonIcon
+                      icon={<Icon name="camera-plus" />}
+                      className={`btn-lg ${style.buttonImageUpload} ${
+                        errors.photo ? 'blinking' : ''
+                      }`}
+                    />
+                  </Tooltip>
+                </div>
               )
             : (
-                <Button
-                  className={`btn-lg ${style.buttonImageUploadLarge}`}
-                >
+                <Button className={`btn-lg ${style.buttonImageUploadLarge}`}>
                   {screenData.PicUploader.uploadButton}
                 </Button>
               )}
-        </div>
+        </FileInput>
       </WavyModalHeader>
 
       <form

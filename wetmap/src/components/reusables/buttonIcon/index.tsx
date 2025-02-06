@@ -5,7 +5,7 @@ export type ButtonProps = {
   onClick?:   (event?: React.MouseEvent<HTMLButtonElement>) => void
   icon?:      React.ReactNode
   className?: string
-  disabled?:   boolean
+  disabled?:  boolean
 };
 
 export default function ButtonIcon(props: ButtonProps) {
