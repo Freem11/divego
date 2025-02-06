@@ -1,9 +1,9 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, useState  } from 'react';
+import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react';
 import TextInput from '../textInput';
 import Icon from '../../../icons/Icon';
 
 export type PriceTextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
-  error?:     any
+  error?: any
 };
 
 const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(function PriceTextInput({ error, ...rest }: PriceTextInputProps, ref) {
@@ -19,7 +19,6 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
     const regex1 = /^\d+(\.\d{1,2})?$/; // price without money symbol
     const regex4 = /^\d+(\.)?$/; // number with decimal at end
 
-    // const validated = curr2.match(regex3);
     if (curr2 == '' || regex4.test(curr2)) {
       const num = curr2;
       setPrevPrice(num);
@@ -36,6 +35,14 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
     data.target.value = price;
   };
 
+  const handleBlur = (data: any) => {
+    const currPrice = data.target.value.replace(/[^0-9.]/g, '');
+    const roundedPrice = Math.round(parseFloat(currPrice) * 100) / 100;
+    const formattedPrice = isNaN(roundedPrice) ? '' : `$${roundedPrice.toFixed(2)}`;
+    setPrevPrice(currPrice);
+    setPrice(formattedPrice);
+  };
+
   return (
     <TextInput
       value={price}
@@ -43,6 +50,7 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
       error={error}
       {...rest}
       onChange={handlePriceChange}
+      onBlur={handleBlur}
       iconLeft={(
         <Icon name="currency-usd" />
       )}
