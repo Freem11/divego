@@ -5,13 +5,16 @@ import {
   insertPhotoLike,
   deletePhotoLike,
 } from '../../../supabaseCalls/photoLikeSupabaseCalls';
-import { grabProfileByUserName } from '../../../supabaseCalls/accountSupabaseCalls';
 import UserProfile from '../../newModals/userProfile';
 import { ModalContext } from '../../reusables/modal/context';
 import CommentsModal from '../../newModals/commentsModal';
 import FullScreenImage from '../fullScreenImage/fullScreenImage';
 import SeaLifeImageCardView from './view';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
+import { getSingleDiveSite } from '../../../supabaseCalls/diveSiteSupabaseCalls';
+import { DiveSiteContext } from '../../contexts/diveSiteContext';
+import { MapContext } from '../../googleMap/mapContext';
+import DiveSite from '../../newModals/diveSite';
 
 export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments, isShowAuthor?: boolean }) {
   const { pic, isShowAuthor = true } = props;
@@ -20,7 +23,8 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
   const [likeData, setLikeData] = useState(pic.likeid);
   const [countOfLikes, setCountOfLikes] = useState(pic.likecount);
   const { setSelectedPicture } = useContext(SelectedPictureContext);
-
+  const { setSelectedDiveSite } = useContext(DiveSiteContext);
+  const { mapRef } = useContext(MapContext);
   const { modalShow } = useContext(ModalContext);
   const photoName = pic.photoFile.split('/').pop();
 
@@ -61,6 +65,19 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
     }
   };
 
+  const handleDiveSiteMove = async (lat: number, lng: number) => {
+    const getSite = await getSingleDiveSite(lat, lng);
+    if (getSite) {
+      setSelectedDiveSite(getSite[0]);
+      mapRef?.panTo({ lat: getSite[0].lat, lng: getSite[0].lng });
+      modalShow(DiveSite, {
+        id:   getSite[0].id,
+        size: 'large',
+      });
+    }
+  };
+
+
   const handleModalOpen = () => {
     modalShow(FullScreenImage, {
       keepPreviousModal: true,
@@ -76,6 +93,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
       handleLike={handleLike}
       handleCommentModal={handleCommentModal}
       handleProfileSwitch={handleProfileSwitch}
+      handleDiveSiteMove={handleDiveSiteMove}
       countOfLikes={countOfLikes}
       picLiked={picLiked}
       isShowAuthor={isShowAuthor}
