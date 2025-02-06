@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorView from './view';
 import { DiveShopContext } from '../../contexts/diveShopContext';
@@ -20,6 +20,12 @@ export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProp
   const isEditModeOn = false;
 
   const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
+
+  useEffect(() => {
+    return () => {
+      setSitesArray([]); // Clear dive sites array
+    };
+  }, []);
 
   const diveSitesSubmitError = () => {
     toast.error('Dive sites is required');
