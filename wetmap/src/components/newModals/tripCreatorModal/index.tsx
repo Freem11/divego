@@ -1,51 +1,50 @@
-import React, { useState, useContext, useEffect } from 'react';
-import { itineraries, insertItinerary } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { ItineraryItem } from '../../../entities/itineraryItem';
+import React, { useState, useContext } from 'react';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorView from './view';
 import { DiveShopContext } from '../../contexts/diveShopContext';
 import { Form } from './form';
+import { SitesArrayContext } from '../../contexts/sitesArrayContext';
+import { toast } from 'react-toastify';
+import { FieldErrors } from 'react-hook-form';
 
 type TripCreatorModalProps = Partial<ModalHandleProps>;
 
 export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
   const { selectedShop } = useContext(DiveShopContext);
-  const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
+  const { sitesArray } = useContext(SitesArrayContext);
 
   const isEditModeOn = false;
 
+  const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
 
-  useEffect(() => {
-    if (selectedShop) {
-      getItineraries(selectedShop.id);
-    }
-  }, [selectedShop]);
+  const diveSitesSubmitError = () => {
+    toast.error('Dive sites is required');
+    setDiveSitesError(true);
+  };
 
-  const getItineraries = async (IdNum: number) => {
-    try {
-      const itins = await itineraries(IdNum);
-      if (itins && itins.length > 0) {
-        setItineraryList(itins);
+  const handleError = (errors: FieldErrors<Form>) => {
+    toast.dismiss();
+    Object.values(errors).forEach((error) => {
+      if (error?.message) {
+        toast.error(error.message);
       }
-    } catch (e) {
-      console.log({ title: 'Error', message: (e as Error).message });
+    });
+    if (sitesArray.length === 0) {
+      diveSitesSubmitError();
     }
   };
 
   const onSubmit = async (formData: Form) => {
-    // const { error } = await insertDiveSiteWaits({
-    //   Site:      formData.Site,
-    //   Latitude:  formData.Latitude,
-    //   Longitude: formData.Longitude,
-    //   UserID:    profile && profile.UserID,
-    // });
+    // Validate dive site selector inputs
+    if (sitesArray.length === 0) {
+      diveSitesSubmitError();
+      return;
+    }
 
-    // if (error) {
-    //   toast.error(screenData.DiveSiteAdd.addSiteError);
-    // } else {
-    //   toast.success(screenData.DiveSiteAdd.addSiteSuccess);
-    // }
-    // onClose();
+    const trip: any = formData;
+    trip.siteList = sitesArray;
+    trip.shopID = selectedShop?.id;
+    console.log(trip);
   };
 
   return (
@@ -54,7 +53,9 @@ export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProp
         <TripCreatorView
           onClose={onModalCancel}
           onSubmit={onSubmit}
+          handleError={handleError}
           isEditModeOn={isEditModeOn}
+          diveSitesError={diveSitesError}
         />
       )}
     </>

@@ -10,10 +10,9 @@ export interface Form {
   Details?: string
 }
 
-
 export const FormRules: FormValidationRules<Form> =   {
   Name: {
-    required: 'Trip name name cannot be empty',
+    required: 'Trip name is required',
   },
   Link: {
     required: 'Link is required',
@@ -25,5 +24,8 @@ export const FormRules: FormValidationRules<Form> =   {
       message: 'Price must be at least 0',
     },
     pattern:  /^\$\d+(\.\d{1,2})?$/,
+  },
+  Details: {
+    required: 'Details is required',
   },
 };

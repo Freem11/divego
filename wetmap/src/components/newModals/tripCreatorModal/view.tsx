@@ -9,44 +9,38 @@ import { FieldErrors, useForm } from 'react-hook-form';
 import Button from '../../reusables/button';
 import Label from '../../reusables/label';
 import PriceTextInput from '../../reusables/priceTextInput';
-import { toast } from 'react-toastify';
+import SiteSelector from '../../reusables/siteSelector';
 
 type TripCreatorViewProps = {
-  onClose?:     () => void
-  isEditModeOn: boolean
-  onSubmit:     (data: Form) => void
+  onClose?:       () => void
+  isEditModeOn:   boolean
+  onSubmit:       (data: Form) => void
+  handleError:    (errors: FieldErrors<Form>) => void
+  diveSitesError: boolean
 };
 
-export default function TripCreatorView(props: TripCreatorViewProps) {
+export default function TripCreatorView({ onClose, onSubmit, handleError, isEditModeOn, diveSitesError }: TripCreatorViewProps) {
   const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
-  const startDate = watch('Start');
-  const endDate = watch('End');
+  const startDate = watch('Start'); // Get start date value from form
+  const endDate = watch('End'); // Get end date value from form
 
-  const handleError = (errors: FieldErrors<Form>) => {
-    toast.dismiss();
-    Object.values(errors).forEach((error) => {
-      if (error?.message) {
-        toast.error(error.message);
-      }
-    });
-  };
   return (
     <div className={styles.wrapper}>
       <div className={styles.buttonBack}>
         <ButtonIcon
           icon={<Icon name="chevron-left" />}
-          onClick={props.onClose}
+          onClick={onClose}
         />
       </div>
 
       {
-        props.isEditModeOn
-          ? (<h1>{screenData.TripCreator.headerEdit}</h1>)
-          : (<h1>{screenData.TripCreator.header}</h1>)
+        isEditModeOn
+          ? (<h2>{screenData.TripCreator.headerEdit}</h2>)
+          : (<h2>{screenData.TripCreator.header}</h2>)
       }
 
-      <form onSubmit={handleSubmit(props.onSubmit, handleError)} className={styles.form}>
+      <form onSubmit={handleSubmit(onSubmit, handleError)} className={styles.form}>
         <div className={styles.formColumns}>
           <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.tripNameLabel}>
@@ -111,28 +105,35 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                   })}
                 min={startDate}
               />
-
             </Label>
+
           </div>
           <div className={styles.formColumn}>
-            <textarea
-              placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
-              {...register('Details')}
-            />
+            <Label label={screenData.TripCreator.diveSitesLabel}>
+              <SiteSelector error={diveSitesError} />
+            </Label>
+            <Label label="Details" className={styles.detailsField}>
+              <textarea
+                className={`${styles.textarea} ${errors.Details && styles.textareaError}`}
+                placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
+                {...register('Details', FormRules.Details)}
+              />
+            </Label>
           </div>
         </div>
         <div className={styles.formBottom}>
-          <Button
-            className="btn-primary"
-            disabled={isSubmitting}
-            type="submit"
-            iconRight={<Icon name="chevron-right" />}
-          >
-            {screenData.TripCreator.submitButton}
-          </Button>
+          <div className={styles.buttonWrapper}>
+            <Button
+              className="btn-primary w-fit"
+              disabled={isSubmitting}
+              type="submit"
+              iconRight={<Icon name="chevron-right" />}
+            >
+              {screenData.TripCreator.submitButton}
+            </Button>
+          </div>
         </div>
       </form>
     </div>
-
   );
 }
