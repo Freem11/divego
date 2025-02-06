@@ -17,6 +17,8 @@ import Settings from '../../newModals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 import { toast } from 'react-toastify';
 import screenData from '../screenData.json';
+import { PhotosGroupedByDate } from '../../../entities/photos';
+import { getPhotosByUserWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
 
 type UserProps = Partial<ModalHandleProps> & {
   userProfileID?: string
@@ -26,6 +28,7 @@ export default function UserProfile(props: UserProps) {
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
+  const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
   const [userIsFollowing, setUserIsFollowing] = useState(false);
   const [followRecordID, setFollowRecordID] = useState(activeSession?.user.id);
@@ -59,6 +62,7 @@ export default function UserProfile(props: UserProps) {
 
   useEffect(() => {
     followCheck();
+    getPhotos();
   }, [openedProfile]);
 
 
@@ -76,6 +80,12 @@ export default function UserProfile(props: UserProps) {
         setUserIsFollowing(true);
       }
     }
+  };
+
+  const getPhotos = async () => {
+    if (!profile || !openedProfile) return;
+    const response = await getPhotosByUserWithExtra(openedProfile.UserID, profile.UserID);
+    setDiveSitePics(response.data || []);
   };
 
   const handleProfileNameChange = async (newName: string) => {
@@ -136,6 +146,7 @@ export default function UserProfile(props: UserProps) {
       handleFollow={handleFollow}
       openSettings={openSettings}
       isActiveProfile={isActiveProfile}
+      diveSitePics={diveSitePics}
       handleImageSelection={() => {}}
       isFollowing={userIsFollowing}
     />
