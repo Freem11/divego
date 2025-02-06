@@ -1,5 +1,5 @@
 import React, { useId } from 'react';
-import './style.scss';
+import styles from './style.module.scss';
 
 type LabelProps = {
   className?: string
@@ -7,16 +7,12 @@ type LabelProps = {
   label?:     React.ReactNode
 };
 
-const Label = (props: LabelProps) => {
+export default function Label({ label, children, className }: LabelProps) {
   const id = useId();
   return (
-    <div className={`ssrc-label ${props.className ?? ''}`}>
-      <label htmlFor={id} className="label-text">{props.label}</label>
-      <div className="label-control">
-        { props.children && React.cloneElement(props.children, { id: id }) }
-      </div>
+    <div className={`${styles.field} ${className}`}>
+      <label className={styles.label} htmlFor={id}>{label}</label>
+      { children && React.cloneElement(children, { id: id }) }
     </div>
   );
 };
-
-export default Label;
