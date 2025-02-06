@@ -8,12 +8,11 @@ import TripCreatorModal from '../tripCreatorModal';
 import { ModalContext } from '../../reusables/modal/context';
 import { DiveShopContext } from '../../contexts/diveShopContext';
 
-
 export default function TripCreatorListModal() {
-  const { selectedShop, setSelectedShop } = useContext(DiveShopContext);
   const { profile } = useContext(UserProfileContext);
   const { modalShow, modalCancel } = useContext(ModalContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
+  const { setSelectedShop, selectedShop } = useContext(DiveShopContext);
 
   useEffect(() => {
     if (profile) {
@@ -56,14 +55,12 @@ export default function TripCreatorListModal() {
 
   return (
     <>
-      {selectedShop && (
-        <TripCreatorListView
-          itineraryList={itineraryList}
-          headerPictureUrl={null}
-          onClose={modalCancel}
-          openTripCreator={openTripCreator}
-        />
-      )}
+      <TripCreatorListView
+        itineraryList={itineraryList}
+        headerPictureUrl={null}
+        onClose={modalCancel}
+        openTripCreator={openTripCreator}
+      />
     </>
   );
 }

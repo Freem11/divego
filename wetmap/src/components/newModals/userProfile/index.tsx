@@ -19,6 +19,8 @@ import { toast } from 'react-toastify';
 import screenData from '../screenData.json';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
+import { PhotosGroupedByDate } from '../../../entities/photos';
+import { getPhotosByUserWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
 
 type UserProps = Partial<ModalHandleProps> & {
   userProfileID?: string
@@ -29,6 +31,7 @@ export default function UserProfile(props: UserProps) {
   const { modalShow }                    = useContext(ModalContext);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
+  const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
   const [userIsFollowing, setUserIsFollowing] = useState(false);
   const [followRecordID, setFollowRecordID] = useState(activeSession?.user.id);
@@ -62,6 +65,7 @@ export default function UserProfile(props: UserProps) {
 
   useEffect(() => {
     followCheck();
+    getPhotos();
   }, [openedProfile]);
 
 
@@ -79,6 +83,12 @@ export default function UserProfile(props: UserProps) {
         setUserIsFollowing(true);
       }
     }
+  };
+
+  const getPhotos = async () => {
+    if (!profile || !openedProfile) return;
+    const response = await getPhotosByUserWithExtra(openedProfile.UserID, profile.UserID);
+    setDiveSitePics(response.data || []);
   };
 
   const handleProfileNameChange = async (newName: string) => {
@@ -109,20 +119,18 @@ export default function UserProfile(props: UserProps) {
 
   const handleProfileBioChange = async (newBio: string) => {
     if (profile) {
-      if (profile) {
-        const response = await updateProfile({
-          UserID:       profile!.UserID,
-          profileBio: newBio,
-        });
-        if (!response.error) {
-          toast.success(screenData.UserProfile.UserProfileUpdateSuccessMessage);
-          setProfile({ ...profile, profileBio: newBio });
-          return;
-        }
-
-
-        toast.error(screenData.Toast.generalError);
+      const response = await updateProfile({
+        UserID:       profile.UserID,
+        profileBio: newBio,
+      });
+      if (!response.error) {
+        toast.success(screenData.UserProfile.UserProfileUpdateSuccessMessage);
+        setProfile({ ...profile, profileBio: newBio });
+        return;
       }
+
+
+      toast.error(screenData.Toast.generalError);
     }
   };
 
@@ -135,10 +143,13 @@ export default function UserProfile(props: UserProps) {
     }
 
     const createFileName = await handleImageUpload(event);
-    await updateProfile({
-      UserID:       profile!.UserID,
-      profileBio: `animalphotos/public/${createFileName}`,
-    });
+    if (profile) {
+      await updateProfile({
+        UserID:       profile.UserID,
+        profileBio: `animalphotos/public/${createFileName}`,
+      });
+    }
+
     setOpenedProfile((prev) => {
       if (!prev) {
         return prev;
@@ -175,6 +186,7 @@ export default function UserProfile(props: UserProps) {
       openSettings={openSettings}
       headerPictureUrl={headerPictureUrl}
       isActiveProfile={isActiveProfile}
+      diveSitePics={diveSitePics}
       isFollowing={userIsFollowing}
     />
   );

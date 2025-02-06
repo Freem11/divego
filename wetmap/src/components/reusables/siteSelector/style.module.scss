@@ -1,0 +1,177 @@
+:root {
+    --ssrc-site-selector-icon-background: #0073E6;
+}
+
+.siteSelector {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 0.25rem;
+}
+
+.sites {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.siteList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    overflow: auto;
+    height: 100%;
+    position: relative;
+    max-height: 15rem;
+    overflow: auto;
+    background: linear-gradient(90deg, rgba(0,0,0,0) 16px, rgba(208,208,208,1) 16px, rgba(208,208,208,1) 18px, rgba(0,0,0,0) 18px);
+}
+
+.siteList::-webkit-scrollbar {
+    width: 0.2rem;
+}
+   
+.siteList::-webkit-scrollbar-thumb {
+    background-color: rgb(208, 208, 208);
+}
+
+.site {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+}
+
+.siteLeft {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+}
+
+.siteRight {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    padding-right: 0.5rem;
+}
+
+.siteCoordinates {
+    font-size: 14px;
+    color: rgb(101, 101, 101);
+}
+
+.siteActions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+}
+
+.site:hover .siteActions {
+    opacity: 1;
+}
+
+.siteLeft svg {
+    width: 1.75rem;
+    height: auto;
+    padding: 0.2rem;
+    border-radius: 100%;
+    border: 0.3rem white solid;
+    color: white;
+    background-color: var(--ssrc-site-selector-icon-background);
+    position: relative;
+    z-index: 10;
+}
+
+.siteActions svg {
+    width: 1rem;
+    height: auto;
+    cursor: pointer;
+}
+
+.emptyStateIcons {
+    position: relative;
+    width: 2rem;
+    height: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 0.3rem;
+}
+
+.emptyStateIcon {
+    width: 1.75rem;
+    height: auto;
+    padding: 0.2rem;
+    border-radius: 100%;
+    color: white;
+    background-color: var(--ssrc-site-selector-icon-background);
+    position: absolute;
+    z-index: 10;
+    border: 0.1rem #f9f9f9 solid;
+}
+
+.emptyStateIconLeft {
+    width: 1.5rem;
+    height: auto;
+    padding: 0.2rem;
+    border-radius: 100%;
+    color: white;
+    background-color: var(--ssrc-site-selector-icon-background);
+    position: absolute;
+    top: -0.3rem;
+    left: -0.75rem;
+    z-index: 5;
+    scale: 0.9;
+}
+
+.emptyStateIconRight {
+    width: 1.5rem;
+    height: auto;
+    padding: 0.2rem;
+    border-radius: 100%;
+    color: white;
+    background-color: var(--ssrc-site-selector-icon-background);
+    position: absolute;
+    top: -0.3rem;
+    right: -0.75rem;
+    z-index: 5;
+    scale: 0.9;
+}
+
+.button {
+    margin-left: 0.3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 0.5rem;
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    cursor: pointer;
+    width: fit-content;
+    font-weight: 500;
+}
+
+.button svg {
+    width: 1rem;
+    height: auto;
+    cursor: pointer;
+}
+
+.loadingState {
+    height: 8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
