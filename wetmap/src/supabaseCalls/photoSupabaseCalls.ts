@@ -239,21 +239,15 @@ export const getPhotosByDiveSiteWithExtra = async (values) => {
   }
 };
 
-export const getPhotosByUserWithExtra = async (userId, connectedUserId) => {
-  const {
-    data,
-    error,
-  } = await supabase.rpc('get_photos_by_userid_groupby_divesite_date', {
+export const getPhotosByUserWithExtra = async (userId: string, connectedUserId: string) => {
+  const response = await supabase.rpc('get_photos_by_userid_groupby_divesite_date', {
     userid:          userId,
     connecteduserid: connectedUserId,
   });
 
-  if (error) {
-    console.error('couldn\'t do it 31,', error);
-    return [];
+  if (response.error) {
+    console.error('couldn\'t do it 31,', response.error);
   }
 
-  if (data) {
-    return data;
-  }
+  return response;
 };

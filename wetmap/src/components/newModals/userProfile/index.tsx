@@ -17,6 +17,10 @@ import Settings from '../../newModals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 import { toast } from 'react-toastify';
 import screenData from '../screenData.json';
+import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
+import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
+import { PhotosGroupedByDate } from '../../../entities/photos';
+import { getPhotosByUserWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
 
 type UserProps = Partial<ModalHandleProps> & {
   userProfileID?: string
@@ -26,6 +30,8 @@ export default function UserProfile(props: UserProps) {
   const { profile, setProfile }          = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
+  const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
+  const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
   const [userIsFollowing, setUserIsFollowing] = useState(false);
   const [followRecordID, setFollowRecordID] = useState(activeSession?.user.id);
@@ -59,6 +65,7 @@ export default function UserProfile(props: UserProps) {
 
   useEffect(() => {
     followCheck();
+    getPhotos();
   }, [openedProfile]);
 
 
@@ -76,6 +83,12 @@ export default function UserProfile(props: UserProps) {
         setUserIsFollowing(true);
       }
     }
+  };
+
+  const getPhotos = async () => {
+    if (!profile || !openedProfile) return;
+    const response = await getPhotosByUserWithExtra(openedProfile.UserID, profile.UserID);
+    setDiveSitePics(response.data || []);
   };
 
   const handleProfileNameChange = async (newName: string) => {
@@ -106,22 +119,57 @@ export default function UserProfile(props: UserProps) {
 
   const handleProfileBioChange = async (newBio: string) => {
     if (profile) {
-      if (profile) {
-        const response = await updateProfile({
-          UserID:       profile!.UserID,
-          profileBio: newBio,
-        });
-        if (!response.error) {
-          toast.success(screenData.UserProfile.UserProfileUpdateSuccessMessage);
-          setProfile({ ...profile, profileBio: newBio });
-          return;
-        }
-
-
-        toast.error(screenData.Toast.generalError);
+      const response = await updateProfile({
+        UserID:       profile.UserID,
+        profileBio: newBio,
+      });
+      if (!response.error) {
+        toast.success(screenData.UserProfile.UserProfileUpdateSuccessMessage);
+        setProfile({ ...profile, profileBio: newBio });
+        return;
       }
+
+
+      toast.error(screenData.Toast.generalError);
     }
   };
+
+  const handleImageSelection = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (!openedProfile) {
+      return;
+    }
+    if (openedProfile.profilePhoto) {
+      clearPreviousImage(openedProfile.profilePhoto);
+    }
+
+    const createFileName = await handleImageUpload(event);
+    if (profile) {
+      await updateProfile({
+        UserID:       profile.UserID,
+        profileBio: `animalphotos/public/${createFileName}`,
+      });
+    }
+
+    setOpenedProfile((prev) => {
+      if (!prev) {
+        return prev;
+      }
+      return {
+        ...prev,
+        profilePhoto: `animalphotos/public/${createFileName}`,
+      };
+    });
+  };
+
+  useEffect(() => {
+    if (openedProfile?.profilePhoto) {
+      const photoName = getPhotoPublicUrl(openedProfile.profilePhoto);
+      setHeaderPictureUrl(photoName);
+    } else {
+      setHeaderPictureUrl(null);
+    }
+  }, [openedProfile?.profilePhoto]);
+
 
   const openSettings = () => {
     modalShow(Settings);
@@ -131,12 +179,14 @@ export default function UserProfile(props: UserProps) {
     <UserProfileView
       onClose={props.onModalCancel}
       profile={openedProfile}
+      handleImageSelection={handleImageSelection}
       handleProfileBioChange={handleProfileBioChange}
       handleProfileNameChange={handleProfileNameChange}
       handleFollow={handleFollow}
       openSettings={openSettings}
+      headerPictureUrl={headerPictureUrl}
       isActiveProfile={isActiveProfile}
-      handleImageSelection={() => {}}
+      diveSitePics={diveSitePics}
       isFollowing={userIsFollowing}
     />
   );

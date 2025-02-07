@@ -1,0 +1,37 @@
+:root {
+    --ssrc-chip-color: #0073E6;
+}
+
+.chip {
+    padding-top: 0.2rem;
+    padding-bottom: 0.2rem;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    background: #0073e615;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 1rem;
+    border: 1px solid #0073e62a;
+    cursor: pointer;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 0.25rem;
+    text-wrap: nowrap;
+    transition: ease 0.1s;
+    color: var(--ssrc-chip-color);
+}
+
+.icon {
+    width: 0.75rem;
+    height: auto;
+    color: #0073E6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: ease-out 0.1s;
+}
+
+.chip:hover .icon {
+    color: #005cb8;
+}

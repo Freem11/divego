@@ -98,7 +98,6 @@ export default function ShopModal(props: ShopModalProps) {
     modalShow(TripCreatorListModal, {
       keepPreviousModal: true,
       size:              'medium',
-      // isEditModeOn:      false,
     });
   };
 
