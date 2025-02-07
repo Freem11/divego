@@ -24,7 +24,7 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditM
   const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
 
   const diveSitesSubmitError = () => {
-    toast.error('Dive sites is required');
+    toast.error(screenData.TripCreator.noSitesError);
     setDiveSitesError(true);
   };
 
@@ -62,9 +62,9 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditM
       const { error } = await insertItineraryRequest(trip, 'Edit');
 
       if (error) {
-        toast.error(screenData.TripCard.editTripError);
+        toast.error(screenData.TripCreator.editTripError);
       } else {
-        toast.success(screenData.TripCard.editTripSuccess);
+        toast.success(screenData.TripCreator.editTripSuccess);
         modalCancel();
         setSitesArray([]);
       }

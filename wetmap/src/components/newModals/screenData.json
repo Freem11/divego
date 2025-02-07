@@ -73,9 +73,7 @@
         "deleteButton": "Delete",
         "anchorButton" : "Go to trip location",
         "bookButton" : "Book trip",
-        "editTripError" : "There was an error submitting trip edit request. Please try again later.",
         "deleteTripError" : "There was an error submitting trip deletion request. Please try again later.",
-        "editTripSuccess": "You trip edit request was successfully submitted! Please allow up to 24 hours for the changes to be approved and reflected in your trip.",
         "deleteTripSuccess": "You trip deletion request was successfully submitted! Please allow up to 24 hours for it to be approved and reflected in your trip list."
       },
       "TripCreator": {
@@ -99,7 +97,10 @@
         "drawerHeader": "Possible Sites in this Trip   (Press to Remove)",
         "emptyDrawer": "No Dive Sites have been added to this Trip yet.",
         "submitSuccess": "Trip created successfully!",
-        "submitError": "Error creating trip. Please try again later."
+        "submitError": "Error creating trip. Please try again later.",
+        "editTripError" : "There was an error submitting trip edit request. Please try again later.",
+        "editTripSuccess": "You trip edit request was successfully submitted! Please allow up to 24 hours for the changes to be approved and reflected in your trip.",
+        "noSitesError": "Your haven't added any potential dive sites to your dive trip!"
       },
       "UserProfile": {
         "drawerHeader": "'s Sea Creature Encounters",
