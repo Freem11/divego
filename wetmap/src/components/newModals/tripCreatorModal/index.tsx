@@ -9,16 +9,18 @@ import { FieldErrors } from 'react-hook-form';
 import { insertItinerary } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { ModalContext } from '../../reusables/modal/context';
 import screenData from '../screenData.json';
+import { ItineraryItem } from '../../../entities/itineraryItem';
 
-type TripCreatorModalProps = Partial<ModalHandleProps>;
+type TripCreatorModalProps = Partial<ModalHandleProps> & {
+  itineraryInfo?:  ItineraryItem
+  isEditModeOn:    boolean
+  setIsEditModeOn: React.Dispatch<React.SetStateAction<boolean>>
+};
 
-export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
+export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditModeOn, setIsEditModeOn }: TripCreatorModalProps) {
   const { selectedShop } = useContext(DiveShopContext);
   const { modalCancel } = useContext(ModalContext);
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
-
-  const isEditModeOn = false;
-
   const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
 
   useEffect(() => {
