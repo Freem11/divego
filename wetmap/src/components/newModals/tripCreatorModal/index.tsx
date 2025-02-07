@@ -84,6 +84,7 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditM
           handleError={handleError}
           isEditModeOn={isEditModeOn}
           diveSitesError={diveSitesError}
+          itineraryInfo={itineraryInfo || null}
         />
       )}
     </>
