@@ -22,26 +22,48 @@ type TripCreatorViewProps = {
   setIsEditModeOn: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export default function TripCreatorView({ onClose, onSubmit, handleError, isEditModeOn, diveSitesError, itineraryInfo }: TripCreatorViewProps) {
+export default function TripCreatorView({ onClose, onSubmit, handleError, isEditModeOn, diveSitesError, itineraryInfo, setIsEditModeOn }: TripCreatorViewProps) {
   const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
 
   const startDate = watch('Start'); // Get start date value from form
   const endDate = watch('End'); // Get end date value from form
 
+  const cloneButtonPress = () => {
+    setIsEditModeOn(false);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.buttonBack}>
         <ButtonIcon
+          className={styles.buttonBack}
           icon={<Icon name="chevron-left" />}
           onClick={onClose}
         />
       </div>
 
-      {
-        isEditModeOn
-          ? (<h2>{screenData.TripCreator.headerEdit}</h2>)
-          : (<h2>{screenData.TripCreator.header}</h2>)
-      }
+      <div className="cols col-12 flex-row">
+        {isEditModeOn && <div className="col-2"></div>}
+        <div className={isEditModeOn ? 'col-8' : 'col-12'}>
+          {
+            isEditModeOn
+              ? (<h2>{screenData.TripCreator.headerEdit}</h2>)
+              : (<h2>{screenData.TripCreator.header}</h2>)
+          }
+        </div>
+        {isEditModeOn
+        && (
+          <div className="col-2 mb-4">
+            <Button
+              onClick={() => cloneButtonPress()}
+              type="button"
+            >
+              {screenData.TripCreator.cloneTripButton}
+            </Button>
+          </div>
+        )}
+
+      </div>
 
       <form onSubmit={handleSubmit(onSubmit, handleError)} className={styles.form}>
         <div className={styles.formColumns}>

@@ -100,7 +100,8 @@
         "submitError": "Error creating trip. Please try again later.",
         "editTripError" : "There was an error submitting trip edit request. Please try again later.",
         "editTripSuccess": "You trip edit request was successfully submitted! Please allow up to 24 hours for the changes to be approved and reflected in your trip.",
-        "noSitesError": "Your haven't added any potential dive sites to your dive trip!"
+        "noSitesError": "Your haven't added any potential dive sites to your dive trip!",
+        "cloneTripButton": "Clone this Trip"
       },
       "UserProfile": {
         "drawerHeader": "'s Sea Creature Encounters",

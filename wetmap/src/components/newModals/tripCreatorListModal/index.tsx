@@ -7,12 +7,14 @@ import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
 import TripCreatorModal from '../tripCreatorModal';
 import { ModalContext } from '../../reusables/modal/context';
 import { DiveShopContext } from '../../contexts/diveShopContext';
+import { EditModeContext } from '../../contexts/editModeContext';
 
 export default function TripCreatorListModal() {
   const { profile } = useContext(UserProfileContext);
   const { modalShow, modalCancel } = useContext(ModalContext);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const { setSelectedShop, selectedShop } = useContext(DiveShopContext);
+  const { setIsEditModeOn } = useContext(EditModeContext);
 
   useEffect(() => {
     if (profile) {
@@ -47,6 +49,7 @@ export default function TripCreatorListModal() {
   };
 
   const openTripCreator = async () => {
+    setIsEditModeOn(false);
     modalShow(TripCreatorModal, {
       keepPreviousModal: true,
       size:              'large',
