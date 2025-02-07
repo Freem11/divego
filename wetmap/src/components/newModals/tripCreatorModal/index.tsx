@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorView from './view';
 import { DiveShopContext } from '../../contexts/diveShopContext';
@@ -6,7 +6,7 @@ import { Form } from './form';
 import { SitesArrayContext } from '../../contexts/sitesArrayContext';
 import { toast } from 'react-toastify';
 import { FieldErrors } from 'react-hook-form';
-import { insertItinerary } from '../../../supabaseCalls/itinerarySupabaseCalls';
+import { insertItinerary, insertItineraryRequest } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { ModalContext } from '../../reusables/modal/context';
 import screenData from '../screenData.json';
 import { ItineraryItem } from '../../../entities/itineraryItem';
@@ -22,12 +22,6 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditM
   const { modalCancel } = useContext(ModalContext);
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
-
-  useEffect(() => {
-    return () => {
-      setSitesArray([]); // Clear dive sites array
-    };
-  }, []);
 
   const diveSitesSubmitError = () => {
     toast.error('Dive sites is required');
@@ -64,14 +58,26 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditM
       BookingPage: formData.Link,
     };
 
-    const { error } = await insertItinerary(trip);
+    if (isEditModeOn) {
+      const { error } = await insertItineraryRequest(trip, 'Edit');
 
-    if (error) {
-      toast.error(screenData.TripCreator.submitError); // Error toast
+      if (error) {
+        toast.error(screenData.TripCard.editTripError);
+      } else {
+        toast.success(screenData.TripCard.editTripSuccess);
+        modalCancel();
+        setSitesArray([]);
+      }
     } else {
-      toast.success(screenData.TripCreator.submitSuccess); // Success toast
-      modalCancel(); // Close modal
-      setSitesArray([]); // Clear dive sites array
+      const { error } = await insertItinerary(trip);
+
+      if (error) {
+        toast.error(screenData.TripCreator.submitError);
+      } else {
+        toast.success(screenData.TripCreator.submitSuccess);
+        modalCancel();
+        setSitesArray([]);
+      }
     }
   };
 
@@ -83,6 +89,7 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditM
           onSubmit={onSubmit}
           handleError={handleError}
           isEditModeOn={isEditModeOn}
+          setIsEditModeOn={setIsEditModeOn}
           diveSitesError={diveSitesError}
           itineraryInfo={itineraryInfo || null}
         />

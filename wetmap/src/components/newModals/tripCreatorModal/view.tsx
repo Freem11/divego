@@ -13,12 +13,13 @@ import SiteSelector from '../../reusables/siteSelector';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 
 type TripCreatorViewProps = {
-  onClose?:       () => void
-  isEditModeOn:   boolean
-  onSubmit:       (data: Form) => void
-  handleError:    (errors: FieldErrors<Form>) => void
-  diveSitesError: boolean
-  itineraryInfo:  ItineraryItem | null
+  onClose?:        () => void
+  isEditModeOn:    boolean
+  onSubmit:        (data: Form) => void
+  handleError:     (errors: FieldErrors<Form>) => void
+  diveSitesError:  boolean
+  itineraryInfo:   ItineraryItem | null
+  setIsEditModeOn: React.Dispatch<React.SetStateAction<boolean>>
 };
 
 export default function TripCreatorView({ onClose, onSubmit, handleError, isEditModeOn, diveSitesError, itineraryInfo }: TripCreatorViewProps) {
