@@ -21,13 +21,6 @@ export default function ShopCardList(props: shopCardListProps) {
           shop={shop}
         />
       ))}
-      {props.shopList.length === 0 && (
-        <div>
-          <p>
-            No dive trips yet.
-          </p>
-        </div>
-      )}
     </div>
   );
 }
