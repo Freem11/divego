@@ -3,11 +3,11 @@ import { MapContext } from '../googleMap/mapContext';
 import { DynamicSelectOptionsAnimals } from '../../entities/DynamicSelectOptionsAnimals';
 import { PhotoContext } from '../contexts/photoContext';
 import { Option } from '../reusables/select';
-import { BoundaryPhotosView } from './view';
+import { BoundaryAnimalsView } from './view';
 import useOnScreen from '../reusables/_helpers/useOnScreen';
 
 
-export function BoundaryPhotos() {
+export function BoundaryAnimals() {
   const { boundaries } = useContext(MapContext);
   const { animalCollection, updateAnimalCollection, selectedAnimals, setSelectedAnimals } = useContext(PhotoContext);
   const ref = useRef<HTMLDivElement>(null);
@@ -35,7 +35,7 @@ export function BoundaryPhotos() {
 
   return (
     <div ref={ref} className="scroll-container non-scrollable">
-      <BoundaryPhotosView
+      <BoundaryAnimalsView
         uniqueKey={boundaries?.toString()}
         getMoreAnimals={DynamicSelectOptionsAnimals.getMoreOptions}
         handleAnimalSelect={handleAnimalSelect}

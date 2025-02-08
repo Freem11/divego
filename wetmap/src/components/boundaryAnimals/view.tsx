@@ -5,7 +5,7 @@ import DynamicSelect, { GetMoreOptions } from '../reusables/dynamicSelect';
 import Icon from '../../icons/Icon';
 import { Animal } from '../../entities/photos';
 
-type BoundaryPhotosViewProps = {
+type BoundaryAnimalsViewProps = {
   uniqueKey?:         string
   getMoreAnimals:     GetMoreOptions
   handleAnimalSelect: (e: any) => void
@@ -16,7 +16,7 @@ type BoundaryPhotosViewProps = {
   animals:            Animal[] | null
 };
 
-export function BoundaryPhotosView(props: BoundaryPhotosViewProps) {
+export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
   return (
     <>
       <DynamicSelect
