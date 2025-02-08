@@ -19,3 +19,13 @@
   z-index: 1;
 }
 
+.buttonBack {
+  color: #afafaf;
+  svg {
+      scale: 2;
+  }
+  &:hover,
+  &:focus {
+      color: #484848;
+  }
+}

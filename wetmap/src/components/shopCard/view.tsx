@@ -1,10 +1,5 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import style from './style.module.scss';
-import ButtonIcon from '../reusables/buttonIcon';
-import Icon from '../../icons/Icon';
-import readableDate from '../../helpers/readableDate';
-import Tooltip from '../reusables/tooltip';
-import screenData from '../newModals/screenData.json';
 import { DiveShop } from '../../entities/diveShop';
 
 type shopCardViewProps = {

@@ -4,13 +4,11 @@ import ShopsListView from './view';
 import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
 import TripCreatorModal from '../tripCreatorModal';
 import { ModalContext } from '../../reusables/modal/context';
-import { DiveShopContext } from '../../contexts/diveShopContext';
 import { DiveShop } from '../../../entities/diveShop';
 
 export default function ShopsListModal() {
   const { profile } = useContext(UserProfileContext);
   const { modalShow, modalCancel } = useContext(ModalContext);
-  const { setSelectedShop, selectedShop } = useContext(DiveShopContext);
   const [listOfShops, setListOfShops] = useState<DiveShop[]>([]);
 
   useEffect(() => {

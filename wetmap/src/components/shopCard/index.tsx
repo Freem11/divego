@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
 import { ModalContext } from '../reusables/modal/context';
-import { toast } from 'react-toastify';
-import screenData from '../newModals/screenData.json';
 import { DiveShop } from '../../entities/diveShop';
 import ShopCardView from './view';
 import ShopModal from '../newModals/shopModal';
