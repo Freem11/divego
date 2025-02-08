@@ -1,31 +1,75 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorView from './view';
 import { DiveShopContext } from '../../contexts/diveShopContext';
+import { Form } from './form';
+import { SitesArrayContext } from '../../contexts/sitesArrayContext';
+import { toast } from 'react-toastify';
+import { FieldErrors } from 'react-hook-form';
+import { insertItinerary } from '../../../supabaseCalls/itinerarySupabaseCalls';
+import { ModalContext } from '../../reusables/modal/context';
+import screenData from '../screenData.json';
 
 type TripCreatorModalProps = Partial<ModalHandleProps>;
 
 export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
   const { selectedShop } = useContext(DiveShopContext);
-  const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
-  const [selectedID, setSelectedID] = useState<number>(0);
+  const { modalCancel } = useContext(ModalContext);
+  const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
+
+  const isEditModeOn = false;
+
+  const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
 
   useEffect(() => {
-    if (selectedShop) {
-      getItineraries(selectedShop.id);
-    }
-  }, [selectedShop]);
+    return () => {
+      setSitesArray([]); // Clear dive sites array
+    };
+  }, []);
 
-  const getItineraries = async (IdNum: number) => {
-    try {
-      const itins = await itineraries(IdNum);
-      if (itins && itins.length > 0) {
-        setItineraryList(itins);
+  const diveSitesSubmitError = () => {
+    toast.error('Dive sites is required');
+    setDiveSitesError(true);
+  };
+
+  const handleError = (errors: FieldErrors<Form>) => {
+    toast.dismiss();
+    Object.values(errors).forEach((error) => {
+      if (error?.message) {
+        toast.error(error.message);
       }
-    } catch (e) {
-      console.log({ title: 'Error', message: (e as Error).message });
+    });
+    if (sitesArray.length === 0) {
+      diveSitesSubmitError();
+    }
+  };
+
+  const onSubmit = async (formData: Form) => {
+    // Validate dive site selector inputs
+    if (sitesArray.length === 0) {
+      diveSitesSubmitError();
+      return;
+    }
+
+    const trip = {
+      shopID:      selectedShop?.id,
+      tripName:    formData.Name,
+      startDate:   formData.Start,
+      endDate:     formData.End,
+      price:       formData.Price,
+      description: formData.Details,
+      siteList:    sitesArray,
+      BookingPage: formData.Link,
+    };
+
+    const { error } = await insertItinerary(trip);
+
+    if (error) {
+      toast.error(screenData.TripCreator.submitError); // Error toast
+    } else {
+      toast.success(screenData.TripCreator.submitSuccess); // Success toast
+      modalCancel(); // Close modal
+      setSitesArray([]); // Clear dive sites array
     }
   };
 
@@ -33,11 +77,11 @@ export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProp
     <>
       {selectedShop && (
         <TripCreatorView
-          setSelectedID={setSelectedID}
-          itineraryList={itineraryList}
-          selectedID={selectedID}
-          headerPictureUrl={null}
           onClose={onModalCancel}
+          onSubmit={onSubmit}
+          handleError={handleError}
+          isEditModeOn={isEditModeOn}
+          diveSitesError={diveSitesError}
         />
       )}
     </>

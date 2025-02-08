@@ -9,13 +9,15 @@ import { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
 
 type SeaLifeImageCardViewProps = {
-  pic:                PhotoWithLikesAndComments
-  handleModalOpen:    () => void
-  handleLike:         (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => Promise<void>
-  handleFollow:       (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, username: string) => Promise<void>
-  handleCommentModal: () => void
-  countOfLikes:       number
-  picLiked:           boolean
+  pic:                 PhotoWithLikesAndComments
+  handleModalOpen:     () => void
+  handleLike:          (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => Promise<void>
+  handleProfileSwitch: (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, username: string) => Promise<void>
+  handleDiveSiteMove:  (lat: number, lng: number) => void
+  handleCommentModal:  () => void
+  countOfLikes:        number
+  picLiked:            boolean
+  isShowAuthor:        boolean
 };
 
 export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
@@ -46,14 +48,26 @@ export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
       </img>
 
       <div className={style.footer} style={{ marginTop: '-6vh' }}>
-        <h4
-          className={style.userLabel}
-          onClick={e => props.handleFollow(e, props.pic.UserName)}
-        >
-          Added by:
-          {' '}
-          {props.pic.UserName}
-        </h4>
+        {props.isShowAuthor
+          ? (
+              <h4
+                className={style.userLabel}
+                onClick={e => props.handleProfileSwitch(e, props.pic.UserID)}
+              >
+                Added by:
+                {' '}
+                {props.pic.UserName}
+              </h4>
+            )
+          : (
+              <h4
+                className={style.userLabel}
+                onClick={() => props.handleDiveSiteMove(props.pic.latitude, props.pic.longitude)}
+              >
+                Go to this location!
+              </h4>
+            )}
+
 
         <div className={style.likeButtonContainer}>
           {props.countOfLikes > 0

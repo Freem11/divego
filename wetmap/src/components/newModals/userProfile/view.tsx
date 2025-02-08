@@ -22,8 +22,9 @@ type userProfileViewProps = {
   openSettings:            () => void
   isActiveProfile:         boolean
   handleImageSelection:    (event: React.ChangeEvent<HTMLInputElement>) => void
-//   isPartnerAccount:     boolean
-//   headerPictureUrl:     string | null
+  isFollowing:             boolean
+  headerPictureUrl:        string | null
+  diveSitePics:            PhotosGroupedByDate[] | null
 };
 
 export default function UserProfileView(props: userProfileViewProps) {
@@ -31,8 +32,7 @@ export default function UserProfileView(props: userProfileViewProps) {
     <div className="cols mx-0 full-height">
       <div className="col-6">
         <WavyModalHeader
-        //   image={props.headerPictureUrl || defaultHeaderPicture}
-          image={defaultHeaderPicture}
+          image={props.headerPictureUrl || defaultHeaderPicture}
           onClose={props.onClose}
         >
           <div className={style.buttonOpenPictureUpload}></div>
@@ -95,24 +95,39 @@ export default function UserProfileView(props: userProfileViewProps) {
                   </Button>
                 )
               : (
-                  <Button className="btn-lg" onClick={props.handleFollow}>
-                    <span className="hide-sm">
-                      Follow
-                    </span>
+                  <Button className={props.isFollowing ? 'btn-lg btn-primary' : 'btn-lg'}onClick={props.handleFollow}>
+                    {(props.isFollowing)
+                      ? (
+                          <span className="hide-sm">
+                            Following
+                          </span>
+                        )
+                      : (
+                          <span className="hide-sm">
+                            Follow
+                          </span>
+                        )}
                   </Button>
                 )}
           </div>
         </div>
-        {/* <div className="panel-body">
+        <div className="panel-body">
           {props?.diveSitePics
-          && props?.diveSitePics.map((packet) => {
+          && props?.diveSitePics.map((packet, packetIndex) => {
             return (
-              <div key={packet.dateTaken} className={style.panelBodyDiveSite}>
-                <h2 className={style.panelDate}>{packet.dateTaken}</h2>
+              <div key={`${packet.dateTaken}-${packetIndex}`} className={style.panelBodyDiveSite}>
+                <h2 className={`${style.panelDate} d-flex flex-column`}>
+                  <span>
+                    {packet.name}
+                  </span>
+                  <span>
+                    {packet.dateTaken}
+                  </span>
+                </h2>
                 {packet.photos
                 && packet.photos.map((pic) => {
                   return (
-                    <SeaLifeImageCard key={pic.id} pic={pic} />
+                    <SeaLifeImageCard key={pic.id} pic={pic} isShowAuthor={false} />
                   );
                 })}
               </div>
@@ -125,7 +140,7 @@ export default function UserProfileView(props: userProfileViewProps) {
               </p>
             </div>
           )}
-        </div> */}
+        </div>
         {/* <div className="panel-footer"></div> */}
       </div>
     </div>

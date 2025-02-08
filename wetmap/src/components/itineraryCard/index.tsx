@@ -5,6 +5,9 @@ import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import ItineraryCardView from './view';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import { MapContext } from '../googleMap/mapContext';
+import { insertItineraryRequest } from '../../supabaseCalls/itinerarySupabaseCalls';
+import { toast } from 'react-toastify';
+import screenData from '../newModals/screenData.json';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
@@ -14,7 +17,7 @@ type ItineraryCardProps = {
 export default function ItineraryCard({ itinerary, canChangeItinerary }: ItineraryCardProps) {
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapConfig, mapRef } = useContext(MapContext);
-  const modalContext = useContext(ModalContext);
+  const { modalPause } = useContext(ModalContext);
 
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
@@ -41,7 +44,17 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
     mapRef?.setZoom(12);
     setMapConfig(2);
 
-    modalContext.modalCancel();
+    modalPause();
+  };
+
+  const handleDeleteButton = async (itinerary: ItineraryItem) => {
+    const { error } = await insertItineraryRequest(itinerary, 'Delete');
+
+    if (error) {
+      toast.error(screenData.TripCard.deleteTripError);
+    } else {
+      toast.success(screenData.TripCard.deleteTripSuccess);
+    }
   };
 
   return (
@@ -49,6 +62,7 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       itinerary={itinerary}
       flipMap={flipMap}
       canChangeItinerary={canChangeItinerary}
+      handleDeleteButton={handleDeleteButton}
     />
   );
 }

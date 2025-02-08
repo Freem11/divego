@@ -17,6 +17,7 @@ export type PhotoWithLikesAndComments = {
 
 export type PhotosGroupedByDate = {
   dateTaken: string
+  name:      string
   photos:    PhotoWithLikesAndComments[]
 };
 

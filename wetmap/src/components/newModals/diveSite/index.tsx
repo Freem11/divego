@@ -1,11 +1,10 @@
 import React, { useState, useContext, useEffect } from 'react';
 import DiveSiteView from './view';
-import { getDiveSitesByIDs, updateDiveSite, getDiveSiteById } from '../../../supabaseCalls/diveSiteSupabaseCalls';
+import { updateDiveSite, getDiveSiteById } from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import { PhotosGroupedByDate } from '../../../entities/photos';
 import { getPhotosByDiveSiteWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
-import { PinContext } from '../../contexts/staticPinContext';
 import { ModalContext } from '../../reusables/modal/context';
 import PicUploader from '../picUploader/index';
 import { ModalHandleProps } from '../../reusables/modal/types';
@@ -13,6 +12,8 @@ import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ActiveProfile } from '../../../entities/profile';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
+import UserProfile from '../userProfile';
+import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 
 type DiveSiteProps = Partial<ModalHandleProps> & {
   id?:    number
@@ -22,7 +23,6 @@ export default function DiveSite(props: DiveSiteProps) {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(DiveSiteContext);
   const { profile }          = useContext(UserProfileContext);
   const { modalShow }        = useContext(ModalContext);
-  const { pin, setPin }      = useContext(PinContext);
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
@@ -94,35 +94,37 @@ export default function DiveSite(props: DiveSiteProps) {
   };
 
   const openPicUploader = () => {
-    if (selectedDiveSite) {
-      setPin({
-        ...pin,
-        Latitude:  selectedDiveSite.lat,
-        Longitude: selectedDiveSite.lng,
-        siteName:  selectedDiveSite.name,
-      });
-    }
-
     modalShow(PicUploader);
   };
 
 
   useEffect(() => {
     if (selectedDiveSite?.divesiteprofilephoto) {
-      const photoName = selectedDiveSite.divesiteprofilephoto.split('/').pop();
-      setHeaderPictureUrl(
-        import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${photoName}`,
-      );
+      const photoName = getPhotoPublicUrl(selectedDiveSite.divesiteprofilephoto);
+      setHeaderPictureUrl(photoName);
     } else {
       setHeaderPictureUrl(null);
     }
   }, [selectedDiveSite?.divesiteprofilephoto]);
+
+  const handleProfileSwitch = async (userId: string) => {
+    if (profile?.UserID === userId) {
+      return;
+    }
+    modalShow(UserProfile, {
+      keepPreviousModal: true,
+      userProfileID:     userId,
+      size:              'large',
+
+    });
+  };
 
   return (
     <DiveSiteView
       onClose={props.onModalCancel}
       openPicUploader={openPicUploader}
       handleImageSelection={handleImageSelection}
+      handleProfileSwitch={handleProfileSwitch}
       diveSite={selectedDiveSite}
       diveSitePics={diveSitePics}
       isPartnerAccount={isPartnerAccount}

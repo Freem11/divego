@@ -11,9 +11,10 @@ type TripCardViewProps = {
   itinerary:           ItineraryItem
   flipMap:             (siteList: number[]) => Promise<void>
   canChangeItinerary?: boolean
+  handleDeleteButton:  (itinerary: ItineraryItem) => void
 };
 
-export default function ItineraryCardView({ itinerary, flipMap, canChangeItinerary }: TripCardViewProps) {
+export default function ItineraryCardView({ itinerary, flipMap, canChangeItinerary, handleDeleteButton }: TripCardViewProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -57,7 +58,7 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
                     <ButtonIcon
                       icon={<Icon name="trash" />}
                       className={style.actionIcon}
-                      // onClick={}
+                      onClick={() => handleDeleteButton(itinerary)}
                     />
                   </Tooltip>
                 </>

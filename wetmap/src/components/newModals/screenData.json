@@ -40,7 +40,12 @@
         "allowLocation": "Please allow location access.",
         "locationNotSupported": "Geolocation is not supported in your browser.",
         "addSiteError": "Error adding site. Please try again later.",
-        "addSiteSuccess": "Site added successfully!"
+        "addSiteSuccess": "Site added successfully!",
+        "siteNameTooltip": "Enter the name of your dive site",
+        "latTooltip": "Enter a number",
+        "lngTooltip": "Enter a number",
+        "myLocationTooltip": "Select latitude and longitude",
+        "pinButtonTooltip": "Select latitude and longitude"
       },
       "PicUploader": {
         "header": "Your Sea Creature Sighting",
@@ -67,22 +72,34 @@
         "editButton": "Edit",
         "deleteButton": "Delete",
         "anchorButton" : "Go to trip location",
-        "bookButton" : "Book trip"
+        "bookButton" : "Book trip",
+        "editTripError" : "There was an error submitting trip edit request. Please try again later.",
+        "deleteTripError" : "There was an error submitting trip deletion request. Please try again later.",
+        "editTripSuccess": "You trip edit request was successfully submitted! Please allow up to 24 hours for the changes to be approved and reflected in your trip.",
+        "deleteTripSuccess": "You trip deletion request was successfully submitted! Please allow up to 24 hours for it to be approved and reflected in your trip list."
       },
       "TripCreator": {
-        "header": "Create a New Dive Trip",
+        "header": "Create Dive Trip",
         "headerEdit": "Submit Trip Edits",
         "cloneButton": "Clone This Trip",
-        "tripNamePlaceholder": "Your Trip's Name",
-        "bookingLinkPlaceholder": "Link to your trip's booking page",
-        "pricePlaceholder": "Trip Price",
+        "tripNameLabel": "Trip Name",
+        "tripNamePlaceholder": "Deep Blue Odyssey",
+        "bookingLinkLabel": "Booking Page URL",
+        "bookingLinkPlaceholder": "https://mybookingpage.com",
+        "priceLabel": "Price",
+        "pricePlaceholder": "$2,500.00",
+        "startDateLabel": "Start Date",
         "startDatePlaceholder": "Start Date",
+        "endDateLabel": "End Date",
         "endDatePlaceholder": "End Date",
-        "tripDescriptionPlaceholder": "Please add any further details about your trip that you think would be helpful in promoting your trip to divers, right here",
+        "diveSitesLabel": "Dive Sites",
+        "tripDescriptionPlaceholder": "What divers need to know about this trip...",
         "submitButton": "Submit",
         "selectSitesButton": "Select Dive Sites",
         "drawerHeader": "Possible Sites in this Trip   (Press to Remove)",
-        "emptyDrawer": "No Dive Sites have been added to this Trip yet."
+        "emptyDrawer": "No Dive Sites have been added to this Trip yet.",
+        "submitSuccess": "Trip created successfully!",
+        "submitError": "Error creating trip. Please try again later."
       },
       "UserProfile": {
         "drawerHeader": "'s Sea Creature Encounters",

@@ -10,6 +10,7 @@ import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorListModal from '../tripCreatorListModal';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveShopContext } from '../../contexts/diveShopContext';
+import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 
 type ShopModalProps = Partial<ModalHandleProps> & {
   id?:    number
@@ -20,6 +21,7 @@ export default function ShopModal(props: ShopModalProps) {
   const { selectedShop, setSelectedShop } = useContext(DiveShopContext);
   const { profile } = useContext(UserProfileContext);
   const [isMyShop, setIsMyShop] = useState<boolean>(false);
+  const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const { modalShow } = useContext(ModalContext);
@@ -99,6 +101,15 @@ export default function ShopModal(props: ShopModalProps) {
     });
   };
 
+  useEffect(() => {
+    if (selectedShop?.diveshopprofilephoto) {
+      const photoName = getPhotoPublicUrl(selectedShop.diveshopprofilephoto);
+      setHeaderPictureUrl(photoName);
+    } else {
+      setHeaderPictureUrl(null);
+    }
+  }, [selectedShop?.diveshopprofilephoto]);
+
 
   return (
     <>
@@ -109,7 +120,7 @@ export default function ShopModal(props: ShopModalProps) {
           diveShop={selectedShop}
           isPartnerAccount={isPartnerAccount}
           itineraryList={itineraryList}
-          headerPictureUrl={null}
+          headerPictureUrl={headerPictureUrl}
           openTripCreatorList={openTripCreatorList}
           isMyShop={isMyShop}
           handleDiveShopImageSelection={handleImageSelection}

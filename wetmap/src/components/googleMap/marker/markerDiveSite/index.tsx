@@ -5,6 +5,7 @@ import iconGold from '../../../../images/mapIcons/AnchorGold.png';
 import { ModalContext } from '../../../reusables/modal/context';
 import DiveSite from '../../../newModals/diveSite';
 import { SitesArrayContext } from '../../../contexts/sitesArrayContext';
+import { MapContext } from '../../mapContext';
 
 type MarkerDiveSiteProps = {
   id:       number
@@ -14,19 +15,30 @@ type MarkerDiveSiteProps = {
 
 export function MarkerDiveSite(props: MarkerDiveSiteProps) {
   const { modalShow } = useContext(ModalContext);
-  const { sitesArray } = useContext(SitesArrayContext);
+  const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
+  const { mapConfig } = useContext(MapContext);
+
+  function handleClick() {
+    if (mapConfig !== 3) {
+      modalShow(DiveSite, {
+        id:   props.id,
+        size: 'large',
+      });
+    } else {
+      if (sitesArray.includes(props.id)) {
+        setSitesArray(prev => prev.filter(id => id !== props.id));
+      } else {
+        setSitesArray(prev => [...prev, props.id]);
+      }
+    }
+  }
 
   return (
     <Marker
       icon={sitesArray.includes(props.id) ? iconGold : icon}
       title={props.title}
       position={props.position}
-      onClick={() => {
-        modalShow(DiveSite, {
-          id:   props.id,
-          size: 'large',
-        });
-      }}
+      onClick={handleClick}
     >
     </Marker>
   );
