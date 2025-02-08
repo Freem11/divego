@@ -14,7 +14,6 @@ import { EditModeContext } from '../../contexts/editModeContext';
 
 type TripCreatorModalProps = Partial<ModalHandleProps> & {
   itineraryInfo?:  ItineraryItem
-
 };
 
 export default function TripCreatorModal({ onModalCancel, itineraryInfo, registerModalCancelCallback }: TripCreatorModalProps) {
@@ -98,7 +97,14 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, registe
           isEditModeOn={isEditModeOn}
           setIsEditModeOn={setIsEditModeOn}
           diveSitesError={diveSitesError}
-          itineraryInfo={itineraryInfo || null}
+          values={{
+            Name:    isEditModeOn ? itineraryInfo?.tripName : '',
+            Link:    isEditModeOn ? itineraryInfo?.BookingPage : '',
+            Price:   isEditModeOn ? itineraryInfo?.price : '',
+            Start:   isEditModeOn ? itineraryInfo?.startDate : '',
+            End:     isEditModeOn ? itineraryInfo?.endDate : '',
+            Details: isEditModeOn ? itineraryInfo?.description : '',
+          }}
         />
       )}
     </>
