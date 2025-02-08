@@ -20,6 +20,7 @@ export default function BlurryImage({ src, alt = 'Image', className = '', onClic
       alt={alt}
       className={`${style.image} ${className} ${isLoading ? style.loading : ''}`}
       onLoad={() => setLoading(false)}
+      loading="lazy"
       onError={() => {
         setHasError(true);
         setLoading(false);
