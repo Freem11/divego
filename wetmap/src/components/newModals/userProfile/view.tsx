@@ -11,7 +11,7 @@ import ButtonIcon from '../../reusables/buttonIcon';
 import SeaLifeImageCard from '../../reusables/seaLifeImageCard';
 import { ActiveProfile } from '../../../entities/profile';
 import FileInput from '../../reusables/fileInput';
-
+import Tooltip from '../../reusables/tooltip';
 
 type userProfileViewProps = {
   onClose?:                () => void
@@ -43,10 +43,12 @@ export default function UserProfileView(props: userProfileViewProps) {
                 onFileChange={props.handleImageSelection}
                 className="d-none"
               >
-                <ButtonIcon
-                  icon={<Icon name="camera-plus" />}
-                  className="btn-lg"
-                />
+                <Tooltip content="test">
+                  <ButtonIcon
+                    icon={<Icon name="camera-plus" />}
+                    className="btn-lg"
+                  />
+                </Tooltip>
               </FileInput>
             </div>
           )}
