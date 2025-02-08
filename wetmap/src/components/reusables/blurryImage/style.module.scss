@@ -1,0 +1,15 @@
+.image {
+  width: 100%;
+  border-radius: 3%;
+  transition: filter 0.7s ease-in-out, transform 0.7s ease-in-out;
+}
+
+.loading {
+  filter: grayscale(100%) blur(10px);
+  transform: scale(1);
+}
+
+.image:not([src]) {
+  filter: none;
+  transform: none;
+}

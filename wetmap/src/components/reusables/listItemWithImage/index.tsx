@@ -1,5 +1,6 @@
 import React  from 'react';
 import './style.scss';
+import BlurryImage from '../blurryImage';
 
 type ListItemWithImageProps = {
   imageUrl:     string | null
@@ -13,9 +14,7 @@ export default function ListItemWithImage(props: ListItemWithImageProps) {
   return (
     <div className={`ssrc-list-item-with-image ${props.highlighted ? 'highlighted' : ''}`}>
       <div className="ssrc-list-item-with-image__container">
-
-        <img src={props.imageUrl || ''} alt={props.imageAlt} />
-
+        <BlurryImage src={props.imageUrl} alt={props.imageAlt} />
         <div className="">
           <div className="">
             <h6 className="">{props.title}</h6>
