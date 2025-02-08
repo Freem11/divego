@@ -68,6 +68,7 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
         keepPreviousModal: true,
         size:              'large',
         itineraryInfo,
+        isEditModeOn1:      true,
       });
     }
   };
