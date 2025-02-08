@@ -43,7 +43,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                 onFileChange={props.handleImageSelection}
                 className="d-none"
               >
-                <Tooltip content="test">
+                <Tooltip content={screenData.UserProfile.addProfilePhotoToolTip}>
                   <ButtonIcon
                     icon={<Icon name="camera-plus" />}
                     className="btn-lg"
@@ -65,8 +65,6 @@ export default function UserProfileView(props: userProfileViewProps) {
                     value={props.profile?.UserName}
                   />
                 </h1>
-                <div>
-                </div>
               </div>
             </div>
 
@@ -97,19 +95,21 @@ export default function UserProfileView(props: userProfileViewProps) {
                   </Button>
                 )
               : (
-                  <Button className={props.isFollowing ? 'btn-lg btn-primary' : 'btn-lg'}onClick={props.handleFollow}>
-                    {(props.isFollowing)
-                      ? (
-                          <span className="hide-sm">
-                            Following
-                          </span>
-                        )
-                      : (
-                          <span className="hide-sm">
-                            Follow
-                          </span>
-                        )}
-                  </Button>
+                  <Tooltip content={screenData.UserProfile.FollowToolTip}>
+                    <Button className={props.isFollowing ? 'btn-lg btn-primary' : 'btn-lg'}onClick={props.handleFollow}>
+                      {(props.isFollowing)
+                        ? (
+                            <span className="hide-sm">
+                              Following
+                            </span>
+                          )
+                        : (
+                            <span className="hide-sm">
+                              Follow
+                            </span>
+                          )}
+                    </Button>
+                  </Tooltip>
                 )}
           </div>
         </div>
