@@ -14,16 +14,15 @@ import SiteSelector from '../../reusables/siteSelector';
 type TripCreatorViewProps = {
   values?:         Form
   onClose?:        () => void
-  isEditModeOn:    boolean
   onSubmit:        (data: Form) => void
   handleError:     (errors: FieldErrors<Form>) => void
   diveSitesError:  boolean
+  isEditModeOn:    boolean
   setIsEditModeOn: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export default function TripCreatorView({ onClose, onSubmit, handleError, isEditModeOn, diveSitesError, values }: TripCreatorViewProps) {
+export default function TripCreatorView({ onClose, onSubmit, handleError, diveSitesError, values, isEditModeOn }: TripCreatorViewProps) {
   const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({ values: values });
-
   const startDate = watch('Start'); // Get start date value from form
   const endDate = watch('End'); // Get end date value from form
 
