@@ -18,13 +18,13 @@ import Tooltip from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
 
 type LayoutMainViewProps = {
-  mapConfig:                   number
-  animateSiteSubmitterModal:   () => void
-  animateProfileModal:         () => void
-  animateSettingsModal:        () => void
-  animateGuidesModal:          () => void
-  animateTripCreatorListModal: () => void
-  isPartnerAccount:            boolean
+  mapConfig:                 number
+  animateSiteSubmitterModal: () => void
+  animateProfileModal:       () => void
+  animateSettingsModal:      () => void
+  animateGuidesModal:        () => void
+  animateShopsListModal:     () => void
+  isPartnerAccount:          boolean
 };
 
 
@@ -83,7 +83,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                           <ButtonIcon
                             disabled={props.mapConfig === 0 ? false : true}
                             icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
-                            onClick={props.animateTripCreatorListModal}
+                            onClick={props.animateShopsListModal}
                           />
                         </Tooltip>
                       </li>

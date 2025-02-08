@@ -1,45 +1,29 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
-import { ItineraryItem } from '../../../entities/itineraryItem';
-import TripCreatorListView from './view';
+import ShopsListView from './view';
 import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
 import TripCreatorModal from '../tripCreatorModal';
 import { ModalContext } from '../../reusables/modal/context';
 import { DiveShopContext } from '../../contexts/diveShopContext';
+import { DiveShop } from '../../../entities/diveShop';
 
-export default function TripCreatorListModal() {
+export default function ShopsListModal() {
   const { profile } = useContext(UserProfileContext);
   const { modalShow, modalCancel } = useContext(ModalContext);
-  const [itineraryList, setItineraryList] = useState<ItineraryItem[]>([]);
   const { setSelectedShop, selectedShop } = useContext(DiveShopContext);
+  const [listOfShops, setListOfShops] = useState<DiveShop[]>([]);
 
   useEffect(() => {
     if (profile) {
-      getShop(profile?.UserID);
+      getShops(profile?.UserID);
     }
+  }, []);
 
-    if (selectedShop) {
-      getItineraries(selectedShop.id);
-    }
-  }, [selectedShop]);
-
-  const getShop = async (id: string) => {
+  const getShops = async (id: string) => {
     try {
-      const shop = await getShopByUserID(id);
-      if (shop) {
-        setSelectedShop(shop[0]);
-      }
-    } catch (e) {
-      console.log({ title: 'Error', message: (e as Error).message });
-    }
-  };
-
-  const getItineraries = async (IdNum: number) => {
-    try {
-      const itins = await itineraries(IdNum);
-      if (itins && itins.length > 0) {
-        setItineraryList(itins);
+      const shops = await getShopByUserID(id);
+      if (shops) {
+        setListOfShops(shops);
       }
     } catch (e) {
       console.log({ title: 'Error', message: (e as Error).message });
@@ -56,9 +40,8 @@ export default function TripCreatorListModal() {
 
   return (
     <>
-      <TripCreatorListView
-        itineraryList={itineraryList}
-        headerPictureUrl={null}
+      <ShopsListView
+        listOfShops={listOfShops}
         onClose={modalCancel}
         openTripCreator={openTripCreator}
       />
