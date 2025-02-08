@@ -1,6 +1,6 @@
 import { GPSBubble } from '../entities/GPSBubble';
 import { Pagination } from '../entities/pagination';
-import { Photo } from '../entities/photos';
+import { Animal, Photo } from '../entities/photos';
 import { supabase } from '../supabase';
 
 // not in use - remove
@@ -40,7 +40,7 @@ import { supabase } from '../supabase';
 //   }
 // };
 
-export const getAnimalNamesThatFit = async (value) => {
+export const getAnimalNamesThatFit = async (value: string) => {
   if (value === '') {
     return [];
   }
@@ -97,14 +97,13 @@ export const getAnimalNamesThatFit = async (value) => {
 //   }
 // };
 
-export const getPhotosforMapArea = async (bubble: GPSBubble, filter?: Partial<Photo>, pagination?: Pagination) => {
-  const builder = supabase
-    .from('photos')
-    .select()
-    .gte('latitude', bubble.minLat)
-    .gte('longitude', bubble.minLng)
-    .lte('latitude', bubble.maxLat)
-    .lte('longitude', bubble.maxLng);
+export const getAnimalsInBubble = async (bubble: GPSBubble, filter?: Partial<Photo>, pagination?: Pagination) => {
+  const builder = supabase.rpc('get_unique_photo_in_bounds', {
+    max_lat: bubble.maxLat,
+    min_lat: bubble.minLat,
+    max_lng: bubble.maxLng,
+    min_lng: bubble.minLng,
+  });
 
   if (filter?.label) {
     builder.ilike('label', '%' + filter.label + '%');
@@ -121,7 +120,7 @@ export const getPhotosforMapArea = async (bubble: GPSBubble, filter?: Partial<Ph
   }
 
   if (data) {
-    return data as Photo[];
+    return data as Animal[];
   }
   return [];
 };

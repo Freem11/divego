@@ -1,19 +1,19 @@
 import React from 'react';
 import InfiniteScroll from '../reusables/infiniteScroll';
-import { PhotoItem } from './photoItem';
+import { AnimalItem } from './animalItem';
 import DynamicSelect, { GetMoreOptions } from '../reusables/dynamicSelect';
 import Icon from '../../icons/Icon';
-import { Photo } from '../../entities/photos';
+import { Animal } from '../../entities/photos';
 
 type BoundaryPhotosViewProps = {
   uniqueKey?:         string
   getMoreAnimals:     GetMoreOptions
   handleAnimalSelect: (e: any) => void
-  loadMorePhotos:     (page: number) => void
-  hasMorePhotos:      boolean
-  selectedPhotos:     string[]
-  isLoadingPhotos:    boolean
-  photos:             Photo[] | null
+  loadMoreAnimals:    (page: number) => void
+  hasMoreAnimals:     boolean
+  selectedAnimals:    string[]
+  isLoadingAnimals:   boolean
+  animals:            Animal[] | null
 };
 
 export function BoundaryPhotosView(props: BoundaryPhotosViewProps) {
@@ -31,13 +31,13 @@ export function BoundaryPhotosView(props: BoundaryPhotosViewProps) {
       <InfiniteScroll
         key={props.uniqueKey}
         className="p-2 scrollable"
-        loadMore={props.loadMorePhotos}
-        hasMore={props.hasMorePhotos}
-        isLoading={props.isLoadingPhotos}
-        renderEmpty={() => <div>No photos in this area</div>}
+        loadMore={props.loadMoreAnimals}
+        hasMore={props.hasMoreAnimals}
+        isLoading={props.isLoadingAnimals}
+        renderEmpty={() => <div>No animals in this area</div>}
       >
-        {props.photos?.map((item) => {
-          return <PhotoItem key={item.id} photo={item} highlighted={props.selectedPhotos.includes(item.label)} />;
+        {props.animals?.map((item) => {
+          return <AnimalItem key={item.photofile} animal={item} highlighted={props.selectedAnimals.includes(item.label)} />;
         })}
 
       </InfiniteScroll>

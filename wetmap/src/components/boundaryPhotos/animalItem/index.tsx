@@ -1,15 +1,15 @@
 import React from 'react';
-import { Photo } from '../../../entities/photos';
+import { Animal } from '../../../entities/photos';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 import ListItemWithImage from '../../reusables/listItemWithImage';
 
-type PhotoItemProps = {
-  photo:        Photo
+type AnimalItemProps = {
+  animal:       Animal
   highlighted?: boolean
 };
 
-export function PhotoItem(props: PhotoItemProps) {
-  const imageUrl = getPhotoPublicUrl(props.photo.photoFile);
+export function AnimalItem(props: AnimalItemProps) {
+  const imageUrl = getPhotoPublicUrl(props.animal.photofile);
   if (!imageUrl) {
     return null;
   }
@@ -17,8 +17,8 @@ export function PhotoItem(props: PhotoItemProps) {
   return (
     <ListItemWithImage
       imageUrl={imageUrl}
-      title={props.photo.label}
-      date={props.photo.dateTaken}
+      title={props.animal.label}
+      date={`seen ${props.animal.times_seen} time(s)`}
       highlighted={props.highlighted}
     />
   );
