@@ -10,20 +10,19 @@ import Button from '../../reusables/button';
 import Label from '../../reusables/label';
 import PriceTextInput from '../../reusables/priceTextInput';
 import SiteSelector from '../../reusables/siteSelector';
-import { ItineraryItem } from '../../../entities/itineraryItem';
 
 type TripCreatorViewProps = {
+  values?:         Form
   onClose?:        () => void
   isEditModeOn:    boolean
   onSubmit:        (data: Form) => void
   handleError:     (errors: FieldErrors<Form>) => void
   diveSitesError:  boolean
-  itineraryInfo:   ItineraryItem | null
   setIsEditModeOn: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export default function TripCreatorView({ onClose, onSubmit, handleError, isEditModeOn, diveSitesError, itineraryInfo }: TripCreatorViewProps) {
-  const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
+export default function TripCreatorView({ onClose, onSubmit, handleError, isEditModeOn, diveSitesError, values }: TripCreatorViewProps) {
+  const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({ values: values });
 
   const startDate = watch('Start'); // Get start date value from form
   const endDate = watch('End'); // Get end date value from form
@@ -49,7 +48,6 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, isEdit
             <Label label={screenData.TripCreator.tripNameLabel}>
               <TextInput
                 iconLeft={<Icon name="store" />}
-                value={itineraryInfo?.tripName}
                 placeholder={screenData.TripCreator.tripNamePlaceholder}
                 error={errors.Name}
                 {...register('Name', FormRules.Name)}
@@ -59,7 +57,6 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, isEdit
             <Label label={screenData.TripCreator.bookingLinkLabel}>
               <TextInput
                 iconLeft={<Icon name="link" />}
-                value={itineraryInfo?.BookingPage}
                 placeholder={screenData.TripCreator.bookingLinkPlaceholder}
                 error={errors.Link}
                 {...register('Link', FormRules.Link)}
@@ -68,7 +65,6 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, isEdit
 
             <Label label={screenData.TripCreator.priceLabel}>
               <PriceTextInput
-                value={itineraryInfo?.price}
                 placeholder={screenData.TripCreator.pricePlaceholder}
                 error={errors.Price}
                 {...register('Price', FormRules.Price)}
@@ -78,7 +74,6 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, isEdit
             <Label label={screenData.TripCreator.startDateLabel}>
               <TextInput
                 iconLeft={<Icon name="calendar-start" />}
-                value={itineraryInfo?.startDate}
                 placeholder={screenData.TripCreator.startDatePlaceholder}
                 error={errors.Start}
                 type="date"
@@ -98,7 +93,6 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, isEdit
             <Label label={screenData.TripCreator.endDateLabel}>
               <TextInput
                 iconLeft={<Icon name="calendar-end" />}
-                value={itineraryInfo?.endDate}
                 placeholder={screenData.TripCreator.endDatePlaceholder}
                 error={errors.End}
                 type="date"
@@ -122,7 +116,6 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, isEdit
             </Label>
             <Label label="Details" className={styles.detailsField}>
               <textarea
-                value={itineraryInfo?.description}
                 className={`${styles.textarea} ${errors.Details && styles.textareaError}`}
                 placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
                 {...register('Details', FormRules.Details)}

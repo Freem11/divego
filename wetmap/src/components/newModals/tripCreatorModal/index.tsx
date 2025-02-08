@@ -81,6 +81,8 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditM
     }
   };
 
+  console.log(isEditModeOn);
+
   return (
     <>
       {selectedShop && (
@@ -91,7 +93,14 @@ export default function TripCreatorModal({ onModalCancel, itineraryInfo, isEditM
           isEditModeOn={isEditModeOn}
           setIsEditModeOn={setIsEditModeOn}
           diveSitesError={diveSitesError}
-          itineraryInfo={itineraryInfo || null}
+          values={{
+            Name:    isEditModeOn ? itineraryInfo?.tripName : '',
+            Link:    isEditModeOn ? itineraryInfo?.BookingPage : '',
+            Price:   isEditModeOn ? itineraryInfo?.price : '',
+            Start:   isEditModeOn ? itineraryInfo?.startDate : '',
+            End:     isEditModeOn ? itineraryInfo?.endDate : '',
+            Details: isEditModeOn ? itineraryInfo?.description : '',
+          }}
         />
       )}
     </>
