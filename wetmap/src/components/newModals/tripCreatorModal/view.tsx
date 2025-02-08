@@ -21,13 +21,13 @@ type TripCreatorViewProps = {
   setIsEditModeOn: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export default function TripCreatorView({ onClose, onSubmit, handleError, diveSitesError, values, isEditModeOn, setIsEditModeOn }: TripCreatorViewProps) {
-  const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({ values: values });
+export default function TripCreatorView(props: TripCreatorViewProps) {
+  const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({ values: props.values });
   const startDate = watch('Start'); // Get start date value from form
   const endDate = watch('End'); // Get end date value from form
 
   const cloneButtonPress = () => {
-    setIsEditModeOn(false);
+    props.setIsEditModeOn(false);
   };
 
   return (
@@ -36,20 +36,20 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, diveSi
         <ButtonIcon
           className={styles.buttonBack}
           icon={<Icon name="chevron-left" />}
-          onClick={onClose}
+          onClick={props.onClose}
         />
       </div>
 
       <div className="cols col-12 flex-row">
-        {isEditModeOn && <div className="col-2"></div>}
-        <div className={isEditModeOn ? 'col-8' : 'col-12'}>
+        {props.isEditModeOn && <div className="col-2"></div>}
+        <div className={props.isEditModeOn ? 'col-8' : 'col-12'}>
           {
-            isEditModeOn
+            props.isEditModeOn
               ? (<h2>{screenData.TripCreator.headerEdit}</h2>)
               : (<h2>{screenData.TripCreator.header}</h2>)
           }
         </div>
-        {isEditModeOn
+        {props.isEditModeOn
         && (
           <div className="col-2 mb-4">
             <Button
@@ -63,7 +63,7 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, diveSi
 
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit, handleError)} className={styles.form}>
+      <form onSubmit={handleSubmit(props.onSubmit, props.handleError)} className={styles.form}>
         <div className={styles.formColumns}>
           <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.tripNameLabel}>
@@ -133,7 +133,7 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, diveSi
           </div>
           <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.diveSitesLabel}>
-              <SiteSelector error={diveSitesError} />
+              <SiteSelector error={props.diveSitesError} />
             </Label>
             <Label label="Details" className={styles.detailsField}>
               <textarea

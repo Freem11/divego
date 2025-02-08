@@ -9,7 +9,6 @@ import { insertItineraryRequest } from '../../supabaseCalls/itinerarySupabaseCal
 import { toast } from 'react-toastify';
 import screenData from '../newModals/screenData.json';
 import TripCreatorModal from '../newModals/tripCreatorModal';
-import { EditModeContext } from '../contexts/editModeContext';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
@@ -20,7 +19,6 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapConfig, mapRef } = useContext(MapContext);
   const { modalPause, modalShow } = useContext(ModalContext);
-  const { setIsEditModeOn } = useContext(EditModeContext);
 
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
@@ -62,13 +60,12 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
 
   const handleEditButton = (itineraryInfo: ItineraryItem) => {
     if (itineraryInfo) {
-      setIsEditModeOn(true);
       setSitesArray(itineraryInfo.siteList || []);
       modalShow(TripCreatorModal, {
         keepPreviousModal: true,
         size:              'large',
         itineraryInfo,
-        isEditModeOn1:      true,
+        isEditModeOn:      true,
       });
     }
   };

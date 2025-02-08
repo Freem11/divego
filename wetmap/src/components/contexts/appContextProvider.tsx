@@ -8,7 +8,6 @@ import UserProfileContextProvider from './userProfileContext';
 import AnimalContextProvider from './animalContext';
 import SelectedPictureContextProvider from './selectedPictureContext';
 import SitesArrayContextProvider from './sitesArrayContext';
-import EditModeContextProvider from './editModeContext';
 import ModalContextProvider from '../reusables/modal/contextProvider';
 import { MapContextProvider } from '../googleMap/mapContextProvider';
 import { DiveSiteContextProvider } from './diveSiteContextProvider';
@@ -25,7 +24,6 @@ const providers = [
   AnimalContextProvider,
   SelectedPictureContextProvider,
   SitesArrayContextProvider,
-  EditModeContextProvider,
   ModalContextProvider,
   DiveSiteContextProvider,
   DiveShopContextProvider,

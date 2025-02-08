@@ -10,20 +10,20 @@ import { insertItinerary, insertItineraryRequest } from '../../../supabaseCalls/
 import { ModalContext } from '../../reusables/modal/context';
 import screenData from '../screenData.json';
 import { ItineraryItem } from '../../../entities/itineraryItem';
-import { EditModeContext } from '../../contexts/editModeContext';
 
 type TripCreatorModalProps = Partial<ModalHandleProps> & {
-  itineraryInfo?:  ItineraryItem
+  itineraryInfo?: ItineraryItem
+  isEditModeOn:   boolean
 };
 
-export default function TripCreatorModal({ isEditModeOn1,  onModalCancel, itineraryInfo, registerModalCancelCallback }: TripCreatorModalProps) {
+export default function TripCreatorModal(props: TripCreatorModalProps) {
   const { selectedShop } = useContext(DiveShopContext);
   const { modalCancel } = useContext(ModalContext);
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
-  const [isEditModeOn, setIsEditModeOn] = useState(isEditModeOn1);
+  const [isEditModeOn, setIsEditModeOn] = useState(props.isEditModeOn);
 
-  registerModalCancelCallback?.(() => {
+  props.registerModalCancelCallback?.(() => {
     if (sitesArray.length > 0) {
       setSitesArray([]);
     }
@@ -91,19 +91,19 @@ export default function TripCreatorModal({ isEditModeOn1,  onModalCancel, itiner
     <>
       {selectedShop && (
         <TripCreatorView
-          onClose={onModalCancel}
+          onClose={props.onModalCancel}
           onSubmit={onSubmit}
           handleError={handleError}
           isEditModeOn={isEditModeOn}
           setIsEditModeOn={setIsEditModeOn}
           diveSitesError={diveSitesError}
           values={{
-            Name:    itineraryInfo?.tripName,
-            Link:    isEditModeOn ? itineraryInfo?.BookingPage : '',
-            Price:   isEditModeOn ? itineraryInfo?.price : '',
-            Start:   isEditModeOn ? itineraryInfo?.startDate : '',
-            End:     isEditModeOn ? itineraryInfo?.endDate : '',
-            Details: isEditModeOn ? itineraryInfo?.description : '',
+            Name:    props.itineraryInfo?.tripName,
+            Link:    props.itineraryInfo?.BookingPage,
+            Price:   props.itineraryInfo?.price,
+            Start:   props.itineraryInfo?.startDate,
+            End:     props.itineraryInfo?.endDate,
+            Details: props.itineraryInfo?.description,
           }}
         />
       )}
