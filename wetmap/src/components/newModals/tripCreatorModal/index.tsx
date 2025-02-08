@@ -17,12 +17,18 @@ type TripCreatorModalProps = Partial<ModalHandleProps> & {
 
 };
 
-export default function TripCreatorModal({ onModalCancel, itineraryInfo }: TripCreatorModalProps) {
+export default function TripCreatorModal({ onModalCancel, itineraryInfo, registerModalCancelCallback }: TripCreatorModalProps) {
   const { selectedShop } = useContext(DiveShopContext);
   const { modalCancel } = useContext(ModalContext);
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
   const { isEditModeOn, setIsEditModeOn } = useContext(EditModeContext);
+
+  registerModalCancelCallback?.(() => {
+    if (sitesArray.length > 0) {
+      setSitesArray([]);
+    }
+  });
 
   const diveSitesSubmitError = () => {
     toast.error(screenData.TripCreator.noSitesError);
