@@ -1,8 +1,6 @@
 import React from 'react';
-import WavyModalHeader from '../../reusables/wavyModalHeader';
 import Button from '../../reusables/button';
 import style from './style.module.scss';
-import defaultHeaderPicture from '../../../images/blackManta.png';
 import ShopCardList from '../../shopCardList';
 import { DiveShop } from '../../../entities/diveShop';
 import ButtonIcon from '../../reusables/buttonIcon';
