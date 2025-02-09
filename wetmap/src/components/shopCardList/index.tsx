@@ -1,18 +1,29 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import style from './style.module.scss';
 import { DiveShop } from '../../entities/diveShop';
 import ListItemWithImage from '../reusables/listItemWithImage';
 import getPhotoPublicUrl from '../../helpers/getPhotoPublicUrl';
 import defaultHeaderPicture from '../../images/blackManta.png';
+import ShopModal from '../newModals/shopModal';
+import { ModalContext } from '../reusables/modal/context';
 
 type shopCardListProps = {
   shopList:              DiveShop[] | null
 };
 
 export default function ShopCardList(props: shopCardListProps) {
+  const { modalShow } = useContext(ModalContext);
   if (!props.shopList) {
     return null;
   }
+
+  const openDiveShop = (id: number) => {
+    modalShow(ShopModal, {
+      id:                id,
+      size:              'large',
+      keepPreviousModal: true,
+    });
+  };
 
   return         (
     <div className={style.shopList}>
@@ -22,12 +33,15 @@ export default function ShopCardList(props: shopCardListProps) {
         if (shop.diveShopProfilePhoto) {
           imageUrl = getPhotoPublicUrl(shop.diveShopProfilePhoto);
         }
+
         return (
           <ListItemWithImage
             key={shop.id}
+            id={shop.id}
             title={shop.orgName}
             date={shop.diveShopBio}
             imageUrl={imageUrl}
+            onClick={openDiveShop}
           />
         );
       })}
