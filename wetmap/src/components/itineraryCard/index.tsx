@@ -37,11 +37,35 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       lngs.push(site.lng);
     });
 
+    const north = Math.max(...lats);
+    const south = Math.min(...lats);
+
+    const maxLng = Math.max(...lngs);
+    const minLng = Math.min(...lngs);
+
+    let east = maxLng;
+    let west = minLng;
+
+    if (maxLng - minLng > 180) {
+      east = minLng;
+      west = maxLng;
+    } else {
+      east = maxLng;
+      west = minLng;
+    }
+
+    const viewPort = {
+      north,
+      south,
+      east,
+      west,
+    };
+
     const moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
     const moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
 
     mapRef?.panTo({ lat: moveLat, lng: moveLng });
-    mapRef?.setZoom(12);
+    mapRef?.fitBounds(viewPort);
     setMapConfig(2);
 
     modalPause();
