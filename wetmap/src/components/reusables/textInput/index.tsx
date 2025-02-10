@@ -12,7 +12,7 @@ const TextInput = React.forwardRef<HTMLInputElement, TextInputProps>(function Te
 
   return (
     <div className={`${className ?? ''} ssrc-text-input ${error ? 'ssrc-text-input--error' : ''}`}>
-      {iconLeft && <i className="icon-left">{iconLeft}</i>}
+      {iconLeft && <i className="ssrc-text-input__icon-left">{iconLeft}</i>}
       <input ref={ref} {...rest} />
       {iconRight && <i className="ssrc-text-input__icon-right">{iconRight}</i>}
     </div>
