@@ -14,7 +14,7 @@ import { Form, FormRules } from './form';
 import FileInput from '../../reusables/fileInput';
 import Label from '../../reusables/label';
 import { toast } from 'react-toastify';
-import Tooltip from '../../reusables/tooltip';
+import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 
 type PicUploaderViewProps = {
   values:               Form
@@ -56,17 +56,19 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           onFileChange={props.handleImageSelection}
           className="d-none"
         >
-          {props.headerPictureUrl
+          {(props.headerPictureUrl)
             ? (
                 <div className={style.buttonImageUpload}>
-                  <Tooltip content={screenData.PicUploader.uploadIcon}>
-                    <ButtonIcon
-                      icon={<Icon name="camera-plus" />}
-                      className={`btn-lg ${style.buttonImageUpload} ${
-                        errors.photo ? 'blinking' : ''
-                      }`}
-                    />
-                  </Tooltip>
+                  <ButtonIcon
+                    icon={(
+                      <Tooltip content={screenData.PicUploader.uploadIcon} direction={TOOLTIP_DIRECTION.LEFT}>
+                        <Icon name="camera-plus" />
+                      </Tooltip>
+                    )}
+                    className={`btn-lg ${style.buttonImageUpload} ${
+                      errors.photo ? 'blinking' : ''
+                    }`}
+                  />
                 </div>
               )
             : (
