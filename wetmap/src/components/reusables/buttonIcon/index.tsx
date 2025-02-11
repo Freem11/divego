@@ -11,7 +11,9 @@ export type ButtonProps = {
 export default function ButtonIcon(props: ButtonProps) {
   return (
     <button disabled={props.disabled || false} onClick={props.onClick} className={`btn ${style.button} ${props.className ?? ''}`}>
-      <i className={style.icon}>{props.icon}</i>
+      <i className={style.icon}>
+        {props.icon}
+      </i>
     </button>
   );
 }

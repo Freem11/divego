@@ -20,10 +20,11 @@
 }
 
 .icon {
-	display: contents;
+  display: block;
+  height: 100%;
 
-	svg,
-	img {
-		height: 100%;
-	}
+  & div:has(svg), 
+  & svg {
+    height: 100%;
+  }
 }
