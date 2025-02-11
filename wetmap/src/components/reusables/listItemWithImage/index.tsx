@@ -8,12 +8,11 @@ type ListItemWithImageProps = {
   title:        string
   date:         string
   highlighted?: boolean
-  onClick:      (id: number) => void
 };
 
 export default function ListItemWithImage(props: ListItemWithImageProps) {
   return (
-    <div onClick={() => props.onClick(props.id)} className={`ssrc-list-item-with-image ${props.highlighted ? 'highlighted' : ''}`}>
+    <div className={`ssrc-list-item-with-image ${props.highlighted ? 'highlighted' : ''}`}>
       <div className="ssrc-list-item-with-image__container">
 
         <img src={props.imageUrl || ''} alt={props.imageAlt} />

@@ -35,14 +35,14 @@ export default function ShopCardList(props: shopCardListProps) {
         }
 
         return (
-          <ListItemWithImage
-            key={shop.id}
-            id={shop.id}
-            title={shop.orgName}
-            date={shop.diveShopBio}
-            imageUrl={imageUrl}
-            onClick={openDiveShop}
-          />
+          <div onClick={() => openDiveShop(shop.id)} key={shop.id}>
+            <ListItemWithImage
+              id={shop.id}
+              title={shop.orgName}
+              date={shop.diveShopBio}
+              imageUrl={imageUrl}
+            />
+          </div>
         );
       })}
     </div>
