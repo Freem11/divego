@@ -1,7 +1,7 @@
 import React from 'react';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
-import ListItemWithImage from '../../reusables/listItemWithImage';
+import SidebarCard from '../../reusables/sidebarCard';
 
 type DiveSiteItemProps = {
   diveSite: DiveSiteWithUserName
@@ -10,10 +10,9 @@ type DiveSiteItemProps = {
 export default function DiveSiteItem(props: DiveSiteItemProps) {
   const imageUrl = getPhotoPublicUrl(props.diveSite.photo);
   return (
-    <ListItemWithImage
+    <SidebarCard
       imageUrl={imageUrl}
       title={props.diveSite.name}
-      date={props.diveSite.divesitebio}
     />
   );
 }

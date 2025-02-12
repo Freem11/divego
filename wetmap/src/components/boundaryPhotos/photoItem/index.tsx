@@ -1,7 +1,7 @@
 import React from 'react';
 import { Photo } from '../../../entities/photos';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
-import ListItemWithImage from '../../reusables/listItemWithImage';
+import SidebarCard from '../../reusables/sidebarCard';
 
 type PhotoItemProps = {
   photo:        Photo
@@ -15,11 +15,9 @@ export function PhotoItem(props: PhotoItemProps) {
   }
 
   return (
-    <ListItemWithImage
+    <SidebarCard
       imageUrl={imageUrl}
       title={props.photo.label}
-      date={props.photo.dateTaken}
-      highlighted={props.highlighted}
     />
   );
 }
