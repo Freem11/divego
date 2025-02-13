@@ -4,6 +4,8 @@ import Icon from '../../../icons/Icon';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import EmptyState from '../emptyState';
 import Loader from '../loader';
+import Tooltip from '../tooltip';
+import screenData from '../../newModals/screenData.json';
 
 type SiteSelectorViewProps = {
   sites:            DiveSiteWithUserName[] | null
@@ -53,10 +55,16 @@ export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemo
           </div>
         )}
 
+
         <button className={styles.button} type="button" onClick={handleSitesAdd}>
-          <Icon name="add" />
-          <span>Add dive sites</span>
+          <Tooltip content={screenData.TripCreator.sitelistTooltip} direction="bottom">
+            <div className={styles.button}>
+              <Icon name="add" />
+              <span>Add dive sites</span>
+            </div>
+          </Tooltip>
         </button>
+
       </div>
     </>
   );

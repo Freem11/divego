@@ -10,6 +10,7 @@ import Button from '../../reusables/button';
 import Label from '../../reusables/label';
 import PriceTextInput from '../../reusables/priceTextInput';
 import SiteSelector from '../../reusables/siteSelector';
+import Tooltip from '../../reusables/tooltip';
 
 type TripCreatorViewProps = {
   values?:         Form
@@ -68,7 +69,11 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
           <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.tripNameLabel}>
               <TextInput
-                iconLeft={<Icon name="store" />}
+                iconLeft={(
+                  <Tooltip content={screenData.TripCreator.tripNameTooltip}>
+                    <Icon name="store" />
+                  </Tooltip>
+                )}
                 placeholder={screenData.TripCreator.tripNamePlaceholder}
                 error={errors.Name}
                 {...register('Name', FormRules.Name)}
@@ -77,7 +82,11 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
             <Label label={screenData.TripCreator.bookingLinkLabel}>
               <TextInput
-                iconLeft={<Icon name="link" />}
+                iconLeft={(
+                  <Tooltip content={screenData.TripCreator.booklingLinkTooltip}>
+                    <Icon name="link" />
+                  </Tooltip>
+                )}
                 placeholder={screenData.TripCreator.bookingLinkPlaceholder}
                 error={errors.Link}
                 {...register('Link', FormRules.Link)}
@@ -88,13 +97,18 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               <PriceTextInput
                 placeholder={screenData.TripCreator.pricePlaceholder}
                 error={errors.Price}
+                toolTipText={screenData.TripCreator.priceTooltip}
                 {...register('Price', FormRules.Price)}
               />
             </Label>
 
             <Label label={screenData.TripCreator.startDateLabel}>
               <TextInput
-                iconLeft={<Icon name="calendar-start" />}
+                iconLeft={(
+                  <Tooltip content={screenData.TripCreator.tripStartTooltip}>
+                    <Icon name="calendar-start" />
+                  </Tooltip>
+                )}
                 placeholder={screenData.TripCreator.startDatePlaceholder}
                 error={errors.Start}
                 type="date"
@@ -113,7 +127,11 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
             <Label label={screenData.TripCreator.endDateLabel}>
               <TextInput
-                iconLeft={<Icon name="calendar-end" />}
+                iconLeft={(
+                  <Tooltip content={screenData.TripCreator.tripEndTooltip}>
+                    <Icon name="calendar-end" />
+                  </Tooltip>
+                )}
                 placeholder={screenData.TripCreator.endDatePlaceholder}
                 error={errors.End}
                 type="date"
