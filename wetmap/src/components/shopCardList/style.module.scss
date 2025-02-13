@@ -1,0 +1,10 @@
+.shopList {
+  padding-top: 1em;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  overflow-y: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}

@@ -8,7 +8,7 @@ import SiteSubmitter from '../../newModals/siteSubmitter';
 import Settings from '../../newModals/setting';
 import UserProfile from '../../newModals/userProfile';
 import GuidesModal from '../../newModals/guides';
-import TripCreatorListModal from '../../newModals/tripCreatorListModal';
+import ShopsListModal from '../../newModals/shopsListModal';
 import { MapContext } from '../../googleMap/mapContext';
 import OnBoardingCarrousel from '../../onboarding';
 
@@ -79,8 +79,8 @@ export default function LayoutMain() {
     modalShow(GuidesModal);
   };
 
-  const animateTripCreatorListModal = () => {
-    modalShow(TripCreatorListModal);
+  const animateShopsListModal = () => {
+    modalShow(ShopsListModal);
   };
 
 
@@ -91,7 +91,7 @@ export default function LayoutMain() {
       animateProfileModal={animateProfileModal}
       animateSettingsModal={animateSettingsModal}
       animateGuidesModal={animateGuidesModal}
-      animateTripCreatorListModal={animateTripCreatorListModal}
+      animateShopsListModal={animateShopsListModal}
       isPartnerAccount={isPartnerAccount}
     />
   );

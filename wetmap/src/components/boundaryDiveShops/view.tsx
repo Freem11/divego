@@ -14,7 +14,6 @@ type BoundaryDiveShopsViewProps = {
 export function BoundaryDiveShopsView(props: BoundaryDiveShopsViewProps) {
   return (
     <InfiniteScroll
-      className="p-2 scrollable"
       loadMore={props.loadMoreDiveShops}
       hasMore={props.hasMoreDiveShops}
       isLoading={props.isLoadingDiveShops}

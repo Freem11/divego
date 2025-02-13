@@ -12,19 +12,19 @@ import AppleLinkButton from '../../../images/AppleCTA.png';
 import GoogleLinkButton from '../../../images/GoogleCTA.png';
 import Emilio from '../../../images/EmilioNew.png';
 import { BoundaryDiveShops } from '../../boundaryDiveShops';
-import { BoundaryPhotos } from '../../boundaryPhotos';
+import { BoundaryAnimals } from '../../boundaryAnimals';
 import { BoundaryDiveSites } from '../../boundaryDiveSites';
 import Tooltip from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
 
 type LayoutMainViewProps = {
-  mapConfig:                   number
-  animateSiteSubmitterModal:   () => void
-  animateProfileModal:         () => void
-  animateSettingsModal:        () => void
-  animateGuidesModal:          () => void
-  animateTripCreatorListModal: () => void
-  isPartnerAccount:            boolean
+  mapConfig:                 number
+  animateSiteSubmitterModal: () => void
+  animateProfileModal:       () => void
+  animateSettingsModal:      () => void
+  animateGuidesModal:        () => void
+  animateShopsListModal:     () => void
+  isPartnerAccount:          boolean
 };
 
 
@@ -83,7 +83,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                           <ButtonIcon
                             disabled={props.mapConfig === 0 ? false : true}
                             icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
-                            onClick={props.animateTripCreatorListModal}
+                            onClick={props.animateShopsListModal}
                           />
                         </Tooltip>
                       </li>
@@ -121,7 +121,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 className="scroll-container non-scrollable"
                 data={[
                   { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites',    content: BoundaryDiveSites },
-                  { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryPhotos },
+                  { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryAnimals },
                   { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Centers',  content: BoundaryDiveShops },
                   { key: 't-4', title: 'Test', content: 'Lorem ipsum dolor sit amet' },
                 ]}
