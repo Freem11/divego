@@ -115,15 +115,14 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
       <section>
         <div className="container-fluid">
-          <div className="cols col-gapless">
-            <div className="col-md-12 col-4 full-height scroll-container" style={{ overflow: 'hidden', height: '90vh' }}>
+          <div className="cols col-gapless mb-4">
+            <div className="col-md-12 col-3 full-height scroll-container mb-4" style={{ overflow: 'hidden', height: '90vh' }}>
               <Tabs
                 className="scroll-container non-scrollable"
                 data={[
                   { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites',    content: BoundaryDiveSites },
                   { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryAnimals },
                   { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Centers',  content: BoundaryDiveShops },
-                  { key: 't-4', title: 'Test', content: 'Lorem ipsum dolor sit amet' },
                 ]}
               />
 
@@ -141,7 +140,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               </div> */}
             </div>
 
-            <div className="col-md-12 col-8 full-height" style={{ height: '90vh' }}>
+            <div className="col-md-12 col-9 full-height" style={{ height: '90vh' }}>
               <MapLoader />
             </div>
           </div>
