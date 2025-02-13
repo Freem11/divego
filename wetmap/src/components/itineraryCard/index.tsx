@@ -29,21 +29,13 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       return; // Exit early if itinerizedDiveSites is undefined or empty
     }
 
-    const lats: number[] = [];
-    const lngs: number[] = [];
-
+    const bounds = new google.maps.LatLngBounds();
     itinerizedDiveSites.forEach((site) => {
-      lats.push(site.lat);
-      lngs.push(site.lng);
+      bounds.extend({ lat: site.lat, lng: site.lng });
     });
 
-    const moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
-    const moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
-
-    mapRef?.panTo({ lat: moveLat, lng: moveLng });
-    mapRef?.setZoom(12);
+    mapRef?.fitBounds(bounds);
     setMapConfig(2);
-
     modalPause();
   };
 
