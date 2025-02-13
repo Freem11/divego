@@ -102,8 +102,25 @@ export const readAllTestRecords = async () => {
   if (data) {
     console.log(data);
   }
+
+  return data;
 };
 
+export const deleteAllUserRecords = async () => {
+  console.log('Deleting all user records:');
+  const { data, error } = await supabase
+    .from('RLS_Test_Playground')
+    .delete()
+    .neq('id', 0);
+
+  if (error) {
+    console.log('couldn\'t do it,', error);
+  }
+
+  if (data) {
+    console.log(data);
+  }
+};
 
 
 export const getShopByUserID = async (value) => {

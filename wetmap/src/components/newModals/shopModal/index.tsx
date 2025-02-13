@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
-import { updateDiveShop, insertDocument, readAllTestRecords } from '../../../supabaseCalls/shopsSupabaseCalls';
+import { updateDiveShop, insertDocument, readAllTestRecords, deleteAllUserRecords } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { SelectedShopContext } from '../../contexts/selectedShopContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
@@ -43,7 +43,8 @@ export default function ShopModal(props: ShopModalProps) {
       if (itins) {
         setItineraryList(itins);
       }
-    } catch (e) {
+    }
+    catch (e) {
       console.log({ title: 'Error', message: (e as Error).message });
     }
   };
@@ -59,8 +60,16 @@ export default function ShopModal(props: ShopModalProps) {
   };
 
   const handleSelectTest = async () => {
-    await readAllTestRecords();
-  }
+
+    let test = await readAllTestRecords();
+    console.log(test);
+    console.log(typeof(test[0].user_id));
+
+  };
+
+  const handleDeleteTest = async () => {
+    await deleteAllUserRecords();
+  };
 
   const handleImageSelection = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!selectedShop) {
@@ -99,6 +108,7 @@ export default function ShopModal(props: ShopModalProps) {
           isMyShop={isMyShop}
           handleInsertTest={handleInsertTest}
           handleSelectTest={handleSelectTest}
+          handleDeleteTest={handleDeleteTest}
           handleDiveShopImageSelection={handleImageSelection}
         />
       )}

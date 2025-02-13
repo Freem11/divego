@@ -18,6 +18,7 @@ type ShopModelViewProps = {
   openTripCreatorList:          () => void
   handleInsertTest:             () => void
   handleSelectTest:             () => void
+  handleDeleteTest:             () => void
 
   diveShop:         DiveShop
   isPartnerAccount: boolean
@@ -85,6 +86,9 @@ export default function ShopModalView(props: ShopModelViewProps) {
           </Button>
           <Button className="mt-2 btn-lg" onClick={props.handleSelectTest}>
             Retrieve your records
+          </Button>
+          <Button className="mt-2 btn-lg" onClick={props.handleDeleteTest}>
+            Delete all records
           </Button>
         </div>
         <ItineraryCardList itineraryList={props.itineraryList} canChangeItineraries={props?.isPartnerAccount && props.isMyShop} />
