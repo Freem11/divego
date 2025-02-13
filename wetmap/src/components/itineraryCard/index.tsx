@@ -29,45 +29,13 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       return; // Exit early if itinerizedDiveSites is undefined or empty
     }
 
-    const lats: number[] = [];
-    const lngs: number[] = [];
-
+    const bounds = new google.maps.LatLngBounds();
     itinerizedDiveSites.forEach((site) => {
-      lats.push(site.lat);
-      lngs.push(site.lng);
+      bounds.extend({ lat: site.lat, lng: site.lng });
     });
 
-    const north = Math.max(...lats);
-    const south = Math.min(...lats);
-
-    const maxLng = Math.max(...lngs);
-    const minLng = Math.min(...lngs);
-
-    let east = maxLng;
-    let west = minLng;
-
-    if (maxLng - minLng > 180) {
-      east = minLng;
-      west = maxLng;
-    } else {
-      east = maxLng;
-      west = minLng;
-    }
-
-    const viewPort = {
-      north,
-      south,
-      east,
-      west,
-    };
-
-    const moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
-    const moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
-
-    mapRef?.panTo({ lat: moveLat, lng: moveLng });
-    mapRef?.fitBounds(viewPort);
+    mapRef?.fitBounds(bounds);
     setMapConfig(2);
-
     modalPause();
   };
 
