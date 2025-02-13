@@ -9,27 +9,30 @@ type ListItemWithImageProps = {
   title:        string
   info?:        string
   rating?:      number
+  hoverHide?:   boolean
   highlighted?: boolean
 };
 
-export default function SidebarCard({ imageUrl, imageAlt, title, info, rating, highlighted }: ListItemWithImageProps) {
+export default function SidebarCard({ imageUrl, imageAlt, title, info, rating, highlighted, hoverHide }: ListItemWithImageProps) {
   return (
     <div className={`${styles.card} ${highlighted && styles.highlighted}`}>
-      <div className={styles.overlay}></div>
+      <div className={`${styles.overlay} ${hoverHide && styles.hoverHide}`}></div>
       <img src={imageUrl || backgroundPhoto} alt={imageAlt} className={styles.backgroundImage} />
-      <p className={styles.title}>{title}</p>
+      <div className={`${styles.content} ${hoverHide && styles.hoverHide}`}>
+        <p className={styles.title}>{title}</p>
 
-      <div className={styles.info}>
-        {rating && (
-          <>
-            <div className={styles.rating}>
-              <Icon name="star" />
-              <span>{rating}</span>
-            </div>
-            •
-          </>
-        )}
-        {info && <span>{info}</span>}
+        <div className={styles.info}>
+          {rating && (
+            <>
+              <div className={styles.rating}>
+                <Icon name="star" />
+                <span>{rating}</span>
+              </div>
+              •
+            </>
+          )}
+          {info && <span>{info}</span>}
+        </div>
       </div>
     </div>
   );

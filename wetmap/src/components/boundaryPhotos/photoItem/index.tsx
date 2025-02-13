@@ -17,6 +17,7 @@ export function PhotoItem(props: PhotoItemProps) {
   return (
     <SidebarCard
       imageUrl={imageUrl}
+      hoverHide={true}
       title={props.photo.label}
     />
   );
