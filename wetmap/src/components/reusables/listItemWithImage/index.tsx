@@ -2,6 +2,7 @@ import React  from 'react';
 import './style.scss';
 
 type ListItemWithImageProps = {
+  id:           number
   imageUrl:     string | null
   imageAlt?:    string
   title:        string

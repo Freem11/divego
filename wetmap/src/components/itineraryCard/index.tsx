@@ -8,6 +8,7 @@ import { MapContext } from '../googleMap/mapContext';
 import { insertItineraryRequest } from '../../supabaseCalls/itinerarySupabaseCalls';
 import { toast } from 'react-toastify';
 import screenData from '../newModals/screenData.json';
+import TripCreatorModal from '../newModals/tripCreatorModal';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
@@ -17,7 +18,7 @@ type ItineraryCardProps = {
 export default function ItineraryCard({ itinerary, canChangeItinerary }: ItineraryCardProps) {
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapConfig, mapRef } = useContext(MapContext);
-  const { modalPause } = useContext(ModalContext);
+  const { modalPause, modalShow } = useContext(ModalContext);
 
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
@@ -49,12 +50,25 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
     }
   };
 
+  const handleEditButton = (itineraryInfo: ItineraryItem) => {
+    if (itineraryInfo) {
+      setSitesArray(itineraryInfo.siteList || []);
+      modalShow(TripCreatorModal, {
+        keepPreviousModal: true,
+        size:              'large',
+        itineraryInfo,
+        isEditModeOn:      true,
+      });
+    }
+  };
+
   return (
     <ItineraryCardView
       itinerary={itinerary}
       flipMap={flipMap}
       canChangeItinerary={canChangeItinerary}
       handleDeleteButton={handleDeleteButton}
+      handleEditButton={handleEditButton}
     />
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext } from 'react';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import TripCreatorView from './view';
 import { DiveShopContext } from '../../contexts/diveShopContext';
@@ -6,29 +6,31 @@ import { Form } from './form';
 import { SitesArrayContext } from '../../contexts/sitesArrayContext';
 import { toast } from 'react-toastify';
 import { FieldErrors } from 'react-hook-form';
-import { insertItinerary } from '../../../supabaseCalls/itinerarySupabaseCalls';
+import { insertItinerary, insertItineraryRequest } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { ModalContext } from '../../reusables/modal/context';
 import screenData from '../screenData.json';
+import { ItineraryItem } from '../../../entities/itineraryItem';
 
-type TripCreatorModalProps = Partial<ModalHandleProps>;
+type TripCreatorModalProps = Partial<ModalHandleProps> & {
+  itineraryInfo?: ItineraryItem
+  isEditModeOn:   boolean
+};
 
-export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProps) {
+export default function TripCreatorModal(props: TripCreatorModalProps) {
   const { selectedShop } = useContext(DiveShopContext);
   const { modalCancel } = useContext(ModalContext);
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
-
-  const isEditModeOn = false;
-
   const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
+  const [isEditModeOn, setIsEditModeOn] = useState(props.isEditModeOn);
 
-  useEffect(() => {
-    return () => {
-      setSitesArray([]); // Clear dive sites array
-    };
-  }, []);
+  props.registerModalCancelCallback?.(() => {
+    if (sitesArray.length > 0) {
+      setSitesArray([]);
+    }
+  });
 
   const diveSitesSubmitError = () => {
-    toast.error('Dive sites is required');
+    toast.error(screenData.TripCreator.noSitesError);
     setDiveSitesError(true);
   };
 
@@ -62,14 +64,26 @@ export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProp
       BookingPage: formData.Link,
     };
 
-    const { error } = await insertItinerary(trip);
+    if (isEditModeOn) {
+      const { error } = await insertItineraryRequest(trip, 'Edit');
 
-    if (error) {
-      toast.error(screenData.TripCreator.submitError); // Error toast
+      if (error) {
+        toast.error(screenData.TripCreator.editTripError);
+      } else {
+        toast.success(screenData.TripCreator.editTripSuccess);
+        modalCancel();
+        setSitesArray([]);
+      }
     } else {
-      toast.success(screenData.TripCreator.submitSuccess); // Success toast
-      modalCancel(); // Close modal
-      setSitesArray([]); // Clear dive sites array
+      const { error } = await insertItinerary(trip);
+
+      if (error) {
+        toast.error(screenData.TripCreator.submitError);
+      } else {
+        toast.success(screenData.TripCreator.submitSuccess);
+        modalCancel();
+        setSitesArray([]);
+      }
     }
   };
 
@@ -77,11 +91,20 @@ export default function TripCreatorModal({ onModalCancel }: TripCreatorModalProp
     <>
       {selectedShop && (
         <TripCreatorView
-          onClose={onModalCancel}
+          onClose={props.onModalCancel}
           onSubmit={onSubmit}
           handleError={handleError}
           isEditModeOn={isEditModeOn}
+          setIsEditModeOn={setIsEditModeOn}
           diveSitesError={diveSitesError}
+          values={{
+            Name:    props.itineraryInfo?.tripName,
+            Link:    props.itineraryInfo?.BookingPage,
+            Price:   props.itineraryInfo?.price,
+            Start:   props.itineraryInfo?.startDate,
+            End:     props.itineraryInfo?.endDate,
+            Details: props.itineraryInfo?.description,
+          }}
         />
       )}
     </>
