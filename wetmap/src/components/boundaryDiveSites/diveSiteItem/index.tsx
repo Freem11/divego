@@ -8,7 +8,7 @@ type DiveSiteItemProps = {
 };
 
 export default function DiveSiteItem(props: DiveSiteItemProps) {
-  const imageUrl = getPhotoPublicUrl(props.diveSite.photo);
+  const imageUrl = getPhotoPublicUrl(props.diveSite.divesiteprofilephoto);
   return (
     <SidebarCard
       imageUrl={imageUrl}

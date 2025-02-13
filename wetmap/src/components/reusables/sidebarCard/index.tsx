@@ -3,7 +3,7 @@ import styles from './style.module.scss';
 import backgroundPhoto from '../../../images/blackManta.png';
 import Icon from '../../../icons/Icon';
 
-type ListItemWithImageProps = {
+type SidebarCardProps = {
   imageUrl:     string | null
   imageAlt?:    string
   title:        string
@@ -13,7 +13,7 @@ type ListItemWithImageProps = {
   highlighted?: boolean
 };
 
-export default function SidebarCard(props: ListItemWithImageProps) {
+export default function SidebarCard(props: SidebarCardProps) {
   return (
     <div className={`${styles.card} ${props.highlighted && styles.highlighted}`}>
       <div className={`${styles.overlay} ${props.hoverHide && styles.hoverHide}`}></div>

@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import style from './style.module.scss';
 import { DiveShop } from '../../entities/diveShop';
-import ListItemWithImage from '../reusables/listItemWithImage';
 import getPhotoPublicUrl from '../../helpers/getPhotoPublicUrl';
 import defaultHeaderPicture from '../../images/blackManta.png';
 import ShopModal from '../newModals/shopModal';
 import { ModalContext } from '../reusables/modal/context';
+import SidebarCard from '../reusables/sidebarCard';
 
 type shopCardListProps = {
   shopList:              DiveShop[] | null
@@ -36,10 +36,9 @@ export default function ShopCardList(props: shopCardListProps) {
 
         return (
           <div onClick={() => openDiveShop(shop.id)} key={shop.id}>
-            <ListItemWithImage
-              id={shop.id}
+            <SidebarCard
               title={shop.orgName}
-              date={shop.diveShopBio}
+              info={shop.diveShopBio}
               imageUrl={imageUrl}
             />
           </div>
