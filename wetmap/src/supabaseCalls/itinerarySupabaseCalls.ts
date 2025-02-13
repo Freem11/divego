@@ -41,15 +41,16 @@ export const insertItinerary = async (values: ItineraryItem) => {
 export const insertItineraryRequest = async (values: ItineraryItem, reqType: string) => {
   const { data, error } = await supabase.from('itineraryRequests').insert([
     {
-      shopID:      values.shopID,
-      tripName:    values.tripName,
-      startDate:   values.startDate,
-      endDate:     values.endDate,
-      price:       values.price,
-      description: values.description,
-      siteList:    values.siteList,
-      BookingPage: values.BookingPage,
-      requestType: reqType,
+      shopID:              values.shopID,
+      tripName:            values.tripName,
+      startDate:           values.startDate,
+      endDate:             values.endDate,
+      price:               values.price,
+      description:         values.description,
+      siteList:            values.siteList,
+      BookingPage:         values.BookingPage,
+      requestType:         reqType,
+      OriginalItineraryID: values.OriginalItineraryID,
     },
   ]);
 
