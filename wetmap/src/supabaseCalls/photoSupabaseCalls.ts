@@ -109,6 +109,8 @@ export const getAnimalsInBubble = async (bubble: GPSBubble, filter?: Partial<Pho
     builder.ilike('label', '%' + filter.label + '%');
   }
 
+  builder.order('times_seen', { ascending: false });
+
   if (pagination?.page) {
     builder.range(pagination.from(), pagination.to());
   }
