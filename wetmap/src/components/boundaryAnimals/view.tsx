@@ -1,17 +1,20 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
 import InfiniteScroll from '../reusables/infiniteScroll';
 import { AnimalItem } from './animalItem';
-import DynamicSelect, { GetMoreOptions } from '../reusables/dynamicSelect';
 import Icon from '../../icons/Icon';
 import { Animal } from '../../entities/photos';
+import TextInput from '../reusables/textInput';
+import Chip from '../reusables/chip';
+import style from './style.module.scss';
 
 type BoundaryAnimalsViewProps = {
   uniqueKey?:         string
-  getMoreAnimals:     GetMoreOptions
-  handleAnimalSelect: (e: any) => void
+  handleAnimalSearch: (search: string) => void
+  handleAnimalSelect: (label: string) => void
   loadMoreAnimals:    (page: number) => void
   hasMoreAnimals:     boolean
   selectedAnimals:    string[]
+  searchAnimal:       string
   isLoadingAnimals:   boolean
   animals:            Animal[] | null
 };
@@ -19,24 +22,38 @@ type BoundaryAnimalsViewProps = {
 export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
   return (
     <>
-      <DynamicSelect
-        labelInValue={true}
-        maxSelectedOptions={2}
+      <TextInput
         placeholder="Search for an animal"
-        getMoreOptions={props.getMoreAnimals}
         iconLeft={<Icon name="shark" />}
-        onChange={props.handleAnimalSelect}
+        onChange={(event: ChangeEvent<HTMLInputElement>) => props.handleAnimalSearch(event.target.value)}
       />
+
+      {props.selectedAnimals.length > 0 && (
+        <div className={style.chipContainer}>
+          {props.selectedAnimals.map(item => (
+            <Chip key={item} unselect={() => props.handleAnimalSelect(item)}>{item}</Chip>
+          ))}
+        </div>
+      )}
 
       <InfiniteScroll
         key={props.uniqueKey}
         loadMore={props.loadMoreAnimals}
         hasMore={props.hasMoreAnimals}
         isLoading={props.isLoadingAnimals}
-        renderEmpty={() => <div>No animals in this area</div>}
+        renderEmpty={() => {
+          if (props.searchAnimal) {
+            return <div>{`Can't find animals like '${props.searchAnimal}' in this area`}</div>;
+          }
+          return <div>No animals in this area</div>;
+        }}
       >
         {props.animals?.map((item) => {
-          return <AnimalItem key={item.photofile} animal={item} highlighted={props.selectedAnimals.includes(item.label)} />;
+          return (
+            <div key={item.photofile} onClick={() => props.handleAnimalSelect(item.label)}>
+              <AnimalItem animal={item} highlighted={props.selectedAnimals.includes(item.label)} />
+            </div>
+          );
         })}
 
       </InfiniteScroll>

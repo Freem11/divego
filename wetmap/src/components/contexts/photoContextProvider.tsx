@@ -14,6 +14,8 @@ export type PhotoContextType = {
   heatPoints:             HeatPoint[] | null
   selectedAnimals:        string[]
   setSelectedAnimals:     Dispatch<React.SetStateAction<string[]>>
+  searchAnimal:           string
+  setSearchAnimal:        Dispatch<React.SetStateAction<string>>
   animalCollection:       PagedCollection<Animal>
   updateAnimalCollection: (page: number, reset?: boolean) => Promise<void>
 };
@@ -22,6 +24,7 @@ export const PhotoContextProvider = ({ children }: any) => {
   const { boundaries, mapConfig } = useContext(MapContext);
   const [heatPoints, setHeatPoints] = useState<HeatPoint[] | null>(null);
   const [selectedAnimals, setSelectedAnimals] = useState<string[]>([]);
+  const [searchAnimal, setSearchAnimal] = useState<string>('');
   const [animalCollection, setCollection] = useState(new PagedCollection<Animal>());
 
   const getHeatPoints = async () => {
@@ -41,7 +44,7 @@ export const PhotoContextProvider = ({ children }: any) => {
       setCollection(prev => ({ ...prev, isLoading: true }));
       const bubble = GPSBubble.createFromBoundaries(boundaries);
       const pagination = new Pagination({ page, ipp: 20 });
-      const items = await GPSBubble.getItemsInGpsBubble(getAnimalsInBubble, bubble, {}, pagination);
+      const items = await GPSBubble.getItemsInGpsBubble(getAnimalsInBubble, bubble, { label: searchAnimal }, pagination);
       setCollection((prev) => {
         return PagedCollection.updateItems(prev, items, reset, pagination);
       });
@@ -60,6 +63,8 @@ export const PhotoContextProvider = ({ children }: any) => {
       heatPoints,
       selectedAnimals,
       setSelectedAnimals,
+      searchAnimal,
+      setSearchAnimal,
       animalCollection,
       updateAnimalCollection,
     }}
