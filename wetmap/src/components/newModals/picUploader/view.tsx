@@ -116,6 +116,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               )}
               placeholder={screenData.PicUploader.whenPlaceholder}
               error={errors.date}
+              max={new Date().toLocaleString('sv-SE').split(' ')[0]}
             />
           </Label>
 

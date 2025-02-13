@@ -33,3 +33,9 @@ export type Photo = {
   UserID:     string
   UserName:   string
 };
+
+export type Animal = {
+  label:      string
+  photofile:  string
+  times_seen: number
+};
