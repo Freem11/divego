@@ -7,10 +7,10 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import TripCreatorListModal from '../tripCreatorListModal';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveShopContext } from '../../contexts/diveShopContext';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
+import TripCreatorModal from '../tripCreatorModal';
 
 type ShopModalProps = Partial<ModalHandleProps> & {
   id?:    number
@@ -95,9 +95,10 @@ export default function ShopModal(props: ShopModalProps) {
   };
 
   const openTripCreatorList = async () => {
-    modalShow(TripCreatorListModal, {
+    modalShow(TripCreatorModal, {
       keepPreviousModal: true,
-      size:              'medium',
+      size:              'large',
+      isEditModeOn:      false,
     });
   };
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Animal } from '../../../entities/photos';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
-import ListItemWithImage from '../../reusables/listItemWithImage';
+import SidebarCard from '../../reusables/sidebarCard';
 
 type AnimalItemProps = {
   animal:       Animal
@@ -15,11 +15,11 @@ export function AnimalItem(props: AnimalItemProps) {
   }
 
   return (
-    <ListItemWithImage
+    <SidebarCard
       imageUrl={imageUrl}
+      hoverHide={true}
       title={props.animal.label}
-      date={`seen ${props.animal.times_seen} time(s)`}
-      highlighted={props.highlighted}
+      info={`${props.animal.times_seen} sighting(s)`}
     />
   );
 }

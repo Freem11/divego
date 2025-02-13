@@ -25,6 +25,12 @@ export const FormRules: FormValidationRules<Form> =   {
     },
     pattern:  /^\$\d+(\.\d{1,2})?$/,
   },
+  Start: {
+    required: 'Trip Start Date is required',
+  },
+  End: {
+    required: 'Trip End Date is required',
+  },
   Details: {
     required: 'Details is required',
   },

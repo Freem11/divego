@@ -19,6 +19,7 @@ type DiveSiteProps = Partial<ModalHandleProps> & {
   id?:    number
   panTo?: boolean
 };
+
 export default function DiveSite(props: DiveSiteProps) {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(DiveSiteContext);
   const { profile }          = useContext(UserProfileContext);

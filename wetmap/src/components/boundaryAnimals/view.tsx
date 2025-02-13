@@ -30,7 +30,6 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
 
       <InfiniteScroll
         key={props.uniqueKey}
-        className="p-2 scrollable"
         loadMore={props.loadMoreAnimals}
         hasMore={props.hasMoreAnimals}
         isLoading={props.isLoadingAnimals}
