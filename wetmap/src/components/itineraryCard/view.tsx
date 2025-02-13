@@ -39,7 +39,7 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
               {' - '}
               {itinerary.endDate && readableDate(itinerary.endDate)}
             </p>
-            <span>|</span>
+            <span>•</span>
             <p>{itinerary.price }</p>
           </div>
         </div>

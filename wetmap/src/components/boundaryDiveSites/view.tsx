@@ -16,7 +16,6 @@ export function BoundaryDiveSitesView(props: BoundaryDiveSitesViewProps) {
   return (
     <InfiniteScroll
       key={props.uniqueKey}
-      className="p-2 scrollable"
       loadMore={props.loadMoreDiveSites}
       hasMore={props.hasMoreDiveSites}
       isLoading={props.isLoadingDiveSites}

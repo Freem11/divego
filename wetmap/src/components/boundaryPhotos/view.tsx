@@ -30,7 +30,6 @@ export function BoundaryPhotosView(props: BoundaryPhotosViewProps) {
 
       <InfiniteScroll
         key={props.uniqueKey}
-        className="p-2 scrollable"
         loadMore={props.loadMorePhotos}
         hasMore={props.hasMorePhotos}
         isLoading={props.isLoadingPhotos}

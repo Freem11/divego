@@ -50,7 +50,7 @@ export default function Container(props: InfiniteScrollProps) {
 
 
   return (
-    <div className={`ssrc-infinite-scroll ${props.className ?? ''} ${props.isLoading ? 'ssrc-infinite-scroll--loading' : ''}`} ref={wrapperRef}>
+    <div className={`ssrc-infinite-scroll ${props.className ?? ''} scrollable ${props.isLoading ? 'ssrc-infinite-scroll--loading' : ''}`} ref={wrapperRef}>
       {props.children}
       <div ref={targetRef}></div>
     </div>
