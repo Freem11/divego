@@ -111,7 +111,11 @@
         "userDefaultDescription": "Say a little about yourself...",
         "UserProfileUpdateSuccessMessage": "User Profile updated successfully...",
         "DuplicateUserNameErrorMessage": "Username already in use, please try again...",
-        "EmptyUserNameError": "Username cannot be empty, please try again..."
+        "EmptyUserNameError": "Username cannot be empty, please try again...",
+        "addProfilePhotoToolTip": "Add a profile picture",
+        "nameChangeToolTip": "Update username",
+        "bioChangeToolTip": "Update description",
+        "FollowToolTip": "Follow/Unfollow user"
       },
       "DiveSite": {
         "drawerHeader": "Sea Creature Sightings",
