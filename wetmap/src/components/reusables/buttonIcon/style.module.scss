@@ -24,7 +24,7 @@
   height: 100%;
 
   & div:has(svg), 
-  & svg {
+  & svg,img {
     height: 100%;
   }
 }
