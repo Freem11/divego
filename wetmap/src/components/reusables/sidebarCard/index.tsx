@@ -13,25 +13,25 @@ type ListItemWithImageProps = {
   highlighted?: boolean
 };
 
-export default function SidebarCard({ imageUrl, imageAlt, title, info, rating, highlighted, hoverHide }: ListItemWithImageProps) {
+export default function SidebarCard(props: ListItemWithImageProps) {
   return (
-    <div className={`${styles.card} ${highlighted && styles.highlighted}`}>
-      <div className={`${styles.overlay} ${hoverHide && styles.hoverHide}`}></div>
-      <img src={imageUrl || backgroundPhoto} alt={imageAlt} className={styles.backgroundImage} />
-      <div className={`${styles.content} ${hoverHide && styles.hoverHide}`}>
-        <p className={styles.title}>{title}</p>
+    <div className={`${styles.card} ${props.highlighted && styles.highlighted}`}>
+      <div className={`${styles.overlay} ${props.hoverHide && styles.hoverHide}`}></div>
+      <img src={props.imageUrl || backgroundPhoto} alt={props.imageAlt} className={styles.backgroundImage} />
+      <div className={`${styles.content} ${props.hoverHide && styles.hoverHide}`}>
+        <p className={styles.title}>{props.title}</p>
 
         <div className={styles.info}>
-          {rating && (
+          {props.rating && (
             <>
               <div className={styles.rating}>
                 <Icon name="star" />
-                <span>{rating}</span>
+                <span>{props.rating}</span>
               </div>
               •
             </>
           )}
-          {info && <span>{info}</span>}
+          {props.info && <span>{props.info}</span>}
         </div>
       </div>
     </div>
