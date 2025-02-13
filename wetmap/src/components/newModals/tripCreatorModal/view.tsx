@@ -12,35 +12,58 @@ import PriceTextInput from '../../reusables/priceTextInput';
 import SiteSelector from '../../reusables/siteSelector';
 
 type TripCreatorViewProps = {
-  onClose?:       () => void
-  isEditModeOn:   boolean
-  onSubmit:       (data: Form) => void
-  handleError:    (errors: FieldErrors<Form>) => void
-  diveSitesError: boolean
+  values?:         Form
+  onClose?:        () => void
+  onSubmit:        (data: Form) => void
+  handleError:     (errors: FieldErrors<Form>) => void
+  diveSitesError:  boolean
+  isEditModeOn:    boolean
+  setIsEditModeOn: React.Dispatch<React.SetStateAction<boolean>>
 };
 
-export default function TripCreatorView({ onClose, onSubmit, handleError, isEditModeOn, diveSitesError }: TripCreatorViewProps) {
-  const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
-
+export default function TripCreatorView(props: TripCreatorViewProps) {
+  const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({ values: props.values });
   const startDate = watch('Start'); // Get start date value from form
   const endDate = watch('End'); // Get end date value from form
+
+  const cloneButtonPress = () => {
+    props.setIsEditModeOn(false);
+  };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.buttonBack}>
         <ButtonIcon
+          className={styles.buttonBack}
           icon={<Icon name="chevron-left" />}
-          onClick={onClose}
+          onClick={props.onClose}
         />
       </div>
 
-      {
-        isEditModeOn
-          ? (<h2>{screenData.TripCreator.headerEdit}</h2>)
-          : (<h2>{screenData.TripCreator.header}</h2>)
-      }
+      <div className="cols col-12 flex-row">
+        {props.isEditModeOn && <div className="col-2"></div>}
+        <div className={props.isEditModeOn ? 'col-8' : 'col-12'}>
+          {
+            props.isEditModeOn
+              ? (<h2>{screenData.TripCreator.headerEdit}</h2>)
+              : (<h2>{screenData.TripCreator.header}</h2>)
+          }
+        </div>
+        {props.isEditModeOn
+        && (
+          <div className="col-2 mb-4">
+            <Button
+              onClick={() => cloneButtonPress()}
+              type="button"
+            >
+              {screenData.TripCreator.cloneTripButton}
+            </Button>
+          </div>
+        )}
 
-      <form onSubmit={handleSubmit(onSubmit, handleError)} className={styles.form}>
+      </div>
+
+      <form onSubmit={handleSubmit(props.onSubmit, props.handleError)} className={styles.form}>
         <div className={styles.formColumns}>
           <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.tripNameLabel}>
@@ -110,7 +133,7 @@ export default function TripCreatorView({ onClose, onSubmit, handleError, isEdit
           </div>
           <div className={styles.formColumn}>
             <Label label={screenData.TripCreator.diveSitesLabel}>
-              <SiteSelector error={diveSitesError} />
+              <SiteSelector error={props.diveSitesError} />
             </Label>
             <Label label="Details" className={styles.detailsField}>
               <textarea

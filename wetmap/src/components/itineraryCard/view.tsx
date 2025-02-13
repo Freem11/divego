@@ -12,9 +12,10 @@ type TripCardViewProps = {
   flipMap:             (siteList: number[]) => Promise<void>
   canChangeItinerary?: boolean
   handleDeleteButton:  (itinerary: ItineraryItem) => void
+  handleEditButton:    (itinerary: ItineraryItem) => void
 };
 
-export default function ItineraryCardView({ itinerary, flipMap, canChangeItinerary, handleDeleteButton }: TripCardViewProps) {
+export default function ItineraryCardView({ itinerary, flipMap, canChangeItinerary, handleDeleteButton, handleEditButton }: TripCardViewProps) {
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const textRef = useRef<HTMLParagraphElement>(null);
@@ -34,9 +35,9 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
           <p className={style.title}>{itinerary.tripName}</p>
           <div className={style.info}>
             <p>
-              {readableDate(itinerary.startDate)}
+              {itinerary.startDate && readableDate(itinerary.startDate)}
               {' - '}
-              {readableDate(itinerary.endDate)}
+              {itinerary.endDate && readableDate(itinerary.endDate)}
             </p>
             <span>•</span>
             <p>{itinerary.price }</p>
@@ -51,7 +52,7 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
                     <ButtonIcon
                       icon={<Icon name="pencil" />}
                       className={style.actionIcon}
-                      // onClick={}
+                      onClick={() => handleEditButton(itinerary)}
                     />
                   </Tooltip>
                   <Tooltip content={screenData.TripCard.deleteButton}>
@@ -69,7 +70,7 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
                     <ButtonIcon
                       icon={<Icon name="anchor" />}
                       className={style.actionIcon}
-                      onClick={() => flipMap(itinerary.siteList)}
+                      onClick={() => itinerary.siteList && flipMap(itinerary.siteList)}
                     />
                   </Tooltip>
                   <Tooltip content={screenData.TripCard.bookButton}>

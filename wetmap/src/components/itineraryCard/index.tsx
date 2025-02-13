@@ -8,6 +8,7 @@ import { MapContext } from '../googleMap/mapContext';
 import { insertItineraryRequest } from '../../supabaseCalls/itinerarySupabaseCalls';
 import { toast } from 'react-toastify';
 import screenData from '../newModals/screenData.json';
+import TripCreatorModal from '../newModals/tripCreatorModal';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
@@ -17,7 +18,7 @@ type ItineraryCardProps = {
 export default function ItineraryCard({ itinerary, canChangeItinerary }: ItineraryCardProps) {
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapConfig, mapRef } = useContext(MapContext);
-  const { modalPause } = useContext(ModalContext);
+  const { modalPause, modalShow } = useContext(ModalContext);
 
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
@@ -29,21 +30,13 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       return; // Exit early if itinerizedDiveSites is undefined or empty
     }
 
-    const lats: number[] = [];
-    const lngs: number[] = [];
-
+    const bounds = new google.maps.LatLngBounds();
     itinerizedDiveSites.forEach((site) => {
-      lats.push(site.lat);
-      lngs.push(site.lng);
+      bounds.extend({ lat: site.lat, lng: site.lng });
     });
 
-    const moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
-    const moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
-
-    mapRef?.panTo({ lat: moveLat, lng: moveLng });
-    mapRef?.setZoom(12);
+    mapRef?.fitBounds(bounds);
     setMapConfig(2);
-
     modalPause();
   };
 
@@ -57,12 +50,25 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
     }
   };
 
+  const handleEditButton = (itineraryInfo: ItineraryItem) => {
+    if (itineraryInfo) {
+      setSitesArray(itineraryInfo.siteList || []);
+      modalShow(TripCreatorModal, {
+        keepPreviousModal: true,
+        size:              'large',
+        itineraryInfo,
+        isEditModeOn:      true,
+      });
+    }
+  };
+
   return (
     <ItineraryCardView
       itinerary={itinerary}
       flipMap={flipMap}
       canChangeItinerary={canChangeItinerary}
       handleDeleteButton={handleDeleteButton}
+      handleEditButton={handleEditButton}
     />
   );
 }
