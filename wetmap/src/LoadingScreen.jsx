@@ -1,7 +1,6 @@
 import React from 'react';
-import './style.scss';
-import MantaRay from '../images/Matt_Manta_White.png';
-
+import './loadingScreen.css';
+import MantaRay from './images/Matt_Manta_White.png';
 
 export default function LoadingScreen() {
   return (

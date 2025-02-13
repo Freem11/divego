@@ -1,0 +1,31 @@
+.screenDiv {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  background-color: #add8e6;
+  align-items: center;
+  justify-content: center;
+}
+
+.containerMain{
+  align-items: center;
+  justify-content: center;
+}
+
+.logoDiv {
+  width: auto;
+  height: 150px;
+  font-family: "Caveat", cursive;
+  font-size: 50px;
+  color: white;
+  text-align: center;
+  margin-left: -65px;
+}
+
+.mantaLogo {
+  width: auto;
+  height: 200px;
+  margin-bottom: 20px;
+  margin-top: 30%;
+}
