@@ -1,5 +1,20 @@
 @import '../../../styles/variables.scss';
 
+
+.fadeDelay {
+  opacity: 0; 
+  animation: fadeInOnly 0.7s ease-in-out 0.7s forwards;
+}
+
+@keyframes fadeInOnly {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.8;
+  }
+}
+
 .pictureBoxQ {
   display: flex;
   flex-direction: column;
@@ -17,7 +32,6 @@
   width: 96%;
   margin-left: 2%;
   background-color: black;
-  opacity: 0.8;
   border-radius: 1vw;
 }
 

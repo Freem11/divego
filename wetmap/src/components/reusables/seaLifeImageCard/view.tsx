@@ -7,6 +7,7 @@ import { PhotoWithLikesAndComments } from '../../../entities/photos';
 import Tooltip from '../../reusables/tooltip';
 import { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
+import BlurryImage from '../blurryImage';
 
 type SeaLifeImageCardViewProps = {
   pic:                 PhotoWithLikesAndComments
@@ -24,7 +25,7 @@ export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
   const photoName = props.pic.photoFile.split('/').pop();
   return (
     <div key={props.pic.id} style={{ position: 'relative' }}>
-      <div className={style.nameBar} style={{ position: 'absolute', top: 10 }}>
+      <div className={`${style.nameBar} ${style.fadeDelay}`} style={{ position: 'absolute', top: 10 }}>
         <h4 className={style.animalLabelP}>{props.pic.label}</h4>
         <a
           className={style.atagp}
@@ -39,15 +40,12 @@ export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
           </Tooltip>
         </a>
       </div>
-
-      <img
+      <BlurryImage
         src={`https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`}
-        style={{ width: '100%', borderRadius: '3%', cursor: 'pointer' }}
         onClick={() => props.handleModalOpen()}
-      >
-      </img>
+      />
 
-      <div className={style.footer} style={{ marginTop: '-6vh' }}>
+      <div className={`${style.footer} ${style.fadeDelay}`} style={{ marginTop: '-6vh' }}>
         {props.isShowAuthor
           ? (
               <h4
@@ -97,7 +95,7 @@ export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
           zIndex:        4,
         }}
       >
-        <p className={style.commentPrompt} onClick={() => props.handleCommentModal()}>
+        <p className={`${style.commentPrompt} ${style.fadeDelay}`} onClick={() => props.handleCommentModal()}>
           {props.pic.commentcount < 1
             ? 'Be first to Comment'
             : `Comment / View all ${props.pic.commentcount} Comments`}
