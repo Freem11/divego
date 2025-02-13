@@ -8,6 +8,8 @@ import { Form, FormRules } from './form';
 import style from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import { toast } from 'react-toastify';
+import Tooltip from '../../reusables/tooltip';
+import ScreenData from '../screenData.json';
 
 type PartnerAccountRequestViewProps = {
   values?:  Form
@@ -50,21 +52,33 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
         </div>
 
         <TextInput
-          iconLeft={<Icon name="store" />}
+          iconLeft={(
+            <Tooltip content={ScreenData.PartnerRequestPage.businesNameTooltip}>
+              <Icon name="store" />
+            </Tooltip>
+          )}
           placeholder={screenData.PartnerRequestPage.businessPlaceholder}
           error={errors.BusinessName}
           {...register('BusinessName', FormRules.BusinessName)}
         />
 
         <TextInput
-          iconLeft={<Icon name="monitor-dashboard" />}
+          iconLeft={(
+            <Tooltip content={ScreenData.PartnerRequestPage.websiteTooltip}>
+              <Icon name="monitor-dashboard" />
+            </Tooltip>
+          )}
           placeholder={screenData.PartnerRequestPage.websitePlaceholder}
           error={errors.WebsiteLink}
           {...register('WebsiteLink', FormRules.WebsiteLink)}
         />
 
         <TextInput
-          iconLeft={<Icon name="latitude"  />}
+          iconLeft={(
+            <Tooltip content={ScreenData.PartnerRequestPage.mapTooltip}>
+              <Icon name="latitude"  />
+            </Tooltip>
+          )}
           placeholder={screenData.PartnerRequestPage.latPlaceholder}
           error={errors.Latitude}
           {...register('Latitude', FormRules.Latitude)}
@@ -72,7 +86,11 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
 
 
         <TextInput
-          iconLeft={<Icon name="longitude" />}
+          iconLeft={(
+            <Tooltip content={ScreenData.PartnerRequestPage.mapTooltip}>
+              <Icon name="longitude" />
+            </Tooltip>
+          )}
           placeholder={screenData.PartnerRequestPage.lngPlaceholder}
           error={errors.Longitude}
           {...register('Longitude', FormRules.Longitude)}
