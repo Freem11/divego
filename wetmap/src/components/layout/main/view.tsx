@@ -14,7 +14,7 @@ import Emilio from '../../../images/EmilioNew.png';
 import { BoundaryDiveShops } from '../../boundaryDiveShops';
 import { BoundaryAnimals } from '../../boundaryAnimals';
 import { BoundaryDiveSites } from '../../boundaryDiveSites';
-import Tooltip from '../../reusables/tooltip';
+import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
 
 type LayoutMainViewProps = {
@@ -50,7 +50,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
               <ul className={style.headerIcons}>
                 <li>
-                  <Tooltip content={ScreenData.MainPage.profileTooltip} direction="bottom">
+                  <Tooltip content={ScreenData.MainPage.profileTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
                       icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
@@ -59,7 +59,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </Tooltip>
                 </li>
                 <li>
-                  <Tooltip content={ScreenData.MainPage.settingsTooltip} direction="bottom">
+                  <Tooltip content={ScreenData.MainPage.settingsTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
                       icon={<Icon name="settings" className="text-blue" style={{ scale: '1.5' }} />}
@@ -68,7 +68,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </Tooltip>
                 </li>
                 <li style={{ marginTop: '2px' }}>
-                  <Tooltip content={ScreenData.MainPage.newDiveSiteTooltip} direction="bottom">
+                  <Tooltip content={ScreenData.MainPage.newDiveSiteTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
                       icon={<Icon name="anchor-plus" className="text-blue" style={{ scale: '1.45' }} />}
@@ -79,7 +79,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 {props.isPartnerAccount
                   ? (
                       <li style={{ marginTop: '2px', marginRight: '10px' }}>
-                        <Tooltip content={ScreenData.MainPage.tripCreatorTooltip} direction="bottom">
+                        <Tooltip content={ScreenData.MainPage.tripCreatorTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                           <ButtonIcon
                             disabled={props.mapConfig === 0 ? false : true}
                             icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
@@ -90,7 +90,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                     )
                   :                   (
                       <li style={{ marginTop: '2px', marginRight: '10px' }}>
-                        <Tooltip content={ScreenData.MainPage.guideTooltip} direction="bottom">
+                        <Tooltip content={ScreenData.MainPage.guideTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                           <ButtonIcon
                             disabled={props.mapConfig === 0 ? false : true}
                             icon={<Icon name="question-mark" className="text-blue" style={{ scale: '1.5' }} />}
