@@ -7,9 +7,10 @@ import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 
 type ShopsListViewProps = {
-  onClose?:        () => void
-  listOfShops:     DiveShop[] | null
-  openTripCreator: () => void
+  onClose?:                () => void
+  listOfShops:             DiveShop[] | null
+  openTripCreator:         () => void
+  openDiveCenterSubmitter: () => void
 };
 
 export default function ShopsListView(props: ShopsListViewProps) {
@@ -27,7 +28,7 @@ export default function ShopsListView(props: ShopsListViewProps) {
           <div className={`${style.buttonAddDivingEvents}`}>
             <Button
               className="mt-2 btn-lg"
-            //  onClick={props.openTripCreator}
+              onClick={props.openDiveCenterSubmitter}
             >
               Add a new location
             </Button>
