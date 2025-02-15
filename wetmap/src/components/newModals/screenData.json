@@ -20,7 +20,11 @@
         "latLngExplainer": "To place your business on the map",
         "submitButton" : "Submit",
         "createSuccess": "Request Created Successfully!",
-        "createError": "Error creating request. Please try again later."
+        "createError": "Error creating request. Please try again later.",
+        "businesNameTooltip": "This will serve as your Dive Centre's name",
+        "websiteTooltip": "We will use this to validate your business as compatible with Scuba SEAsons",
+        "mapTooltip": "Used to place your Dive Centre on the map"
+
       },
       "SearchPage": {
         "header": "Map Navigation",
