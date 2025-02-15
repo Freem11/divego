@@ -51,7 +51,7 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
       error={error}
       {...rest}
       onChange={handlePriceChange}
-      // onBlur={handleBlur}
+      onBlur={handleBlur}
     />
   );
 });
