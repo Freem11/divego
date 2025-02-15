@@ -54,15 +54,19 @@ export default function TripCreatorModal(props: TripCreatorModalProps) {
     }
 
     const trip = {
-      shopID:      selectedShop?.id,
-      tripName:    formData.Name,
-      startDate:   formData.Start,
-      endDate:     formData.End,
-      price:       formData.Price,
-      description: formData.Details,
-      siteList:    sitesArray,
-      BookingPage: formData.Link,
+      shopID:              selectedShop?.id,
+      tripName:            formData.Name,
+      startDate:           formData.Start,
+      endDate:             formData.End,
+      price:               formData.Price,
+      description:         formData.Details,
+      siteList:            sitesArray,
+      BookingPage:         formData.Link,
     };
+
+    if (props.itineraryInfo) {
+      Object.assign(trip, { OriginalItineraryID: props.itineraryInfo?.id });
+    }
 
     if (isEditModeOn) {
       const { error } = await insertItineraryRequest(trip, 'Edit');
