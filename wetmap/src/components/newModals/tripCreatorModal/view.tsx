@@ -95,9 +95,13 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
             <Label label={screenData.TripCreator.priceLabel}>
               <PriceTextInput
+                iconLeft={(
+                  <Tooltip content={screenData.TripCreator.priceTooltip}>
+                    <Icon name="currency-usd" />
+                  </Tooltip>
+                )}
                 placeholder={screenData.TripCreator.pricePlaceholder}
                 error={errors.Price}
-                toolTipText={screenData.TripCreator.priceTooltip}
                 {...register('Price', FormRules.Price)}
               />
             </Label>

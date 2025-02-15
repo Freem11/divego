@@ -1,14 +1,11 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react';
-import TextInput from '../textInput';
-import Icon from '../../../icons/Icon';
-import Tooltip from '../../reusables/tooltip';
+import React, { useState } from 'react';
+import TextInput, { TextInputProps } from '../textInput';
 
-export type PriceTextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
-  error?:       any
-  toolTipText?: string
+export type PriceTextInputProps = TextInputProps & {
+  // currency: string // Maybe we need that in the future
 };
 
-const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(function PriceTextInput({ error, toolTipText, value: initialValue, ...rest }: PriceTextInputProps, ref) {
+const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(function PriceTextInput({ error, value: initialValue, ...rest }: PriceTextInputProps, ref) {
   const [price, setPrice] = useState(initialValue);
   const [prevPrice, setPrevPrice] = useState('');
 
@@ -54,12 +51,7 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
       error={error}
       {...rest}
       onChange={handlePriceChange}
-      onBlur={handleBlur}
-      iconLeft={(
-        <Tooltip content={toolTipText}>
-          <Icon name="currency-usd" />
-        </Tooltip>
-      )}
+      // onBlur={handleBlur}
     />
   );
 });
