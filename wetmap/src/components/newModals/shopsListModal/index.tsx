@@ -5,6 +5,7 @@ import { getShopByUserID } from '../../../supabaseCalls/shopsSupabaseCalls';
 import TripCreatorModal from '../tripCreatorModal';
 import { ModalContext } from '../../reusables/modal/context';
 import { DiveShop } from '../../../entities/diveShop';
+import ShopSubmitter from '../shopSubmitter';
 
 export default function ShopsListModal() {
   const { profile } = useContext(UserProfileContext);
@@ -36,12 +37,20 @@ export default function ShopsListModal() {
     });
   };
 
+  const openDiveCenterSubmitter = async () => {
+    modalShow(ShopSubmitter, {
+      keepPreviousModal: true,
+      size:              'medium',
+
+    });
+  };
   return (
     <>
       <ShopsListView
         listOfShops={listOfShops}
         onClose={modalCancel}
         openTripCreator={openTripCreator}
+        openDiveCenterSubmitter={openDiveCenterSubmitter}
       />
     </>
   );
