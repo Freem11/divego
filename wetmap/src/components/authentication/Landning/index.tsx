@@ -13,12 +13,14 @@ export default function LandingPage() {
   const { setProfile } = useContext(UserProfileContext);
 
   async function getSocialSignIn(provider: any) {
-    const signInData = socialSignIn(provider);
-    if (signInData) handleSupabaseSetup(signInData, setActiveSession);
+    const signInData = await socialSignIn(provider);
+    if (signInData) {
+      await handleSupabaseSetup(signInData, setActiveSession);
+    }
   }
 
   async function handleSupabaseSetup(sessionToken: any, setActiveSession: React.Dispatch<React.SetStateAction<ActiveSession | null>>) {
-    if (sessionToken) {
+    if (sessionToken.user) {
       await localStorage.setItem('token', JSON.stringify(sessionToken));
       if (sessionToken.session) {
         setActiveSession(sessionToken.session);
