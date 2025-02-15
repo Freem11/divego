@@ -1,9 +1,8 @@
-import React, { DetailedHTMLProps, InputHTMLAttributes, useState } from 'react';
-import TextInput from '../textInput';
-import Icon from '../../../icons/Icon';
+import React, { useState } from 'react';
+import TextInput, { TextInputProps } from '../textInput';
 
-export type PriceTextInputProps = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement> & {
-  error?: any
+export type PriceTextInputProps = TextInputProps & {
+  // currency: string // Maybe we need that in the future
 };
 
 const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(function PriceTextInput({ error, value: initialValue, ...rest }: PriceTextInputProps, ref) {
@@ -53,9 +52,6 @@ const PriceTextInput = React.forwardRef<HTMLInputElement, PriceTextInputProps>(f
       {...rest}
       onChange={handlePriceChange}
       onBlur={handleBlur}
-      iconLeft={(
-        <Icon name="currency-usd" />
-      )}
     />
   );
 });
