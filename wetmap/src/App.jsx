@@ -12,47 +12,43 @@ import { SessionContext } from './components/contexts/sessionContext';
 import { toast, ToastContainer } from 'react-toastify';
 import Router from './router';
 import { MapContext } from './components/googleMap/mapContext';
+import { UserProfileContext } from './components/contexts/userProfileContext';
+import { createProfile, grabProfileById } from './supabaseCalls/accountSupabaseCalls';
 // DiveLocker
 
 function App() {
   const { setInitialPoint } = useContext(MapContext);
   const [appIsReady, setAppIsReady] = useState(false);
-  const [activeSession, setActiveSession] = useState(null);
+  const { initProfile, profile, profileInitialized } = useContext(UserProfileContext);
 
   useEffect(() => {
-    async function getUserData() {
-      await supabase.auth.getSession().then((value) => {
-        localStorage.setItem('token', JSON.stringify(value.data.session));
-        setActiveSession(value.data.session);
-      });
-    }
-    getUserData();
+    initProfile();
   }, []);
 
-  const handleStartup = async () => {
-    try {
-      const valuless = localStorage.getItem('token');
-      if (valuless) {
-        const value = JSON.parse(valuless);
-        if (value && value.session) {
-          if (value.session.refresh_token) {
-            let newSession = await sessionRefresh(
-              value.session.refresh_token,
-            );
-            setActiveSession(newSession);
-          }
-        }
-      }
-      await sessionCheck();
-      localStorage.removeItem('token');
-    } catch (error) {
-      console.log('no dice:', error);
-    }
-  };
+  // const handleStartup = async () => {
+  //   try {
+  //     const valuless = localStorage.getItem('token');
+  //     if (valuless) {
+  //       const value = JSON.parse(valuless);
+  //       if (value && value.session) {
+  //         if (value.session.refresh_token) {
+  //           let newSession = await sessionRefresh(
+  //             value.session.refresh_token,
+  //           );
+  //           setActiveSession(newSession);
+  //         }
+  //       }
+  //     }
+  //     await sessionCheck();
+  //     localStorage.removeItem('token');
+  //   } catch (error) {
+  //     console.log('no dice:', error);
+  //   }
+  // };
 
-  useLayoutEffect(() => {
-    handleStartup();
-  }, []);
+  // useLayoutEffect(() => {
+  //   handleStartup();
+  // }, []);
 
   useEffect(() => {
     (async () => {
@@ -76,18 +72,14 @@ function App() {
     }
   }, []);
 
-  if (!appIsReady) {
+  if (!appIsReady || !profileInitialized) {
     return <LoadingScreen />;
   }
 
   return (
     <div className="App">
       <ToastContainer autoClose={10000} />
-
-      <SessionContext.Provider value={{ activeSession, setActiveSession }}>
-        { !activeSession ? <AuthenticationPage /> : <Router /> }
-      </SessionContext.Provider>
-
+      { !profile ? <AuthenticationPage /> : <Router /> }
     </div>
   );
 }

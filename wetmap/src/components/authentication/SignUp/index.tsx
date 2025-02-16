@@ -3,13 +3,12 @@ import { SliderContext } from '../../reusables/slider/context';
 import { Form } from './form';
 import SignUpPageView from './view';
 import { register, sessionCheck } from '../../../supabaseCalls/authenticateSupabaseCalls';
-import { createProfile } from '../../../supabaseCalls/accountSupabaseCalls';
-import { SessionContext } from '../../contexts/sessionContext';
 import { toast } from 'react-toastify';
 import screenData from '../../newModals/screenData.json';
+import { UserProfileContext } from '../../contexts/userProfileContext';
 
 export default function SignUpPage() {
-  const { setActiveSession } = useContext(SessionContext);
+  const { initProfile } = useContext(UserProfileContext);
   const { goToSlide } = useContext(SliderContext);
 
   const onSubmit = async (data: Form) => {
@@ -22,12 +21,7 @@ export default function SignUpPage() {
     }
 
     if (session !== null) {
-      await createProfile({ id: session.user.id, email: data.email });
-      await localStorage.setItem(
-        'token',
-        JSON.stringify(session.refresh_token),
-      );
-      setActiveSession(session);
+      initProfile(true);
     } else {
       toast.error(screenData.SignUpPage.signUpError);
     }

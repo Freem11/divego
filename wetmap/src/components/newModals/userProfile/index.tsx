@@ -12,7 +12,6 @@ import {
   deleteUserFollow,
   checkIfUserFollows,
 } from '../../../supabaseCalls/userFollowSupabaseCalls';
-import { SessionContext } from '../../contexts/sessionContext';
 import Settings from '../../newModals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 import { toast } from 'react-toastify';
@@ -26,15 +25,14 @@ type UserProps = Partial<ModalHandleProps> & {
   userProfileID?: string
 };
 export default function UserProfile(props: UserProps) {
-  const { activeSession } = useContext(SessionContext);
-  const { profile, setProfile }          = useContext(UserProfileContext);
+  const { profile, initProfile }         = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const isActiveProfile: boolean = !props.userProfileID;
   const [userIsFollowing, setUserIsFollowing] = useState(false);
-  const [followRecordID, setFollowRecordID] = useState(activeSession?.user.id);
+  const [followRecordID, setFollowRecordID] = useState(profile?.UserID);
 
   async function profileCheck() {
     if (props.userProfileID) {
@@ -104,7 +102,7 @@ export default function UserProfile(props: UserProps) {
       });
       if (!response.error) {
         toast.success(screenData.UserProfile.UserProfileUpdateSuccessMessage);
-        setProfile({ ...profile, UserName: newName });
+        initProfile(true);
         return;
       }
 
@@ -125,7 +123,7 @@ export default function UserProfile(props: UserProps) {
       });
       if (!response.error) {
         toast.success(screenData.UserProfile.UserProfileUpdateSuccessMessage);
-        setProfile({ ...profile, profileBio: newBio });
+        initProfile(true);
         return;
       }
 

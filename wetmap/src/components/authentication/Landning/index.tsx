@@ -10,7 +10,6 @@ import { socialSignIn } from '../../../supabaseCalls/authenticateSupabaseCalls';
 export default function LandingPage() {
   const { goToSlide } = useContext(SliderContext);
   const { setActiveSession } = useContext(SessionContext);
-  const { setProfile } = useContext(UserProfileContext);
 
   async function getSocialSignIn(provider: any) {
     const signInData = await socialSignIn(provider);
@@ -20,35 +19,36 @@ export default function LandingPage() {
   }
 
   async function handleSupabaseSetup(sessionToken: any, setActiveSession: React.Dispatch<React.SetStateAction<ActiveSession | null>>) {
-    if (sessionToken.user) {
-      await localStorage.setItem('token', JSON.stringify(sessionToken));
-      if (sessionToken.session) {
-        setActiveSession(sessionToken.session);
-      } else {
-        setActiveSession(sessionToken);
-      }
-      let sanitizeData;
-      if (sessionToken.session) {
-        sanitizeData = sessionToken.session;
-      } else {
-        sanitizeData = sessionToken;
-      }
+    console.log(sessionToken);
+    // if (sessionToken.user) {
+    //   await localStorage.setItem('token', JSON.stringify(sessionToken));
+    //   if (sessionToken.session) {
+    //     setActiveSession(sessionToken.session);
+    //   } else {
+    //     setActiveSession(sessionToken);
+    //   }
+    //   let sanitizeData;
+    //   if (sessionToken.session) {
+    //     sanitizeData = sessionToken.session;
+    //   } else {
+    //     sanitizeData = sessionToken;
+    //   }
 
-      const profileCheck = await grabProfileById(sanitizeData.user.id);
+    //   const profileCheck = await grabProfileById(sanitizeData.user.id);
+    //   console.log({ profileCheck });
 
-      if (profileCheck) {
-        await createProfile({
-          id:    sanitizeData.user.id,
-          email: sanitizeData.user.email,
-        });
-      }
-    }
+    //   if (profileCheck) {
+    //     await createProfile({
+    //       id:    sanitizeData.user.id,
+    //       email: sanitizeData.user.email,
+    //     });
+    //   }
+    // }
   }
 
   return (
     <LandingPageView
       goToSlide={goToSlide}
-      setProfile={setProfile}
       socialSignIn={getSocialSignIn}
     />
   );

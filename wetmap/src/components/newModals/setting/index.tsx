@@ -1,6 +1,3 @@
-
-import { signOut } from '../../../supabaseCalls/authenticateSupabaseCalls';
-import { SessionContext } from '../../contexts/sessionContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import SettingsView from './view';
@@ -13,8 +10,7 @@ type SettingsProps = Partial<ModalHandleProps>;
 
 
 export default function Settings(props: SettingsProps) {
-  const { setActiveSession } = useContext(SessionContext);
-  const { profile } = useContext(UserProfileContext);
+  const { profile, logout } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
   const [profileType, setProfileType] = useState<string | null>(null);
   const [openDialog, setOpenDialog] = useState(false);
@@ -29,10 +25,8 @@ export default function Settings(props: SettingsProps) {
 
 
   const handleLogout = async () => {
-    await localStorage.removeItem('token');
-    await signOut();
     props?.onModalCancel?.();
-    setActiveSession(null);
+    logout();
   };
 
   const onClose = () => {
