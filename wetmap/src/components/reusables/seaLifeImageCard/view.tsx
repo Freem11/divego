@@ -11,6 +11,7 @@ import BlurryImage from '../blurryImage';
 
 type SeaLifeImageCardViewProps = {
   pic:                 PhotoWithLikesAndComments
+  mapConfig:           number
   handleModalOpen:     () => void
   handleLike:          (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => Promise<void>
   handleProfileSwitch: (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, username: string) => Promise<void>
@@ -50,7 +51,7 @@ export default function SeaLifeImageCardView(props: SeaLifeImageCardViewProps) {
           ? (
               <h4
                 className={style.userLabel}
-                onClick={e => props.handleProfileSwitch(e, props.pic.UserID)}
+                onClick={props.mapConfig === 2 ? () => null : e => props.handleProfileSwitch(e, props.pic.UserID)}
               >
                 Added by:
                 {' '}

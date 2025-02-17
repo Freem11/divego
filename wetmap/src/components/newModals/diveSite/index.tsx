@@ -122,6 +122,7 @@ export default function DiveSite(props: DiveSiteProps) {
 
   return (
     <DiveSiteView
+      mapConfig={mapContext.mapConfig}
       onClose={props.onModalCancel}
       openPicUploader={openPicUploader}
       handleImageSelection={handleImageSelection}

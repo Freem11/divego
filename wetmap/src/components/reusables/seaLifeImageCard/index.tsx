@@ -27,6 +27,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
   const { mapRef } = useContext(MapContext);
   const { modalShow } = useContext(ModalContext);
   const photoName = pic.photoFile.split('/').pop();
+  const mapContext = useContext(MapContext);
 
   const handleProfileSwitch = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, userId: string) => {
     e.stopPropagation();
@@ -89,6 +90,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
   return (
     <SeaLifeImageCardView
       pic={pic}
+      mapConfig={mapContext.mapConfig}
       handleModalOpen={handleModalOpen}
       handleLike={handleLike}
       handleCommentModal={handleCommentModal}
