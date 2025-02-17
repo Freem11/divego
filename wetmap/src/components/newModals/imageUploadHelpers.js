@@ -26,7 +26,6 @@ const uploadImage = async (file, name) => {
 };
 
 const clearPreviousImage = async (oldFile) => {
-  console.log('REMOVING', oldFile);
   removePhoto({
     filePath: import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH,
     fileName: `${oldFile}`,
