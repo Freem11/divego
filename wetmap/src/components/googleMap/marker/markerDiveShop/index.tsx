@@ -16,7 +16,7 @@ export function MarkerDiveShop(props: MarkerDiveShopProps) {
   const { mapConfig } = useContext(MapContext);
 
   function handleClick() {
-    if (mapConfig === 3) {
+    if (mapConfig === 3 || mapConfig === 2) {
       return;
     } else {
       modalShow(ShopModal, {
