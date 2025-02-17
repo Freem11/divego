@@ -14,6 +14,10 @@ const ModalContextProvider = ({ children }: any) => {
   const modalShow: ModalShow = (component, options) => {
     const newModalWindow = new ModalWindow(component, options);
 
+    if (paused) {
+      return;
+    }
+
     if (newModalWindow.name === currentModalName) {
       return;
     }
