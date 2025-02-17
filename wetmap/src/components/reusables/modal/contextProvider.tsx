@@ -15,6 +15,7 @@ const ModalContextProvider = ({ children }: any) => {
     const newModalWindow = new ModalWindow(component, options);
 
     if (paused) {
+      // stop gap measure, need to refactor to allow other modals to open while one is paused
       return;
     }
 
