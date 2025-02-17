@@ -61,10 +61,10 @@ export default function PicUploader(props: PicUploaderProps) {
       latitude:   selectedDiveSite.lat,
       longitude:  selectedDiveSite.lng,
     });
-
     if (error) {
       toast.error(screenData.PicUploader.uploadError);
     } else {
+      setPhotoFile(null);
       toast.success(screenData.PicUploader.uploadSuccess);
     }
 
