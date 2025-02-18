@@ -52,6 +52,7 @@ export default function Modal() {
 
   const openStyle = {
     transform:  'translateY(0)',
+    opacity:    1,
     transition: `transform ${modalContext.modalAnimationDuration}ms ease-in-out`,
   };
 
@@ -61,8 +62,9 @@ export default function Modal() {
 
   return (
     <div className={`${style.modalWrapper} ${style.active}`} ref={rootRef}>
-      {modalContext.stack.map((modalWindow) => {
-        return (
+      {modalContext.stack.map(modalWindow => (
+        <>
+          <div className={`${style.modalBackground} ${modalWindow.name === modalContext.currentModalName && style.showBackground}`}></div>
           <div
             className={`${style.modalContainer} ${style[modalWindow.options.size]}`}
             style={modalWindow.name === modalContext.currentModalName ? openStyle : closeStyle}
@@ -82,8 +84,8 @@ export default function Modal() {
               }}
             />
           </div>
-        );
-      })}
+        </>
+      ))}
     </div>
   );
 }
