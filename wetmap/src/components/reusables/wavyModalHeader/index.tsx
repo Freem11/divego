@@ -3,7 +3,7 @@ import style from './style.module.scss';
 import Icon from '../../../icons/Icon';
 import WavyBlock from '../wavyBlock';
 import ButtonIcon from '../buttonIcon';
-import { useImageLoader } from './useImageLoader';
+import { useImageLoader } from '../blurryImage/useImageLoader';
 
 export type WavyModalHeaderProps = {
   onClose?:  (event?: React.MouseEvent) => void
