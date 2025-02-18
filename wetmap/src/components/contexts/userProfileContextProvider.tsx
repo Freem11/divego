@@ -95,7 +95,6 @@ export const UserProfileContextProvider = ({ children }: any) => {
   const logout = async () => {
     await signOut();
     setProfile(null);
-    setProfileInitialized(null);
 
     // allow initProfile to be called again to re-initialize(login right after logging out)
     initialized.current = null;

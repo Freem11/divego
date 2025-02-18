@@ -41,7 +41,7 @@ function App() {
     }
   }, []);
 
-  if (!appIsReady || !profileInitialized) {
+  if (!appIsReady || profileInitialized === null) {
     return <LoadingScreen />;
   }
 
