@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 export function useImageLoader(imageUrl?: string | null) {
   const [isLoading, setLoading] = useState(!!imageUrl);
@@ -19,7 +19,7 @@ export function useImageLoader(imageUrl?: string | null) {
     };
   }, [imageUrl]);
 
-  const validImage = imageUrl && !hasError ? imageUrl : undefined;
+  const validImage = useMemo(() => imageUrl && !hasError ? imageUrl : undefined, [hasError, imageUrl]);
 
   return { isLoading, hasError, validImage };
 }
