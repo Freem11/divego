@@ -19,7 +19,7 @@ export function AnimalItem(props: AnimalItemProps) {
       imageUrl={imageUrl}
       hoverHide={true}
       title={props.animal.label}
-      info={`${props.animal.times_seen} sighting(s)`}
+      info={`${props.animal.times_seen} Sighting${props.animal.times_seen !== 1 ? 's' : ''}`}
     />
   );
 }
