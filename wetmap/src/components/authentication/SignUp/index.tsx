@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { SliderContext } from '../../reusables/slider/context';
 import { Form } from './form';
 import SignUpPageView from './view';
-import { register, sessionCheck } from '../../../supabaseCalls/authenticateSupabaseCalls';
+import { register } from '../../../supabaseCalls/authenticateSupabaseCalls';
 import { toast } from 'react-toastify';
 import screenData from '../../newModals/screenData.json';
 import { UserProfileContext } from '../../contexts/userProfileContext';
@@ -25,7 +25,6 @@ export default function SignUpPage() {
     } else {
       toast.error(screenData.SignUpPage.signUpError);
     }
-    await sessionCheck();
   };
 
   return (

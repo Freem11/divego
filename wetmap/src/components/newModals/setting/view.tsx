@@ -11,8 +11,6 @@ type SettingsProps = {
   profileType:         string | null
   handlePartnerButton: () => void
   handleDanger:        () => void
-  setOpenDialog:       (value: React.SetStateAction<boolean>) => void
-  openDialog:          boolean
 };
 
 export default function SettingsView(props: SettingsProps) {

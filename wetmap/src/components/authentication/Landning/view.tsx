@@ -39,15 +39,15 @@ export default function LandingPageView(props: LandingPageProps) {
       <div>
         <div className="mb-2 text-center">{screenData.LandingPage.content}</div>
         <div className="flex-centered">
-          <div className="col-6 flex-row-between" style={{ height: '3.5rem' }}>
+          <div className="col-3 flex-row-between" style={{ height: '3.5rem' }}>
             <ButtonIcon
               icon={<img src={googleIcon} alt="Google" onClick={() => props.socialSignIn('google')} />}
               className="full-height"
             />
-            <ButtonIcon
+            {/* <ButtonIcon
               icon={<img src={facebookIcon} alt="Facebook" onClick={() => props.socialSignIn('facebook')} />}
               className="full-height"
-            />
+            /> */}
             <ButtonIcon
               icon={<img src={appleIcon} alt="Apple" onClick={() => props.socialSignIn('apple')} />}
               className="full-height"

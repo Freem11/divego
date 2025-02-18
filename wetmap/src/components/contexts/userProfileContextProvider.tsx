@@ -1,25 +1,37 @@
-import React, { createContext, useEffect, useReducer, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { ActiveProfile } from '../../entities/profile';
 import { sessionCheck, signOut } from '../../supabaseCalls/authenticateSupabaseCalls';
 import { createProfile, grabProfileById } from '../../supabaseCalls/accountSupabaseCalls';
 import { UserProfileContext } from './userProfileContext';
+import { Session } from '@supabase/supabase-js';
 
 export type UserProfileContextType = {
   logout:             () => Promise<void>
   profile:            ActiveProfile | null
+  session:            Session | null
   initProfile:        (force?: boolean) => Promise<void>
-  profileInitialized: boolean
+  profileInitialized: boolean | null
 };
 
 
 export const UserProfileContextProvider = ({ children }: any) => {
+  // Used to expose this flag outside and let other component react on it
+  // null - profile is not initialized
+  // true - profile is initialized successfully
+  // false - that initialization failed
+  const [profileInitialized, setProfileInitialized] = useState<boolean | null>(null);
+
+  // Used to prevent double initialization during re-renders, avoid createProfile call
   const initialized = useRef<boolean | null>(null);
+
+  // Just to store the profile
   const [profile, setProfile] = useState<ActiveProfile | null>(null);
-  const [profileInitialized, setProfileInitialized] = useState(false);
+
+  // Supabase session
+  const [session, setSession] = useState<Session | null>(null);
 
   const getSession = async () => {
     const session = await sessionCheck();
-    console.log({ session });
 
     if (session.error) {
       console.log('Unable to initialize session', session.error);
@@ -30,18 +42,24 @@ export const UserProfileContextProvider = ({ children }: any) => {
       return null;
     }
 
-    return session.data.session;
+    return session.data.session as Session;
   };
 
   const initProfile = async (force = false) => {
-    console.log('call initProfile', initialized.current);
+    if (force) {
+      // sometimes we need to profile reinitialization: after logging in or out, after changing profile data...
+      initialized.current = null;
+    }
 
-    if (force || initialized.current === null) {
+    if (initialized.current === null) {
       initialized.current = false;
       const session = await getSession();
 
+      setSession(session);
+
       if (!session?.user.id) {
-        // User is not signed in
+        // User is not signed in - profile will be empty
+        initialized.current = true;
         setProfileInitialized(true);
         return;
       }
@@ -56,26 +74,28 @@ export const UserProfileContextProvider = ({ children }: any) => {
         });
 
         if (created.error) {
+          setProfileInitialized(false);
           console.log('Unable to create new profile for user ', session.user.id);
           return;
         }
 
         const profile = await grabProfileById(session.user.id);
         if (!profile) {
+          setProfileInitialized(false);
           console.log('Unable to fetch new profile');
           return;
         }
         setProfile(profile);
       }
-      setProfileInitialized(true);
       initialized.current = true;
+      setProfileInitialized(true);
     }
   };
 
   const logout = async () => {
-    // localStorage.removeItem('token');
     await signOut();
     setProfile(null);
+    setProfileInitialized(null);
 
     // allow initProfile to be called again to re-initialize(login right after logging out)
     initialized.current = null;
@@ -86,6 +106,7 @@ export const UserProfileContextProvider = ({ children }: any) => {
     <UserProfileContext.Provider value={{
       logout,
       profile,
+      session,
       initProfile,
       profileInitialized,
     }}

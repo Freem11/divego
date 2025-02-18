@@ -13,7 +13,6 @@ export default function Settings(props: SettingsProps) {
   const { profile, logout } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
   const [profileType, setProfileType] = useState<string | null>(null);
-  const [openDialog, setOpenDialog] = useState(false);
 
   useEffect(() => {
     if (profile?.partnerAccount) {
@@ -38,22 +37,17 @@ export default function Settings(props: SettingsProps) {
   };
 
   const handleDanger = () => {
-    // setOpenDialog(true);
-
     modalShow(ConfirmDeleteAccount, { keepPreviousModal: true });
   };
 
 
   return (
     <SettingsView
-
       onClose={onClose}
       handleLogout={handleLogout}
       profileType={profileType}
       handlePartnerButton={handlePartnerButton}
       handleDanger={handleDanger}
-      setOpenDialog={setOpenDialog}
-      openDialog={openDialog}
     />
   );
 }

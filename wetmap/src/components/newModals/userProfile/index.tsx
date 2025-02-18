@@ -58,13 +58,13 @@ export default function UserProfile(props: UserProps) {
 
   useEffect(() => {
     profileCheck();
-  }, [props.userProfileID]);
+  }, [props.userProfileID, profile]);
 
 
   useEffect(() => {
     followCheck();
     getPhotos();
-  }, [openedProfile]);
+  }, [openedProfile?.UserID]);
 
 
   const handleFollow = async () => {
@@ -144,19 +144,10 @@ export default function UserProfile(props: UserProps) {
     if (profile) {
       await updateProfile({
         UserID:       profile.UserID,
-        profileBio: `animalphotos/public/${createFileName}`,
-      });
-    }
-
-    setOpenedProfile((prev) => {
-      if (!prev) {
-        return prev;
-      }
-      return {
-        ...prev,
         profilePhoto: `animalphotos/public/${createFileName}`,
-      };
-    });
+      });
+      initProfile(true);
+    }
   };
 
   useEffect(() => {

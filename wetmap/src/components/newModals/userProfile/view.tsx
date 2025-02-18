@@ -39,17 +39,17 @@ export default function UserProfileView(props: userProfileViewProps) {
 
           {(props.isActiveProfile) && (
             <div className={style.buttonImageUpload}>
-              <FileInput
-                onFileChange={props.handleImageSelection}
-                className="d-none"
-              >
-                <Tooltip content={screenData.UserProfile.addProfilePhotoToolTip}>
+              <Tooltip content={screenData.UserProfile.addProfilePhotoToolTip}>
+                <FileInput
+                  onFileChange={props.handleImageSelection}
+                  className="d-none"
+                >
                   <ButtonIcon
                     icon={<Icon name="camera-plus" />}
                     className="btn-lg"
                   />
-                </Tooltip>
-              </FileInput>
+                </FileInput>
+              </Tooltip>
             </div>
           )}
         </WavyModalHeader>

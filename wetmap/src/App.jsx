@@ -1,19 +1,13 @@
 import './App.scss';
-import { useState, useEffect, useLayoutEffect, useContext } from 'react';
-import { supabase } from './supabase';
+import { useState, useEffect, useContext } from 'react';
 import AuthenticationPage from './components/authentication';
 import LoadingScreen from './LoadingScreen';
 import { getMostRecentPhoto } from './supabaseCalls/photoSupabaseCalls';
-import {
-  sessionCheck,
-  sessionRefresh,
-} from './supabaseCalls/authenticateSupabaseCalls';
-import { SessionContext } from './components/contexts/sessionContext';
+
 import { toast, ToastContainer } from 'react-toastify';
 import Router from './router';
 import { MapContext } from './components/googleMap/mapContext';
 import { UserProfileContext } from './components/contexts/userProfileContext';
-import { createProfile, grabProfileById } from './supabaseCalls/accountSupabaseCalls';
 // DiveLocker
 
 function App() {
@@ -24,31 +18,6 @@ function App() {
   useEffect(() => {
     initProfile();
   }, []);
-
-  // const handleStartup = async () => {
-  //   try {
-  //     const valuless = localStorage.getItem('token');
-  //     if (valuless) {
-  //       const value = JSON.parse(valuless);
-  //       if (value && value.session) {
-  //         if (value.session.refresh_token) {
-  //           let newSession = await sessionRefresh(
-  //             value.session.refresh_token,
-  //           );
-  //           setActiveSession(newSession);
-  //         }
-  //       }
-  //     }
-  //     await sessionCheck();
-  //     localStorage.removeItem('token');
-  //   } catch (error) {
-  //     console.log('no dice:', error);
-  //   }
-  // };
-
-  // useLayoutEffect(() => {
-  //   handleStartup();
-  // }, []);
 
   useEffect(() => {
     (async () => {
