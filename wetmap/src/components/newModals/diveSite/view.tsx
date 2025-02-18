@@ -14,16 +14,16 @@ import Tooltip from '../../reusables/tooltip';
 import ScreenData from '../screenData.json';
 
 type DiveSiteViewProps = {
-  mapConfig:            number
-  onClose?:             () => void
-  openPicUploader:      () => void
-  handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
-  handleProfileSwitch:  (username: string) => Promise<void>
-  onDiveSiteBioChange:  (newValue: string) => void
-  diveSite:             DiveSiteWithUserName | null
-  diveSitePics:         PhotosGroupedByDate[] | null
-  isPartnerAccount:     boolean
-  headerPictureUrl:     string | null
+  showPicUploaderButton: boolean
+  onClose?:              () => void
+  openPicUploader:       () => void
+  handleImageSelection:  (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleProfileSwitch:   (username: string) => Promise<void>
+  onDiveSiteBioChange:   (newValue: string) => void
+  diveSite:              DiveSiteWithUserName | null
+  diveSitePics:          PhotosGroupedByDate[] | null
+  isPartnerAccount:      boolean
+  headerPictureUrl:      string | null
 };
 
 
@@ -86,11 +86,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                 {'Added by: '}
                 <a
                   href="#"
-                  onClick={props.mapConfig === 2
-                    ? () => null
-                    : () => {
-                        props.handleProfileSwitch(props?.diveSite?.userid);
-                      }}
+                  onClick={() => props.handleProfileSwitch(props?.diveSite?.userid)}
                 >
                   {props?.diveSite?.newusername}
                 </a>
@@ -116,7 +112,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         <div className="panel-header">
           <h3>{screenData.DiveSite.drawerHeader}</h3>
           <div className={style.addPictureButton}>
-            {props.mapConfig !== 2
+            {props.showPicUploaderButton
             && (
               <Button className="btn-lg" onClick={props.openPicUploader}>
                 <span className="hide-sm">

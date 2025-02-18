@@ -112,6 +112,9 @@ export default function DiveSite(props: DiveSiteProps) {
     if (profile?.UserID === userId) {
       return;
     }
+    if (mapContext.mapConfig === 2) {
+      return;
+    }
     modalShow(UserProfile, {
       keepPreviousModal: true,
       userProfileID:     userId,
@@ -122,7 +125,7 @@ export default function DiveSite(props: DiveSiteProps) {
 
   return (
     <DiveSiteView
-      mapConfig={mapContext.mapConfig}
+      showPicUploaderButton={mapContext.mapConfig !== 2}
       onClose={props.onModalCancel}
       openPicUploader={openPicUploader}
       handleImageSelection={handleImageSelection}

@@ -35,6 +35,9 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
     if (profile?.UserID === userId) {
       return;
     }
+    if (mapContext.mapConfig === 2) {
+      return;
+    }
     modalShow(UserProfile, {
       keepPreviousModal: true,
       userProfileID:     userId,
@@ -90,7 +93,6 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
   return (
     <SeaLifeImageCardView
       pic={pic}
-      mapConfig={mapContext.mapConfig}
       handleModalOpen={handleModalOpen}
       handleLike={handleLike}
       handleCommentModal={handleCommentModal}
