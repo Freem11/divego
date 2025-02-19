@@ -6,17 +6,17 @@ import {
   deletePhotoLike,
 } from '../../../supabaseCalls/photoLikeSupabaseCalls';
 import UserProfile from '../../newModals/userProfile';
-import { ModalContext } from '../../reusables/modal/context';
+import { ModalContext } from '../modal/context';
 import CommentsModal from '../../newModals/commentsModal';
 import FullScreenImage from '../fullScreenImage/fullScreenImage';
-import SeaLifeImageCardView from './view';
+import SeaLifeCardView from './view';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
 import { getSingleDiveSite } from '../../../supabaseCalls/diveSiteSupabaseCalls';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
 import { MapContext } from '../../googleMap/mapContext';
 import DiveSite from '../../newModals/diveSite';
 
-export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments, isShowAuthor?: boolean }) {
+export default function SeaLifeCard(props: { pic: PhotoWithLikesAndComments, isShowAuthor?: boolean }) {
   const { pic, isShowAuthor = true } = props;
   const { profile } = useContext(UserProfileContext);
   const [picLiked, setPicLiked] = useState(pic.likedbyuser);
@@ -28,7 +28,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
   const { modalShow } = useContext(ModalContext);
   const photoName = pic.photoFile.split('/').pop();
 
-  const handleProfileSwitch = async (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>, userId: string) => {
+  const handleProfileSwitch = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, userId: string) => {
     e.stopPropagation();
 
     if (profile?.UserID === userId) {
@@ -42,7 +42,8 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
     });
   };
 
-  const handleCommentModal = () => {
+  const handleCommentModal = (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => {
+    e.stopPropagation();
     modalShow(CommentsModal, {
       keepPreviousModal: true,
     });
@@ -65,7 +66,7 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
     }
   };
 
-  const handleDiveSiteMove = async (lat: number, lng: number) => {
+  const handleDiveSiteMove = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, lat: number, lng: number) => {
     const getSite = await getSingleDiveSite(lat, lng);
     if (getSite) {
       setSelectedDiveSite(getSite[0]);
@@ -83,11 +84,12 @@ export default function SeaLifeImageCard(props: { pic: PhotoWithLikesAndComments
       keepPreviousModal: true,
       size:              'full',
       src:               `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`,
+      onModalCancel:     () => {}, // Added to fix TypeScript error
     });
   };
 
   return (
-    <SeaLifeImageCardView
+    <SeaLifeCardView
       pic={pic}
       handleModalOpen={handleModalOpen}
       handleLike={handleLike}

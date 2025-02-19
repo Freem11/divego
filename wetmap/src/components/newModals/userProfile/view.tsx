@@ -8,10 +8,10 @@ import { PhotosGroupedByDate } from '../../../entities/photos';
 import PlainTextInput from '../../reusables/plainTextInput';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import ButtonIcon from '../../reusables/buttonIcon';
-import SeaLifeImageCard from '../../reusables/seaLifeImageCard';
 import { ActiveProfile } from '../../../entities/profile';
 import FileInput from '../../reusables/fileInput';
 import Tooltip from '../../reusables/tooltip';
+import SeaLifeImageCardList from '../../reusables/seaLifeCardList';
 
 type userProfileViewProps = {
   onClose?:                () => void
@@ -24,7 +24,7 @@ type userProfileViewProps = {
   handleImageSelection:    (event: React.ChangeEvent<HTMLInputElement>) => void
   isFollowing:             boolean
   headerPictureUrl:        string | null
-  diveSitePics:            PhotosGroupedByDate[] | null
+  diveSitePics:            PhotosGroupedByDate[]
 };
 
 export default function UserProfileView(props: userProfileViewProps) {
@@ -83,7 +83,7 @@ export default function UserProfileView(props: userProfileViewProps) {
       </div>
 
       <div className="col-6 panel border-none full-height">
-        <div className="panel-header">
+        <div className={style.panelHeader}>
           <h3>{`${props.profile?.UserName}'s Sea Creature Encounters`}</h3>
           <div className={style.addPictureButton}>
             {(props.isActiveProfile)
@@ -113,37 +113,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                 )}
           </div>
         </div>
-        <div className="panel-body">
-          {props?.diveSitePics
-          && props?.diveSitePics.map((packet, packetIndex) => {
-            return (
-              <div key={`${packet.dateTaken}-${packetIndex}`} className={style.panelBodyDiveSite}>
-                <h2 className={`${style.panelDate} d-flex flex-column`}>
-                  <span>
-                    {packet.name}
-                  </span>
-                  <span>
-                    {packet.dateTaken}
-                  </span>
-                </h2>
-                {packet.photos
-                && packet.photos.map((pic) => {
-                  return (
-                    <SeaLifeImageCard key={pic.id} pic={pic} isShowAuthor={false} />
-                  );
-                })}
-              </div>
-            );
-          })}
-          {props?.diveSitePics?.length === 0 && (
-            <div>
-              <p className="noSightings">
-                {screenData.DiveSite.emptyDrawer}
-              </p>
-            </div>
-          )}
-        </div>
-        {/* <div className="panel-footer"></div> */}
+        <SeaLifeImageCardList diveSitePics={props.diveSitePics} onUserProfile={true} />
       </div>
     </div>
   );

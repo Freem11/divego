@@ -1,0 +1,146 @@
+p {
+  margin: 0;
+}
+
+a {
+  color: white;
+  font-weight: 500;
+  opacity: 0.8;
+  transition: 250ms ease;
+}
+
+a:hover {
+  color: white;
+  opacity: 1;
+  text-decoration: none;
+}
+
+.card {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  min-height: 15rem;
+  border-radius: 1rem;
+  overflow: hidden;
+  color: white;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: start;
+  cursor: pointer;
+}
+
+.backgroundImage {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #0073E6;
+  object-fit: cover;
+  object-position: 50% 50%;
+  transition: 250ms ease;
+}
+
+.card:hover .backgroundImage {
+  transform: scale(1.03);
+}
+
+.overlay {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(5deg, rgba(0, 0, 0) 0%, rgba(0, 0, 0, 0.75) 35%, rgba(0, 0, 0, 0) 75%);
+  transition: 250ms ease;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+}
+
+.title {
+  margin: 0;
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.info {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  opacity: 0.8;
+}
+
+.report {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  color: white;
+}
+
+.reportIcon {
+  width: 1rem;
+  height: auto;
+  color: white;
+}
+
+.actions {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 0.25rem;
+}
+
+.action {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 14px;
+  color: white;
+  transition: ease 200ms;
+}
+
+.liked {
+  color: #0073E6;
+  opacity: 1;
+}
+
+.action:active .actionIcon {
+  scale: 0.9;
+}
+
+.actionIcon {
+  width: 1rem;
+  height: auto;
+  transition: ease 200ms;
+}
+
+.actionIcon:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.fadeDelay {
+  opacity: 0; 
+  animation: fadeInOnly 0.7s ease-in-out 0.7s forwards;
+}
+
+@keyframes fadeInOnly {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
