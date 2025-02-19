@@ -19,7 +19,7 @@ export default function SidebarCard(props: SidebarCardProps) {
     <div className={`${styles.card} ${props.highlighted && styles.highlighted}`}>
       <div className={`${styles.overlay} ${props.hoverHide && styles.hoverHide}`}></div>
       <BlurryImage src={props.imageUrl || backgroundPhoto} alt={props.imageAlt} className={styles.backgroundImage} />
-      <div className={`${styles.content} ${props.hoverHide && styles.hoverHide}`}>
+      <div className={`${styles.content} ${props.hoverHide && styles.hoverHide} ${styles.fadeDelay}`}>
         <p className={styles.title}>{props.title}</p>
 
         <div className={styles.info}>
