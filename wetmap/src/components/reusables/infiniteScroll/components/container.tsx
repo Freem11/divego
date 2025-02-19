@@ -34,7 +34,7 @@ export default function Container(props: InfiniteScrollProps) {
 
     const observer = new IntersectionObserver(callback, {
       root:       wrapperRef.current,
-      rootMargin: '0px',
+      rootMargin: '10px',
       threshold:  1.0,
     });
 
