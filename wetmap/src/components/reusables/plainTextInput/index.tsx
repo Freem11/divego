@@ -3,12 +3,15 @@ import Icon from '../../../icons/Icon';
 import ButtonIcon from '../buttonIcon';
 
 import './style.scss';
+import Tooltip from '../tooltip';
 
 type TextInputProps = InputHTMLAttributes<HTMLInputElement>;
 type CustomInputProps = {
-  onSave: (value: string) => void
-  error?: any
-  value?: string
+  onSave:              (value: string) => void
+  error?:              any
+  value?:              string
+  tooltipEditText?:    string
+  tooltipConfirmText?: string
 };
 
 const PlainTextInput = React.forwardRef<HTMLInputElement, TextInputProps & CustomInputProps>(function PlainTextInput(props: TextInputProps & CustomInputProps, forwardedRef) {
@@ -19,6 +22,34 @@ const PlainTextInput = React.forwardRef<HTMLInputElement, TextInputProps & Custo
   const onKeyDown = (event: React.KeyboardEvent) => {
     if (event.key === 'Enter') {
       event.preventDefault();
+    }
+  };
+
+  const determineTooltipEdit = () => {
+    if (props.tooltipConfirmText) {
+      return (
+        <Tooltip content={props.tooltipEditText}>
+          <Icon name="pencil" fill="darkgrey" />
+        </Tooltip>
+      );
+    } else {
+      return (
+        <Icon name="pencil" fill="darkgrey" />
+      );
+    }
+  };
+
+  const determineTooltipConfirm = () => {
+    if (props.tooltipConfirmText) {
+      return (
+        <Tooltip content={props.tooltipConfirmText}>
+          <Icon name="check-bold" fill="green" />
+        </Tooltip>
+      );
+    } else {
+      return (
+        <Icon name="check-bold" fill="green" />
+      );
     }
   };
 
@@ -42,7 +73,7 @@ const PlainTextInput = React.forwardRef<HTMLInputElement, TextInputProps & Custo
       {!props.readOnly && isEditModeOn && (
         <ButtonIcon
           className="btn-sm"
-          icon={<Icon name="check-bold" fill="green" />}
+          icon={determineTooltipConfirm()}
           onClick={() => {
             setIsEditModeOn(false);
             props.onSave(`${value}`);
@@ -54,7 +85,7 @@ const PlainTextInput = React.forwardRef<HTMLInputElement, TextInputProps & Custo
       {!props.readOnly && !isEditModeOn && (
         <ButtonIcon
           className="btn-sm"
-          icon={<Icon name="pencil" fill="darkgrey" />}
+          icon={determineTooltipEdit()}
           onClick={() => {
             setIsEditModeOn(true);
             setTimeout(function () {
