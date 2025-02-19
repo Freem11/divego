@@ -43,8 +43,34 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
         hasMore={props.hasMoreAnimals}
         isLoading={props.isLoadingAnimals}
         renderEmpty={() => {
-          if (props.searchAnimal) {
-            return <EmptyState iconName="shark" text={`No "${props.searchAnimal}" in this area.`} />;
+          if (props.selectedAnimals.length > 0) {
+            return (
+              <EmptyState
+                iconName="shark"
+                text={`No ${props.selectedAnimals.map((animal, index, animals) => {
+                  // Convert animal name to lowercase before using it
+                  const animalLower = animal.toLowerCase();
+
+                  // Special case for exactly 2 items: just use "or" without comma
+                  if (animals.length === 2) {
+                    return `${animalLower}${index === 0 ? ' or ' : ''}`;  // Add " or " after first item
+                  }
+
+                  // Last item: just return the animal name with no separator
+                  if (index === animals.length - 1) {
+                    return animalLower;
+                  }
+
+                  // Second-to-last item: add ", or " after it
+                  if (index === animals.length - 2) {
+                    return `${animalLower}, or `;
+                  }
+
+                  // All other items: add ", " after them
+                  return `${animalLower}, `;
+                }).join('')} in this area.`}  // join("") combines all pieces into a single string
+              />
+            );
           }
           return  <EmptyState iconName="shark" text="No sea life in this area." />;
         }}
