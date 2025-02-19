@@ -6,6 +6,7 @@ import { Animal } from '../../entities/photos';
 import TextInput from '../reusables/textInput';
 import Chip from '../reusables/chip';
 import style from './style.module.scss';
+import EmptyState from '../reusables/emptyState';
 
 type BoundaryAnimalsViewProps = {
   uniqueKey?:         string
@@ -43,9 +44,9 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
         isLoading={props.isLoadingAnimals}
         renderEmpty={() => {
           if (props.searchAnimal) {
-            return <div>{`Can't find animals like '${props.searchAnimal}' in this area`}</div>;
+            return <EmptyState iconName="shark" text={`No "${props.searchAnimal}" in this area.`} />;
           }
-          return <div>No animals in this area</div>;
+          return  <EmptyState iconName="shark" text="No sea life in this area." />;
         }}
       >
         {props.animals?.map((item) => {

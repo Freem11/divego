@@ -2,6 +2,7 @@ import React from 'react';
 import ItineraryCard from '../itineraryCard';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import style from './style.module.scss';
+import EmptyState from '../reusables/emptyState';
 
 type ItineraryCardListProps = {
   itineraryList:         ItineraryItem[] | null
@@ -14,22 +15,20 @@ export default function ItineraryCardList({ itineraryList, canChangeItineraries 
   }
 
   return         (
-    <div className={style.itineraryList}>
-      {itineraryList // in the future, if itineraryList is not empty, render a loading spinner
-      && itineraryList.map((itinerary: any) => (
-        <ItineraryCard
-          key={itinerary.id}
-          itinerary={itinerary}
-          canChangeItinerary={canChangeItineraries}
-        />
-      ))}
+    <>
+      <div className={style.itineraryList}>
+        {itineraryList // in the future, if itineraryList is not empty, render a loading spinner
+        && itineraryList.map((itinerary: any) => (
+          <ItineraryCard
+            key={itinerary.id}
+            itinerary={itinerary}
+            canChangeItinerary={canChangeItineraries}
+          />
+        ))}
+      </div>
       {itineraryList.length === 0 && (
-        <div>
-          <p>
-            No dive trips yet.
-          </p>
-        </div>
+        <EmptyState iconName="explore" text="No trips yet." />
       )}
-    </div>
+    </>
   );
 }

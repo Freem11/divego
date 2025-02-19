@@ -1,19 +1,21 @@
 import React from 'react';
 import styles from './style.module.scss';
+import Icon, { IconName } from '../../../icons/Icon';
 
 type EmptyStateProps = {
-  visual: React.ReactNode
-  text:   string
-  error:  boolean
+  iconName: IconName
+  text:     string
 };
 
-export default function EmptyState({ visual, text, error }: EmptyStateProps) {
+export default function EmptyState(props: EmptyStateProps) {
   return (
-    <div className={`${styles.emptyState} ${error && styles.error}`}>
-      <div>
-        {visual}
+    <div className={styles.emptyState}>
+      <div className={styles.emptyStateIcons}>
+        <Icon name={props.iconName} className={styles.emptyStateIconLeft} />
+        <Icon name={props.iconName} className={styles.emptyStateIcon} />
+        <Icon name={props.iconName} className={styles.emptyStateIconRight} />
       </div>
-      <p>{text}</p>
+      <p>{props.text}</p>
     </div>
   );
 }
