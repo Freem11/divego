@@ -14,15 +14,16 @@ import Tooltip from '../../reusables/tooltip';
 import ScreenData from '../screenData.json';
 
 type DiveSiteViewProps = {
-  onClose?:             () => void
-  openPicUploader:      () => void
-  handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
-  handleProfileSwitch:  (username: string) => Promise<void>
-  onDiveSiteBioChange:  (newValue: string) => void
-  diveSite:             DiveSiteWithUserName | null
-  diveSitePics:         PhotosGroupedByDate[] | null
-  isPartnerAccount:     boolean
-  headerPictureUrl:     string | null
+  showPicUploaderButton: boolean
+  onClose?:              () => void
+  openPicUploader:       () => void
+  handleImageSelection:  (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleProfileSwitch:   (username: string) => Promise<void>
+  onDiveSiteBioChange:   (newValue: string) => void
+  diveSite:              DiveSiteWithUserName | null
+  diveSitePics:          PhotosGroupedByDate[] | null
+  isPartnerAccount:      boolean
+  headerPictureUrl:      string | null
 };
 
 
@@ -92,6 +93,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
               </div>
             </div>
 
+
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
@@ -112,11 +114,15 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         <div className="panel-header">
           <h3>{screenData.DiveSite.drawerHeader}</h3>
           <div className={style.addPictureButton}>
-            <Button className="btn-lg" onClick={props.openPicUploader}>
-              <span className="hide-sm">
-                {screenData.DiveSite.addSightingButton}
-              </span>
-            </Button>
+            {props.showPicUploaderButton
+            && (
+              <Button className="btn-lg" onClick={props.openPicUploader}>
+                <span className="hide-sm">
+                  {screenData.DiveSite.addSightingButton}
+                </span>
+              </Button>
+            ) }
+
           </div>
         </div>
         <div className="panel-body">
