@@ -1,14 +1,14 @@
 import React from 'react';
-import './style.scss';
+import style from './style.module.css';
 import MantaRay from '../images/Matt_Manta_White.png';
 
 export default function LoadingScreen() {
   return (
-    <div className="screenDiv">
-      <div className="containerMain">
-        <img src={MantaRay} className="mantaLogo"></img>
+    <div className={style.screenDiv}>
+      <div className={style.containerMain}>
+        <img src={MantaRay} className={style.mantaLogo}></img>
 
-        <div className="logoDiv">Scuba SEAsons</div>
+        <div className={style.logoDiv}>Scuba SEAsons</div>
       </div>
     </div>
   );
