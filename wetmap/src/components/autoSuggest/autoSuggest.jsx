@@ -1,11 +1,10 @@
-import React, {useState} from "react";
-import AutoSuggestListItem from "./autoSuggestListItem";
-import HighlightOffIcon from "@mui/icons-material/HighlightOff";
-import SearchIcon from "@mui/icons-material/Search";
-import "./autoSuggest.css";
-import InputField from "../reusables/inputField";
+import React, { useState } from 'react';
+import AutoSuggestListItem from './autoSuggestListItem';
+import HighlightOffIcon from '@mui/icons-material/HighlightOff';
+import SearchIcon from '@mui/icons-material/Search';
+import './autoSuggest.css';
 import TextInputField from '../newModals/textInput';
-import { getAnimalNamesThatFit } from "../../supabaseCalls/photoSupabaseCalls";
+import { getAnimalNamesThatFit } from '../../supabaseCalls/photoSupabaseCalls';
 
 export default function AutoSuggest(props) {
   const {
@@ -44,7 +43,7 @@ export default function AutoSuggest(props) {
 
   const handleClear = () => {
     setTextSource(false);
-    setPin({ ...pin, Animal: "" });
+    setPin({ ...pin, Animal: '' });
     setList([]);
   };
 
@@ -61,31 +60,24 @@ export default function AutoSuggest(props) {
         inputValue={inputValue}
         placeHolderText={placeHolderText}
         secure={false}
-        vectorIcon={"MaterialCommunityIcons"}
+        vectorIcon="MaterialCommunityIcons"
         onChangeText={handleChange}
         handleClear={handleClear}
         animal={pin.Animal}
       />
-      <div
-        // style={{
-        //   ...style1,
-        //   height: "auto",
-        //   zIndex: "100",
-        //   position: "absolute",
-        // }}
-      >
-        {list.length > 0 &&
-          list.map((element) => {
-            return (
-              <AutoSuggestListItem
-                key={element}
-                value={element}
-                handleSelect={handleList}
-                // style={style2}
-                // style3={style3}
-              />
-            );
-          })}
+      <div>
+        {list.length > 0
+        && list.map((element) => {
+          return (
+            <AutoSuggestListItem
+              key={element}
+              value={element}
+              handleSelect={handleList}
+              // style={style2}
+              // style3={style3}
+            />
+          );
+        })}
       </div>
     </div>
   );
