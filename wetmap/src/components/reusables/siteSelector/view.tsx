@@ -24,7 +24,7 @@ export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemo
 
         {sites !== null && sites.length === 0 && (
           <div onClick={handleSitesAdd} className={`${styles.emptyStateBox} ${error && styles.error}`}>
-            <EmptyState iconName="anchor" text="No dive sites yet." />
+            <EmptyState iconName="anchor" text={screenData.TripCreator.emptyDrawer} />
           </div>
         )}
 

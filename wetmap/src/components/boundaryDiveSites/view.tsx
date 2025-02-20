@@ -3,6 +3,7 @@ import DiveSiteItem from './diveSiteItem';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import InfiniteScroll from '../reusables/infiniteScroll';
 import EmptyState from '../reusables/emptyState';
+import ScreenData from '../newModals/screenData.json';
 
 type BoundaryDiveSitesViewProps = {
   uniqueKey?:         string
@@ -20,7 +21,7 @@ export function BoundaryDiveSitesView(props: BoundaryDiveSitesViewProps) {
       loadMore={props.loadMoreDiveSites}
       hasMore={props.hasMoreDiveSites}
       isLoading={props.isLoadingDiveSites}
-      renderEmpty={() => (<EmptyState iconName="anchor" text="No dive sites in this area." />)}
+      renderEmpty={() => (<EmptyState iconName="anchor" text={ScreenData.Sidebar.diveCenterEmptyDrawer} />)}
     >
 
       {props.diveSites?.map((item) => {

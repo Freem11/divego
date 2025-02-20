@@ -5,6 +5,7 @@ import readableDate from '../../../helpers/readableDate';
 import SeaLifeCard from '../seaLifeCard';
 import Icon from '../../../icons/Icon';
 import EmptyState from '../emptyState';
+import ScreenData from '../../newModals/screenData.json';
 
 type SeaLifeImageCardListProps = {
   diveSitePics:   PhotosGroupedByDate[] | null
@@ -38,7 +39,10 @@ export default function SeaLifeImageCardList(props: SeaLifeImageCardListProps) {
         ))}
       </div>
       {(!props.diveSitePics || props.diveSitePics.length === 0) && (
-        <EmptyState iconName="shark" text="No sightings yet." />
+        <EmptyState
+          iconName="shark"
+          text={props.onUserProfile ? ScreenData.UserProfile.emptyDrawer : ScreenData.DiveSite.emptyDrawer}
+        />
       )}
     </>
   );

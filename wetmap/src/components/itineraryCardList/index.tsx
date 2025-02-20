@@ -3,6 +3,7 @@ import ItineraryCard from '../itineraryCard';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import style from './style.module.scss';
 import EmptyState from '../reusables/emptyState';
+import ScreenData from '../newModals/screenData.json';
 
 type ItineraryCardListProps = {
   itineraryList:         ItineraryItem[] | null
@@ -27,7 +28,7 @@ export default function ItineraryCardList({ itineraryList, canChangeItineraries 
         ))}
       </div>
       {itineraryList.length === 0 && (
-        <EmptyState iconName="explore" text="No trips yet." />
+        <EmptyState iconName="explore" text={ScreenData.DiveShop.emptyDrawer} />
       )}
     </>
   );

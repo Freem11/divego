@@ -7,6 +7,7 @@ import TextInput from '../reusables/textInput';
 import Chip from '../reusables/chip';
 import style from './style.module.scss';
 import EmptyState from '../reusables/emptyState';
+import ScreenData from '../newModals/screenData.json';
 
 type BoundaryAnimalsViewProps = {
   uniqueKey?:         string
@@ -72,7 +73,7 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
               />
             );
           }
-          return  <EmptyState iconName="shark" text="No sea life in this area." />;
+          return  <EmptyState iconName="shark" text={ScreenData.Sidebar.seaLifeEmptyDrawer} />;
         }}
       >
         {props.animals?.map((item) => {
