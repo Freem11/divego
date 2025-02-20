@@ -64,7 +64,11 @@ export default function Modal() {
     <div className={`${style.modalWrapper} ${style.active}`} ref={rootRef}>
       {modalContext.stack.map(modalWindow => (
         <>
-          <div className={`${style.modalBackground} ${modalWindow.name === modalContext.currentModalName && style.showBackground}`}></div>
+          <div
+            onClick={() => modalContext.modalCancel()}
+            className={`${style.modalBackground} ${modalWindow.name === modalContext.currentModalName && style.showBackground}`}
+          >
+          </div>
           <div
             className={`${style.modalContainer} ${style[modalWindow.options.size]}`}
             style={modalWindow.name === modalContext.currentModalName ? openStyle : closeStyle}

@@ -19,8 +19,8 @@ type DiveSiteViewProps = {
   handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
   handleProfileSwitch:  (username: string) => Promise<void>
   onDiveSiteBioChange:  (newValue: string) => void
-  diveSite:             DiveSiteWithUserName
-  diveSitePics:         PhotosGroupedByDate[]
+  diveSite:             DiveSiteWithUserName | null
+  diveSitePics:         PhotosGroupedByDate[] | null
   isPartnerAccount:     boolean
   headerPictureUrl:     string | null
 };
@@ -83,7 +83,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                 {'Added by: '}
                 <a
                   href="#"
-                  onClick={() => props.handleProfileSwitch(props.diveSite.userid)}
+                  onClick={() => props.diveSite && props.handleProfileSwitch(props.diveSite.userid)}
                 >
                   {props?.diveSite?.newusername}
                 </a>

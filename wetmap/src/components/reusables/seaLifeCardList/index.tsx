@@ -7,7 +7,7 @@ import Icon from '../../../icons/Icon';
 import EmptyState from '../emptyState';
 
 type SeaLifeImageCardListProps = {
-  diveSitePics:   PhotosGroupedByDate[]
+  diveSitePics:   PhotosGroupedByDate[] | null
   onUserProfile?: boolean
 };
 

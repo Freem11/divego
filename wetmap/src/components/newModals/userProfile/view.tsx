@@ -24,7 +24,7 @@ type userProfileViewProps = {
   handleImageSelection:    (event: React.ChangeEvent<HTMLInputElement>) => void
   isFollowing:             boolean
   headerPictureUrl:        string | null
-  diveSitePics:            PhotosGroupedByDate[]
+  diveSitePics:            PhotosGroupedByDate[] | null
 };
 
 export default function UserProfileView(props: userProfileViewProps) {
