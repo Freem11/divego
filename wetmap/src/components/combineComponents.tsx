@@ -1,7 +1,7 @@
 import React from 'react';
 
 type combineComponentsProps = {
-  children?: any
+  children?: React.ReactNode
 };
 
 export const combineComponents = (props: combineComponentsProps) => {
