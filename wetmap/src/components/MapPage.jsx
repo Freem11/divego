@@ -35,7 +35,7 @@ import { PullTabContext } from './contexts/pullTabContext';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import './mapPage.css';
 import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
-import Histogram from './histogram/histogramBody';
+import Histogram from './histogram';
 import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
 

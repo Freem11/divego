@@ -1,0 +1,38 @@
+.mainContainer {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    z-index: 20;
+    pointer-events: none;
+  }
+
+  .barBox {
+    display: flex;
+    flex-direction: column;
+    pointer-events: none;
+  }
+
+.histogramLine{
+  display: flex;
+  flex-direction: row;
+}
+
+.monthLabel{
+  height: 25px;
+  width: 25px;
+  font-weight: 100;
+  color: white;
+}
+
+  .barContainer {
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    background-color: #e7ecef;
+    z-index: 20;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    margin-left: 5px;
+    margin-right: 1px;
+    height: 25px;
+  }

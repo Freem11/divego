@@ -1,6 +1,6 @@
 import { GPSBubble } from '../entities/GPSBubble';
 import { Pagination } from '../entities/pagination';
-import { Animal, Photo } from '../entities/photos';
+import { Animal, Photo, HistogramData } from '../entities/photos';
 import { supabase } from '../supabase';
 
 // not in use - remove
@@ -170,7 +170,8 @@ export const getAnimalsInBubble = async (bubble: GPSBubble, filter?: Partial<Pho
 //   }
 // };
 
-export const getHistoData = async (values) => {
+
+export const getHistoData = async (values: HistogramData) => {
   if (values.animals) {
     const { data, error } = await supabase.rpc('histogram3', {
       animals: values.animals,
