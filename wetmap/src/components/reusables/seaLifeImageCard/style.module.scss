@@ -1,18 +1,8 @@
 @import '../../../styles/variables.scss';
-
+@import "../../../styles/mixins.scss";
 
 .fadeDelay {
-  opacity: 0; 
-  animation: fadeInOnly 0.7s ease-in-out 0.7s forwards;
-}
-
-@keyframes fadeInOnly {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.8;
-  }
+  @include fade-in();
 }
 
 .pictureBoxQ {
