@@ -1,38 +1,48 @@
 .mainContainer {
-    position: absolute;
-    top: 10%;
-    left: 50%;
-    z-index: 20;
-    pointer-events: none;
-  }
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  z-index: 20;
+  pointer-events: none;
+}
 
-  .barBox {
-    display: flex;
-    flex-direction: column;
-    pointer-events: none;
-  }
+.barBox {
+  display: flex;
+  flex-direction: column;
+  pointer-events: none;
+}
 
 .histogramLine{
   display: flex;
+  align-items: start;
   flex-direction: row;
+  gap: 0.5rem;
 }
 
 .monthLabel{
   height: 25px;
   width: 25px;
-  font-weight: 100;
-  color: white;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgb(255, 255, 255);
+  text-shadow: 
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px  1px 0 #000,
+    1px  1px 0 #000,
+    0px 0px 5px rgba(0,0,0,1);
 }
 
-  .barContainer {
-    display: flex;
-    flex-direction: column;
-    align-self: center;
-    background-color: #e7ecef;
-    z-index: 20;
-    border-top-right-radius: 10px;
-    border-bottom-right-radius: 10px;
-    margin-left: 5px;
-    margin-right: 1px;
-    height: 25px;
-  }
+.barContainer {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  background-color: #0073e695;
+  border: 2px solid #0073e6;
+  box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.2), 0 1px 2px -1px rgb(0 0 0 / 0.2);
+  z-index: 20;
+  border-radius: 1rem;
+  height: 14px;
+  margin-bottom: 3px;
+}

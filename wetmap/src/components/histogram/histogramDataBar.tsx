@@ -10,8 +10,7 @@ export default function DataBar(props: histogramItemProps) {
   return (
     <div className={style.histogramLine}>
       <div className={style.monthLabel}>{props.month}</div>
-      <div className={style.barContainer} style={{ width: props.barValue + 'px' }}>
-      </div>
+      <div className={style.barContainer} style={{ width: props.barValue + 'px', visibility: (props.barValue == 0) ? 'hidden' : 'visible' }}></div>
     </div>
   );
 }
