@@ -39,17 +39,17 @@ export default function UserProfileView(props: userProfileViewProps) {
 
           {(props.isActiveProfile) && (
             <div className={style.buttonImageUpload}>
-              <FileInput
-                onFileChange={props.handleImageSelection}
-                className="d-none"
-              >
-                <Tooltip content={screenData.UserProfile.addProfilePhotoToolTip}>
+              <Tooltip content={screenData.UserProfile.addProfilePhotoToolTip}>
+                <FileInput
+                  onFileChange={props.handleImageSelection}
+                  className="d-none"
+                >
                   <ButtonIcon
                     icon={<Icon name="camera-plus" />}
                     className="btn-lg"
                   />
-                </Tooltip>
-              </FileInput>
+                </FileInput>
+              </Tooltip>
             </div>
           )}
         </WavyModalHeader>
@@ -63,6 +63,8 @@ export default function UserProfileView(props: userProfileViewProps) {
                     readOnly={!props?.isActiveProfile}
                     onSave={props?.handleProfileNameChange}
                     value={props.profile?.UserName}
+                    tooltipEditText="Click here to change your diver name"
+                    tooltipConfirmText="Click here to confirm changes"
                   />
                 </h1>
               </div>
@@ -75,6 +77,8 @@ export default function UserProfileView(props: userProfileViewProps) {
                   onSave={props?.handleProfileBioChange}
                   value={props.profile?.profileBio ?? ''}
                   placeholder={screenData.UserProfile.userDefaultDescription}
+                  tooltipEditText="Click here to write a bio about yourself"
+                  tooltipConfirmText="Click here to confirm changes to your bio"
                 />
               </div>
             </div>

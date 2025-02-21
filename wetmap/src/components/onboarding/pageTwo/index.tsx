@@ -9,29 +9,32 @@ import Emilio from '../../../images/EmilioNew.png';
 import CarrouselData from '../carrouselData.json';
 import style from '../style.module.scss';
 import { UserProfileContext } from '../../contexts/userProfileContext';
-import { ActiveProfile } from '../../../entities/profile';
-import { grabProfileById, updateProfile } from '../../../supabaseCalls/accountSupabaseCalls';
-import { SessionContext } from '../../contexts/sessionContext';
+import { updateProfile } from '../../../supabaseCalls/accountSupabaseCalls';
+import { toast } from 'react-toastify';
+import screenData from '../../newModals/screenData.json';
 
 
 export default function PageTwo() {
-  const { setProfile } = useContext(UserProfileContext);
-  const { activeSession } = useContext(SessionContext);
+  const { profile, initProfile } = useContext(UserProfileContext);
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
   const { slideForward } = useContext(SliderContext);
 
   const onSubmit = async (data: Form) => {
-    if (activeSession) {
-      await updateProfile({
-        UserID:       activeSession?.user.id,
+    if (profile) {
+      const response = await updateProfile({
+        UserID:   profile.UserID,
         UserName: data.username,
       });
-    }
-    if (activeSession) {
-      const profile = await grabProfileById(activeSession?.user.id);
-      if (profile) {
-        setProfile(profile);
+
+      if (!response.error) {
+        initProfile(true);
         slideForward();
+        return;
+      }
+
+      if (response.error.code == '23505') {
+        toast.error(screenData.UserProfile.DuplicateUserNameErrorMessage);
+        return;
       }
     }
   };

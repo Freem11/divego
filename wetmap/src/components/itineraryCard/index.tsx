@@ -18,7 +18,7 @@ type ItineraryCardProps = {
 export default function ItineraryCard({ itinerary, canChangeItinerary }: ItineraryCardProps) {
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapConfig, mapRef } = useContext(MapContext);
-  const { modalPause, modalShow } = useContext(ModalContext);
+  const { modalShow, modalCancel } = useContext(ModalContext);
 
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
@@ -37,7 +37,7 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
 
     mapRef?.fitBounds(bounds);
     setMapConfig(2);
-    modalPause();
+    modalCancel();
   };
 
   const handleDeleteButton = async (itinerary: ItineraryItem) => {

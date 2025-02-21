@@ -1,7 +1,7 @@
 import {
   uploadphoto,
   removePhoto,
-} from "../../cloudflareBucketCalls/cloudflareAWSCalls";
+} from '../../cloudflareBucketCalls/cloudflareAWSCalls';
 
 const handleImageUpload = async (photoInfo) => {
   let imageFile;
@@ -11,8 +11,8 @@ const handleImageUpload = async (photoInfo) => {
     imageFile = photoInfo;
   }
 
-  let extension = imageFile.name.split(".").pop();
-  const fileName = Date.now() + "." + extension;
+  let extension = imageFile.name.split('.').pop();
+  const fileName = Date.now() + '.' + extension;
 
   let uploaded = await uploadImage(imageFile, fileName);
 
@@ -21,7 +21,7 @@ const handleImageUpload = async (photoInfo) => {
 
 const uploadImage = async (file, name) => {
   const data = new FormData();
-  data.append("image", file);
+  data.append('image', file);
   await uploadphoto(file, name);
 };
 

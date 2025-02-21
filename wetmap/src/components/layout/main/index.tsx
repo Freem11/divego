@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import LayoutMainView from './view';
-import { grabProfileById } from '../../../supabaseCalls/accountSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
-import { SessionContext } from '../../contexts/sessionContext';
 import { ModalContext } from '../../reusables/modal/context';
 import SiteSubmitter from '../../newModals/siteSubmitter';
 import Settings from '../../newModals/setting';
@@ -14,8 +12,7 @@ import OnBoardingCarrousel from '../../onboarding';
 
 export default function LayoutMain() {
   const { mapConfig } = useContext(MapContext);
-  const { activeSession } = useContext(SessionContext);
-  const { profile, setProfile } = useContext(UserProfileContext);
+  const { profile } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
@@ -26,29 +23,10 @@ export default function LayoutMain() {
   }, [profile]);
 
   useEffect(() => {
-    const getProfile = async () => {
-      let sessionUserId;
-      if (activeSession) {
-        sessionUserId = activeSession.user.id;
-        try {
-          const success = await grabProfileById(sessionUserId);
-          if (success) {
-            const bully = success && success.UserName;
-            if (bully == null || bully === '') {
-              handleOnBoarding();
-              return;
-            } else {
-              setProfile(success);
-            }
-          }
-        } catch (e) {
-          console.log({ title: 'Error', message: (e as Error).message });
-        }
-      }
-    };
-
-    getProfile();
-  }, []);
+    if (profile && !profile.UserName) {
+      handleOnBoarding();
+    }
+  }, [profile]);
 
   const handleOnBoarding = () => {
     animateOnBoardingModal();

@@ -14,15 +14,16 @@ import ScreenData from '../screenData.json';
 import SeaLifeImageCardList from '../../reusables/seaLifeCardList';
 
 type DiveSiteViewProps = {
-  onClose?:             () => void
-  openPicUploader:      () => void
-  handleImageSelection: (event: React.ChangeEvent<HTMLInputElement>) => void
-  handleProfileSwitch:  (username: string) => Promise<void>
-  onDiveSiteBioChange:  (newValue: string) => void
-  diveSite:             DiveSiteWithUserName | null
-  diveSitePics:         PhotosGroupedByDate[] | null
-  isPartnerAccount:     boolean
-  headerPictureUrl:     string | null
+  showPicUploaderButton: boolean
+  onClose?:              () => void
+  openPicUploader:       () => void
+  handleImageSelection:  (event: React.ChangeEvent<HTMLInputElement>) => void
+  handleProfileSwitch:   (username: string) => Promise<void>
+  onDiveSiteBioChange:   (newValue: string) => void
+  diveSite:              DiveSiteWithUserName | null
+  diveSitePics:          PhotosGroupedByDate[] | null
+  isPartnerAccount:      boolean
+  headerPictureUrl:      string | null
 };
 
 
@@ -90,6 +91,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
               </div>
             </div>
 
+
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
@@ -97,6 +99,8 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                   value={props?.diveSite?.divesitebio || ''}
                   readOnly={!props?.isPartnerAccount}
                   onSave={props?.onDiveSiteBioChange}
+                  tooltipEditText={`Click here to write a bio about ${props?.diveSite?.name}`}
+                  tooltipConfirmText={`Click here to confirm changes to ${props?.diveSite?.name}'s bio`}
                 />
               </div>
             </div>
@@ -108,11 +112,15 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         <div className={style.panelHeader}>
           <h3>{screenData.DiveSite.drawerHeader}</h3>
           <div className={style.addPictureButton}>
-            <Button className="btn-lg" onClick={props.openPicUploader}>
-              <span className="hide-sm">
-                {screenData.DiveSite.addSightingButton}
-              </span>
-            </Button>
+            {props.showPicUploaderButton
+            && (
+              <Button className="btn-lg" onClick={props.openPicUploader}>
+                <span className="hide-sm">
+                  {screenData.DiveSite.addSightingButton}
+                </span>
+              </Button>
+            ) }
+
           </div>
         </div>
         <SeaLifeImageCardList diveSitePics={props.diveSitePics} />

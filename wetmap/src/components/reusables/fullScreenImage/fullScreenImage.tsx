@@ -2,13 +2,13 @@ import React from 'react';
 import style from './fullScreenImage.module.scss';
 import ButtonIcon from '../buttonIcon';
 import Icon from '../../../icons/Icon';
+import { ModalHandleProps } from '../modal/types';
 
 type FullScreenImageViewProps = {
   src:           string
-  onModalCancel: () => void
 };
 
-const FullScreenImage = (props: FullScreenImageViewProps) => {
+const FullScreenImage = (props: FullScreenImageViewProps & Partial<ModalHandleProps>) => {
   return (
     <>
       <div

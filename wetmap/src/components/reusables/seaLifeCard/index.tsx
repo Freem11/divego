@@ -27,11 +27,15 @@ export default function SeaLifeCard(props: { pic: PhotoWithLikesAndComments, isS
   const { mapRef } = useContext(MapContext);
   const { modalShow } = useContext(ModalContext);
   const photoName = pic.photoFile.split('/').pop();
+  const mapContext = useContext(MapContext);
 
   const handleProfileSwitch = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, userId: string) => {
     e.stopPropagation();
 
     if (profile?.UserID === userId) {
+      return;
+    }
+    if (mapContext.mapConfig === 2) {
       return;
     }
     modalShow(UserProfile, {
