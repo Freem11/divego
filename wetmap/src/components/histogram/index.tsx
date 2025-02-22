@@ -32,35 +32,25 @@ export default function Histogram(props: HistogramProps) {
   const getHistogramData = async () => {
     if (boundaries) {
       const bubble = GPSBubble.createFromBoundaries(boundaries);
-      try {
-        const historgramData: HistogramSupaData[] = await getHistoData({
-          animals: [props.animal],
-          minLat:  bubble.minLat,
-          maxLat:  bubble.maxLat,
-          minLng:  bubble.minLng,
-          maxLng:  bubble.maxLng,
-        });
+      const historgramData = await GPSBubble.getItemsInGpsBubble(getHistoData, bubble, [props.animal]);
 
-        let i = 1;
-        const dataArray = [];
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      let i = 1;
+      const dataArray = [];
+      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-        if (historgramData) {
-          const maxVal = Math.max(...historgramData.map((item: { num: number }) => item.num));
-          for (i = 1; i < 13; i++) {
-            historgramData.forEach((dataPoint: HistogramSupaData) => {
-              if (dataPoint.month === i) {
-                dataArray.push({ value: (dataPoint.num / maxVal) * 100, month: months[i - 1] });
-              }
-            });
-            if (dataArray.length < i) {
-              dataArray.push({ value: 0, month: months[i - 1] });
+      if (historgramData) {
+        const maxVal = Math.max(...historgramData.map((item: { num: number }) => item.num));
+        for (i = 1; i < 13; i++) {
+          historgramData.forEach((dataPoint: HistogramSupaData) => {
+            if (dataPoint.month === i) {
+              dataArray.push({ value: (dataPoint.num / maxVal) * 100, month: months[i - 1] });
             }
+          });
+          if (dataArray.length < i) {
+            dataArray.push({ value: 0, month: months[i - 1] });
           }
-          setHistoData(dataArray);
         }
-      } catch (e) {
-        console.log({ title: 'Error', message: (e as Error).message });
+        setHistoData(dataArray);
       }
     }
   };

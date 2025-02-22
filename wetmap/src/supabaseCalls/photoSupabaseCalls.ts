@@ -171,24 +171,22 @@ export const getAnimalsInBubble = async (bubble: GPSBubble, filter?: Partial<Pho
 // };
 
 
-export const getHistoData = async (values: HistogramData) => {
-  if (values.animals) {
-    const { data, error } = await supabase.rpc('histogram3', {
-      animals: values.animals,
-      max_lat: values.maxLat,
-      min_lat: values.minLat,
-      max_lng: values.maxLng,
-      min_lng: values.minLng,
-    });
+export const getHistoData = async (bubble: GPSBubble, animal: string[]) => {
+  const { data, error } = await supabase.rpc('histogram3', {
+    animals: animal,
+    max_lat: bubble.maxLat,
+    min_lat: bubble.minLat,
+    max_lng: bubble.maxLng,
+    min_lng: bubble.minLng,
+  });
 
-    if (error) {
-      console.log('couldn\'t do it,', error);
-      return [];
-    }
+  if (error) {
+    console.log('couldn\'t do it,', error);
+    return [];
+  }
 
-    if (data) {
-      return data;
-    }
+  if (data) {
+    return data;
   }
 };
 
