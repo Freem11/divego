@@ -23,8 +23,6 @@ type BoundaryAnimalsViewProps = {
 };
 
 export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
-  const [isHovered, setIsHovered] = useState(false);
-
   return (
     <>
       <TextInput
@@ -81,10 +79,12 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
       >
         {props.animals?.map((item) => {
           return (
-            <div key={item.photofile} onClick={() => props.handleAnimalSelect(item.label)} style={{ position: 'relative' }}>
-              {props.selectedAnimals.includes(item.label) && <Histogram animal={item.label} isHovered={isHovered} />}
-              <AnimalItem animal={item} highlighted={props.selectedAnimals.includes(item.label)} setIsHovered={setIsHovered} />
-            </div>
+            <AnimalItemHoverWithHistogram
+              onClick={() => props.handleAnimalSelect(item.label)}
+              key={item.photofile}
+              item={item}
+              selectedAnimals={props.selectedAnimals}
+            />
           );
         })}
 
@@ -92,3 +92,20 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
     </>
   );
 }
+
+// TODO: add prop types
+
+const AnimalItemHoverWithHistogram = (props: any) => {
+  const [isHovered, setIsHovered] = useState(false);
+
+  return (
+    <div onClick={props.onClick} style={{ position: 'relative' }}>
+      {props.selectedAnimals.includes(props.item.label) && <Histogram animal={props.item.label} isHovered={isHovered} />}
+      <AnimalItem
+        animal={props.item}
+        highlighted={props.selectedAnimals.includes(props.item.label)}
+        setIsHovered={setIsHovered}
+      />
+    </div>
+  );
+};
