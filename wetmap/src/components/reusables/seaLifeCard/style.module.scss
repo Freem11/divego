@@ -125,16 +125,7 @@ p {
   color: rgba(255, 255, 255, 0.75);
 }
 
+@import "../../../styles/mixins.scss";
 .fadeDelay {
-  opacity: 0; 
-  animation: fadeInOnly 0.7s ease-in-out 0.7s forwards;
-}
-
-@keyframes fadeInOnly {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  @include fade-in();
 }
