@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react';
-// import { PhotoContext } from '../contexts/photoContext';
 import { MapContext } from '../googleMap/mapContext';
 import { GPSBubble } from '../../entities/GPSBubble';
 import { getHistoData } from '../../supabaseCalls/photoSupabaseCalls';
@@ -12,8 +11,6 @@ type HistogramProps = {
 
 export default function Histogram(props: HistogramProps) {
   const { boundaries } = useContext(MapContext);
-  // const photoContext = useContext(PhotoContext);
-  // const { selectedAnimals } = useContext(PhotoContext);
   const [histoData, setHistoData] = useState<HistogramItem[]>([]);
 
   useEffect(() => {
@@ -21,8 +18,6 @@ export default function Histogram(props: HistogramProps) {
       getHistogramData();
     }
   }, [boundaries]);
-
-  // photoContext.heatPoints,
 
   const getHistogramData = async () => {
     if (boundaries) {
