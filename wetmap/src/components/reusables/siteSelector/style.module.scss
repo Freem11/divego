@@ -97,54 +97,15 @@
     cursor: pointer;
 }
 
-.emptyStateIcons {
-    position: relative;
-    width: 2rem;
-    height: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 0.3rem;
+.emptyStateBox {
+    height: 8rem;
+    background: #f9f9f9;
+    border: 1px dashed #dadada;
+    border-radius: 0.5rem;
 }
 
-.emptyStateIcon {
-    width: 1.75rem;
-    height: auto;
-    padding: 0.2rem;
-    border-radius: 100%;
-    color: white;
-    background-color: var(--ssrc-site-selector-icon-background);
-    position: absolute;
-    z-index: 10;
-    border: 0.1rem #f9f9f9 solid;
-}
-
-.emptyStateIconLeft {
-    width: 1.5rem;
-    height: auto;
-    padding: 0.2rem;
-    border-radius: 100%;
-    color: white;
-    background-color: var(--ssrc-site-selector-icon-background);
-    position: absolute;
-    top: -0.3rem;
-    left: -0.75rem;
-    z-index: 5;
-    scale: 0.9;
-}
-
-.emptyStateIconRight {
-    width: 1.5rem;
-    height: auto;
-    padding: 0.2rem;
-    border-radius: 100%;
-    color: white;
-    background-color: var(--ssrc-site-selector-icon-background);
-    position: absolute;
-    top: -0.3rem;
-    right: -0.75rem;
-    z-index: 5;
-    scale: 0.9;
+.error {
+    border-color: red;
 }
 
 .button {
