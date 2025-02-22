@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.8.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1160 1160" style="enable-background:new 0 0 1160 1160;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#000000;stroke-width:125;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st1{fill:none;stroke:#000000;stroke-width:85;stroke-miterlimit:10;}
+	.st2{fill:none;stroke:#000000;stroke-width:100;stroke-miterlimit:10;}
+	.st3{fill:none;stroke:#000000;stroke-width:75;stroke-linejoin:round;stroke-miterlimit:10;}
+</style>
+<g id="Thicc_Blue">
+	<g>
+		<path d="M580.17,256.51c0,0-0.52,0-1.17,0c-0.65,0-1.17,0-1.17,0s0.52,0,1.17,0C579.65,256.51,580.17,256.51,580.17,256.51
+			L580.17,256.51z"/>
+	</g>
+	<g>
+		<line class="st0" x1="579.59" y1="241.28" x2="579.59" y2="1079.22"/>
+	</g>
+	<circle class="st1" cx="580.17" cy="153.38" r="84.38"/>
+	<g>
+		<path class="st2" d="M577.83,1022.96c294.74,0,328.14-152.94,328.14-342.21"/>
+		<polyline class="st3" points="807.53,741.7 902.46,646.77 997.38,741.7 		"/>
+	</g>
+	<g>
+		<line class="st2" x1="728.42" y1="389.53" x2="430.75" y2="389.53"/>
+	</g>
+	<polyline class="st3" points="676.27,1010.07 581.34,1105 486.42,1010.07 	"/>
+	<g>
+		<path class="st2" d="M580.17,1022.96c-294.74,0-328.14-152.94-328.14-342.21"/>
+		<polyline class="st3" points="350.47,741.7 255.54,646.77 160.62,741.7 		"/>
+	</g>
+</g>
+</svg>
