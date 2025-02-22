@@ -25,7 +25,8 @@ export const DiveShopContextProvider = ({ children }: any) => {
       // TODO: add pagination to diveshops
       setCollection(prev => ({ ...prev, isLoading: true }));
       const bubble = GPSBubble.createFromBoundaries(boundaries);
-      const items = await getDiveShops(bubble);
+      const items = await GPSBubble.getItemsInGpsBubble(getDiveShops, bubble);
+
       setCollection((prev) => {
         return PagedCollection.updateItems(prev, items, reset);
       });
