@@ -4,8 +4,9 @@ import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 import SidebarCard from '../../reusables/sidebarCard';
 
 type AnimalItemProps = {
-  animal:       Animal
-  highlighted?: boolean
+  animal:        Animal
+  highlighted?:  boolean
+  setIsHovered?: (isHovered: boolean) => void
 };
 
 export function AnimalItem(props: AnimalItemProps) {
@@ -17,6 +18,7 @@ export function AnimalItem(props: AnimalItemProps) {
   return (
     <SidebarCard
       imageUrl={imageUrl}
+      setIsHovered={props.setIsHovered}
       hoverHide={true}
       title={props.animal.label}
       info={`${props.animal.times_seen} sighting(s)`}

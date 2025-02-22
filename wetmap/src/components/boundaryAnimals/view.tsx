@@ -1,4 +1,4 @@
-import React, { ChangeEvent } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import InfiniteScroll from '../reusables/infiniteScroll';
 import { AnimalItem } from './animalItem';
 import Icon from '../../icons/Icon';
@@ -21,6 +21,8 @@ type BoundaryAnimalsViewProps = {
 };
 
 export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
+  const [isHovered, setIsHovered] = useState(false);
+
   return (
     <>
       <TextInput
@@ -52,8 +54,8 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
         {props.animals?.map((item) => {
           return (
             <div key={item.photofile} onClick={() => props.handleAnimalSelect(item.label)} style={{ position: 'relative' }}>
-              {props.selectedAnimals.includes(item.label) && <Histogram animal={item.label} />}
-              <AnimalItem animal={item} highlighted={props.selectedAnimals.includes(item.label)} />
+              {props.selectedAnimals.includes(item.label) && <Histogram animal={item.label} isHovered={isHovered} />}
+              <AnimalItem animal={item} highlighted={props.selectedAnimals.includes(item.label)} setIsHovered={setIsHovered} />
             </div>
           );
         })}

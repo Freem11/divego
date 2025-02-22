@@ -4,19 +4,25 @@ import backgroundPhoto from '../../../images/blackManta.png';
 import Icon from '../../../icons/Icon';
 
 type SidebarCardProps = {
-  imageUrl:     string | null
-  imageAlt?:    string
-  title:        string
-  info?:        string
-  rating?:      number
-  hoverHide?:   boolean
-  highlighted?: boolean
+  imageUrl:      string | null
+  imageAlt?:     string
+  title:         string
+  info?:         string
+  rating?:       number
+  hoverHide?:    boolean
+  highlighted?:  boolean
+  setIsHovered?: (isHovered: boolean) => void
 };
 
 export default function SidebarCard(props: SidebarCardProps) {
   return (
     <div className={`${styles.card} ${props.highlighted && styles.highlighted}`}>
-      <div className={`${styles.overlay} ${props.hoverHide && styles.hoverHide}`}></div>
+      <div
+        className={`${styles.overlay} ${props.hoverHide && styles.hoverHide}`}
+        onMouseEnter={() => props.setIsHovered && props.setIsHovered(true)}
+        onMouseLeave={() => props.setIsHovered && props.setIsHovered(false)}
+      >
+      </div>
       <img src={props.imageUrl || backgroundPhoto} alt={props.imageAlt} className={styles.backgroundImage} />
       <div className={`${styles.content} ${props.hoverHide && styles.hoverHide}`}>
         <p className={styles.title}>{props.title}</p>

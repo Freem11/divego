@@ -7,7 +7,8 @@ import HistogramView from './view';
 import { HistogramItem, HistogramSupaData } from '../../entities/histogram';
 
 type HistogramProps = {
-  animal: string
+  animal:    string
+  isHovered: boolean
 };
 
 export default function Histogram(props: HistogramProps) {
@@ -65,6 +66,6 @@ export default function Histogram(props: HistogramProps) {
   };
 
   return (
-    <HistogramView histoData={histoData} hoverHide={true} />
+    <HistogramView histoData={histoData} hoverHide={true} isHovered={props.isHovered} />
   );
 }
