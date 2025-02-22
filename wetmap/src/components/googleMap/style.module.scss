@@ -5,19 +5,6 @@
   border-radius: 15px;
 }
 
-.histogramContainer {
-  z-index: 10;
-  position: absolute;
-  left: 15px;
-  bottom: 250px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 85px;
-  pointer-events: none;
-}
-
-
 .zoomButtonContainer {
   z-index: 10;
   position: absolute;
