@@ -6,6 +6,7 @@ import { Animal } from '../../entities/photos';
 import TextInput from '../reusables/textInput';
 import Chip from '../reusables/chip';
 import style from './style.module.scss';
+import Histogram from '../histogram';
 
 type BoundaryAnimalsViewProps = {
   uniqueKey?:         string
@@ -50,7 +51,8 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
       >
         {props.animals?.map((item) => {
           return (
-            <div key={item.photofile} onClick={() => props.handleAnimalSelect(item.label)}>
+            <div key={item.photofile} onClick={() => props.handleAnimalSelect(item.label)} style={{ position: 'relative' }}>
+              {props.selectedAnimals.includes(item.label) && <Histogram animal={item.label} />}
               <AnimalItem animal={item} highlighted={props.selectedAnimals.includes(item.label)} />
             </div>
           );

@@ -22,7 +22,6 @@ import { HeatPoint } from '../../entities/heatPoint';
 import { diveShopToPointFeature } from './dto/diveShopToPointFeature';
 import RoundButtonIcon from '../reusables/roundButton';
 import Icon from '../../icons/Icon';
-import Histogram from '../histogram';
 
 const libraries: Libraries = ['places', 'visualization'];
 
@@ -188,12 +187,6 @@ export default function MapView(props: MapViewProps) {
         <RoundButtonIcon icon={<Icon name="plus" color="blue" onClick={zoomMapIn} />} />
         <RoundButtonIcon icon={<Icon name="minus" color="blue"  onClick={zoomMapOut} />} />
       </div>
-
-      <div className={style.histogramContainer}>
-        <Histogram />
-
-      </div>
-
     </GoogleMap>
   );
 }

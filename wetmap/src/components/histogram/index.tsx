@@ -6,10 +6,14 @@ import { getHistoData } from '../../supabaseCalls/photoSupabaseCalls';
 import HistogramView from './view';
 import { HistogramItem, HistogramSupaData } from '../../entities/histogram';
 
-export default function Histogram() {
+type HistogramProps = {
+  animal: string
+};
+
+export default function Histogram(props: HistogramProps) {
   const { boundaries } = useContext(MapContext);
   const photoContext = useContext(PhotoContext);
-  const { selectedAnimals } = useContext(PhotoContext);
+  // const { selectedAnimals } = useContext(PhotoContext);
   const [histoData, setHistoData] = useState<HistogramItem[]>([]);
 
   useEffect(() => {
@@ -29,7 +33,7 @@ export default function Histogram() {
       const bubble = GPSBubble.createFromBoundaries(boundaries);
       try {
         const historgramData: HistogramSupaData[] = await getHistoData({
-          animals: selectedAnimals,
+          animals: [props.animal],
           minLat:  bubble.minLat,
           maxLat:  bubble.maxLat,
           minLng:  bubble.minLng,
@@ -61,6 +65,6 @@ export default function Histogram() {
   };
 
   return (
-    <HistogramView histoData={histoData} />
+    <HistogramView histoData={histoData} hoverHide={true} />
   );
 }

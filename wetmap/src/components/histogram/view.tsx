@@ -4,12 +4,13 @@ import style from './style.module.scss';
 import { HistogramItem } from '../../entities/histogram';
 
 type HistogramViewProps = {
-  histoData: HistogramItem[]
+  histoData:  HistogramItem[]
+  hoverHide?: boolean
 };
 
 export default function HistogramView(props: HistogramViewProps) {
   return (
-    <div className={style.mainContainer}>
+    <div className={`${style.mainContainer} ${props.hoverHide && style.hoverHide}`}>
       <div className={style.barBox}>
         {props.histoData.length > 0
         && props.histoData.map((data, index) => {
