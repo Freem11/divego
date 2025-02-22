@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useState } from 'react';
+import React, { ChangeEvent } from 'react';
 import InfiniteScroll from '../reusables/infiniteScroll';
 import { AnimalItem } from './animalItem';
 import Icon from '../../icons/Icon';
@@ -79,12 +79,13 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
       >
         {props.animals?.map((item) => {
           return (
-            <AnimalItemHoverWithHistogram
-              onClick={() => props.handleAnimalSelect(item.label)}
-              key={item.photofile}
-              item={item}
-              selectedAnimals={props.selectedAnimals}
-            />
+            <div key={item.photofile} onClick={() => props.handleAnimalSelect(item.label)} style={{ position: 'relative' }}>
+              <AnimalItem
+                key={item.photofile}
+                animal={item}
+                extraContent={props.selectedAnimals.includes(item.label) && <Histogram animal={item.label} />}
+              />
+            </div>
           );
         })}
 
@@ -92,20 +93,3 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
     </>
   );
 }
-
-// TODO: add prop types
-
-const AnimalItemHoverWithHistogram = (props: any) => {
-  const [isHovered, setIsHovered] = useState(false);
-
-  return (
-    <div onClick={props.onClick} style={{ position: 'relative' }}>
-      {props.selectedAnimals.includes(props.item.label) && <Histogram animal={props.item.label} isHovered={isHovered} />}
-      <AnimalItem
-        animal={props.item}
-        highlighted={props.selectedAnimals.includes(props.item.label)}
-        setIsHovered={setIsHovered}
-      />
-    </div>
-  );
-};

@@ -7,14 +7,6 @@
   pointer-events: none;
 }
 
-.hovered {
-  opacity: 0;
-}
-
-.mainContainer:hover .hoverHide {
-  opacity: 0;
-}
-
 .barBox {
   display: flex;
   flex-direction: column;

@@ -6,12 +6,11 @@ import { HistogramItem } from '../../entities/histogram';
 type HistogramViewProps = {
   histoData:  HistogramItem[]
   hoverHide?: boolean
-  isHovered?: boolean
 };
 
 export default function HistogramView(props: HistogramViewProps) {
   return (
-    <div className={`${style.mainContainer} ${props.hoverHide && style.hoverHide} ${props.isHovered && style.hovered}`}>
+    <div className={`${style.mainContainer} ${props.hoverHide && style.hoverHide}`}>
       <div className={style.barBox}>
         {props.histoData.length > 0
         && props.histoData.map((data, index) => {
