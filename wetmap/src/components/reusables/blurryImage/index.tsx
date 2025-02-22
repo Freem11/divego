@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './style.module.scss';
+import { useImageLoader } from './useImageLoader';
 
 type Props = {
   src?:       string | null
@@ -9,22 +10,14 @@ type Props = {
 };
 
 export default function BlurryImage({ src, alt = 'Image', className = '', onClick }: Props) {
-  const [isLoading, setLoading] = useState(!!src);
-  const [hasError, setHasError] = useState(false);
-
-  const validSrc = !src || hasError ? undefined : src;
+  const { isLoading, validImage } = useImageLoader(src);
 
   return (
     <img
-      src={validSrc}
+      src={validImage}
       alt={alt}
       className={`${style.image} ${className} ${isLoading ? style.loading : ''}`}
-      onLoad={() => setLoading(false)}
       loading="lazy"
-      onError={() => {
-        setHasError(true);
-        setLoading(false);
-      }}
       onClick={onClick}
     />
   );

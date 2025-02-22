@@ -1,0 +1,46 @@
+.cardList {
+    padding-right: 1rem;
+    padding-left: 1rem;
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 1rem;
+    /* Hide scrollbar for IE, Edge and Firefox */
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.cardList::-webkit-scrollbar {
+    display: none;
+}
+
+.packet {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.packetHeader {
+    font-weight: 500;
+    text-align: left;
+    color: rgb(100, 100, 100);
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 1rem;
+    padding-top: 1rem;
+}
+
+.packetHeaderItem {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.packetHeader svg {
+    width: 1rem;
+    height: auto;
+    color: #0073E6;
+}

@@ -7,6 +7,8 @@ import TextInput from '../reusables/textInput';
 import Chip from '../reusables/chip';
 import style from './style.module.scss';
 import Histogram from '../histogram';
+import EmptyState from '../reusables/emptyState';
+import ScreenData from '../newModals/screenData.json';
 
 type BoundaryAnimalsViewProps = {
   uniqueKey?:         string
@@ -45,10 +47,36 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
         hasMore={props.hasMoreAnimals}
         isLoading={props.isLoadingAnimals}
         renderEmpty={() => {
-          if (props.searchAnimal) {
-            return <div>{`Can't find animals like '${props.searchAnimal}' in this area`}</div>;
+          if (props.selectedAnimals.length > 0) {
+            return (
+              <EmptyState
+                iconName="shark"
+                text={`No ${props.selectedAnimals.map((animal, index, animals) => {
+                  // Convert animal name to lowercase before using it
+                  const animalLower = animal.toLowerCase();
+
+                  // Special case for exactly 2 items: just use "or" without comma
+                  if (animals.length === 2) {
+                    return `${animalLower}${index === 0 ? ' or ' : ''}`;  // Add " or " after first item
+                  }
+
+                  // Last item: just return the animal name with no separator
+                  if (index === animals.length - 1) {
+                    return animalLower;
+                  }
+
+                  // Second-to-last item: add ", or " after it
+                  if (index === animals.length - 2) {
+                    return `${animalLower}, or `;
+                  }
+
+                  // All other items: add ", " after them
+                  return `${animalLower}, `;
+                }).join('')} in this area.`}  // join("") combines all pieces into a single string
+              />
+            );
           }
-          return <div>No animals in this area</div>;
+          return  <EmptyState iconName="shark" text={ScreenData.Sidebar.seaLifeEmptyDrawer} />;
         }}
       >
         {props.animals?.map((item) => {

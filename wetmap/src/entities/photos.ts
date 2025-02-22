@@ -11,7 +11,7 @@ export type PhotoWithLikesAndComments = {
   UserName:     string
   likecount:    number
   likedbyuser:  boolean
-  likeid:       number
+  likeid:       number | null
   commentcount: number
 };
 

@@ -2,6 +2,7 @@ import React  from 'react';
 import styles from './style.module.scss';
 import backgroundPhoto from '../../../images/blackManta.png';
 import Icon from '../../../icons/Icon';
+import BlurryImage from '../blurryImage';
 
 type SidebarCardProps = {
   imageUrl:      string | null
@@ -23,8 +24,8 @@ export default function SidebarCard(props: SidebarCardProps) {
         onMouseLeave={() => props.setIsHovered && props.setIsHovered(false)}
       >
       </div>
-      <img src={props.imageUrl || backgroundPhoto} alt={props.imageAlt} className={styles.backgroundImage} />
-      <div className={`${styles.content} ${props.hoverHide && styles.hoverHide}`}>
+      <BlurryImage src={props.imageUrl || backgroundPhoto} alt={props.imageAlt} className={styles.backgroundImage} />
+      <div className={`${styles.content} ${props.hoverHide && styles.hoverHide} ${styles.fadeDelay}`}>
         <p className={styles.title}>{props.title}</p>
 
         <div className={styles.info}>
