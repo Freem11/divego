@@ -9,6 +9,7 @@
 
   .modalContainer {
     transform: translateY(100vh);
+    opacity: 0;
     background: $themeWhite;
     width: 70vw;
     max-width: 600px;
@@ -45,4 +46,19 @@
       border-radius: 0
     }
   }
+}
+
+.modalBackground {
+  position: fixed;
+  z-index: 5;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+
+.showBackground {
+  opacity: 1;
 }
