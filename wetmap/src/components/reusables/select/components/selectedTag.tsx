@@ -7,11 +7,10 @@ type SelectedTagProps = {
 
 export default function SelectedTag(props: SelectedTagProps) {
   return (
-    <div className="selected-tag">
+    <div className="ssrc-select_selected-tag">
       <span>{props.label}</span>
       <button
         aria-label={`remove ${props.label}`}
-        className="action"
         onClick={(e) => {
           e.stopPropagation();
           props.deselctItem();
