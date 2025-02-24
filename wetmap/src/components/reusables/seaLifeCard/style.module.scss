@@ -106,10 +106,15 @@ p {
   transition: ease 200ms;
 }
 
-.liked {
-  color: #0073E6;
-  opacity: 1;
+.biggerIcon {
+  margin-bottom: 4px;
+  scale: 1.15;
 }
+
+.liked {
+  color: red;
+}
+
 
 .action:active .actionIcon {
   scale: 0.9;

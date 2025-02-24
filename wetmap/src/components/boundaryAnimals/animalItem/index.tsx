@@ -4,8 +4,8 @@ import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 import SidebarCard from '../../reusables/sidebarCard';
 
 type AnimalItemProps = {
-  animal:       Animal
-  highlighted?: boolean
+  animal:        Animal
+  extraContent?: React.ReactNode
 };
 
 export function AnimalItem(props: AnimalItemProps) {
@@ -20,6 +20,7 @@ export function AnimalItem(props: AnimalItemProps) {
       hoverHide={true}
       title={props.animal.label}
       info={`${props.animal.times_seen} Sighting${props.animal.times_seen !== 1 ? 's' : ''}`}
+      extraContent={props.extraContent}
     />
   );
 }

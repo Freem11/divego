@@ -66,8 +66,8 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
               className={style.action}
             >
               <Icon
-                className={`${style.actionIcon} ${props.picLiked && style.liked}`}
-                name="like"
+                className={`${style.actionIcon} ${style.biggerIcon} ${props.picLiked && style.liked}`}
+                name="like-hand"
               />
               <span>
                 {abbreviateNumber(props.countOfLikes)}

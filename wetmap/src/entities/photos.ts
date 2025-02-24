@@ -39,3 +39,11 @@ export type Animal = {
   photofile:  string
   times_seen: number
 };
+
+export type HistogramData = {
+  animals: string[]
+  minLat:  number
+  maxLat:  number
+  minLng:  number
+  maxLng:  number
+};
