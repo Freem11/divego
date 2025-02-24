@@ -7,7 +7,6 @@ import TextInput from '../../reusables/textInput';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
 import { Form, FormRules } from './form';
-import style from './style.module.scss';
 import { toast } from 'react-toastify';
 import Tooltip from '../../reusables/tooltip';
 
