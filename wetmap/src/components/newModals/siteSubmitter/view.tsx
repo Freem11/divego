@@ -85,38 +85,35 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
         </div>
 
 
-        <div className={style.horizontalButtonContainer}>
-          <div className="col-3">
-            <Tooltip content={screenData.DiveSiteAdd.myLocationTooltip}>
-              <Button
-                onClick={props.getDeviceLocation}
-                className="btn-md"
-                type="button"
-              >
-                {screenData.DiveSiteAdd.myLocationButton}
-              </Button>
-            </Tooltip>
+        <div className="cols mx-0">
+          <div className="col-4">
+            <Button
+              onClick={props.getDeviceLocation}
+              className="btn-md col-3"
+              type="button"
+            >
+              {screenData.DiveSiteAdd.myLocationButton}
+            </Button>
           </div>
+          <div className="col-4"> </div>
+          <div className="col-4">
 
-          <div className="col-3 ">
-            <Tooltip content={screenData.DiveSiteAdd.pinButtonTooltip}>
-              <Button
-                onClick={props.onNavigate}
-                className="btn-md"
-                type="button"
-              >
-                {screenData.DiveSiteAdd.pinButton}
-              </Button>
-            </Tooltip>
+            <Button
+              onClick={props.onNavigate}
+              className="btn-md col-3"
+              type="button"
+            >
+              {screenData.DiveSiteAdd.pinButton}
+            </Button>
           </div>
         </div>
 
         <div className="cols mx-0">
-          <div className="col-9"></div>
-          <div className="col-3">
+          <div className="col-8"></div>
+          <div className="col-4">
             <Button
               disabled={isSubmitting}
-              className="btn-md btn-primary"
+              className="btn-md btn-primary col-3"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >
