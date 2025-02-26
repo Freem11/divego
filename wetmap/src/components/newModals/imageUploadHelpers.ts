@@ -28,7 +28,7 @@ const handleImageUpload = async (props: handleImageUploadProps) => {
   const extension = imageFile.name.split('.').pop();
   const fileName = Date.now() + '.' + extension;
 
-  const uploaded = await uploadImage(imageFile, fileName);
+  const uploaded = await uploadImage({ file: imageFile, name: fileName });
 
   return fileName;
 };
