@@ -12,7 +12,7 @@ const ShowModal = ({ component }: { component: React.FC<any> }): JSX.Element | n
   return null;
 };
 
-export const routes = [
+const routes = [
   {
     path:     '*',
     element:  <LayoutMain />,
