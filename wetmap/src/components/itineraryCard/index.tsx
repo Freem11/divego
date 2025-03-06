@@ -5,6 +5,10 @@ import { getDiveSitesByIDs } from '../../supabaseCalls/diveSiteSupabaseCalls';
 import ItineraryCardView from './view';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import { MapContext } from '../googleMap/mapContext';
+import { insertItineraryRequest } from '../../supabaseCalls/itinerarySupabaseCalls';
+import { toast } from 'react-toastify';
+import screenData from '../newModals/screenData.json';
+import TripCreatorModal from '../newModals/tripCreatorModal';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
@@ -14,7 +18,7 @@ type ItineraryCardProps = {
 export default function ItineraryCard({ itinerary, canChangeItinerary }: ItineraryCardProps) {
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapConfig, mapRef } = useContext(MapContext);
-  const modalContext = useContext(ModalContext);
+  const { modalShow, modalCancel } = useContext(ModalContext);
 
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
@@ -26,22 +30,36 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       return; // Exit early if itinerizedDiveSites is undefined or empty
     }
 
-    const lats: number[] = [];
-    const lngs: number[] = [];
-
+    const bounds = new google.maps.LatLngBounds();
     itinerizedDiveSites.forEach((site) => {
-      lats.push(site.lat);
-      lngs.push(site.lng);
+      bounds.extend({ lat: site.lat, lng: site.lng });
     });
 
-    const moveLat = lats.reduce((acc, curr) => acc + curr, 0) / lats.length;
-    const moveLng = lngs.reduce((acc, curr) => acc + curr, 0) / lngs.length;
-
-    mapRef?.panTo({ lat: moveLat, lng: moveLng });
-    mapRef?.setZoom(12);
+    mapRef?.fitBounds(bounds);
     setMapConfig(2);
+    modalCancel();
+  };
 
-    modalContext.modalCancel();
+  const handleDeleteButton = async (itinerary: ItineraryItem) => {
+    const { error } = await insertItineraryRequest(itinerary, 'Delete');
+
+    if (error) {
+      toast.error(screenData.TripCard.deleteTripError);
+    } else {
+      toast.success(screenData.TripCard.deleteTripSuccess);
+    }
+  };
+
+  const handleEditButton = (itineraryInfo: ItineraryItem) => {
+    if (itineraryInfo) {
+      setSitesArray(itineraryInfo.siteList || []);
+      modalShow(TripCreatorModal, {
+        keepPreviousModal: true,
+        size:              'large',
+        itineraryInfo,
+        isEditModeOn:      true,
+      });
+    }
   };
 
   return (
@@ -49,6 +67,8 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
       itinerary={itinerary}
       flipMap={flipMap}
       canChangeItinerary={canChangeItinerary}
+      handleDeleteButton={handleDeleteButton}
+      handleEditButton={handleEditButton}
     />
   );
 }

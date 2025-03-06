@@ -13,10 +13,11 @@
   max-height: 100%;
   object-fit: contain;
   border-radius: 15px;
-  border: 2px solid lightgrey;
+  filter: drop-shadow(0 4px 3px rgb(0 0 0 / 0.07)) drop-shadow(0 2px 2px rgb(0 0 0 / 0.06));
 }
 
 .close {
   position: absolute;
-  bottom: 3vh;
+  top: 3vh;
+  right: 3vh;
 }

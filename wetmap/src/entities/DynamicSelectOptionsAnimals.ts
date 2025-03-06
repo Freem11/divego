@@ -3,7 +3,7 @@ import { DynamicSelectOptions } from '../components/reusables/dynamicSelect/Dyna
 
 export class DynamicSelectOptionsAnimals extends DynamicSelectOptions {
   convertItem(item) {
-    return { key: item.id, label: item.label };
+    return { key: item.label, label: item.label };
   }
 
   static getMoreOptions(search, limit, skip) {

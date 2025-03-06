@@ -29,7 +29,7 @@ export const addDeletedAccountInfo = async (values: DeletedAccountInfo) => {
 
 
 export const createProfile = async (values) => {
-  const { data, error } = await supabase
+  const response = await supabase
     .from(USERS_PROFILE_TABLE)
     .insert([
       {
@@ -38,16 +38,15 @@ export const createProfile = async (values) => {
       },
     ]);
 
-  if (error) {
-    console.log('couldn\'t do it,', error);
+  if (response.error) {
+    console.log('Unable to create profile', response.error);
   }
 
-  if (data) {
-    console.log(data);
-  }
+  return response;
 };
 
 export const updateProfile = async (profile: Partial<ActiveProfile>) => {
+  console.log('profile', profile);
   const response = await supabase
     .from(USERS_PROFILE_TABLE)
     .update(profile)

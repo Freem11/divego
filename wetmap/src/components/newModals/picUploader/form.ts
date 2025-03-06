@@ -9,7 +9,6 @@ export interface Form {
   diveSiteName?: string
 }
 
-
 export const FormRules: FormValidationRules<Form> = {
   animal: {
     required: 'Please tell us what you saw',

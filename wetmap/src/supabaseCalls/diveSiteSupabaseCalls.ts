@@ -198,22 +198,19 @@ export const updateDiveSite = async (values) => {
   }
 };
 
-// not in use
-// export const getDiveSitesforMapArea = async (value) => {
-//   const { data, error } = await supabase
-//     .from('diveSites')
-//     .select()
-//     .gte('lat', value.minLat)
-//     .gte('lng', value.minLng)
-//     .lte('lat', value.maxLat)
-//     .lte('lng', value.maxLng);
+export const getSingleDiveSite = async (lat: number, lng: number) => {
+  const { data, error } = await supabase
+    .from('diveSites')
+    .select()
+    .eq('lat', lat)
+    .eq('lng', lng);
 
-//   if (error) {
-//     console.log('couldn\'t do it,', error);
-//     return [];
-//   }
+  if (error) {
+    console.log('couldn\'t do it,', error);
+    return [];
+  }
 
-//   if (data) {
-//     return data;
-//   }
-// };
+  if (data) {
+    return data as DiveSiteWithUserName[];
+  }
+};

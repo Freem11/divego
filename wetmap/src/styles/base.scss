@@ -39,7 +39,7 @@
 //@import "../node_modules/spectre.css/src/modals";
 // @import "node_modules/spectre.css/src/navs";
 // @import "node_modules/spectre.css/src/pagination";
-@import "node_modules/spectre.css/src/panels";
+@import "spectre.css/src/panels";
 // @import "node_modules/spectre.css/src/popovers";
 // @import "node_modules/spectre.css/src/steps";
 // @import "node_modules/spectre.css/src/tabs";
@@ -133,19 +133,30 @@ h6 {
 
 
 .App {
+  // Site selector
+  --ssrc-site-selector-icon-background: #{$primaryBlue};
+
+  // Chip
+  --ssrc-chip-color: #{$primaryBlue};
+
+  // Label
   --ssrc-label-control-shift: 0.8em;
 
+  // Select
   --ssrc-select-border-color: #{$gray-color};
   --ssrc-select-text-color: #{$gray-color};
   --ssrc-select-control-height: #{$control-size};
   --ssrc-select-trigger-text-color: #{$body-font-color};
   --ssrc-select-create-button-text-color: #{$primary-color};
 
+  // Text area
   --ssrc-text-area-input-border-color: #{$gray-color};
 
+  // Text input
   --ssrc-text-input-height: #{$control-size};
   --ssrc-text-input-color: #{$gray-color};
   --ssrc-text-input-border-color: #{$gray-color};
 
+  // List item
   --ssrc-list-item-with-image-hover-color:#{$secondary-color};
 }

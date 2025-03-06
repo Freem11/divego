@@ -12,19 +12,19 @@ import AppleLinkButton from '../../../images/AppleCTA.png';
 import GoogleLinkButton from '../../../images/GoogleCTA.png';
 import Emilio from '../../../images/EmilioNew.png';
 import { BoundaryDiveShops } from '../../boundaryDiveShops';
-import { BoundaryPhotos } from '../../boundaryPhotos';
+import { BoundaryAnimals } from '../../boundaryAnimals';
 import { BoundaryDiveSites } from '../../boundaryDiveSites';
-import Tooltip from '../../reusables/tooltip';
+import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
 
 type LayoutMainViewProps = {
-  mapConfig:                   number
-  animateSiteSubmitterModal:   () => void
-  animateProfileModal:         () => void
-  animateSettingsModal:        () => void
-  animateGuidesModal:          () => void
-  animateTripCreatorListModal: () => void
-  isPartnerAccount:            boolean
+  mapConfig:                 number
+  animateSiteSubmitterModal: () => void
+  animateProfileModal:       () => void
+  animateSettingsModal:      () => void
+  animateGuidesModal:        () => void
+  animateShopsListModal:     () => void
+  isPartnerAccount:          boolean
 };
 
 
@@ -49,17 +49,17 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
             <div className="col-md-12 col-2 mt-2 flex-centered justify-content-sm-center justify-content-flex-start">
 
               <ul className={style.headerIcons}>
-                <li>  
-                  <Tooltip content={ScreenData.MainPage.profileTooltip} direction="bottom">
+                <li>
+                  <Tooltip content={ScreenData.MainPage.profileTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
-                      icon={ <Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
+                      icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
                       onClick={props.animateProfileModal}
                     />
                   </Tooltip>
                 </li>
                 <li>
-                  <Tooltip content={ScreenData.MainPage.settingsTooltip} direction="bottom">
+                  <Tooltip content={ScreenData.MainPage.settingsTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
                       icon={<Icon name="settings" className="text-blue" style={{ scale: '1.5' }} />}
@@ -68,7 +68,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </Tooltip>
                 </li>
                 <li style={{ marginTop: '2px' }}>
-                  <Tooltip content={ScreenData.MainPage.newDiveSiteTooltip} direction="bottom">
+                  <Tooltip content={ScreenData.MainPage.newDiveSiteTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
                       icon={<Icon name="anchor-plus" className="text-blue" style={{ scale: '1.45' }} />}
@@ -79,18 +79,18 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 {props.isPartnerAccount
                   ? (
                       <li style={{ marginTop: '2px', marginRight: '10px' }}>
-                        <Tooltip content={ScreenData.MainPage.tripCreatorTooltip} direction="bottom">
+                        <Tooltip content={ScreenData.MainPage.tripCreatorTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                           <ButtonIcon
                             disabled={props.mapConfig === 0 ? false : true}
                             icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
-                            onClick={props.animateTripCreatorListModal}
+                            onClick={props.animateShopsListModal}
                           />
                         </Tooltip>
                       </li>
                     )
                   :                   (
                       <li style={{ marginTop: '2px', marginRight: '10px' }}>
-                        <Tooltip content={ScreenData.MainPage.guideTooltip} direction="bottom">
+                        <Tooltip content={ScreenData.MainPage.guideTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                           <ButtonIcon
                             disabled={props.mapConfig === 0 ? false : true}
                             icon={<Icon name="question-mark" className="text-blue" style={{ scale: '1.5' }} />}
@@ -115,15 +115,14 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
       <section>
         <div className="container-fluid">
-          <div className="cols col-gapless">
-            <div className="col-md-12 col-4 full-height scroll-container" style={{ overflow: 'hidden', height: '90vh' }}>
+          <div className="cols col-gapless mb-4">
+            <div className="col-md-12 col-3 full-height scroll-container mb-4" style={{ overflow: 'hidden', height: '90vh' }}>
               <Tabs
                 className="scroll-container non-scrollable"
                 data={[
                   { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites',    content: BoundaryDiveSites },
-                  { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryPhotos },
+                  { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryAnimals },
                   { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Centers',  content: BoundaryDiveShops },
-                  { key: 't-4', title: 'Test', content: 'Lorem ipsum dolor sit amet' },
                 ]}
               />
 
@@ -141,7 +140,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               </div> */}
             </div>
 
-            <div className="col-md-12 col-8 full-height" style={{ height: '90vh' }}>
+            <div className="col-md-12 col-9 full-height" style={{ height: '90vh' }}>
               <MapLoader />
             </div>
           </div>
