@@ -2,7 +2,7 @@ import React from 'react';
 import style from './style.module.css';
 import MantaRay from '../images/Matt_Manta_White.png';
 
-export default function LoadingScreen() {
+const LoadingScreen: React.FC = () => {
   return (
     <div className={style.screenDiv}>
       <div className={style.containerMain}>
@@ -12,4 +12,6 @@ export default function LoadingScreen() {
       </div>
     </div>
   );
-}
+};
+
+export default LoadingScreen;
