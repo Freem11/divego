@@ -7,7 +7,7 @@ type LabelProps = {
   label?:     React.ReactNode
 };
 
-const Label = (props: LabelProps) => {
+export default function Label(props: LabelProps) {
   const id = useId();
   return (
     <div className={`ssrc-label ${props.className ?? ''}`}>
@@ -16,7 +16,6 @@ const Label = (props: LabelProps) => {
         { props.children && React.cloneElement(props.children, { id: id }) }
       </div>
     </div>
+
   );
 };
-
-export default Label;

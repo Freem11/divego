@@ -11,8 +11,6 @@ type SettingsProps = {
   profileType:         string | null
   handlePartnerButton: () => void
   handleDanger:        () => void
-  setOpenDialog:       (value: React.SetStateAction<boolean>) => void
-  openDialog:          boolean
 };
 
 export default function SettingsView(props: SettingsProps) {
@@ -49,7 +47,7 @@ export default function SettingsView(props: SettingsProps) {
             <div className="col-3">
               <Button
                 onClick={props.handleLogout}
-                className="btn-md bg-primary"
+                className="btn-md btn-primary"
                 iconRight={<Icon name="chevron-right" />}
                 type="button"
               >

@@ -1,6 +1,6 @@
 import { GPSBubble } from '../entities/GPSBubble';
 import { Pagination } from '../entities/pagination';
-import { Photo } from '../entities/photos';
+import { Animal, Photo, HistogramData } from '../entities/photos';
 import { supabase } from '../supabase';
 
 // not in use - remove
@@ -40,14 +40,12 @@ import { supabase } from '../supabase';
 //   }
 // };
 
-export const getAnimalNamesThatFit = async (value) => {
+export const getAnimalNamesThatFit = async (value: string) => {
   if (value === '') {
     return [];
   }
 
-  const { data, error } = await supabase
-    .from('photos')
-    .select('label, id')
+  const { data, error } = await supabase.rpc('get_unique_photo')
     .ilike('label', '%' + value + '%');
 
   if (error) {
@@ -99,18 +97,19 @@ export const getAnimalNamesThatFit = async (value) => {
 //   }
 // };
 
-export const getPhotosforMapArea = async (bubble: GPSBubble, filter?: Partial<Photo>, pagination?: Pagination) => {
-  const builder = supabase
-    .from('photos')
-    .select()
-    .gte('latitude', bubble.minLat)
-    .gte('longitude', bubble.minLng)
-    .lte('latitude', bubble.maxLat)
-    .lte('longitude', bubble.maxLng);
+export const getAnimalsInBubble = async (bubble: GPSBubble, filter?: Partial<Photo>, pagination?: Pagination) => {
+  const builder = supabase.rpc('get_unique_photo_in_bounds', {
+    max_lat: bubble.maxLat,
+    min_lat: bubble.minLat,
+    max_lng: bubble.maxLng,
+    min_lng: bubble.minLng,
+  });
 
   if (filter?.label) {
     builder.ilike('label', '%' + filter.label + '%');
   }
+
+  builder.order('times_seen', { ascending: false });
 
   if (pagination?.page) {
     builder.range(pagination.from(), pagination.to());
@@ -123,7 +122,7 @@ export const getPhotosforMapArea = async (bubble: GPSBubble, filter?: Partial<Ph
   }
 
   if (data) {
-    return data as Photo[];
+    return data as Animal[];
   }
   return [];
 };
@@ -171,24 +170,23 @@ export const getPhotosforMapArea = async (bubble: GPSBubble, filter?: Partial<Ph
 //   }
 // };
 
-export const getHistoData = async (values) => {
-  if (values.animals) {
-    const { data, error } = await supabase.rpc('histogram3', {
-      animals: values.animals,
-      max_lat: values.maxLat,
-      min_lat: values.minLat,
-      max_lng: values.maxLng,
-      min_lng: values.minLng,
-    });
 
-    if (error) {
-      console.log('couldn\'t do it,', error);
-      return [];
-    }
+export const getHistoData = async (bubble: GPSBubble, animal: string[]) => {
+  const { data, error } = await supabase.rpc('histogram3', {
+    animals: animal,
+    max_lat: bubble.maxLat,
+    min_lat: bubble.minLat,
+    max_lng: bubble.maxLng,
+    min_lng: bubble.minLng,
+  });
 
-    if (data) {
-      return data;
-    }
+  if (error) {
+    console.log('couldn\'t do it,', error);
+    return [];
+  }
+
+  if (data) {
+    return data;
   }
 };
 
@@ -239,21 +237,15 @@ export const getPhotosByDiveSiteWithExtra = async (values) => {
   }
 };
 
-export const getPhotosByUserWithExtra = async (userId, connectedUserId) => {
-  const {
-    data,
-    error,
-  } = await supabase.rpc('get_photos_by_userid_groupby_divesite_date', {
+export const getPhotosByUserWithExtra = async (userId: string, connectedUserId: string) => {
+  const response = await supabase.rpc('get_photos_by_userid_groupby_divesite_date', {
     userid:          userId,
     connecteduserid: connectedUserId,
   });
 
-  if (error) {
-    console.error('couldn\'t do it 31,', error);
-    return [];
+  if (response.error) {
+    console.error('couldn\'t do it 31,', response.error);
   }
 
-  if (data) {
-    return data;
-  }
+  return response;
 };

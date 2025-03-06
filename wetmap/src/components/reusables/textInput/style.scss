@@ -9,7 +9,7 @@
 .ssrc-text-input {
   height: var(--ssrc-text-input-height);
   display: flex;
-  border-bottom: 1px solid var(--ssrc-text-input-border-color);
+  border-bottom: 1px solid #dadada;
   color: var(--ssrc-text-input-color);
   position: relative;
 
@@ -28,6 +28,10 @@
 
   input:disabled {
     background-color: transparent;
+  }
+
+  input::placeholder {
+    color: #c4c4c4;
   }
 
   // to open calendar onClick on the whole input, not only small picker icon
@@ -49,8 +53,12 @@
     display: block;
     height: 100%;
 
-    & * {
+    & div:has(svg), & svg {
       height: 100%;
     }
   }
+}
+
+.ssrc-text-input:has(input:focus) {
+  border-bottom-color: var(--ssrc-text-input-border-color)
 }

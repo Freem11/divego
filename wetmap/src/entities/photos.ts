@@ -11,12 +11,13 @@ export type PhotoWithLikesAndComments = {
   UserName:     string
   likecount:    number
   likedbyuser:  boolean
-  likeid:       number
+  likeid:       number | null
   commentcount: number
 };
 
 export type PhotosGroupedByDate = {
   dateTaken: string
+  name:      string
   photos:    PhotoWithLikesAndComments[]
 };
 
@@ -31,4 +32,18 @@ export type Photo = {
   month:      number
   UserID:     string
   UserName:   string
+};
+
+export type Animal = {
+  label:      string
+  photofile:  string
+  times_seen: number
+};
+
+export type HistogramData = {
+  animals: string[]
+  minLat:  number
+  maxLat:  number
+  minLng:  number
+  maxLng:  number
 };

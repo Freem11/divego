@@ -5,10 +5,11 @@ import Button from '../../../reusables/button';
 import screenData from '../../../newModals/screenData.json';
 import { SitesArrayContext } from '../../../contexts/sitesArrayContext';
 import { DiveShopContext } from '../../../contexts/diveShopContext';
+import ShopModal from '../../../newModals/shopModal';
 
 export function ReturnToShopButton() {
   const { mapRef, setMapConfig } = useContext(MapContext);
-  const { modalResume } = useContext(ModalContext);
+  const { modalShow } = useContext(ModalContext);
   const { selectedShop } = useContext(DiveShopContext);
   const { setSitesArray } = useContext(SitesArrayContext);
 
@@ -19,10 +20,13 @@ export function ReturnToShopButton() {
       onClick={() => {
         if (selectedShop) {
           mapRef?.panTo({ lat: selectedShop.lat, lng: selectedShop.lng });
+          modalShow(ShopModal, {
+            id:   selectedShop.id,
+            size: 'large',
+          });
         }
         setMapConfig(0);
         setSitesArray([]);
-        modalResume();
       }}
     >
       {screenData.GoogleMap.shopButton}

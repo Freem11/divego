@@ -3,7 +3,6 @@ export type DiveSiteWithUserName = {
   name:                 string
   lat:                  number
   lng:                  number
-  photo:                string
   userid:               string
   region:               string
   username:             string
