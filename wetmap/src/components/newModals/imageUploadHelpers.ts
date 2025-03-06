@@ -8,12 +8,12 @@ import {
     };
 
     type uploadImageProps = {
-      file: any
+      file: File
       name: string | null
     };
 
     type clearPreviousImageProps = {
-      oldFile: any
+      oldFile: string
     };
 
 const handleImageUpload = async (props: handleImageUploadProps) => {
