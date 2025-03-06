@@ -62,6 +62,8 @@ export default function ShopModalView(props: ShopModelViewProps) {
                   value={props?.diveShop?.diveshopbio || ''}
                   readOnly={!props?.isPartnerAccount || !props.isMyShop}
                   onSave={props?.handleDiveShopBioChange}
+                  tooltipEditText={`Click here to write a bio about ${props?.diveShop?.orgname}`}
+                  tooltipConfirmText={`Click here to confirm changes to ${props?.diveShop?.orgname}'s bio`}
                 />
               </div>
             </div>
@@ -82,7 +84,6 @@ export default function ShopModalView(props: ShopModelViewProps) {
             : <h3>Offered Diving Trips</h3>}
         </div>
         <ItineraryCardList itineraryList={props.itineraryList} canChangeItineraries={props?.isPartnerAccount && props.isMyShop} />
-        <div className="panel-footer"></div>
       </div>
     </div>
   );

@@ -14,6 +14,7 @@ import { Form, FormRules } from './form';
 import FileInput from '../../reusables/fileInput';
 import Label from '../../reusables/label';
 import { toast } from 'react-toastify';
+import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 
 type PicUploaderViewProps = {
   values:               Form
@@ -25,8 +26,12 @@ type PicUploaderViewProps = {
 };
 
 export default function PicUploaderView(props: PicUploaderViewProps) {
-  const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
-    values:   props.values,
+  const {
+    register,
+    handleSubmit,
+    formState: { isSubmitting, errors },
+  } = useForm<Form>({
+    values: props.values,
   });
 
   const handleError = (errors: FieldErrors<Form>) => {
@@ -45,25 +50,29 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
 
   return (
     <div className="flex-column-between full-height">
-
       <WavyModalHeader image={props.headerPictureUrl} onClose={props.onClose}>
-
         <FileInput
           {...register('photo', FormRules.photo)}
           onFileChange={props.handleImageSelection}
           className="d-none"
         >
-          {props.headerPictureUrl
+          {(props.headerPictureUrl)
             ? (
-                <ButtonIcon
-                  icon={<Icon name="camera-plus" />}
-                  className={`btn-lg ${style.buttonImageUpload} ${errors.photo ? 'blinking' : ''}`}
-                />
+                <div className={style.buttonImageUpload}>
+                  <ButtonIcon
+                    icon={(
+                      <Tooltip content={screenData.PicUploader.uploadIcon} direction={TOOLTIP_DIRECTION.LEFT}>
+                        <Icon name="camera-plus" />
+                      </Tooltip>
+                    )}
+                    className={`btn-lg ${style.buttonImageUpload} ${
+                      errors.photo ? 'blinking' : ''
+                    }`}
+                  />
+                </div>
               )
             : (
-                <Button
-                  className={`btn-lg ${style.buttonImageUploadLarge}`}
-                >
+                <Button className={`btn-lg ${style.buttonImageUploadLarge}`}>
                   {screenData.PicUploader.uploadButton}
                 </Button>
               )}
@@ -87,25 +96,38 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               modeSelectedTags="on"
               placeholder={screenData.PicUploader.whatPlaceholder}
               getMoreOptions={props.getMoreAnimals}
-              iconLeft={<Icon name="shark" />}
+              iconLeft={(
+                <Tooltip content={screenData.PicUploader.whatIcon}>
+                  <Icon name="shark" />
+                </Tooltip>
+              )}
               error={errors.animal}
             />
           </Label>
 
-          <Label label={screenData.PicUploader.whatLabel}>
+          <Label label={screenData.PicUploader.whenLabel}>
             <TextInput
               {...register('date', FormRules.date)}
               type="date"
-              iconLeft={<Icon name="calendar-month" />}
+              iconLeft={(
+                <Tooltip content={screenData.PicUploader.whenIcon}>
+                  <Icon name="calendar-month" />
+                </Tooltip>
+              )}
               placeholder={screenData.PicUploader.whenPlaceholder}
               error={errors.date}
+              max={new Date().toLocaleString('sv-SE').split(' ')[0]}
             />
           </Label>
 
           <Label label={screenData.PicUploader.whereLabel}>
             <TextInput
               {...register('diveSiteName')}
-              iconLeft={<Icon name="anchor" />}
+              iconLeft={(
+                <Tooltip content={screenData.PicUploader.whereIcon}>
+                  <Icon name="anchor" />
+                </Tooltip>
+              )}
               placeholder={screenData.PicUploader.wherePlaceholder}
               disabled={true}
             />
@@ -117,7 +139,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
           <div className="col-4">
             <Button
               disabled={isSubmitting}
-              className="btn-lg bg-primary col-3"
+              className="btn-md btn-primary col-3"
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >

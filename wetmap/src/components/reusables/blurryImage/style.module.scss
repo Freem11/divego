@@ -1,0 +1,13 @@
+.image {
+  width: 100%;
+}
+
+.loading {
+  filter: grayscale(100%) blur(10px);
+  transform: scale(1);
+}
+
+.image:not([src]) {
+  filter: none;
+  transform: none;
+}

@@ -20,7 +20,11 @@
         "latLngExplainer": "To place your business on the map",
         "submitButton" : "Submit",
         "createSuccess": "Request Created Successfully!",
-        "createError": "Error creating request. Please try again later."
+        "createError": "Error creating request. Please try again later.",
+        "businesNameTooltip": "This will serve as your Dive Centre's name",
+        "websiteTooltip": "We will use this to validate your business as compatible with Scuba SEAsons",
+        "mapTooltip": "Used to place your Dive Centre on the map"
+
       },
       "SearchPage": {
         "header": "Map Navigation",
@@ -40,17 +44,26 @@
         "allowLocation": "Please allow location access.",
         "locationNotSupported": "Geolocation is not supported in your browser.",
         "addSiteError": "Error adding site. Please try again later.",
-        "addSiteSuccess": "Site added successfully!"
+        "addSiteSuccess": "Site added successfully!",
+        "siteNameTooltip": "Enter the name of your dive site",
+        "latTooltip": "Enter a number",
+        "lngTooltip": "Enter a number",
+        "myLocationTooltip": "Select latitude and longitude",
+        "pinButtonTooltip": "Select latitude and longitude"
       },
       "PicUploader": {
         "header": "Your Sea Creature Sighting",
         "uploadButton": "Upload a Photo",
+        "uploadIcon": "Photo Upload",
         "whatLabel": "What you saw",
         "whatPlaceholder": "Sea Life Encountered",
+        "whatIcon": "Sea Creature",
         "whenLabel": "When you saw it",
         "whenPlaceholder": "Date of Sighting",
+        "whenIcon": "Calendar",
         "whereLabel": "Where you saw it",
         "wherePlaceholder": "Location of Sighting",
+        "whereIcon": "Location",
         "submitButton" : "Submit",
         "uploadError": "Error uploading photo. Please try again later.",
         "uploadSuccess": "Photo uploaded successfully!",
@@ -67,36 +80,60 @@
         "editButton": "Edit",
         "deleteButton": "Delete",
         "anchorButton" : "Go to trip location",
-        "bookButton" : "Book trip"
+        "bookButton" : "Book trip",
+        "deleteTripError" : "There was an error submitting trip deletion request. Please try again later.",
+        "deleteTripSuccess": "You trip deletion request was successfully submitted! Please allow up to 24 hours for it to be approved and reflected in your trip list."
       },
       "TripCreator": {
-        "header": "Create a New Dive Trip",
+        "header": "Create Dive Trip",
         "headerEdit": "Submit Trip Edits",
         "cloneButton": "Clone This Trip",
-        "tripNamePlaceholder": "Your Trip's Name",
-        "bookingLinkPlaceholder": "Link to your trip's booking page",
-        "pricePlaceholder": "Trip Price",
+        "tripNameLabel": "Trip Name",
+        "tripNamePlaceholder": "Deep Blue Odyssey",
+        "bookingLinkLabel": "Booking Page URL",
+        "bookingLinkPlaceholder": "https://mybookingpage.com",
+        "priceLabel": "Price",
+        "pricePlaceholder": "$2,500.00",
+        "startDateLabel": "Start Date",
         "startDatePlaceholder": "Start Date",
+        "endDateLabel": "End Date",
         "endDatePlaceholder": "End Date",
-        "tripDescriptionPlaceholder": "Please add any further details about your trip that you think would be helpful in promoting your trip to divers, right here",
+        "diveSitesLabel": "Dive Sites",
+        "tripDescriptionPlaceholder": "Please provide any additional details about your trip that divers need to know",
         "submitButton": "Submit",
         "selectSitesButton": "Select Dive Sites",
         "drawerHeader": "Possible Sites in this Trip   (Press to Remove)",
-        "emptyDrawer": "No Dive Sites have been added to this Trip yet."
+        "emptyDrawer": "No dive sites yet.",
+        "submitSuccess": "Trip created successfully!",
+        "submitError": "Error creating trip. Please try again later.",
+        "editTripError" : "There was an error submitting trip edit request. Please try again later.",
+        "editTripSuccess": "You trip edit request was successfully submitted! Please allow up to 24 hours for the changes to be approved and reflected in your trip.",
+        "noSitesError": "Your haven't added any potential dive sites to your dive trip!",
+        "cloneTripButton": "Clone this Trip",
+        "tripNameTooltip": "What is your trip's name",
+         "booklingLinkTooltip": "Where can divers book this trip",
+         "priceTooltip": "What is the cost of the trip (excluding gear rental)",
+         "tripStartTooltip": "When does this trip start",
+         "tripEndTooltip": "When does this trip end",
+         "sitelistTooltip": "Add potential dive sites to your trip by selecting them on the map!"
       },
       "UserProfile": {
         "drawerHeader": "'s Sea Creature Encounters",
-        "emptyDrawer": " hasn't posted any sightings yet.",
+        "emptyDrawer": "No sightings posted yet.",
         "userDoesFollow": "Following",
         "UserDoesNotFollow": "Follow",
         "userDefaultDescription": "Say a little about yourself...",
         "UserProfileUpdateSuccessMessage": "User Profile updated successfully...",
         "DuplicateUserNameErrorMessage": "Username already in use, please try again...",
-        "EmptyUserNameError": "Username cannot be empty, please try again..."
+        "EmptyUserNameError": "Username cannot be empty, please try again...",
+        "addProfilePhotoToolTip": "Add a profile picture",
+        "nameChangeToolTip": "Update username",
+        "bioChangeToolTip": "Update description",
+        "FollowToolTip": "Follow/Unfollow user"
       },
       "DiveSite": {
         "drawerHeader": "Sea Creature Sightings",
-        "emptyDrawer": "No sightings at this site yet.",
+        "emptyDrawer": "No sightings yet.",
         "addSightingButton": "Add Sighting",
         "submitButton": "Submit",
         "reportSiteTooltip": "Report an issue with this dive site",
@@ -107,7 +144,7 @@
       },
       "DiveShop": {
         "drawerHeader": "Offered Dive Trips",
-        "emptyDrawer": " aren't currently offering any Dive Trips",
+        "emptyDrawer": "No dive trips yet.",
         "addDiveShopPhotoButton": "Add a photo of your dive shop"
       },
       "CommentsModal": {
@@ -168,7 +205,7 @@
         "profileTooltip": "Profile",
         "settingsTooltip": "Settings",
         "newDiveSiteTooltip": "Add a New Dive Site",
-        "tripCreatorTooltip": "Create Trip",
+        "tripCreatorTooltip": "My Shop(s)",
         "guideTooltip": "User Guide"
       },
       "PasswordRecoveryPage": {
@@ -189,5 +226,10 @@
         "contact": "Contact us",
         "contantEmail": "scubaseasons@gmail.com",
         "errorDeleting": "Something went wrong. Please try again later"
+      },
+      "Sidebar": {
+        "diveSiteEmptyDrawer": "No dive sites in this area.",
+        "seaLifeEmptyDrawer": "No sea life in this area.",
+        "diveCenterEmptyDrawer": "No dive centers in this area."
       }
     }

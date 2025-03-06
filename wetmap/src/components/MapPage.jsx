@@ -1,7 +1,6 @@
 import React from 'react';
 import { animated, useSpring } from 'react-spring';
 import MapLoader from './googleMap';
-import SearchTool from './searchTool/index';
 import OnBoardingCarrousel from './onboarding/index';
 import SiteSubmitter from './newModals/siteSubmitter';
 import GuidesModal from './newModals/guides';
@@ -14,7 +13,6 @@ import { grabProfileById } from './../supabaseCalls/accountSupabaseCalls';
 import Button from '@mui/material/Button';
 import ToggleButton from '@mui/material/ToggleButton';
 import Collapse from '@mui/material/Collapse';
-import ExploreIcon from '@mui/icons-material/Explore';
 import AnchorIcon from '@mui/icons-material/Anchor';
 import AddLocationAltIcon from '@mui/icons-material/AddLocationAlt';
 import QuestionMarkIcon from '@mui/icons-material/QuestionMark';
@@ -37,7 +35,7 @@ import { PullTabContext } from './contexts/pullTabContext';
 import { AreaPicsContext } from './contexts/areaPicsContext';
 import './mapPage.css';
 import AnimalTopAutoSuggest from './animalTags/animalTagContainer';
-import Histogram from './histogram/histogramBody';
+import Histogram from './histogram';
 import { ModalContext } from './reusables/modal/context';
 import Modal from './reusables/modal/modal';
 
@@ -140,10 +138,6 @@ const MapPage = React.memo(function MapPage() {
     animateLaunchModal();
   };
 
-  const handleDiveSiteSearchButton = () => {
-    animateSiteSearchModal();
-  };
-
   const handleDiveSiteModalButton = () => {
     clearSiteModal();
   };
@@ -222,12 +216,6 @@ const MapPage = React.memo(function MapPage() {
       size: 'large',
     });
     // create new userprofile here
-  };
-
-  const animateSiteSearchModal = () => {
-    modalShow(SearchTool, {
-      size: 'small',
-    });
   };
 
   const animatePulltab = () => {
@@ -317,21 +305,6 @@ const MapPage = React.memo(function MapPage() {
                   <QuestionMarkIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
                 <p className="buttonFont">Guides</p>
-              </div>
-            )}
-
-            {mapConfig === 0 && (
-              <div className="gearBox">
-                <ToggleButton
-                  sx={toggleButtonStyle}
-                  value="check"
-                  onChange={() => {
-                    handleDiveSiteSearchButton();
-                  }}
-                >
-                  <ExploreIcon sx={{ width: '3vw', height: '1.5vw' }} />
-                </ToggleButton>
-                <p className="buttonFont">Search Map</p>
               </div>
             )}
 

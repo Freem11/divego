@@ -1,20 +1,18 @@
 import React, { useContext, useEffect, useState } from 'react';
 import LayoutMainView from './view';
-import { grabProfileById } from '../../../supabaseCalls/accountSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
-import { SessionContext } from '../../contexts/sessionContext';
 import { ModalContext } from '../../reusables/modal/context';
 import SiteSubmitter from '../../newModals/siteSubmitter';
 import Settings from '../../newModals/setting';
 import UserProfile from '../../newModals/userProfile';
 import GuidesModal from '../../newModals/guides';
-import TripCreatorListModal from '../../newModals/tripCreatorListModal';
+import ShopsListModal from '../../newModals/shopsListModal';
 import { MapContext } from '../../googleMap/mapContext';
+import OnBoardingCarrousel from '../../onboarding';
 
 export default function LayoutMain() {
   const { mapConfig } = useContext(MapContext);
-  const { activeSession } = useContext(SessionContext);
-  const { profile, setProfile } = useContext(UserProfileContext);
+  const { profile } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
@@ -25,28 +23,21 @@ export default function LayoutMain() {
   }, [profile]);
 
   useEffect(() => {
-    const getProfile = async () => {
-      let sessionUserId;
-      if (activeSession) {
-        sessionUserId = activeSession.user.id;
-        try {
-          const success = await grabProfileById(sessionUserId);
-          if (success) {
-            const bully = success && success.UserName;
-            if (bully == null || bully === '') {
-              return;
-            } else {
-              setProfile(success);
-            }
-          }
-        } catch (e) {
-          console.log({ title: 'Error', message: (e as Error).message });
-        }
-      }
-    };
+    if (profile && !profile.UserName) {
+      handleOnBoarding();
+    }
+  }, [profile]);
 
-    getProfile();
-  }, []);
+  const handleOnBoarding = () => {
+    animateOnBoardingModal();
+  };
+
+  const animateOnBoardingModal = () => {
+    modalShow(OnBoardingCarrousel, {
+      size:        'full',
+      allowCancel: false,
+    });
+  };
 
   const animateSiteSubmitterModal = () => {
     modalShow(SiteSubmitter);
@@ -57,15 +48,17 @@ export default function LayoutMain() {
   };
 
   const animateProfileModal = () => {
-    modalShow(UserProfile);
+    modalShow(UserProfile, {
+      size:        'large',
+    });
   };
 
   const animateGuidesModal = () => {
     modalShow(GuidesModal);
   };
 
-  const animateTripCreatorListModal = () => {
-    modalShow(TripCreatorListModal);
+  const animateShopsListModal = () => {
+    modalShow(ShopsListModal);
   };
 
 
@@ -76,7 +69,7 @@ export default function LayoutMain() {
       animateProfileModal={animateProfileModal}
       animateSettingsModal={animateSettingsModal}
       animateGuidesModal={animateGuidesModal}
-      animateTripCreatorListModal={animateTripCreatorListModal}
+      animateShopsListModal={animateShopsListModal}
       isPartnerAccount={isPartnerAccount}
     />
   );

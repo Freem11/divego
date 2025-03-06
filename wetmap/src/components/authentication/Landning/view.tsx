@@ -1,4 +1,4 @@
-import React, { Dispatch, SetStateAction } from 'react';
+import React from 'react';
 import Button from '../../reusables/button';
 import blackManta from '../../../images/blackManta.png';
 import googleIcon from '../../../images/google-color.png';
@@ -6,13 +6,11 @@ import facebookIcon from '../../../images/facebook-color.png';
 import appleIcon from '../../../images/apple.png';
 import ButtonIcon from '../../reusables/buttonIcon';
 import screenData from '../../newModals/screenData.json';
-import { ActiveProfile } from '../../../entities/profile';
 import WavyBlock from '../../reusables/wavyBlock';
 import style from './style.module.scss';
 
 type LandingPageProps = {
   goToSlide:    (pageNumber: number) => void
-  setProfile:   Dispatch<SetStateAction<ActiveProfile | null>>
   socialSignIn: (provider: any) => void
 };
 
@@ -41,15 +39,15 @@ export default function LandingPageView(props: LandingPageProps) {
       <div>
         <div className="mb-2 text-center">{screenData.LandingPage.content}</div>
         <div className="flex-centered">
-          <div className="col-6 flex-row-between" style={{ height: '3.5rem' }}>
+          <div className="col-3 flex-row-between" style={{ height: '3.5rem' }}>
             <ButtonIcon
               icon={<img src={googleIcon} alt="Google" onClick={() => props.socialSignIn('google')} />}
               className="full-height"
             />
-            <ButtonIcon
+            {/* <ButtonIcon
               icon={<img src={facebookIcon} alt="Facebook" onClick={() => props.socialSignIn('facebook')} />}
               className="full-height"
-            />
+            /> */}
             <ButtonIcon
               icon={<img src={appleIcon} alt="Apple" onClick={() => props.socialSignIn('apple')} />}
               className="full-height"

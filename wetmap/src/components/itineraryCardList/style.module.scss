@@ -1,10 +1,17 @@
 .itineraryList {
-  padding-top: 1em;
   padding-right: 1rem;
   padding-left: 1rem;
-  overflow-y: auto;
-  height: 100%;
+  overflow: auto;
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding-bottom: 1rem;
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+.itineraryList::-webkit-scrollbar {
+  display: none;
 }
