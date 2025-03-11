@@ -1,5 +1,5 @@
 import React from 'react';
-import style from './style.module.css';
+import style from './style.module.scss';
 import MantaRay from '../images/Matt_Manta_White.png';
 
 const LoadingScreen: React.FC = () => {
