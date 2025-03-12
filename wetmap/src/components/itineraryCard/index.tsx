@@ -50,7 +50,7 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
     }
   };
 
-  const handleEditButton = (itineraryInfo: ItineraryItem) => {
+  const handleEditButton = async (itineraryInfo: ItineraryItem) => {
     if (itineraryInfo) {
       setSitesArray(itineraryInfo.siteList || []);
       modalShow(TripCreatorModal, {

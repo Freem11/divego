@@ -50,7 +50,7 @@ export const insertItineraryRequest = async (values: ItineraryItem, reqType: str
       siteList:            values.siteList,
       BookingPage:         values.BookingPage,
       requestType:         reqType,
-      OriginalItineraryID: values.id,
+      OriginalItineraryID: values.OriginalItineraryID,
     },
   ]);
 
