@@ -39,7 +39,6 @@ export default function SeaLifeCard(props: { pic: PhotoWithLikesAndComments, isS
       return;
     }
     modalShow(UserProfile, {
-      keepPreviousModal: true,
       userProfileID:     userId,
       size:              'large',
 
@@ -71,6 +70,7 @@ export default function SeaLifeCard(props: { pic: PhotoWithLikesAndComments, isS
   };
 
   const handleDiveSiteMove = async (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, lat: number, lng: number) => {
+    e.stopPropagation();
     const getSite = await getSingleDiveSite(lat, lng);
     if (getSite) {
       setSelectedDiveSite(getSite[0]);

@@ -122,6 +122,7 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
   const searchRef   = useRef<HTMLInputElement>(null);
   const wrapperRef  = useRef<HTMLDivElement>(null);
   const timeoutRef  = useRef<ReturnType<typeof setInterval> | undefined>(undefined);
+  const searchMirrorRef = useRef<HTMLSpanElement>(null);
 
   const [isOpen, setIsOpen] = useState(false);
 
@@ -148,6 +149,7 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
 
   // effect: close dropdown if click outside
   useEffect(() => {
+    adjustSearchInputWidth();
     const handleWrapperClick = (e: MouseEvent) => {
       setIsOpen((prev) => {
         if (!prev) {
@@ -173,15 +175,15 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
   // effect: prepare data to be passed to onChange
   useEffect(() => {
     // show the label of the selected option in search input
-    if (props.modeSelectedTags === 'off' && !isMulti && value && searchRef.current) {
+    if (props.modeSelectedTags === 'off' && !isMulti && value) {
       const selectedOption = value.values().next().value;
       if (selectedOption) {
-        searchRef.current.value = selectedOption.label;
+        setSearchInputValue(selectedOption.label);
       }
     }
 
-    if (props.modeSelectedTags === 'empty' && searchRef.current) {
-      searchRef.current.value = '';
+    if (props.modeSelectedTags === 'empty') {
+      setSearchInputValue('');
     }
 
     // prepare data to be passed to onChange(except first render)
@@ -193,6 +195,22 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
     initRef.current = true;
   }, [value]);
 
+
+  const adjustSearchInputWidth = () => {
+    // to make input's width match its content
+    if (searchMirrorRef.current && searchRef.current) {
+      searchMirrorRef.current.innerHTML = searchRef.current.value;
+      searchRef.current.style.width = 'auto'; // Reset width to recalculate
+      searchRef.current.style.width = (searchMirrorRef.current.offsetWidth + 10)  + 'px';
+    }
+  };
+
+  const setSearchInputValue = (value: string) => {
+    if (searchRef.current) {
+      searchRef.current.value = value;
+      adjustSearchInputWidth();
+    }
+  };
 
   const onTriggerClick = () => {
     if (!options.size) {
@@ -209,6 +227,8 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
       setIsOpen(true);
     }
 
+    adjustSearchInputWidth();
+
     clearTimeout(timeoutRef.current);
     timeoutRef.current = setTimeout(() => {
       if (search) {
@@ -220,7 +240,7 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
 
   const selectItem = useCallback((key: string) => {
     if (showSelectedTags && searchRef?.current) {
-      searchRef.current.value = '';
+      setSearchInputValue('');
     }
     setValue((prev): Values => {
       if (prev === null) {
@@ -279,9 +299,9 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
     });
   }
 
-  const createItem = useCallback((value) => {
+  const createItem = useCallback((value: string) => {
     if (showSelectedTags && searchRef?.current) {
-      searchRef.current.value = '';
+      setSearchInputValue('');
     }
     setValue((prev) => {
       if (!prev || !value) {
@@ -318,36 +338,37 @@ const Select = React.forwardRef<HTMLInputElement, SelectProps>(function Select(_
       role="listbox"
     >
       <input type="hidden" name={props.name} ref={forwardedRef} value={JSON.stringify(getResultValue(value, props.labelInValue, isMulti)) ?? ''} />
+      <span style={{ visibility: 'hidden', position: 'absolute' }} ref={searchMirrorRef}></span>
 
-      <div className="trigger" onClick={onTriggerClick}>
+      <div className="ssrc-select_trigger" onClick={onTriggerClick}>
 
-        {props.iconLeft && <i className="icon-left">{props.iconLeft}</i>}
+        {props.iconLeft && <i className="ssrc-select_icon-left">{props.iconLeft}</i>}
 
-        {showSelectedTags && value.size > 0 && (
-          <div className="selected-tags">
-            {Array.from(value?.values() || []).map(option => (
+        <div className="ssrc-select_trigger-content">
+          {showSelectedTags && value.size > 0 && (
+            Array.from(value?.values() || []).map(option => (
               <SelectedTag key={option.key} label={option.label} deselctItem={() => deselctItem(option.key)} />
-            ))}
-          </div>
+            ))
+          )}
+
+          <input
+            onChange={e => onSearch(e.target.value)}
+            ref={searchRef}
+            type="search"
+            placeholder={getPlaceholder()}
+          />
+        </div>
+
+        {props.iconSelectArrow && (
+          <span className="ssrc-select_arrow">
+            {props.iconSelectArrow === true ? '↓' : props.iconSelectArrow}
+          </span>
         )}
 
-        <input
-          onChange={e => onSearch(e.target.value)}
-          ref={searchRef}
-          type="search"
-          placeholder={getPlaceholder()}
-        />
-
-        <button className="trigger-button">
-          {props.iconSelectArrow && (
-            <span className="arrow">
-              {props.iconSelectArrow === true ? '↓' : props.iconSelectArrow}
-            </span>
-          )}
-        </button>
+        <button className="ssrc-select_trigger-button"></button>
       </div>
 
-      <menu className="dropdown-wrapper">
+      <menu className="ssrc-select_dropdown-wrapper">
         {(isOpen || shouldDisplayCreate) && (
           <props.dropdownComponent
             options={options}

@@ -52,7 +52,6 @@ export default function Modal() {
 
   const openStyle = {
     transform:  'translateY(0)',
-    opacity:    1,
     transition: `transform ${modalContext.modalAnimationDuration}ms ease-in-out`,
   };
 
@@ -64,11 +63,11 @@ export default function Modal() {
     <div className={`${style.modalWrapper} ${style.active}`} ref={rootRef}>
       {modalContext.stack.map(modalWindow => (
         <>
-          <div
-            onClick={() => modalContext.modalCancel()}
-            className={`${style.modalBackground} ${modalWindow.name === modalContext.currentModalName && style.showBackground}`}
-          >
-          </div>
+          {/* background should not be present when modal is paused because it prevents interaction with the app */}
+          {modalWindow.name === modalContext.currentModalName && (
+            <div onClick={() => modalContext.modalCancel()} className={`${style.modalBackground}`}></div>
+          )}
+
           <div
             className={`${style.modalContainer} ${style[modalWindow.options.size]}`}
             style={modalWindow.name === modalContext.currentModalName ? openStyle : closeStyle}

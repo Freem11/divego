@@ -16,6 +16,7 @@ import { BoundaryAnimals } from '../../boundaryAnimals';
 import { BoundaryDiveSites } from '../../boundaryDiveSites';
 import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
+import { Outlet } from 'react-router-dom';
 
 type LayoutMainViewProps = {
   mapConfig:                 number
@@ -288,6 +289,8 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           </div>
         </div>
       </footer>
+
+      <Outlet />
       <Modal />
     </div>
   );

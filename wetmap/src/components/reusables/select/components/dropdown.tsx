@@ -11,22 +11,22 @@ export type DropdownProps = {
 
 export default function Dropdown(props: DropdownProps) {
   return (
-    <div className="dropdown">
+    <div className="ssrc-select_dropdown">
 
-      <ul className="option-list">
+      <ul className="ssrc-select_option-list">
 
         {props.children}
 
         {props.shouldDisplayCreate && (
           <li>
             <button
-              className="create"
+              className="ssrc-select_create"
               onClick={() => props.createItem(props.searchText)}
               type="button"
             >
               Create
               {' '}
-              <span className="search-term">{props.searchText}</span>
+              <span className="ssrc-select_search-term">{props.searchText}</span>
             </button>
           </li>
         )}

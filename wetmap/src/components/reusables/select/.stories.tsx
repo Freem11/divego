@@ -39,6 +39,12 @@ export const MultiSelectWithoutLimit: Story = {
   },
 };
 
+export const SelectWithLongPlaceholder: Story = {
+  args: {
+    placeholder: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestias doloremque ipsa debitis reprehenderit repudiandae fugiat.',
+  },
+};
+
 
 export const SelectWithoutSelectArrow: Story = {
   args: {
