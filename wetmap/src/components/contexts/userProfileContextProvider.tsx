@@ -11,6 +11,8 @@ export type UserProfileContextType = {
   session:            Session | null
   initProfile:        (force?: boolean) => Promise<void>
   profileInitialized: boolean | null
+  metrics:            boolean
+  switchToMetrics:    (metrics: boolean) => void
 };
 
 
@@ -21,6 +23,7 @@ export const UserProfileContextProvider = ({ children }: any) => {
   // false - that initialization failed
   const [profileInitialized, setProfileInitialized] = useState<boolean | null>(null);
 
+  const [metrics, setMetrics] = useState<boolean>(false);
   // Used to prevent double initialization during re-renders, avoid createProfile call
   const initialized = useRef<boolean | null>(null);
 
@@ -49,6 +52,7 @@ export const UserProfileContextProvider = ({ children }: any) => {
     if (force) {
       // sometimes we need to profile reinitialization: after logging in or out, after changing profile data...
       initialized.current = null;
+      setMetrics(true);
     }
 
     if (initialized.current === null) {
@@ -61,12 +65,14 @@ export const UserProfileContextProvider = ({ children }: any) => {
         // User is not signed in - profile will be empty
         initialized.current = true;
         setProfileInitialized(true);
+        setMetrics(true);
         return;
       }
 
       const profile = await grabProfileById(session.user.id);
       if (profile) {
         setProfile(profile);
+        setMetrics(true);
       } else {
         const created = await createProfile({
           id:    session.user.id,
@@ -82,10 +88,12 @@ export const UserProfileContextProvider = ({ children }: any) => {
         const profile = await grabProfileById(session.user.id);
         if (!profile) {
           setProfileInitialized(false);
+          setMetrics(true);
           console.log('Unable to fetch new profile');
           return;
         }
         setProfile(profile);
+        setMetrics(true);
       }
       initialized.current = true;
       setProfileInitialized(true);
@@ -100,14 +108,20 @@ export const UserProfileContextProvider = ({ children }: any) => {
     initialized.current = null;
   };
 
+  const switchToMetrics = (metrics: boolean) => {
+    setMetrics(metrics);
+  };
+
 
   return (
     <UserProfileContext.Provider value={{
       logout,
+      switchToMetrics,
       profile,
       session,
       initProfile,
       profileInitialized,
+      metrics,
     }}
     >
       {children}
