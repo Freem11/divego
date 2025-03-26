@@ -1,0 +1,4 @@
+# Netlify redirect rules
+
+# Redirect all requests to the entry point(needed to make react routing work)
+/*  /index.html   200

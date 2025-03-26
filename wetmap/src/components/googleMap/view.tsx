@@ -187,7 +187,6 @@ export default function MapView(props: MapViewProps) {
         <RoundButtonIcon icon={<Icon name="plus" color="blue" onClick={zoomMapIn} />} />
         <RoundButtonIcon icon={<Icon name="minus" color="blue"  onClick={zoomMapOut} />} />
       </div>
-
     </GoogleMap>
   );
 }

@@ -26,6 +26,7 @@ export default function MainSearch() {
         coordinates = [diveSite.lat, diveSite.lng];
         setSelectedDiveSite(diveSite);
         mapRef?.setZoom(15);
+        mapRef?.panTo({ lat: coordinates[0], lng: coordinates[1] });
         return true;
       });
     }
@@ -33,20 +34,17 @@ export default function MainSearch() {
     if (option?.data?.type === 'place') {
       const response = await getPlaceLocation({ placeId: option?.data.id });
       response?.results?.some((result) => {
-        coordinates = [result.geometry.location.lat(), result.geometry.location.lng()];
-        mapRef?.setZoom(14);
+        mapRef?.fitBounds(result.geometry.viewport);
         return true;
       });
-    }
-
-    if (coordinates.length > 0) {
-      mapRef?.panTo({ lat: coordinates[0], lng: coordinates[1] });
     }
   };
 
   return (
     <div className={style.mainSearch}>
       <DynamicSelect
+        modeSelectedTags="empty"
+        triggerOnChangeWhenReselect={true}
         labelInValue={true}
         iconLeft={<Icon name="navigation-variant-outline" style={{ scale: '0.7' }} />}
         getMoreOptions={DynamicSelectOptionsMainSearch.getMoreOptions}

@@ -2,6 +2,7 @@ import { DiveSiteWithUserName } from '../entities/diveSite';
 import { GPSBubble } from '../entities/GPSBubble';
 import { Pagination } from '../entities/pagination';
 import { supabase } from '../supabase';
+import TamapaData from '../../../TampaDiveSites.json';
 
 export const diveSites = async () => {
   const { data, error } = await supabase.from('diveSites').select();
@@ -31,7 +32,9 @@ export const getDiveSitesBasic = async (bubble: GPSBubble) => {
   }
 
   return data as DiveSiteWithUserName[];
+  // return TamapaData as DiveSiteWithUserName[];
 };
+
 export const getDiveSitesWithUser = async (bubble: GPSBubble, filter?: Partial<DiveSiteWithUserName>, pagination?: Pagination) => {
   const builder = supabase.rpc('get_divesites_with_username', {
     max_lat: bubble.maxLat,
@@ -198,22 +201,19 @@ export const updateDiveSite = async (values) => {
   }
 };
 
-// not in use
-// export const getDiveSitesforMapArea = async (value) => {
-//   const { data, error } = await supabase
-//     .from('diveSites')
-//     .select()
-//     .gte('lat', value.minLat)
-//     .gte('lng', value.minLng)
-//     .lte('lat', value.maxLat)
-//     .lte('lng', value.maxLng);
+export const getSingleDiveSite = async (lat: number, lng: number) => {
+  const { data, error } = await supabase
+    .from('diveSites')
+    .select()
+    .eq('lat', lat)
+    .eq('lng', lng);
 
-//   if (error) {
-//     console.log('couldn\'t do it,', error);
-//     return [];
-//   }
+  if (error) {
+    console.log('couldn\'t do it,', error);
+    return [];
+  }
 
-//   if (data) {
-//     return data;
-//   }
-// };
+  if (data) {
+    return data as DiveSiteWithUserName[];
+  }
+};

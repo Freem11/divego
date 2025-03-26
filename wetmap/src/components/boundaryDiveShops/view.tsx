@@ -2,6 +2,8 @@ import React from 'react';
 import InfiniteScroll from '../reusables/infiniteScroll';
 import { DiveShop } from '../../entities/diveShop';
 import DiveShopItem from './diveShopItem';
+import EmptyState from '../reusables/emptyState';
+import ScreenData from '../newModals/screenData.json';
 
 type BoundaryDiveShopsViewProps = {
   loadMoreDiveShops:  (page: number) => void
@@ -14,10 +16,10 @@ type BoundaryDiveShopsViewProps = {
 export function BoundaryDiveShopsView(props: BoundaryDiveShopsViewProps) {
   return (
     <InfiniteScroll
-      className="p-2 scrollable"
       loadMore={props.loadMoreDiveShops}
       hasMore={props.hasMoreDiveShops}
       isLoading={props.isLoadingDiveShops}
+      renderEmpty={() => (<EmptyState iconName="store" text={ScreenData.Sidebar.diveCenterEmptyDrawer} />)}
     >
 
       {props.diveShops?.map((item) => {

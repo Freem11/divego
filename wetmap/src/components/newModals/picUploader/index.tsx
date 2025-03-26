@@ -1,38 +1,39 @@
 import React, { useContext, useState } from 'react';
 import PicUploaderView from './view';
 import { DynamicSelectOptionsAnimals } from '../../../entities/DynamicSelectOptionsAnimals';
-import { PinContext } from '../../contexts/staticPinContext';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { insertPhotoWaits } from '../../../supabaseCalls/photoWaitSupabaseCalls';
 import { Form } from './form';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { toast } from 'react-toastify';
 import screenData from '../screenData.json';
+import { DiveSiteContext } from '../../contexts/diveSiteContext';
+import { UserProfileContext } from '../../contexts/userProfileContext';
+import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 
 type PicUploaderProps = Partial<ModalHandleProps> & { pictureId?: number };
 
 export default function PicUploader(props: PicUploaderProps) {
-  const { pin, setPin } = useContext(PinContext);
-  const [picUrl, setPicUrl] = useState<string | null>(null);
+  const { profile } = useContext(UserProfileContext);
+  const { selectedDiveSite } = useContext(DiveSiteContext);
+
+  const [photoFile, setPhotoFile] = useState<string | null>(null);
+  const [successfullySubmitted, setSuccessfullySubmitted] = useState(false);
+
 
   props?.registerModalCancelCallback?.(() => {
-    if (pin?.PicFile) {
-      clearPreviousImage(pin?.PicFile);
-      setPin({ ...pin, PicFile: null });
+    if (photoFile && !successfullySubmitted) {
+      clearPreviousImage(photoFile);
     }
   });
 
   const handleImageSelection = async (event: React.ChangeEvent<HTMLInputElement>) => {
-    if (pin?.PicFile) {
-      clearPreviousImage(pin?.PicFile);
+    if (photoFile) {
+      clearPreviousImage(photoFile);
     }
     try {
       const createFileName = await handleImageUpload(event);
-      setPicUrl(import.meta.env.VITE_CLOUDFLARE_R2_BUCKET_PATH + `${createFileName}`);
-      setPin({
-        ...pin,
-        PicFile: `animalphotos/public/${createFileName}`,
-      });
+      setPhotoFile(`animalphotos/public/${createFileName}`);
     } catch (e) {
       console.error(e);
       toast.error(screenData.PicUploader.fileUploadError);
@@ -40,33 +41,45 @@ export default function PicUploader(props: PicUploaderProps) {
   };
 
   const onSubmit = async (formData: Required<Form>) => {
+    if (!profile) {
+      toast.error(screenData.Toast.generalError);
+      return;
+    }
+    if (!selectedDiveSite) {
+      toast.error(screenData.Toast.generalError);
+      return;
+    }
+    if (!photoFile) {
+      toast.error(screenData.Toast.generalError);
+      return;
+    }
     const { error } = await insertPhotoWaits({
       label:      formData.animal.label,
       dateTaken:  formData.date,
-      UserID:     pin?.UserID,
-      photoFile:  pin?.PicFile,
-      latitude:   pin?.Latitude,
-      longitude:  pin?.Longitude,
+      UserID:     profile.UserID,
+      photoFile:  photoFile,
+      latitude:   selectedDiveSite.lat,
+      longitude:  selectedDiveSite.lng,
     });
-
     if (error) {
       toast.error(screenData.PicUploader.uploadError);
     } else {
+      setPhotoFile(null);
       toast.success(screenData.PicUploader.uploadSuccess);
     }
 
-    setPin({ ...pin, PicFile: null });
+    setSuccessfullySubmitted(true);
   };
 
   return (
     <PicUploaderView
-      headerPictureUrl={picUrl}
+      headerPictureUrl={photoFile && getPhotoPublicUrl(photoFile)}
       handleImageSelection={handleImageSelection}
       getMoreAnimals={DynamicSelectOptionsAnimals.getMoreOptions}
       onClose={props.onModalCancel}
       onSubmit={onSubmit}
       values={{
-        diveSiteName: pin?.siteName,
+        diveSiteName: selectedDiveSite?.name,
       }}
     />
   );

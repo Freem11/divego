@@ -8,6 +8,12 @@
     background-size: cover;
     background-color: $primaryBlue;
     background-position: center center;
+    transition: filter 0.7s ease-in-out, transform 0.7s ease-in-out;
+}
+
+.loading {
+    filter: grayscale(100%) blur(10px);
+    transform: scale(1);
 }
 
 .buttonBack {

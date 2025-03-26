@@ -1,13 +1,10 @@
 import React from 'react';
 
-type combineComponentsProps = {
-  children?: React.ReactNode
-};
 
-export const combineComponents = (props: combineComponentsProps) => {
-  const { children, ...components } = props;
+export const combineComponents = (...components: Array<React.JSXElementConstructor<React.PropsWithChildren>>) => {
   return components.reduce(
     (AccumulatedComponents, CurrentComponent) => {
+      // eslint-disable-next-line react/display-name
       return ({ children }) => {
         return (
           <AccumulatedComponents>
