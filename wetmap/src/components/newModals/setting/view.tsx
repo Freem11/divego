@@ -50,24 +50,28 @@ export default function SettingsView(props: SettingsProps) {
             )}
           </div>
 
-          <div className={styles.toggleContainer}>
-
-            <div className={styles.toggleSwitch}>
-              <input
-                checked={isChecked}
-                onChange={handleToggle}
-                type="checkbox"
-                name="metrics"
-                className={styles.checkbox}
-              />
-
-              <label>
-                Use Metrics?
-              </label>
+          <div className={styles.blockContainer}>
+            <h2 className="ml-4 mt-2 mb-1">Unit Selected</h2>
+            <div className={styles.grayOutlineFlexRow}>
+              <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.metrics ? 'Metrics' : 'Imperial'}</h4>
+              <div className={styles.toggleSwitch}>
+                <label>
+                  Metric
+                </label>
+                <input
+                  checked={isChecked}
+                  onChange={handleToggle}
+                  type="checkbox"
+                  name="metrics"
+                  className={styles.checkbox}
+                />
+                <label>
+                  Imperial
+                </label>
+              </div>
             </div>
-
-
           </div>
+
 
           <div className={styles.horizontalButtonContainer}>
             <div className="col-3"></div>
