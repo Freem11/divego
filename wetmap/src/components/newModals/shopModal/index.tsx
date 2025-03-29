@@ -87,7 +87,7 @@ export default function ShopModal(props: ShopModalProps) {
       clearPreviousImage(selectedShop.diveshopprofilephoto);
     }
 
-    const createFileName = await handleImageUpload(event);
+    const createFileName = await handleImageUpload(event.target.files);
     setSelectedShop({
       ...selectedShop,
       diveshopprofilephoto: `animalphotos/public/${createFileName}`,
