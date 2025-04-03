@@ -18,7 +18,6 @@ type SettingsProps = {
 export default function SettingsView(props: SettingsProps) {
   const [isChecked, setIsChecked] = React.useState<boolean>(props.metrics);
 
-  console.log('isChecked', isChecked);
   const handleToggle = () => {
     setIsChecked(!isChecked);
     props.switchToMetrics(!isChecked);
@@ -56,9 +55,6 @@ export default function SettingsView(props: SettingsProps) {
             <div className={styles.grayOutlineFlexRow}>
               <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.metrics ? 'Metric' : 'Imperial'}</h4>
               <div className={styles.toggleSwitch}>
-                <label>
-                  Imperial
-                </label>
                 <input
                   checked={isChecked}
                   onClick={handleToggle}
@@ -69,9 +65,6 @@ export default function SettingsView(props: SettingsProps) {
                 <label className={styles.toggleSwitchLabel}  onClick={handleToggle}>
                   <span className={styles.toggleSwitchInner} />
                   <span className={styles.toggleSwitchSwitch} />
-                </label>
-                <label>
-                  Metric
                 </label>
               </div>
             </div>
