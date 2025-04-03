@@ -22,6 +22,7 @@ export default function SettingsView(props: SettingsProps) {
     setIsChecked(!isChecked);
     props.switchToMetrics(!isChecked);
   };
+
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
       <ButtonIcon
