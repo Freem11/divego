@@ -10,6 +10,7 @@ import { MapContext } from './components/googleMap/mapContext';
 import { UserProfileContext } from './components/contexts/userProfileContext';
 // DiveLocker
 
+
 function App() {
   const { setInitialPoint } = useContext(MapContext);
   const [appIsReady, setAppIsReady] = useState(false);

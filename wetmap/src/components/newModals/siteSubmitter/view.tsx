@@ -2,7 +2,6 @@ import React from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
 import backGroundPic from '../../../images/boat.png';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
-import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
@@ -10,6 +9,7 @@ import { Form, FormRules } from './form';
 import style from './style.module.scss';
 import { toast } from 'react-toastify';
 import Tooltip from '../../reusables/tooltip';
+import { useTranslation } from 'react-i18next';
 
 type SiteSubmitterProps = {
   values?:           Form
@@ -20,6 +20,8 @@ type SiteSubmitterProps = {
 };
 
 export default function SiteSubmitterView(props: SiteSubmitterProps) {
+  const { t } = useTranslation('modals');
+
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
     values: props.values,
   });
@@ -45,39 +47,39 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
       <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(onSubmit, handleError)}>
         <div>
           <div className="d-flex">
-            <h1 className="text-clip">{screenData.DiveSiteAdd.header}</h1>
+            <h1 className="text-clip">{t('DiveSiteAdd.header')}</h1>
           </div>
 
           <div className="stack-4 mb-2">
             <TextInput // Once approved ill add the content stuff to screenData json
               iconLeft={(
-                <Tooltip content={screenData.DiveSiteAdd.siteNameTooltip}>
+                <Tooltip content={t('DiveSiteAdd.siteNameTooltip')}>
                   <Icon name="diving-scuba-flag" />
                 </Tooltip>
               )}
-              placeholder={screenData.DiveSiteAdd.siteNamePlaceholder}
+              placeholder={t('DiveSiteAdd.siteNamePlaceholder')}
               error={errors.Site}
               {...register('Site', FormRules.Site)}
             />
 
             <TextInput
               iconLeft={(
-                <Tooltip content={screenData.DiveSiteAdd.latTooltip}>
+                <Tooltip content={t('DiveSiteAdd.latTooltip')}>
                   <Icon name="latitude" />
                 </Tooltip>
               )}
-              placeholder={screenData.DiveSiteAdd.latPlaceholder}
+              placeholder={t('DiveSiteAdd.latPlaceholder')}
               error={errors.Latitude}
               {...register('Latitude', FormRules.Latitude)}
             />
 
             <TextInput
               iconLeft={(
-                <Tooltip content={screenData.DiveSiteAdd.lngTooltip}>
+                <Tooltip content={t('DiveSiteAdd.lngTooltip')}>
                   <Icon name="longitude" />
                 </Tooltip>
               )}
-              placeholder={screenData.DiveSiteAdd.lngPlaceholder}
+              placeholder={t('DiveSiteAdd.lngPlaceholder')}
               error={errors.Longitude}
               {...register('Longitude', FormRules.Longitude)}
             />
@@ -87,25 +89,25 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
 
         <div className={style.horizontalButtonContainer}>
           <div className="col-3">
-            <Tooltip content={screenData.DiveSiteAdd.myLocationTooltip}>
+            <Tooltip content={t('DiveSiteAdd.myLocationTooltip')}>
               <Button
                 onClick={props.getDeviceLocation}
                 className="btn-md"
                 type="button"
               >
-                {screenData.DiveSiteAdd.myLocationButton}
+                {t('DiveSiteAdd.myLocationButton')}
               </Button>
             </Tooltip>
           </div>
 
           <div className="col-3 ">
-            <Tooltip content={screenData.DiveSiteAdd.pinButtonTooltip}>
+            <Tooltip content={t('DiveSiteAdd.pinButtonTooltip')}>
               <Button
                 onClick={props.onNavigate}
                 className="btn-md"
                 type="button"
               >
-                {screenData.DiveSiteAdd.pinButton}
+                {t('DiveSiteAdd.pinButton')}
               </Button>
             </Tooltip>
           </div>
@@ -120,7 +122,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >
-              {screenData.DiveSiteAdd.submitButton}
+              {t('DiveSiteAdd.submitButton')}
             </Button>
           </div>
         </div>
