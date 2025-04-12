@@ -15,7 +15,6 @@ const resources = {
     common:     enCommon,
     modals:     enModals,
     validators: enValidators,
-
   },
   es: {
     common:     esCommon,
