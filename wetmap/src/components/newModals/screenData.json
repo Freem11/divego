@@ -18,38 +18,18 @@
         "latPlaceholder": "Latitude",
         "lngPlaceholder": "Longitude",
         "latLngExplainer": "To place your business on the map",
-        "submitButton" : "Submit",
+        "submitButton": "Submit",
         "createSuccess": "Request Created Successfully!",
         "createError": "Error creating request. Please try again later.",
         "businesNameTooltip": "This will serve as your Dive Centre's name",
         "websiteTooltip": "We will use this to validate your business as compatible with Scuba SEAsons",
         "mapTooltip": "Used to place your Dive Centre on the map"
-
       },
       "SearchPage": {
         "header": "Map Navigation",
         "placeholder": "Search by Dive Site name or Location",
         "diveAddPrompt": "Can't find your dive site?",
         "diveAddLink": "Tap here to add it!"
-      },
-      "DiveSiteAdd": {
-        "header": "Add a New Dive Site",
-        "siteNamePlaceholder": "Dive Site Name",
-        "latPlaceholder": "Latitude",
-        "lngPlaceholder": "Longitude",
-        "myLocationButton": "Use my location",
-        "myLocationExplainer": "This can take up to 30 seconds",
-        "pinButton": "Drop a pin",
-        "submitButton" : "Submit",
-        "allowLocation": "Please allow location access.",
-        "locationNotSupported": "Geolocation is not supported in your browser.",
-        "addSiteError": "Error adding site. Please try again later.",
-        "addSiteSuccess": "Site added successfully!",
-        "siteNameTooltip": "Enter the name of your dive site",
-        "latTooltip": "Enter a number",
-        "lngTooltip": "Enter a number",
-        "myLocationTooltip": "Select latitude and longitude",
-        "pinButtonTooltip": "Select latitude and longitude"
       },
       "PicUploader": {
         "header": "Your Sea Creature Sighting",
@@ -64,7 +44,7 @@
         "whereLabel": "Where you saw it",
         "wherePlaceholder": "Location of Sighting",
         "whereIcon": "Location",
-        "submitButton" : "Submit",
+        "submitButton": "Submit",
         "uploadError": "Error uploading photo. Please try again later.",
         "uploadSuccess": "Photo uploaded successfully!",
         "fileUploadError": "Error uploading file. Please try again later."
@@ -79,9 +59,9 @@
       "TripCard": {
         "editButton": "Edit",
         "deleteButton": "Delete",
-        "anchorButton" : "Go to trip location",
-        "bookButton" : "Book trip",
-        "deleteTripError" : "There was an error submitting trip deletion request. Please try again later.",
+        "anchorButton": "Go to trip location",
+        "bookButton": "Book trip",
+        "deleteTripError": "There was an error submitting trip deletion request. Please try again later.",
         "deleteTripSuccess": "You trip deletion request was successfully submitted! Please allow up to 24 hours for it to be approved and reflected in your trip list."
       },
       "TripCreator": {
@@ -106,16 +86,16 @@
         "emptyDrawer": "No dive sites yet.",
         "submitSuccess": "Trip created successfully!",
         "submitError": "Error creating trip. Please try again later.",
-        "editTripError" : "There was an error submitting trip edit request. Please try again later.",
+        "editTripError": "There was an error submitting trip edit request. Please try again later.",
         "editTripSuccess": "You trip edit request was successfully submitted! Please allow up to 24 hours for the changes to be approved and reflected in your trip.",
         "noSitesError": "Your haven't added any potential dive sites to your dive trip!",
         "cloneTripButton": "Clone this Trip",
         "tripNameTooltip": "What is your trip's name",
-         "booklingLinkTooltip": "Where can divers book this trip",
-         "priceTooltip": "What is the cost of the trip (excluding gear rental)",
-         "tripStartTooltip": "When does this trip start",
-         "tripEndTooltip": "When does this trip end",
-         "sitelistTooltip": "Add potential dive sites to your trip by selecting them on the map!"
+        "booklingLinkTooltip": "Where can divers book this trip",
+        "priceTooltip": "What is the cost of the trip (excluding gear rental)",
+        "tripStartTooltip": "When does this trip start",
+        "tripEndTooltip": "When does this trip end",
+        "sitelistTooltip": "Add potential dive sites to your trip by selecting them on the map!"
       },
       "UserProfile": {
         "drawerHeader": "'s Sea Creature Encounters",
@@ -216,8 +196,7 @@
         "passwordResetEmailSent": "Email Sent! Check Your Email For A Link To Reset Your Password",
         "passwordResetError": "Something went wrong. Please try again later"
       },
-      "ConfirmDeleteAccount":
-      {
+      "ConfirmDeleteAccount": {
         "title": "Account Deletion",
         "subHeader": "Are you sure you want to delete your account?",
         "body": "Please note that deleting your account will not delete your previous dive site or photo submissions, please contact us if you wish to have those removed from the community",
