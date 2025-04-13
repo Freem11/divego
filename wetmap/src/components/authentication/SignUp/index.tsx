@@ -4,12 +4,13 @@ import { Form } from './form';
 import SignUpPageView from './view';
 import { register } from '../../../supabaseCalls/authenticateSupabaseCalls';
 import { toast } from 'react-toastify';
-import screenData from '../../newModals/screenData.json';
 import { UserProfileContext } from '../../contexts/userProfileContext';
+import { useTranslation } from 'react-i18next';
 
 export default function SignUpPage() {
   const { initProfile } = useContext(UserProfileContext);
   const { goToSlide } = useContext(SliderContext);
+  const { t } = useTranslation();
 
   const onSubmit = async (data: Form) => {
     const response = await register(data);
@@ -23,7 +24,7 @@ export default function SignUpPage() {
     if (session !== null) {
       initProfile(true);
     } else {
-      toast.error(screenData.SignUpPage.signUpError);
+      toast.error(t('SignUpPage.signUpError'));
     }
   };
 

@@ -4,16 +4,17 @@ import PasswordRecoveryView from './view';
 import { sendPasswordResetEmail } from '../../../supabaseCalls/authenticateSupabaseCalls';
 import { SliderContext } from '../../reusables/slider/context';
 import { toast } from 'react-toastify';
-import screenData from '../../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 export default function PasswordRecoveryPage() {
+  const { t } = useTranslation();
   const { goToSlide } = useContext(SliderContext);
 
   const onSubmit = async (data: Form) => {
     const response = await sendPasswordResetEmail(data.email, window.location.origin + '/account/password/');
 
     if (!response.error && response.data) {
-      toast.success(screenData.PasswordRecoveryPage.passwordResetEmailSent);
+      toast.success(t('PasswordRecoveryPage.passwordResetEmailSent'));
       return;
     }
 
@@ -22,7 +23,7 @@ export default function PasswordRecoveryPage() {
       return;
     }
 
-    toast.error(screenData.PasswordRecoveryPage.passwordResetError);
+    toast.error(t('PasswordRecoveryPage.passwordResetError'));
   };
 
   return (

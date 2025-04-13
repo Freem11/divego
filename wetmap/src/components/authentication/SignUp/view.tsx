@@ -4,9 +4,9 @@ import { Form, FormRules } from './form';
 import Button from '../../reusables/button';
 import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
-import screenData from '../../newModals/screenData.json';
 import TextInput from '../../reusables/textInput';
 import SecureTextInput from '../../reusables/secureTextInput';
+import { useTranslation } from 'react-i18next';
 
 type SignUpPageProps = {
   goToSlide: (pageNumber: number) => void
@@ -15,6 +15,7 @@ type SignUpPageProps = {
 
 export default function SignUpPageView(props: SignUpPageProps) {
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
+  const { t } = useTranslation();
 
   return (
     <div className="flex-column-between full-height">
@@ -24,7 +25,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
           className="btn-lg"
           onClick={() => props.goToSlide(1)}
         />
-        <h1 className="text-clip">{screenData.SignUpPage.title}</h1>
+        <h1 className="text-clip">{t('SignUpPage.title')}</h1>
 
         <form
           className="mx-6 mb-6"
@@ -34,7 +35,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
             <TextInput
               error={errors.fullName}
               iconLeft={<Icon name="person" />}
-              placeholder={screenData.SignUpPage.namePlaceholder}
+              placeholder={t('SignUpPage.namePlaceholder')}
               {...register('fullName', FormRules.fullName)}
             />
           </div>
@@ -43,7 +44,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
             <TextInput
               error={errors.email}
               iconLeft={<Icon name="at" />}
-              placeholder={screenData.SignUpPage.emailPlaceholder}
+              placeholder={t('SignUpPage.emailPlaceholder')}
               {...register('email', FormRules.email)}
             />
           </div>
@@ -51,7 +52,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
           <div className="mt-10">
             <SecureTextInput
               error={errors.password}
-              placeholder={screenData.SignUpPage.passwordPlaceholder}
+              placeholder={t('SignUpPage.passwordPlaceholder')}
               {...register('password', FormRules.password)}
             />
           </div>
@@ -65,7 +66,7 @@ export default function SignUpPageView(props: SignUpPageProps) {
                 type="submit"
                 iconRight={<Icon name="chevron-right" />}
               >
-                {screenData.SignUpPage.buttonText}
+                {t('SignUpPage.buttonText')}
               </Button>
             </div>
           </div>
@@ -73,10 +74,10 @@ export default function SignUpPageView(props: SignUpPageProps) {
       </div>
 
       <div className="text-center mb-6">
-        {screenData.SignUpPage.promptText}
+        {t('SignUpPage.promptText')}
         { ' '}
         <a onClick={() => props.goToSlide(2)}>
-          {`${screenData.SignUpPage.promptLinkText}`}
+          {`${t('SignUpPage.promptLinkText')}`}
         </a>
       </div>
 
