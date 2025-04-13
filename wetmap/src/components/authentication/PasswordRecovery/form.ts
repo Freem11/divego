@@ -8,7 +8,7 @@ export interface Form {
 
 export const FormRules: FormValidationRules<Form> = {
   email: {
-    required: i18n.t('Validators.requiredEmail'),
+    required: i18n.t('Validators.supplyEmail'),
     ...validationEmail,
   },
 
