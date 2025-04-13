@@ -2,12 +2,12 @@ import React from 'react';
 import Button from '../../reusables/button';
 import blackManta from '../../../images/blackManta.png';
 import googleIcon from '../../../images/google-color.png';
-import facebookIcon from '../../../images/facebook-color.png';
 import appleIcon from '../../../images/apple.png';
 import ButtonIcon from '../../reusables/buttonIcon';
-import screenData from '../../newModals/screenData.json';
 import WavyBlock from '../../reusables/wavyBlock';
 import style from './style.module.scss';
+import { useTranslation } from 'react-i18next';
+// import facebookIcon from '../../../images/facebook-color.png';
 
 type LandingPageProps = {
   goToSlide:    (pageNumber: number) => void
@@ -15,6 +15,7 @@ type LandingPageProps = {
 };
 
 export default function LandingPageView(props: LandingPageProps) {
+  const { t } = useTranslation();
   return (
     <div className="flex-column-between full-height">
       <div>
@@ -22,22 +23,22 @@ export default function LandingPageView(props: LandingPageProps) {
           <WavyBlock />
         </div>
 
-        <h1 className="ml-10 text-clip text-left">{screenData.LandingPage.title}</h1>
+        <h1 className="ml-10 text-clip text-left">{t('LandingPage.title')}</h1>
 
         <div className="flex-centered">
           <div className="col-6">
             <Button className="btn-primary btn-lg" onClick={() => props.goToSlide(2)}>
-              {screenData.LandingPage.buttonOneText}
+              {t('LandingPage.buttonOneText')}
             </Button>
             <Button className="btn-lg mt-4" onClick={() => props.goToSlide(0)}>
-              {screenData.LandingPage.buttonTwoText}
+              {t('LandingPage.buttonTwoText')}
             </Button>
           </div>
         </div>
       </div>
 
       <div>
-        <div className="mb-2 text-center">{screenData.LandingPage.content}</div>
+        <div className="mb-2 text-center">{t('LandingPage.content')}</div>
         <div className="flex-centered">
           <div className="col-3 flex-row-between" style={{ height: '3.5rem' }}>
             <ButtonIcon
