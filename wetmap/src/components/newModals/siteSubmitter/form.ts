@@ -1,5 +1,6 @@
 
 import { FormValidationRules } from '../../../forms/form';
+import i18n from '../../../i18n';
 
 export interface Form {
   Site?:      string
@@ -10,26 +11,27 @@ export interface Form {
 
 export const FormRules: FormValidationRules<Form> = {
   Site: {
-    required: 'Dive site name cannot be empty',
+    required: i18n.t('Validators.requiredSite'),
   },
   Longitude: {
-    required: 'Longitude is required',
+    required: i18n.t('Validators.requiredLongitude'),
     min:      {
       value:   -180,
-      message: 'Longitude must be greater than -180',
+      message: i18n.t('Validators.minLongitude', { value: -180 }),
     },
     max:      {
       value:   180,
-      message: 'Longitude must be less than 180',
+      message: i18n.t('Validators.maxLongitude', { value: 180 }),
     } },
   Latitude: {
-    required: 'Longitude is required',
+    required: i18n.t('Validators.requiredLatitude'),
     min:      {
       value:   -180,
-      message: 'Latitude must be greater than -180',
+      message: i18n.t('Validators.minLatitude', { value: -180 }),
     },
     max:      {
       value:   180,
-      message: 'Latitude must be less than 180',
-    } },
+      message: i18n.t('Validators.maxLatitude', { value: 180 }),
+    },
+  },
 };
