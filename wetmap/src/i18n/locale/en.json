@@ -42,6 +42,15 @@
         "websiteTooltip": "We will use this to validate your business as compatible with Scuba SEAsons",
         "mapTooltip": "Used to place your Dive Centre on the map"
     },
+    "MapPage": {
+        "profile": "Profile",
+        "settings": "Settings",
+        "guides": "Guides",
+        "siteAdd": "Site Add",
+        "showHide": "Show/Hide",
+        "returnToShop": "Return to Shop",
+        "setPin": "Set Pin"
+    },
     "SearchPage": {
         "header": "Map Navigation",
         "placeholder": "Search by Dive Site name or Location",
@@ -224,7 +233,15 @@
         "settingsTooltip": "Settings",
         "newDiveSiteTooltip": "Add a New Dive Site",
         "tripCreatorTooltip": "My Shop(s)",
-        "guideTooltip": "User Guide"
+        "guideTooltip": "User Guide",
+        "diveSites": "Dive Sites",
+        "seaLife": "Sea Life",
+        "diveCenters": "Dive Centers",
+        "availableOnMobile": "Available on Mobile",
+        "connectWithUs": "Connect with us",
+        "rightsReserved": "© 2025. All rights reserved.",
+        "yourCart": "Your Cart",
+        "searchByCityOrDive": "Search by city or dive site name"
     },
     "PasswordRecoveryPage": {
         "title": "Reset Password",

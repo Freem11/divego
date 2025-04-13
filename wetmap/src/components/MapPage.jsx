@@ -41,6 +41,7 @@ import Modal from './reusables/modal/modal';
 
 import { MapConfigContext } from './contexts/mapConfigContext';
 import { Outlet } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 const MapPage = React.memo(function MapPage() {
   const { activeSession } = useContext(SessionContext);
@@ -51,6 +52,7 @@ const MapPage = React.memo(function MapPage() {
   const { selectedShop } = useContext(SelectedShopContext);
   const { mapZoom, setMapZoom } = useContext(ZoomContext);
   const { setMapCoords } = useContext(CoordsContext);
+  const { t } = useTranslation();
 
   const { areaPics } = useContext(AreaPicsContext);
   const [isOpen, setIsOpen] = useState(false);
@@ -274,7 +276,7 @@ const MapPage = React.memo(function MapPage() {
                 >
                   <PersonIcon sx={{ width: '3vw', height: '2vw' }} />
                 </ToggleButton>
-                <p className="buttonFont">Profile</p>
+                <p className="buttonFont">{t('MapPage.profile')}</p>
               </div>
             )}
 
@@ -289,7 +291,7 @@ const MapPage = React.memo(function MapPage() {
                 >
                   <SettingsIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
-                <p className="buttonFont">Settings</p>
+                <p className="buttonFont">{t('MapPage.settings')}</p>
               </div>
             )}
 
@@ -304,7 +306,7 @@ const MapPage = React.memo(function MapPage() {
                 >
                   <QuestionMarkIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
-                <p className="buttonFont">Guides</p>
+                <p className="buttonFont">{t('MapPage.guides')}</p>
               </div>
             )}
 
@@ -319,7 +321,7 @@ const MapPage = React.memo(function MapPage() {
                 >
                   <AddLocationAltIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
-                <p className="buttonFont">Site Add</p>
+                <p className="buttonFont">{t('MapPage.siteAdd')}</p>
               </div>
             )}
 
@@ -336,7 +338,7 @@ const MapPage = React.memo(function MapPage() {
                 >
                   <AnchorIcon sx={{ width: '3vw', height: '1.5vw' }} />
                 </ToggleButton>
-                <p className="buttonFont">Show/Hide</p>
+                <p className="buttonFont">{t('MapPage.showHide')}</p>
               </div>
             )}
           </div>
@@ -454,7 +456,7 @@ const MapPage = React.memo(function MapPage() {
                 'zIndex':          3,
               }}
             >
-              Set Pin
+              {t('MapPage.setPin')}
             </Button>
           </div>
         </div>
@@ -496,7 +498,7 @@ const MapPage = React.memo(function MapPage() {
                 'zIndex':          3,
               }}
             >
-              Return to Shop
+              {t('MapPage.returnToShop')}
             </Button>
           </div>
         </div>

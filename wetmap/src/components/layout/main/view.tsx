@@ -105,7 +105,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
               <div className="cart text-end d-none d-lg-block dropdown">
                 <button className="border-0 bg-transparent d-flex flex-column gap-2 lh-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                  <span className="fs-6 text-muted dropdown-toggle">Your Cart</span>
+                  <span className="fs-6 text-muted dropdown-toggle">{t('MainPage.yourCart')}</span>
                   <span className="cart-total fs-5 fw-bold">$1290.00</span>
                 </button>
               </div>
@@ -122,9 +122,9 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               <Tabs
                 className="scroll-container non-scrollable"
                 data={[
-                  { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites',    content: BoundaryDiveSites },
-                  { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryAnimals },
-                  { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Centers',  content: BoundaryDiveShops },
+                  { key: 't-1', className: 'scroll-container non-scrollable', title: t('MainPage.diveSites'),    content: BoundaryDiveSites },
+                  { key: 't-2', className: 'scroll-container non-scrollable', title: t('MainPage.seaLife'),      content: BoundaryAnimals },
+                  { key: 't-3', className: 'scroll-container non-scrollable', title: t('MainPage.diveCenters'),  content: BoundaryDiveShops },
                 ]}
               />
 
@@ -165,7 +165,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               <div className="col-sm-0 col-1"></div>
               <div className="col-sm-12 col-md-12 col-4">
                 <div className={style.headers}>
-                  Available on Mobile
+                  {t('MainPage.availableOnMobile')}
                   <div className="mobile-links flex-centered  justify-content-sm-center justify-content-flex-start mt-6">
                     <a href="https://apps.apple.com/us/app/divego/id6450968950" target="_blank" rel="noreferrer">
                       <img  src={AppleLinkButton} height={60} />
@@ -178,7 +178,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               </div>
               <div className="col-sm-12 col-md-12 col-4">
                 <div className={style.headers}>
-                  Connect with us
+                  {t('MainPage.connectWithUs')}
                   <div className="social-links flex-row-between mt-10 col-8 col-md-6 col-sm-10">
                     <a href="https://www.facebook.com/profile.php?id=61554622375177" target="_blank" rel="noreferrer">
                       <ButtonIcon icon={<Icon name="facebook" color="white" style={{ scale: '2' }} />} />
@@ -200,7 +200,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               </div>
               <div className="col-md-0 col-1"></div>
               <div className="col-12">
-                <p className={style.footerRights}>© 2025. All rights reserved.</p>
+                <p className={style.footerRights}>{t('MainPage.rightsReserved')}</p>
               </div>
             </div>
 
