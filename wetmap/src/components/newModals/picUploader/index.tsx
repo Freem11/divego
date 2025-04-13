@@ -6,14 +6,15 @@ import { insertPhotoWaits } from '../../../supabaseCalls/photoWaitSupabaseCalls'
 import { Form } from './form';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { toast } from 'react-toastify';
-import screenData from '../screenData.json';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
+import { useTranslation } from 'react-i18next';
 
 type PicUploaderProps = Partial<ModalHandleProps> & { pictureId?: number };
 
 export default function PicUploader(props: PicUploaderProps) {
+  const { t } = useTranslation();
   const { profile } = useContext(UserProfileContext);
   const { selectedDiveSite } = useContext(DiveSiteContext);
 
@@ -36,21 +37,21 @@ export default function PicUploader(props: PicUploaderProps) {
       setPhotoFile(`animalphotos/public/${createFileName}`);
     } catch (e) {
       console.error(e);
-      toast.error(screenData.PicUploader.fileUploadError);
+      toast.error(t('PicUploader.fileUploadError'));
     }
   };
 
   const onSubmit = async (formData: Required<Form>) => {
     if (!profile) {
-      toast.error(screenData.Toast.generalError);
+      toast.error(t('Toast.generalError'));
       return;
     }
     if (!selectedDiveSite) {
-      toast.error(screenData.Toast.generalError);
+      toast.error(t('Toast.generalError'));
       return;
     }
     if (!photoFile) {
-      toast.error(screenData.Toast.generalError);
+      toast.error(t('Toast.generalError'));
       return;
     }
     const { error } = await insertPhotoWaits({
@@ -62,10 +63,10 @@ export default function PicUploader(props: PicUploaderProps) {
       longitude:  selectedDiveSite.lng,
     });
     if (error) {
-      toast.error(screenData.PicUploader.uploadError);
+      toast.error(t('PicUploader.uploadError'));
     } else {
       setPhotoFile(null);
-      toast.success(screenData.PicUploader.uploadSuccess);
+      toast.success(t('PicUploader.uploadSuccess'));
     }
 
     setSuccessfullySubmitted(true);
