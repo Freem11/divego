@@ -1,4 +1,21 @@
 {
+    "Common": {
+        "to": "to",
+        "Months": {
+            "Jan": "Jan",
+            "Feb": "Feb",
+            "Mar": "Mar",
+            "Apr": "Apr",
+            "May": "May",
+            "Jun": "Jun",
+            "Jul": "Jul",
+            "Aug": "Aug",
+            "Sep": "Sep",
+            "Oct": "Oct",
+            "Nov": "Nov",
+            "Dec": "Dec"
+        }
+    },
     "SettingsPage": {
         "header": "Settings",
         "subHeading1": "Account Type",
@@ -76,6 +93,8 @@
         "deleteButton": "Delete"
     },
     "TripCard": {
+        "readMore": "Read More",
+        "readLess": "Read Less",
         "editButton": "Edit",
         "deleteButton": "Delete",
         "anchorButton": "Go to trip location",
@@ -226,9 +245,11 @@
         "errorDeleting": "Something went wrong. Please try again later"
     },
     "Sidebar": {
+        "searchForAnimal": "Search for an animal",
         "diveSiteEmptyDrawer": "No dive sites in this area.",
         "seaLifeEmptyDrawer": "No sea life in this area.",
-        "diveCenterEmptyDrawer": "No dive centers in this area."
+        "diveCenterEmptyDrawer": "No dive centers in this area.",
+        "inThisArea": "in this area."
     },
     "Validators": {
         "requiredEmail": "Please insert valid email",

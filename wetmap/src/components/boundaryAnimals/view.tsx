@@ -28,7 +28,7 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
   return (
     <>
       <TextInput
-        placeholder="Search for an animal"
+        placeholder={t('Sidebar.searchForAnimal')}
         iconLeft={<Icon name="shark" />}
         onChange={(event: ChangeEvent<HTMLInputElement>) => props.handleAnimalSearch(event.target.value)}
       />
@@ -48,6 +48,7 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
         isLoading={props.isLoadingAnimals}
         renderEmpty={() => {
           if (props.selectedAnimals.length > 0) {
+            // TODO: put everything in i18n with variables
             return (
               <EmptyState
                 iconName="shark"
@@ -72,7 +73,7 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
 
                   // All other items: add ", " after them
                   return `${animalLower}, `;
-                }).join('')} in this area.`}  // join("") combines all pieces into a single string
+                }).join('')} ${t('SideBar.inThisArea')}`}  // join("") combines all pieces into a single string
               />
             );
           }

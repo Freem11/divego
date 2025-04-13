@@ -98,7 +98,7 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
             className={style.showMore}
             onClick={() => setIsExpanded(prev => !prev)}
           >
-            {isExpanded ? 'Read less' : 'Read more'}
+            {isExpanded ? t('TripCard.readLess') : t('TripCard.readMore')}
           </span>
         )}
       </div>
