@@ -1,9 +1,9 @@
 import React from 'react';
 import backGroundPic from '../../../images/boat.png';
-import screenData from '../screenData.json';
 import Button from '../../reusables/button';
 import style from './style.module.scss';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
+import { useTranslation } from 'react-i18next';
 
 type ConfirmDeleteAccountViewProps = {
   onClose:     () => void
@@ -12,22 +12,24 @@ type ConfirmDeleteAccountViewProps = {
 };
 
 export default function ConfirmDeleteAccountView(props: ConfirmDeleteAccountViewProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="flex-column-between full-height">
       <WavyModalHeader image={backGroundPic} />
       <div className="columns">
         <div className="d-flex ml-8">
-          <h1 className="text-clip uppercase">{screenData.ConfirmDeleteAccount.title}</h1>
+          <h1 className="text-clip uppercase">{t('ConfirmDeleteAccount.title')}</h1>
         </div>
       </div>
       <div>
 
         <div className="columns">
           <div className="column col-12 px-8">
-            <h3 className={style.subHeader}>{screenData.ConfirmDeleteAccount.subHeader}</h3>
+            <h3 className={style.subHeader}>{t('ConfirmDeleteAccount.subHeader')}</h3>
           </div>
         </div>
-        <p className="text-gray px-8">{screenData.ConfirmDeleteAccount.body}</p>
+        <p className="text-gray px-8">{t('ConfirmDeleteAccount.body')}</p>
       </div>
       <div className={style.horizontalButtonContainer}>
         <div className="col-3">
@@ -36,7 +38,7 @@ export default function ConfirmDeleteAccountView(props: ConfirmDeleteAccountView
             className="btn-md "
             type="button"
           >
-            {screenData.ConfirmDeleteAccount.deleteBtnText}
+            {t('ConfirmDeleteAccount.deleteBtnText')}
           </Button>
         </div>
         <div className="col-3">
@@ -46,7 +48,7 @@ export default function ConfirmDeleteAccountView(props: ConfirmDeleteAccountView
             className="btn-md btn-primary"
             type="button"
           >
-            {screenData.ConfirmDeleteAccount.cancelBtnText}
+            {t('ConfirmDeleteAccount.cancelBtnText')}
           </Button>
         </div>
         <div className="col-3">
@@ -55,7 +57,7 @@ export default function ConfirmDeleteAccountView(props: ConfirmDeleteAccountView
             className="btn-md btn-primary"
             type="button"
           >
-            {screenData.ConfirmDeleteAccount.contact}
+            {t('ConfirmDeleteAccount.contact')}
           </Button>
         </div>
       </div>

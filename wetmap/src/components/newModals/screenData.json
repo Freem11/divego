@@ -127,16 +127,6 @@
         "emptyDrawer": "No dive trips yet.",
         "addDiveShopPhotoButton": "Add a photo of your dive shop"
       },
-      "CommentsModal": {
-        "header": "Comments",
-        "commentsPlaceholder": "Blow some bubbles . . .",
-        "replyButton": "Reply",
-        "replyHideSingle": "Hide reply",
-        "replyHideMultiple": "Hide replies",
-        "replyViewSingle": "View Reply",
-        "replyViewMultiplOne": "View ",
-        "replyViewMultiplTwo": " Replies"
-      },
       "GoogleMap": {
         "pinButton": "Set Pin",
         "shopButton": "Return to Shop",
@@ -195,16 +185,6 @@
         "emailInvalidMessage": "Please supply the email that you use to login",
         "passwordResetEmailSent": "Email Sent! Check Your Email For A Link To Reset Your Password",
         "passwordResetError": "Something went wrong. Please try again later"
-      },
-      "ConfirmDeleteAccount": {
-        "title": "Account Deletion",
-        "subHeader": "Are you sure you want to delete your account?",
-        "body": "Please note that deleting your account will not delete your previous dive site or photo submissions, please contact us if you wish to have those removed from the community",
-        "deleteBtnText": "Delete account",
-        "cancelBtnText": "Cancel",
-        "contact": "Contact us",
-        "contantEmail": "scubaseasons@gmail.com",
-        "errorDeleting": "Something went wrong. Please try again later"
       },
       "Sidebar": {
         "diveSiteEmptyDrawer": "No dive sites in this area.",
