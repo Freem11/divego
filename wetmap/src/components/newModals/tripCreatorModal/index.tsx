@@ -8,8 +8,8 @@ import { toast } from 'react-toastify';
 import { FieldErrors } from 'react-hook-form';
 import { insertItinerary, insertItineraryRequest } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { ModalContext } from '../../reusables/modal/context';
-import screenData from '../screenData.json';
 import { ItineraryItem } from '../../../entities/itineraryItem';
+import { useTranslation } from 'react-i18next';
 
 type TripCreatorModalProps = Partial<ModalHandleProps> & {
   itineraryInfo?: ItineraryItem
@@ -22,6 +22,7 @@ export default function TripCreatorModal(props: TripCreatorModalProps) {
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const [diveSitesError, setDiveSitesError] = useState<boolean>(false);
   const [isEditModeOn, setIsEditModeOn] = useState(props.isEditModeOn);
+  const { t } = useTranslation();
 
   props.registerModalCancelCallback?.(() => {
     if (sitesArray.length > 0) {
@@ -30,7 +31,7 @@ export default function TripCreatorModal(props: TripCreatorModalProps) {
   });
 
   const diveSitesSubmitError = () => {
-    toast.error(screenData.TripCreator.noSitesError);
+    toast.error(t('TripCreator.noSitesError'));
     setDiveSitesError(true);
   };
 
@@ -72,9 +73,9 @@ export default function TripCreatorModal(props: TripCreatorModalProps) {
       const { error } = await insertItineraryRequest(trip, 'Edit');
 
       if (error) {
-        toast.error(screenData.TripCreator.editTripError);
+        toast.error(t('TripCreator.editTripError'));
       } else {
-        toast.success(screenData.TripCreator.editTripSuccess);
+        toast.success(t('TripCreator.editTripSuccess'));
         modalCancel();
         setSitesArray([]);
       }
@@ -82,9 +83,9 @@ export default function TripCreatorModal(props: TripCreatorModalProps) {
       const { error } = await insertItinerary(trip);
 
       if (error) {
-        toast.error(screenData.TripCreator.submitError);
+        toast.error(t('TripCreator.submitError'));
       } else {
-        toast.success(screenData.TripCreator.submitSuccess);
+        toast.success(t('TripCreator.submitSuccess'));
         modalCancel();
         setSitesArray([]);
       }
