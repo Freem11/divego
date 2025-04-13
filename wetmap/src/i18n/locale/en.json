@@ -231,6 +231,7 @@
         "diveCenterEmptyDrawer": "No dive centers in this area."
     },
     "Validators": {
+        "requiredNewPassword": "Please enter new password",
         "requiredSite": "Dive site name cannot be empty",
         "requiredBusinessName": "Business name cannot be empty",
         "requiredWebsite": "Website link cannot be empty",

@@ -6,14 +6,15 @@ import { performPasswordReset } from '../../../supabaseCalls/authenticateSupabas
 import { ModalContext } from '../../reusables/modal/context';
 import { useNavigate } from 'react-router-dom';
 import { ModalHandleProps } from '../../reusables/modal/types';
-import screenData from '../screenData.json';
 import detectOS from './platformDetect';
+import { useTranslation } from 'react-i18next';
 
 
 export default function PasswordUpdate(props: ModalHandleProps) {
   const [runningOn, setRunningOn] = useState<string | null>(null);
   const [revealRoutes, setRevealRoutes] = useState<boolean>(false);
   const { modalCancel } = useContext(ModalContext);
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   props.registerModalCancelCallback(() => {
@@ -29,7 +30,7 @@ export default function PasswordUpdate(props: ModalHandleProps) {
     const response = await performPasswordReset(data.password1);
 
     if (!response.error && response.data) {
-      toast.success(screenData.PasswordUpdate.passwordUpdatedSuccessfully);
+      toast.success(t('PasswordUpdate.passwordUpdatedSuccessfully'));
       setRevealRoutes(true);
       return;
     }
@@ -39,7 +40,7 @@ export default function PasswordUpdate(props: ModalHandleProps) {
       return;
     }
 
-    toast.error(screenData.PasswordUpdate.passwordUpdateError);
+    toast.error(t('PasswordUpdate.passwordUpdateError'));
   };
 
   return (

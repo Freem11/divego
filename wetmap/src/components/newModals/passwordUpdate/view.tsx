@@ -6,7 +6,7 @@ import Icon from '../../../icons/Icon';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import backGroundPic from '../../../images/blackManta.png';
 import Button from '../../reusables/button';
-import screenData from '../screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type PasswordUpdateProps = {
   onSubmit:     (data: Form) => void
@@ -16,13 +16,14 @@ type PasswordUpdateProps = {
 };
 
 export default function PasswordUpdateView(props: PasswordUpdateProps) {
+  const { t } = useTranslation();
   const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
     shouldFocusError: false,
   });
 
   const validate = (value: string) => {
     if (watch('password1') != value) {
-      return screenData.PasswordUpdate.passwordsDoNotMatch;
+      return t('PasswordUpdate.passwordsDoNotMatch');
     }
   };
 
@@ -34,19 +35,19 @@ export default function PasswordUpdateView(props: PasswordUpdateProps) {
       <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(props.onSubmit)}>
         <div>
           <div className="d-flex">
-            <h1 className="text-clip">{screenData.PasswordUpdate.header}</h1>
+            <h1 className="text-clip">{t('PasswordUpdate.header')}</h1>
           </div>
 
           <div className="stack-4 mb-2">
             <SecureTextInput
               error={errors.password1}
-              placeholder={screenData.PasswordUpdate.password1Placeholder}
+              placeholder={t('PasswordUpdate.password1Placeholder')}
               {...register('password1', FormRules.password1)}
             />
 
             <SecureTextInput
               error={errors.password2}
-              placeholder={screenData.PasswordUpdate.password2Placeholder}
+              placeholder={t('PasswordUpdate.password2Placeholder')}
               {...register('password2', { validate })}
             />
           </div>
@@ -60,7 +61,7 @@ export default function PasswordUpdateView(props: PasswordUpdateProps) {
                 type="submit"
                 iconRight={<Icon name="chevron-right" />}
               >
-                {screenData.PasswordUpdate.submitButton}
+                {t('PasswordUpdate.submitButton')}
               </Button>
             </div>
           </div>
