@@ -1,6 +1,5 @@
 import React from 'react';
 import { FieldErrors, useForm } from 'react-hook-form';
-import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
@@ -9,7 +8,7 @@ import style from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import { toast } from 'react-toastify';
 import Tooltip from '../../reusables/tooltip';
-import ScreenData from '../screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type PartnerAccountRequestViewProps = {
   values?:  Form
@@ -18,6 +17,8 @@ type PartnerAccountRequestViewProps = {
 };
 
 export default function PartnerAccountRequestView(props: PartnerAccountRequestViewProps) {
+  const { t } = useTranslation();
+
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
     values: props.values,
   });
@@ -47,39 +48,39 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
       </div>
       <form className="flex-column-between full-height mx-6 mb-6" onSubmit={handleSubmit(onSubmit, handleError)}>
         <div>
-          <h1>{screenData.PartnerRequestPage.header}</h1>
-          <div className={style.explanation}>{screenData.PartnerRequestPage.explanation}</div>
+          <h1>{t('PartnerRequestPage.header')}</h1>
+          <div className={style.explanation}>{t('PartnerRequestPage.explanation')}</div>
         </div>
 
         <TextInput
           iconLeft={(
-            <Tooltip content={ScreenData.PartnerRequestPage.businesNameTooltip}>
+            <Tooltip content={t('PartnerRequestPage.businesNameTooltip')}>
               <Icon name="store" />
             </Tooltip>
           )}
-          placeholder={screenData.PartnerRequestPage.businessPlaceholder}
+          placeholder={t('PartnerRequestPage.businessPlaceholder')}
           error={errors.BusinessName}
           {...register('BusinessName', FormRules.BusinessName)}
         />
 
         <TextInput
           iconLeft={(
-            <Tooltip content={ScreenData.PartnerRequestPage.websiteTooltip}>
+            <Tooltip content={t('PartnerRequestPage.websiteTooltip')}>
               <Icon name="monitor-dashboard" />
             </Tooltip>
           )}
-          placeholder={screenData.PartnerRequestPage.websitePlaceholder}
+          placeholder={t('PartnerRequestPage.websitePlaceholder')}
           error={errors.WebsiteLink}
           {...register('WebsiteLink', FormRules.WebsiteLink)}
         />
 
         <TextInput
           iconLeft={(
-            <Tooltip content={ScreenData.PartnerRequestPage.mapTooltip}>
+            <Tooltip content={t('PartnerRequestPage.mapTooltip')}>
               <Icon name="latitude"  />
             </Tooltip>
           )}
-          placeholder={screenData.PartnerRequestPage.latPlaceholder}
+          placeholder={t('PartnerRequestPage.latPlaceholder')}
           error={errors.Latitude}
           {...register('Latitude', FormRules.Latitude)}
         />
@@ -87,11 +88,11 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
 
         <TextInput
           iconLeft={(
-            <Tooltip content={ScreenData.PartnerRequestPage.mapTooltip}>
+            <Tooltip content={t('PartnerRequestPage.mapTooltip')}>
               <Icon name="longitude" />
             </Tooltip>
           )}
-          placeholder={screenData.PartnerRequestPage.lngPlaceholder}
+          placeholder={t('PartnerRequestPage.lngPlaceholder')}
           error={errors.Longitude}
           {...register('Longitude', FormRules.Longitude)}
         />
@@ -105,7 +106,7 @@ export default function PartnerAccountRequestView(props: PartnerAccountRequestVi
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >
-              {screenData.PartnerRequestPage.submitButton}
+              {t('PartnerRequestPage.submitButton')}
             </Button>
           </div>
         </div>

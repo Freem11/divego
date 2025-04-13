@@ -6,12 +6,13 @@ import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { createPartnerAccountRequest } from '../../../supabaseCalls/partnerSupabaseCalls';
 import { toast } from 'react-toastify';
-import screenData from '../screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type PartnerAccountRequestpProps = Partial<ModalHandleProps>;
 
 export default function PartnerAccountRequest(props: PartnerAccountRequestpProps) {
   const { profile } = useContext(UserProfileContext);
+  const { t } = useTranslation();
 
   const onSubmit = async (data: Form) => {
     const { error } = await createPartnerAccountRequest({
@@ -20,9 +21,9 @@ export default function PartnerAccountRequest(props: PartnerAccountRequestpProps
     });
 
     if (error) {
-      toast.error(screenData.PartnerRequestPage.createError);
+      toast.error(t('PartnerRequestPage.createError'));
     } else {
-      toast.success(screenData.PartnerRequestPage.createSuccess);
+      toast.success(t('PartnerRequestPage.createSuccess'));
     }
     onClose();
   };

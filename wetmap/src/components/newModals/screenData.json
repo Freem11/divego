@@ -8,23 +8,6 @@
         "delAccount": "Delete Account",
         "dangerZoneBar": "Danger Zone"
       },
-      "PartnerRequestPage": {
-        "header": "Partner Account Upgrade",
-        "explanation": "To qualify for a 'Partner Account' Your Account must represent a diving business that takes divers out diving. \n Examples include: Dive Shops, Dive Charters, Diver Centres and Liveaboards",
-        "businessPlaceholder": "Full business name",
-        "businessExplainer": "For display purposes",
-        "websitePlaceholder": "Website Url",
-        "websiteExplainer": "To evaluate and validate your business",
-        "latPlaceholder": "Latitude",
-        "lngPlaceholder": "Longitude",
-        "latLngExplainer": "To place your business on the map",
-        "submitButton": "Submit",
-        "createSuccess": "Request Created Successfully!",
-        "createError": "Error creating request. Please try again later.",
-        "businesNameTooltip": "This will serve as your Dive Centre's name",
-        "websiteTooltip": "We will use this to validate your business as compatible with Scuba SEAsons",
-        "mapTooltip": "Used to place your Dive Centre on the map"
-      },
       "SearchPage": {
         "header": "Map Navigation",
         "placeholder": "Search by Dive Site name or Location",
