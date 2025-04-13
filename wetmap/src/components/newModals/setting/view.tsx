@@ -1,9 +1,9 @@
-import screenData from '../screenData.json';
 import React from 'react';
 import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
+import { useTranslation } from 'react-i18next';
 
 type SettingsProps = {
   onClose:             () => void
@@ -14,6 +14,8 @@ type SettingsProps = {
 };
 
 export default function SettingsView(props: SettingsProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
       <ButtonIcon
@@ -24,14 +26,14 @@ export default function SettingsView(props: SettingsProps) {
 
       <div className="flex-column-between full-height mb-6">
         <div className="mx-10 text-left">
-          <h1 className="mt-4 text-bold">{screenData.SettingsPage.header}</h1>
-          <h2 className="ml-4 mt-2 mb-1">{screenData.SettingsPage.subHeading1}</h2>
+          <h1 className="mt-4 text-bold">{t('SettingsPage.header')}</h1>
+          <h2 className="ml-4 mt-2 mb-1">{t('SettingsPage.subHeading1')}</h2>
           <div className={styles.grayOutline}>
             <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.profileType}</h4>
             { props.profileType === 'Diver Account'
             && (
               <span onClick={props.handlePartnerButton}>
-                <p className={styles.upgradeLink}>{screenData.SettingsPage.notPartnerAccount}</p>
+                <p className={styles.upgradeLink}>{t('SettingsPage.notPartnerAccount')}</p>
               </span>
             )}
             { props.profileType === null
@@ -51,16 +53,16 @@ export default function SettingsView(props: SettingsProps) {
                 iconRight={<Icon name="chevron-right" />}
                 type="button"
               >
-                {screenData.SettingsPage.logout}
+                {t('SettingsPage.logout')}
               </Button>
             </div>
           </div>
         </div>
 
         <div className="mt-4 mx-10">
-          <h2 className="my-2 text-center" style={{ color: 'maroon' }}>{screenData.SettingsPage.dangerZoneBar}</h2>
+          <h2 className="my-2 text-center" style={{ color: 'maroon' }}>{t('SettingsPage.dangerZoneBar')}</h2>
           <div className={styles.redOutline} onClick={props.handleDanger}>
-            <h4 className="my-4 text-bold text-center" style={{ color: 'maroon' }}>{screenData.SettingsPage.delAccount}</h4>
+            <h4 className="my-4 text-bold text-center" style={{ color: 'maroon' }}>{t('SettingsPage.delAccount')}</h4>
           </div>
         </div>
       </div>
