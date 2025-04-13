@@ -10,7 +10,7 @@ type SettingsProps = Partial<ModalHandleProps>;
 
 
 export default function Settings(props: SettingsProps) {
-  const { profile, logout, metrics, switchToMetrics } = useContext(UserProfileContext);
+  const { profile, logout, switchToMetrics } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
   const [profileType, setProfileType] = useState<string | null>(null);
 
@@ -48,7 +48,7 @@ export default function Settings(props: SettingsProps) {
       profileType={profileType}
       handlePartnerButton={handlePartnerButton}
       handleDanger={handleDanger}
-      metrics={metrics}
+      metrics={profile?.unit_system === 'Metric'}
       switchToMetrics={switchToMetrics}
     />
   );

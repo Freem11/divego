@@ -62,7 +62,7 @@ export default function Modal() {
   return (
     <div className={`${style.modalWrapper} ${style.active}`} ref={rootRef}>
       {modalContext.stack.map(modalWindow => (
-        <>
+        <div key={modalWindow.name}>
           {/* background should not be present when modal is paused because it prevents interaction with the app */}
           {modalWindow.name === modalContext.currentModalName && (
             <div onClick={() => modalContext.modalCancel()} className={`${style.modalBackground}`}></div>
@@ -87,7 +87,7 @@ export default function Modal() {
               }}
             />
           </div>
-        </>
+        </div>
       ))}
     </div>
   );

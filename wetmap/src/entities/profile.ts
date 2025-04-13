@@ -10,7 +10,8 @@ export type ActiveProfile = {
   partnerAccount:       boolean
   profileBio:           string | null
   profilePhoto:         string
-  imperial?:            boolean
+  unit_system?:         string
+  language?:            string
 };
 
 
