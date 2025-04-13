@@ -17,6 +17,7 @@ type DiveSiteViewProps = {
   showPicUploaderButton: boolean
   onClose?:              () => void
   openPicUploader:       () => void
+  openDiveSiteFlag:      () => void
   handleImageSelection:  (event: React.ChangeEvent<HTMLInputElement>) => void
   handleProfileSwitch:   (username: string) => Promise<void>
   onDiveSiteBioChange:   (newValue: string) => void
@@ -25,7 +26,6 @@ type DiveSiteViewProps = {
   isPartnerAccount:      boolean
   headerPictureUrl:      string | null
 };
-
 
 export default function DiveSiteView(props: DiveSiteViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
@@ -46,8 +46,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         >
           <div className={style.buttonOpenPictureUpload}></div>
 
-          {props.isPartnerAccount
-          && (
+          {props.isPartnerAccount && (
             <div className={style.buttonImageUpload}>
               <Tooltip content={ScreenData.DiveSite.addPhotoTooltip}>
                 <ButtonIcon
@@ -58,23 +57,21 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
               </Tooltip>
             </div>
           )}
-
         </WavyModalHeader>
 
         <div className="ml-6">
           <div className="stack-4">
             <div>
               <div className="d-flex">
-                <h1 className="mb-0">
-                  {props?.diveSite?.name}
-                </h1>
+                <h1 className="mb-0">{props?.diveSite?.name}</h1>
                 <div>
                   <Tooltip content={ScreenData.DiveSite.reportSiteTooltip}>
                     <Icon
                       name="error-outline"
                       className={style.reportIcon}
-                      onClick={() =>
-                        (window.location.href = `mailto:scubaseasons@gmail.com?subject=Reporting%20issue%20with%20Dive%20Site:%20"${props.diveSite?.name}"%20at%20Latitude:%20${props.diveSite?.lat}%20Longitude:%20${props.diveSite?.lng}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Dive%20site%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20dive%20site%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Dive%20site%20GPS%20coordinates%20are%20not%20correct%0D%0A%0D%0A(Please%20provide%20a%20correct%20latitude%20and%20longitude%20and%20we%20will%20update%20the%20record)`)}
+                      onClick={() => {
+                        props.openDiveSiteFlag();
+                      }}
                     />
                   </Tooltip>
                 </div>
@@ -84,13 +81,14 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                 {'Added by: '}
                 <a
                   href="#"
-                  onClick={() => props.diveSite && props.handleProfileSwitch(props.diveSite.userid)}
+                  onClick={() =>
+                    props.diveSite
+                    && props.handleProfileSwitch(props.diveSite.userid)}
                 >
                   {props?.diveSite?.newusername}
                 </a>
               </div>
             </div>
-
 
             <div className="panel border-none">
               <div className="panel-body">
@@ -112,15 +110,13 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         <div className={style.panelHeader}>
           <h3>{screenData.DiveSite.drawerHeader}</h3>
           <div className={style.addPictureButton}>
-            {props.showPicUploaderButton
-            && (
+            {props.showPicUploaderButton && (
               <Button className="btn-lg" onClick={props.openPicUploader}>
                 <span className="hide-sm">
                   {screenData.DiveSite.addSightingButton}
                 </span>
               </Button>
-            ) }
-
+            )}
           </div>
         </div>
         <SeaLifeImageCardList diveSitePics={props.diveSitePics} />

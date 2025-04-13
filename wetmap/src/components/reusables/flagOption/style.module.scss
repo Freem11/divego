@@ -1,0 +1,31 @@
+.grayOutline {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 70px;
+    color: #5f5e5e;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
+    margin-top: -1px;
+}
+
+.buttonBack {
+    color: #afafaf;
+    svg {
+        scale: 2;
+    }
+    &:hover,
+    &:focus {
+        color: #484848;
+    }
+}
+
+.active {
+    transform: rotate(90deg);
+    transition: transform 0.1s linear;
+}
+
+.inactive {
+    transform: rotate(0deg);
+    transition: transform 0.1s linear;
+}

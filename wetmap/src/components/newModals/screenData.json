@@ -231,5 +231,10 @@
         "diveSiteEmptyDrawer": "No dive sites in this area.",
         "seaLifeEmptyDrawer": "No sea life in this area.",
         "diveCenterEmptyDrawer": "No dive centers in this area."
+      },
+      "DiveSiteFlag":{
+        "subHeading1": "Type of issue",
+        "option1": "1) Dive site name not correct",
+        "description1": "(Please provide correct dive site name and we will correct the record)"
       }
     }

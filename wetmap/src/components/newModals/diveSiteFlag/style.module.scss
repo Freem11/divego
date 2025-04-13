@@ -1,0 +1,28 @@
+@import "../../../styles/variables.scss";
+
+.buttonBack {
+    color: #afafaf;
+    svg {
+        scale: 2;
+    }
+    &:hover,
+    &:focus {
+        color: #484848;
+    }
+}
+
+.subHeading {
+    border-bottom: 1px solid;
+}
+
+.grayOutline {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #5f5e5e;
+    margin-top: -1px;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
+}
+
