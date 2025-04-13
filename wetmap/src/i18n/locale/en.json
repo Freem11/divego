@@ -231,6 +231,13 @@
         "diveCenterEmptyDrawer": "No dive centers in this area."
     },
     "Validators": {
+        "requiredTripName": "Trip name is required",
+        "requiredLink": "Link is required",
+        "requiredPrice": "Price is required",
+        "minPrice": "Price must be at least {{value}}",
+        "requiredStartDate": "Trip Start Date is required",
+        "requiredEndDate": "Trip End Date is required",
+        "requiredDetails": "Details is required",
         "requiredNewPassword": "Please enter new password",
         "requiredSite": "Dive site name cannot be empty",
         "requiredBusinessName": "Business name cannot be empty",
