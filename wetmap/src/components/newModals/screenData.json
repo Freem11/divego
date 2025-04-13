@@ -111,14 +111,6 @@
         "bioChangeToolTip": "Update description",
         "FollowToolTip": "Follow/Unfollow user"
       },
-      "DiveSite": {
-        "drawerHeader": "Sea Creature Sightings",
-        "emptyDrawer": "No sightings yet.",
-        "addSightingButton": "Add Sighting",
-        "submitButton": "Submit",
-        "reportSiteTooltip": "Report an issue with this dive site",
-        "addPhotoTooltip": "Add a photo of this dive site"
-      },
       "SeaLifeImageCard": {
         "reportPictureTooltip": "Report an issue with this picture"
       },

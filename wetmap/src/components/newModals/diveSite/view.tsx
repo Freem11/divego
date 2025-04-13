@@ -1,5 +1,4 @@
 import React, { useRef } from 'react';
-import screenData from '../screenData.json';
 import style from './style.module.scss';
 import Button from '../../reusables/button';
 import Icon from '../../../icons/Icon';
@@ -10,8 +9,8 @@ import PlainTextInput from '../../reusables/plainTextInput';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Tooltip from '../../reusables/tooltip';
-import ScreenData from '../screenData.json';
 import SeaLifeImageCardList from '../../reusables/seaLifeCardList';
+import { useTranslation } from 'react-i18next';
 
 type DiveSiteViewProps = {
   showPicUploaderButton: boolean
@@ -29,6 +28,7 @@ type DiveSiteViewProps = {
 
 export default function DiveSiteView(props: DiveSiteViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
+  const { t } = useTranslation();
 
   return (
     <div className="cols mx-0 full-height">
@@ -49,7 +49,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
           {props.isPartnerAccount
           && (
             <div className={style.buttonImageUpload}>
-              <Tooltip content={ScreenData.DiveSite.addPhotoTooltip}>
+              <Tooltip content={t('DiveSite.addPhotoTooltip')}>
                 <ButtonIcon
                   icon={<Icon name="camera-plus" />}
                   className="btn-lg"
@@ -69,7 +69,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                   {props?.diveSite?.name}
                 </h1>
                 <div>
-                  <Tooltip content={ScreenData.DiveSite.reportSiteTooltip}>
+                  <Tooltip content={t('DiveSite.reportSiteTooltip')}>
                     <Icon
                       name="error-outline"
                       className={style.reportIcon}
@@ -110,13 +110,13 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
 
       <div className="col-6 panel border-none full-height">
         <div className={style.panelHeader}>
-          <h3>{screenData.DiveSite.drawerHeader}</h3>
+          <h3>{t('DiveSite.drawerHeader')}</h3>
           <div className={style.addPictureButton}>
             {props.showPicUploaderButton
             && (
               <Button className="btn-lg" onClick={props.openPicUploader}>
                 <span className="hide-sm">
-                  {screenData.DiveSite.addSightingButton}
+                  {t('DiveSite.addSightingButton')}
                 </span>
               </Button>
             ) }
