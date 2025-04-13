@@ -20,7 +20,7 @@ type SiteSubmitterProps = {
 };
 
 export default function SiteSubmitterView(props: SiteSubmitterProps) {
-  const { t } = useTranslation('modals');
+  const { t } = useTranslation();
 
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({
     values: props.values,

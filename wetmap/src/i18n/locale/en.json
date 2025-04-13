@@ -229,5 +229,14 @@
         "diveSiteEmptyDrawer": "No dive sites in this area.",
         "seaLifeEmptyDrawer": "No sea life in this area.",
         "diveCenterEmptyDrawer": "No dive centers in this area."
+    },
+    "Validators": {
+        "requiredSite": "Dive site name cannot be empty",
+        "requiredLongitude": "Longitude is required",
+        "minLongitude": "Longitude must be greater than {{value}}",
+        "maxLongitude": "Longitude must be less than {{value}}",
+        "requiredLatitude": "Latitude is required",
+        "minLatitude": "Latitude must be greater than {{value}}",
+        "maxLatitude": "Latitude must be less than {{value}}"
     }
 }

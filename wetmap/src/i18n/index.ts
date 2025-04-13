@@ -2,24 +2,15 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import enCommon from './locale/en/common.json';
-import enModals from './locale/en/modals.json';
-import enValidators from './locale/en/validators.json';
-
-import esCommon from './locale/es/common.json';
-import esModals from './locale/es/modals.json';
-import esValidators from './locale/es/validators.json';
+import en from './locale/en.json';
+import es from './locale/es.json';
 
 const resources = {
   en: {
-    common:     enCommon,
-    modals:     enModals,
-    validators: enValidators,
+    translation: en,
   },
   es: {
-    common:     esCommon,
-    modals:     esModals,
-    validators: esValidators,
+    translation: es,
   },
 };
 
@@ -30,8 +21,6 @@ i18n
     resources,
     // lng:           'en', // force for testing
     fallbackLng:   'en',
-    ns:            ['common', 'modals', 'validators'],
-    defaultNS:     'common',
     interpolation: {
       escapeValue: false,
     },
