@@ -1,11 +1,11 @@
 import React, { SetStateAction, useState } from 'react';
-import screenData from '../screenData.json';
 import style from './style.module.scss';
 import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
 import CommentListItem from '../../commentListItem/commentListItem';
 import { CommentItem } from '../../../entities/comment';
 import TextAreaInput from '../../reusables/textAreaInput';
+import { useTranslation } from 'react-i18next';
 
 type CommentsModalViewProps = {
   handleCommentInsert: () => void
@@ -19,6 +19,7 @@ type CommentsModalViewProps = {
 export default function CommentsModalView(props: CommentsModalViewProps) {
   const [selectedReplyId, setSelectedReplyId] = useState<number[]>([]);
 
+  const { t } = useTranslation();
   const hideRepliesForChildren = (parentId: number, newSelectedReplyId: number[]) => {
     newSelectedReplyId = [
       ...newSelectedReplyId.filter(id => parentId !== id),
@@ -71,8 +72,8 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
                 nbReplies++;
               }
             }
-            return commentDeets.replied_to === null || 
-            selectedReplyId.includes(commentDeets.replied_to)
+            return commentDeets.replied_to === null
+              || selectedReplyId.includes(commentDeets.replied_to)
               ? (
                   <div key={commentDeets.id}>
                     <CommentListItem
@@ -105,7 +106,7 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
             }
           }}
         />
-        <h1 className="ml-10 pl-4 mb-0 pb-4 text-left">{screenData.CommentsModal.header}</h1>
+        <h1 className="ml-10 pl-4 mb-0 pb-4 text-left">{t('CommentsModal.header')}</h1>
       </div>
 
       <div className={style.middleContainer}>
@@ -133,7 +134,7 @@ export default function CommentsModalView(props: CommentsModalViewProps) {
 
           <TextAreaInput
             className="text-large"
-            placeholder={screenData.CommentsModal.commentsPlaceholder}
+            placeholder={t('CommentsModal.commentsPlaceholder')}
             onChange={(e: { target: { value: React.SetStateAction<string> } }) => props.setCommentContent(e.target.value)}
           />
         </div>
