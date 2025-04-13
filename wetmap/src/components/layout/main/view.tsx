@@ -15,7 +15,7 @@ import { BoundaryDiveShops } from '../../boundaryDiveShops';
 import { BoundaryAnimals } from '../../boundaryAnimals';
 import { BoundaryDiveSites } from '../../boundaryDiveSites';
 import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
-import ScreenData from '../../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type LayoutMainViewProps = {
   mapConfig:                 number
@@ -29,6 +29,8 @@ type LayoutMainViewProps = {
 
 
 export default function LayoutMainView(props: LayoutMainViewProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="bg-white">
       <header style={{ minHeight: '10vh' }}>
@@ -50,7 +52,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
               <ul className={style.headerIcons}>
                 <li>
-                  <Tooltip content={ScreenData.MainPage.profileTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
+                  <Tooltip content={t('MainPage.profileTooltip')} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
                       icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
@@ -59,7 +61,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </Tooltip>
                 </li>
                 <li>
-                  <Tooltip content={ScreenData.MainPage.settingsTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
+                  <Tooltip content={t('MainPage.settingsTooltip')} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
                       icon={<Icon name="settings" className="text-blue" style={{ scale: '1.5' }} />}
@@ -68,7 +70,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                   </Tooltip>
                 </li>
                 <li style={{ marginTop: '2px' }}>
-                  <Tooltip content={ScreenData.MainPage.newDiveSiteTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
+                  <Tooltip content={t('MainPage.newDiveSiteTooltip')} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
                       icon={<Icon name="anchor-plus" className="text-blue" style={{ scale: '1.45' }} />}
@@ -79,7 +81,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                 {props.isPartnerAccount
                   ? (
                       <li style={{ marginTop: '2px', marginRight: '10px' }}>
-                        <Tooltip content={ScreenData.MainPage.tripCreatorTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
+                        <Tooltip content={t('MainPage.tripCreatorTooltip')} direction={TOOLTIP_DIRECTION.BOTTOM}>
                           <ButtonIcon
                             disabled={props.mapConfig === 0 ? false : true}
                             icon={<Icon name="diving-scuba-flag" className="text-blue" style={{ scale: '1.5' }} />}
@@ -90,7 +92,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                     )
                   :                   (
                       <li style={{ marginTop: '2px', marginRight: '10px' }}>
-                        <Tooltip content={ScreenData.MainPage.guideTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
+                        <Tooltip content={t('MainPage.guideTooltip')} direction={TOOLTIP_DIRECTION.BOTTOM}>
                           <ButtonIcon
                             disabled={props.mapConfig === 0 ? false : true}
                             icon={<Icon name="question-mark" className="text-blue" style={{ scale: '1.5' }} />}

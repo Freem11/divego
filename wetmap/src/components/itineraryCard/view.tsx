@@ -5,7 +5,7 @@ import Icon from '../../icons/Icon';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import readableDate from '../../helpers/readableDate';
 import Tooltip from '../reusables/tooltip';
-import screenData from '../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type TripCardViewProps = {
   itinerary:           ItineraryItem
@@ -19,6 +19,7 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
   const [isExpanded, setIsExpanded] = useState(false);
   const [isOverflowing, setIsOverflowing] = useState(false);
   const textRef = useRef<HTMLParagraphElement>(null);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (textRef.current) {
@@ -48,14 +49,14 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
           {canChangeItinerary
             ? (
                 <>
-                  <Tooltip content={screenData.TripCard.editButton}>
+                  <Tooltip content={t('TripCard.editButton')}>
                     <ButtonIcon
                       icon={<Icon name="pencil" />}
                       className={style.actionIcon}
                       onClick={() => handleEditButton(itinerary)}
                     />
                   </Tooltip>
-                  <Tooltip content={screenData.TripCard.deleteButton}>
+                  <Tooltip content={t('TripCard.deleteButton')}>
                     <ButtonIcon
                       icon={<Icon name="trash" />}
                       className={style.actionIcon}
@@ -66,14 +67,14 @@ export default function ItineraryCardView({ itinerary, flipMap, canChangeItinera
               )
             : (
                 <>
-                  <Tooltip content={screenData.TripCard.anchorButton}>
+                  <Tooltip content={t('TripCard.anchorButton')}>
                     <ButtonIcon
                       icon={<Icon name="anchor" />}
                       className={style.actionIcon}
                       onClick={() => itinerary.siteList && flipMap(itinerary.siteList)}
                     />
                   </Tooltip>
-                  <Tooltip content={screenData.TripCard.bookButton}>
+                  <Tooltip content={t('TripCard.bookButton')}>
                     <ButtonIcon
                       icon={<Icon name="diving-scuba-flag" />}
                       className={style.actionIcon}

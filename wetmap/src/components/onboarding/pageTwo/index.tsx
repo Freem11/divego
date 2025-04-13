@@ -11,13 +11,14 @@ import style from '../style.module.scss';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { updateProfile } from '../../../supabaseCalls/accountSupabaseCalls';
 import { toast } from 'react-toastify';
-import screenData from '../../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 
 export default function PageTwo() {
   const { profile, initProfile } = useContext(UserProfileContext);
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
   const { slideForward } = useContext(SliderContext);
+  const { t } = useTranslation();
 
   const onSubmit = async (data: Form) => {
     if (profile) {
@@ -33,7 +34,7 @@ export default function PageTwo() {
       }
 
       if (response.error.code == '23505') {
-        toast.error(screenData.UserProfile.DuplicateUserNameErrorMessage);
+        toast.error(t('UserProfile.DuplicateUserNameErrorMessage'));
         return;
       }
     }

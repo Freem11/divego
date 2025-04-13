@@ -231,6 +231,7 @@
         "diveCenterEmptyDrawer": "No dive centers in this area."
     },
     "Validators": {
+        "requiredEmail": "Please supply the email that you use to login",
         "requiredTripName": "Trip name is required",
         "requiredLink": "Link is required",
         "requiredPrice": "Price is required",

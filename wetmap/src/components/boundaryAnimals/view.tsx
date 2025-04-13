@@ -8,7 +8,7 @@ import Chip from '../reusables/chip';
 import style from './style.module.scss';
 import Histogram from '../histogram';
 import EmptyState from '../reusables/emptyState';
-import ScreenData from '../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type BoundaryAnimalsViewProps = {
   uniqueKey?:         string
@@ -23,6 +23,8 @@ type BoundaryAnimalsViewProps = {
 };
 
 export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       <TextInput
@@ -74,7 +76,7 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
               />
             );
           }
-          return  <EmptyState iconName="shark" text={ScreenData.Sidebar.seaLifeEmptyDrawer} />;
+          return  <EmptyState iconName="shark" text={t('Sidebar.seaLifeEmptyDrawer')} />;
         }}
       >
         {props.animals?.map((item) => {
