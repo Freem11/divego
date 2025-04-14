@@ -182,9 +182,11 @@
         "DuplicateUserNameErrorMessage": "Username already in use, please try again...",
         "EmptyUserNameError": "Username cannot be empty, please try again...",
         "addProfilePhotoToolTip": "Add a profile picture",
-        "nameChangeToolTip": "Update username",
-        "bioChangeToolTip": "Update description",
-        "FollowToolTip": "Follow/Unfollow user"
+        "changeDiverNameTooltip": "Click here to change your diver name",
+        "FollowToolTip": "Follow/Unfollow user",
+        "confirmDiverNameTooltip": "Click here to confirm changes",
+        "changeBioTooltip": "Click here to write a bio about yourself",
+        "confirmBioTooltip": "Click here to confirm changes to your bio"
     },
     "UserGuide": {
         "comingSoon": "User guides coming soon"

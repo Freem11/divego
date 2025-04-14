@@ -65,8 +65,8 @@ export default function UserProfileView(props: userProfileViewProps) {
                     readOnly={!props?.isActiveProfile}
                     onSave={props?.handleProfileNameChange}
                     value={props.profile?.UserName}
-                    tooltipEditText="Click here to change your diver name"
-                    tooltipConfirmText="Click here to confirm changes"
+                    tooltipEditText={t('UserProfile.changeDiverNameTooltip')}
+                    tooltipConfirmText={t('UserProfile.confirmDiverNameTooltip')}
                   />
                 </h1>
               </div>
@@ -79,8 +79,8 @@ export default function UserProfileView(props: userProfileViewProps) {
                   onSave={props?.handleProfileBioChange}
                   value={props.profile?.profileBio ?? ''}
                   placeholder={t('UserProfile.userDefaultDescription')}
-                  tooltipEditText="Click here to write a bio about yourself"
-                  tooltipConfirmText="Click here to confirm changes to your bio"
+                  tooltipEditText={t('UserProfile.changeBioTooltip')}
+                  tooltipConfirmText={t('UserProfile.confirmBioTooltip')}
                 />
               </div>
             </div>
