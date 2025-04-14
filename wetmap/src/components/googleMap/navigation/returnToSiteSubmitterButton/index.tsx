@@ -2,11 +2,12 @@ import React, { useContext } from 'react';
 import { MapContext } from '../../mapContext';
 import { ModalContext } from '../../../reusables/modal/context';
 import Button from '../../../reusables/button';
-import screenData from '../../../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 export function ReturnToSiteSubmitterButton() {
   const { setMapConfig } = useContext(MapContext);
   const { modalResume } = useContext(ModalContext);
+  const { t } = useTranslation();
 
   return (
     <Button
@@ -17,7 +18,7 @@ export function ReturnToSiteSubmitterButton() {
         setMapConfig(0);
       }}
     >
-      {screenData.GoogleMap.pinButton}
+      {t('GoogleMap.pinButton')}
     </Button>
   );
 }

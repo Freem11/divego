@@ -6,18 +6,18 @@ import { Form, FormRules } from './form';
 import Button from '../../reusables/button';
 import { SliderContext } from '../../reusables/slider/context';
 import Emilio from '../../../images/EmilioNew.png';
-import CarrouselData from '../carrouselData.json';
 import style from '../style.module.scss';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { updateProfile } from '../../../supabaseCalls/accountSupabaseCalls';
 import { toast } from 'react-toastify';
-import screenData from '../../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 
 export default function PageTwo() {
   const { profile, initProfile } = useContext(UserProfileContext);
   const { register, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>();
   const { slideForward } = useContext(SliderContext);
+  const { t } = useTranslation();
 
   const onSubmit = async (data: Form) => {
     if (profile) {
@@ -33,7 +33,7 @@ export default function PageTwo() {
       }
 
       if (response.error.code == '23505') {
-        toast.error(screenData.UserProfile.DuplicateUserNameErrorMessage);
+        toast.error(t('UserProfile.DuplicateUserNameErrorMessage'));
         return;
       }
     }
@@ -42,13 +42,13 @@ export default function PageTwo() {
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="py-10 flex-column-between flex-centered full-height">
       <div className="col-10">
-        <h1>{CarrouselData.PageTwo.title}</h1>
-        <p>{CarrouselData.PageTwo.content}</p>
+        <h1>{t('OnBoarding.PageTwo.title')}</h1>
+        <p>{t('OnBoarding.PageTwo.content')}</p>
         <TextInput
           error={errors.username}
           className="bg-white"
           iconLeft={<Icon name="person" />}
-          placeholder="Enter your username"
+          placeholder={t('OnBoarding.PageTwo.enterUsername')}
           {...register('username', FormRules.username)}
         />
       </div>
@@ -57,7 +57,7 @@ export default function PageTwo() {
 
       <div className="col-6">
         <Button className="btn-lg" disabled={isSubmitting}>
-          {CarrouselData.PageTwo.buttonOneText}
+          {t('OnBoarding.PageTwo.buttonOneText')}
         </Button>
       </div>
     </form>

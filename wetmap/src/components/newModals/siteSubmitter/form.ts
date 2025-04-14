@@ -2,6 +2,11 @@
 import { FormValidationRules } from '../../../forms/form';
 import i18n from '../../../i18n';
 
+const MIN_LONGITUDE = -180;
+const MAX_LONGITUDE = 180;
+const MIN_LATITUDE = -180;
+const MAX_LATITUDE = 180;
+
 export interface Form {
   Site?:      string
   Latitude?:  number
@@ -16,22 +21,22 @@ export const FormRules: FormValidationRules<Form> = {
   Longitude: {
     required: i18n.t('Validators.requiredLongitude'),
     min:      {
-      value:   -180,
-      message: i18n.t('Validators.minLongitude', { value: -180 }),
+      value:   MIN_LONGITUDE,
+      message: i18n.t('Validators.minLongitude', { value: MIN_LONGITUDE }),
     },
     max:      {
-      value:   180,
-      message: i18n.t('Validators.maxLongitude', { value: 180 }),
+      value:   MAX_LONGITUDE,
+      message: i18n.t('Validators.maxLongitude', { value: MAX_LONGITUDE }),
     } },
   Latitude: {
     required: i18n.t('Validators.requiredLatitude'),
     min:      {
-      value:   -180,
-      message: i18n.t('Validators.minLatitude', { value: -180 }),
+      value:   MIN_LATITUDE,
+      message: i18n.t('Validators.minLatitude', { value: MIN_LATITUDE }),
     },
     max:      {
-      value:   180,
-      message: i18n.t('Validators.maxLatitude', { value: 180 }),
+      value:   MAX_LATITUDE,
+      message: i18n.t('Validators.maxLatitude', { value: MAX_LATITUDE }),
     },
   },
 };

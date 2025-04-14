@@ -3,7 +3,7 @@ import ItineraryCard from '../itineraryCard';
 import { ItineraryItem } from '../../entities/itineraryItem';
 import style from './style.module.scss';
 import EmptyState from '../reusables/emptyState';
-import ScreenData from '../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type ItineraryCardListProps = {
   itineraryList:         ItineraryItem[] | null
@@ -14,6 +14,8 @@ export default function ItineraryCardList({ itineraryList, canChangeItineraries 
   if (!itineraryList) {
     return null;
   }
+
+  const { t } = useTranslation();
 
   return         (
     <>
@@ -28,7 +30,7 @@ export default function ItineraryCardList({ itineraryList, canChangeItineraries 
         ))}
       </div>
       {itineraryList.length === 0 && (
-        <EmptyState iconName="explore" text={ScreenData.DiveShop.emptyDrawer} />
+        <EmptyState iconName="explore" text={t('DiveShop.emptyDrawer')} />
       )}
     </>
   );

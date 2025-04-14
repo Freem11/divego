@@ -1,6 +1,7 @@
-
 import { FormValidationRules } from '../../../forms/form';
+import i18n from '../../../i18n';
 
+const MIN_PRICE = 0;
 export interface Form {
   Name?:    string
   Link?:    string
@@ -10,28 +11,28 @@ export interface Form {
   Details?: string
 }
 
-export const FormRules: FormValidationRules<Form> =   {
+export const FormRules: FormValidationRules<Form> = {
   Name: {
-    required: 'Trip name is required',
+    required: i18n.t('Validators.requiredTripName'),
   },
   Link: {
-    required: 'Link is required',
+    required: i18n.t('Validators.requiredLink'),
   },
   Price: {
-    required: 'Price is required',
+    required: i18n.t('Validators.requiredPrice'),
     min:      {
-      value:   0,
-      message: 'Price must be at least 0',
+      value:   MIN_PRICE,
+      message: i18n.t('Validators.minPrice', { value: MIN_PRICE }),
     },
-    pattern:  /^\$\d+(\.\d{1,2})?$/,
+    pattern: /^\$\d+(\.\d{1,2})?$/,
   },
   Start: {
-    required: 'Trip Start Date is required',
+    required: i18n.t('Validators.requiredTripStartDate'),
   },
   End: {
-    required: 'Trip End Date is required',
+    required: i18n.t('Validators.requiredTripEndDate'),
   },
   Details: {
-    required: 'Details is required',
+    required: i18n.t('Validators.requiredDetails'),
   },
 };

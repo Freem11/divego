@@ -5,7 +5,7 @@ import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import EmptyState from '../emptyState';
 import Loader from '../loader';
 import Tooltip from '../tooltip';
-import screenData from '../../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type SiteSelectorViewProps = {
   sites:            DiveSiteWithUserName[] | null
@@ -15,6 +15,8 @@ type SiteSelectorViewProps = {
 };
 
 export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemove, error }: SiteSelectorViewProps) {
+  const { t } = useTranslation();
+
   return (
     <>
       <div className={styles.siteSelector}>
@@ -24,7 +26,7 @@ export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemo
 
         {sites !== null && sites.length === 0 && (
           <div onClick={handleSitesAdd} className={`${styles.emptyStateBox} ${error && styles.error}`}>
-            <EmptyState iconName="anchor" text={screenData.TripCreator.emptyDrawer} />
+            <EmptyState iconName="anchor" text={t('TripCreator.emptyDrawer')} />
           </div>
         )}
 
@@ -48,7 +50,7 @@ export default function SiteSelectorView({ sites, handleSitesAdd, handleSiteRemo
 
 
         <button className={styles.button} type="button" onClick={handleSitesAdd}>
-          <Tooltip content={screenData.TripCreator.sitelistTooltip} direction="bottom">
+          <Tooltip content={t('TripCreator.sitelistTooltip')} direction="bottom">
             <div className={styles.button}>
               <Icon name="add" />
               <span>Add dive sites</span>

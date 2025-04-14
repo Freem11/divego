@@ -51,7 +51,7 @@ export default function SiteSubmitterView(props: SiteSubmitterProps) {
           </div>
 
           <div className="stack-4 mb-2">
-            <TextInput // Once approved ill add the content stuff to screenData json
+            <TextInput
               iconLeft={(
                 <Tooltip content={t('DiveSiteAdd.siteNameTooltip')}>
                   <Icon name="diving-scuba-flag" />

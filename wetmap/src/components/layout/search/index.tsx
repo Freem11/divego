@@ -10,10 +10,12 @@ import { onChangeEvent, Option } from '../../reusables/select';
 import Icon from '../../../icons/Icon';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
+import { useTranslation } from 'react-i18next';
 
 export default function MainSearch() {
   const { mapRef } = useContext(MapContext);
   const { setSelectedDiveSite } = useContext(DiveSiteContext);
+  const { t } = useTranslation();
 
   const handleSelect = async (event: onChangeEvent<OptionAdditionalData>) => {
     let coordinates: number[] = [];
@@ -49,7 +51,7 @@ export default function MainSearch() {
         iconLeft={<Icon name="navigation-variant-outline" style={{ scale: '0.7' }} />}
         getMoreOptions={DynamicSelectOptionsMainSearch.getMoreOptions}
         onChange={handleSelect}
-        placeholder="Search by city or dive site name"
+        placeholder={t('MainPage.searchByCityOrDive')}
         dropdownItemComponent={(props: DropdownItemProps) => {
           return <MainSearchDropdownItem {...props} />;
         }}

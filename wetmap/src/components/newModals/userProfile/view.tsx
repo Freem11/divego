@@ -1,5 +1,4 @@
 import React from 'react';
-import screenData from '../screenData.json';
 import style from './style.module.scss';
 import Button from '../../reusables/button';
 import Icon from '../../../icons/Icon';
@@ -12,6 +11,7 @@ import { ActiveProfile } from '../../../entities/profile';
 import FileInput from '../../reusables/fileInput';
 import Tooltip from '../../reusables/tooltip';
 import SeaLifeImageCardList from '../../reusables/seaLifeCardList';
+import { useTranslation } from 'react-i18next';
 
 type userProfileViewProps = {
   onClose?:                () => void
@@ -28,6 +28,8 @@ type userProfileViewProps = {
 };
 
 export default function UserProfileView(props: userProfileViewProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="cols mx-0 full-height">
       <div className="col-6">
@@ -39,7 +41,7 @@ export default function UserProfileView(props: userProfileViewProps) {
 
           {(props.isActiveProfile) && (
             <div className={style.buttonImageUpload}>
-              <Tooltip content={screenData.UserProfile.addProfilePhotoToolTip}>
+              <Tooltip content={t('UserProfile.addProfilePhotoToolTip')}>
                 <FileInput
                   onFileChange={props.handleImageSelection}
                   className="d-none"
@@ -63,8 +65,8 @@ export default function UserProfileView(props: userProfileViewProps) {
                     readOnly={!props?.isActiveProfile}
                     onSave={props?.handleProfileNameChange}
                     value={props.profile?.UserName}
-                    tooltipEditText="Click here to change your diver name"
-                    tooltipConfirmText="Click here to confirm changes"
+                    tooltipEditText={t('UserProfile.changeDiverNameTooltip')}
+                    tooltipConfirmText={t('UserProfile.confirmDiverNameTooltip')}
                   />
                 </h1>
               </div>
@@ -76,9 +78,9 @@ export default function UserProfileView(props: userProfileViewProps) {
                   readOnly={!props?.isActiveProfile}
                   onSave={props?.handleProfileBioChange}
                   value={props.profile?.profileBio ?? ''}
-                  placeholder={screenData.UserProfile.userDefaultDescription}
-                  tooltipEditText="Click here to write a bio about yourself"
-                  tooltipConfirmText="Click here to confirm changes to your bio"
+                  placeholder={t('UserProfile.userDefaultDescription')}
+                  tooltipEditText={t('UserProfile.changeBioTooltip')}
+                  tooltipConfirmText={t('UserProfile.confirmBioTooltip')}
                 />
               </div>
             </div>
@@ -99,7 +101,7 @@ export default function UserProfileView(props: userProfileViewProps) {
                   </Button>
                 )
               : (
-                  <Tooltip content={screenData.UserProfile.FollowToolTip}>
+                  <Tooltip content={t('UserProfile.FollowToolTip')}>
                     <Button className={props.isFollowing ? 'btn-lg btn-primary' : 'btn-lg'}onClick={props.handleFollow}>
                       {(props.isFollowing)
                         ? (

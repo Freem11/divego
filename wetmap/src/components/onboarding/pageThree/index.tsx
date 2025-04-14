@@ -2,22 +2,23 @@ import React, { useContext } from 'react';
 import Button from '../../reusables/button';
 import { SliderContext } from '../../reusables/slider/context';
 import Emilio from '../../../images/EmilioNew.png';
-import CarrouselData from '../carrouselData.json';
 import style from '../style.module.scss';
+import { useTranslation } from 'react-i18next';
 
 export default function PageThree() {
   const { slideForward } = useContext(SliderContext);
+  const { t } = useTranslation();
 
   function getLocation() {
     if (navigator.geolocation) {
       navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
         if (permissionStatus.state === 'denied') {
-          alert('Please allow location access.');
+          alert(t('OnBoarding.PageThree.allowLocation'));
           window.location.href = 'app-settings:location';
         } else {
           navigator.geolocation.getCurrentPosition(
             function (position) {
-              alert('Location Permission was Granted.');
+              alert(t('OnBoarding.PageThree.locationGranted'));
             },
             function (error) {
               console.log('location permissions denied', error.message);
@@ -27,7 +28,7 @@ export default function PageThree() {
         }
       });
     } else {
-      alert('Geolocation is not supported in your browser.');
+      alert(t('OnBoarding.PageThree.locationNotSupported'));
     }
   }
 
@@ -41,18 +42,18 @@ export default function PageThree() {
     <div className="py-10 flex-column-between flex-centered full-height">
 
       <div className="col-10">
-        <h1>{CarrouselData.PageThree.title}</h1>
-        <p>{CarrouselData.PageThree.content}</p>
+        <h1>{t('OnBoarding.PageThree.title')}</h1>
+        <p>{t('OnBoarding.PageThree.content')}</p>
       </div>
 
       <img src={Emilio} className={style.emilio} />
 
       <div className="d-flex col-12">
         <Button onClick={slideForward} className="btn-lg btn-primary mr-6">
-          {CarrouselData.PageThree.buttonTwoText}
+          {t('OnBoarding.PageThree.buttonTwoText')}
         </Button>
         <Button onClick={grantPermissions} className="btn-lg">
-          {CarrouselData.PageThree.buttonOneText}
+          {t('OnBoarding.PageThree.buttonOneText')}
         </Button>
       </div>
     </div>

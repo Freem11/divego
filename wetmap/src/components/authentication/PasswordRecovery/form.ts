@@ -1,6 +1,6 @@
 import { FormValidationRules } from '../../../forms/form';
 import { validationEmail } from '../../../forms/validation';
-import screenData from '../../newModals/screenData.json';
+import i18n from '../../../i18n';
 
 export interface Form {
   email: string
@@ -8,7 +8,7 @@ export interface Form {
 
 export const FormRules: FormValidationRules<Form> = {
   email: {
-    required: screenData.PasswordRecoveryPage.emailInvalidMessage,
+    required: i18n.t('Validators.supplyEmail'),
     ...validationEmail,
   },
 

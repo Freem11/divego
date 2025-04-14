@@ -5,7 +5,7 @@ import readableDate from '../../../helpers/readableDate';
 import SeaLifeCard from '../seaLifeCard';
 import Icon from '../../../icons/Icon';
 import EmptyState from '../emptyState';
-import ScreenData from '../../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type SeaLifeImageCardListProps = {
   diveSitePics:   PhotosGroupedByDate[] | null
@@ -13,6 +13,7 @@ type SeaLifeImageCardListProps = {
 };
 
 export default function SeaLifeImageCardList(props: SeaLifeImageCardListProps) {
+  const { t } = useTranslation();
   return (
     <>
       <div className={style.cardList}>
@@ -41,7 +42,7 @@ export default function SeaLifeImageCardList(props: SeaLifeImageCardListProps) {
       {(!props.diveSitePics || props.diveSitePics.length === 0) && (
         <EmptyState
           iconName="shark"
-          text={props.onUserProfile ? ScreenData.UserProfile.emptyDrawer : ScreenData.DiveSite.emptyDrawer}
+          text={props.onUserProfile ? t('UserProfile.emptyDrawer') : t('DiveSite.emptyDrawer')}
         />
       )}
     </>

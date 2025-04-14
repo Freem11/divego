@@ -4,6 +4,7 @@ import { GPSBubble } from '../../entities/GPSBubble';
 import { getHistoData } from '../../supabaseCalls/photoSupabaseCalls';
 import HistogramView from './view';
 import { HistogramItem, HistogramSupaData } from '../../entities/histogram';
+import { useTranslation } from 'react-i18next';
 
 type HistogramProps = {
   animal:    string
@@ -12,6 +13,7 @@ type HistogramProps = {
 export default function Histogram(props: HistogramProps) {
   const { boundaries } = useContext(MapContext);
   const [histoData, setHistoData] = useState<HistogramItem[]>([]);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (boundaries) {
@@ -26,7 +28,20 @@ export default function Histogram(props: HistogramProps) {
 
       let i = 1;
       const dataArray = [];
-      const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const months = [
+        t('Common.Months.Jan'),
+        t('Common.Months.Feb'),
+        t('Common.Months.Mar'),
+        t('Common.Months.Apr'),
+        t('Common.Months.May'),
+        t('Common.Months.Jun'),
+        t('Common.Months.Jul'),
+        t('Common.Months.Aug'),
+        t('Common.Months.Sep'),
+        t('Common.Months.Oct'),
+        t('Common.Months.Nov'),
+        t('Common.Months.Dec'),
+      ];
 
       if (historgramData) {
         const maxVal = Math.max(...historgramData.map((item: { num: number }) => item.num));

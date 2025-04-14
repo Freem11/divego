@@ -7,13 +7,14 @@ import style from './style.module.scss';
 import ButtonIcon from '../reusables/buttonIcon';
 import Icon from '../../icons/Icon';
 import { MapContext } from '../googleMap/mapContext';
+import { useTranslation } from 'react-i18next';
 
 export default function Itinerary(props) {
   const { itinerary, selectedID, setSelectedID } = props;
   const { setSitesArray } = useContext(SitesArrayContext);
   const { mapRef, setMapConfig } = useContext(MapContext);
   const { modalPause } = useContext(ModalContext);
-
+  const { t } = useTranslation();
 
   const [hiddenHeigth, setHiddenHeigth] = useState(0);
 
@@ -88,7 +89,7 @@ export default function Itinerary(props) {
         <div className={style.topRail}>
           <p className={style.dateText}>
             {itinerary.startDate}
-            {' to '}
+            {` ${t('to')} `}
             {itinerary.endDate}
           </p>
           <p className={style.priceText}>{itinerary.price }</p>

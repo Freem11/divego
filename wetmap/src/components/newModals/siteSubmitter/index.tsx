@@ -8,12 +8,13 @@ import { ModalContext } from '../../reusables/modal/context';
 import { ModalHandleProps } from '../../reusables/modal/types';
 import { MapContext } from '../../googleMap/mapContext';
 import { toast } from 'react-toastify';
-import screenData from '../screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type SiteSubmitterProps = Partial<ModalHandleProps>;
 
 export default function SiteSubmitter(props: SiteSubmitterProps) {
   const { profile } = useContext(UserProfileContext);
+  const { t } = useTranslation();
   const [deviceLocation, setDeviceLocation] = useState<google.maps.LatLngLiteral | null>(null);
   const { setMapConfig, draggablePoint, setDraggablePoint } = useContext(MapContext);
 
@@ -24,7 +25,7 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
     if (navigator.geolocation) {
       navigator.permissions.query({ name: 'geolocation' }).then((permissionStatus) => {
         if (permissionStatus.state === 'denied') {
-          toast.error(screenData.DiveSiteAdd.allowLocation);
+          toast.error(t('DiveSiteAdd.allowLocation'));
           window.location.href = 'app-settings:location';
         } else {
           navigator.geolocation.getCurrentPosition(
@@ -36,14 +37,14 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
             },
             function (error) {
               console.log('Location permissions denied', error.message);
-              toast.error(screenData.DiveSiteAdd.allowLocation);
+              toast.error(t('DiveSiteAdd.allowLocation'));
             },
             { enableHighAccuracy: false, timeout: 5000, maximumAge: 0 },
           );
         }
       });
     } else {
-      toast.error(screenData.DiveSiteAdd.locationNotSupported);
+      toast.error(t('DiveSiteAdd.locationNotSupported'));
     }
   };
 
@@ -62,9 +63,9 @@ export default function SiteSubmitter(props: SiteSubmitterProps) {
     });
 
     if (error) {
-      toast.error(screenData.DiveSiteAdd.addSiteError);
+      toast.error(t('DiveSiteAdd.addSiteError'));
     } else {
-      toast.success(screenData.DiveSiteAdd.addSiteSuccess);
+      toast.success(t('DiveSiteAdd.addSiteSuccess'));
     }
     onClose();
   };

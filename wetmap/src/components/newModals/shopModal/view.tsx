@@ -10,7 +10,7 @@ import { ItineraryItem } from '../../../entities/itineraryItem';
 import { DiveShop } from '../../../entities/diveShop';
 import ItineraryCardList from '../../itineraryCardList';
 import Tooltip from '../../reusables/tooltip';
-import screenData from '../../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type ShopModelViewProps = {
   onClose?:                     () => void
@@ -25,6 +25,8 @@ type ShopModelViewProps = {
 };
 
 export default function ShopModalView(props: ShopModelViewProps) {
+  const { t } = useTranslation();
+
   const fileUploaderRef = useRef<HTMLInputElement>(null);
   return (
     <div className="cols mx-0 full-height">
@@ -38,7 +40,7 @@ export default function ShopModalView(props: ShopModelViewProps) {
         <WavyModalHeader image={props.headerPictureUrl || defaultHeaderPicture} onClose={props.onClose}>
           <div className={style.buttonImageUpload}>
             {(props?.isPartnerAccount && props.isMyShop) && (
-              <Tooltip content={screenData.DiveShop.addDiveShopPhotoButton}>
+              <Tooltip content={t('DiveShop.addDiveShopPhotoButton')}>
                 <ButtonIcon
                   icon={<Icon name="camera-plus" />}
                   className="btn-lg"
@@ -58,12 +60,12 @@ export default function ShopModalView(props: ShopModelViewProps) {
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
-                  placeholder={`A little about ${props?.diveShop?.orgname}`}
+                  placeholder={t('DiveShop.bioInputPlaceholder', { name: props?.diveShop?.orgname })}
                   value={props?.diveShop?.diveshopbio || ''}
                   readOnly={!props?.isPartnerAccount || !props.isMyShop}
                   onSave={props?.handleDiveShopBioChange}
-                  tooltipEditText={`Click here to write a bio about ${props?.diveShop?.orgname}`}
-                  tooltipConfirmText={`Click here to confirm changes to ${props?.diveShop?.orgname}'s bio`}
+                  tooltipEditText={t('DiveShop.bioTooltipEdit', { name: props?.diveShop?.orgname })}
+                  tooltipConfirmText={t('DiveShop.bioTooltipConfirm', { name: props?.diveShop?.orgname })}
                 />
               </div>
             </div>
@@ -77,11 +79,11 @@ export default function ShopModalView(props: ShopModelViewProps) {
                 <div className={`${style.buttonAddDivingEvents}`}>
                   <h3>Trip Creator List</h3>
                   <Button className="mt-2 btn-lg" onClick={props.openTripCreatorList}>
-                    Add diving event
+                    {t('DiveShop.addEvent')}
                   </Button>
                 </div>
               )
-            : <h3>Offered Diving Trips</h3>}
+            : <h3>{t('DiveShop.offeredTips')}</h3>}
         </div>
         <ItineraryCardList itineraryList={props.itineraryList} canChangeItineraries={props?.isPartnerAccount && props.isMyShop} />
       </div>

@@ -1,16 +1,16 @@
 import React, { SetStateAction } from 'react';
 import style from './style.module.scss';
-import screenData from '../newModals/screenData.json';
 import { CommentItem } from '../../entities/comment';
+import { useTranslation } from 'react-i18next';
 
 type CommentListItemType = {
-  commentDetails: CommentItem
-  setReplyTo: (value: SetStateAction<(string|number)[] | null>) => void
-  replyTo: (string|number)[] | null
+  commentDetails:    CommentItem
+  setReplyTo:        (value: SetStateAction<(string | number)[] | null>) => void
+  replyTo:           (string | number)[] | null
   toggleShowReplies: (commentID: CommentItem) => void
-  selectedReplyId: number[]
-  nbReplies: number
-}
+  selectedReplyId:   number[]
+  nbReplies:         number
+};
 
 export default function CommentListItem(props: CommentListItemType) {
   const {
@@ -22,13 +22,15 @@ export default function CommentListItem(props: CommentListItemType) {
     nbReplies,
   } = props;
 
-  let newDate = new Date(commentDetails.created_at);
-  let finalDate = newDate.toLocaleString().substring(0, 10);
+  const { t } = useTranslation();
+
+  const newDate = new Date(commentDetails.created_at);
+  const finalDate = newDate.toLocaleString().substring(0, 10);
 
   return (
     <div className={style.masterBox} key={commentDetails.id}>
       <div className={style.shadowbox}>
-      <div className={style.topBox}>
+        <div className={style.topBox}>
           <p className={style.userText}>{commentDetails.username}</p>
           <p className={style.dateText}>{finalDate}</p>
         </div>
@@ -44,22 +46,22 @@ export default function CommentListItem(props: CommentListItemType) {
               : setReplyTo([commentDetails.username, commentDetails.id]);
           }}
         >
-          {screenData.CommentsModal.replyButton}
+          {t('CommentsModal.replyButton')}
         </p>
         {nbReplies > 0
-        ? (
-            <p
-              className={style.viewRepliesText}
-              onClick={() => toggleShowReplies(commentDetails)}
-            >
-              {selectedReplyId.includes(commentDetails.id)
-                ?  nbReplies === 1 ? screenData.CommentsModal.replyHideSingle : screenData.CommentsModal.replyHideMultiple 
-                : nbReplies === 1 ? screenData.CommentsModal.replyViewSingle : `${screenData.CommentsModal.replyViewMultiplOne} ${nbReplies} ${screenData.CommentsModal.replyViewMultiplTwo}`}
-            </p>
-          )
-        : (
-            ''
-          )}
+          ? (
+              <p
+                className={style.viewRepliesText}
+                onClick={() => toggleShowReplies(commentDetails)}
+              >
+                {selectedReplyId.includes(commentDetails.id)
+                  ?  nbReplies === 1 ? t('CommentsModal.replyHideSingle') : t('CommentsModal.replyHideMultiple')
+                  : nbReplies === 1 ? t('CommentsModal.replyViewSingle') : `${t('CommentsModal.replyViewMultiplOne')} ${nbReplies} ${t('CommentsModal.replyViewMultiplTwo')}`}
+              </p>
+            )
+          : (
+              ''
+            )}
       </div>
 
     </div>

@@ -15,11 +15,11 @@ import {
 import Settings from '../../newModals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 import { toast } from 'react-toastify';
-import screenData from '../screenData.json';
 import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 import { PhotosGroupedByDate } from '../../../entities/photos';
 import { getPhotosByUserWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
+import { useTranslation } from 'react-i18next';
 
 type UserProps = Partial<ModalHandleProps> & {
   userProfileID?: string
@@ -33,6 +33,7 @@ export default function UserProfile(props: UserProps) {
   const isActiveProfile: boolean = !props.userProfileID;
   const [userIsFollowing, setUserIsFollowing] = useState(false);
   const [followRecordID, setFollowRecordID] = useState(profile?.UserID);
+  const { t } = useTranslation();
 
   async function profileCheck() {
     if (props.userProfileID) {
@@ -91,7 +92,7 @@ export default function UserProfile(props: UserProps) {
 
   const handleProfileNameChange = async (newName: string) => {
     if (newName == '') {
-      toast.error(screenData.UserProfile.EmptyUserNameError);
+      toast.error(t('UserProfile.EmptyUserNameError'));
       return false;
     }
 
@@ -101,17 +102,17 @@ export default function UserProfile(props: UserProps) {
         UserName: newName,
       });
       if (!response.error) {
-        toast.success(screenData.UserProfile.UserProfileUpdateSuccessMessage);
+        toast.success(t('UserProfile.UserProfileUpdateSuccessMessage'));
         initProfile(true);
         return;
       }
 
       if (response.error.code == '23505') {
-        toast.error(screenData.UserProfile.DuplicateUserNameErrorMessage);
+        toast.error(t('UserProfile.DuplicateUserNameErrorMessage'));
         return;
       }
 
-      toast.error(screenData.Toast.generalError);
+      toast.error(t('Toast.generalError'));
     }
   };
 
@@ -122,13 +123,13 @@ export default function UserProfile(props: UserProps) {
         profileBio: newBio,
       });
       if (!response.error) {
-        toast.success(screenData.UserProfile.UserProfileUpdateSuccessMessage);
+        toast.success(t('UserProfile.UserProfileUpdateSuccessMessage'));
         initProfile(true);
         return;
       }
 
 
-      toast.error(screenData.Toast.generalError);
+      toast.error(t('Toast.generalError'));
     }
   };
 

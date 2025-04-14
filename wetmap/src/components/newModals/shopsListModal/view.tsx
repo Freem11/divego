@@ -5,6 +5,7 @@ import ShopCardList from '../../shopCardList';
 import { DiveShop } from '../../../entities/diveShop';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
+import { useTranslation } from 'react-i18next';
 
 type ShopsListViewProps = {
   onClose?:                () => void
@@ -14,6 +15,8 @@ type ShopsListViewProps = {
 };
 
 export default function ShopsListView(props: ShopsListViewProps) {
+  const { t } = useTranslation();
+
   return (
     <div className="cols mx-0 full-height">
       <ButtonIcon
@@ -24,13 +27,13 @@ export default function ShopsListView(props: ShopsListViewProps) {
       <div className="col-12 panel border-none full-height">
 
         <div className="panel-header">
-          <h3>My Dive Centers</h3>
+          <h3>{t('ShopList.myDiveCenters')}</h3>
           <div className={`${style.buttonAddDivingEvents}`}>
             <Button
               className="mt-2 btn-lg"
               onClick={props.openDiveCenterSubmitter}
             >
-              Add a new location
+              {t('ShopList.addNewLocation')}
             </Button>
           </div>
         </div>

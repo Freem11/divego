@@ -1,5 +1,10 @@
-
 import { FormValidationRules } from '../../../forms/form';
+import i18n from '../../../i18n';
+
+const MIN_LONGITUDE = -180;
+const MAX_LONGITUDE = 180;
+const MIN_LATITUDE = -180;
+const MAX_LATITUDE = 180;
 
 export interface Form {
   BusinessName?: string
@@ -8,34 +13,33 @@ export interface Form {
   Longitude?:    number
 }
 
-
 export const FormRules: FormValidationRules<Form> = {
   BusinessName: {
-    required: 'Business name cannot be empty',
+    required: i18n.t('Validators.requiredBusinessName'),
   },
   WebsiteLink: {
-    required: 'Website link cannot be empty',
+    required: i18n.t('Validators.requiredWebsite'),
   },
   Longitude: {
-    required: 'Longitude is required',
+    required: i18n.t('Validators.requiredLongitude'),
     min:      {
-      value:   -180,
-      message: 'Longitude must be greater than -180',
+      value:   MIN_LONGITUDE,
+      message: i18n.t('Validators.minLongitude', { value: MIN_LONGITUDE }),
     },
     max: {
-      value:   180,
-      message: 'Longitude must be less than 180',
+      value:   MAX_LONGITUDE,
+      message: i18n.t('Validators.maxLongitude', { value: MAX_LONGITUDE }),
     },
   },
   Latitude: {
-    required: 'Longitude is required',
+    required: i18n.t('Validators.requiredLatitude'),
     min:      {
-      value:   -180,
-      message: 'Latitude must be greater than -180',
+      value:   MIN_LATITUDE,
+      message: i18n.t('Validators.minLatitude', { value: MIN_LATITUDE }),
     },
     max: {
-      value:   180,
-      message: 'Latitude must be less than 180',
+      value:   MAX_LATITUDE,
+      message: i18n.t('Validators.maxLatitude', { value: MAX_LATITUDE }),
     },
   },
 };

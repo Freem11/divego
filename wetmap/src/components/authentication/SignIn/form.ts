@@ -1,4 +1,5 @@
 import { FormValidationRules } from '../../../forms/form';
+import i18n from '../../../i18n';
 
 export interface Form {
   email:    string
@@ -8,9 +9,9 @@ export interface Form {
 
 export const FormRules: FormValidationRules<Form> = {
   email: {
-    required: 'Please enter your email',
+    required: i18n.t('Validators.requiredEmail'),
   },
   password: {
-    required: 'Please enter your password',
+    required: i18n.t('Validators.requiredPassword'),
   },
 };

@@ -1,5 +1,6 @@
 import { FormValidationRules } from '../../../forms/form';
 import { validationEmail, validationPassword } from '../../../forms/validation';
+import i18n from '../../../i18n';
 
 
 export interface Form {
@@ -11,14 +12,14 @@ export interface Form {
 
 export const FormRules: FormValidationRules<Form> = {
   fullName: {
-    required: 'Please enter your full name',
+    required: i18n.t('Validators.requiredFullName'),
   },
   email: {
-    required: 'Please enter your email',
+    required: i18n.t('Validators.enterYourEmail'),
     ...validationEmail,
   },
   password: {
-    required: 'Please enter your password',
+    required: i18n.t('Validators.requiredPassword'),
     ...validationPassword,
   },
 };

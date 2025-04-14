@@ -3,7 +3,7 @@ import DiveSiteItem from './diveSiteItem';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import InfiniteScroll from '../reusables/infiniteScroll';
 import EmptyState from '../reusables/emptyState';
-import ScreenData from '../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type BoundaryDiveSitesViewProps = {
   uniqueKey?:         string
@@ -15,13 +15,14 @@ type BoundaryDiveSitesViewProps = {
 };
 
 export function BoundaryDiveSitesView(props: BoundaryDiveSitesViewProps) {
+  const { t } = useTranslation();
   return (
     <InfiniteScroll
       key={props.uniqueKey}
       loadMore={props.loadMoreDiveSites}
       hasMore={props.hasMoreDiveSites}
       isLoading={props.isLoadingDiveSites}
-      renderEmpty={() => (<EmptyState iconName="anchor" text={ScreenData.Sidebar.diveCenterEmptyDrawer} />)}
+      renderEmpty={() => (<EmptyState iconName="anchor" text={t('Sidebar.diveCenterEmptyDrawer')} />)}
     >
 
       {props.diveSites?.map((item) => {

@@ -5,7 +5,6 @@ import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button/index';
 import TextInput from '../../reusables/textInput';
 import ButtonIcon from '../../reusables/buttonIcon';
-import screenData from '../screenData.json';
 import DynamicSelect from '../../reusables/dynamicSelect';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 
@@ -15,6 +14,7 @@ import FileInput from '../../reusables/fileInput';
 import Label from '../../reusables/label';
 import { toast } from 'react-toastify';
 import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
+import { useTranslation } from 'react-i18next';
 
 type PicUploaderViewProps = {
   values:               Form
@@ -33,6 +33,8 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
   } = useForm<Form>({
     values: props.values,
   });
+
+  const { t } = useTranslation();
 
   const handleError = (errors: FieldErrors<Form>) => {
     toast.dismiss();
@@ -61,7 +63,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
                 <div className={style.buttonImageUpload}>
                   <ButtonIcon
                     icon={(
-                      <Tooltip content={screenData.PicUploader.uploadIcon} direction={TOOLTIP_DIRECTION.LEFT}>
+                      <Tooltip content={t('PicUploader.uploadIcon')} direction={TOOLTIP_DIRECTION.LEFT}>
                         <Icon name="camera-plus" />
                       </Tooltip>
                     )}
@@ -73,7 +75,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               )
             : (
                 <Button className={`btn-lg ${style.buttonImageUploadLarge}`}>
-                  {screenData.PicUploader.uploadButton}
+                  {t('PicUploader.uploadButton')}
                 </Button>
               )}
         </FileInput>
@@ -84,20 +86,20 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
         onSubmit={handleSubmit(onSubmit, handleError)}
       >
         <div className="d-flex">
-          <h1 className="mb-0 text-clip">{screenData.PicUploader.header}</h1>
+          <h1 className="mb-0 text-clip">{t('PicUploader.header')}</h1>
         </div>
 
         <div className="stack-4 mb-2">
-          <Label label={screenData.PicUploader.whatLabel}>
+          <Label label={t('PicUploader.whatLabel')}>
             <DynamicSelect
               {...register('animal', FormRules.animal)}
               allowCreate={true}
               labelInValue={true}
               modeSelectedTags="on"
-              placeholder={screenData.PicUploader.whatPlaceholder}
+              placeholder={t('PicUploader.whatPlaceholder')}
               getMoreOptions={props.getMoreAnimals}
               iconLeft={(
-                <Tooltip content={screenData.PicUploader.whatIcon}>
+                <Tooltip content={t('PicUploader.whatIcon')}>
                   <Icon name="shark" />
                 </Tooltip>
               )}
@@ -105,30 +107,30 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
             />
           </Label>
 
-          <Label label={screenData.PicUploader.whenLabel}>
+          <Label label={t('PicUploader.whenLabel')}>
             <TextInput
               {...register('date', FormRules.date)}
               type="date"
               iconLeft={(
-                <Tooltip content={screenData.PicUploader.whenIcon}>
+                <Tooltip content={t('PicUploader.whenIcon')}>
                   <Icon name="calendar-month" />
                 </Tooltip>
               )}
-              placeholder={screenData.PicUploader.whenPlaceholder}
+              placeholder={t('PicUploader.whenPlaceholder')}
               error={errors.date}
               max={new Date().toLocaleString('sv-SE').split(' ')[0]}
             />
           </Label>
 
-          <Label label={screenData.PicUploader.whereLabel}>
+          <Label label={t('PicUploader.whereLabel')}>
             <TextInput
               {...register('diveSiteName')}
               iconLeft={(
-                <Tooltip content={screenData.PicUploader.whereIcon}>
+                <Tooltip content={t('PicUploader.whereIcon')}>
                   <Icon name="anchor" />
                 </Tooltip>
               )}
-              placeholder={screenData.PicUploader.wherePlaceholder}
+              placeholder={t('PicUploader.wherePlaceholder')}
               disabled={true}
             />
           </Label>
@@ -143,7 +145,7 @@ export default function PicUploaderView(props: PicUploaderViewProps) {
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >
-              {screenData.PicUploader.submitButton}
+              {t('PicUploader.submitButton')}
             </Button>
           </div>
         </div>

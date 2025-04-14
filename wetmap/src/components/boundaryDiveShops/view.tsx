@@ -3,7 +3,7 @@ import InfiniteScroll from '../reusables/infiniteScroll';
 import { DiveShop } from '../../entities/diveShop';
 import DiveShopItem from './diveShopItem';
 import EmptyState from '../reusables/emptyState';
-import ScreenData from '../newModals/screenData.json';
+import { useTranslation } from 'react-i18next';
 
 type BoundaryDiveShopsViewProps = {
   loadMoreDiveShops:  (page: number) => void
@@ -14,12 +14,13 @@ type BoundaryDiveShopsViewProps = {
 };
 
 export function BoundaryDiveShopsView(props: BoundaryDiveShopsViewProps) {
+  const { t } = useTranslation();
   return (
     <InfiniteScroll
       loadMore={props.loadMoreDiveShops}
       hasMore={props.hasMoreDiveShops}
       isLoading={props.isLoadingDiveShops}
-      renderEmpty={() => (<EmptyState iconName="store" text={ScreenData.Sidebar.diveCenterEmptyDrawer} />)}
+      renderEmpty={() => (<EmptyState iconName="store" text={t('Sidebar.diveCenterEmptyDrawer')} />)}
     >
 
       {props.diveShops?.map((item) => {

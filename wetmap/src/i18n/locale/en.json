@@ -1,4 +1,49 @@
 {
+    "Common": {
+        "to": "to",
+        "or": "or",
+        "Months": {
+            "Jan": "Jan",
+            "Feb": "Feb",
+            "Mar": "Mar",
+            "Apr": "Apr",
+            "May": "May",
+            "Jun": "Jun",
+            "Jul": "Jul",
+            "Aug": "Aug",
+            "Sep": "Sep",
+            "Oct": "Oct",
+            "Nov": "Nov",
+            "Dec": "Dec"
+        }
+    },
+    "OnBoarding": {
+        "PageOne": {
+            "title": "Welcome to Scuba SEAsons!",
+            "content": "Created out of the desire for every dive to hold the opportunity to have an unforgettable encounter with a sea creature. \n \n Divers everywhere make this happen by adding their own dive site and sea creature sighting contributions.\n\nThe result:\n The creation of a map of the optimum season to dive with any sea creature anywhere in the world!\n\nI’m Emilio and I’m here to walk you through this short onboarding.\n\n\n\n\n",
+            "buttonOneText": "Next"
+        },
+        "PageTwo": {
+            "title": "Your Diver Name",
+            "content": "Scuba SEAsons relies on user contributions of dive sites and sea creature sightings.\n\nTo credit and to let others know about your contributions please provide us with your “diver name”\n\n\n\n\n",
+            "buttonOneText": "Ok",
+            "enterUsername": "Enter your username"
+        },
+        "PageThree": {
+            "title": "Location Tracking",
+            "content": "Scuba SEAsons uses location tracking for two features within the app:\n\nFirst, to allow the map to centre on your current location when needed\n&\nTo allow you to use your current location as the GPS location of a dive site when you are physically at the dive site and you want to add it to the app.\n\n\n\n\n",
+            "buttonOneText": "Accept",
+            "buttonTwoText": "Opt Out",
+            "allowLocation": "Please allow location access.",
+            "locationGranted": "Location Permission was Granted.",
+            "locationNotSupported": "Geolocation is not supported in your browser."
+        },
+        "PageFour": {
+            "title": "Thanks for joining Scuba SEAsons!",
+            "content": "That’s it!\n\nYou’re all setup.\n\nIf you ever want to change your diver name, you can do so from your profile page at any time.\n\n\n\n\n",
+            "buttonOneText": "Finish"
+        }
+    },
     "SettingsPage": {
         "header": "Settings",
         "subHeading1": "Account Type",
@@ -24,6 +69,15 @@
         "businesNameTooltip": "This will serve as your Dive Centre's name",
         "websiteTooltip": "We will use this to validate your business as compatible with Scuba SEAsons",
         "mapTooltip": "Used to place your Dive Centre on the map"
+    },
+    "MapPage": {
+        "profile": "Profile",
+        "settings": "Settings",
+        "guides": "Guides",
+        "siteAdd": "Site Add",
+        "showHide": "Show/Hide",
+        "returnToShop": "Return to Shop",
+        "setPin": "Set Pin"
     },
     "SearchPage": {
         "header": "Map Navigation",
@@ -76,6 +130,8 @@
         "deleteButton": "Delete"
     },
     "TripCard": {
+        "readMore": "Read More",
+        "readLess": "Read Less",
         "editButton": "Edit",
         "deleteButton": "Delete",
         "anchorButton": "Go to trip location",
@@ -126,9 +182,14 @@
         "DuplicateUserNameErrorMessage": "Username already in use, please try again...",
         "EmptyUserNameError": "Username cannot be empty, please try again...",
         "addProfilePhotoToolTip": "Add a profile picture",
-        "nameChangeToolTip": "Update username",
-        "bioChangeToolTip": "Update description",
-        "FollowToolTip": "Follow/Unfollow user"
+        "changeDiverNameTooltip": "Click here to change your diver name",
+        "FollowToolTip": "Follow/Unfollow user",
+        "confirmDiverNameTooltip": "Click here to confirm changes",
+        "changeBioTooltip": "Click here to write a bio about yourself",
+        "confirmBioTooltip": "Click here to confirm changes to your bio"
+    },
+    "UserGuide": {
+        "comingSoon": "User guides coming soon"
     },
     "DiveSite": {
         "drawerHeader": "Sea Creature Sightings",
@@ -136,15 +197,30 @@
         "addSightingButton": "Add Sighting",
         "submitButton": "Submit",
         "reportSiteTooltip": "Report an issue with this dive site",
-        "addPhotoTooltip": "Add a photo of this dive site"
+        "addPhotoTooltip": "Add a photo of this dive site",
+        "bioInputPlaceholder": "A little about {{name}}",
+        "bioTooltipEdit": "Click here to write a bio about {{name}}",
+        "bioTooltipConfirm": "Click here to confirm changes to {{name}}'s bio"
     },
     "SeaLifeImageCard": {
         "reportPictureTooltip": "Report an issue with this picture"
     },
+    "ShopList": {
+        "myDiveCenters": "My Dive Centers",
+        "addNewLocation": "Add New Location"
+    },
+    "SiteSubmitter": {
+        "additionalCentersComing": "Additional Dive Center functionality coming soon!"
+    },
     "DiveShop": {
         "drawerHeader": "Offered Dive Trips",
         "emptyDrawer": "No dive trips yet.",
-        "addDiveShopPhotoButton": "Add a photo of your dive shop"
+        "addDiveShopPhotoButton": "Add a photo of your dive shop",
+        "bioInputPlaceholder": "A little about {{name}}",
+        "bioTooltipEdit": "Click here to write a bio about {{name}}",
+        "bioTooltipConfirm": "Click here to confirm changes to {{name}}'s bio",
+        "addEvent": "Add diving event",
+        "offeredTips": "Offered Dive Trips"
     },
     "CommentsModal": {
         "header": "Comments",
@@ -172,7 +248,11 @@
         "passwordsDoNotMatch": "Your passwords do no match",
         "passwordUpdatedSuccessfully": "Your password has been updated successfully",
         "passwordUpdateError": "Something went wrong. Please try again later",
-        "submitButton": "Submit"
+        "submitButton": "Submit",
+        "continueDesktop": "Continue on Desktop?",
+        "continueMobile": "Continue on Mobile?",
+        "availableOnAndroid": "Available on Android",
+        "availableOniOS": "Available on iOS"
     },
     "SignUpPage": {
         "title": "Sign Up",
@@ -205,7 +285,15 @@
         "settingsTooltip": "Settings",
         "newDiveSiteTooltip": "Add a New Dive Site",
         "tripCreatorTooltip": "My Shop(s)",
-        "guideTooltip": "User Guide"
+        "guideTooltip": "User Guide",
+        "diveSites": "Dive Sites",
+        "seaLife": "Sea Life",
+        "diveCenters": "Dive Centers",
+        "availableOnMobile": "Available on Mobile",
+        "connectWithUs": "Connect with us",
+        "rightsReserved": "© 2025. All rights reserved.",
+        "yourCart": "Your Cart",
+        "searchByCityOrDive": "Search by city or dive site name"
     },
     "PasswordRecoveryPage": {
         "title": "Reset Password",
@@ -226,17 +314,43 @@
         "errorDeleting": "Something went wrong. Please try again later"
     },
     "Sidebar": {
+        "searchForAnimal": "Search for an animal",
         "diveSiteEmptyDrawer": "No dive sites in this area.",
         "seaLifeEmptyDrawer": "No sea life in this area.",
-        "diveCenterEmptyDrawer": "No dive centers in this area."
+        "diveCenterEmptyDrawer": "No dive centers in this area.",
+        "inThisArea": "in this area."
     },
     "Validators": {
+        "requiredEmail": "Please insert valid email",
+        "supplyEmail": "Please supply the email that you use to login",
+        "enterYourEmail": "Please enter your email",
+        "requiredTripName": "Trip name is required",
+        "requiredLink": "Link is required",
+        "requiredPrice": "Price is required",
+        "minPrice": "Price must be at least {{value}}",
+        "startBeforeEndDate": "Start date must be before end date",
+        "endAfterStartDate": "End date must be after start date",
+        "requiredStartDate": "Start date is required",
+        "requiredEndDate": "End date is required",
+        "requiredTripStartDate": "Trip Start Date is required",
+        "requiredFullName": "Please enter your full name",
+        "requiredPassword": "Please enter your password",
+        "requiredLongPassword": "Password must be at least {{value}} characters long",
+        "passwordTooLong": "Password is too long. Max length is {{value}} characters",
+        "requiredTripEndDate": "Trip End Date is required",
+        "requiredDetails": "Details is required",
+        "requiredNewPassword": "Please enter new password",
         "requiredSite": "Dive site name cannot be empty",
+        "requiredBusinessName": "Business name cannot be empty",
+        "requiredWebsite": "Website link cannot be empty",
         "requiredLongitude": "Longitude is required",
         "minLongitude": "Longitude must be greater than {{value}}",
         "maxLongitude": "Longitude must be less than {{value}}",
         "requiredLatitude": "Latitude is required",
         "minLatitude": "Latitude must be greater than {{value}}",
-        "maxLatitude": "Latitude must be less than {{value}}"
+        "maxLatitude": "Latitude must be less than {{value}}",
+        "whatYouSaw": "Please tell us what you saw",
+        "whenYouSaw": "Please tell us when you saw it",
+        "noPicture": "No picture uploaded"
     }
 }

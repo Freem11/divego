@@ -2,7 +2,6 @@ import React from 'react';
 import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
-import screenData from '../screenData.json';
 import TextInput from '../../reusables/textInput';
 import { Form, FormRules } from './form';
 import { FieldErrors, useForm } from 'react-hook-form';
@@ -11,6 +10,7 @@ import Label from '../../reusables/label';
 import PriceTextInput from '../../reusables/priceTextInput';
 import SiteSelector from '../../reusables/siteSelector';
 import Tooltip from '../../reusables/tooltip';
+import { useTranslation } from 'react-i18next';
 
 type TripCreatorViewProps = {
   values?:         Form
@@ -26,6 +26,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
   const { register, watch, handleSubmit, formState: { isSubmitting, errors } } = useForm<Form>({ values: props.values });
   const startDate = watch('Start'); // Get start date value from form
   const endDate = watch('End'); // Get end date value from form
+  const { t } = useTranslation();
 
   const cloneButtonPress = () => {
     props.setIsEditModeOn(false);
@@ -46,8 +47,8 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
         <div className={props.isEditModeOn ? 'col-8' : 'col-12'}>
           {
             props.isEditModeOn
-              ? (<h2>{screenData.TripCreator.headerEdit}</h2>)
-              : (<h2>{screenData.TripCreator.header}</h2>)
+              ? (<h2>{t('TripCreator.headerEdit')}</h2>)
+              : (<h2>{t('TripCreator.header')}</h2>)
           }
         </div>
         {props.isEditModeOn
@@ -57,7 +58,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               onClick={() => cloneButtonPress()}
               type="button"
             >
-              {screenData.TripCreator.cloneTripButton}
+              {t('TripCreator.cloneTripButton')}
             </Button>
           </div>
         )}
@@ -67,85 +68,85 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
       <form onSubmit={handleSubmit(props.onSubmit, props.handleError)} className={styles.form}>
         <div className={styles.formColumns}>
           <div className={styles.formColumn}>
-            <Label label={screenData.TripCreator.tripNameLabel}>
+            <Label label={t('TripCreator.tripNameLabel')}>
               <TextInput
                 iconLeft={(
-                  <Tooltip content={screenData.TripCreator.tripNameTooltip}>
+                  <Tooltip content={t('TripCreator.tripNameTooltip')}>
                     <Icon name="store" />
                   </Tooltip>
                 )}
-                placeholder={screenData.TripCreator.tripNamePlaceholder}
+                placeholder={t('TripCreator.tripNamePlaceholder')}
                 error={errors.Name}
                 {...register('Name', FormRules.Name)}
               />
             </Label>
 
-            <Label label={screenData.TripCreator.bookingLinkLabel}>
+            <Label label={t('TripCreator.bookingLinkLabel')}>
               <TextInput
                 iconLeft={(
-                  <Tooltip content={screenData.TripCreator.booklingLinkTooltip}>
+                  <Tooltip content={t('TripCreator.booklingLinkTooltip')}>
                     <Icon name="link" />
                   </Tooltip>
                 )}
-                placeholder={screenData.TripCreator.bookingLinkPlaceholder}
+                placeholder={t('TripCreator.bookingLinkPlaceholder')}
                 error={errors.Link}
                 {...register('Link', FormRules.Link)}
               />
             </Label>
 
-            <Label label={screenData.TripCreator.priceLabel}>
+            <Label label={t('TripCreator.priceLabel')}>
               <PriceTextInput
                 iconLeft={(
-                  <Tooltip content={screenData.TripCreator.priceTooltip}>
+                  <Tooltip content={t('TripCreator.priceTooltip')}>
                     <Icon name="currency-usd" />
                   </Tooltip>
                 )}
-                placeholder={screenData.TripCreator.pricePlaceholder}
+                placeholder={t('TripCreator.pricePlaceholder')}
                 error={errors.Price}
                 {...register('Price', FormRules.Price)}
               />
             </Label>
 
-            <Label label={screenData.TripCreator.startDateLabel}>
+            <Label label={t('TripCreator.startDateLabel')}>
               <TextInput
                 iconLeft={(
-                  <Tooltip content={screenData.TripCreator.tripStartTooltip}>
+                  <Tooltip content={t('TripCreator.tripStartTooltip')}>
                     <Icon name="calendar-start" />
                   </Tooltip>
                 )}
-                placeholder={screenData.TripCreator.startDatePlaceholder}
+                placeholder={t('TripCreator.startDatePlaceholder')}
                 error={errors.Start}
                 type="date"
                 {...register('Start',
-                  { required: 'Start date is required',
+                  { required: t('Validators.requiredStartDate'),
                     validate: (value) => {
                       if (!endDate || !value) return true;
                       const end = new Date(endDate);
                       const start = new Date(value);
-                      return end >= start || 'Start date must be before end date';
+                      return end >= start || t('Validators.startBeforeEndDate');
                     },
                   })}
                 max={endDate}
               />
             </Label>
 
-            <Label label={screenData.TripCreator.endDateLabel}>
+            <Label label={t('TripCreator.endDateLabel')}>
               <TextInput
                 iconLeft={(
-                  <Tooltip content={screenData.TripCreator.tripEndTooltip}>
+                  <Tooltip content={t('TripCreator.tripEndTooltip')}>
                     <Icon name="calendar-end" />
                   </Tooltip>
                 )}
-                placeholder={screenData.TripCreator.endDatePlaceholder}
+                placeholder={t('TripCreator.endDatePlaceholder')}
                 error={errors.End}
                 type="date"
                 {...register('End',
-                  { required: 'End date is required',
+                  { required: t('Validators.requiredEndDate'),
                     validate: (value) => {
                       if (!startDate || !value) return true;
                       const start = new Date(startDate);
                       const end = new Date(value);
-                      return end >= start || 'End date must be after start date';
+                      return end >= start || t('Validators.endBeforeStartDate');
                     },
                   })}
                 min={startDate}
@@ -154,13 +155,13 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
 
           </div>
           <div className={styles.formColumn}>
-            <Label label={screenData.TripCreator.diveSitesLabel}>
+            <Label label={t('TripCreator.diveSitesLabel')}>
               <SiteSelector error={props.diveSitesError} />
             </Label>
             <Label label="Details" className={styles.detailsField}>
               <textarea
                 className={`${styles.textarea} ${errors.Details && styles.textareaError}`}
-                placeholder={screenData.TripCreator.tripDescriptionPlaceholder}
+                placeholder={t('TripCreator.tripDescriptionPlaceholder')}
                 {...register('Details', FormRules.Details)}
               />
             </Label>
@@ -174,7 +175,7 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
               type="submit"
               iconRight={<Icon name="chevron-right" />}
             >
-              {screenData.TripCreator.submitButton}
+              {t('TripCreator.submitButton')}
             </Button>
           </div>
         </div>

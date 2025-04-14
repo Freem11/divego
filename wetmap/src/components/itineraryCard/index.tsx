@@ -7,8 +7,8 @@ import { ItineraryItem } from '../../entities/itineraryItem';
 import { MapContext } from '../googleMap/mapContext';
 import { insertItineraryRequest } from '../../supabaseCalls/itinerarySupabaseCalls';
 import { toast } from 'react-toastify';
-import screenData from '../newModals/screenData.json';
 import TripCreatorModal from '../newModals/tripCreatorModal';
+import { useTranslation } from 'react-i18next';
 
 type ItineraryCardProps = {
   itinerary:           ItineraryItem
@@ -19,6 +19,7 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
   const { setSitesArray } = useContext(SitesArrayContext);
   const { setMapConfig, mapRef } = useContext(MapContext);
   const { modalShow, modalCancel } = useContext(ModalContext);
+  const { t } = useTranslation();
 
   const flipMap = async (siteList: number[]) => {
     setSitesArray(siteList);
@@ -44,9 +45,9 @@ export default function ItineraryCard({ itinerary, canChangeItinerary }: Itinera
     const { error } = await insertItineraryRequest(itinerary, 'Delete');
 
     if (error) {
-      toast.error(screenData.TripCard.deleteTripError);
+      toast.error(t('TripCard.deleteTripError'));
     } else {
-      toast.success(screenData.TripCard.deleteTripSuccess);
+      toast.success(t('TripCard.deleteTripSuccess'));
     }
   };
 
