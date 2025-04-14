@@ -27,10 +27,10 @@ export const FormRules: FormValidationRules<Form> = {
     pattern: /^\$\d+(\.\d{1,2})?$/,
   },
   Start: {
-    required: i18n.t('Validators.requiredStartDate'),
+    required: i18n.t('Validators.requiredTripStartDate'),
   },
   End: {
-    required: i18n.t('Validators.requiredEndDate'),
+    required: i18n.t('Validators.requiredTripEndDate'),
   },
   Details: {
     required: i18n.t('Validators.requiredDetails'),

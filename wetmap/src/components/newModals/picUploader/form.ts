@@ -1,5 +1,6 @@
 
 import { FormValidationRules } from '../../../forms/form';
+import i18n from '../../../i18n';
 import { Option } from '../../reusables/select';
 
 export interface Form {
@@ -11,13 +12,13 @@ export interface Form {
 
 export const FormRules: FormValidationRules<Form> = {
   animal: {
-    required: 'Please tell us what you saw',
+    required: i18n.t('Validators.whatYouSaw'),
   },
   date: {
-    required: 'Please tell us when you saw it',
+    required: i18n.t('Validators.whenYouSaw'),
   },
   photo: {
-    required: 'No picture uploaded',
+    required: i18n.t('Validators.noPicture'),
   },
   // longitude: {
   //   required: 'Longitude is required',

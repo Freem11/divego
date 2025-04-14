@@ -118,12 +118,12 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 error={errors.Start}
                 type="date"
                 {...register('Start',
-                  { required: 'Start date is required',
+                  { required: t('Validators.requiredStartDate'),
                     validate: (value) => {
                       if (!endDate || !value) return true;
                       const end = new Date(endDate);
                       const start = new Date(value);
-                      return end >= start || 'Start date must be before end date';
+                      return end >= start || t('Validators.startBeforeEndDate');
                     },
                   })}
                 max={endDate}
@@ -141,12 +141,12 @@ export default function TripCreatorView(props: TripCreatorViewProps) {
                 error={errors.End}
                 type="date"
                 {...register('End',
-                  { required: 'End date is required',
+                  { required: t('Validators.requiredEndDate'),
                     validate: (value) => {
                       if (!startDate || !value) return true;
                       const start = new Date(startDate);
                       const end = new Date(value);
-                      return end >= start || 'End date must be after start date';
+                      return end >= start || t('Validators.endBeforeStartDate');
                     },
                   })}
                 min={startDate}

@@ -95,12 +95,12 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
             <div className="panel border-none">
               <div className="panel-body">
                 <PlainTextInput
-                  placeholder={`A little about ${props?.diveSite?.name}`}
+                  placeholder={t('DiveSite.bioInputPlaceholder', { name: props?.diveSite?.name })}
                   value={props?.diveSite?.divesitebio || ''}
                   readOnly={!props?.isPartnerAccount}
                   onSave={props?.onDiveSiteBioChange}
-                  tooltipEditText={`Click here to write a bio about ${props?.diveSite?.name}`}
-                  tooltipConfirmText={`Click here to confirm changes to ${props?.diveSite?.name}'s bio`}
+                  tooltipEditText={t('DiveSite.bioTooltipEdit', { name: props?.diveSite?.name })}
+                  tooltipConfirmText={t('DiveSite.bioTooltipConfirm', { name: props?.diveSite?.name })}
                 />
               </div>
             </div>

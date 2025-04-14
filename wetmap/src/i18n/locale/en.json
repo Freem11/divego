@@ -1,6 +1,7 @@
 {
     "Common": {
         "to": "to",
+        "or": "or",
         "Months": {
             "Jan": "Jan",
             "Feb": "Feb",
@@ -185,21 +186,39 @@
         "bioChangeToolTip": "Update description",
         "FollowToolTip": "Follow/Unfollow user"
     },
+    "UserGuide": {
+        "comingSoon": "User guides coming soon"
+    },
     "DiveSite": {
         "drawerHeader": "Sea Creature Sightings",
         "emptyDrawer": "No sightings yet.",
         "addSightingButton": "Add Sighting",
         "submitButton": "Submit",
         "reportSiteTooltip": "Report an issue with this dive site",
-        "addPhotoTooltip": "Add a photo of this dive site"
+        "addPhotoTooltip": "Add a photo of this dive site",
+        "bioInputPlaceholder": "A little about {{name}}",
+        "bioTooltipEdit": "Click here to write a bio about {{name}}",
+        "bioTooltipConfirm": "Click here to confirm changes to {{name}}'s bio"
     },
     "SeaLifeImageCard": {
         "reportPictureTooltip": "Report an issue with this picture"
     },
+    "ShopList": {
+        "myDiveCenters": "My Dive Centers",
+        "addNewLocation": "Add New Location"
+    },
+    "SiteSubmitter": {
+        "additionalCentersComing": "Additional Dive Center functionality coming soon!"
+    },
     "DiveShop": {
         "drawerHeader": "Offered Dive Trips",
         "emptyDrawer": "No dive trips yet.",
-        "addDiveShopPhotoButton": "Add a photo of your dive shop"
+        "addDiveShopPhotoButton": "Add a photo of your dive shop",
+        "bioInputPlaceholder": "A little about {{name}}",
+        "bioTooltipEdit": "Click here to write a bio about {{name}}",
+        "bioTooltipConfirm": "Click here to confirm changes to {{name}}'s bio",
+        "addEvent": "Add diving event",
+        "offeredTips": "Offered Dive Trips"
     },
     "CommentsModal": {
         "header": "Comments",
@@ -227,7 +246,11 @@
         "passwordsDoNotMatch": "Your passwords do no match",
         "passwordUpdatedSuccessfully": "Your password has been updated successfully",
         "passwordUpdateError": "Something went wrong. Please try again later",
-        "submitButton": "Submit"
+        "submitButton": "Submit",
+        "continueDesktop": "Continue on Desktop?",
+        "continueMobile": "Continue on Mobile?",
+        "availableOnAndroid": "Available on Android",
+        "availableOniOS": "Available on iOS"
     },
     "SignUpPage": {
         "title": "Sign Up",
@@ -303,12 +326,16 @@
         "requiredLink": "Link is required",
         "requiredPrice": "Price is required",
         "minPrice": "Price must be at least {{value}}",
-        "requiredStartDate": "Trip Start Date is required",
+        "startBeforeEndDate": "Start date must be before end date",
+        "endAfterStartDate": "End date must be after start date",
+        "requiredStartDate": "Start date is required",
+        "requiredEndDate": "End date is required",
+        "requiredTripStartDate": "Trip Start Date is required",
         "requiredFullName": "Please enter your full name",
         "requiredPassword": "Please enter your password",
         "requiredLongPassword": "Password must be at least {{value}} characters long",
         "passwordTooLong": "Password is too long. Max length is {{value}} characters",
-        "requiredEndDate": "Trip End Date is required",
+        "requiredTripEndDate": "Trip End Date is required",
         "requiredDetails": "Details is required",
         "requiredNewPassword": "Please enter new password",
         "requiredSite": "Dive site name cannot be empty",
@@ -319,6 +346,9 @@
         "maxLongitude": "Longitude must be less than {{value}}",
         "requiredLatitude": "Latitude is required",
         "minLatitude": "Latitude must be greater than {{value}}",
-        "maxLatitude": "Latitude must be less than {{value}}"
+        "maxLatitude": "Latitude must be less than {{value}}",
+        "whatYouSaw": "Please tell us what you saw",
+        "whenYouSaw": "Please tell us when you saw it",
+        "noPicture": "No picture uploaded"
     }
 }

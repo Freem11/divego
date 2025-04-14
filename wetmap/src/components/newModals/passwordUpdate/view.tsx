@@ -68,15 +68,15 @@ export default function PasswordUpdateView(props: PasswordUpdateProps) {
 
           {props.revealRoutes && (
             <div className="flex-column-between mt-10">
-              <a onClick={props.onClose}>Continue on Desktop?</a>
-              <p className="mb-0">or</p>
+              <a onClick={props.onClose}>{t('PasswordUpdate.continueDesktop')}</a>
+              <p className="mb-0">{t('Common.or')}</p>
 
               {props.runningOn === 'Android' || props.runningOn === 'iOS'
-                ? <a href="scubaseasons://">Continue on Mobile?</a>
+                ? <a href="scubaseasons://">{t('PasswordUpdate.continueMobile')}</a>
                 : (
                     <div className="flex-column-between mt-10">
-                      <a href="https://play.google.com/store/apps/details?id=com.freem11.divegomobile"  target="_blank" rel="noreferrer">Available for Android</a>
-                      <a href="https://apps.apple.com/us/app/divego/id6450968950" target="_blank" rel="noreferrer">Available for iOS</a>
+                      <a href="https://play.google.com/store/apps/details?id=com.freem11.divegomobile"  target="_blank" rel="noreferrer">{t('PasswordUpdate.availableOnAndroid')}</a>
+                      <a href="https://apps.apple.com/us/app/divego/id6450968950" target="_blank" rel="noreferrer">{t('PasswordUpdate.availableOniOS')}</a>
                     </div>
                   )}
             </div>
