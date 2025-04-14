@@ -306,6 +306,8 @@
         "requiredStartDate": "Trip Start Date is required",
         "requiredFullName": "Please enter your full name",
         "requiredPassword": "Please enter your password",
+        "requiredLongPassword": "Password must be at least {{value}} characters long",
+        "passwordTooLong": "Password is too long. Max length is {{value}} characters",
         "requiredEndDate": "Trip End Date is required",
         "requiredDetails": "Details is required",
         "requiredNewPassword": "Please enter new password",

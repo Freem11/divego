@@ -1,6 +1,7 @@
 import { FormValidationRules } from '../../../forms/form';
 import i18n from '../../../i18n';
 
+const MIN_PRICE = 0;
 export interface Form {
   Name?:    string
   Link?:    string
@@ -20,8 +21,8 @@ export const FormRules: FormValidationRules<Form> = {
   Price: {
     required: i18n.t('Validators.requiredPrice'),
     min:      {
-      value:   0,
-      message: i18n.t('Validators.minPrice', { value: 0 }),
+      value:   MIN_PRICE,
+      message: i18n.t('Validators.minPrice', { value: MIN_PRICE }),
     },
     pattern: /^\$\d+(\.\d{1,2})?$/,
   },
