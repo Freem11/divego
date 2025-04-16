@@ -104,6 +104,10 @@ export const UserProfileContextProvider = ({ children }: any) => {
 
   const switchToMetrics = async (metrics: boolean) => {
     if (profile) {
+      setProfile({
+        ...profile,
+        unit_system: metrics ? 'Metric' : 'Imperial',
+      });
       await updateProfile({
         ...profile,
         UserID:      profile.UserID,
