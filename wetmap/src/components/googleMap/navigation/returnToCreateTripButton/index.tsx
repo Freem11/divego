@@ -15,10 +15,6 @@ export function ReturnToCreateTripButton() {
       className="btn-md bg-primary"
       type="button"
       onClick={() => {
-        // should this onClick be the same as the returnToShopButton??
-        if (selectedShop) {
-          mapRef?.panTo({ lat: selectedShop.lat, lng: selectedShop.lng });
-        }
         setMapConfig(0);
         modalResume();
       }}
