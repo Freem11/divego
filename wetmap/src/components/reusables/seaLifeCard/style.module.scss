@@ -1,3 +1,4 @@
+@import '../../../styles/variables.scss';
 p {
   margin: 0;
 }
@@ -46,7 +47,12 @@ p {
   inset: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(5deg, rgba(0, 0, 0, 0.75) 0%, rgba(0, 0, 0, 0.5) 35%, rgba(0, 0, 0, 0) 75%);
+  background: linear-gradient(
+    5deg,
+    rgba(0, 0, 0, 0.75) 0%,
+    rgba(0, 0, 0, 0.5) 35%,
+    rgba(0, 0, 0, 0) 75%
+  );
   transition: 250ms ease;
 }
 
@@ -104,6 +110,7 @@ p {
   font-size: 14px;
   color: white;
   transition: ease 200ms;
+  position: relative;
 }
 
 .biggerIcon {
@@ -114,7 +121,6 @@ p {
 .liked {
   color: red;
 }
-
 
 .action:active .actionIcon {
   scale: 0.9;
@@ -130,7 +136,61 @@ p {
   color: rgba(255, 255, 255, 0.75);
 }
 
-@import "../../../styles/mixins.scss";
+.socialButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($bg-color, 5%);
+    transform: translateY(0px);
+    scale: 1.05;
+  }
+
+  &:active {
+    transform: translateY(0);
+    scale: 0.95;
+    background-color: darken($bg-color, 10%);
+  }
+}
+
+.socialIcon {
+  font-size: 1.75rem;
+  color: rgb(17, 115, 214);
+  width: 30px;
+  height: 30px;
+}
+
+.socialShareContainer {
+  position: absolute;
+  bottom: 40px;
+  left: -68px;
+  border-radius: 40px 10px 7px 40px;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  background-color: rgb(255, 255, 255);
+  padding: 0.25rem;
+  z-index: 10;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: 3.5px;
+    width: 16px;
+    height: 16px;
+    background-color: rgb(255, 255, 255);
+    transform: rotate(45deg);
+    border-radius: 2px;
+    z-index: -1;
+  }
+}
+
+@import '../../../styles/mixins.scss';
 .fadeDelay {
   @include fade-in();
 }
