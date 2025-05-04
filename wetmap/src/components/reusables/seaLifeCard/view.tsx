@@ -10,15 +10,53 @@ import abbreviateNumber from '../../../helpers/abbreviateNumber';
 import screenData from '../../newModals/screenData.json';
 
 type SeaLifeCardViewProps = {
-  pic:                 PhotoWithLikesAndComments
-  handleModalOpen:     () => void
-  handleLike:          (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => Promise<void>
-  handleProfileSwitch: (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, username: string) => Promise<void>
-  handleDiveSiteMove:  (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>, lat: number, lng: number) => void
-  handleCommentModal:  (e: React.MouseEvent<HTMLHeadingElement, MouseEvent>) => void
-  countOfLikes:        number
-  picLiked:            boolean
-  isShowAuthor:        boolean
+  label:           string
+  pic:             PhotoWithLikesAndComments
+  isShowAuthor?:   boolean
+  picLiked?:       boolean
+  countOfLikes:    number
+  shareContent?:   boolean
+  setShareContent: React.Dispatch<SetStateAction<boolean>>
+  handleModalOpen: () => void
+  handleLike: (
+    e: React.MouseEvent<HTMLHeadingElement, MouseEvent>
+  ) => Promise<void>
+  handleProfileSwitch: (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    username: string
+  ) => Promise<void>
+  handleDiveSiteMove: (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>,
+    lat: number,
+    lng: number
+  ) => void
+  handleCommentModal: (
+    e: React.MouseEvent<HTMLHeadingElement, MouseEvent>
+  ) => void
+  handleShareModal: (
+    e: React.MouseEvent<HTMLHeadingElement, MouseEvent>
+  ) => void
+};
+
+import { toast } from 'react-toastify';
+import {
+  FacebookShareButton,
+  WhatsappShareButton,
+  LinkedinShareButton,
+  // EmailShareButton,
+  TwitterShareButton,
+} from 'react-share';
+
+type SocialPlatform = {
+  name:     string
+  Button:   React.ComponentType<any>
+  Icon:     React.ReactNode
+  getProps: (
+    url: string,
+    title: string,
+    description?: string,
+    imageUrl?: string
+  ) => any
 };
 
 export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
