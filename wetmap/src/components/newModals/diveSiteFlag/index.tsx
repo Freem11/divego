@@ -1,7 +1,8 @@
-import DiveSiteFlagView from './view';
 import React, { useState } from 'react';
+
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ModalHandleProps } from '../../reusables/modal/types';
+import DiveSiteFlagView from './view';
 
 type DiveSiteFlagProps = Partial<ModalHandleProps> & {
   diveSite: DiveSiteWithUserName | null

@@ -235,6 +235,9 @@
       "DiveSiteFlag":{
         "subHeading1": "Type of issue",
         "option1": "1) Dive site name not correct",
-        "description1": "(Please provide correct dive site name and we will correct the record)"
+        "description1": "(Please provide correct dive site name and we will correct the record)",
+        "diveSiteNamePlaceholder": "Please enter the correct dive site name",
+        "diveSiteLatitudePlaceholder": "Please enter the correct latitude",
+        "diveSiteLongitudePlaceholder": "Please enter the correct longitude"
       }
     }
