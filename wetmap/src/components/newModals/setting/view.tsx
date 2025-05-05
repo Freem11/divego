@@ -11,9 +11,18 @@ type SettingsProps = {
   profileType:         string | null
   handlePartnerButton: () => void
   handleDanger:        () => void
+  metrics:             boolean
+  switchToMetrics:     (metrics: boolean) => void
 };
 
 export default function SettingsView(props: SettingsProps) {
+  const [isChecked, setIsChecked] = React.useState<boolean>(props.metrics);
+
+  const handleToggle = () => {
+    setIsChecked(!isChecked);
+    props.switchToMetrics(!isChecked);
+  };
+
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
       <ButtonIcon
@@ -41,6 +50,27 @@ export default function SettingsView(props: SettingsProps) {
               </span>
             )}
           </div>
+
+          <div>
+            <h2 className="ml-4 mt-2 mb-1">Unit System</h2>
+            <div className={styles.grayOutlineFlexRow}>
+              <h4 className="ml-8 mb-0 mt-1 text-bold text-dark">{props.metrics ? 'Metric' : 'Imperial'}</h4>
+              <div className={styles.toggleSwitch}>
+                <input
+                  checked={isChecked}
+                  onClick={handleToggle}
+                  type="checkbox"
+                  name="metric"
+                  className={styles.toggleSwitchCheckbox}
+                />
+                <label className={styles.toggleSwitchLabel}  onClick={handleToggle}>
+                  <span className={styles.toggleSwitchInner} />
+                  <span className={styles.toggleSwitchSwitch} />
+                </label>
+              </div>
+            </div>
+          </div>
+
 
           <div className={styles.horizontalButtonContainer}>
             <div className="col-3"></div>
