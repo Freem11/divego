@@ -230,11 +230,14 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
                       });
                     }}
                     className={style.socialButton}
-                    style={{ backgroundColor: 'transparent' }}
+                    style={{
+                      backgroundColor: 'transparent',
+                      paddingTop:      '4px',
+                    }}
                     aria-label="Copy url"
                     title="Copy url"
                   >
-                    <Icon name="link" className={style.socialIcon} />
+                    <Icon name="copy" className={style.socialIcon} />
                   </div>
                 </div>
               )}
