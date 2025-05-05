@@ -43,7 +43,7 @@ import {
   FacebookShareButton,
   WhatsappShareButton,
   LinkedinShareButton,
-  // EmailShareButton,
+  EmailShareButton,
   TwitterShareButton,
 } from 'react-share';
 
@@ -106,28 +106,23 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
           source: hostUrl,
         }),
       },
-      // {
-      //   name:     'Email',
-      //   Button:   EmailShareButton,
-      //   Icon:     <Icon name="email-send-outline" className={style.socialIcon} />,
-      //   getProps: (url, title, description) => ({
-      //     url,
-      //     subject: title,
-      //     body:    description
-      //       ? `${description}\n\nCheck out this link: ${url}`
-      //       : `Check out this link: ${url}`,
-      //     separator:              '\n\n',
-      //     openShareDialogOnClick: true, // Explicitly set for EmailShareButton
-      //   }),
-      // },
+      {
+        name:     'Email',
+        Button:   EmailShareButton,
+        Icon:     <Icon name="email" className={style.socialIcon} />,
+        getProps: (url, title, description) => ({
+          url,
+          subject:   title,
+          body:      description,
+          separator: '\n\n',
+        }),
+      },
     ];
   };
 
   const platforms = createSocialPlatforms();
 
-  // const shareUrl = `https://scuba-seasons.web.app/${photoName}`;
   const shareUrl = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
-  const shareImageUrl = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
   const shareTitle = props.label;
   const shareDescription = `Check out this amazing photo of ${props.label} on WetMap!`;
 
@@ -144,11 +139,11 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
           href={`mailto:scubaseasons@gmail.com?subject=Reporting%20issue%20with%20picture:%20"${props.pic.label}"%20${props.pic.photoFile}&body=Type%20of%20issue:%0D%0A%0D%0A%0D%0A%0D%0A1)%20Animal%20name%20not%20correct%0D%0A%0D%0A(Please%20provide%20correct%20animal%20name%20and%20we%20will%20correct%20the%20record)%0D%0A%0D%0A%0D%0A%0D%0A2)%20Copy%20write%20image%20claim%0D%0A%0D%0A(Please%20provide%20proof%20that%20you%20own%20the%20submitted%20photo%20and%20we%20will%20remove%20it%20as%20you%20have%20requested)`}
           className={style.report}
         >
-          <Tooltip direction={TOOLTIP_DIRECTION.LEFT} content={ScreenData.SeaLifeImageCard.reportPictureTooltip}>
-            <Icon
-              name="error-outline"
-              className={style.reportIcon}
-            />
+          <Tooltip
+            direction={TOOLTIP_DIRECTION.LEFT}
+            content={ScreenData.SeaLifeImageCard.reportPictureTooltip}
+          >
+            <Icon name="error-outline" className={style.reportIcon} />
           </Tooltip>
         </a>
         <div className={style.content}>
@@ -203,7 +198,7 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
                       shareUrl,
                       shareTitle,
                       shareDescription,
-                      shareImageUrl,
+                      // shareImageUrl,
                     );
 
                     return (
