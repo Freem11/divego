@@ -1,0 +1,53 @@
+@import '../../../styles/variables.scss';
+.socialButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+
+  &:hover {
+    background-color: darken($bg-color, 5%);
+    transform: translateY(0px);
+    scale: 1.05;
+  }
+
+  &:active {
+    transform: translateY(0);
+    scale: 0.95;
+    background-color: darken($bg-color, 10%);
+  }
+}
+
+.socialIcon {
+  font-size: 1.75rem;
+  color: rgb(17, 115, 214);
+  width: 30px;
+  height: 30px;
+}
+
+.socialShareContainer {
+  position: absolute;
+  bottom: 40px;
+  transform: translate(-45%);
+  border-radius: 40px 10px 7px 40px;
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+  background-color: rgb(255, 255, 255);
+  padding: 0.25rem;
+  z-index: 10;
+
+  &:before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    right: 3.5px;
+    width: 16px;
+    height: 16px;
+    background-color: rgb(255, 255, 255);
+    transform: rotate(45deg);
+    border-radius: 2px;
+    z-index: -1;
+  }
+}

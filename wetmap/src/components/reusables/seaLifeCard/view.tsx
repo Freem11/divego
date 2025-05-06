@@ -38,93 +38,10 @@ type SeaLifeCardViewProps = {
   ) => void
 };
 
-import { toast } from 'react-toastify';
-import {
-  FacebookShareButton,
-  WhatsappShareButton,
-  LinkedinShareButton,
-  EmailShareButton,
-  TwitterShareButton,
-} from 'react-share';
-
-type SocialPlatform = {
-  name:     string
-  Button:   React.ComponentType<any>
-  Icon:     React.ReactNode
-  getProps: (
-    url: string,
-    title: string,
-    description?: string,
-    imageUrl?: string
-  ) => any
-};
+import ShareContent from '../share';
 
 export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
-  console.log(props);
-  const hostUrl = 'https://scuba-seasons.web.app/';
   const photoName = props.pic.photoFile.split('/').pop();
-  const createSocialPlatforms = (): SocialPlatform[] => {
-    return [
-      {
-        name:     'Facebook',
-        Button:   FacebookShareButton,
-        Icon:     <Icon name="facebook" className={style.socialIcon} />,
-        getProps: (url, quote) => ({
-          quote,
-          url,
-          hashtag: '#Scuba SEAsons', // Optional
-        }),
-      },
-      {
-        name:     'X',
-        Button:   TwitterShareButton,
-        Icon:     <Icon name="x-icon" className={style.socialIcon} />,
-        getProps: (url, title) => ({
-          url,
-          title,
-          hashtags: ['Scuba SEAsons'],
-        }),
-      },
-      {
-        name:     'WhatsApp',
-        Button:   WhatsappShareButton,
-        Icon:     <Icon name="whatsapp" className={style.socialIcon} />,
-        getProps: (url, title) => ({
-          url,
-          title,
-          separator: ' - ', // Optional custom separator
-        }),
-      },
-      {
-        name:     'LinkedIn',
-        Button:   LinkedinShareButton,
-        Icon:     <Icon name="linkedin" className={style.socialIcon} />,
-        getProps: (url, title, summary) => ({
-          url,
-          title,
-          summary,
-          source: hostUrl,
-        }),
-      },
-      {
-        name:     'Email',
-        Button:   EmailShareButton,
-        Icon:     <Icon name="email" className={style.socialIcon} />,
-        getProps: (url, title, description) => ({
-          url,
-          subject:   title,
-          body:      description,
-          separator: '\n\n',
-        }),
-      },
-    ];
-  };
-
-  const platforms = createSocialPlatforms();
-
-  const shareUrl = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
-  const shareTitle = props.label;
-  const shareDescription = `Check out this amazing photo of ${props.label} on WetMap!`;
 
   return (
     <div className={style.card} onClick={() => props.handleModalOpen()}>
@@ -151,29 +68,35 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
             <p className={style.title}>{props.pic.label}</p>
             <div className={style.info}>
               {props.isShowAuthor && (
-                <a onClick={e => props.handleProfileSwitch(e, props.pic.UserID)}>
+                <a
+                  onClick={e => props.handleProfileSwitch(e, props.pic.UserID)}
+                >
                   {props.pic.UserName}
                 </a>
-              ) }
+              )}
               {!props.isShowAuthor && (
-                <a onClick={e => props.handleDiveSiteMove(e, props.pic.latitude, props.pic.longitude)}>
+                <a
+                  onClick={e =>
+                    props.handleDiveSiteMove(
+                      e,
+                      props.pic.latitude,
+                      props.pic.longitude,
+                    )}
+                >
                   {screenData.SeaLifeImageCard.visitSitePrompt}
                 </a>
               )}
             </div>
           </div>
           <div className={style.actions}>
-            <div
-              onClick={e => props.handleLike(e)}
-              className={style.action}
-            >
+            <div onClick={e => props.handleLike(e)} className={style.action}>
               <Icon
-                className={`${style.actionIcon} ${style.biggerIcon} ${props.picLiked && style.liked}`}
+                className={`${style.actionIcon} ${style.biggerIcon} ${
+                  props.picLiked && style.liked
+                }`}
                 name="like-hand"
               />
-              <span>
-                {abbreviateNumber(props.countOfLikes)}
-              </span>
+              <span>{abbreviateNumber(props.countOfLikes)}</span>
             </div>
             <div
               onClick={e => props.handleCommentModal(e)}
@@ -187,55 +110,7 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
               className={style.action}
             >
               <Icon className={style.actionIcon} name="share" />
-              {props.shareContent && (
-                <div
-                  className={style.socialShareContainer}
-                  onClick={e => e.stopPropagation()}
-                >
-                  {platforms.map((platform) => {
-                    const { name, Button, Icon, getProps } = platform;
-                    const buttonProps = getProps(
-                      shareUrl,
-                      shareTitle,
-                      shareDescription,
-                      // shareImageUrl,
-                    );
-
-                    return (
-                      <Button
-                        key={name}
-                        {...buttonProps}
-                        className={style.socialButton}
-                        htmlTitle={`${name} share`}
-                        aria-label={name}
-                        onShareWindowClose={() =>
-                          toast.success(`Shared via ${name}!`, {
-                            autoClose: 1000,
-                          })}
-                      >
-                        {Icon}
-                      </Button>
-                    );
-                  })}
-                  <div
-                    onClick={() => {
-                      navigator.clipboard.writeText(shareUrl);
-                      toast.success('Link copied to clipboard!', {
-                        autoClose: 1000,
-                      });
-                    }}
-                    className={style.socialButton}
-                    style={{
-                      backgroundColor: 'transparent',
-                      paddingTop:      '4px',
-                    }}
-                    aria-label="Copy url"
-                    title="Copy url"
-                  >
-                    <Icon name="copy" className={style.socialIcon} />
-                  </div>
-                </div>
-              )}
+              {props.shareContent && <ShareContent {...props} />}
             </div>
           </div>
         </div>
