@@ -10,7 +10,7 @@ type TabItem = {
 type TabsProps = {
   data:       TabItem[]
   className?: string
-  fullWidth?: false
+  fullWidth?: false | boolean
   onChange?:  (tab: TabItem, index: number) => void
 };
 
