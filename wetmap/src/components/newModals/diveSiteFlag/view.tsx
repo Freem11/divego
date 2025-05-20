@@ -8,7 +8,8 @@ import FlagOption from '../../reusables/flagOption';
 import TextInput from '../../reusables/textInput';
 import screenData from '../screenData.json';
 import { Form } from './form';
-import styles from './style.module.scss';
+import style from './style.module.scss';
+import Button from '../../reusables/button';
 
 type DiveSiteFlagViewProps = {
   diveSite:          DiveSiteWithUserName | null
@@ -63,13 +64,13 @@ export default function DiveSiteFlagView(props: DiveSiteFlagViewProps) {
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
       <ButtonIcon
         icon={<Icon name="chevron-left" />}
-        className={`btn-lg text-gray ml-4 mt-4 ${styles.buttonBack}`}
+        className={`btn-lg text-gray ml-4 mt-4 ${style.buttonBack}`}
         onClick={props.onClose}
       />
 
       <div className="flex-column-between full-height mb-6">
         <div className="mx-10 text-left">
-          <h2 className="mt-4 text-bold">{`Reporting issue with Dive Site: "${props.diveSite?.name}" at Latitude: ${props.diveSite?.lat} Longitude: ${props.diveSite?.lng}`}</h2>
+          <h1 className="mt-4">{`Report issue with Dive Site: "${props.diveSite?.name}" at Latitude: ${props.diveSite?.lat} Longitude: ${props.diveSite?.lng}`}</h1>
           <h3 className="ml-4 mt-2 mb-1">
             {screenData.DiveSiteFlag.subHeading1}
           </h3>
@@ -84,6 +85,13 @@ export default function DiveSiteFlagView(props: DiveSiteFlagViewProps) {
               {children}
             </FlagOption>
           ))}
+        </div>
+        <div className={style.submitButton}>
+          <Button className="btn-lg" onClick={() => {}}>
+            <span className="hide-sm">
+              {screenData.DiveSiteFlag.submitButton}
+            </span>
+          </Button>
         </div>
       </div>
     </div>

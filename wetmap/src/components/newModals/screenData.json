@@ -238,6 +238,7 @@
         "description1": "(Please provide correct dive site name and we will correct the record)",
         "diveSiteNamePlaceholder": "Please enter the correct dive site name",
         "diveSiteLatitudePlaceholder": "Please enter the correct latitude",
-        "diveSiteLongitudePlaceholder": "Please enter the correct longitude"
+        "diveSiteLongitudePlaceholder": "Please enter the correct longitude",
+        "submitButton": "Submit"
       }
     }

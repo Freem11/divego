@@ -69,9 +69,7 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                     <Icon
                       name="error-outline"
                       className={style.reportIcon}
-                      onClick={() => {
-                        props.openDiveSiteFlag();
-                      }}
+                      onClick={props.openDiveSiteFlag}
                     />
                   </Tooltip>
                 </div>
