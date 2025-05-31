@@ -44,6 +44,7 @@
     &.ssrc-tabs_item--active button {
       border-bottom-color: var(--ssrc-tabs-active-underline-color);
       color: var(--ssrc-tabs-active-text-color);
+      width:100%;
     }
   }
 

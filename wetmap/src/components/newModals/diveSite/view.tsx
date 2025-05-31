@@ -1,11 +1,7 @@
 import React, { useRef } from 'react';
-import screenData from '../screenData.json';
 import style from './style.module.scss';
-import Button from '../../reusables/button';
 import Icon from '../../../icons/Icon';
 import defaultHeaderPicture from '../../../images/blackManta.png';
-import { DiveSiteWithUserName } from '../../../entities/diveSite';
-import { PhotosGroupedByDate } from '../../../entities/photos';
 import PlainTextInput from '../../reusables/plainTextInput';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import ButtonIcon from '../../reusables/buttonIcon';
@@ -13,9 +9,7 @@ import Tooltip from '../../reusables/tooltip';
 import ScreenData from '../screenData.json';
 import Tabs from '../../reusables/tabs';
 import { DiveSiteViewProps } from './type';
-import { SealifeSightings } from './sealifeSightings';
-import SeaLifeImageCardList from '../../reusables/seaLifeCardList';
-
+import { SealifeSightings } from './SealifeSightingsView';
 
 export default function DiveSiteView(props: DiveSiteViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
@@ -121,9 +115,23 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         <Tabs
           className="scroll-container non-scrollable"
           data={[
-            { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites Review', content: () => <SealifeSightings props={props} /> },
-            { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life Sightings',      content: 'World' },
-            { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Site Trips',  content: 'Trips' },
+            { key:       't-1', className: '', title:     'Sea Life Sightings',
+              content:   () => (
+                <SealifeSightings
+                  showPicUploaderButton={props.showPicUploaderButton}
+                  onClose={props.onClose}
+                  openPicUploader={props.openPicUploader}
+                  handleImageSelection={props.handleImageSelection}
+                  handleProfileSwitch={props.handleProfileSwitch}
+                  onDiveSiteBioChange={props.onDiveSiteBioChange}
+                  diveSite={props.diveSite}
+                  diveSitePics={props.diveSitePics}
+                  isPartnerAccount={props.isPartnerAccount}
+                  headerPictureUrl={props.headerPictureUrl}
+                />
+              ) },
+            { key: 't-2', className: '', title: 'Dive Sites Review', content: 'World' },
+            { key: 't-3', className: '', title: 'Dive Site Trips',  content: 'Trips' },
           ]}
           fullWidth={true}
         />

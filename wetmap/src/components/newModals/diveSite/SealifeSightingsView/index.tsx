@@ -1,6 +1,13 @@
-const SealifeSightingsView = (props: DiveSiteViewProps) => {
+import React from 'react';
+import SeaLifeImageCardList from '../../../reusables/seaLifeCardList';
+import screenData from '../../screenData.json';
+import style from './style.module.scss';
+import Button from '../../../reusables/button';
+import { DiveSiteViewProps } from '../type';
+
+export function SealifeSightings(props: DiveSiteViewProps) {
   return (
-    <div className="col-6 panel border-none full-height">
+    <div className="col-12 panel border-none full-height">
       <div className={style.panelHeader}>
         <h3>{screenData.DiveSite.drawerHeader}</h3>
         <div className={style.addPictureButton}>

@@ -29,7 +29,7 @@ const Tabs = (props: TabsProps) => {
       <ul className={`ssrc-tabs_items ${props.fullWidth ? 'full-width' : ''}`}>
         {props?.data?.map((tab, index) => {
           return (
-            <li key={index} className={`ssrc-tabs_item ${activeTab === index ? 'ssrc-tabs_item--active' : ''}`}>
+            <li key={index} className={`ssrc-tabs_item ${activeTab === index ? 'ssrc-tabs_item--active' : ''} ${tab.className ?? ''}`}>
               <button onClick={() => handleClick(index)}>
                 {typeof tab.title === 'function' ? <tab.title /> : tab.title}
               </button>
