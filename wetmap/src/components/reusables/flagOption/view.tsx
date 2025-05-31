@@ -19,6 +19,7 @@ export default function FlagOptionView(props: FlagOptionViewProps) {
       <div className={style.grayOutline}>
         <h5 className="ml-8 mb-0 text-bold text-dark">{props.title}</h5>
         <ButtonIcon
+          type="button"
           icon={<Icon name="chevron-right" />}
           className={`btn text-gray ml-4 my-2 ${style.buttonBack} ${
             props.isActive ? style.active : style.inactive
