@@ -42,7 +42,7 @@ export const getDiveShops = async (values: GPSBubble) => {
 // };
 
 export const getShopByName = async (value: string) => {
-  const { data, error } = await supabase.rpc('get_diveshops_byname', {
+  const { data, error } = await supabase.rpc('get_diveshops_byname_new', {
     orgname: value,
   });
 
