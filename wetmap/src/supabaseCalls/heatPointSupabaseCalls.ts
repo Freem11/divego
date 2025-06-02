@@ -8,17 +8,13 @@ type HeatPointFilter = {
 
 export const getHeatPoints = async (bubble: GPSBubble, filter?: HeatPointFilter) => {
   const builder = supabase
-    .from('heatPoints')
-    .select('lat,lng,weight')
-    .gte('lat', bubble.minLat)
-    .gte('lng', bubble.minLng)
-    .lte('lat', bubble.maxLat)
-    .lte('lng', bubble.maxLng);
-
-  if (filter?.animal?.length) {
-    builder.in('animal', filter.animal);
-  }
-
+    .rpc('get_heatmap_points',{
+      max_lat: bubble.maxLat,
+      min_lat: bubble.minLat,
+      max_lng: bubble.maxLng,
+      min_lng: bubble.minLng,
+      animal_list: filter?.animal?.length ? filter.animal : null,
+    });
 
   const { data } = await builder;
 
