@@ -1,0 +1,73 @@
+import React, { useState } from 'react';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+
+export type SliderInputProps = {
+    min: number
+    max: number
+    unit: string
+    showLabel: boolean
+};
+
+export default function SliderInput(props: SliderInputProps) {
+    const [label, setLabel] = useState<string>('');
+
+    const marks = [
+        {
+            value: props.min,
+            label: `${props.min}${props.unit}`,
+        },
+        {
+            value: props.max,
+            label: `${props.max}${props.unit}`,
+        },
+    ];
+
+    function valuetext(value: number) {
+        return `${value}${props.unit}`;
+    }
+
+    function handleChange(e) {
+        console.log(e.target.value);
+        currentLabel(e.target.value);
+    }
+
+    const steps = (props.max - props.min) / 5;
+
+    function currentLabel(speed: number) {
+        const range = props.max - props.min;
+        const percent = (speed - props.min) / range;
+
+        if (percent >= 0 && percent < 0.2) {
+            setLabel('no current');
+        } else if (percent < 0.4) {
+            setLabel('weak drift');
+        } else if (percent < 0.6) {
+            setLabel('typical drift');
+        } else if (percent < 0.8) {
+            setLabel('strong drift');
+        } else {
+            setLabel('extreme drift');
+        }
+    }
+
+    return (
+        <div style={{ height: 400, width: 400 }}>
+            <Box sx={{ width: 300 }}>
+                <h3>{props.showLabel ? label : ''}</h3>
+                <Slider
+                    defaultValue={70}
+                    aria-label="Small"
+                    valueLabelDisplay="auto"
+                    getAriaValueText={valuetext}
+                    min={props.min}
+                    max={props.max}
+                    marks={marks}
+                    step={steps}
+                    onChange={e => handleChange(e)}
+                />
+                <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
+            </Box>
+        </div>
+    );
+}
