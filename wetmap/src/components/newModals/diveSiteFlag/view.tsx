@@ -91,7 +91,12 @@ export default function DiveSiteFlagView(props: DiveSiteFlagViewProps) {
           ))}
         </div>
         <div className={style.submitButton}>
-          <Button disabled={isSubmitting} className="btn-lg">
+          <Button
+            disabled={isSubmitting}
+            className="btn-lg btn-primary col-3"
+            type="submit"
+            iconRight={<Icon name="chevron-right" />}
+          >
             <span className="hide-sm">
               {screenData.DiveSiteFlag.submitButton}
             </span>
