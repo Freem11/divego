@@ -17,10 +17,10 @@ export default function FlagOption(props: FlagOptionProps) {
   const animationRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (props.selectedReason !== props.index) {
+    if (props.selectedReason !== props.index && height > 0) {
       releaseMoreInfoAnimations();
     }
-  }, [props.selectedReason]);
+  }, [props.selectedReason, props.index, height]);
 
   useEffect(() => {
     return () => {
@@ -68,14 +68,13 @@ export default function FlagOption(props: FlagOptionProps) {
       setIsActive(true);
       animateHeight(0, contentRef.current?.scrollHeight || 0);
     } else {
-      setIsActive(false);
-      animateHeight(height, 0);
+      releaseMoreInfoAnimations();
     }
   };
 
   const releaseMoreInfoAnimations = () => {
     setIsActive(false);
-    setHeight(0);
+    animateHeight(height, 0);
   };
 
   return (
