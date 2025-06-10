@@ -32,12 +32,12 @@
   }
 }
 
-.active {
+.expanded {
   transform: rotate(90deg);
   transition: transform 0.1s linear;
 }
 
-.inactive {
+.collapsed {
   transform: rotate(0deg);
   transition: transform 0.1s linear;
 }
