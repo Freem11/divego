@@ -61,8 +61,6 @@ export default function DiveSiteFlagView(props: DiveSiteFlagViewProps) {
     },
   ];
 
-  const headerText = `Report issue with Dive Site: "${props.diveSite?.name}" at Latitude: ${props.diveSite?.lat} Longitude: ${props.diveSite?.lng}`;
-
   return (
     <div className="full-height" style={{ paddingBottom: '4.5rem' }}>
       <ButtonIcon
@@ -74,7 +72,9 @@ export default function DiveSiteFlagView(props: DiveSiteFlagViewProps) {
 
       <form className="flex-column-between full-height mb-6" onSubmit={handleSubmit(props.onSubmit)}>
         <div className="mx-10 text-left">
-          <h1 className="mt-4">{headerText}</h1>
+          <h1 className="mt-4 text-center">{screenData.DiveSiteFlag.heading}</h1>
+          <p className={style.title}>{`${props.diveSite?.name}`}</p>
+          <p className={style.info}>{`${props.diveSite?.lat}, ${props.diveSite?.lng}`}</p>
           <h3 className="ml-4 mt-2 mb-1">
             {screenData.DiveSiteFlag.subHeading1}
           </h3>

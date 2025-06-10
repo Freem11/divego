@@ -233,6 +233,7 @@
         "diveCenterEmptyDrawer": "No dive centers in this area."
       },
       "DiveSiteFlag":{
+        "heading": "Report issue with Dive Site",
         "subHeading1": "Type of issue",
         "flagReasons": {
           "incorrectName": "Dive site name not correct",
