@@ -2,7 +2,6 @@ import { DiveSiteWithUserName } from '../entities/diveSite';
 import { GPSBubble } from '../entities/GPSBubble';
 import { Pagination } from '../entities/pagination';
 import { supabase } from '../supabase';
-import TamapaData from '../../../TampaDiveSites.json';
 
 export const diveSites = async () => {
   const { data, error } = await supabase.from('diveSites').select();
@@ -19,12 +18,12 @@ export const diveSites = async () => {
 
 export const getDiveSitesBasic = async (bubble: GPSBubble) => {
   const { data, error } = await supabase
-    .from('diveSites')
-    .select('id,lat,lng,name')
-    .gte('lat', bubble.minLat)
-    .gte('lng', bubble.minLng)
-    .lte('lat', bubble.maxLat)
-    .lte('lng', bubble.maxLng);
+    .rpc('get_divesites', {
+      min_lat: bubble.minLat,
+      max_lat: bubble.maxLat,
+      min_lng: bubble.minLng,
+      max_lng: bubble.maxLng,
+    });
 
   if (error || !data) {
     console.log('couldn\'t do it,', error);
@@ -32,11 +31,10 @@ export const getDiveSitesBasic = async (bubble: GPSBubble) => {
   }
 
   return data as DiveSiteWithUserName[];
-  // return TamapaData as DiveSiteWithUserName[];
 };
 
 export const getDiveSitesWithUser = async (bubble: GPSBubble, filter?: Partial<DiveSiteWithUserName>, pagination?: Pagination) => {
-  const builder = supabase.rpc('get_divesites_with_username', {
+  const builder = supabase.rpc('get_divesites_with_username_new', {
     max_lat: bubble.maxLat,
     min_lat: bubble.minLat,
     max_lng: bubble.maxLng,
@@ -86,6 +84,7 @@ export const insertDiveSite = async (values) => {
       name:   values.name,
       lat:    values.lat,
       lng:    values.lng,
+      // add geom column
       UserID: values.UserID,
     },
   ]);
@@ -203,10 +202,10 @@ export const updateDiveSite = async (values) => {
 
 export const getSingleDiveSite = async (lat: number, lng: number) => {
   const { data, error } = await supabase
-    .from('diveSites')
-    .select()
-    .eq('lat', lat)
-    .eq('lng', lng);
+    .rpc('get_single_divesite', {
+      lat: lat,
+      lng: lng,
+    });
 
   if (error) {
     console.log('couldn\'t do it,', error);
