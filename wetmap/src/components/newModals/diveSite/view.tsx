@@ -92,30 +92,11 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
         </div>
       </div>
 
-      {/* <div className="col-md-12 col-3 full-height scroll-container mb-4" style={{ overflow: 'hidden', height: '90vh' }}>
-
-      </div> */}
-
       <div className="col-6 panel border-none full-height">
-        {/* <div className={style.panelHeader}>
-          <h3>{screenData.DiveSite.drawerHeader}</h3>
-          <div className={style.addPictureButton}>
-            {props.showPicUploaderButton
-            && (
-              <Button className="btn-lg" onClick={props.openPicUploader}>
-                <span className="hide-sm">
-                  {screenData.DiveSite.addSightingButton}
-                </span>
-              </Button>
-            ) }
-
-          </div>
-        </div>
-        <SeaLifeImageCardList diveSitePics={props.diveSitePics} /> */}
         <Tabs
           className="scroll-container non-scrollable"
           data={[
-            { key:       't-1', className: '', title:     'Sea Life Sightings',
+            { key:       't-1', className: 'full-width', title:     'Sea Life Sightings',
               content:   () => (
                 <SealifeSightings
                   showPicUploaderButton={props.showPicUploaderButton}
@@ -130,8 +111,8 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
                   headerPictureUrl={props.headerPictureUrl}
                 />
               ) },
-            { key: 't-2', className: '', title: 'Dive Sites Review', content: 'World' },
-            { key: 't-3', className: '', title: 'Dive Site Trips',  content: 'Trips' },
+            { key: 't-2', className: 'full-width', title: 'Dive Sites Review', content: 'World' },
+            { key: 't-3', className: 'full-width', title: 'Dive Site Trips',  content: 'Trips' },
           ]}
           fullWidth={true}
         />
