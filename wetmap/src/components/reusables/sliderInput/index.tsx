@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import Box from '@mui/material/Box';
-import Slider from '@mui/material/Slider';
+import styles from './style.module.scss';
+// import Box from '@mui/material/Box';
+// import Slider from '@mui/material/Slider';
 
 export type SliderInputProps = {
   min:       number
@@ -53,7 +54,7 @@ export default function SliderInput(props: SliderInputProps) {
 
   return (
     <div style={{ height: 400, width: 400 }}>
-      <Box sx={{ width: 300 }}>
+      {/* <Box sx={{ width: 300 }}>
         <h3>{props.showLabel ? label : ''}</h3>
         <Slider
           defaultValue={70}
@@ -67,7 +68,10 @@ export default function SliderInput(props: SliderInputProps) {
           onChange={(e, value) => handleChange(e, value as number)}
         />
         <Slider defaultValue={50} aria-label="Default" valueLabelDisplay="auto" />
-      </Box>
+      </Box> */}
+      <div className={styles.slidecontainer}>
+        <input type="range" min={props.min} max={props.max} defaultValue="50" className={styles.slider} id="myRange" />
+      </div>
     </div>
   );
 }

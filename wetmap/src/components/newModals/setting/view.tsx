@@ -79,6 +79,7 @@ export default function SettingsView(props: SettingsProps) {
               unit="m/s"
               showLabel={false}
             />
+
           </div>
 
           <div className={styles.horizontalButtonContainer}>
