@@ -82,7 +82,7 @@ export default function DiveSite(props: DiveSiteProps) {
       clearPreviousImage(selectedDiveSite.divesiteprofilephoto);
     }
 
-    const createFileName = await handleImageUpload(event);
+    const createFileName = await handleImageUpload(event.target.files);
     setSelectedDiveSite((prev) => {
       if (!prev) {
         return prev;

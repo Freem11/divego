@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { ActiveProfile } from '../../entities/profile';
 import { sessionCheck, signOut } from '../../supabaseCalls/authenticateSupabaseCalls';
-import { createProfile, grabProfileById } from '../../supabaseCalls/accountSupabaseCalls';
+import { createProfile, grabProfileById, updateProfile } from '../../supabaseCalls/accountSupabaseCalls';
 import { UserProfileContext } from './userProfileContext';
 import { Session } from '@supabase/supabase-js';
 
@@ -11,6 +11,7 @@ export type UserProfileContextType = {
   session:            Session | null
   initProfile:        (force?: boolean) => Promise<void>
   profileInitialized: boolean | null
+  switchToMetrics:    (metrics: boolean) => void
 };
 
 
@@ -67,6 +68,7 @@ export const UserProfileContextProvider = ({ children }: any) => {
       const profile = await grabProfileById(session.user.id);
       if (profile) {
         setProfile(profile);
+        console.log('profile', profile);
       } else {
         const created = await createProfile({
           id:    session.user.id,
@@ -100,10 +102,25 @@ export const UserProfileContextProvider = ({ children }: any) => {
     initialized.current = null;
   };
 
+  const switchToMetrics = async (metrics: boolean) => {
+    if (profile) {
+      setProfile({
+        ...profile,
+        unit_system: metrics ? 'Metric' : 'Imperial',
+      });
+      await updateProfile({
+        ...profile,
+        UserID:      profile.UserID,
+        unit_system: metrics ? 'Metric' : 'Imperial',
+      });
+    }
+  };
+
 
   return (
     <UserProfileContext.Provider value={{
       logout,
+      switchToMetrics,
       profile,
       session,
       initProfile,

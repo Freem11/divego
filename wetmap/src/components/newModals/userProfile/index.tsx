@@ -140,7 +140,7 @@ export default function UserProfile(props: UserProps) {
       clearPreviousImage(openedProfile.profilePhoto);
     }
 
-    const createFileName = await handleImageUpload(event);
+    const createFileName = await handleImageUpload(event.target.files);
     if (profile) {
       await updateProfile({
         UserID:       profile.UserID,
