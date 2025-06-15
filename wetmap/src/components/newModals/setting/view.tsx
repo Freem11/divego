@@ -4,6 +4,7 @@ import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
+import SliderInput from '../../reusables/sliderInput';
 
 type SettingsProps = {
   onClose:             () => void
@@ -71,6 +72,14 @@ export default function SettingsView(props: SettingsProps) {
             </div>
           </div>
 
+          <div>
+            <SliderInput
+              min={0}
+              max={10}
+              unit="m/s"
+              showLabel={false}
+            />
+          </div>
 
           <div className={styles.horizontalButtonContainer}>
             <div className="col-3"></div>
