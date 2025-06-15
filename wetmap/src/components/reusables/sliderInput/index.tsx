@@ -53,7 +53,7 @@ export default function SliderInput(props: SliderInputProps) {
   }
 
   return (
-    <div style={{ height: 400, width: 400 }}>
+    <div className={styles.sliderInputContainer}>
       {/* <Box sx={{ width: 300 }}>
         <h3>{props.showLabel ? label : ''}</h3>
         <Slider
