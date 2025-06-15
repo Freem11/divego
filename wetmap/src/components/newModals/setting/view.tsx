@@ -5,6 +5,7 @@ import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
 import SliderInput from '../../reusables/sliderInput';
+import WavyBlock from '../../reusables/wavyBlock';
 
 type SettingsProps = {
   onClose:             () => void
@@ -52,6 +53,7 @@ export default function SettingsView(props: SettingsProps) {
             )}
           </div>
 
+
           <div>
             <h2 className="ml-4 mt-2 mb-1">Unit System</h2>
             <div className={styles.grayOutlineFlexRow}>
@@ -72,12 +74,16 @@ export default function SettingsView(props: SettingsProps) {
             </div>
           </div>
 
+
           <div>
+
             <SliderInput
               min={0}
-              max={10}
+              max={2.5}
+              range={2.5 / 25}
+              value={1}
               unit="m/s"
-              showLabel={false}
+              showLabel={true}
             />
 
           </div>
