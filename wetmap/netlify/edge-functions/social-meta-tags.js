@@ -1,3 +1,5 @@
+
+
 export default async function handler(request, context) {
   const url = new URL(request.url);
   const userAgent = request.headers.get('user-agent') || '';
@@ -10,11 +12,11 @@ export default async function handler(request, context) {
   }
 
   // Extract share parameters from URL
-  const title = url.searchParams.get('title') || 'Scuba SEAsons - Dive into Amazing Underwater Adventures';
-  const description = url.searchParams.get('description') || 'Discover the best diving spots and marine life encounters worldwide. Share your underwater adventures with the diving community.';
-  const image = url.searchParams.get('image') || 'https://scuba-seasons.web.app/src/images/Matt_Manta_White.png';
-  const type = url.searchParams.get('type') || 'website';
-  const cleanUrl = `${url.protocol}//${url.host}${url.pathname}`;
+  const title = 'Scuba SEAsons - Dive into Amazing Underwater Adventures';
+  const description = 'Join a community of divers across the globe sharing their favorite dive spots and best time to visit.';
+  const image = `https://${url.host}/src/assets/SharingPromo.png`;
+  const type = 'website';
+  const cleanUrl = `https://${url.host}${url.pathname}`;
 
 
   const html = `<!DOCTYPE html>
