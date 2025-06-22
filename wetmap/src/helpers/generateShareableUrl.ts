@@ -7,7 +7,7 @@ type ShareableUrlParams = {
 };
 
 export function generateShareableUrl(params: ShareableUrlParams): string {
-  const baseUrl = 'https://scuba-seasons.web.app/';
+  const baseUrl = 'https://scubaseasons.netlify.app/';
 
   const searchParams = new URLSearchParams({
     title:       params.title,

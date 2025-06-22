@@ -2,6 +2,14 @@
   publish = "dist"
   command = "npm run build"
 
+# Edge Functions for social media crawlers
+[functions]
+  directory = "netlify/edge-functions"
+
+[[edge_functions]]
+  function = "social-meta-tags"
+  path = "/*"
+
 [[headers]]
   for = "/*"
   [headers.values]
