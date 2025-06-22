@@ -14,7 +14,7 @@ export default async function handler(request, context) {
   // Extract share parameters from URL
   const title = 'Scuba SEAsons - Dive into Amazing Underwater Adventures';
   const description = 'Join a community of divers across the globe sharing their favorite dive spots and best time to visit.';
-  const image = `https://${url.host}/src/assets/SharingPromo.png`;
+  const image = 'https://scubaseasons.netlify.app/src/assets/SharingPromo.png';
   const type = 'website';
   const cleanUrl = `https://${url.host}${url.pathname}`;
 
