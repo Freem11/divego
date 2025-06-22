@@ -10,6 +10,7 @@ import {
 import style from './style.module.scss';
 import ShareContentView from './view';
 import Icon from '../../../icons/Icon';
+import { generatePhotoShareUrl } from '../../../helpers/generateShareableUrl';
 
 type SocialPlatform = {
   name:     string
@@ -30,12 +31,13 @@ type Props = {
 
 const ShareContent = (props: Props) => {
   const { pic } = props;
-  const hostUrl = 'https://scuba-seasons.web.app/';
-  const photoName = props.pic.photoFile.split('/').pop();
-  const shareUrl = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
+  // const hostUrl = 'https://scuba-seasons.web.app/';
+  // const photoName = props.pic.photoFile.split('/').pop();
+  // const shareUrl = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
   const shareTitle = props.label;
   const shareDescription = `Check out this amazing photo of ${props.label} on WetMap!`;
   // const shareImageUrl = pic.photoFile;
+  const shareUrl = generatePhotoShareUrl(pic, props.label);
 
   const createSocialPlatforms = (): SocialPlatform[] => {
     return [
@@ -43,9 +45,11 @@ const ShareContent = (props: Props) => {
         name:     'Facebook',
         Button:   FacebookShareButton,
         Icon:     <Icon name="facebook" className={style.socialIcon} />,
-        getProps: (url, quote) => ({
+        getProps: (url, quote, title, description) => ({
           quote,
           url,
+          title,
+          description,
           // hashtag: '#ScubaSEAsons', // Optional
         }),
       },
@@ -77,7 +81,7 @@ const ShareContent = (props: Props) => {
           url,
           title,
           summary,
-          source: hostUrl,
+          // source: hostUrl,
         }),
       },
       {
