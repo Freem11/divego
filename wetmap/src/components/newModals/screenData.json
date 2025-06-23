@@ -232,5 +232,18 @@
         "diveSiteEmptyDrawer": "No dive sites in this area.",
         "seaLifeEmptyDrawer": "No sea life in this area.",
         "diveCenterEmptyDrawer": "No dive centers in this area."
+      },
+      "DiveSiteFlag":{
+        "heading": "Report issue with Dive Site",
+        "subHeading1": "Type of issue",
+        "flagReasons": {
+          "incorrectName": "Dive site name not correct",
+          "incorrectCoordinates": "Dive site GPS coordinates are not correct"
+        },
+        "description1": "(Please provide correct dive site name and we will correct the record)",
+        "diveSiteNamePlaceholder": "Please enter the correct dive site name",
+        "diveSiteLatitudePlaceholder": "Please enter the correct latitude",
+        "diveSiteLongitudePlaceholder": "Please enter the correct longitude",
+        "submitButton": "Submit"
       }
     }

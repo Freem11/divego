@@ -1,0 +1,50 @@
+.masterBox {
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.grayOutline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 2;
+  margin-top: -1px;
+  border-top: 1px solid; /* Top border */
+  border-bottom: 1px solid; /* Bottom border */
+  width: 96%;
+  background-color: white;
+  color: #5f5e5e;
+}
+
+.buttonBack {
+  color: #afafaf;
+
+  svg {
+    scale: 2;
+  }
+  &:hover,
+  &:focus {
+    color: #484848;
+  }
+}
+
+.expanded {
+  transform: rotate(90deg);
+  transition: transform 0.1s linear;
+}
+
+.collapsed {
+  transform: rotate(0deg);
+  transition: transform 0.1s linear;
+}
+
+.extraBox {
+  position: relative;
+  z-index: 1;
+  overflow-y: auto;
+  width: 93%;
+}

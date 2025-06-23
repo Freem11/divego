@@ -14,6 +14,7 @@ import { MapContext } from '../../googleMap/mapContext';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
 import UserProfile from '../userProfile';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
+import DiveSiteFlag from '../diveSiteFlag';
 
 type DiveSiteProps = Partial<ModalHandleProps> & {
   id?:    number
@@ -98,6 +99,13 @@ export default function DiveSite(props: DiveSiteProps) {
     modalShow(PicUploader);
   };
 
+  const openDiveSiteFlag = () => {
+    modalShow(DiveSiteFlag, {
+      diveSite:          selectedDiveSite,
+      keepPreviousModal: true,
+    });
+  };
+
 
   useEffect(() => {
     if (selectedDiveSite?.divesiteprofilephoto) {
@@ -128,6 +136,7 @@ export default function DiveSite(props: DiveSiteProps) {
       showPicUploaderButton={mapContext.mapConfig !== 2}
       onClose={props.onModalCancel}
       openPicUploader={openPicUploader}
+      openDiveSiteFlag={openDiveSiteFlag}
       handleImageSelection={handleImageSelection}
       handleProfileSwitch={handleProfileSwitch}
       diveSite={selectedDiveSite}

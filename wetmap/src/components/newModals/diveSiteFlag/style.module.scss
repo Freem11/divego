@@ -1,0 +1,70 @@
+@import "../../../styles/variables.scss";
+
+.buttonBack {
+    transition: color 0.2s ease;
+    color: #afafaf;
+
+    svg {
+        transform: scale(2);
+    }
+
+    &:hover,
+    &:focus {
+        color: #484848;
+    }
+}
+
+.title {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.info {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  column-gap: 0.25rem;
+  font-size: 14px;
+  color: rgb(101, 101, 101);
+  text-wrap: nowrap;
+  flex-wrap: wrap;
+}
+
+.packetHeader {
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 1rem;
+    padding-top: 1rem;
+    text-align: left;
+    color: rgb(100, 100, 100);
+    font-weight: 500;
+}
+
+.packetHeaderItem {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.subHeading {
+    border-bottom: 1px solid;
+}
+
+.grayOutline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: -1px;
+    border-top: 1px solid; /* Top border */
+    border-bottom: 1px solid; /* Bottom border */
+    color: #5f5e5e;
+}
+
+.submitButton {
+    z-index: 1;
+    margin-inline: auto;
+    width: fit-content;
+}
+

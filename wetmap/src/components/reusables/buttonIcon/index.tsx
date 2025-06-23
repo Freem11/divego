@@ -6,11 +6,12 @@ export type ButtonProps = {
   icon?:      React.ReactNode
   className?: string
   disabled?:  boolean
+  type?:      'button' | 'submit' | 'reset'
 };
 
 export default function ButtonIcon(props: ButtonProps) {
   return (
-    <button disabled={props.disabled || false} onClick={props.onClick} className={`btn ${style.button} ${props.className ?? ''}`}>
+    <button type={props.type || 'submit'} disabled={props.disabled || false} onClick={props.onClick} className={`btn ${style.button} ${props.className ?? ''}`}>
       <i className={style.icon}>
         {props.icon}
       </i>
