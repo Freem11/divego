@@ -7,6 +7,7 @@ import { TOOLTIP_DIRECTION } from '../tooltip';
 import ScreenData from '../../newModals/screenData.json';
 import BlurryImage from '../blurryImage';
 import abbreviateNumber from '../../../helpers/abbreviateNumber';
+import screenData from '../../newModals/screenData.json';
 
 type SeaLifeCardViewProps = {
   pic:                 PhotoWithLikesAndComments
@@ -55,7 +56,7 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
               ) }
               {!props.isShowAuthor && (
                 <a onClick={e => props.handleDiveSiteMove(e, props.pic.latitude, props.pic.longitude)}>
-                  Visit site
+                  {screenData.SeaLifeImageCard.visitSitePrompt}
                 </a>
               )}
             </div>
