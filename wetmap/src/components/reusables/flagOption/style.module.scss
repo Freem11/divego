@@ -32,12 +32,12 @@
   }
 }
 
-.active {
+.expanded {
   transform: rotate(90deg);
   transition: transform 0.1s linear;
 }
 
-.inactive {
+.collapsed {
   transform: rotate(0deg);
   transition: transform 0.1s linear;
 }
@@ -47,8 +47,4 @@
   z-index: 1;
   overflow-y: auto;
   width: 93%;
-  background-color: #fbfaf9;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
-  box-shadow: 1px 3px 5px #87878780;
 }

@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import React from 'react';
 import FlagOptionView from './view';
+import useHeightAnimation from './useHeightAnimation';
 
 type FlagOptionProps = {
   title:             string
@@ -10,84 +11,48 @@ type FlagOptionProps = {
   children:          React.ReactNode | React.ReactNode[]
 };
 
+const COLLAPSED_HEIGHT = 0;
+
 export default function FlagOption(props: FlagOptionProps) {
-  const [isActive, setIsActive] = useState(false);
-  const [height, setHeight] = useState(0);
+  const { selectedReason, setSelectedReason, index, title, children } = props;
+
   const contentRef = useRef<HTMLDivElement>(null);
-  const animationRef = useRef<number | null>(null);
 
-  useEffect(() => {
-    if (props.selectedReason !== props.index) {
-      releaseMoreInfoAnimations();
-    }
-  }, [props.selectedReason]);
+  const { height, animateHeight } = useHeightAnimation();
 
-  useEffect(() => {
-    return () => {
-      if (animationRef.current !== null) {
-        cancelAnimationFrame(animationRef.current);
-      }
-    };
-  }, []);
+  const isSelected = selectedReason === index;
+  const isExpanded = height > COLLAPSED_HEIGHT;
 
-  const animateHeight = (
-    startHeight: number,
-    endHeight: number,
-    duration: number = 300,
-  ) => {
-    const startTime = performance.now();
-
-    const animate = (currentTime: number) => {
-      const elapsedTime = currentTime - startTime;
-      const progress = Math.min(elapsedTime / duration, 1);
-
-      const easeProgress = 1 - Math.pow(1 - progress, 2);
-
-      const currentHeight
-        = startHeight + (endHeight - startHeight) * easeProgress;
-      setHeight(currentHeight);
-
-      if (progress < 1) {
-        animationRef.current = requestAnimationFrame(animate);
-      } else {
-        animationRef.current = null;
-      }
-    };
-
-    if (animationRef.current !== null) {
-      cancelAnimationFrame(animationRef.current);
-    }
-
-    animationRef.current = requestAnimationFrame(animate);
-  };
-
-  const startMoreInfoAnimation = (id: number) => {
-    props.setSelectedReason(id);
-
-    if (height === 0) {
-      setIsActive(true);
-      animateHeight(0, contentRef.current?.scrollHeight || 0);
+  const toggleExpansion = useCallback((shouldExpand: boolean) => {
+    if (shouldExpand) {
+      const targetHeight = contentRef.current?.scrollHeight || 0;
+      animateHeight(height, targetHeight);
     } else {
-      setIsActive(false);
-      animateHeight(height, 0);
+      animateHeight(height, COLLAPSED_HEIGHT);
     }
-  };
+  }, [height, animateHeight]);
 
-  const releaseMoreInfoAnimations = () => {
-    setIsActive(false);
-    setHeight(0);
-  };
+  const handleOptionSelect = useCallback((id: number) => {
+    setSelectedReason(id);
+    toggleExpansion(!isExpanded);
+  }, [setSelectedReason, toggleExpansion, isExpanded]);
+
+  useEffect(() => {
+    if (!isSelected && isExpanded) {
+      toggleExpansion(false);
+    }
+  }, [isSelected, isExpanded, toggleExpansion]);
 
   return (
     <FlagOptionView
-      title={props.title}
-      index={props.index}
-      isActive={isActive}
-      startMoreInfoAnimation={startMoreInfoAnimation}
+      title={title}
+      index={index}
+      isExpanded={isExpanded}
+      handleOptionSelect={handleOptionSelect}
       height={height}
       contentRef={contentRef}
     >
-      {props.children}
+      {children}
     </FlagOptionView>
   );
 }
