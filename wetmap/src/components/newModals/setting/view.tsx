@@ -5,7 +5,7 @@ import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
 import SliderInput from '../../reusables/sliderInput';
-import WavyBlock from '../../reusables/wavyBlock';
+import VisibilitySliderInput from '../../reusables/visibilitySliderInput';
 
 type SettingsProps = {
   onClose:             () => void
@@ -86,6 +86,9 @@ export default function SettingsView(props: SettingsProps) {
               showLabel={true}
             />
 
+          </div>
+          <div>
+            <VisibilitySliderInput />
           </div>
 
           <div className={styles.horizontalButtonContainer}>

@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './style.module.scss';
-import { set } from 'react-hook-form';
+// import { set } from 'react-hook-form';
 // import Box from '@mui/material/Box';
 // import Slider from '@mui/material/Slider';
 
@@ -17,16 +17,16 @@ export default function SliderInput(props: SliderInputProps) {
   const [label, setLabel] = useState<string>('');
   const [value, setValue] = useState<number>(props.value);
 
-  const marks = [
-    {
-      value: props.min,
-      label: `${props.min}${props.unit}`,
-    },
-    {
-      value: props.max,
-      label: `${props.max}${props.unit}`,
-    },
-  ];
+  // const marks = [
+  //   {
+  //     value: props.min,
+  //     label: `${props.min}${props.unit}`,
+  //   },
+  //   {
+  //     value: props.max,
+  //     label: `${props.max}${props.unit}`,
+  //   },
+  // ];
 
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
