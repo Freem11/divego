@@ -1,4 +1,12 @@
-# How to create/modify svg in Inkscape
+# How to add svg to the app
+Put optimized svg file into `svg` directory and run `node _build-svg.js ` in current folder. The script will parse `svg` directory and create two files:
+ - index.html - simple html file for preview. It's a convenient way to check icons added to the app
+ - _config.json - basically key value storage (svg name: svg metadata). This file is being used in `Icon.tsx` to generate svg.
+ 
+
+# How to create/modify/optimize svg in Inkscape
+
+https://inkscape.org/ - Inkscape is a vector graphics editor.
 
 ## Remome unnecessary points
 Manually - just select point and hit delete - the app will automatically adjust other points to keep the shape
