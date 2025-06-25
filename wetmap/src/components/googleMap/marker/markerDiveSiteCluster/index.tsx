@@ -16,7 +16,7 @@ export function MarkerDiveSiteCluster(props: MarkerDiveSiteClusterProps) {
   <path style="transform: scale(0.85); transform-origin: center" fill="white" d="${iconConfig['anchors'][1]}"/>
   </svg>`;
   const url = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg);
-  console.log(url);
+
   return (
     <Marker
       icon={{ url }}
