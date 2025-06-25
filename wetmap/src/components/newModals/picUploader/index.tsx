@@ -32,7 +32,7 @@ export default function PicUploader(props: PicUploaderProps) {
       clearPreviousImage(photoFile);
     }
     try {
-      const createFileName = await handleImageUpload(event);
+      const createFileName = await handleImageUpload(event.target.files);
       setPhotoFile(`animalphotos/public/${createFileName}`);
     } catch (e) {
       console.error(e);

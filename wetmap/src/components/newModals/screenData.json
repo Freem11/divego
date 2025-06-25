@@ -103,7 +103,7 @@
         "submitButton": "Submit",
         "selectSitesButton": "Select Dive Sites",
         "drawerHeader": "Possible Sites in this Trip   (Press to Remove)",
-        "emptyDrawer": "No Dive Sites have been added to this Trip yet.",
+        "emptyDrawer": "No dive sites yet.",
         "submitSuccess": "Trip created successfully!",
         "submitError": "Error creating trip. Please try again later.",
         "editTripError" : "There was an error submitting trip edit request. Please try again later.",
@@ -119,7 +119,7 @@
       },
       "UserProfile": {
         "drawerHeader": "'s Sea Creature Encounters",
-        "emptyDrawer": " hasn't posted any sightings yet.",
+        "emptyDrawer": "No sightings posted yet.",
         "userDoesFollow": "Following",
         "UserDoesNotFollow": "Follow",
         "userDefaultDescription": "Say a little about yourself...",
@@ -133,18 +133,19 @@
       },
       "DiveSite": {
         "drawerHeader": "Sea Creature Sightings",
-        "emptyDrawer": "No sightings at this site yet.",
+        "emptyDrawer": "No sightings yet.",
         "addSightingButton": "Add Sighting",
         "submitButton": "Submit",
         "reportSiteTooltip": "Report an issue with this dive site",
         "addPhotoTooltip": "Add a photo of this dive site"
       },
       "SeaLifeImageCard": {
-        "reportPictureTooltip": "Report an issue with this picture"
+        "reportPictureTooltip": "Report an issue with this picture",
+        "visitSitePrompt": "Visit Site"
       },
       "DiveShop": {
         "drawerHeader": "Offered Dive Trips",
-        "emptyDrawer": " aren't currently offering any Dive Trips",
+        "emptyDrawer": "No dive trips yet.",
         "addDiveShopPhotoButton": "Add a photo of your dive shop"
       },
       "CommentsModal": {
@@ -226,5 +227,10 @@
         "contact": "Contact us",
         "contantEmail": "scubaseasons@gmail.com",
         "errorDeleting": "Something went wrong. Please try again later"
+      },
+      "Sidebar": {
+        "diveSiteEmptyDrawer": "No dive sites in this area.",
+        "seaLifeEmptyDrawer": "No sea life in this area.",
+        "diveCenterEmptyDrawer": "No dive centers in this area."
       }
     }

@@ -11,7 +11,7 @@ export type PhotoWithLikesAndComments = {
   UserName:     string
   likecount:    number
   likedbyuser:  boolean
-  likeid:       number
+  likeid:       number | null
   commentcount: number
 };
 
@@ -38,4 +38,12 @@ export type Animal = {
   label:      string
   photofile:  string
   times_seen: number
+};
+
+export type HistogramData = {
+  animals: string[]
+  minLat:  number
+  maxLat:  number
+  minLng:  number
+  maxLng:  number
 };
