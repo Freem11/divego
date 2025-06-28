@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './style.module.scss';
 // import { set } from 'react-hook-form';
 // import Box from '@mui/material/Box';
@@ -10,23 +10,16 @@ export type SliderInputProps = {
   value:     number
   range:     number
   unit:      string
+  label:     string
   showLabel: boolean
 };
 
 export default function SliderInput(props: SliderInputProps) {
-  const [label, setLabel] = useState<string>('');
+  const [label, setLabel] = useState<string>(props.label);
   const [value, setValue] = useState<number>(props.value);
-
-  // const marks = [
-  //   {
-  //     value: props.min,
-  //     label: `${props.min}${props.unit}`,
-  //   },
-  //   {
-  //     value: props.max,
-  //     label: `${props.max}${props.unit}`,
-  //   },
-  // ];
+  console.log('value', value);
+  console.log('unit', props.unit);
+  console.log('label', label);
 
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
@@ -60,15 +53,19 @@ export default function SliderInput(props: SliderInputProps) {
     }
   }
 
+  useEffect(() => {
+    setValue(props.value);
+  }, [props.unit]);
+
   return (
     <div className={styles.sliderInputContainer}>
       <div className={styles.slidecontainer}>
-        <h3>{props.showLabel ? label : ''}</h3>
+        <h3>{props.showLabel ? label : 'hello'}</h3>
         <input
           type="range"
           min={props.min}
           max={props.max}
-          defaultValue={props.value}
+          defaultValue={value}
           step={props.range}
           className={styles.slider}
           onChange={e => handleChange(e)}

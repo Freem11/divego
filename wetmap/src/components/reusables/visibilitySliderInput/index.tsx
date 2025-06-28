@@ -1,21 +1,39 @@
 import React from 'react';
 import SliderInput from '../sliderInput';
+import { convertDistance } from '../../../helpers/utils/converter';
 
 export default function VisibilitySliderInput(
+  { isMetric, value }: { isMetric: boolean, value: number },
 ) {
-  // we need react redux to get the imperial/metric data, otherwise, we have to keep calling the api
-  const maxMetrics = 100;
-  const maxImperial = 30;
+  const maxMetrics = 30;
+  const maxImperial = 100;
+
   return (
     <div>
-      <SliderInput
-        min={0}
-        max={100}
-        value={0}
-        range={10 / 100}
-        unit="ft"
-        showLabel={false}
-      />
+      {
+        isMetric
+          ?      (
+              <SliderInput
+                min={0}
+                max={maxMetrics}
+                value={value}
+                range={3 / 30}
+                unit="m"
+                showLabel={false}
+              />
+            )
+          :      (
+              <SliderInput
+                min={0}
+                max={maxImperial}
+                value={convertDistance(value, 'm')}
+                range={10 / 100}
+                unit="ft"
+                showLabel={false}
+              />
+            )
+      }
+
     </div>
   );
 }

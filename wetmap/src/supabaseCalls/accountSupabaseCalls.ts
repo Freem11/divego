@@ -46,7 +46,6 @@ export const createProfile = async (values) => {
 };
 
 export const updateProfile = async (profile: Partial<ActiveProfile>) => {
-  console.log('profile', profile);
   const response = await supabase
     .from(USERS_PROFILE_TABLE)
     .update(profile)

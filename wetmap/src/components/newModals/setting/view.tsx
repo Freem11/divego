@@ -4,8 +4,8 @@ import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
-import SliderInput from '../../reusables/sliderInput';
 import VisibilitySliderInput from '../../reusables/visibilitySliderInput';
+import CurrentSliderInput from '../../reusables/currentSliderInput';
 
 type SettingsProps = {
   onClose:             () => void
@@ -77,18 +77,19 @@ export default function SettingsView(props: SettingsProps) {
 
           <div>
 
-            <SliderInput
+            {/* <SliderInput
               min={0}
               max={2.5}
               range={2.5 / 25}
               value={1}
               unit="m/s"
               showLabel={true}
-            />
+            /> */}
 
+            <CurrentSliderInput isMetric={isChecked} value={1} />
           </div>
           <div>
-            <VisibilitySliderInput />
+            <VisibilitySliderInput isMetric={isChecked} value={30} />
           </div>
 
           <div className={styles.horizontalButtonContainer}>
