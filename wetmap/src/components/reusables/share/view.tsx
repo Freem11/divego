@@ -1,11 +1,10 @@
-import style from './style.module.scss';
 import React from 'react';
+import style from './style.module.scss';
 import { toast } from 'react-toastify';
 import Icon from '../../../icons/Icon';
 import { SocialPlatform } from './index';
 
 interface ShareContentViewProps {
-  // pic:              any
   shareUrl:         string
   shareTitle:       string
   shareDescription: string
@@ -32,7 +31,6 @@ const ShareContentView: React.FC<ShareContentViewProps> = ({
             {...platformProps}
             title={shareTitle}
             description={shareDescription}
-            // url="https://www.youtube.com/watch?v=kPYbl-o0YPs"
             url={shareUrl}
             className={style.socialButton}
             htmlTitle={`${name} share`}
