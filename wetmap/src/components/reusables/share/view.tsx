@@ -2,30 +2,21 @@ import style from './style.module.scss';
 import React from 'react';
 import { toast } from 'react-toastify';
 import Icon from '../../../icons/Icon';
+import { SocialPlatform } from './index';
 
-const ShareContentView = ({
-  // pic,
+interface ShareContentViewProps {
+  // pic:              any
+  shareUrl:         string
+  shareTitle:       string
+  shareDescription: string
+  platforms:        SocialPlatform[]
+}
+
+const ShareContentView: React.FC<ShareContentViewProps> = ({
   platforms,
   shareUrl,
   shareTitle,
   shareDescription,
-}: // handleShareCopyUrl,
-{
-  pic:              any
-  shareUrl:         string
-  shareTitle:       string
-  shareDescription: string
-  platforms: {
-    name:     string
-    Button:   React.ComponentType<any>
-    Icon:     React.ReactNode
-    getProps: (
-      url: string,
-      title: string,
-      description?: string,
-      imageUrl?: string
-    ) => any
-  }[]
 }) => {
   return (
     <div
@@ -33,18 +24,16 @@ const ShareContentView = ({
       onClick={e => e.stopPropagation()}
     >
       {platforms.map((platform) => {
-        const { name, Button, Icon, getProps } = platform;
-        const buttonProps = getProps(
-          shareUrl,
-          shareTitle,
-          shareDescription,
-          // shareImageUrl,
-        );
+        const { name, Button, Icon, platformProps } = platform;
 
         return (
           <Button
             key={name}
-            {...buttonProps}
+            {...platformProps}
+            title={shareTitle}
+            description={shareDescription}
+            // url="https://www.youtube.com/watch?v=kPYbl-o0YPs"
+            url={shareUrl}
             className={style.socialButton}
             htmlTitle={`${name} share`}
             aria-label={name}

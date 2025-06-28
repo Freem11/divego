@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 // import { toast } from 'react-toastify';
 import {
   FacebookShareButton,
@@ -10,108 +10,74 @@ import {
 import style from './style.module.scss';
 import ShareContentView from './view';
 import Icon from '../../../icons/Icon';
-import { generatePhotoShareUrl } from '../../../helpers/generateShareableUrl';
 
-type SocialPlatform = {
-  name:     string
-  Button:   React.ComponentType<any>
-  Icon:     React.ReactNode
-  getProps: (
-    url: string,
-    title: string,
-    description?: string,
-    imageUrl?: string
-  ) => any
+export type SocialPlatform = {
+  name:          string
+  Button:        React.ComponentType<any>
+  Icon:          React.ReactNode
+  platformProps: {
+    hashtag?:      string
+    hashtags?:     string[]
+    separator?:    string
+    subject?:      string
+    body?:         string
+    windowWidth?:  number
+    windowHeight?: number
+  }
 };
 
-type Props = {
-  pic:   any
-  label: string
-};
+const ShareContent = () => {
+  const shareUrl = `https://scuba-seasons.web.app/`;
+  const shareTitle = 'Scuba SEAsons - Dive into Amazing Underwater Adventures!';
+  const shareDescription = 'Discover the best diving spots and marine life encounters worldwide. Share your underwater adventures with the diving community.';
 
-const ShareContent = (props: Props) => {
-  const { pic } = props;
-  // const hostUrl = 'https://scuba-seasons.web.app/';
-  // const photoName = props.pic.photoFile.split('/').pop();
-  // const shareUrl = `https://pub-c089cae46f7047e498ea7f80125058d5.r2.dev/${photoName}`;
-  const shareTitle = props.label;
-  const shareDescription = `Check out this amazing photo of ${props.label} on WetMap!`;
-  // const shareImageUrl = pic.photoFile;
-  const shareUrl = generatePhotoShareUrl(pic, props.label);
-
-  const createSocialPlatforms = (): SocialPlatform[] => {
+  const platforms = useMemo<SocialPlatform[]>(() => {
     return [
       {
-        name:     'Facebook',
-        Button:   FacebookShareButton,
-        Icon:     <Icon name="facebook" className={style.socialIcon} />,
-        getProps: (url, quote, title, description) => ({
-          quote,
-          url,
-          title,
-          description,
-          // hashtag: '#ScubaSEAsons', // Optional
-        }),
+        name:          'Facebook',
+        Button:        FacebookShareButton,
+        Icon:          <Icon name="facebook" className={style.socialIcon} />,
+        platformProps: {
+          hashtag:  '#ScubaSEAsons',
+        },
       },
       {
-        name:     'X',
-        Button:   TwitterShareButton,
-        Icon:     <Icon name="x-icon" className={style.socialIcon} />,
-        getProps: (url, title) => ({
-          url,
-          title,
-          // hashtags: ['ScubaSEAsons'],
-        }),
+        name:          'X',
+        Button:        TwitterShareButton,
+        Icon:          <Icon name="x-icon" className={style.socialIcon} />,
+        platformProps: {
+          hashtags:  ['ScubaSEAsons'],
+        },
       },
       {
-        name:     'WhatsApp',
-        Button:   WhatsappShareButton,
-        Icon:     <Icon name="whatsapp" className={style.socialIcon} />,
-        getProps: (url, title) => ({
-          url,
-          title,
-          separator: ' - ', // Optional custom separator
-        }),
+        name:          'WhatsApp',
+        Button:        WhatsappShareButton,
+        Icon:          <Icon name="whatsapp" className={style.socialIcon} />,
+        platformProps: {
+          separator:    ' - ',
+        },
       },
       {
-        name:     'LinkedIn',
-        Button:   LinkedinShareButton,
-        Icon:     <Icon name="linkedin" className={style.socialIcon} />,
-        getProps: (url, title, summary) => ({
-          url,
-          title,
-          summary,
-          // source: hostUrl,
-        }),
+        name:          'LinkedIn',
+        Button:        LinkedinShareButton,
+        Icon:          <Icon name="linkedin" className={style.socialIcon} />,
+        platformProps: {
+          summary: 'test',
+          source:  shareUrl,
+        },
       },
       {
-        name:     'Email',
-        Button:   EmailShareButton,
-        Icon:     <Icon name="email" className={style.socialIcon} />,
-        getProps: (url, title, description) => ({
-          url,
-          subject:   title,
-          body:      description,
+        name:          'Email',
+        Button:        EmailShareButton,
+        Icon:          <Icon name="email" className={style.socialIcon} />,
+        platformProps: {
+          subject:   'Scuba SEAsons - Dive into Amazing Underwater Adventures!',
+          body:      'Discover the best diving spots and marine life encounters worldwide. Share your underwater adventures with the diving community.',
           separator: '\n\n',
-        }),
+        },
       },
     ];
-  };
-  const platforms = createSocialPlatforms();
-  // const handleShareUrlCopy = () => {
-  //   navigator.clipboard.writeText(shareUrl);
-  //   toast.success('Link copied to clipboard!', {
-  //     autoClose: 1000,
-  //   });
-  // };
-
-  // const handleShareModal = (
-  //   e: React.MouseEvent<HTMLHeadingElement, MouseEvent>,
-  // ) => {
-  //   e.stopPropagation();
-  //   setSelectedPicture(pic);
-  //   setShareContent(!shareContent);
-  // };
+  }, []);
 
   return (
     <ShareContentView
@@ -119,12 +85,6 @@ const ShareContent = (props: Props) => {
       shareUrl={shareUrl}
       shareTitle={shareTitle}
       shareDescription={shareDescription}
-      // handleShareUrlCopy={handleShareUrlCopy}
-      // handleShareModal={handleShareModal}
-      // setSelectedPicture={setSelectedPicture}
-      // setShareContent={setShareContent}
-      // shareContent={shareContent}
-      pic={pic}
     />
   );
 };

@@ -110,7 +110,7 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
               className={style.action}
             >
               <Icon className={style.actionIcon} name="share" />
-              {props.shareContent && <ShareContent {...props} />}
+              {props.shareContent && <ShareContent />}
             </div>
           </div>
         </div>

@@ -17,7 +17,6 @@ import { BoundaryDiveSites } from '../../boundaryDiveSites';
 import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
 import { Outlet } from 'react-router-dom';
-import DynamicMetaTags from '../../reusables/dynamicMetaTags';
 
 type LayoutMainViewProps = {
   mapConfig:                 number
@@ -33,7 +32,6 @@ type LayoutMainViewProps = {
 export default function LayoutMainView(props: LayoutMainViewProps) {
   return (
     <div className="bg-white">
-      <DynamicMetaTags />
       <header style={{ minHeight: '10vh' }}>
         <div className="container-fluid">
           <div className="cols col-gapless">
