@@ -1,7 +1,8 @@
 .cardList {
-    padding-right: 1rem;
-    padding-left: 1rem;
-    overflow: auto;
+    padding-right: 2rem;
+    padding-left: 2rem;
+    overflow: auto;   
+    max-height: 800px;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;

@@ -1,31 +1,15 @@
 import React, { useRef } from 'react';
-import screenData from '../screenData.json';
 import style from './style.module.scss';
-import Button from '../../reusables/button';
 import Icon from '../../../icons/Icon';
 import defaultHeaderPicture from '../../../images/blackManta.png';
-import { DiveSiteWithUserName } from '../../../entities/diveSite';
-import { PhotosGroupedByDate } from '../../../entities/photos';
 import PlainTextInput from '../../reusables/plainTextInput';
 import WavyModalHeader from '../../reusables/wavyModalHeader';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Tooltip from '../../reusables/tooltip';
 import ScreenData from '../screenData.json';
-import SeaLifeImageCardList from '../../reusables/seaLifeCardList';
-
-type DiveSiteViewProps = {
-  showPicUploaderButton: boolean
-  onClose?:              () => void
-  openPicUploader:       () => void
-  handleImageSelection:  (event: React.ChangeEvent<HTMLInputElement>) => void
-  handleProfileSwitch:   (username: string) => Promise<void>
-  onDiveSiteBioChange:   (newValue: string) => void
-  diveSite:              DiveSiteWithUserName | null
-  diveSitePics:          PhotosGroupedByDate[] | null
-  isPartnerAccount:      boolean
-  headerPictureUrl:      string | null
-};
-
+import Tabs from '../../reusables/tabs';
+import { DiveSiteViewProps } from './type';
+import { SealifeSightings } from './SealifeSightingsView';
 
 export default function DiveSiteView(props: DiveSiteViewProps) {
   const fileUploaderRef = useRef<HTMLInputElement>(null);
@@ -109,22 +93,31 @@ export default function DiveSiteView(props: DiveSiteViewProps) {
       </div>
 
       <div className="col-6 panel border-none full-height">
-        <div className={style.panelHeader}>
-          <h3>{screenData.DiveSite.drawerHeader}</h3>
-          <div className={style.addPictureButton}>
-            {props.showPicUploaderButton
-            && (
-              <Button className="btn-lg" onClick={props.openPicUploader}>
-                <span className="hide-sm">
-                  {screenData.DiveSite.addSightingButton}
-                </span>
-              </Button>
-            ) }
-
-          </div>
-        </div>
-        <SeaLifeImageCardList diveSitePics={props.diveSitePics} />
+        <Tabs
+          className="scroll-container non-scrollable"
+          data={[
+            { key:       't-1', className: 'full-width', title:     'Sea Life Sightings',
+              content:   () => (
+                <SealifeSightings
+                  showPicUploaderButton={props.showPicUploaderButton}
+                  onClose={props.onClose}
+                  openPicUploader={props.openPicUploader}
+                  handleImageSelection={props.handleImageSelection}
+                  handleProfileSwitch={props.handleProfileSwitch}
+                  onDiveSiteBioChange={props.onDiveSiteBioChange}
+                  diveSite={props.diveSite}
+                  diveSitePics={props.diveSitePics}
+                  isPartnerAccount={props.isPartnerAccount}
+                  headerPictureUrl={props.headerPictureUrl}
+                />
+              ) },
+            { key: 't-2', className: 'full-width', title: 'Dive Sites Review', content: 'World' },
+            { key: 't-3', className: 'full-width', title: 'Dive Site Trips',  content: 'Trips' },
+          ]}
+          fullWidth={true}
+        />
       </div>
+
     </div>
   );
 }

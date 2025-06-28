@@ -95,7 +95,7 @@ export default function DiveSite(props: DiveSiteProps) {
   };
 
   const openPicUploader = () => {
-    modalShow(PicUploader);
+    modalShow(PicUploader, { keepPreviousModal: true });
   };
 
 

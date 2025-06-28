@@ -1,0 +1,13 @@
+@import "../../../../styles/variables.scss";
+
+.addPictureButton {
+    margin-inline: auto;
+    width: fit-content;
+    z-index: 1;
+}
+
+  .panelHeader {
+    border-bottom: 1px solid #dadada;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    padding: 1.5rem;
+}
