@@ -1,4 +1,4 @@
-import React, { SetStateAction } from 'react';
+import React from 'react';
 import style from './style.module.scss';
 import Icon from '../../../icons/Icon';
 import { PhotoWithLikesAndComments } from '../../../entities/photos';
@@ -15,8 +15,6 @@ type SeaLifeCardViewProps = {
   isShowAuthor?:   boolean
   picLiked?:       boolean
   countOfLikes:    number
-  shareContent?:   boolean
-  setShareContent: React.Dispatch<SetStateAction<boolean>>
   handleModalOpen: () => void
   handleLike: (
     e: React.MouseEvent<HTMLHeadingElement, MouseEvent>
@@ -33,12 +31,7 @@ type SeaLifeCardViewProps = {
   handleCommentModal: (
     e: React.MouseEvent<HTMLHeadingElement, MouseEvent>
   ) => void
-  handleShareModal: (
-    e: React.MouseEvent<HTMLHeadingElement, MouseEvent>
-  ) => void
 };
-
-import ShareContent from '../share';
 
 export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
   const photoName = props.pic.photoFile.split('/').pop();
@@ -104,13 +97,6 @@ export default function SeaLifeCardView(props: SeaLifeCardViewProps) {
             >
               <Icon className={style.actionIcon} name="comment" />
               <span>{abbreviateNumber(props.pic.commentcount)}</span>
-            </div>
-            <div
-              onClick={e => props.handleShareModal(e)}
-              className={style.action}
-            >
-              <Icon className={style.actionIcon} name="share" />
-              {props.shareContent && <ShareContent />}
             </div>
           </div>
         </div>

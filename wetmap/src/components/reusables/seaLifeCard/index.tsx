@@ -22,7 +22,6 @@ export default function SeaLifeCard(props: { pic: PhotoWithLikesAndComments, isS
   const [picLiked, setPicLiked] = useState(pic.likedbyuser);
   const [likeData, setLikeData] = useState(pic.likeid);
   const [countOfLikes, setCountOfLikes] = useState(pic.likecount);
-  const [shareContent, setShareContent] = useState<boolean>(false);
   const { setSelectedPicture } = useContext(SelectedPictureContext);
   const { setSelectedDiveSite } = useContext(DiveSiteContext);
   const { mapRef } = useContext(MapContext);
@@ -93,15 +92,6 @@ export default function SeaLifeCard(props: { pic: PhotoWithLikesAndComments, isS
     });
   };
 
-
-  const handleShareModal = (
-    e: React.MouseEvent<HTMLHeadingElement, MouseEvent>,
-  ) => {
-    e.stopPropagation();
-    setSelectedPicture(pic);
-    setShareContent(!shareContent);
-  };
-
   return (
     <SeaLifeCardView
       label={pic.label}
@@ -110,13 +100,10 @@ export default function SeaLifeCard(props: { pic: PhotoWithLikesAndComments, isS
       handleLike={handleLike}
       handleCommentModal={handleCommentModal}
       handleProfileSwitch={handleProfileSwitch}
-      handleShareModal={handleShareModal}
       handleDiveSiteMove={handleDiveSiteMove}
       countOfLikes={countOfLikes}
       picLiked={picLiked}
       isShowAuthor={isShowAuthor}
-      shareContent={shareContent}
-      setShareContent={setShareContent}
     />
   );
 }

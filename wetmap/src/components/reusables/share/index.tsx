@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { FC, ReactNode, useMemo } from 'react';
 // import { toast } from 'react-toastify';
 import {
   FacebookShareButton,
@@ -18,7 +18,12 @@ export type SocialPlatform = {
   platformProps: Record<string, any>
 };
 
-const ShareContent = () => {
+interface ShareContentProps {
+  trigger:       ReactNode
+  onOpenChange?: (isOpen: boolean) => void
+}
+
+const ShareContent: FC<ShareContentProps> = ({ trigger, onOpenChange }) => {
   const shareUrl = `https://scuba-seasons.web.app/`;
   const shareTitle = 'Scuba SEAsons - Dive into Amazing Underwater Adventures!';
   const shareDescription = 'Discover the best diving spots and marine life encounters worldwide. Share your underwater adventures with the diving community.';
@@ -75,6 +80,8 @@ const ShareContent = () => {
       shareUrl={shareUrl}
       shareTitle={shareTitle}
       shareDescription={shareDescription}
+      trigger={trigger}
+      onOpenChange={onOpenChange}
     />
   );
 };

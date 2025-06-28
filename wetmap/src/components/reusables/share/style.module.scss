@@ -1,4 +1,10 @@
 @import '../../../styles/variables.scss';
+
+.shareContainer {
+  position: relative;
+  z-index: 100;
+}
+
 .socialButton {
   display: flex;
   justify-content: center;
@@ -24,28 +30,39 @@
   color: rgb(17, 115, 214);
   width: 30px;
   height: 30px;
+  fill: rgb(255, 255, 255);
 }
 
 .socialShareContainer {
   position: absolute;
-  bottom: 40px;
-  transform: translate(-45%);
-  border-radius: 40px 10px 7px 40px;
+  bottom: -50px;
+  border-radius: 40px;
+  right: -5px;
   display: flex;
   flex-direction: row;
   gap: 0.25rem;
-  background-color: rgb(255, 255, 255);
-  padding: 0.25rem;
+  background-color: rgb(17, 115, 214);
+  padding: 0.25rem 0.3rem;
   z-index: 10;
+  opacity: 0;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  pointer-events: none;
+  transform: translate(20px, -10px);
+
+  &.show {
+    opacity: 1;
+    transform: translate(20px, 2px);
+    pointer-events: auto;
+  }
 
   &:before {
     content: '';
     position: absolute;
-    bottom: -5px;
-    right: 3.5px;
+    top: -4px;
+    right: 36px;
     width: 16px;
     height: 16px;
-    background-color: rgb(255, 255, 255);
+    background-color: rgb(17, 115, 214);
     transform: rotate(45deg);
     border-radius: 2px;
     z-index: -1;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 import style from './style.module.scss';
 import { toast } from 'react-toastify';
 import Icon from '../../../icons/Icon';
@@ -9,6 +9,8 @@ interface ShareContentViewProps {
   shareTitle:       string
   shareDescription: string
   platforms:        SocialPlatform[]
+  trigger:          ReactNode
+  onOpenChange?:    (isOpen: boolean) => void
 }
 
 const ShareContentView: React.FC<ShareContentViewProps> = ({
@@ -16,50 +18,68 @@ const ShareContentView: React.FC<ShareContentViewProps> = ({
   shareUrl,
   shareTitle,
   shareDescription,
+  trigger: TriggerComponent,
+  onOpenChange,
 }) => {
-  return (
-    <div
-      className={style.socialShareContainer}
-      onClick={e => e.stopPropagation()}
-    >
-      {platforms.map((platform) => {
-        const { name, Button, Icon, platformProps } = platform;
+  const [showPopup, setShowPopup] = React.useState(false);
 
-        return (
-          <Button
-            key={name}
-            {...platformProps}
-            title={shareTitle}
-            description={shareDescription}
-            url={shareUrl}
-            className={style.socialButton}
-            htmlTitle={`${name} share`}
-            aria-label={name}
-            onShareWindowClose={() =>
-              toast.success(`Shared via ${name}!`, {
-                autoClose: 1000,
-              })}
-          >
-            {Icon}
-          </Button>
-        );
-      })}
+  return (
+    <div className={style.shareContainer}>
       <div
         onClick={() => {
-          navigator.clipboard.writeText(shareUrl);
-          toast.success('Link copied to clipboard!', {
-            autoClose: 1000,
-          });
+          setShowPopup(!showPopup);
+          if (onOpenChange !== undefined) onOpenChange(!showPopup);
         }}
-        className={style.socialButton}
-        style={{
-          backgroundColor: 'transparent',
-          paddingTop:      '4px',
-        }}
-        aria-label="Copy url"
-        title="Copy url"
+        style={{ cursor: 'pointer' }}
       >
-        <Icon name="copy" className={style.socialIcon} />
+        {TriggerComponent}
+      </div>
+      <div
+        className={`${style.socialShareContainer} ${showPopup ? style.show : ''} bg-blue`}
+        onClick={e => e.stopPropagation()}
+      >
+        {platforms.map((platform) => {
+          const { name, Button, Icon, platformProps } = platform;
+
+          return (
+            <Button
+              key={name}
+              {...platformProps}
+              title={shareTitle}
+              description={shareDescription}
+              url={shareUrl}
+              className={style.socialButton}
+              htmlTitle={`${name} share`}
+              aria-label={name}
+              onShareWindowClose={() => {
+                if (onOpenChange !== undefined) onOpenChange(false);
+                toast.success(`Shared via ${name}!`, {
+                  autoClose: 1000,
+                });
+                setShowPopup(false);
+              }}
+            >
+              {Icon}
+            </Button>
+          );
+        })}
+        <div
+          onClick={() => {
+            navigator.clipboard.writeText(shareUrl);
+            toast.success('Link copied to clipboard!', {
+              autoClose: 1000,
+            });
+          }}
+          className={style.socialButton}
+          style={{
+            backgroundColor: 'transparent',
+            paddingTop:      '4px',
+          }}
+          aria-label="Copy url"
+          title="Copy url"
+        >
+          <Icon name="copy" className={style.socialIcon} />
+        </div>
       </div>
     </div>
   );
