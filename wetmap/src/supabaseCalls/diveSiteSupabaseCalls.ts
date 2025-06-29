@@ -39,7 +39,7 @@ export const getDiveSitesWithUser = async (bubble: GPSBubble, filter?: Partial<D
     min_lat: bubble.minLat,
     max_lng: bubble.maxLng,
     min_lng: bubble.minLng,
-    userid:  filter?.userid ?? '',
+    userid:  filter?.userid || null,
   });
 
   if (pagination?.page) {

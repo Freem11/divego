@@ -14,6 +14,7 @@ export default function LayoutMain() {
   const { mapConfig } = useContext(MapContext);
   const { profile } = useContext(UserProfileContext);
   const { modalShow } = useContext(ModalContext);
+  const [showShareContent, setShowShareContent] = useState(false);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
 
   useEffect(() => {
@@ -61,6 +62,9 @@ export default function LayoutMain() {
     modalShow(ShopsListModal);
   };
 
+  const handleShareModal = () => {
+    setShowShareContent(!showShareContent);
+  };
 
   return (
     <LayoutMainView
@@ -70,6 +74,8 @@ export default function LayoutMain() {
       animateSettingsModal={animateSettingsModal}
       animateGuidesModal={animateGuidesModal}
       animateShopsListModal={animateShopsListModal}
+      handleShareModal={handleShareModal}
+      showShareContent={showShareContent}
       isPartnerAccount={isPartnerAccount}
     />
   );
