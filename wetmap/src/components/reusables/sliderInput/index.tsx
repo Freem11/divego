@@ -1,29 +1,22 @@
 import React, { useEffect, useState } from 'react';
 import styles from './style.module.scss';
-// import { set } from 'react-hook-form';
-// import Box from '@mui/material/Box';
-// import Slider from '@mui/material/Slider';
 
 export type SliderInputProps = {
-  min:       number
-  max:       number
-  value:     number
-  range:     number
-  unit:      string
-  label:     string
-  showLabel: boolean
+  min:           number
+  max:           number
+  value:         number
+  range:         number
+  unit:          string
+  label?:        string
+  currentLabel?: (speed: number) => void
+  showLabel:     boolean
 };
 
 export default function SliderInput(props: SliderInputProps) {
-  const [label, setLabel] = useState<string>(props.label);
   const [value, setValue] = useState<number>(props.value);
-  console.log('value', value);
-  console.log('unit', props.unit);
-  console.log('label', label);
-
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
-    currentLabel(Number(e.target.value));
+    props.currentLabel?.(Number(e.target.value));
     setValue(Number(e.target.value));
   }
 
@@ -36,22 +29,6 @@ export default function SliderInput(props: SliderInputProps) {
     return arr;
   };
 
-  function currentLabel(speed: number) {
-    const range = props.max - props.min;
-    const percent = (speed - props.min) / range;
-
-    if (percent >= 0 && percent < 0.2) {
-      setLabel('no current');
-    } else if (percent < 0.4) {
-      setLabel('weak drift');
-    } else if (percent < 0.6) {
-      setLabel('typical drift');
-    } else if (percent < 0.8) {
-      setLabel('strong drift');
-    } else {
-      setLabel('extreme drift');
-    }
-  }
 
   useEffect(() => {
     setValue(props.value);
@@ -60,12 +37,12 @@ export default function SliderInput(props: SliderInputProps) {
   return (
     <div className={styles.sliderInputContainer}>
       <div className={styles.slidecontainer}>
-        <h3>{props.showLabel ? label : 'hello'}</h3>
+        <h3>{props.showLabel ? props.label : ''}</h3>
         <input
           type="range"
           min={props.min}
           max={props.max}
-          defaultValue={value}
+          value={value}
           step={props.range}
           className={styles.slider}
           onChange={e => handleChange(e)}

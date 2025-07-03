@@ -76,19 +76,11 @@ export default function SettingsView(props: SettingsProps) {
 
 
           <div>
-
-            {/* <SliderInput
-              min={0}
-              max={2.5}
-              range={2.5 / 25}
-              value={1}
-              unit="m/s"
-              showLabel={true}
-            /> */}
-
+            {/* value needs to be stored in database, otherwise, everytime there is a unit changed, it will re-render the initial value */}
             <CurrentSliderInput isMetric={isChecked} value={1} />
           </div>
           <div>
+            {/* same as comment above */}
             <VisibilitySliderInput isMetric={isChecked} value={30} />
           </div>
 
