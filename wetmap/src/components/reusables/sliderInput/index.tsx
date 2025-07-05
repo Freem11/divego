@@ -34,10 +34,21 @@ export default function SliderInput(props: SliderInputProps) {
     setValue(props.value);
   }, [props.unit]);
 
+  // no current: grey
+  // weak drift: blue
+  // typical drift: green
+  // strong drift: orange
+  // extreme drift: red
   return (
     <div className={styles.sliderInputContainer}>
       <div className={styles.slidecontainer}>
-        <h3>{props.showLabel ? props.label : ''}</h3>
+        <h3 className="text-center">
+          {props.showLabel ? props.label : ''}
+          {' '}
+          {value}
+          {' '}
+          {props.unit}
+        </h3>
         <input
           type="range"
           min={props.min}

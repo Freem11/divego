@@ -19,15 +19,15 @@ export default function CurrentSliderInput(
     const percent = (speed - 0) / range;
 
     if (percent >= 0 && percent < 0.2) {
-      setLabel('no current');
+      setLabel('No current');
     } else if (percent < 0.4) {
-      setLabel('weak drift');
+      setLabel('Weak drift');
     } else if (percent < 0.6) {
-      setLabel('typical drift');
+      setLabel('Typical drift');
     } else if (percent < 0.8) {
-      setLabel('strong drift');
+      setLabel('Strong drift');
     } else {
-      setLabel('extreme drift');
+      setLabel('Extreme drift');
     }
   }
 
