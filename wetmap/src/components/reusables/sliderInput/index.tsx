@@ -34,15 +34,24 @@ export default function SliderInput(props: SliderInputProps) {
     setValue(props.value);
   }, [props.unit]);
 
-  // no current: grey
-  // weak drift: blue
-  // typical drift: green
-  // strong drift: orange
-  // extreme drift: red
+  function getColorClass(label: string | undefined) {
+    if (!label) return styles['sliderLabel-center'];
+    let returnedClass = styles['sliderLabel-center'];
+
+    if (label.includes('No current')) returnedClass = styles['sliderLabel-gray'];
+    if (label.includes('Weak drift')) returnedClass = styles['sliderLabel-blue'];
+    if (label.includes('Typical drift')) returnedClass = styles['sliderLabel-green'];
+    if (label.includes('Strong drift')) returnedClass = styles['sliderLabel-orange'];
+    if (label.includes('Extreme drift')) returnedClass = styles['sliderLabel-red'];
+
+    return returnedClass; // default color
+  };
+
+
   return (
     <div className={styles.sliderInputContainer}>
       <div className={styles.slidecontainer}>
-        <h3 className="text-center">
+        <h3 className={getColorClass(props.label)}>
           {props.showLabel ? props.label : ''}
           {' '}
           {value}

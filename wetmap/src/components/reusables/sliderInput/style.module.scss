@@ -13,7 +13,30 @@
     position:relative;
 }
 
+.sliderLabel-center{
+  text-align: center;
+}
+.sliderLabel-red{
+  color:red;
+  text-align: center;
+}
 
+.sliderLabel-gray{
+  color:gray;
+  text-align: center;
+}
+.sliderLabel-green{
+  color:green;
+  text-align: center;
+}
+.sliderLabel-orange{
+  color:orange;
+  text-align: center;
+}
+.sliderLabel-blue{
+  color:blue;
+  text-align: center;
+}
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
