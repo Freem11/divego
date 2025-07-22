@@ -4,6 +4,8 @@ import styles from './style.module.scss';
 import ButtonIcon from '../../reusables/buttonIcon';
 import Icon from '../../../icons/Icon';
 import Button from '../../reusables/button';
+import VisibilitySliderInput from '../../reusables/visibilitySliderInput';
+import CurrentSliderInput from '../../reusables/currentSliderInput';
 
 type SettingsProps = {
   onClose:             () => void
@@ -51,6 +53,7 @@ export default function SettingsView(props: SettingsProps) {
             )}
           </div>
 
+
           <div>
             <h2 className="ml-4 mt-2 mb-1">Unit System</h2>
             <div className={styles.grayOutlineFlexRow}>
@@ -71,6 +74,15 @@ export default function SettingsView(props: SettingsProps) {
             </div>
           </div>
 
+
+          <div>
+            {/* value needs to be stored in database, otherwise, everytime there is a unit changed, it will re-render the initial value */}
+            <CurrentSliderInput isMetric={isChecked} value={1} />
+          </div>
+          <div>
+            {/* same as comment above */}
+            <VisibilitySliderInput isMetric={isChecked} value={30} />
+          </div>
 
           <div className={styles.horizontalButtonContainer}>
             <div className="col-3"></div>

@@ -68,7 +68,6 @@ export const UserProfileContextProvider = ({ children }: any) => {
       const profile = await grabProfileById(session.user.id);
       if (profile) {
         setProfile(profile);
-        console.log('profile', profile);
       } else {
         const created = await createProfile({
           id:    session.user.id,
