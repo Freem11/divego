@@ -8,6 +8,7 @@ import { Form } from './form';
 import DiveSiteFlagView from './view';
 
 export type FlagData = {
+  original: DiveSiteWithUserName | null
   name?: {
     reason:  string
     newName: string
@@ -37,7 +38,7 @@ export default function DiveSiteFlag(props: DiveSiteFlagProps) {
   };
 
   function buildFlagData(data: Form) {
-    const flagData: FlagData = {};
+    const flagData: FlagData = { original: props.diveSite };
 
     const hasName = data.diveSiteName && data.diveSiteName.trim();
     const hasLatitude = data.diveSiteLatitude && data.diveSiteLatitude.trim();
