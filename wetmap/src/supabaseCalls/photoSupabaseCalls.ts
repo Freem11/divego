@@ -225,6 +225,7 @@ export const getPhotosByDiveSiteWithExtra = async (values) => {
     lat:             values.lat,
     lng:             values.lng,
     connecteduserid: values.userId,
+    limit_count:     null,
   });
 
   if (error) {
