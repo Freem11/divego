@@ -8,7 +8,7 @@ type DiveShopItemProps = {
 };
 
 export default function DiveShopItem(props: DiveShopItemProps) {
-  const imageUrl = getPhotoPublicUrl(props.diveShop.diveshopprofilephoto);
+  const imageUrl = getPhotoPublicUrl(props.diveShop.diveShopProfilePhoto);
 
   return (
     <SidebarCard

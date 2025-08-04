@@ -94,6 +94,7 @@ export default function SeaLifeCard(props: { pic: PhotoWithLikesAndComments, isS
 
   return (
     <SeaLifeCardView
+      label={pic.label}
       pic={pic}
       handleModalOpen={handleModalOpen}
       handleLike={handleLike}

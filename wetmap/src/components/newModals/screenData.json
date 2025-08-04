@@ -140,7 +140,8 @@
         "addPhotoTooltip": "Add a photo of this dive site"
       },
       "SeaLifeImageCard": {
-        "reportPictureTooltip": "Report an issue with this picture"
+        "reportPictureTooltip": "Report an issue with this picture",
+        "visitSitePrompt": "Visit Site"
       },
       "DiveShop": {
         "drawerHeader": "Offered Dive Trips",
@@ -206,6 +207,7 @@
         "settingsTooltip": "Settings",
         "newDiveSiteTooltip": "Add a New Dive Site",
         "tripCreatorTooltip": "My Shop(s)",
+        "shareTooltip": "Share",
         "guideTooltip": "User Guide"
       },
       "PasswordRecoveryPage": {

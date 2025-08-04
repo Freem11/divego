@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useContext, useEffect, useRef, Fragment } from 'react';
 import { ModalContext } from './context';
 
 import style from './modal.module.scss';
@@ -61,18 +61,27 @@ export default function Modal() {
 
   return (
     <div className={`${style.modalWrapper} ${style.active}`} ref={rootRef}>
-      {modalContext.stack.map(modalWindow => (
-        <>
+      {modalContext.stack.map((modalWindow, index) => (
+        <Fragment key={modalWindow.name + ' ' + index}>
           {/* background should not be present when modal is paused because it prevents interaction with the app */}
           {modalWindow.name === modalContext.currentModalName && (
-            <div onClick={() => modalContext.modalCancel()} className={`${style.modalBackground}`}></div>
+            <div
+              onClick={() => modalContext.modalCancel()}
+              className={`${style.modalBackground}`}
+            >
+            </div>
           )}
 
           <div
-            className={`${style.modalContainer} ${style[modalWindow.options.size]}`}
-            style={modalWindow.name === modalContext.currentModalName ? openStyle : closeStyle}
+            className={`${style.modalContainer} ${
+              style[modalWindow.options.size]
+            }`}
+            style={
+              modalWindow.name === modalContext.currentModalName
+                ? openStyle
+                : closeStyle
+            }
             data-modal-name={modalWindow.name}
-            key={modalWindow.name}
           >
             <modalWindow.component
               {...modalWindow.options}
@@ -87,7 +96,7 @@ export default function Modal() {
               }}
             />
           </div>
-        </>
+        </Fragment>
       ))}
     </div>
   );

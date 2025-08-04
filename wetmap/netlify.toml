@@ -1,0 +1,24 @@
+[build]
+  publish = "dist"
+  command = "npm run build"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Content-Type = "text/javascript"
+
+[[headers]]
+  for = "/*.jsx"
+  [headers.values]
+    Content-Type = "text/javascript"
+
+[[headers]]
+  for = "/*.mjs"
+  [headers.values]
+    Content-Type = "text/javascript" 

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 27.8.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1160 1160" style="enable-background:new 0 0 1160 1160;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill-rule:evenodd;clip-rule:evenodd;}
+	.st1{opacity:0.75;}
+	.st2{fill:#FFFFFF;}
+	.st3{fill:none;stroke:#FFFFFF;stroke-width:25;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st4{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#FFFFFF;stroke-width:25;stroke-miterlimit:10;}
+	.st5{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#FFFFFF;stroke-width:25;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st6{fill:none;stroke:#FFFFFF;stroke-width:25;stroke-miterlimit:10;}
+	.st7{fill:none;stroke:#000000;stroke-width:75;stroke-miterlimit:10;}
+	.st8{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#000000;stroke-width:75;stroke-miterlimit:10;}
+	
+		.st9{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#000000;stroke-width:76;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;}
+	
+		.st10{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#000000;stroke-width:75;stroke-linecap:square;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st11{fill:none;stroke:#FFFFFF;stroke-width:65;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st12{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#FFFFFF;stroke-width:50;stroke-miterlimit:10;}
+	.st13{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#FFFFFF;stroke-width:65;stroke-miterlimit:10;}
+	.st14{fill-rule:evenodd;clip-rule:evenodd;fill:none;stroke:#FFFFFF;stroke-width:50;stroke-linejoin:round;stroke-miterlimit:10;}
+	.st15{fill:none;stroke:#FFFFFF;stroke-width:65;stroke-miterlimit:10;}
+</style>
+<g id="Layer_29">
+	<circle class="st0" cx="579" cy="579" r="579"/>
+</g>
+<g id="BG_SMalls">
+	<g class="st1">
+		<g>
+			<path class="st2" d="M230.5,412.5c0,0,0.22,0,0.5,0s0.5,0,0.5,0s-0.22,0-0.5,0S230.5,412.5,230.5,412.5z"/>
+			<path class="st2" d="M231.5,412.5c0,0-0.22,0-0.5,0s-0.5,0-0.5,0s0.22,0,0.5,0S231.5,412.5,231.5,412.5L231.5,412.5z"/>
+		</g>
+		<g>
+			<line class="st3" x1="231.25" y1="408" x2="231.25" y2="765.5"/>
+		</g>
+		<circle class="st4" cx="231.5" cy="363.5" r="36"/>
+		<g>
+			<path class="st4" d="M231.5,739.5c100,0,100-90.22,100-146"/>
+			<polyline class="st5" points="291,619.5 331.5,579 372,619.5 			"/>
+		</g>
+		<g>
+			<line class="st6" x1="284.75" y1="469.25" x2="177.75" y2="469.25"/>
+		</g>
+		<g>
+			<path class="st4" d="M230.5,739.5c-100,0-100-90.22-100-146"/>
+			<polyline class="st5" points="171,619.5 130.5,579 90,619.5 			"/>
+		</g>
+		<polyline class="st5" points="272.5,734 232,774.5 191.5,734 		"/>
+	</g>
+	<g class="st1">
+		<g>
+			<path class="st2" d="M927.5,412.5c0,0,0.22,0,0.5,0c0.28,0,0.5,0,0.5,0s-0.22,0-0.5,0C927.72,412.5,927.5,412.5,927.5,412.5z"/>
+			<path class="st2" d="M928.5,412.5c0,0-0.22,0-0.5,0c-0.28,0-0.5,0-0.5,0s0.22,0,0.5,0C928.28,412.5,928.5,412.5,928.5,412.5
+				L928.5,412.5z"/>
+		</g>
+		<g>
+			<line class="st3" x1="928.25" y1="408" x2="928.25" y2="765.5"/>
+		</g>
+		<circle class="st4" cx="928.5" cy="363.5" r="36"/>
+		<g>
+			<path class="st4" d="M928.5,739.5c100,0,100-90.22,100-146"/>
+			<polyline class="st5" points="988,619.5 1028.5,579 1069,619.5 			"/>
+		</g>
+		<g>
+			<line class="st6" x1="981.75" y1="469.25" x2="874.75" y2="469.25"/>
+		</g>
+		<g>
+			<path class="st4" d="M927.5,739.5c-100,0-100-90.22-100-146"/>
+			<polyline class="st5" points="868,619.5 827.5,579 787,619.5 			"/>
+		</g>
+		<polyline class="st5" points="969.5,734 929,774.5 888.5,734 		"/>
+	</g>
+</g>
+<g id="Outline">
+	<path class="st7" d="M578,305c0,0,0.45,0,1,0s1,0,1,0s-0.45,0-1,0S578,305,578,305z"/>
+	<g>
+		<line class="st7" x1="579.5" y1="296" x2="579.5" y2="1011"/>
+	</g>
+	<circle class="st8" cx="580" cy="207" r="72"/>
+	<g>
+		<path class="st8" d="M580,959c200,0,200-180.44,200-292"/>
+		<polyline class="st9" points="715,703 780,638 845,703 		"/>
+	</g>
+	<g>
+		<line class="st7" x1="686.5" y1="418.5" x2="472.5" y2="418.5"/>
+	</g>
+	<g>
+		<path class="st8" d="M578,959c-200,0-200-180.44-200-292"/>
+		<polyline class="st10" points="443,703 378,638 313,703 		"/>
+	</g>
+	<polyline class="st8" points="662,948 581,1029 500,948 	"/>
+</g>
+<g id="Large">
+	<g>
+		<path class="st2" d="M578,305c0,0,0.45,0,1,0s1,0,1,0s-0.45,0-1,0S578,305,578,305z"/>
+		<path class="st2" d="M580,305c0,0-0.45,0-1,0s-1,0-1,0s0.45,0,1,0S580,305,580,305L580,305z"/>
+	</g>
+	<g>
+		<line class="st11" x1="579.5" y1="296" x2="579.5" y2="1011"/>
+	</g>
+	<circle class="st12" cx="580" cy="207" r="72"/>
+	<g>
+		<path class="st13" d="M580,959c200,0,200-180.44,200-292"/>
+		<polyline class="st14" points="699,719 780,638 861,719 		"/>
+	</g>
+	<g>
+		<line class="st15" x1="686.5" y1="418.5" x2="472.5" y2="418.5"/>
+	</g>
+	<g>
+		<path class="st13" d="M578,959c-200,0-200-180.44-200-292"/>
+		<polyline class="st14" points="459,719 378,638 297,719 		"/>
+	</g>
+	<polyline class="st5" points="662,948 581,1029 500,948 	"/>
+</g>
+</svg>
