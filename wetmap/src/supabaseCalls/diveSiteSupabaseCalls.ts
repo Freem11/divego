@@ -187,7 +187,7 @@ export const updateDiveSite = async (values) => {
   console.log('updating...', values);
   const { data, error } = await supabase
     .from('diveSites')
-    .update({ diveSiteBio: values.bio, diveSiteProfilePhoto: values.photo  })
+    .update({ diveSiteBio: values.bio, divesiteprofilephoto: values.photo  })
     .eq('id', values.id);
 
   if (error) {

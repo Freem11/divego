@@ -98,7 +98,6 @@ export default function DiveSite(props: DiveSiteProps) {
     modalShow(PicUploader);
   };
 
-
   useEffect(() => {
     if (selectedDiveSite?.divesiteprofilephoto) {
       const photoName = getPhotoPublicUrl(selectedDiveSite.divesiteprofilephoto);
