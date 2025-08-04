@@ -21,7 +21,7 @@ export function BoundaryDiveSitesView(props: BoundaryDiveSitesViewProps) {
       loadMore={props.loadMoreDiveSites}
       hasMore={props.hasMoreDiveSites}
       isLoading={props.isLoadingDiveSites}
-      renderEmpty={() => (<EmptyState iconName="anchor" text={ScreenData.Sidebar.diveCenterEmptyDrawer} />)}
+      renderEmpty={() => (<EmptyState iconName="anchor" text={ScreenData.Sidebar.diveSiteEmptyDrawer} />)}
     >
 
       {props.diveSites?.map((item) => {
