@@ -46,7 +46,20 @@ $transparent-background-color: rgba(255, 255, 255, 0.2);
     align-self: self-start;
 }
 
-// Load default ones from spectre.css
+//TODO: On future versions, check if Spectre has fixed the divide by error, and remove these overrides.
+// Define control sizes and related variables needed for padding calculations
+$control-size: 1.8rem !default;
+$control-size-sm: 1.4rem !default;
+$line-height: 1.2rem !default;
+$border-width: 0.05rem !default;
+
+// Override Spectre.css variables to fix Sass deprecation warnings
+$control-padding-y: calc(($control-size - $line-height) / 2) - $border-width !default;
+$control-padding-y-sm: calc(($control-size-sm - $line-height) / 2) - $border-width !default;
+$control-padding-y-lg: calc(($control-size-lg - $line-height) / 2) - $border-width !default;
+
+
+// Load default ones from spectre.css AFTER our overrides
 @import 'spectre.css/src/variables';
 
 $responsive-breakpoints: (
