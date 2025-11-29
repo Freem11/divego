@@ -1,0 +1,55 @@
+@import "../../../styles/variables.scss";
+
+.buttonOpenPictureUpload {
+    position: absolute;
+    // left: 0; 
+    right: 4%;
+
+    top: 6%;
+    margin-inline: auto;
+    width: fit-content;
+    z-index: 1;
+}
+
+.buttonImageUpload {
+    position: absolute;
+    right: 3%;
+    bottom: 15%;
+    z-index: 1;
+}
+
+.pictureZone {
+    height: 44.9%;
+    background-color: $primaryBlue;
+    overflow: hidden;
+}
+
+.addPictureButton {
+    margin-inline: auto;
+    width: fit-content;
+    z-index: 1;
+}
+
+.noSightings {
+    flex: 1 ;
+    width: 60% ;
+    align-items: center ;
+    justify-content: center ;
+    text-align: center ;
+    margin-top: 40% ;
+    font-family: 'Itim', cursive;
+    font-size: 18 ;
+    color: #F0EEEB ;
+  }
+
+  .panelHeader {
+    border-bottom: 1px solid #dadada;
+    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+    padding: 1.5rem;
+}
+
+.reportIcon {
+    width: 1rem;
+    height: auto;
+    cursor: pointer;
+}

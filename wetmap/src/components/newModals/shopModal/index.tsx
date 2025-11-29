@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { itineraries } from '../../../supabaseCalls/itinerarySupabaseCalls';
 import { getDiveShopById, updateDiveShop } from '../../../supabaseCalls/shopsSupabaseCalls';
 import { UserProfileContext } from '../../contexts/userProfileContext';
-import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
+// import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { ItineraryItem } from '../../../entities/itineraryItem';
 import { ModalContext } from '../../reusables/modal/context';
 import ShopModalView from './view';
@@ -11,6 +11,7 @@ import { MapContext } from '../../googleMap/mapContext';
 import { DiveShopContext } from '../../contexts/diveShopContext';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 import TripCreatorModal from '../tripCreatorModal';
+import { clearPreviousImage, handleImageUpload } from '../../../helpers/imageUploadHelpers';
 
 type ShopModalProps = Partial<ModalHandleProps> & {
   id?:    number

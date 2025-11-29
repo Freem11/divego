@@ -1,0 +1,68 @@
+@import "../../../styles/variables.scss";
+
+.footer{
+  background-color: $primaryBlue;
+}
+
+.headerIcons {
+  display: flex;
+  justify-content: flex-end;
+  list-style: none;
+  margin: 0;
+  li{
+    margin: 0;
+    margin-left: 15px;
+    margin-top: 3px;
+  }
+}
+
+.mainLogo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: $themeBlack;
+  font-style: italic;
+  font-size: x-large;
+  font-weight: lighter;
+  white-space: nowrap;
+  margin-left: 10px;
+}
+
+.mainLogo:hover{
+  text-decoration: none;
+}
+
+.lowerLogo {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: $themeWhite;
+  font-style: italic;
+  font-size: x-large;
+  font-weight: lighter;
+}
+
+
+.headers {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  margin: 10px;
+  padding-top: 20px;
+  padding-left: 1.5%;
+  color: $themeWhite;
+  font-size:x-large;
+  font-weight: lighter;
+}
+
+.footerRights {
+  margin: 10px;
+  color: $themeWhite;
+  font-weight: lighter;
+  white-space: nowrap;
+}
+
+.emilio {
+  transform: rotate(2deg);
+}

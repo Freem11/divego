@@ -16,10 +16,11 @@ import { BoundaryAnimals } from '../../boundaryAnimals';
 import { BoundaryDiveSites } from '../../boundaryDiveSites';
 import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import ShareContent from '../../reusables/share';
+import { AppRoutes } from '../../../router';
 
-type LayoutMainViewProps = {
+type LayoutPageViewProps = {
   mapConfig:                 number
   animateSiteSubmitterModal: () => void
   animateProfileModal:       () => void
@@ -32,7 +33,7 @@ type LayoutMainViewProps = {
 };
 
 
-export default function LayoutMainView(props: LayoutMainViewProps) {
+export default function LayoutPageView(props: LayoutPageViewProps) {
   return (
     <div className="bg-white">
       <header style={{ minHeight: '10vh' }}>
@@ -40,10 +41,10 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
           <div className="cols col-gapless">
 
             <div className="col-md-12 col-3 mt-1">
-              <a href="index.html" className={style.mainLogo} style={{ color: 'black', marginTop: 10 }}>
+              <Link to="/" className={style.mainLogo} style={{ color: 'black', marginTop: 10 }}>
                 <img src={blackMantaIcon} height={50} alt="logo" style={{ marginBottom: 5 }} />
                 Scuba SEAsons
-              </a>
+              </Link>
             </div>
             <div className="col-md-12 col-6 mt-1">
               <MainSearch />
@@ -55,11 +56,13 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
               <ul className={style.headerIcons}>
                 <li>
                   <Tooltip content={ScreenData.MainPage.profileTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
-                    <ButtonIcon
-                      disabled={props.mapConfig === 0 ? false : true}
-                      icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
-                      onClick={props.animateProfileModal}
-                    />
+                    <Link to={AppRoutes.account()}>
+                      <ButtonIcon
+                        disabled={props.mapConfig === 0 ? false : true}
+                        icon={<Icon name="person" className="text-blue" style={{ scale: '1.5' }} />}
+                        onClick={props.animateProfileModal}
+                      />
+                    </Link>
                   </Tooltip>
                 </li>
                 <li>
@@ -133,20 +136,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
       <section>
         <div className="container-fluid">
           <div className="cols col-gapless mb-4">
-            <div className="col-md-12 col-3 full-height scroll-container mb-4" style={{ overflow: 'hidden', height: '90vh' }}>
-              <Tabs
-                className="scroll-container non-scrollable"
-                data={[
-                  { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites',    content: BoundaryDiveSites },
-                  { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryAnimals },
-                  { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Centers',  content: BoundaryDiveShops },
-                ]}
-              />
-            </div>
-
-            <div className="col-md-12 col-9 full-height" style={{ height: '90vh' }}>
-              <MapLoader />
-            </div>
+            <Outlet />
           </div>
         </div>
 
@@ -210,7 +200,6 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
         </div>
       </footer>
 
-      <Outlet />
       <Modal />
     </div>
   );

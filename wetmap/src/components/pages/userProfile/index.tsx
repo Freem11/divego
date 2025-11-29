@@ -2,7 +2,6 @@ import React, { useState, useContext, useEffect } from 'react';
 import UserProfileView from './view';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import { ModalContext } from '../../reusables/modal/context';
-import { ModalHandleProps } from '../../reusables/modal/types';
 import {
   grabProfileById,
   updateProfile,
@@ -15,29 +14,30 @@ import {
 import Settings from '../../newModals/setting';
 import { ActiveProfile } from '../../../entities/profile';
 import { toast } from 'react-toastify';
-import screenData from '../screenData.json';
+import screenData from '../../newModals/screenData.json';
 // import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 import { PhotosGroupedByDate } from '../../../entities/photos';
 import { getPhotosByUserWithExtra } from '../../../supabaseCalls/photoSupabaseCalls';
+import { useParams } from 'react-router-dom';
 import { clearPreviousImage, handleImageUpload } from '../../../helpers/imageUploadHelpers';
 
-type UserProps = Partial<ModalHandleProps> & {
-  userProfileID?: string
-};
-export default function UserProfile(props: UserProps) {
+
+export default function PageUserProfile() {
   const { profile, initProfile }         = useContext(UserProfileContext);
   const { modalShow }                    = useContext(ModalContext);
   const [openedProfile, setOpenedProfile] = useState<ActiveProfile | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
-  const isActiveProfile: boolean = !props.userProfileID;
   const [userIsFollowing, setUserIsFollowing] = useState(false);
   const [followRecordID, setFollowRecordID] = useState(profile?.UserID);
+  const routerParams = useParams();
+  const isActiveProfile: boolean = !routerParams.id;
+
 
   async function profileCheck() {
-    if (props.userProfileID) {
-      const selectedProfile = await grabProfileById(props.userProfileID);
+    if (routerParams.id) {
+      const selectedProfile = await grabProfileById(routerParams.id);
       setOpenedProfile(selectedProfile);
     } else {
       setOpenedProfile(profile);
@@ -59,7 +59,7 @@ export default function UserProfile(props: UserProps) {
 
   useEffect(() => {
     profileCheck();
-  }, [props.userProfileID, profile]);
+  }, [routerParams.id, profile]);
 
 
   useEffect(() => {
@@ -167,7 +167,7 @@ export default function UserProfile(props: UserProps) {
 
   return (
     <UserProfileView
-      onClose={props.onModalCancel}
+      onClose={() => {}}
       profile={openedProfile}
       handleImageSelection={handleImageSelection}
       handleProfileBioChange={handleProfileBioChange}

@@ -4,6 +4,8 @@ import { DiveSiteWithUserName } from '../../entities/diveSite';
 import InfiniteScroll from '../reusables/infiniteScroll';
 import EmptyState from '../reusables/emptyState';
 import ScreenData from '../newModals/screenData.json';
+import { Link } from 'react-router-dom';
+import { AppRoutes } from '../../router';
 
 type BoundaryDiveSitesViewProps = {
   uniqueKey?:         string
@@ -26,9 +28,9 @@ export function BoundaryDiveSitesView(props: BoundaryDiveSitesViewProps) {
 
       {props.diveSites?.map((item) => {
         return (
-          <div key={item.id} onClick={() => props.handleOpenDiveSite(item)}>
+          <Link to={AppRoutes.diveSite(item.id)} key={item.id}>
             <DiveSiteItem diveSite={item} />
-          </div>
+          </Link>
         );
       })}
 

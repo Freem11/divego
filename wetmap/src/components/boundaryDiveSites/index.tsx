@@ -5,11 +5,14 @@ import DiveSite from '../newModals/diveSite';
 import { DiveSiteWithUserName } from '../../entities/diveSite';
 import { MapContext } from '../googleMap/mapContext';
 import { BoundaryDiveSitesView } from './view';
+import { useNavigate } from 'react-router-dom';
 
 export function BoundaryDiveSites() {
   const { updateDiveSiteCollection, collection, setSelectedDiveSite } = useContext(DiveSiteContext);
   const { modalShow } = useContext(ModalContext);
   const { boundaries } = useContext(MapContext);
+  const navigate = useNavigate();
+
 
   useEffect(() => {
     updateDiveSiteCollection(1, true);
@@ -21,11 +24,12 @@ export function BoundaryDiveSites() {
 
 
   const handleOpenDiveSite = (item: DiveSiteWithUserName) => {
-    setSelectedDiveSite(item);
-    modalShow(DiveSite, {
-      size:  'large',
-      panTo: true,
-    });
+    navigate(`/divesites/${item.id}`);
+    // setSelectedDiveSite(item);
+    // modalShow(DiveSite, {
+    //   size:  'large',
+    //   panTo: true,
+    // });
   };
 
   return (

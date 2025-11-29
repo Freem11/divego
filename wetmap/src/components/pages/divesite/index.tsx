@@ -6,47 +6,40 @@ import { getPhotosByDiveSiteWithExtra } from '../../../supabaseCalls/photoSupaba
 import { UserProfileContext } from '../../contexts/userProfileContext';
 // import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { ModalContext } from '../../reusables/modal/context';
-import PicUploader from '../picUploader/index';
-import { ModalHandleProps } from '../../reusables/modal/types';
+// import { ModalHandleProps } from '../../reusables/modal/types';
 import { DiveSiteWithUserName } from '../../../entities/diveSite';
 import { ActiveProfile } from '../../../entities/profile';
 import { MapContext } from '../../googleMap/mapContext';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
-import UserProfile from '../userProfile';
+// import UserProfile from '../userProfile';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
+import { useParams } from 'react-router-dom';
 import { clearPreviousImage, handleImageUpload } from '../../../helpers/imageUploadHelpers';
+// import { clearPreviousImage } from '../../newModals/imageUploadHelpers';
+// import { handleImageUpload } from '../../newModals/imageUploadHelpers';
 
-type DiveSiteProps = Partial<ModalHandleProps> & {
-  id?:    number
-  panTo?: boolean
-};
 
-export default function DiveSite(props: DiveSiteProps) {
+export default function PageDiveSite() {
   const { selectedDiveSite, setSelectedDiveSite } = useContext(DiveSiteContext);
   const { profile }          = useContext(UserProfileContext);
-  const { modalShow }        = useContext(ModalContext);
+  // const { modalShow }        = useContext(ModalContext);
   const [diveSitePics, setDiveSitePics] = useState<PhotosGroupedByDate[] | null>(null);
   const [headerPictureUrl, setHeaderPictureUrl] = useState<string | null>(null);
   const [isPartnerAccount, setIsPartnerAccount] = useState(false);
   const mapContext = useContext(MapContext);
+  const routerParams = useParams();
 
   useEffect(() => {
     (async () => {
-      if (props.id) {
-        const diveSites = await getDiveSiteById(props.id);
+      if (routerParams.id) {
+        const diveSites = await getDiveSiteById(routerParams.id);
         if (diveSites && diveSites.length) {
           setSelectedDiveSite(diveSites[0]);
         }
       }
     })();
-  }, [props.id]);
+  }, [routerParams.id]);
 
-  useEffect(() => {
-    if (props.panTo && selectedDiveSite && mapContext.mapRef) {
-      const latlng = new google.maps.LatLng(selectedDiveSite.lat, selectedDiveSite.lng);
-      mapContext.mapRef.panTo(latlng);
-    }
-  }, [selectedDiveSite, props.panTo]);
 
   useEffect(() => {
     if (selectedDiveSite) {
@@ -95,9 +88,6 @@ export default function DiveSite(props: DiveSiteProps) {
     });
   };
 
-  const openPicUploader = () => {
-    modalShow(PicUploader);
-  };
 
   useEffect(() => {
     if (selectedDiveSite?.divesiteprofilephoto) {
@@ -115,19 +105,19 @@ export default function DiveSite(props: DiveSiteProps) {
     if (mapContext.mapConfig === 2) {
       return;
     }
-    modalShow(UserProfile, {
-      keepPreviousModal: true,
-      userProfileID:     userId,
-      size:              'large',
+    // modalShow(UserProfile, {
+    //   keepPreviousModal: true,
+    //   userProfileID:     userId,
+    //   size:              'large',
 
-    });
+    // });
   };
 
   return (
     <DiveSiteView
       showPicUploaderButton={mapContext.mapConfig !== 2}
-      onClose={props.onModalCancel}
-      openPicUploader={openPicUploader}
+
+      openPicUploader={() => {      }}
       handleImageSelection={handleImageSelection}
       handleProfileSwitch={handleProfileSwitch}
       diveSite={selectedDiveSite}

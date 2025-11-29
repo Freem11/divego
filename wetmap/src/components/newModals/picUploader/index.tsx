@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import PicUploaderView from './view';
 import { DynamicSelectOptionsAnimals } from '../../../entities/DynamicSelectOptionsAnimals';
-import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
+// import { clearPreviousImage, handleImageUpload } from '../imageUploadHelpers';
 import { insertPhotoWaits } from '../../../supabaseCalls/photoWaitSupabaseCalls';
 import { Form } from './form';
 import { ModalHandleProps } from '../../reusables/modal/types';
@@ -10,6 +10,7 @@ import screenData from '../screenData.json';
 import { DiveSiteContext } from '../../contexts/diveSiteContext';
 import { UserProfileContext } from '../../contexts/userProfileContext';
 import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
+import { clearPreviousImage, handleImageUpload } from '../../../helpers/imageUploadHelpers';
 
 type PicUploaderProps = Partial<ModalHandleProps> & { pictureId?: number };
 

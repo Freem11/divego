@@ -2,7 +2,7 @@
 import {
   uploadphoto,
   removePhoto,
-} from '../../cloudflareBucketCalls/cloudflareAWSCalls';
+} from '../cloudflareBucketCalls/cloudflareAWSCalls';
 
 
 const handleImageUpload = async (files: FileList | null) => {
