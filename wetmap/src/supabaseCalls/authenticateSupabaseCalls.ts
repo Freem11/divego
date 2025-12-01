@@ -1,3 +1,4 @@
+import { supalog } from '../helpers/supalog';
 import { supabase } from '../supabase';
 
 
@@ -63,7 +64,7 @@ export const signInStandard = async (loginDetails: loginDetails) => {
   });
 
   if (error) {
-    console.log('couldn\'t login,', error);
+    supalog.warn('couldn\'t login,', error);
   }
 
   if (data) {
