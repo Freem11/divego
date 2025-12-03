@@ -35,8 +35,12 @@ export default function PicUploader(props: PicUploaderProps) {
       const createFileName = await handleImageUpload(event.target.files);
       setPhotoFile(`animalphotos/public/${createFileName}`);
     } catch (e) {
-      console.error(e);
-      toast.error(screenData.PicUploader.fileUploadError);
+      if (e instanceof Error) {
+        console.error(e.message);
+        toast.error(e.message);
+      } else {
+        console.error('An unknown error occurred:', e);
+      }
     }
   };
 

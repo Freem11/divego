@@ -6,10 +6,7 @@ import {
 } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
-
 export const uploadphoto = async (file, fileName) => {
-  // console.log("got", file, fileName)
-
   const input = {
     Body:        file,
     Bucket:      'scubaseasons',
@@ -18,12 +15,15 @@ export const uploadphoto = async (file, fileName) => {
   };
 
   const command = new PutObjectCommand(input);
-  const response = await aws3.send(command);
 
-  if (response) {
-    // console.log("cloudFlare", response)
-    console.log(`Upload of photo: ${fileName} was sucessful`);
-    //   return data.path
+  try {
+    const response = await aws3.send(command);
+    if (response) {
+      console.log(`Upload of photo: ${fileName} was successful`);
+    }
+  } catch (error) {
+    console.error(`S3 Upload failed for ${fileName}:`, error);
+    throw new Error(`Failed to upload image to S3: ${error.message || 'Unknown error'}`);
   }
 };
 
