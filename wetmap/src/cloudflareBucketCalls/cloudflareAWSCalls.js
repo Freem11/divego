@@ -1,14 +1,14 @@
 import { aws3 } from '../aws';
 import {
-  GetObjectCommand,
   PutObjectCommand,
   DeleteObjectCommand,
 } from '@aws-sdk/client-s3';
-import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 
 export const uploadphoto = async (file, fileName) => {
+  const blob = new Blob([file], { type: file.type || 'image/jpeg' });
+
   const input = {
-    Body:        file,
+    Body:        blob,
     Bucket:      'scubaseasons',
     Key:         fileName,
     ContentType: 'image/jpeg',
