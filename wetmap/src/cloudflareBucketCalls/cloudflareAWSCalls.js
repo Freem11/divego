@@ -5,10 +5,11 @@ import {
 } from '@aws-sdk/client-s3';
 
 export const uploadphoto = async (file, fileName) => {
-  const blob = new Blob([file], { type: file.type || 'image/jpeg' });
+  const arrayBuffer = await file.arrayBuffer();
+  const fileData = new Uint8Array(arrayBuffer);
 
   const input = {
-    Body:        blob,
+    Body:        fileData,
     Bucket:      'scubaseasons',
     Key:         fileName,
     ContentType: 'image/jpeg',
