@@ -1,3 +1,4 @@
+import { scubalog } from '../helpers/scubalog';
 import { supabase } from '../supabase';
 
 
@@ -63,7 +64,7 @@ export const signInStandard = async (loginDetails: loginDetails) => {
   });
 
   if (error) {
-    console.log('couldn\'t login,', error);
+    scubalog.warn('couldn\'t login,', error);
   }
 
   if (data) {
