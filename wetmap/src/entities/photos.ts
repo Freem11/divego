@@ -1,3 +1,5 @@
+import { Image } from './image';
+
 export type PhotoWithLikesAndComments = {
   id:           number
   created_at:   string
@@ -36,8 +38,8 @@ export type Photo = {
 
 export type Animal = {
   label:      string
-  photofile:  string
   times_seen: number
+  image:      Image
 };
 
 export type HistogramData = {
