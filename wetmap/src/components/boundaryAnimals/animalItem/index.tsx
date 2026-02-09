@@ -1,7 +1,8 @@
 import React from 'react';
 import { Animal } from '../../../entities/photos';
-import getPhotoPublicUrl from '../../../helpers/getPhotoPublicUrl';
 import SidebarCard from '../../reusables/sidebarCard';
+import { IMAGE_SIZE } from '../../../entities/image';
+import getImagePublicUrl from '../../../helpers/getImagePublicUrl';
 
 type AnimalItemProps = {
   animal:        Animal
@@ -9,7 +10,7 @@ type AnimalItemProps = {
 };
 
 export function AnimalItem(props: AnimalItemProps) {
-  const imageUrl = getPhotoPublicUrl(props.animal.photofile);
+  const imageUrl = getImagePublicUrl(props.animal.image, IMAGE_SIZE.LG);
   if (!imageUrl) {
     return null;
   }

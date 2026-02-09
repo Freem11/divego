@@ -121,10 +121,27 @@ export const getAnimalsInBubble = async (bubble: GPSBubble, filter?: Partial<Pho
     return [];
   }
 
+  const result = [] as Animal[];
   if (data) {
-    return data as Animal[];
+    data.forEach((item: any) => {
+      const animal: Animal = {
+        label:      item.label,
+        times_seen: item.times_seen,
+        image:      {
+          file_name:     item.photofile,
+          public_domain: item.public_domain,
+          sm:            item.sm,
+          md:            item.md,
+          lg:            item.lg,
+          xl:            item.xl,
+        },
+      };
+
+      result.push(animal);
+    });
   }
-  return [];
+
+  return result;
 };
 
 // not in use - remove
