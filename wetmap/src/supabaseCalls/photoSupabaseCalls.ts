@@ -129,7 +129,7 @@ export const getAnimalsInBubble = async (bubble: GPSBubble, filter?: Partial<Pho
         times_seen: item.times_seen,
         image:      {
           file_name:     item.photofile,
-          public_domain: '',
+          public_domain: item.public_domain,
           sm:            item.sm,
           md:            item.md,
           lg:            item.lg,
