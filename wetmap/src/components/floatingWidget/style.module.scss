@@ -1,0 +1,12 @@
+.floatingContainer {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  background: #ffffff;
+  z-index: 9;
+  height: 100%;
+  height: calc(100% - 3rem);
+  border-radius: 15px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}

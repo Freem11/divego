@@ -49,7 +49,6 @@ export default function MapView(props: MapViewProps) {
   });
 
   const options: google.maps.MapOptions = useMemo(() => ({
-    mapTypeId:             'hybrid',
     clickableIcons:        false,
     maxZoom:               18,
     minZoom:               3,

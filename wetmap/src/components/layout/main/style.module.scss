@@ -4,6 +4,20 @@
   background-color: $primaryBlue;
 }
 
+header {
+  margin-bottom: 15.2px;
+}
+
+.mainContainer {
+  margin: 0 1rem;
+}
+
+.mapContainer {
+  position: relative;
+  padding-bottom: 1rem;
+  // height: 90%; // TODO remove after reworking header
+}
+
 .headerIcons {
   display: flex;
   justify-content: flex-end;
