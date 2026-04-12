@@ -8,10 +8,10 @@ export default defineConfig({
     proxy: {
       '/api': 'http://localhost:5000/',
     },
-    https: {
-      key:  '../../key.pem',
-      cert: '../../cert.pem',
-    },
+    // https: {
+    //   key:  '../../key.pem',
+    //   cert: '../../cert.pem',
+    // },
   },
   test: /\.(ttf)$/,
   use:  [{
