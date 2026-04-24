@@ -67,6 +67,7 @@
     "@storybook/test": "^8.4.1",
     "@stylistic/eslint-plugin": "^2.8.0",
     "@types/eslint__js": "^8.42.3",
+    "@types/piexifjs": "^1.0.0",
     "@types/react": "^18.2.0",
     "@types/react-dom": "^18.2.0",
     "@types/react-toastify": "^4.1.0",

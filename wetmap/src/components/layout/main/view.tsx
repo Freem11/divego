@@ -26,6 +26,7 @@ type LayoutMainViewProps = {
   animateSettingsModal:      () => void
   animateGuidesModal:        () => void
   animateShopsListModal:     () => void
+  animateVideoModal:         () => void
   handleShareModal:          () => void
   isPartnerAccount:          boolean
   showShareContent:          boolean
@@ -92,6 +93,19 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                       )}
                     />
                   </Tooltip>
+                </li>
+                <li style={{ marginTop: '2px' }}>
+                  {/* <Tooltip content={ScreenData.MainPage.shareTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}> */}
+                  <ShareContent
+                    trigger={(
+                      <ButtonIcon
+                        disabled={props.mapConfig !== 0}
+                        icon={<Icon name="share" className="text-blue" style={{ scale: '1.3' }} />}
+                        onClick={props.animateVideoModal}
+                      />
+                    )}
+                  />
+                  {/* </Tooltip> */}
                 </li>
                 {props.isPartnerAccount
                   ? (

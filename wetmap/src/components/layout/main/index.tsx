@@ -9,6 +9,7 @@ import GuidesModal from '../../newModals/guides';
 import ShopsListModal from '../../newModals/shopsListModal';
 import { MapContext } from '../../googleMap/mapContext';
 import OnBoardingCarrousel from '../../onboarding';
+import VideoSandbox from '../../newModals/videoToPhoto';
 
 export default function LayoutMain() {
   const { mapConfig } = useContext(MapContext);
@@ -66,6 +67,12 @@ export default function LayoutMain() {
     setShowShareContent(!showShareContent);
   };
 
+  const animateVideoModal = () => {
+    modalShow(VideoSandbox, {
+      size: 'large',
+    });
+  };
+
   return (
     <LayoutMainView
       mapConfig={mapConfig}
@@ -77,6 +84,7 @@ export default function LayoutMain() {
       handleShareModal={handleShareModal}
       showShareContent={showShareContent}
       isPartnerAccount={isPartnerAccount}
+      animateVideoModal={animateVideoModal}
     />
   );
 }
