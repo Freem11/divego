@@ -25,10 +25,11 @@ type LayoutMainViewProps = {
   mapConfig:                 number
   animateSiteSubmitterModal: () => void
   animateProfileModal:       () => void
-  animateSettingsModal:      () => void
-  animateGuidesModal:        () => void
+  //animateSettingsModal:      () => void
+  //animateGuidesModal:        () => void
   animateShopsListModal:     () => void
   handleShareModal:          () => void
+  animateContibuteModal:     () => void
   isPartnerAccount:          boolean
   showShareContent:          boolean
 };
@@ -56,6 +57,16 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
               <ul className={style.headerIcons}>
                 <li>
+                  <Tooltip content={ScreenData.MainPage.contribute} direction={TOOLTIP_DIRECTION.BOTTOM}>
+                    <ButtonIcon
+                      disabled={false}
+                      icon="+ Contribute"
+                      onClick={props.animateProfileModal}
+                      className={style.contributeButton}
+                    />
+                  </Tooltip>
+                </li>
+                <li>
                   <Tooltip content={ScreenData.MainPage.profileTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
@@ -64,7 +75,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                     />
                   </Tooltip>
                 </li>
-                <li>
+                {/* <li>
                   <Tooltip content={ScreenData.MainPage.settingsTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
@@ -72,7 +83,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                       onClick={props.animateSettingsModal}
                     />
                   </Tooltip>
-                </li>
+                </li> */}
                 {/* <li style={{ marginTop: '2px' }}>
                   <Tooltip content={ScreenData.MainPage.newDiveSiteTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
@@ -95,7 +106,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                     />
                   </Tooltip>
                 </li> */}
-                {props.isPartnerAccount
+                {/* {props.isPartnerAccount
                   ? (
                       <li style={{ marginTop: '2px', marginRight: '10px' }}>
                         <Tooltip content={ScreenData.MainPage.tripCreatorTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
@@ -117,7 +128,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                           />
                         </Tooltip>
                       </li>
-                    )}
+                    )} */}
               </ul>
 
               <div className="cart text-end d-none d-lg-block dropdown">

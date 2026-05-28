@@ -77,11 +77,10 @@ export function BoundaryAnimalsView(props: BoundaryAnimalsViewProps) {
           return  <EmptyState iconName="shark" text={ScreenData.Sidebar.seaLifeEmptyDrawer} />;
         }}
       >
-        {props.animals?.map((item) => {
+        {props.animals?.map((item, index) => {
           return (
-            <div key={item.photofile} onClick={() => props.handleAnimalSelect(item.label)} style={{ position: 'relative' }}>
+            <div key={`${item.photofile}-${item.label}-${index}`} onClick={() => props.handleAnimalSelect(item.label)} style={{ position: 'relative' }}>
               <AnimalItem
-                key={item.photofile}
                 animal={item}
                 extraContent={props.selectedAnimals.includes(item.label) && <Histogram animal={item.label} />}
               />

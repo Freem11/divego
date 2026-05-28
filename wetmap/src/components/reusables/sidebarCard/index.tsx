@@ -21,7 +21,7 @@ export default function SidebarCard(props: SidebarCardProps) {
       <div className={styles.imageWrapper}>
         <BlurryImage src={props.imageUrl || backgroundPhoto} alt={props.imageAlt} className={styles.cardImage} />
         <div className={styles.bookmarkWrapper}>
-          <Icon name="flag" className={styles.bookmarkIcon} style={{ scale: '1.2' }} />
+          <Icon name="bookmark-outline" className={styles.bookmarkIcon} />
         </div>
       </div>
       

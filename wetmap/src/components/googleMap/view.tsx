@@ -46,6 +46,7 @@ export default function MapView(props: MapViewProps) {
     id:               'google-map-script',
     libraries,
     googleMapsApiKey: props.googleMapApiKey,
+    version:          '3.64',
   });
 
   const options: google.maps.MapOptions = useMemo(() => ({
