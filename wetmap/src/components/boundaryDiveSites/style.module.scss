@@ -1,0 +1,42 @@
+.regionGroup {
+  margin-bottom: 1.5rem;
+}
+
+.regionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 0.5rem;
+}
+
+.regionTitle {
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+.iconWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 24px;
+  height: 24px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  color: #007bff;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.iconWrapper.open {
+  transform: rotate(90deg);
+}
+
+.regionGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}

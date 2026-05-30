@@ -1,6 +1,7 @@
 import React from 'react';
 import MainSearch from '../search';
 import MapLoader from '../../googleMap';
+import FloatingWidget from '../../floatingWidget';
 import Icon from '../../../icons/Icon';
 import ButtonIcon from '../../reusables/buttonIcon';
 import blackMantaIcon from '../../../images/Matt_Manta_Black.png';
@@ -18,15 +19,17 @@ import Tooltip, { TOOLTIP_DIRECTION } from '../../reusables/tooltip';
 import ScreenData from '../../newModals/screenData.json';
 import { Outlet } from 'react-router-dom';
 import ShareContent from '../../reusables/share';
+import ContentSelector from '../../reusables/contentSelector';
 
 type LayoutMainViewProps = {
   mapConfig:                 number
   animateSiteSubmitterModal: () => void
   animateProfileModal:       () => void
-  animateSettingsModal:      () => void
-  animateGuidesModal:        () => void
+  //animateSettingsModal:      () => void
+  //animateGuidesModal:        () => void
   animateShopsListModal:     () => void
   handleShareModal:          () => void
+  animateContibuteModal:     () => void
   isPartnerAccount:          boolean
   showShareContent:          boolean
 };
@@ -34,7 +37,7 @@ type LayoutMainViewProps = {
 
 export default function LayoutMainView(props: LayoutMainViewProps) {
   return (
-    <div className="bg-white">
+    <div className={`bg-white ${style.mainContainer}`}>
       <header style={{ minHeight: '10vh' }}>
         <div className="container-fluid">
           <div className="cols col-gapless">
@@ -54,6 +57,16 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
 
               <ul className={style.headerIcons}>
                 <li>
+                  <Tooltip content={ScreenData.MainPage.contribute} direction={TOOLTIP_DIRECTION.BOTTOM}>
+                    <ButtonIcon
+                      disabled={false}
+                      icon="+ Contribute"
+                      onClick={props.animateProfileModal}
+                      className={style.contributeButton}
+                    />
+                  </Tooltip>
+                </li>
+                <li>
                   <Tooltip content={ScreenData.MainPage.profileTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
@@ -62,7 +75,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                     />
                   </Tooltip>
                 </li>
-                <li>
+                {/* <li>
                   <Tooltip content={ScreenData.MainPage.settingsTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
@@ -70,8 +83,8 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                       onClick={props.animateSettingsModal}
                     />
                   </Tooltip>
-                </li>
-                <li style={{ marginTop: '2px' }}>
+                </li> */}
+                {/* <li style={{ marginTop: '2px' }}>
                   <Tooltip content={ScreenData.MainPage.newDiveSiteTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
                     <ButtonIcon
                       disabled={props.mapConfig === 0 ? false : true}
@@ -92,8 +105,8 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                       )}
                     />
                   </Tooltip>
-                </li>
-                {props.isPartnerAccount
+                </li> */}
+                {/* {props.isPartnerAccount
                   ? (
                       <li style={{ marginTop: '2px', marginRight: '10px' }}>
                         <Tooltip content={ScreenData.MainPage.tripCreatorTooltip} direction={TOOLTIP_DIRECTION.BOTTOM}>
@@ -115,7 +128,7 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
                           />
                         </Tooltip>
                       </li>
-                    )}
+                    )} */}
               </ul>
 
               <div className="cart text-end d-none d-lg-block dropdown">
@@ -131,35 +144,28 @@ export default function LayoutMainView(props: LayoutMainViewProps) {
       </header>
 
       <section>
-        <div className="container-fluid">
-          <div className="cols col-gapless mb-4">
-            <div className="col-md-12 col-3 full-height scroll-container mb-4" style={{ overflow: 'hidden', height: '90vh' }}>
-              <Tabs
-                className="scroll-container non-scrollable"
-                data={[
-                  { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites',    content: BoundaryDiveSites },
-                  { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryAnimals },
-                  { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Centers',  content: BoundaryDiveShops },
-                ]}
-              />
-
-              {/* <div className="hero">
-                <div className="hero-body">
-                  <div className="bg-gray">AAA</div>
-                </div>
-                <div className="hero-body">
-                  <div className="bg-gray">AAA</div>
-                </div>
-                <div className="hero-body">
-                  <div className="bg-gray">AAA</div>
-                </div>
-
-              </div> */}
-            </div>
-
-            <div className="col-md-12 col-9 full-height" style={{ height: '90vh' }}>
-              <MapLoader />
-            </div>
+        <div className={`container-fluid ${style.mapContainer}`}>
+          <div className="full-height" style={{ height: '80vh' }}>
+            <MapLoader />
+            {/* State-lifted ContentSelector + FloatingWidget integration */}
+            {(() => {
+              const tabData = [
+                { key: 't-1', className: 'scroll-container non-scrollable', title: 'Dive Sites',    content: BoundaryDiveSites },
+                { key: 't-2', className: 'scroll-container non-scrollable', title: 'Sea Life',      content: BoundaryAnimals },
+                { key: 't-3', className: 'scroll-container non-scrollable', title: 'Dive Centers',  content: BoundaryDiveShops },
+              ];
+              const [activeTab, setActiveTab] = React.useState(0);
+              const selectedContent = tabData[activeTab].content;
+              return (
+                <>
+                  <ContentSelector
+                    data={tabData}
+                    onChange={(_, idx) => setActiveTab(idx)}
+                  />
+                  <FloatingWidget content={selectedContent} />
+                </>
+              );
+            })()}
           </div>
         </div>
 

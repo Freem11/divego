@@ -1,0 +1,82 @@
+:root {
+  --ssrc-tabs-underline-width: 1px;
+  --ssrc-tabs-underline-color: red;
+  --ssrc-tabs-active-underline-width: .1rem;
+  --ssrc-tabs-active-underline-color: blue;
+  --ssrc-tabs-active-text-color: blue;
+  --ssrc-tabs-focus-text-color: blue;
+  --ssrc-tabs-item-padding: .4rem .2rem .3rem .2rem;
+}
+
+.ssrc-tabs {
+  position: absolute;
+  z-index: 9999;
+  //top: 1rem;
+  bottom: 2rem;
+  left: 1rem;
+  //right: 1rem;
+}
+
+// ssrc: scuba seasons reusable component
+.ssrc-tabs_content{
+  &.ssrc-tabs_content--hidden{
+    display: none;
+  }
+}
+
+.ssrc-tabs_items {
+  align-items: center;
+  border-bottom: none;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  list-style: none;
+  margin: 0;
+
+  .ssrc-tabs_item {
+    margin-top: 0;
+    flex: 1;
+    margin-bottom: 8px;
+    width: 100%;
+
+    li {
+      display: block;
+      text-decoration: none;
+    }
+
+    button {
+      border-bottom: var(--ssrc-tabs-active-underline-width) solid transparent;
+      color: inherit;
+      display: block;
+      margin: 0 .4rem 0 0;
+      padding: 0 0.5rem;
+      text-decoration: none;
+      background-color: white;
+      border-radius: 25px;
+      border-color: transparent;
+      border: none;
+      outline: none;
+      width: 100%;
+      &:focus,
+      &:hover {
+        color: #0073E6;
+      }
+    }
+    &.ssrc-tabs_item--active button {
+      border-bottom-color: var(--ssrc-tabs-active-underline-color);
+      background: #0073E6;
+      color: #ffffff;
+    }
+  }
+
+  &.full-width {
+    .ssrc-tabs_item {
+      flex: 1 0 0;
+      text-align: center;
+
+      a {
+        margin: 0;
+      }
+    }
+  }
+}

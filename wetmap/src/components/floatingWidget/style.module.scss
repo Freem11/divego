@@ -1,0 +1,32 @@
+.floatingContainer {
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  background-color: rgba(225, 245, 250, 0.85); /* Semi-transparent cyan-blue */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px); /* Safari support */
+  z-index: 9;
+  height: calc(100% - 3rem);
+  width: 420px;
+  max-width: 90vw;
+  border-radius: 24px;
+  box-sizing: border-box;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15); /* Soft drop shadow */
+  padding: 1.5rem;
+}
+
+/* Custom subtle scrollbar */
+.floatingContainer::-webkit-scrollbar {
+  width: 8px;
+}
+.floatingContainer::-webkit-scrollbar-track {
+  background: transparent;
+}
+.floatingContainer::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 10px;
+}
+.floatingContainer::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(255, 255, 255, 0.8);
+}

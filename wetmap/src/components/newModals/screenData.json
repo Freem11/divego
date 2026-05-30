@@ -1,4 +1,4 @@
-    {
+  {
       "SettingsPage": {
         "header": "Settings",
         "subHeading1": "Account Type",
@@ -208,7 +208,8 @@
         "newDiveSiteTooltip": "Add a New Dive Site",
         "tripCreatorTooltip": "My Shop(s)",
         "shareTooltip": "Share",
-        "guideTooltip": "User Guide"
+        "guideTooltip": "User Guide",
+        "contribute": "Contribute"
       },
       "PasswordRecoveryPage": {
         "title": "Reset Password",
