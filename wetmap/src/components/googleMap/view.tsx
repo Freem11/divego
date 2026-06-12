@@ -17,8 +17,8 @@ import { diveSiteToPointFeature } from './dto/diveSiteToPointFeature';
 import useSupercluster, { UseSuperclusterArgument } from 'use-supercluster';
 import { MarkerDiveSite } from './marker/markerDiveSite';
 import { MarkerDiveShop } from './marker/markerDiveShop';
-import { MarkerHeatPoint } from './marker/markerHeatPoint';
-import { HeatPoint } from '../../entities/heatPoint';
+// import { MarkerHeatPoint } from './marker/markerHeatPoint';
+// import { HeatPoint } from '../../entities/heatPoint';
 import { diveShopToPointFeature } from './dto/diveShopToPointFeature';
 import RoundButtonIcon from '../reusables/roundButton';
 import Icon from '../../icons/Icon';
@@ -160,12 +160,12 @@ export default function MapView(props: MapViewProps) {
         }
       })}
 
-      {props?.heatPoints?.length && [0, 2].includes(props.mapConfig) && (
+      {/* {props?.heatPoints?.length && [0, 2].includes(props.mapConfig) && (
         <MarkerHeatPoint
           heatPoints={props.heatPoints}
           map={map}
         />
-      )}
+      )} */}
 
       {props.tempMarker && (
         <Marker position={props.tempMarker} icon={anchorIconGold} />
