@@ -10,11 +10,15 @@ export type DiveSiteWithUserName = {
   divesitebio:          string
   newusername:          string
   divesiteprofilephoto: string
+  engagement_score?:    number
+  siteNumber?:          number
 };
 
 export type DiveSiteBasic = {
-  id:   number
-  name: string
-  lat:  number
-  lng:  number
+  id:                number
+  name:              string
+  lat:               number
+  lng:               number
+  engagement_score?: number
+  siteNumber?:       number
 };
