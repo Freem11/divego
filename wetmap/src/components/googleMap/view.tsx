@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { GoogleMap, Marker, useJsApiLoader, Libraries } from '@react-google-maps/api';
 import style from './style.module.scss';
-import anchorIconGold from '../../images/mapIcons/AnchorGold.png';
+import anchorIconGold from '../../images/AnchorGold.png';
 
 import { DiveSiteBasic } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';

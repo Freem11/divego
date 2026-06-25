@@ -1,10 +1,11 @@
 import React, { useContext, useMemo } from 'react';
-import { Marker } from '@react-google-maps/api';
+import { OverlayView } from '@react-google-maps/api';
 import { ModalContext } from '../../../reusables/modal/context';
 import DiveSite from '../../../newModals/diveSite';
 import { SitesArrayContext } from '../../../contexts/sitesArrayContext';
 import { MapContext } from '../../mapContext';
-import iconConfig from '../../../../icons/_config.json';
+import anchorWhite from '../../../../images/AnchorWhite.png';
+import anchorGold from '../../../../images/AnchorGold.png';
 
 type MarkerDiveSiteHaloProps = {
   id:          number
@@ -14,11 +15,14 @@ type MarkerDiveSiteHaloProps = {
   siteNumber?: number
 };
 
+const ICON_SIZE = 28;
+
 function getHaloConfig(score: number) {
   if (score >= 35) {
     return {
       sizes:     [48, 36, 24, 12],
       opacities: [0.5, 0.65, 0.8, 0.9],
+      zIndex:    20,
     };
   }
 
@@ -26,6 +30,7 @@ function getHaloConfig(score: number) {
     return {
       sizes:     [36, 24, 12],
       opacities: [0.5, 0.65, 0.8],
+      zIndex:    15,
     };
   }
 
@@ -33,13 +38,23 @@ function getHaloConfig(score: number) {
     return {
       sizes:     [24, 12],
       opacities: [0.5, 0.65],
+      zIndex:    10,
     };
   }
 
   return {
     sizes:     [12],
     opacities: [0.5],
+    zIndex:    5,
   };
+}
+
+function isSameSite(item: unknown, siteId: number) {
+  if (typeof item === 'object' && item !== null && 'id' in item) {
+    return Number((item as { id: number }).id) === Number(siteId);
+  }
+
+  return Number(item) === Number(siteId);
 }
 
 export function MarkerDiveSiteHalo(props: MarkerDiveSiteHaloProps) {
@@ -47,60 +62,26 @@ export function MarkerDiveSiteHalo(props: MarkerDiveSiteHaloProps) {
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const { mapConfig } = useContext(MapContext);
 
-  const isSelected = sitesArray.map(Number).includes(Number(props.id));
+  const isSelected = sitesArray.some(item => isSameSite(item, props.id));
   const score = props.score ?? 0;
 
-  const icon = useMemo(() => {
-    const { sizes, opacities } = getHaloConfig(score);
-    const maxSize = Math.max(...sizes, 30);
-    const center = maxSize / 2;
-    const anchorPath = iconConfig.anchor[1];
-    const anchorColor = isSelected ? 'gold' : 'white';
+  const { sizes, opacities, zIndex } = useMemo(
+    () => getHaloConfig(score),
+    [score],
+  );
 
-    const rings = sizes
-      .map((size, index) => {
-        const radius = size / 2;
+  const outerSize = Math.max(sizes[0], ICON_SIZE);
 
-        return `
-          <circle
-            cx="${center}"
-            cy="${center}"
-            r="${radius}"
-            fill="gold"
-            opacity="${opacities[index]}"
-          />
-        `;
-      })
-      .join('');
+  function handleClick(event: React.MouseEvent<HTMLDivElement>) {
+    event.stopPropagation();
 
-    const svg = `
-      <svg width="${maxSize}" height="${maxSize}" viewBox="0 0 ${maxSize} ${maxSize}" xmlns="http://www.w3.org/2000/svg">
-        ${rings}
-        <svg x="${center - 15}" y="${center - 15}" width="30" height="30" viewBox="0 0 512 512">
-          <path
-            style="transform: scale(0.85); transform-origin: center"
-            fill="${anchorColor}"
-            d="${anchorPath}"
-          />
-        </svg>
-      </svg>
-    `;
-
-    return {
-      url:        'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg),
-      scaledSize: new google.maps.Size(maxSize, maxSize),
-      anchor:     new google.maps.Point(center, center),
-    };
-  }, [score, isSelected]);
-
-  function handleClick() {
     // Web mapConfig 3 = Create Trip Sites List
     if (mapConfig === 3) {
       setSitesArray((prev) => {
-        const exists = prev.map(Number).includes(Number(props.id));
+        const exists = prev.some(item => isSameSite(item, props.id));
 
         return exists
-          ? prev.filter(id => Number(id) !== Number(props.id))
+          ? prev.filter(item => !isSameSite(item, props.id))
           : [...prev, props.id];
       });
 
@@ -114,12 +95,55 @@ export function MarkerDiveSiteHalo(props: MarkerDiveSiteHaloProps) {
   }
 
   return (
-    <Marker
-      icon={icon}
-      title={props.title}
+    <OverlayView
       position={props.position}
-      zIndex={isSelected ? 999 : Math.max(1, score)}
-      onClick={handleClick}
-    />
+      mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+      getPixelPositionOffset={(width, height) => ({
+        x: -(width / 2),
+        y: -(height / 2),
+      })}
+    >
+      <div
+        title={props.title}
+        onClick={handleClick}
+        style={{
+          position:       'relative',
+          width:          outerSize,
+          height:         outerSize,
+          display:        'flex',
+          alignItems:     'center',
+          justifyContent: 'center',
+          cursor:         'pointer',
+          zIndex:         isSelected ? 999 : zIndex,
+        }}
+      >
+        {sizes.map((size, index) => (
+          <div
+            key={`${size}-${index}`}
+            style={{
+              position:        'absolute',
+              width:           size,
+              height:          size,
+              borderRadius:    '50%',
+              backgroundColor: 'gold',
+              opacity:         opacities[index],
+            }}
+          />
+        ))}
+
+        <img
+          src={isSelected ? anchorGold : anchorWhite}
+          alt={props.title}
+          style={{
+            position:      'absolute',
+            width:         ICON_SIZE,
+            height:        ICON_SIZE,
+            objectFit:     'contain',
+            pointerEvents: 'none',
+            zIndex:        10,
+          }}
+        />
+      </div>
+    </OverlayView>
   );
 }
