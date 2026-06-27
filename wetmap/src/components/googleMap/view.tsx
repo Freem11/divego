@@ -1,8 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import { GoogleMap, Marker, useJsApiLoader, Libraries } from '@react-google-maps/api';
 import style from './style.module.scss';
-import { ClusterProperty, PointFeatureCategory } from './types';
-import anchorIconGold from '../../images/mapIcons/AnchorGold.png';
+import anchorIconGold from '../../images/AnchorGold.png';
 
 import { DiveSiteBasic } from '../../entities/diveSite';
 import { DiveShop } from '../../entities/diveShop';
@@ -11,19 +10,12 @@ import { MarkerDraggable } from './marker/markerDraggable';
 import { ReturnToSiteSubmitterButton } from './navigation/returnToSiteSubmitterButton';
 import { ReturnToShopButton } from './navigation/returnToShopButton';
 import { ReturnToCreateTripButton } from './navigation/returnToCreateTripButton';
-import { MarkerDiveSiteCluster } from './marker/markerDiveSiteCluster';
-import Supercluster from 'supercluster';
-import { diveSiteToPointFeature } from './dto/diveSiteToPointFeature';
-import useSupercluster, { UseSuperclusterArgument } from 'use-supercluster';
-import { MarkerDiveSite } from './marker/markerDiveSite';
 import { MarkerDiveShop } from './marker/markerDiveShop';
-import { MarkerHeatPoint } from './marker/markerHeatPoint';
-import { HeatPoint } from '../../entities/heatPoint';
-import { diveShopToPointFeature } from './dto/diveShopToPointFeature';
 import RoundButtonIcon from '../reusables/roundButton';
 import Icon from '../../icons/Icon';
+import { MarkerDiveSiteHalo } from './marker/markerDiveSiteHalo';
 
-const libraries: Libraries = ['places', 'visualization'];
+const libraries: Libraries = ['places'];
 
 type MapViewProps = {
   googleMapApiKey:    string
@@ -36,7 +28,6 @@ type MapViewProps = {
   handleBoundsChange: () => void
   diveSites?:         DiveSiteBasic[] | null
   diveShops?:         DiveShop[] | null
-  heatPoints?:        HeatPoint[] | null
 };
 
 export default function MapView(props: MapViewProps) {
@@ -60,12 +51,16 @@ export default function MapView(props: MapViewProps) {
     ...(props.options ?? {}),
   }), [props.options]);
 
-
   const onMapLoad = (map: google.maps.Map) => {
     setMap(map);
+
     if (typeof props.onLoad === 'function') {
       props.onLoad(map);
     }
+
+    window.setTimeout(() => {
+      props.handleBoundsChange();
+    }, 0);
   };
 
   const zoomMapIn = () => {
@@ -82,30 +77,6 @@ export default function MapView(props: MapViewProps) {
     }
   };
 
-  const clusterConfig = useMemo<UseSuperclusterArgument<ClusterProperty, Supercluster.AnyProps>>(() => {
-    const bounds = map?.getBounds();
-    const zoom = map?.getZoom();
-
-    if (bounds && zoom) {
-      const points = [] as Supercluster.PointFeature<ClusterProperty>[];
-      props.diveSites?.forEach(item => points.push(diveSiteToPointFeature(item)));
-      props.diveShops?.forEach(item => points.push(diveShopToPointFeature(item)));
-      return {
-        points:  points,
-        options: { radius: 75, maxZoom: 16 },
-        zoom:    zoom,
-        bounds:  [
-          bounds.getSouthWest().lng(),
-          bounds.getSouthWest().lat(),
-          bounds.getNorthEast().lng(),
-          bounds.getNorthEast().lat(),
-        ],
-      };
-    }
-
-    return { points:  [], zoom:    0 };
-  }, [props.diveSites, props.diveShops]);
-  const { clusters, supercluster } = useSupercluster(clusterConfig);
 
   if (!isLoaded) {
     return <div>Loading...</div>;
@@ -121,55 +92,47 @@ export default function MapView(props: MapViewProps) {
       onBoundsChanged={props.handleBoundsChange}
     >
 
-      {clusters && clusters.map((cluster) => {
-        const [lng, lat] = cluster.geometry.coordinates;
-        const isCluster = cluster.properties.cluster;
-        const pointCount = cluster.properties.point_count;
-
-        if (isCluster && pointCount && supercluster && cluster.id) {
-          return (
-            <MarkerDiveSiteCluster
-              key={cluster.id}
-              pointCount={pointCount}
-              position={{ lat, lng }}
-              expansionZoom={supercluster.getClusterExpansionZoom(+cluster.id)}
-            />
-          );
+      {props.diveShops?.map((shop) => {
+        if (!Number.isFinite(Number(shop.lat)) || !Number.isFinite(Number(shop.lng))) {
+          return null;
         }
 
-        if (cluster.properties.category === PointFeatureCategory.DiveSite) {
-          return (
-            <MarkerDiveSite
-              key={cluster.id}
-              id={cluster.properties.id}
-              title={cluster.properties.title}
-              position={{ lat, lng }}
-            />
-          );
-        }
-
-        if (cluster.properties.category === PointFeatureCategory.DiveShop) {
-          return (
-            <MarkerDiveShop
-              key={cluster.id}
-              id={cluster.properties.id}
-              title={cluster.properties.title}
-              position={{ lat, lng }}
-            />
-          );
-        }
+        return (
+          <MarkerDiveShop
+            key={`shop-${shop.id}`}
+            id={Number(shop.id)}
+            title={shop.orgname ?? shop.orgname ?? ''}
+            position={{
+              lat: Number(shop.lat),
+              lng: Number(shop.lng),
+            }}
+          />
+        );
       })}
 
-      {props?.heatPoints?.length && [0, 2].includes(props.mapConfig) && (
-        <MarkerHeatPoint
-          heatPoints={props.heatPoints}
-          map={map}
-        />
-      )}
+      {props.diveSites?.map((site) => {
+        if (!Number.isFinite(Number(site.lat)) || !Number.isFinite(Number(site.lng))) {
+          return null;
+        }
 
-      {props.tempMarker && (
+        return (
+          <MarkerDiveSiteHalo
+            key={`site-${site.id}`}
+            id={Number(site.id)}
+            title={site.name}
+            position={{
+              lat: Number(site.lat),
+              lng: Number(site.lng),
+            }}
+            score={site.engagement_score ?? 0}
+            siteNumber={site.siteNumber}
+          />
+        );
+      })}
+
+      {/* {props.tempMarker && (
         <Marker position={props.tempMarker} icon={anchorIconGold} />
-      )}
+      )} */}
 
       {props.mapConfig === 1 && (
         <MarkerDraggable />

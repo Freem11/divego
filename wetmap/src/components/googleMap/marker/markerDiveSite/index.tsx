@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 import { Marker } from '@react-google-maps/api';
-import icon from '../../../../images/mapIcons/AnchorBlue1.png';
-import iconGold from '../../../../images/mapIcons/AnchorGold.png';
+import AnchorWhite from '../../../../images/AnchorWhite.png';
+import AnchorGold from '../../../../images/AnchorGold.png';
 import { ModalContext } from '../../../reusables/modal/context';
 import DiveSite from '../../../newModals/diveSite';
 import { SitesArrayContext } from '../../../contexts/sitesArrayContext';
 import { MapContext } from '../../mapContext';
-import iconConfig from '../../../../icons/_config.json';
 
 type MarkerDiveSiteProps = {
   id:       number
@@ -19,17 +18,13 @@ export function MarkerDiveSite(props: MarkerDiveSiteProps) {
   const { sitesArray, setSitesArray } = useContext(SitesArrayContext);
   const { mapConfig } = useContext(MapContext);
 
-  const svg1 = `<svg width="30" height="30" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <path style="transform: scale(0.85); transform-origin: center" fill="skyblue" d="${iconConfig.anchor[1]}"/>
-  </svg>`;
-  const url1 = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg1);
+  const isSelected = sitesArray.some((id) => Number(id) === Number(props.id));
 
-  const svg2 = `<svg width="30" height="30" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
-  <path style="transform: scale(0.85); transform-origin: center" fill="gold" d="${iconConfig.anchor[1]}"/>
-  </svg>`;
-  const url2 = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svg2);
-
-  const url = sitesArray.includes(props.id) ? url2 : url1;
+  const icon = useMemo(() => ({
+    url:        isSelected ? AnchorGold : AnchorWhite,
+    scaledSize: new google.maps.Size(30, 30),
+    anchor:     new google.maps.Point(15, 15),
+  }), [isSelected]);
 
   function handleClick() {
     if (mapConfig !== 3) {
@@ -37,22 +32,25 @@ export function MarkerDiveSite(props: MarkerDiveSiteProps) {
         id:   props.id,
         size: 'large',
       });
-    } else {
-      if (sitesArray.includes(props.id)) {
-        setSitesArray(prev => prev.filter(id => id !== props.id));
-      } else {
-        setSitesArray(prev => [...prev, props.id]);
-      }
+
+      return;
     }
+
+    setSitesArray((prev) => {
+      const exists = prev.some((id) => Number(id) === Number(props.id));
+
+      return exists
+        ? prev.filter(id => Number(id) !== Number(props.id))
+        : [...prev, props.id];
+    });
   }
 
   return (
     <Marker
-      icon={url}
+      icon={icon}
       title={props.title}
       position={props.position}
       onClick={handleClick}
-    >
-    </Marker>
+    />
   );
 }

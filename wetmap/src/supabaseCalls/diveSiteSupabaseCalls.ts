@@ -1,4 +1,4 @@
-import { DiveSiteWithUserName } from '../entities/diveSite';
+import { DiveSiteBasic, DiveSiteWithUserName } from '../entities/diveSite';
 import { GPSBubble } from '../entities/GPSBubble';
 import { Pagination } from '../entities/pagination';
 import { supabase } from '../supabase';
@@ -16,21 +16,57 @@ export const diveSites = async () => {
   }
 };
 
-export const getDiveSitesBasic = async (bubble: GPSBubble) => {
-  const { data, error } = await supabase
-    .rpc('get_divesites', {
-      min_lat: bubble.minLat,
-      max_lat: bubble.maxLat,
-      min_lng: bubble.minLng,
-      max_lng: bubble.maxLng,
-    });
+// export const getDiveSitesBasic = async (bubble: GPSBubble) => {
+//   const { data, error } = await supabase
+//     .rpc('get_divesites', {
+//       min_lat: bubble.minLat,
+//       max_lat: bubble.maxLat,
+//       min_lng: bubble.minLng,
+//       max_lng: bubble.maxLng,
+//     });
+
+//   if (error || !data) {
+//     console.log('couldn\'t do it,', error);
+//     return [];
+//   }
+
+//   return data as DiveSiteWithUserName[];
+// };
+
+export const getDiveSitesBasic = async (
+  bubble: GPSBubble,
+  zoom: number
+): Promise<DiveSiteBasic[]> => {
+  const SITES_PER_CELL = [1, 1, 1, 1, 1, 1, 1, 1, 2, 3, 5, 10];
+
+  const clampedZoom = Math.max(0, Math.min(zoom, 12));
+
+  const gridSizeM = Math.round(
+    5000 * Math.pow(2, Math.max(0, 12 - clampedZoom))
+  );
+
+  const sitesPerCell =
+    clampedZoom >= 12 ? -1 : SITES_PER_CELL[clampedZoom] ?? 1;
+
+  const { data, error } = await supabase.rpc('get_dive_sites_in_viewport', {
+    min_lat:        bubble.minLat,
+    min_lng:        bubble.minLng,
+    max_lat:        bubble.maxLat,
+    max_lng:        bubble.maxLng,
+    grid_size_m:    gridSizeM,
+    sites_per_cell: sitesPerCell,
+  });
 
   if (error || !data) {
-    console.log('couldn\'t do it,', error);
+    console.log('couldn\'t get dive sites in viewport,', error);
     return [];
   }
 
-  return data as DiveSiteWithUserName[];
+  return data.map((site: DiveSiteBasic, index: number) => ({
+    ...site,
+    siteNumber:       index + 1,
+    engagement_score: site.engagement_score ?? 0,
+  }));
 };
 
 export const getDiveSitesWithUser = async (bubble: GPSBubble, filter?: Partial<DiveSiteWithUserName>, pagination?: Pagination) => {
@@ -130,18 +166,38 @@ export const getDiveSiteWithUserName = async (values: { siteName: string, region
   }
 };
 
-export const getDiveSitesByIDs = async (ids: number[]): Promise<DiveSiteWithUserName[]> => {
+// export const getDiveSitesByIDs = async (ids: number[]): Promise<DiveSiteWithUserName[]> => {
+//   const { data, error } = await supabase
+//     .from('diveSites')
+//     .select()
+//     .in('id', ids);
+
+//   if (error || !data) {
+//     console.log('couldn\'t do it 7,', error);
+//     return [];
+//   }
+
+//   return data as DiveSiteWithUserName[];
+// };
+
+export const getDiveSitesByIDs = async (ids: number[]): Promise<DiveSiteBasic[]> => {
+  if (!ids.length) return [];
+
   const { data, error } = await supabase
     .from('diveSites')
-    .select()
+    .select('id, name, lat, lng, engagement_score')
     .in('id', ids);
 
   if (error || !data) {
-    console.log('couldn\'t do it 7,', error);
+    console.log('couldn\'t get dive sites by ids,', error);
     return [];
   }
 
-  return data as DiveSiteWithUserName[];
+  return data.map((site, index) => ({
+    ...site,
+    siteNumber:       index + 1,
+    engagement_score: site.engagement_score ?? 0,
+  }));
 };
 
 export const getSingleDiveSiteByNameAndRegion = async (values: { name: string, region: string | null }) => {
