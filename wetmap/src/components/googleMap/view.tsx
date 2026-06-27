@@ -130,9 +130,9 @@ export default function MapView(props: MapViewProps) {
         );
       })}
 
-      {props.tempMarker && (
+      {/* {props.tempMarker && (
         <Marker position={props.tempMarker} icon={anchorIconGold} />
-      )}
+      )} */}
 
       {props.mapConfig === 1 && (
         <MarkerDraggable />
